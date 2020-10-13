@@ -7,15 +7,20 @@ description: Learn how to install the AMPLIFY CLI and authorize it to use the
   AMPLIFY Central APIs. This enables you to integrate the CLI into your DevOps
   pipeline.
 ---
-
 ## Before you start
 
-* You will need an administrator account for AMPLIFY Central ([Managing Accounts](https://docs.axway.com/bundle/AMPLIFY_Dashboard_allOS_en/page/managing_accounts.html))
-* AMPLIFY Central CLI supports:
+* You will need an administrator account for AMPLIFY Central ([Managing Accounts](https://docs.axway.com/bundle/AMPLIFY_Dashboard_allOS_en/page/managing_accounts.html)).
+* You will need [Node.js](https://nodejs.org/en/download/) version 10.13.0 or later.
 
-    * Operational systems (OS): Mac OS, Linux, Windows 10
-    * Terminal shell: Mac OS Terminal, Linux Terminal, Windows Command Prompt, Windows PowerShell
-    * Not supported: Cygwin (Windows), Git Bash(Windows)
+### Operating system supported configurations
+
+The following table describes the operating system supported configurations that you can use with AMPLIFY Central CLI.
+
+| OS                  | Node.js Version  | Terminal Shells Supported  | Terminal Shells Unsupported |
+| ------------------- | ---------------- | -------------------------- | --------------------------- |
+| Mac OSX or later    | 10.13.0 or later | bash , zsh                 |                             |
+| Windows 10 or later | 10.13.0 or later | Command Prompt, PowerShell | Cygwin, Git Bash            |
+| Linux               | 10.13.0 or later | bash                       |                             |
 
 ## Install AMPLIFY CLI and AMPLIFY Central CLI
 
@@ -30,12 +35,17 @@ description: Learn how to install the AMPLIFY CLI and authorize it to use the
 3. Run AMPLIFY package manager to install AMPLIFY Central CLI:
 
    ```
-   amplify pm install @axway/amplify-central-cli
+   [sudo] amplify pm install @axway/amplify-central-cli
    ```
-4. Run AMPLIFY package manager list command to view available packages.
+4. Run AMPLIFY package manager list command to view available packages:
 
    ```
    amplify pm list
+   ```
+
+   Expected response:
+
+   ```
    AMPLIFY CLI, version 1.4.0
    Copyright (c) 2018, Axway, Inc. All Rights Reserved.
    NAME                           | INSTALLED VERSIONS             | ACTIVE VERSION
@@ -45,35 +55,35 @@ description: Learn how to install the AMPLIFY CLI and authorize it to use the
 All the development versions of AMPLIFY Central CLI can be found at [NPM install of AMPLIFY Central CLI](https://www.npmjs.com/package/@axway/amplify-central-cli). To install a specific development version, run the following command:
 
 ```
-amplify pm install @axway/amplify-central-cli@0.1.8-dev.10
+[sudo] amplify pm install @axway/amplify-central-cli@0.1.8-dev.10
 ```
 
 ### Additional installation steps on Windows
 
-After successfully installing Amplify Central CLI, you must check if OpenSSL is installed. OpenSSL is needed to generate a public and private key pairs for service account authentication, which is a pre-requisite for the creation of service accounts.
+After successfully installing Amplify Central CLI, you must check if OpenSSL is installed. OpenSSL is needed to generate a public and private key pair for service account authentication, which is a pre-requisite for the creation of service accounts.
 
 Install OpenSSL if not installed already:
 
 1. [Download OpenSSL](https://slproweb.com/products/Win32OpenSSL.html).
 2. Install OpenSSL, and ensure it is added to your path (`C:\Program Files\OpenSSL-Win64\bin`) in environment variables.
 
-    ![Environment variables](/Images/central/cli_central/env_variables.png)
-
+   ![Environment variables](/Images/central/cli_central/env_variables.png)
 3. Verify that OpenSSL is installed and configured correctly.
 
-    ```
-     openssl version
-    ```
+   ```
+    openssl version
+   ```
 
 ## Authorize your CLI to use the AMPLIFY Central APIs
 
 Before using the AMPLIFY Central APIs you must first authorize your CLI, so you can use it, for example, as part of your DevOps pipeline.
-There are two ways to authorize your CLI:
 
-* [Use your AMPLIFY Platform login credentials](/docs/central/cli_central/cli_install#login-with-your-amplify-platform-credentials).
-* [Use a service account](/docs/central/cli_central/cli_install#authenticate-and-authorize-your-service-account).
+You can use the following options to authorize your CLI:
 
-### Log in with your AMPLIFY Platform credentials
+1. [Use your AMPLIFY Platform login credentials](/docs/central/cli_central/cli_install/#option-1---log-in-with-your-amplify-platform-credentials).
+2. [Use a service account](/docs/central/cli_central/cli_install/#option-2---authenticate-and-authorize-your-service-account).
+
+### Option 1 - Log in with your AMPLIFY Platform credentials
 
 To use Central CLI to log in with your AMPLIFY Platform credentials, run the following command and used `apicentral` as the client identifier:
 
@@ -90,26 +100,31 @@ To check that your client identifier is set correctly to `apicentral`, run:
 
 ```
 amplify central config list
+```
+
+Expected response:
+
+```
 { 'client-id': 'apicentral' }
 ```
 
-If the client identifier is not set to `apicentral`, set the client identifier for future operations::
+If the client identifier is not set to `apicentral`, set the client identifier for future operations by running:
 
 ```
-amplify central config set --clientid=apicentral
+amplify central config set --client-id=apicentral
 ```
 
 You have completed the authorization of your CLI with your AMPLIFY Platform credentials.
 
-### Authenticate and authorize your service account
+### Option 2 - Authenticate and authorize your service account
 
 To use the Central CLI, your service account must authenticate with AMPLIFY Platform and it must be authorized to use the AMPLIFY Central APIs.
 
-#### Create a service account using the CLI
+You can use the following options to create your service account:
 
-{{% alert title="Note" %}}You must have OpenSSL installed to run this command.{{% /alert %}}
+#### 2.1 Create a service account using the CLI
 
-To create a service account from the CLI, run the following command
+To create a service account from the CLI, run the following command (You must have OpenSSL installed to run this command):
 
 ```
 amplify central create service-account
@@ -117,7 +132,7 @@ amplify central create service-account
 
 You will be prompted to provide a name for the service account. A public and private key pair in RSA format will be generated for you.
 
-#### Create a service account using the user interface
+#### 2.2 Create a service account using the AMPLIFY Central UI
 
 To create a service account from the UI, log in to AMPLIFY Central UI as an administrator, and create a service account for your CLI. Add the public key that you created earlier. When the account is created, copy the client identifier from the **Client ID** field.
 
@@ -127,11 +142,15 @@ Watch the animation to learn how to do this in AMPLIFY Central UI.
 
 #### Authorize the service account with AMPLIFY platform
 
-To authorize the service account with AMPLIFY platform, log in to AMPLIFY CLI using the following command:
+After you create a service account your must authorize it with AMPLIFY platform, and log in to AMPLIFY CLI using the following command:
 
 ```
 amplify auth login --client-id DOSA_105cf15d051c432c8cd2e1313f54c2da --secret-file ~/test/private_key.pem
+```
 
+Expected response:
+
+```
 AMPLIFY CLI, version 1.4.0
 Copyright (c) 2018, Axway, Inc. All Rights Reserved.
 
@@ -148,10 +167,15 @@ To set the service account client identifier for future operations:
 amplify central config set --client-id DOSA_105cf15d051c432c8cd2e1313f54c2da
 ```
 
-To view the saved configuration:
+To view the saved configuration, run:
 
 ```
 amplify central config list
+```
+
+Expected response:
+
+```
 { 'client-id': 'DOSA_105cf15d051c432c8cd2e1313f54c2da' }
 ```
 
