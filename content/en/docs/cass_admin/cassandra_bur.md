@@ -292,16 +292,20 @@ done
 # NOTE: This MUST be adapted for and validated in your environment before use! #
 ################################################################################
 # Replace the xxx values below to match your environment
-CASSANDRA_DIR="xxx"
+CASSANDRA_BIN_DIR="xxx"
 KEYSPACE_NAME="xxx"
+NODETOOL_ARGS=""
+CQLSH_ARGS=""
 # Example:
-#  CASSANDRA_DATA_DIR="/opt/cassandra"
+#  CASSANDRA_BIN_DIR="/opt/cassandra/bin"
 #  KEYSPACE_NAME="x9fa003e2_d975_4a4a_a27e_280ab7fd8a5_group_2"
+#  NODETOOL_ARGS="-u username -pw password"
+#  CQLSH_ARGS="-u username -p password"
 ##### Do NOT change anything below this line #####
-cqlsh="${CASSANDRA_DIR}/bin/cqlsh"
-keyspace_path="${CASSANDRA_DIR}/data/data/${KEYSPACE_NAME}"
-echo -e "\n\tReloading indexes - all indexes will be dropped and reloaded again"
-echo -e "\tReload indexes for keyspace ${KEYSPACE_NAME}?"
+cqlsh="${CASSANDRA_BIN_DIR}/cqlsh ${CQLSH_ARGS}"
+nodetool="${CASSANDRA_BIN_DIR}/nodetool ${NODETOOL_ARGS}"
+echo -e "\n\tRebuilding indexes - all indexes will be rebuilt using nodetool rebuild_index"
+echo -e "\tRebuild indexes for keyspace ${KEYSPACE_NAME}?"
 read -n 1 -p "Continue (y/n)?" answer
 echo -e "\n"
 if [ "$answer" != "y" ] && [ "$answer" != "Y" ]; then
@@ -309,11 +313,10 @@ if [ "$answer" != "y" ] && [ "$answer" != "Y" ]; then
 fi
 set -e
 trap '[ "$?" -eq 0 ] || echo \*\*\* FATAL ERROR \*\*\*' EXIT $?
-if ! [ -d "${CASSANDRA_DIR}" ]; then echo -e "\nERROR: Cassandra dir not found at '${CASSANDRA_DIR}'";exit 1; fi
-if ! [ -d "${keyspace_path}" ]; then echo -e "\nERROR: Keyspace path '${keyspace_path}' is not valid";exit 1; fi
+if ! [ -d "${CASSANDRA_BIN_DIR}" ]; then echo -e "\nERROR: Cassandra bin dir not found at '${CASSANDRA_BIN_DIR}'";exit 1; fi
 indexes=$(mktemp)
-${cqlsh} -e "SELECT index_name FROM system.schema_columns WHERE keyspace_name = '${KEYSPACE_NAME}'" > ${indexes}
-sed -i -e '1,3d;/^$/d;/null/d;$d' ${indexes}
+${cqlsh} -e "SELECT columnfamily_name, index_name FROM system.schema_columns WHERE keyspace_name = '${KEYSPACE_NAME}'" > ${indexes}
+sed -i -e '1,3d;/^$/d;s/[[:blank:]]\{1,\}/ /g;s/|//;/null/d;$d' ${indexes}
 if [ $(wc -l < ${indexes}) -eq 0 ]; then
   echo -e "Error getting current indexes"
   exit 1
@@ -321,18 +324,8 @@ fi
 while IFS= read -r line
 do
   index="${line#"${line%%[![:space:]]*}"}"
-  echo -e "Restoring index: '${index}'"
-  create_index=$(${cqlsh} -e "DESCRIBE INDEX ${KEYSPACE_NAME}.\"${index}\";")
-  if [ $(echo ${create_index} | wc -l) -ne 1 ]; then
-    echo -e "Error getting create script for index: ${index}"
-    exit 1
-  fi
-  echo -e "\tDropping index"
-  ${cqlsh} -e "DROP INDEX ${KEYSPACE_NAME}.\"${index}\";"
-  echo -e "\tCreating index again"
-  ${cqlsh} -e "${create_index}"
-  echo -e "\tChecking created index"
-  ${cqlsh} -e "DESCRIBE INDEX ${KEYSPACE_NAME}.${index};" > /dev/null
+  echo -e "Rebuilding index: '${index}'"
+  ${nodetool} rebuild_index ${KEYSPACE_NAME} ${index}
   echo -e "\tDone"
 done < "$indexes"
 ```
