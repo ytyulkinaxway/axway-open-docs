@@ -6,8 +6,6 @@
   "description": "Supported platforms and other system requirements for API Gateway, and specific requirements for API Gateway components."
 }
 
-{{< alert title="Note" color="primary" >}}Windows is supported only for a limited set of developer tools, see [Install developer tools on Windows](/docs/apim_installation/apigtw_install/install_dev_tools/). API Gateway and API Manager do not support Windows.{{< /alert >}}
-
 ## Operating systems and hardware
 
 This section describes the operating system requirements for API Gateway.
@@ -16,14 +14,10 @@ This section describes the operating system requirements for API Gateway.
 
 API Gateway supports the following software versions:
 
-* CentOS 6.x, 7.x, 8.x
+* CentOS 6.x, 7.x, 8.x (CentOS 8.x is supported from [7.7.20200530](/docs/apim_relnotes/20200530_apimgr_relnotes/) update onward.)
 * Oracle Linux 6.x, 7.x
-* Red Hat Enterprise Linux 6.x, 7.x, 8.x
+* Red Hat Enterprise Linux 6.x, 7.x, 8.x (Red Hat Enterprise Linux 8.x is supported from [7.7.20200530](/docs/apim_relnotes/20200530_apimgr_relnotes/) update and later updates only.)
 * SUSE Linux Enterprise Server 11.x, 12.x
-
-{{< alert title="Note" color="primary" >}}
-CentOS 8.x and Red Hat Enterprise Linux 8.x are supported from 7.7.20200530 (May 2020) update and later updates only.
-{{< /alert >}}
 
 API Gateway supports the following hardware:
 
@@ -33,23 +27,15 @@ API Gateway supports the following hardware:
 {{< alert title="Note" color="primary" >}}When new Linux kernels and distributions are released, Axway modifies and tests its products for stability and reliability on these platforms.
 Axway makes every effort to add support for new kernels and distributions in a timely manner. However, until a kernel or distribution is added to this list, its use with API Gateway is not supported. Axway endeavors to support any generally popular Linux distribution on a release that the vendor still supports.{{< /alert >}}
 
-#### `LANG` environment variable
+Your Linux system must have the `LANG` environment variable set. If this variable is not configured correctly, your system might have issues handling Unicode characters in file names. A full installation of Linux should configure this for you automatically. If you are running the API Gateway in a Docker image that you have built, set this variable in your Dockerfile as follows:
 
-Your Linux system must have the `LANG` environment variable set. If this variable is not configured correctly, your system might have issues handling Unicode characters in file names. A full install of Linux should configure this for you automatically.
-
-If you are running the API Gateway in a Docker image that you have built, set this in your Dockerfile as follows:
-
-```
+ ```
 ENV LANG=en_US.UTF-8
 ```
 
 This variable is set for you in EMT mode.
 
-#### `libnsl` library
-
-In CentOS 8.x and Red Hat Enterprise Linux 8.x `glibc` no longer includes `libnsl`. This was included in earlier releases and is required by the API Gateway.
-
-To install the library:
+In CentOS 8.x and Red Hat Enterprise Linux 8.x `glibc` no longer includes `libnsl` library. This was included in earlier releases and is required by the API Gateway. To install the library:
 
 ```
 sudo yum install libnsl
@@ -57,7 +43,9 @@ sudo yum install libnsl
 
 ### Windows
 
-(Policy Studio, Configuration Studio, Package and Deployment Tools only)
+Windows is supported only for a limited set of developer tools, see [Install developer tools on Windows](/docs/apim_installation/apigtw_install/install_dev_tools/). API Gateway and API Manager do not support Windows.
+
+This section addresses Policy Studio, Configuration Studio, Package and Deployment Tools only.
 
 API Gateway supports the following software versions:
 
@@ -96,8 +84,8 @@ API Gateway and API Manager support the following relational databases to store 
 
 * MySQL Server 5.6, 5.7
 * MariaDB 5.5, 10.1
-* Microsoft SQL Server 2012, 2014
-* Oracle 11.2, 12.1
+* Microsoft SQL Server 2016, 2017, and 2019
+* Oracle 12.2, 18c, and 19c
 * IBM DB2 10.5
 
 {{< alert title="Note" color="primary" >}}If you are using MariaDB you must use the MySQL JDBC driver with the MySQL database connection URL (for example, `jdbc:mysql://DB_HOST:3306/reports`) instead of the provided MariaDB version. You must also ensure that you are using a MySQL JDBC driver version 5.1.x or earlier (for example, 5.1.47), as later versions (for example, 6.x, 8.x) are not currently supported.{{< /alert >}}
@@ -228,7 +216,7 @@ You must have a valid Axway license file to install the following API Gateway co
 
 You can obtain an evaluation trial license to enable you to evaluate the API Gateway features. However, you must have a full license to enable all API Gateway features for use in a non-evaluation environment (for example, development, testing, or production). To obtain an evaluation trial license or a full license, contact your Axway Account Manager.
 
-{{< alert title="Note" color="primary" >}}You can install an Admin Node Manager in isolation without an API Gateway license. For more information, see [Install the Admin Node Manager](/docs/apim_installation/apigtw_install/install_node_manager/).{{< /alert >}}
+You can install an Admin Node Manager in isolation without an API Gateway license. For more information, see [Install the Admin Node Manager](/docs/apim_installation/apigtw_install/install_node_manager/).
 
 **McAfee license file**:
 
@@ -268,17 +256,16 @@ After completing the installation and before starting the services:
 1. Create a new temporary directory that has `exec` privileges (for example, `/opt/Axway-7.7/tmp`).
 2. If you installed Cassandra during API Gateway installation, edit the file `CASSANDRA_INSTALL_DIR/conf/cassandra-env.sh` and add the following line:
 
-    ```
-    JVM_OPTS="$JVM_OPTS -Djava.io.tmpdir=<TheNewTmpDir>"
-    ```
-
+   ```
+   JVM_OPTS="$JVM_OPTS -Djava.io.tmpdir=<TheNewTmpDir>"
+   ```
 3. Create or edit the file `VDISTDIR/apigateway/conf/jvm.xml`, and add the following:
 
-    ```xml
-    <ConfigurationFragment>
-        <VMArg name="-Djava.io.tmpdir=<TheNewTmpDir>
-    </ConfigurationFragment>
-    ```
+   ```xml
+   <ConfigurationFragment>
+       <VMArg name="-Djava.io.tmpdir=<TheNewTmpDir>
+   </ConfigurationFragment>
+   ```
 
 ### Service packs
 
