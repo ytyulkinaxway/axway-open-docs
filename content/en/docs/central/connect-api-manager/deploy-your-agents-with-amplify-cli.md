@@ -58,21 +58,21 @@ The installation procedure will prompt for the following:
 1. Select the agents you want to install: Discovery / Traceability / all
 2. Select the type of gateway you want to connect to (only v7 gateway is valid at this time)
 3. Select the agent deployment mode: binary / Docker image
-4. API Manager connectivity:
+4. Platform connectivity:
+   * **environment**: can be an existing one or a new one that will be created by the installation procedure
+   * **team**: can be an existing one or a new one that will be created by the installation procedure
+   * **service account**: can be an existing one or a new one that will be created by the installation procedure. If you choose an existing one, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the AMPLIFY Platform. If you choose to create a new one, the generated private/public keys will be provided.
+5. API Manager connectivity:
    * **hostname** of the API Manager (localhost by default)
    * **port** of the API Manager (8075 by default)
    * user/password
-5. API Gateway connectivity:
+6. API Gateway connectivity:
    * **hostname** of the API Gateway (localhost by default)
    * **port** of the API Gateway (8090 by default)
    * user/password
    * event log path
-6. Platform connectivity:
-   * **environment**: can be an existing one or a new one that will be created by the installation procedure
-   * **team**: can be an existing one or a new one that will be created by the installation procedure
-   * **service account**: can be an existing one or a new one that will be created by the installation procedure. If you choose an existing one, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the AMPLIFY Platform. If you choose to create a new one, the generated private/public keys will be provided.
 
-Once you answered all questions, the agents are downloaded, the configuration file updated and the key pair generated (if you chose to create a new service account).
+Once you have answered all questions, the agents are downloaded, the configuration files are updated, the Amplify Central resources are created and the key pair are generated (if you chose to create a new service account).
 The current directory should contain the following files:
 
 ```shell
@@ -80,14 +80,15 @@ discovery_agent
 discovery_agent.yml
 traceability_agent
 traceability_agent.yml
-env_vars
+da_env_vars.env
+ta_env_vars.env
 private_key.pem
 public_key.pem
 ```
 
 `discovery_agent` / `discovery_agent.yml` / `traceability_agent` / `traceability_agent.yml` files will be present only if you choose the binary mode installation.
 
-`env_vars` contains the specific configuration you entered during the installation procedure.
+`da_env_vars.env` / `ta_env_vars.env` contains the specific configuration you entered during the installation procedure.
 
 `discovery_agent.yml` and `traceability_agent.yml` contain the default minimum agent configuration.
 
@@ -102,13 +103,13 @@ As mentioned in the installation procedure, agents can be started with the follo
 Discovery Agent:
 
 ```shell
-./discovery_agent --envFile ./env_vars
+./discovery_agent --envFile ./da_env_vars.env
 ```
 
 Traceability Agent:
 
 ```shell
-./discovery_agent --envFile ./env_vars
+./discovery_agent --envFile ./ta_env_vars.env
 ```
 
 ### Docker mode
@@ -118,13 +119,13 @@ As mentioned in the installation procedure, agents can be started with the follo
 Discovery Agent:
 
 ```shell
-docker run -it --env-file $(pwd)/env_vars -v $(pwd):/keys axway-docker-public-registry.bintray.io/agent/v7-discovery-agent:latest
+docker run -it --env-file $(pwd)/da_env_vars.env -v $(pwd):/keys axway-docker-public-registry.bintray.io/agent/v7-discovery-agent:latest
 ```
 
 Traceability Agent:
 
 ```shell
-docker run -it --env-file $(pwd)/env_vars -v $(pwd):/keys -v EVENT_LOG_PATH_ENTERED_DURING_INSTALLATION:/events axway-docker-public-registry.bintray.io/agent/v7-traceability-agent:latest
+docker run -it --env-file $(pwd)/ta_env_vars.env -v $(pwd):/keys -v EVENT_LOG_PATH_ENTERED_DURING_INSTALLATION:/events axway-docker-public-registry.bintray.io/agent/v7-traceability-agent:latest
 ```
 
 See [Administer API Gateway](/docs/central/connect-api-manager/gateway-administation/index.html) for additional information about agent features.
