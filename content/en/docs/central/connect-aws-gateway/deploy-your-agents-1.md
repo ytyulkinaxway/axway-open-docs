@@ -25,8 +25,6 @@ Learn how to create your Discovery Agent and Traceability Agent configuration fi
 
 The Discovery Agent is used to discover new deployments and stage updates to existing deployments. Once they are discovered, the related APIs are published to AMPLIFY Central so that they become available for any consumer.
 
-As soon as an API is published, a new `APIC_ID` tag is added to the stage so that the Discovery Agent will not publish it again.
-
 The Discovery Agent only discovers published APIs where the stage has a tag(s) defined in the agent configuration file. See AWS_DISCOVERYTAGS.
 
 There are two operating modes of the Discovery Agent, one is receiving continuous changes from AWS API Gateway and pushing to AMPLIFY Central. The other synchronizing all APIs and then exits.
