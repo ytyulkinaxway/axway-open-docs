@@ -470,48 +470,78 @@ kill 13186
 
 The agent can be installed as a Linux service with systemd. The following commands will help you utilize the service. These commands install the service abilities and must be run as a root user.
 
-To install the service to execute with user axway and group axway:
+When running as a service, it is best to save your logging to a file rather than the console output. See [Customizing log section (log)](#customizing-log-section-log) above.
 
-```shell
-cd /home/APIC-agents
-sudo ./discovery_agent service install -u axway -g axway
-```
+* Install
 
-To start the service:
+  To install the service and have it execute as user axway and group axway:
 
-```shell
-cd /home/APIC-agents
-sudo ./discovery_agent service start
-```
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service install -u axway -g axway
+  ```
 
-To stop the service:
+  Optionally, provide an environment file with all the configuration overwrites for the agent:
 
-```shell
-cd /home/APIC-agents
-sudo ./discovery_agent service stop
-```
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service install -u axway -g axway --envFile /path/to/da_env_file.env
+  ```
 
-To enable the service to start when the machine starts:
+* Start
 
-```shell
-cd /home/APIC-agents
-sudo ./discovery_agent service enable
-```
+  To start the service:
 
-To get the name of the service:
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service start
+  ```
 
-```shell
-cd /home/APIC-agents
-sudo ./discovery_agent service name
-```
+* Logs
 
-To uninstall the service from the machine:
+  To get all logs for the service, since the machine last booted:
 
-```shell
-cd /home/APIC-agents
-sudo ./discovery_agent service stop   # to ensure it is not running
-sudo ./discovery_agent service remove
-```
+  ```shell
+  cd /home/APIC-agents
+  ./discovery_agent service logs
+  ```
+
+* Stop
+
+  To stop the service:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service stop
+  ```
+
+* Enable
+
+  To enable the service to start when the machine starts:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service enable
+  ```
+
+* Name
+
+  To get the name of the service:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service name
+  ```
+
+* Remove
+
+  To uninstall the service from the machine:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service stop   # to ensure it is not running
+  sudo ./discovery_agent service remove
+  ```
 
 #### Verify Discovery Agent is Running
 
@@ -1021,48 +1051,78 @@ kill 13186
 
 The agent can be installed as a Linux service, with systemd. The following commands will help you utilize the service. These commands install the service abilities and must be run as a root user.
 
-To install the service to execute with user axway and group axway:
+When running as a service, it is best to save your logging to a file rather than the console output. See [Customizing log section (logging)](#customizing-log-section-logging) above.
 
-```shell
-cd /home/APIC-agents
-sudo ./traceability_agent service install -u axway -g axway
-```
+* Install
 
-To start the service:
+  To install the service and have it execute as user axway and group axway:
 
-```shell
-cd /home/APIC-agents
-sudo ./traceability_agent service start
-```
+  ```shell
+  cd /home/APIC-agents
+  sudo ./traceability_agent service install -u axway -g axway
+  ```
 
-To stop the service:
+  Optionally, provide an environment file with all the configuration overwrites for the agent:
 
-```shell
-cd /home/APIC-agents
-sudo ./traceability_agent service stop
-```
+  ```shell
+  cd /home/APIC-agents
+  sudo ./traceability_agent service install -u axway -g axway --envFile /path/to/ta_env_file.env
+  ```
 
-To enable the service to start when the machine starts:
+* Start
 
-```shell
-cd /home/APIC-agents
-sudo ./traceability_agent service enable
-```
+  To start the service:
 
-To get the name of the service:
+  ```shell
+  cd /home/APIC-agents
+  sudo ./traceability_agent service start
+  ```
 
-```shell
-cd /home/APIC-agents
-sudo ./traceability_agent service name
-```
+* Logs
 
-To uninstall the service from the machine:
+  To get all logs for the service, since the machine last booted:
 
-```shell
-cd /home/APIC-agents
-sudo ./traceability_agent service stop   # to ensure it is not running
-sudo ./traceability_agent service remove
-```
+  ```shell
+  cd /home/APIC-agents
+  ./traceability_agent service logs
+  ```
+
+* Stop
+
+  To stop the service:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./traceability_agent service stop
+  ```
+
+* Enable
+
+  To enable the service to start when the machine starts:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./traceability_agent service enable
+  ```
+
+* Name
+
+  To get the name of the service:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./traceability_agent service name
+  ```
+
+* Remove
+
+  To uninstall the service from the machine:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./traceability_agent service stop   # to ensure it is not running
+  sudo ./traceability_agent service remove
+  ```
 
 #### Verify binary Traceability Agent is Running
 
