@@ -30,8 +30,6 @@ The Discovery Agent is used to discover new published APIs or any updated APIs. 
 
 The Discovery Agent only discovers APIs that have the tag(s) defined in the agent configuration file. See [Discover APIs](/docs/central/connect-api-manager/filtering-apis-to-be-discovered/). By default, the filter is empty and thus the agent will discover all published API.
 
-As soon as an API is published, the identifier of the asset in AMPLIFY Central is kept in a custom field at the API level in API Manager to help the agent remember what is already published.
-
 The binary agent can run in the following modes:
 
 * With a yaml configuration file having the same name as the agent binary - `discovery_agent.yml`:
@@ -113,8 +111,6 @@ This section connects the agent to API Manager and determines which APIs should 
 
 `filter` (optional): Expression to filter the API you want the agent to discover. See [Discover APIs](/docs/central/connect-api-manager/filtering-apis-to-be-discovered/). Leaving this field empty tells the agent to discover all published APIs (REST / SOAP).
 
-`proxyApicIDField` (optional): The field name used to store AMPLIFY Central identifier for the front-end proxy in API Manager. Default value is **apicId**. If you do not intend to change it, comment this property. Be aware that the field will not be visible in the API Manager front-end proxy, as it is a specific configuration. If you want to see that field or customize it, refer to Add a custom property to APIs in [Customize API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_custom/index.html#customize-api-manager-data) documentation.
-
 `subscriptionApplicationField` (optional): The field name used to store AMPLIFY Central subscription identifier inside the API Manager application securing the front end proxy. Default value is **subscriptions**. If you do not intend to change it, comment this property. Be aware that the field will not be visible in the API Manager application, as it is a specific configuration. If you want to see that field or customize it, refer to Add a custom property to applications in [Customize API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_custom/index.html#customize-api-manager-data) documentation.
 
 `pollInterval`: The frequency in which API Manager is polled for new endpoints. Default value is 30s.
@@ -136,7 +132,6 @@ apimanager:
   port: 8075
   discoveryIgnoreTags: tag1, tag2
   filter:
-#  proxyApicIDField: apicId
 #  subscriptionApplicationField: subscriptions
   pollInterval: 30s
   allowApplicationAutoCreation: true
@@ -364,7 +359,6 @@ apimanager:
   port: 8075
   discoveryIgnoreTags: tag1, tag2
   filter:
-#  proxyApicIDField: apicId
 #  subscriptionApplicationField: subscriptions
   pollInterval: 30s
   allowApplicationAutoCreation: true
@@ -773,7 +767,7 @@ traceability_agent:
 
 #### Customizing apimanager section (traceability_agent.apimanager)
 
-This section tells the agent which API needs to be monitor: one that has been discovered by the discovery agent (ie. has a non-empty `apicId` custom field).
+This section tells the agent which API needs to be monitored: one that has been discovered by the Discovery Agent.
 
 `host`: The Machine name where API Manager is running. localhost value can be used, as the agent is installed on the same machine as the API Manager.
 
@@ -783,14 +777,12 @@ This section tells the agent which API needs to be monitor: one that has been di
 
 `apiVersion`: The API Manager API version to use. Default value is **1.3**.
 
-`proxyApicIDField` (optional): The field name used to store the AMPLIFY Central identifier for the front-end proxy in API Manager. Default value is **apicId**. If you do not intend to change it, comment this property. Be aware that the field will not be visible in the API Manager front-end proxy, as it is a specific configuration. If you want to see that field or customize it, refer to Add a custom property to APIs in [Customize API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_custom/index.html#customize-api-manager-data) documentation.
-
 `auth.username`: An API Manager user the agent will use to connect to the API Manager. This user must have either an “API Manager Administrator” or “Organization administrator” role. Based on the role of this user, the agent is able to:
 
 * discover any API from any organization (“API Manager Administrator”)  
 * discovery any API from a specific organization (“Organization administrator”)
 
-For the traceability agent to report correctly the discovered API traffic, it is recommended to use the same user as the one used for discovering APIs.
+For the Traceability Agent to report correctly the discovered API traffic, it is recommended to use the same user as the one used for discovering APIs.
 
 `auth.password`: The password of the API Manager user in clear text.
 
@@ -806,7 +798,6 @@ traceability_agent:
     port: 8075
     pollInterval: 1m
     apiVersion: 1.3
-    proxyApicIDField: "apicId"
     auth:
       username: myAPIManagerUserName
       password: myAPIManagerUserPassword
@@ -938,7 +929,6 @@ traceability_agent:
     port: 8075
     pollInterval: 1m
     apiVersion: 1.3
-    proxyApicIDField: "apicId"
     auth:
       username: myAPIManagerUserName
       password: myAPIManagerUserPassword
