@@ -49,6 +49,21 @@ The Traceability Agent sends log information about APIs that have been discovere
 * The Linux machine where API Manager and API Gateway are running must be accessible and have `sudo` rights to run the Agents.
 * The agents must be installed on the same machine that API Manager and/or API Gateway is running.
 
+## Region support
+
+AMPLIFY Central supports two regions, US (default) and EU. The data  (APIs, traffic) that the agents send to AMPLIFY Central is stored in one of those regions based on the agent configuration.
+
+Use one of the following URLs to access the AMPLIFY Central UI:
+
+* US: [https://apicentral.axway.com](https://apicentral.axway.com)
+* EU: [https://central.eu-fr.axway.com](https://central.eu-fr.axway.com)
+
+Update the following variables to move data to the EU region:
+
+* `CENTRAL_DEPLOYMENT`= **prod-eu**
+* `CENTRAL_URL`= **htpps://central.eu-fr.axway.com**
+* `TRACEABILITY_HOST`= **ingestion-lumberjack.visibility.eu-fr.axway.com:453**
+
 ## Connect Axway API Manager to AMPLIFY Central quickstart
 
 The following gives you a high-level overview of the required steps to connect a API-Manager V7 environment to AMPLIFY-Central.
