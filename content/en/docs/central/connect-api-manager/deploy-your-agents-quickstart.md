@@ -41,6 +41,11 @@ APIGATEWAY_PORT=8090
 APIGATEWAY_AUTH_USERNAME=<apiGatewayOperatorUser>
 APIGATEWAY_AUTH_PASSWORD=<apiGatewayOperatorUserPassword>
 #
+# API GATEWAY EVENT LOG PATH
+#
+# When multiple log paths are defined, either separate each path with a comma or use the wildcard to regroup them all in a single value.
+EVENT_LOG_PATHS=<apiGatewayInstallDir>/events/group-*_instance-*.log
+#
 #AMPLIFY Central connectivity
 #
 CENTRAL_ORGANIZATIONID=<YOUR ORGANIZATION ID>
@@ -50,8 +55,6 @@ CENTRAL_AUTH_CLIENTID=<SERVICE ACCOUNT NAME: DOSA_xxxxxxxxx>
 
 The required values represented in `<>` are either coming from the API Management system installation or from AMPLIFY platform configuration.
 An explanation for each variable can be found in the [Agent variables section](/docs/central/connect-api-manager/agent-variables/).
-
-Once all the values are gathered, use the following command `export $(grep -v '^#' env_vars_agents | xargs)` to define the environment variables based on your file definition.
 
 ## 2. Download Discovery Agent
 
@@ -63,10 +66,10 @@ Unzip the file `discovery_agent-latest.zip` to get the agent binary (`discovery_
 
 ## 3. Start the Discovery Agent
 
-Before starting the agent, you need to copy the private/public key into the same folder as the agent. Then execute the following command:
+Before starting the agent, you need to copy the private/public key into the same folder as the agent. You also need to copy the `env_vars_agents` file into the agent directory. Then execute the following command:
 
 ```shell
-./discovery_agent
+./discovery_agent --envFile ./env_vars_agents
 ```
 
 If all parameters are corrects, the following message should be displayed:
@@ -86,12 +89,10 @@ curl -L "https://axway.bintray.com/generic-repo/v7-agents/v7_traceability_agent/
 
 Unzip the file `traceability_agent-latest.zip` to get the agent binary (`traceability_agent`) and the template configuration (`traceability_agent.yml`) into the same folder as the discovery agent.
 
-Edit the `traceability_agent.yml` and locate the path for the event logs (`/home/axway/apigateway/events/group-?_instance_?.log`). Replace `/home/axway/` with the real installation directory of your API Management system.
-
 ## 5. Start the Traceability Agent
 
 ```
-./traceability_agent
+./traceability_agent --envFile ./env_vars_agents
 ```
 
 If all parameter are correct, the following message should be displayed:
