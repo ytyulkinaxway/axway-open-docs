@@ -127,13 +127,17 @@ For conformance with the HTTP/1.1 specification, the client must send a `Host` h
 
 You can configure a remote host for a destination server supporting HTTP 1.1.
 
-In the Policy Studio node tree, click **Environment Configuration > Listeners > API Gateway**. Select the remote host you want and click **Edit**, or add a new host, and select **Allow HTTP 1.1**.
+In the Policy Studio node tree, click **Environment Configuration > Listeners > API Gateway**. Select the remote host you want to configure, and click **Edit**, or add a new host, and select **Allow HTTP 1.1**.
 
-Remote host only enforces settings to a specific configured endpoint, not globally. You must edit the settings separately for each destination server you want to configure for HTTP 1.1.
+The remote host only enforces settings to a specific configured server, not globally. You must edit the settings separately for each destination server you want to configure for HTTP 1.1.
 
-#### Configure HTTP 1.1 for incoming connections
+If you have [set HTTP 1.1 to be used globally](/docs/apim_administration/apigtw_admin/admin_performance/#configure-http-11-globally), you can also use a remote host to turn it *off* for a specific server by deselecting **Allow HTTP 1.1**.
 
-You can enable HTTP 1.1 globally for incoming connections in API Gateway by editing the following file:
+#### Configure HTTP 1.1 globally
+
+You can enable HTTP 1.1 globally in the `service.xml` configuration file, which will then apply to all incoming connections and to outgoing connections to hosts for which there is no remote host. The HTTP 1.1 setting in a remote host will override this global setting.
+
+Enable HTTP 1.1 globally by editing the following file:
 
 ```
 INSTALL_DIR/apigateway/groups/<group>/<instance>/conf/service.xml
