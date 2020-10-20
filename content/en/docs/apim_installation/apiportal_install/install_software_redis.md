@@ -74,7 +74,7 @@ For better performance and scalability, you can configure API Portal to cache A
     sudo yum remove rh-php73-php-devel rh-php73-php-pear
     ```
 
-## Install Redis on CentOS 7 using EPEL/Remi
+## Install Redis on CentOS 7 and RHEL 8 using EPEL/Remi
 
 1. Install Redis and `redis` PHP module:
 
