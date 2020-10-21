@@ -99,7 +99,6 @@ The containerized agent can run in the following mode:
     level: debug
     format: json
     output: stdout
-    path: logs
     maskedValues: keyword1, keyword2, keyword3
    ```
 
