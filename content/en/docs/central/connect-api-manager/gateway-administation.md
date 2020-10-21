@@ -317,7 +317,7 @@ subscriptions:
       subscribeFailed:
         subject: Subscription Failed Notification
         body: |
-          Could not subscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a>
+          Could not subscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a> Error: ${message}
       unsubscribeFailed:
         subject: Subscription Removal Failed Notification
         body: |
@@ -334,8 +334,6 @@ The log section defines how the agent is managing its logs.
 
 `output`: The output for the log lines (stdout, file, both). Default value is **stdout**.
 
-`path`: The path (relative to the agent binary or absolute) to save logs files, if output type file or both. Default value is relative path **logs**.
-
 `maskedValues` : Comma-separated list of keywords to identify within the agent config, which is used to mask its corresponding sensitive data. Keywords are matched by whole words and are case-sensitive. Displaying of agent config to the console requires that the log.level be at debug (level: debug)
 
 Once all data is gathered, this section should look like:
@@ -345,9 +343,10 @@ log:
   level: info
   format: json
   output: stdout
-  path: logs
   maskedValues: keyword1, keyword2, keyword3
 ```
+
+See [Set up agent configuration](/docs/central/connect-api-manager/agent-variables/) for more options
 
 #### Validating your custom Discovery Agent configuration file
 
@@ -409,7 +408,7 @@ subscriptions:
       subscribeFailed:
         subject: Subscription Failed Notification
         body: |
-          Could not subscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a>
+          Could not subscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a> Error: ${message}
       unsubscribeFailed:
         subject: Subscription Removal Failed Notification
         body: |
