@@ -45,38 +45,42 @@ To set the number of days after which the logs will be deleted:
 
 ## Manage data requests
 
-The users of API Portal are able to request their data export or removal.
+The users of API Portal can request their data export or removal.
 
-* This feature is enabled by default. You can disable it by going to **Menus > Main menu > Data Request** and make sure the Status is set to **Unpublished**.
+To use the data request feature, you must to set up a SMTP server. To configure the SMTP server settings, in JAI, click **System > Global Configuration > Server > Mail Settings**.
 
-The dashboard of privacy requests is located in the Joomla Privacy Component **Users > Privacy**. It provides a summary of the information requests for the website and a status of recommended actions to take. The request count module on the left is a summary of the information requests on a website. The health check module shows if there are any recommended actions to take. For example it will show you if there are any urgent requests (which are older then configurable amount of time under the **Options** button) or if the mail sending is disabled.
+The data request feature is enabled by default. To disable it, in JAI, click **Menus > Main menu > Data Request** and set **Status** to **Unpublished**.
 
-In the **Requests** menu there's a list of all requests made in the site along with their status and available actions.
+The dashboard of privacy requests is located in the Joomla Privacy Component **Users > Privacy**. It provides a summary of the information requests for the website and a status of recommended actions that you can take. The request count module on the left is a summary of the information requests on a website. The health check module shows whether there are any recommended actions to take. For example, it will show you whether there are any urgent requests (which are older then configurable amount of time under the **Options** button) or the mail sending is disabled.
 
-Once the user requests the export or removal of his or her data the user and also the site admin will receive emails for the request that is made. The user then needs to confirm it by following a link sent into the email. When the request is confirmed the site owner can either export or delete the data or invalidate the request. Once a proper status is set the request can be completed by the admin.
+In the **Requests** menu there is a list of all requests made in the site along with their status and available actions.
 
-{{< alert title="Joomla compatibility" color="danger" >}} For Joomla versions older than **3.9.22** the removal of the data from the request view is not possible.{{< /alert >}}
+After the user requests the export or removal of their data, both user and site admin will receive an email notification for the request. The user must confirm the request by following a link sent into the email. When the request is confirmed, the site owner can either export or delete the data, or invalidate the request. Once the status of the request is updated, the request can be completed by the admin.
+
+{{< alert title="Note" color="" >}}For Joomla versions older than **3.9.22** the removal of the data from the request view is not possible.{{< /alert >}}
 
 ### Removal of personal data
 
-Once removal request is completed all user's sessions are deleted and the user is anonymised. This means that the logs of the user are still present but they could not be linked to the user anymore. The user is blocked and is not able to login anymore. Keep in mind this does not mean that the user is deleted.
+After the request to remove data is completed all user's sessions are deleted and the user is anonymized, but not deleted. This means that the logs of the user are still present, but they could not be linked to the user anymore. The user is blocked and is not able to login anymore.
 
 ## Additional recommendations
 
+Additional recommendations to manage privacy and personal data.
+
 ### Define retention periods for personal data
 
-For General Data Protection (GDP compliance, you should define retention periods within the design phase for all data fields taking into account the defined purpose. You must also include retention periods for backups.
+For General Data Protection (GDP) compliance, you should define retention periods within the design phase for all data fields taking into account the defined purpose. You should also include retention periods for backups.
 
-If you are a small organization, you may not need a documented retention policy. However, if you do not have a retention policy, you should still regularly review the data you hold and delete or anonymise any data that you no longer need.
+If you are a small organization, you may not need a documented retention policy. However, if you do not have a retention policy, you should still regularly review the data you hold and delete or anonymize any data that you no longer need.
 
 You must include your Data Protection Officer (DPO) or Legal department to define the retention periods as other laws may impact the retention requirements.
 
 ### Permanently delete unnecessary data
 
-When the retention periods expire you have to ensure that all of the data which is no longer needed has been deleted. This may require automatic identification of the latest activities and a data deletion functionality or manual work.
+When the retention periods expire, you must ensure that all of the data which is no longer needed has been deleted. This may require automatic identification of the latest activities and a data deletion functionality or manual work.
 
 ### Develop a log retention policy and archival procedures
 
 We recommend that you develop a log retention policy to identify storage requirements for device logs, and appropriate archival procedures to ensure that the audit logs are available for a security response in the case of an incident or investigation.
 
-The audit logs must be collected for the last 30 days in easily accessible storage media. Older logs should be archived in a protected storage and should be accessible in the future as required for incidents or investigations.
+The audit logs must be collected for the last 30 days, in an easily accessible storage media. Older logs should be archived in a protected storage and should be accessible in the future as required for incidents or investigations.
