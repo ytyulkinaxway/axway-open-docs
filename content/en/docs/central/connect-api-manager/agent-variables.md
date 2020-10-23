@@ -164,4 +164,9 @@ Note: For logging, it is recommended to set it up in the agent configuration fil
 | TRACEABILITY_PROTOCOL         | Protocol (https or tcp) to be used for communicating with ingestion service (default value: `tcp`).                                                         |
 | TRACEABILITY_PROXYURL         | The socks5 or http URL of the proxy server for ingestion service (`<socks5://hostname:port>`). If empty, no proxy is defined.                               |
 | TRACEABILITY_COMPRESSIONLEVEL | The gzip compression level for the output event (default value: `3`).                                                                                       |
+| TRACEABILITY_BULKMAXSIZE      | The maximum number of events to bulk in a single ingestion request (default value: `100`).                                                                  |
+| TRACEABILITY_TIMEOUT          | The time to wait for ingestion response (default value: `300s`).                                                                                            |
+| QUEUE_MEM_EVENTS              | The size of the internal queue used for storing consumed events before publishing them (default value: `2048`).                                             |
+| QUEUE_MEM_FLUSH_MINEVENTS     | The minimum number of events in queue required for publishing (default value: `100`).                                                                       |
+| QUEUE_MEM_FLUSH_TIMEOUT       | The maximum time to wait for min_events to be fulfilled (default value: `1s`).                                                                              |
 | APIGATEWAY_GETHEADERS         | Call the API Gateway API to get additional transaction details (headers, useragent). If false, API Gateway config does not need to be set. Default is True. |
