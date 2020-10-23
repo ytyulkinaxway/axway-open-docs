@@ -58,14 +58,14 @@
 /content/en/docs/apim_administration/apigtw_admin/ @andreamussap
 /content/en/docs/apim_administration/apimgr_admin/ @andreamussap
 /content/en/docs/apim_administration/apimgr_sso/ @andreamussap
-/content/en/docs/apim_administration/apiportal_admin/ @andreamussap @jowens-axway
-/content/en/docs/apim_administration/apiportal_sso/ @andreamussap @jowens-axway
+/content/en/docs/apim_administration/apiportal_admin/ @andreamussap
+/content/en/docs/apim_administration/apiportal_sso/ @andreamussap
 /content/en/docs/apim_howto_guides/ @andreamussap
 /content/en/docs/apim_installation/apigtw_install/ @andreamussap
 /content/en/docs/apim_installation/apigw_containers/ @andreamussap
 /content/en/docs/apim_installation/apigw_upgrade/ @andreamussap
-/content/en/docs/apim_installation/apiportal_docker/ @andreamussap @jowens-axway
-/content/en/docs/apim_installation/apiportal_install/ @andreamussap @jowens-axway
+/content/en/docs/apim_installation/apiportal_docker/ @andreamussap
+/content/en/docs/apim_installation/apiportal_install/ @andreamussap
 /content/en/docs/apim_policydev/apigw_external_connections/ @andreamussap
 /content/en/docs/apim_policydev/apigw_gw_instances/ @andreamussap
 /content/en/docs/apim_policydev/apigw_kps/ @andreamussap
@@ -74,15 +74,14 @@
 /content/en/docs/apim_policydev/apigw_polref/ @andreamussap
 /content/en/docs/apim_policydev/apigw_web_services/ @andreamussap
 /content/en/docs/apim_reference/ @andreamussap
-/content/en/docs/apim_relnotes/*apimgr_relnotes.md @andreamussap @maherb4
-/content/en/docs/apim_relnotes/*apip_relnotes.md @andreamussap @jowens-axway
+/content/en/docs/apim_relnotes/*apimgr_relnotes.md @andreamussap
+/content/en/docs/apim_relnotes/*apip_relnotes.md @andreamussap
 /content/en/docs/apimanager_analytics/ @andreamussap
-/content/en/docs/apim_yamles/ @andreamussap allandenis38
 /content/en/docs/apimanager_capacityguide/ @andreamussap
 /content/en/docs/apimgmt_multi_dc/ @andreamussap
 /content/en/docs/apimgmt_security/ @andreamussap
 /content/en/docs/apiportal_ha/ @andreamussap
-/content/en/docs/cass_admin/ @andreamussap @kmercierwhite
+/content/en/docs/cass_admin/ @andreamussap
 /content/en/docs/glossary/ @andreamussap
 
 # Documentation files for APIM ref arch
