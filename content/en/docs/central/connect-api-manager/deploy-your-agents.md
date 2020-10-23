@@ -250,6 +250,9 @@ To install the binary Traceability Agent:
      hosts: ${TRACEABILITY_HOST:ingestion-lumberjack.datasearch.axway.com:453}
      protocol: ${TRACEABILITY_PROTOCOL:"tcp"}
      compression_level: ${TRACEABILITY_COMPRESSIONLEVEL:3}
+     bulk_max_size: ${TRACEABILITY_BULKMAXSIZE:100}
+     timeout: ${TRACEABILITY_TIMEOUT:300s}
+     pipelining: 0
      ssl:
        enabled: true
        verification_mode: none
@@ -261,8 +264,14 @@ To install the binary Traceability Agent:
          - "ECDHE-RSA-AES-128-CBC-SHA256"
          - "ECDHE-RSA-AES-128-GCM-SHA256"
          - "ECDHE-RSA-AES-256-GCM-SHA384"
-     pipelining: 0
      proxy_url: ${TRACEABILITY_PROXYURL:""}
+
+   queue:
+     mem:
+       events: ${QUEUE_MEM_EVENTS:2048}
+       flush:
+         min_events: ${QUEUE_MEM_FLUSH_MINEVENTS:100}
+         timeout: ${QUEUE_MEM_FLUSH_TIMEOUT:1s}
 
    logging:
      metrics:
