@@ -8,7 +8,7 @@
 
 ## Installation
 
-For details how to install a database using `yum`, see the following:
+For details on how to install a database using `yum`, see the following:
 
 * [MySQL installation instructions](http://dev.mysql.com/doc/refman/5.6/en/linux-installation-yum-repo.html)
 * [MariaDB installation instructions](https://mariadb.com/kb/en/mariadb/yum/)
@@ -39,68 +39,72 @@ To generate the SSL-RSA certificates and enable SSL in the MySQL or MariaDB serv
 
 You must first create the database server and the client certificate and key files. During the process, you must respond to several prompts from the Open SSL commands:
 
-* To generate test files, press `Enter` to all prompts except the one for Common Name (CN) of the server certificate (CA). The CN must match the host you will use for connecting, and it must differ from the server and client hosts certificates.
+* To generate test files, press `Enter` to all prompts except the one for Common Name (CN) of the server certificate (server-cert.pem). The CN must match the host you will use for connecting, and it must differ from the root and client hosts certificates.
 * To generate files for production use, you must provide (non-empty) responses.
 
 1. To create the RSA certificates, enter the following commands in the given order, and respond to any prompts you receive:
 
-    ```
-    mkdir -p /etc/mysql/certs
-    cd /etc/mysql/certs
-    openssl genrsa 2048 > ca-key.pem
-    openssl req -new -x509 -nodes -days 3600 -key ca-key.pem > ca.pem
-    openssl req -newkey rsa:2048 -days 3600 -nodes -keyout server-key.pem > server-req.pem
-    openssl x509 -req -in server-req.pem -days 3600 -CA ca.pem -CAkey ca-key.pem -set_serial 01 > server-cert.pem
-    openssl req -newkey rsa:2048 -days 3600 -nodes -keyout client-key.pem > client-req.pem
-    openssl x509 -req -in client-req.pem -days 3600 -CA ca.pem -CAkey ca-key.pem -set_serial 01 > client-cert.pem
-    ```
-
+   ```
+   mkdir -p /etc/mysql/certs
+   cd /etc/mysql/certs
+   openssl genrsa 2048 > ca-key.pem
+   openssl req -new -x509 -nodes -days 3600 -key ca-key.pem > ca.pem
+   openssl req -newkey rsa:2048 -days 3600 -nodes -keyout server-key.pem > server-req.pem
+   openssl x509 -req -in server-req.pem -days 3600 -CA ca.pem -CAkey ca-key.pem -set_serial 01 > server-cert.pem
+   openssl req -newkey rsa:2048 -days 3600 -nodes -keyout client-key.pem > client-req.pem
+   openssl x509 -req -in client-req.pem -days 3600 -CA ca.pem -CAkey ca-key.pem -set_serial 01 > client-cert.pem
+   ```
 2. To verify the generated certificate, enter the following command:
 
-    ```
-    openssl verify -CAfile ca.pem server-cert.pem client-cert.pem
-    ```
+   ```
+   openssl verify -CAfile ca.pem server-cert.pem client-cert.pem
+   ```
+3. Verify that the MySQL user have access (ownership, or at least read rights) to the generated certificates, otherwise MySQL could not use them and enable TLS configuration.
+
+   ```
+   chmod -R a+r /etc/mysql/certs
+   ```
 
 ### Enable secure connection in the database server
 
 To enable secure connection in the MySQL or MariaDB server-side configuration, do the following:
 
 1. To start the database server so that it permits clients to connect securely, use options that identify the certificate and key files the server uses when establishing a secure connection:
-    * `ssl-ca` identifies the CA certificate.
-    * `ssl-cert` identifies the server public key certificate. This can be sent to the client and authenticated against the CA certificate the client has.
-    * `ssl-key` identifies the server private key.
 
+   * `ssl-ca` identifies the CA certificate.
+   * `ssl-cert` identifies the server public key certificate. This can be sent to the client and authenticated against the CA certificate the client has.
+   * `ssl-key` identifies the server private key.
 2. Edit the `/etc/my.cnf` file as follows to configure the certificates:
 
-    ```
-    [mysqld]
-    ...
-    ssl-ca=/etc/mysql/certs/ca.pem
-    ssl-cert=/etc/mysql/certs/server-cert.pem
-    ssl-key=/etc/mysql/certs/server-key.pem
-    ```
-
+   ```
+   [mysqld]
+   ...
+   ssl-ca=/etc/mysql/certs/ca.pem
+   ssl-cert=/etc/mysql/certs/server-cert.pem
+   ssl-key=/etc/mysql/certs/server-key.pem
+   ```
 3. Save the file and restart the database:
 
-    ```
-    systemctl restart mysql
-    ```
+   ```
+   systemctl restart mysql
+   ```
 
 ### Verify the configuration
 
 After configuring the MySQL or MariaDB database server with certificates, you need to make sure SSL is enabled on the server side.
 
 1. Log in to the database server as the `root` user:
-    ```bash
-    mysql -u root –p
-    ```
 
+   ```bash
+   mysql -u root –p
+   ```
 2. Enter the following command:
-    ```
-    SHOW VARIABLES LIKE '%ssl%';
-    ```
 
-You should get output similar to the one below:
+   ```
+   SHOW VARIABLES LIKE '%ssl%';
+   ```
+
+You should get an output similar to the one below:
 
 ![Example output for the MySQL settings](/Images/APIPortal/mysql_ssl_settings.png)
 
@@ -133,13 +137,11 @@ If you do not want to use a secure connection, you can configure API Portal to 
 1. Connect to your database server.
 2. To configure a user account, enter the following:
 
-    ```mysql
-    CREATE USER '<user name>'@'<API Portal host>' IDENTIFIED BY '<your password>';
-    GRANT ALL PRIVILEGES ON <database name>.* TO '<user name>'@'<API Portal host>' WITH GRANT OPTION;
-    FLUSH PRIVILEGES;
-    ```
-
-    Replace the placeholders with the actual values.
+   ```mysql
+   CREATE USER '<user name>'@'<API Portal host>' IDENTIFIED BY '<your password>';
+   GRANT ALL PRIVILEGES ON <database name>.* TO '<user name>'@'<API Portal host>' WITH GRANT OPTION;
+   FLUSH PRIVILEGES;
+   ```
 
 ### Configure a user account with TLS authentication
 
@@ -154,22 +156,23 @@ To enable one-way authentication, create a user with the option `REQUIRE SSL`.
 
 1. Log in to the database server as the `root` user and enter the following:
 
-    ```mysql
-    CREATE USER '<user name>'@'<API Portal host>' IDENTIFIED BY '<password>' REQUIRE SSL;
-    GRANT ALL PRIVILEGES ON <database name>.* TO '<user name>'@'<API Portal host>' WITH GRANT OPTION;
-    FLUSH PRIVILEGES;
-    ```
+   ```mysql
+   CREATE USER '<user name>'@'<API Portal host>' IDENTIFIED BY '<password>' REQUIRE SSL;
+   GRANT ALL PRIVILEGES ON <database name>.* TO '<user name>'@'<API Portal host>' WITH GRANT OPTION;
+   FLUSH PRIVILEGES;
+   ```
 
-    Replace the placeholders with the user name and password you want to use.
-
+   Replace the placeholders with the user name and password you want to use.
 2. Copy the `ca.pem` CA certificate to `/etc/mysql/certs` on the machine on which you will install API Portal.
 3. Test the connection to the database server from the API Portal machine:
 
-    ```shell
-    mysql -h <database host> -u <user name> -p \
-        --ssl-ca=/etc/mysql/certs/ca.pem \
-        --ssl-verify-server-cert
-    ```
+   ```shell
+   mysql -h <database host> -u <user name> -p \
+       --ssl-ca=/etc/mysql/certs/ca.pem \
+       --ssl-verify-server-cert
+   ```
+
+   The `database host` must be the CN of the server certificate that you have previously generated.
 
 #### Configure two-way (mutual) authentication
 
@@ -177,26 +180,25 @@ To enable two-way authentication, create a user with the option `REQUIRE X509`.
 
 1. Log in to the database server as the `root` user and enter the following:
 
-    ```mysql
-    CREATE USER '<user name>'@'<API Portal host>' IDENTIFIED BY '<password>' REQUIRE X509;
-    GRANT ALL PRIVILEGES ON <database name>.* TO '<user name>'@'<API Portal host>' WITH GRANT OPTION;
-    FLUSH PRIVILEGES;
-    ```
-
-    Replace the placeholders with the user name and password you want to use.
+   ```mysql
+   CREATE USER '<user name>'@'<API Portal host>' IDENTIFIED BY '<password>' REQUIRE X509;
+   GRANT ALL PRIVILEGES ON <database name>.* TO '<user name>'@'<API Portal host>' WITH GRANT OPTION;
+   FLUSH PRIVILEGES;
+   ```
 
 2. Copy the following client certificates to `/etc/mysql/certs` on the machine on which you will install API Portal:
-    * `client-key.pem`
-    * `client-cert.pem`
-    * `ca.pem`
 
+   * `client-key.pem`
+   * `client-cert.pem`
+   * `ca.pem`
 3. Test the connection to the database server from the API Portal machine:
-    ```shell
-    mysql -h <database host> -u <user name> -p \
-        --ssl-ca=/etc/mysql/certs/ca.pem \
-        --ssl-cert=/etc/mysql/certs/client-cert.pem \
-        --ssl-key=/etc/mysql/certs/client-key.pem \
-        --ssl-verify-server-cert
-    ```
 
-    Type the password.
+   ```shell
+   mysql -h <database host> -u <user name> -p \
+       --ssl-ca=/etc/mysql/certs/ca.pem \
+       --ssl-cert=/etc/mysql/certs/client-cert.pem \
+       --ssl-key=/etc/mysql/certs/client-key.pem \
+       --ssl-verify-server-cert
+   ```
+
+   The `database host` must be the CN of the server certificate that you have previously generated.
