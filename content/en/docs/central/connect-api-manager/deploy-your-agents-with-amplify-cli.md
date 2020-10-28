@@ -24,7 +24,7 @@ Learn how to quickly install and run your Discovery and Traceability agents with
 * Node.js 8 LTS or later
 * Access to npm package (for installing AMPLIFY cli)
 * Access to login.axway.com on port 443
-* Minimum AMPLIFY Central CLI version: 0.1.8 (check version using `amplify central --version`)
+* Minimum AMPLIFY Central CLI version: 0.1.14 (check version using `amplify central --version`)
 
 More information is available at [Install AMPLIFY Central CLI](/docs/central/cli_central/cli_install/).
 
@@ -55,8 +55,8 @@ amplify central install agents
 
 The installation procedure will prompt for the following:
 
-1. Select the agents you want to install: Discovery / Traceability / all
-2. Select the type of gateway you want to connect to (only v7 gateway is valid at this time)
+1. Select the type of gateway you want to connect to, V7 gateway in this scenario
+2. Select the agents you want to install: Discovery / Traceability / all
 3. Select the agent deployment mode: binary / Docker image
 4. Platform connectivity:
    * **environment**: can be an existing one or a new one that will be created by the installation procedure
