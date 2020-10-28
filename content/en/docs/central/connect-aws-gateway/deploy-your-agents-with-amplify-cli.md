@@ -1,0 +1,151 @@
+---
+title: Deploy your agents with AMPLIFY CLI
+linkTitle: Deploy your agents with AMPLIFY CLI
+draft: false
+weight: 35
+description: Learn how to deploy your agents using AMPLIFY CLI so that you can
+  manage your AWS API Gateway environment within AMPLIFY Central.
+---
+## Before you start
+
+* Read [AMPLIFY Central AWS API Gateway connected overview](/docs/central/connect-aws-gateway/)
+* You will need information on AWS
+    * the region that the AWS API Gateway resources are hosted in
+    * the bucket that the Resources will be uploaded to
+    * the logging configuration setup on AWS API Gateway
+    * the configuration of AWS Config Service
+* It is recommended that you have access to the AWS CLI command line to run the necessary setup commands
+
+## Objectives
+
+Learn how to quickly install and run your Discovery and Traceability agents with basic configuration using AMPLIFY Central CLI.
+
+## AMPLIFY Central CLI prerequisites
+
+* Node.js 8 LTS or later
+* Access to npm package (for installing AMPLIFY cli)
+* Access to login.axway.com on port 443
+* Minimum AMPLIFY Central CLI version: 0.1.15 (check version using `amplify central --version`)
+
+For more information, see [Install AMPLIFY Central CLI](/docs/central/cli_central/cli_install/).
+
+## Installing the agents
+
+### Step 1: Identify yourself to AMPLIFY Platform with AMPLIFY CLI
+
+To use Central CLI to log in with your AMPLIFY Platform credentials, run the following command and use `apicentral` as the client identifier:
+
+```shell
+amplify auth login --client-id apicentral
+```
+
+A browser will automatically open.
+Enter your valid credentials (email address and password). Once the “Authorization Successful” message is displayed, go back to AMPLIFY CLI. The browser may be closed at this point.
+
+If you are a member of multiple AMPLIFY organizations, you may have to choose an organization.
+
+{{< alert title="Note" color="primary" >}}If you do not have a graphical environment, forward the display to an X11 server (Xming or similar tools) using the `export DISPLAY=myLaptop:0.0` command.{{< /alert >}}
+
+### Step 2: Running the agents' install procedure
+
+AWS agents are delivered in a Docker image provided by Axway. You can run them from any Docker containter that can access the AMPLIFY Platform and AWS API Gateway.
+The AMPLIFY Central CLI will guide you through the configuration of the agents. Cloud formation templates are provided to help you setup either an EC2 architecture or an ECS-fargate architecture. You can also decide to not use any of them and deploy the Docker images in your own Docker container architecture.
+
+To start the installation procedure, run the following command:
+
+```shell
+amplify central install agents
+```
+
+The installation procedure prompts for the following:
+
+1. Select the type of gateway you want to connect to (AWS API Gateway in this scenario).
+2. Platform connectivity:
+   * **Environment**: can be an existing environment or a new one that will be created by the installation procedure
+   * **Team**: can be an existing team or a new one that will be created by the installation procedure
+   * **Service account**: can be an existing service account or a new one that will be created by the installation procedure. If you choose an existing one, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the AMPLIFY Platform. If you choose to create a new one, the generated private and public keys will be provided.
+3. AWS Configuration Setup options:
+    * **Region** of the AWS API Gateway resources
+    * **S3 Bucket Name** within the same region as the AWS API Gateway resouces
+    * **API Gateway Cloud Watch Setup** defaulted to `Yes`, sets up the IAM role and configures API Gateway to log API Gateway transactions to CloudWatch
+    * **APIGW Log Group** defaulted to `aws-apigw-traffic-logs`, where API Gateway transactions will be logged within CloudWatch
+    * **Config Service Setup** defaulted to `Yes`, set to `No` if this is already in use
+    * **Config Service Bucket** defaulted to **S3 bucket Name**, where Config Service stores its data
+    * **Config Bucket Exists** defaulted to `Yes`, set to `No` to have the CloudFormation create the bucket
+    * **Discovery Agent Queue** defaulted to `aws-apigw-discovery`, the SQS Queue where events for the Discovery Agent are sent. `-[region]` is appended to this
+    * **Traceability Agent Queue** defaulted to `aws-apigw-traceability`, the SQS Queue where events for the Traceability Agent are sent. `-[region]` is appended to this
+    * **Deployment Type** only `EC2` is available via the CLI at this time
+    * **Instance Type** defaulted to `t3.micro`
+    * **EC2 SSH Key Pair** the name of the EC2 Key Pair that will be installed on the instance
+    * **VPC ID** the ID of the VPC (ex. vpc-xxxxxxx) to deploy the instance in, leave blank to have the CloudFormation deploy the entire EC2 Infrastructure
+      * **Public IP Address** when using existing infrastructure, set to `No` if the VPC has an Internet Gateway, as the Instance needs internet Access to communicate with AMPLIFY
+      * **Security Group ID** when using existing infrastructure, the security group (ex. sg-xxxxxxx) to assign to the EC2 instance
+      * **Subnet ID** when using existing infrastructure, the subnet (ex. subnet-xxxxxx) to deploy the EC2 instance to
+    * **SSH IP Range** defaulted to 0.0.0.0/0, set to the IP range that is allowed to SSH to the EC2 instance
+    * **Discovery Agent Log Group** defaulted to `amplify-discovery-agent-logs`, the log group the Discovery Agent will use
+    * **Traceability Agent Log Group** defaulted to `amplify-traceability-agent-logs`, the log group the Traceability Agent will use
+    * **SSM Private Key Parameter** defaulted to `AmplifyPrivateKey`, the Parameter Name in AWS SSM where the Amplify Private key is stored
+    * **SSM Public Key Parameter** defaulted to `AmplifyPublicKey`, the Parameter Name in AWS SSM where the Amplify Public key is stored
+
+Once you have answered all questions, the cloud formation templates are downloaded and pre-configured, the agents' configuration files are updated, the Amplify Central resources are created and the key pair is generated (if you chose to create a new service account).
+
+The current directory contains the following files:
+
+```shell
+da_env_vars.env
+ta_env_vars.env
+private_key.pem
+public_key.pem
+amplify-agents-deploy-all.yaml
+amplify-agents-ec2.yaml
+amplify-agents-resources.yaml
+cloudformation_properties.json
+traceability_lambda.zip
+```
+
+`da_env_vars.env` / `ta_env_vars.env` contains the specific configuration you entered during the installation procedure. These files are required to start the agents.
+
+`private_key.pem` and `public_key.pem` are the generated key pair the agent will use to securely talk with the AMPLIFY Platform (if you choose to let the installation generate them).
+
+`amplify-agents-deploy-all.yaml` / `amplify-agents-ec2.yaml` / `amplify-agents-resources.yaml` are the CloudFormation files to configure AWS services / infrastructure.
+
+`cloudformation_properties.json` contains the parameter values required as input to the CloudFormation execution.
+
+`traceability_lambda.zip` is referenced in the CloudFormation scripts to setup the AWS Lambda function required.
+
+### Step 3: Deploying the agent in EC2 or ECS-fargate infrastructure
+
+The installation summary contains the AWS CLI commands needed to finish the installation.
+
+Example:
+
+```shell
+
+To complete the install, run the following AWS CLI command:
+  - Create, if necessary, and upload all files to your S3 bucket:
+    aws s3api create-bucket --bucket my-bucket-name --create-bucket-configuration LocationConstraint=eu-west-1
+    aws s3 sync --exclude "*" --include "traceability_lambda.zip" --include "amplify-agents-deploy-all.yaml" --include "amplify-agents-resources.yaml" --include "amplify-agents-ec2.yaml"  ./ s3://my-bucket-name
+    aws s3 sync --exclude "*" --include "da_env_vars.env" --include "ta_env_vars.env"  ./ s3://my-bucket-name/resources
+  - If necessary, create EC2 KeyPair, for EC2 login:
+    aws ec2 create-key-pair --key-name keypair --query KeyMaterial --output text > MyKeyPair.pem
+  - Create the SSM parameter:
+    aws ssm put-parameter --type SecureString --name AmplifyPrivateKey --value "$(cat private_key.pem)"
+    aws ssm put-parameter --type SecureString --name AmplifyPublicKey --value "$(cat public_key.pem)"
+  - Deploy the CloudFormation Stack:
+    aws cloudformation create-stack --stack-name AxwayAmplifyAgents \
+        --template-url https://my-bucket-name.s3-eu-west-1.amazonaws.com/amplify-agents-deploy-all.yaml \
+        --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameters "$(cat cloudformation_properties.json)"
+```
+
+* Create, if necessary, and upload all files to your S3 bucket:
+    * These commands create the bucket, if needed, then uploads all resources to the bucket.
+* If necessary, create EC2 KeyPair, for EC2 login:
+    * This command creates the EC2 Key Pair, if necessary, and saves the private key to MyKeyPair.pem.
+* Create the SSM parameter:
+    * These commands save the AMPLIFY Private and Public Keys to the AWS SSM Parameter Store.
+* Deploy the CloudFormation Stack:
+    * This command deploys the CloudFormation template using all the resources uploaded to S3. The end result will be a running EC2 instance with the agents installed and logging to CloudWatch.
+
+Once the Cloud formation template creation is completed, the agents should be running in the choosen infrastructure.
+
+See [Administer AWS Gateway cloud](/docs/central/connect-aws-gateway/cloud-administration-operation/) for additional information about agent features.
