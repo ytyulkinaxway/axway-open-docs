@@ -131,7 +131,7 @@ The sFTP server currently supports:
 
 ### Groovy v2.5.13
 
-The Groovy version used by the Scripting Filter is updated to 2.5.13.
+The Groovy version used by the Scripting Filter is updated from 2.4.8 to 2.5.13.
 
 ### Filebeat v6.2.2
 
@@ -350,6 +350,7 @@ The following are known issues for this update.
 | RDAPI-21738 | Issue in sysupgarde apply - Import failed for table                                                                                                                |
 | RDAPI-21784 | Redaction not working when Content-Type is multipart/form-data and form-field is a file                                                                            |
 | RDAPI-21801 | Spaces in query-string parameters which are encoded as '%20' on the inbound request, are changed to be encoded with '+' during the transaction                     |
+| RDAPI-21984 | Groovy's java.util.Date does not work in scripts due to Groovy version update from 2.4.8 to 2.5.13.                                                                |
 
 ### Policy Studio help documentation
 
