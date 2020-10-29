@@ -317,6 +317,13 @@ const collections = [{
   description: 'All pages relating to Mesh management.',
   format: 'frontmatter',
 }, {
+  ...docsDefaults('central/amplify_relnotes', 'central/amplify_relnotes'),
+  name: 'amplify_relnotes',
+  label: 'AMPLIFY Release notes',
+  label_singular: 'page in AMPLIFY Release notes section',
+  description: 'Release notes for AMPLIFY Central and AMPLIFY Catalog',
+  format: 'frontmatter',
+}, {
   ...docsDefaults('central/connect-api-manager', 'central/connect-api-manager'),
   name: 'connect-api-manager',
   label: 'Connect API Manager documentation',
