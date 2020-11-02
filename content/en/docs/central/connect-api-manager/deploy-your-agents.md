@@ -100,11 +100,15 @@ The containerized agent can run in the following mode:
     format: json
     output: stdout
     maskedValues: keyword1, keyword2, keyword3
+
+   status:
+    healthCheckInterval: 30s
    ```
 
    * The value for *team* can be found in [AMPLIFY Central > Access > Teams](https://apicentral.axway.com/access/teams/).
    * The value for *organizationID* can be found in AMPLIFY Central Platform > Organization.
    * The value for *clientId* can be found in Service Account. See [Create a service account](/docs/central/cli_central/cli_install/#create-a-service-account).
+   * The value for *healthCheckInterval* can be between 30 seconds and 5 minutes. To specify the value in seconds use an 's' character (e.g. 30s). To specify the value in minutes, use a an 'm' character (e.g. 5m).
 5. Run the binary Discovery Agent:
 
    * Open a shell and run the following commands to start up your agent.  Add necessary [Agent flags](/docs/central/connect-api-manager/discovery-agent-flags/).
