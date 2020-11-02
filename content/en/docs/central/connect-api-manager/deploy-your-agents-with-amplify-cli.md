@@ -24,7 +24,7 @@ Learn how to quickly install and run your Discovery and Traceability agents with
 * Node.js 8 LTS or later
 * Access to npm package (for installing AMPLIFY cli)
 * Access to login.axway.com on port 443
-* Minimum AMPLIFY Central CLI version: 0.1.14 (check version using `amplify central --version`)
+* Minimum AMPLIFY Central CLI version: 0.1.15 (check version using `amplify central --version`)
 
 More information is available at [Install AMPLIFY Central CLI](/docs/central/cli_central/cli_install/).
 
@@ -39,11 +39,11 @@ amplify auth login --client-id apicentral
 ```
 
 A browser will automatically open.
-Enter your valid credentials (email address and password). Once the “Authorization Successful” message is displayed, you can go back to the AMPLIFY CLI.
+Enter your valid credentials (email address and password). Once the “Authorization Successful” message is displayed, go back to AMPLIFY CLI.
 
 If you are a member of multiple AMPLIFY organizations, you may have to choose an organization.
 
-{{< alert title="Note" color="primary" >}}If you do not have a graphical environment, you will have to forward the display to an X11 server (Xming or similar tools) using the `export DISPLAY=myLaptop:0.0` command .{{< /alert >}}
+{{< alert title="Note" color="primary" >}}If you do not have a graphical environment, forward the display to an X11 server (Xming or similar tools) using the `export DISPLAY=myLaptop:0.0` command .{{< /alert >}}
 
 ### Step 2: Running the agents' install procedure
 
@@ -55,13 +55,13 @@ amplify central install agents
 
 The installation procedure will prompt for the following:
 
-1. Select the type of gateway you want to connect to, V7 gateway in this scenario
-2. Select the agents you want to install: Discovery / Traceability / all
-3. Select the agent deployment mode: binary / Docker image
+1. Select the type of gateway you want to connect to (V7 gateway in this scenario)
+2. Select the agents you want to install: Discovery / Traceability / all.
+3. Select the agent deployment mode: binary / Docker image.
 4. Platform connectivity:
    * **environment**: can be an existing one or a new one that will be created by the installation procedure
    * **team**: can be an existing one or a new one that will be created by the installation procedure
-   * **service account**: can be an existing one or a new one that will be created by the installation procedure. If you choose an existing one, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the AMPLIFY Platform. If you choose to create a new one, the generated private/public keys will be provided.
+   * **service account**: can be an existing service account or a new one that will be created by the installation procedure. If you choose an existing one, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the AMPLIFY Platform. If you choose to create a new one, the generated private and public keys will be provided.
 5. API Manager connectivity:
    * **hostname** of the API Manager (localhost by default)
    * **port** of the API Manager (8075 by default)
@@ -72,7 +72,8 @@ The installation procedure will prompt for the following:
    * user/password
    * event log path
 
-Once you have answered all questions, the agents are downloaded, the configuration files are updated, the Amplify Central resources are created and the key pair are generated (if you chose to create a new service account).
+Once you have answered all questions, the agents are downloaded, the configuration files are updated, the Amplify Central resources are created and the key pair is generated (if you chose to create a new service account).
+
 The current directory should contain the following files:
 
 ```shell
