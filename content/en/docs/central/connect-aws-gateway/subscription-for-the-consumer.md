@@ -14,7 +14,7 @@ description: A subscription provides the consumer, or subscriber, with the
 
    1. Open an AMPLIFY Catalog item.
    2. Click **Subscribe**.
-   3. Select a Team and usage plan for which you wish to subscribe. **WARNING**: The subscription will fail if you select a usage plan for which no API stages have been added. For additional information, see [Manage AMPLIFY Catalog subscriptions](/docs/catalog/manage_subscriptions/index.html).
+   3. Select a Team and usage plan for which you wish to subscribe. **WARNING**: The subscription will fail if you select a usage plan for which no API stages have been added. For additional information, see [Manage AMPLIFY Catalog subscriptions](/docs/catalog/manage_subscriptions/).
 4. The Discovery Agent receives the subscription event:
 
    Subscription status: **Subscribing...**
@@ -37,7 +37,7 @@ description: A subscription provides the consumer, or subscriber, with the
 1. A consumer initiates unsubscribe:
 
    1. Open the AMPLIFY Catalog and navigate to the **Subscription** tab.
-   2. Unsubscribe from the active subscription.  For additional information, see [Manage AMPLIFY Catalog subscriptions](/docs/catalog/manage_subscriptions/index.html).
+   2. Unsubscribe from the active subscription.  For additional information, see [Manage AMPLIFY Catalog subscriptions](/docs/catalog/manage_subscriptions/).
 
 2. The Discovery Agent receives the Unsubscribe event:
 
