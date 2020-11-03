@@ -349,7 +349,7 @@ CENTRAL_ENVIRONMENT=<Environment>
    docker run --env-file ./env_vars -v <pwd>/keys:/keys -v <pwd>/events:/events axway-docker-public-registry.bintray.io/agent/v7-traceability-agent:latest
    ```
 
-   * See [Create and start API Gateway Docker container](/docs/apim_installation/apigw_containers/docker_script_gwimage/index.html#mount-volumes-to-persist-logs-outside-the-api-gateway-container) for more  information regarding the persistent API Gateway trace and event logs to a directory on your host machine.
+   * See [Create and start API Gateway Docker container](/docs/apim_installation/apigw_containers/docker_script_gwimage/#mount-volumes-to-persist-logs-outside-the-api-gateway-container/) for more  information regarding the persistent API Gateway trace and event logs to a directory on your host machine.
    * Run the following health check command to ensure the agent is up and running:
 
    ```shell
