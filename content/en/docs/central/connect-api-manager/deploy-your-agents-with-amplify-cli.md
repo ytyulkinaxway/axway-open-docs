@@ -129,4 +129,4 @@ Traceability Agent:
 docker run -it --env-file $(pwd)/ta_env_vars.env -v $(pwd):/keys -v EVENT_LOG_PATH_ENTERED_DURING_INSTALLATION:/events axway-docker-public-registry.bintray.io/agent/v7-traceability-agent:latest
 ```
 
-See [Administer API Gateway](/docs/central/connect-api-manager/gateway-administation/index.html) for additional information about agent features.
+See [Administer API Gateway](/docs/central/connect-api-manager/gateway-administation/) for additional information about agent features.
