@@ -57,6 +57,12 @@ To start the installation procedure, run the following command:
 amplify central install agents
 ```
 
+If your AMPLIFY subscription is hosted in the EU region, then the following installation command must be used to correctly configure the agents:
+
+```shell
+amplify central install agents --region=EU
+```
+
 The installation procedure prompts for the following:
 
 1. Select the type of gateway you want to connect to (AWS API Gateway in this scenario).
