@@ -9,7 +9,7 @@ description: Learn how to deploy your Discovery Agent and Traceability Agent so
 ## Before you start
 
 * Read [AMPLIFY Central and Axway API Manager connected overview](/docs/central/connect-api-manager/)
-* Be sure you have [Prepared AMPLIFY Central](/docs/central/connect-api-manager/prepare-amplify-central/index.html)
+* Be sure you have [Prepared AMPLIFY Central](/docs/central/connect-api-manager/prepare-amplify-central/)
 * You will need a basic knowledge of Axway API Management solution:
 
     * Where the solution is running (host / port / path to the logs / users)
@@ -25,7 +25,7 @@ Learn how to install, customize and run your Discovery and Traceability agents.
 
 The Discovery Agent is used to discover new published APIs or any updated APIs. Once they are discovered, the related APIs are published to AMPLIFY Central, in one of the following publication modes:
 
-* **Environment / API Service publication** : Customers publish their APIs to the AMPLIFY platform.
+* **Environment / API Service publication**: Customers publish their APIs to the AMPLIFY platform.
 * **Environment / API Service publication / Catalog item publication** (default mode): Same as previous plus automatically expose the APIS to the consumer via the AMPLIFY Catalog.
 
 The Discovery Agent only discovers APIs that have the tag(s) defined in the agent configuration file. See [Discover APIs](/docs/central/connect-api-manager/filtering-apis-to-be-discovered/). By default, the filter is empty and thus the agent will discover all published API.
@@ -111,7 +111,7 @@ This section connects the agent to API Manager and determines which APIs should 
 
 `filter` (optional): Expression to filter the API you want the agent to discover. See [Discover APIs](/docs/central/connect-api-manager/filtering-apis-to-be-discovered/). Leaving this field empty tells the agent to discover all published APIs (REST / SOAP).
 
-`subscriptionApplicationField` (optional): The field name used to store AMPLIFY Central subscription identifier inside the API Manager application securing the front end proxy. Default value is **subscriptions**. If you do not intend to change it, comment this property. Be aware that the field will not be visible in the API Manager application, as it is a specific configuration. If you want to see that field or customize it, refer to Add a custom property to applications in [Customize API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_custom/index.html#customize-api-manager-data) documentation.
+`subscriptionApplicationField` (optional): The field name used to store AMPLIFY Central subscription identifier inside the API Manager application securing the front end proxy. Default value is **subscriptions**. If you do not intend to change it, comment this property. Be aware that the field will not be visible in the API Manager application, as it is a specific configuration. If you want to see that field or customize it, refer to Add a custom property to applications in [Customize API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_custom/#customize-api-manager-data/) documentation.
 
 `pollInterval`: The frequency in which API Manager is polled for new endpoints. Default value is 30s.
 
@@ -1152,7 +1152,7 @@ cd /home/APIC-agents
    docker run --env-file ./env_vars -v <pwd>/keys:/keys -v <pwd>/events:/events axway-docker-public-registry.bintray.io/agent/v7-traceability-agent:latest
    ```
 
-   * See [Create and start API Gateway Docker container](/docs/apim_installation/apigw_containers/docker_script_gwimage/index.html#mount-volumes-to-persist-logs-outside-the-api-gateway-container) for more  information regarding the persistent API Gateway trace and event logs to a directory on your host machine.
+   * See [Create and start API Gateway Docker container](/docs/apim_installation/apigw_containers/docker_script_gwimage/#mount-volumes-to-persist-logs-outside-the-api-gateway-container/) for more  information regarding the persistent API Gateway trace and event logs to a directory on your host machine.
    * Run the following health check command to ensure the agent is up and running:
 
    ```shell
