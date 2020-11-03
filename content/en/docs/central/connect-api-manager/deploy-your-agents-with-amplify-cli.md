@@ -53,15 +53,21 @@ Agents will be installed in the directory from where the CLI runs. You can insta
 amplify central install agents
 ```
 
+If your AMPLIFY subscription is hosted in the EU region, then the following installation command must be used to correctly configure the agents:
+
+```shell
+amplify central install agents --region=EU
+```
+
 The installation procedure will prompt for the following:
 
-1. Select the type of gateway you want to connect to (V7 gateway in this scenario)
-2. Select the agents you want to install: Discovery / Traceability / all.
-3. Select the agent deployment mode: binary / Docker image.
-4. Platform connectivity:
-   * **environment**: can be an existing one or a new one that will be created by the installation procedure
-   * **team**: can be an existing one or a new one that will be created by the installation procedure
+1. Select the type of gateway you want to connect to (V7 gateway in this scenario).
+2. Platform connectivity:
+   * **environment**: can be an existing environment or a new one that will be created by the installation procedure
+   * **team**: can be an existing team or a new one that will be created by the installation procedure
    * **service account**: can be an existing service account or a new one that will be created by the installation procedure. If you choose an existing one, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the AMPLIFY Platform. If you choose to create a new one, the generated private and public keys will be provided.
+3. Select the agents you want to install: Discovery / Traceability / all.
+4. Select the agent deployment mode: binary / Docker image.
 5. API Manager connectivity:
    * **hostname** of the API Manager (localhost by default)
    * **port** of the API Manager (8075 by default)
