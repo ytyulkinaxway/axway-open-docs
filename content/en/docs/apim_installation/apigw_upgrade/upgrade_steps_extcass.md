@@ -100,7 +100,7 @@ Perform the following in your new API Gateway 7.7 installation.
 
 #### Task 1 - Apply the latest update
 
-Apply the latest available update for your new installation. To see the system property changes made between the old installation and the latest update, see [system property changes](/docs/apim_installation/apigw_upgrade/upgrade_system_props/). Updates are available from [Axway Support](https://support.axway.com/).
+Apply the latest available update for your new installation. To see the system property changes made between the old installation and the latest update, see [JVM System Property changes](/docs/apim_installation/apigw_upgrade/system_props.md). Updates are available from [Axway Support](https://support.axway.com/).
 
 {{< alert title="Tip" color="primary" >}}Ensure that your new 7.7 installation is on the latest update to reduce any possible issues.{{< /alert >}}
 
