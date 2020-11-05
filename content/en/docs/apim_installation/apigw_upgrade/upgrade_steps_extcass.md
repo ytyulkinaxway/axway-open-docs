@@ -220,7 +220,7 @@ In this example, API Gateway has a three-node topology that includes two Admin N
 
 The sample topology is as follows:
 
-![Example multi-node topology](/Images/UpgradeGuide/APIgw_upgrade%20topology.png)
+![Example multi-node topology](/Images/UpgradeGuide/APIgw_upgrade_topology.png)
 
 * API Gateway NodeA: This node runs an Admin Node Manager and a single API Gateway named `APIGateway1` in a group named `GatewayGroup`.
 * API Gateway NodeB: This node runs a Node Manager and a single API Gateway named `APIGateway2` in a group named `GatewayGroup`.
