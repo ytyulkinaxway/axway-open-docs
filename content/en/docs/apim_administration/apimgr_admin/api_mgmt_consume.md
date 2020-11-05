@@ -1,9 +1,9 @@
 {
-    "title": "Consume APIs in API Manager",
-    "linkTitle": "Consume APIs",
-    "weight": "80",
-    "date": "2019-09-17",
-    "description": "Consume APIs and manage client applications."
+"title": "Consume APIs in API Manager",
+  "linkTitle": "Consume APIs",
+  "weight": "80",
+  "date": "2019-09-17",
+  "description": "Consume APIs and manage client applications."
 }
 
 ## Consume APIs
@@ -51,7 +51,7 @@ When applications have been created, you can click an application name in the **
 
 The following settings are available on the **Authentication** tab:
 
-* **API Keys**: Click **New API Key** to create an API key for the application. API keys are enabled by default. Click **Show Secret** to obtain the associated secret key. You can also specify **JavaScript Origins** to allow the application to run on specific protocols or domains (for example, `https://my_test_url.example.com`) for Cross Origins Resource Sharing (CORS). You can enter `*` to allow all domains. For more details, see [Virtualize REST APIs in API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_virtualize_web/).
+* **API Keys**: Click **New API Key** to create an API key for the application. API keys are enabled by default. Click **Show Secret** to obtain the associated secret key. You can also specify **JavaScript Origins** to allow the application to run on specific protocols or domains (for example, `https://my_test_url.example.com`) for Cross Origins Resource Sharing (CORS). You can enter one domain per line or `*` to allow all domains. For more details, see [Virtualize REST APIs in API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_virtualize_web/).
 * **OAuth Credentials**: Click **New client ID** to create a client ID for the application, and enter the following settings in the dialog:
     * **Application Type**: Applications set to **Confidential** must always send the generated secret along with their `OAuth-Authorization` request. Applications set to **Public** may ommit the secret, when not using the `client_credentials` grant type. Defaults to **Confidential**.
     * **Redirect URLs**: You can enter optional redirect URLs for the application (one URL per line). The application can then redirect users only to the specified URLs, which helps prevent attacks.
