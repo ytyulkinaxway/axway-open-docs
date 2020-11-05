@@ -140,7 +140,7 @@ In this example, API Gateway has a single-node topology that includes one Admin 
 
 The sample topology is as follows:
 
-![Single-node topology](/Images/UpgradeGuide/APIgw_single%20node%20upgrade%20topology.png)
+![Single-node topology](/Images/UpgradeGuide/APIgw_single_node_upgrade_topology.png)
 
 ### Before you upgrade - Check the old installation
 
