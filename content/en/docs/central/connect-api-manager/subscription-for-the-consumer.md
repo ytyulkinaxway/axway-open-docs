@@ -11,9 +11,16 @@ description: >-
 ---
 ## Supported use cases when consumer subscribes to an API
 
-* **API providers allow the subscriber to create his own application** (property `APIMANAGER_ALLOWAPPLICATIONAUTOCREATION=true` set in the discovery agent configuration file): the agent will generate the application, the needed credentials (API key / Oauth client) and add the access to the API from the newly created application.
-* **Application has no access to the API** in Axway API Manager: subscription will fail. This is a known issue that is currently being reworked to enable the subscriber to automatically associate the API with the selected application.
-* **Application has access to the API** in Axway API Manager: subscriber is able to subscribe and receive the first nondisabled API Key or Oauth clientId / ClientSecret based on the API security.
+* **API providers allow the subscriber to create an application** (property `APIMANAGER_ALLOWAPPLICATIONAUTOCREATION=true` set in the discovery agent configuration file): the agent generates the application and adds the access to the API from the newly created application.
+* **Application has no access to the API** in Axway API Manager: the agent adds access to the API from the selected application.
+* **Application already has access to the API** in Axway API Manager: the agent has nothing to do.
+
+## Supported use cases for issuing consumer credentials
+
+The property `APIMANAGER_SUBSCRIPTIONSISSUENEWCREDENTIALS` allows the API provider to issue new credentials each time a consumer subscribes to an API (default behavior) or reuse existing credentials.
+
+* **generate new credentials** (default): new credentials (ApiKey / oauth client&secret ) are generated per subscription and store within the selected application.
+* **reuse existing credentials** (property `APIMANAGER_SUBSCRIPTIONSISSUENEWCREDENTIALS=false` set in the Discovery Agent configuration file): the agent sends the first non-repudiated credentials available in the application to the subscriber.
 
 ## Supported use cases for subscription approval
 
@@ -27,8 +34,17 @@ Each API can define its own approval mode:
 
 Once the subscription is approved, the agent catches this event from AMPLIFY Central and, based on its configuration, can forward the credentials using either an SMTP server or a webhook.
 
-* email: the agent configuration contains the access details to an SMTP server (endpoint / prot / credentials if any) and the templates for the emails. Emails can be trigger when subscription succeeds, subscription fails or when unsubscribes to an API.  For more information about this configuration, see [Customizing SMTP notifications](/docs/central/connect-api-manager/gateway-administation/#customizing-smtp-notification-subscription).
-* webhook: the agent configuration contains the webhook details about where to send the payload to (catalog asset url / catalog asset name / subscriber email / credentials / action=APPROVE / authtemplate=preconfigure security template sentence).
+* **email**: the agent configuration contains the access details to an SMTP server (endpoint / port / credentials, if any) and the templates for the emails. Emails can be triggered when the subscription succeeds, fails or when unsubscribes to an API. The agent configuration allows you to customize the email template with several properties:
+
+    * `${catalogItemUrl}`: url of the catalog item to help consumer find it easily
+    * `${catalogItemName}`: name of the catalog item
+    * `${keyHeaderName}` / `${key}`: apiKey header name and apiKey value
+    * `${clientID}` /  `${clientSecret}`: oauth clientID and clientSecret to request the oauth token
+    * `${message}`: error message raised by the agent when the subscription fails or the unsubscribe fails
+
+For more information about this configuration, see [Customizing SMTP notifications](/docs/central/connect-api-manager/gateway-administation/#customizing-smtp-notification-subscription).
+
+* **webhook**: the agent configuration contains the webhook details about where to send the payload (catalog asset url / catalog asset name / subscriber email / credentials / action=APPROVE / authtemplate=preconfigure security template sentence).
 
 Webhook payload definition:
 
@@ -88,7 +104,7 @@ Request sample sent to the webhook endpoint:
 
 1. (Optional) An API provider creates one or more applications on Axway API Manager and provides the necessary security feature (API key / OAuth...) and quota, if needed:
 
-   * Add a custom field to the application to track the AMPLIFY Central subscription. Refer to `<API_Gateway_install_dir>/apigateway/webapps//apiportal/vordel/apiportal/app/app.config file` in the **customPropertiesConfig** section. For more details, see [Customize API Manager](https://docs.axway.com/bundle/axway-open-docs/page/docs/apim_administration/apimgr_admin/api_mgmt_custom/index.html).
+   * Add a custom field to the application to track the AMPLIFY Central subscription. Refer to `<API_Gateway_install_dir>/apigateway/webapps//apiportal/vordel/apiportal/app/app.config file` in the **customPropertiesConfig** section. For more details, see [Customize API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_custom/).
 
        Sample application:
 
@@ -120,7 +136,7 @@ Request sample sent to the webhook endpoint:
 
    1. Open an AMPLIFY Catalog item.
    2. Click **Subscribe**.
-   3. Select the Team and API Manager Application name (created in Step 1) for which you want to subscribe. **WARNING**: The subscription will fail if you select an application for which no APIs have been given access. For additional information, see [Manage AMPLIFY Catalog subscriptions.](https://docs.axway.com/bundle/axway-open-docs/page/docs/catalog/manage_subscriptions/index.html)
+   3. Select the Team and API Manager Application name for which you want to subscribe. For additional information, see [Manage AMPLIFY Catalog subscriptions.](/docs/catalog/manage_subscriptions/)
 
 2. Based on the API subscription approval (manual vs. automatic), an API provider has to approve the subscription.
 
@@ -153,7 +169,7 @@ Request sample sent to the webhook endpoint:
 1. A consumer initiates unsubscribe:
 
    1. Open the AMPLIFY Catalog and navigate to the **Subscription** tab.
-   2. Unsubscribe from the active subscription. For additional information, see [Manage AMPLIFY Catalog subscriptions](https://docs.axway.com/bundle/axway-open-docs/page/docs/catalog/manage_subscriptions/index.html).
+   2. Unsubscribe from the active subscription. For additional information, see [Manage AMPLIFY Catalog subscriptions](/docs/catalog/manage_subscriptions/).
 
 2. The Discovery Agent receives the Unsubscribe event:
 
@@ -217,4 +233,4 @@ The agent could mark a subscription as **Failed to subscribe** or **Failed to un
 | 5 | On API Gateway Manager, the application chosen for the subscription does not match the inbound security setting for the API.                                                           | Under the API section in API Manager > Manage the Frontend API, click the API > Inbound Tab: Verify that the API has the appropriate Inbound security selected.                               |
 | 6 | The agent fails to communicate to API Gateway Manager.                                                                                                                                 | Check your internet connection. API Gateway Manager requires an HTTPS connection.                                                                                                               |
 
-For additional information, see [Manage AMPLIFY Catalog subscriptions](https://docs.axway.com/bundle/axway-open-docs/page/docs/catalog/manage_subscriptions/index.html).
+For additional information, see [Manage AMPLIFY Catalog subscriptions](/docs/catalog/manage_subscriptions/).
