@@ -5,10 +5,103 @@ draft: false
 weight: 60
 description: A subscription provides the consumer, or subscriber, with the
   required security, quota and endpoint materials to correctly consume the API.
+  The security material and/or quota to access an API is configured inside the
+  usage plan on AWS API Gateway.
 ---
+## Supported use cases when consumer subscribes to an API
+
+* **API providers allow the subscriber to create a usage plan** (property `AWS_ALLOWUSAGEPLANAUTOCREATION=true` set in the Discovery Agent configuration file): the agent generates the usage plan and adds access to the API from the newly created usage plan.
+* **Usage plan has no access to the API** in AWS API Gateway: the agent adds access to the API from the selected usage plan.
+* **Usage plan already has access to the API** in AWS API Gateway: the agent has nothing to do.
+
+## Supported use cases for issuing consumer credentials
+
+The property `AWS_SUBSCRIPTIONSISSUENEWCREDENTIALS` allows the API provider to issue new credentials each time a consumer subscribes to an API (default behavior) or reuses existing credentials.
+
+* **generate new credentials** (default): new ApiKey is generated per subscription and store within the selected usage plan.
+* **reuse existing credentials** (property `AWS_SUBSCRIPTIONSISSUENEWCREDENTIALS=false` set in the Discovery Agent configuration file): The agent sends the first non repudiated credentials available in the usage plan to the subscriber.
+
+## Supported use cases for subscription approval
+
+Each API can define its own approval mode:
+
+* manual (default): an API provider approves the subscription before the consumer receives the API credentials.
+(Optional) the agent configuration contains webhook information that is triggered on each subscription state change. The webhook implementation can, for instance, trigger an MS Teams card to a dedicated Teams channel where the API provider will approve the subscription.
+* automatic: the subscription is auto-approve without human intervention.
+
+## Supported use cases for receiving API credentials
+
+Once the subscription is approved, the agent catches the event from AMPLIFY Central and, based on its configuration, can forward the credentials using either an SMTP server or a webhook.
+
+* **email**: the agent configuration contains the access details to an SMTP server (endpoint / port / credentials, if any) and the templates for the emails. Emails can be trigger when the subscription succeeds, fails or when unsubscribes to an API. The agent configuration allows you to customize the email template with several properties:
+
+    * `${catalogItemUrl}`: url of the catalog item to help the consumer find it easily
+    * `${catalogItemName}`: name of the catalog item
+    * `${keyHeaderName}` / `${key}`: apiKey header name and apiKey value
+    * `${clientID}` /  `${clientSecret}`: oauth clientID and clientSecret to request the oauth token
+    * `${message}`: error message raised by the agent when subscription or unsubscribe fails.
+
+For more information about this configuration, see [Customizing SMTP notifications](/docs/central/connect-api-manager/gateway-administation/#customizing-smtp-notification-subscription).
+
+* **webhook**: the agent configuration contains the webhook details about where to send the payload (catalog asset url / catalog asset name / subscriber email / credentials / action=APPROVE / authtemplate=preconfigure security template sentence).
+
+Webhook payload definition:
+
+```json
+{
+    "type": "object",
+    "properties": {
+        "catalogItemId": {
+            "type": "string"
+        },
+        "catalogItemUrl": {
+            "type": "string"
+        },
+        "catalogItemName": {
+            "type": "string"
+        },
+        "action": {
+            "type": "string"
+        },
+        "email": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "keyHeaderName": {
+            "type": "string"
+        },
+        "authtemplate": {
+            "type": "string"
+        }
+    }
+}
+```
+
+The payload is base64 encoded when sent to the webhook endpoint.
+
+Request sample sent to the webhook endpoint:
+
+```
+{
+    "headers": {
+        "Accept-Encoding": "gzip",
+        "Host": "<webHook url>",
+        "User-Agent": "EnterpriseEdgeGatewayDiscoveryAgent/<agent_version>",
+        "Contenttype": "application/json",
+        "Content-Length": "485"
+    },
+    "body": {
+        "$content-type": "application/octet-stream",
+        "$content": "eyJjYXRhbG9nSXRlbUlkIjoiZTRlOTFkMjM3NDRiY2I0ZDAxWFhYWCIsImNhdGFsb2dJdGVtVXJsIjoiaHR0cHM6Ly9hcGljZW50cmFsLmF4d2F5LmNvbS9jYXRhbG9nL2V4cGxvcmUvZTRlOTFkMjM3NDRiY2I0ZDAxWFhYWCIsImNhdGFsb2dJdGVtTmFtZSI6Ik1lZGljYWwgUHJhY3RpdGlvbmVyIChWNykiLCJhY3Rpb24iOiJBQ1RJVkUiLCJlbWFpbCI6InVzZXJAbWFpbC5jb20iLCJrZXkiOiI0OWQ5NzJjZC0wZjA2LTQ1MGMtODZkMS1YWFhYWFhYIiwia2V5SGVhZGVyTmFtZSI6IktleUlkIiwiYXV0aHRlbXBsYXRlIjoiWW91ciBBUEkgaXMgc2VjdXJlZCB1c2luZyBhbiBBUElLZXkgY3JlZGVudGlhbDpoZWFkZXI6XHUwMDNjYlx1MDAzZUtleUlkXHUwMDNjL2JcdTAwM2UvdmFsdWU6XHUwMDNjYlx1MDAzZTQ5ZDk3MmNkLTBmMDYtNDUwYy04NmQxLVhYWFhYWFhcdTAwM2MvYlx1MDAzZSJ9"
+    }
+}
+```
+
 ## Subscription workflow
 
-1. An administrator creates one or more usage plans on AWS API Gateway that provides the necessary security feature (API key / authorizer) and quota, if needed.
+1. (Optional) An administrator creates one or more usage plans on AWS API Gateway that provides the necessary security feature (API key / authorizer) and quota, if needed.
 2. An administrator adds associated API stages to the usage plan(s).
 3. A consumer initiates the subscription in AMPLIFY Central:
 
