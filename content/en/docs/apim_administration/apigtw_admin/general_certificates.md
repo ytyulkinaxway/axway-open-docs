@@ -5,7 +5,6 @@
   "date": "2019-10-18",
   "description": "Import CA certificates, and import and create server certificates and private keys in the certificate store."
 }
-
 For API Gateway to trust X.509 certificates issued by a specific Certificate Authority (CA), you must import that CA's certificate into the API Gateway's trusted certificate store. For example, if API Gateway is to trust secure communications (SSL connections or XML Signature) from an external SAML Policy Decision Point (PDP), you must import the PDP certificate, or the issuing CA certificate into the API Gateway certificate store.
 
 In addition to importing CA certificates, you can import and create server certificates and private keys in the certificate store. These can be stored locally or on an external Hardware Security Module (HSM). You can also import and create public-private key pairs. For example, these can be used with the Secure Shell (SSH) File Transfer Protocol (SFTP) or with Pretty Good Privacy (PGP).
@@ -218,21 +217,19 @@ To create a certificate realm and associated keystore, perform the following ste
 7. You are prompted to input the PIN passphrase for the slot. The passphrase will not echo any output.
 8. When you enter the correct PIN passphrase for the slot, this displays a list of private keys. Choose the key to use for the certificate realm. For example:
 
-    ```
-    Choose from one of the following:
-        1) server1_priv
-        2) jms_priv
-        q) Quit
+   ```
+   Choose from one of the following:
+       1) server1_priv
+       2) jms_priv
+       q) Quit
 
-    Select option:2
-    ```
-
+   Select option:2
+   ```
 9. You are prompted for a file name for the keystore. For example:
 
-    ```
-    Certificate realm filename [jms keys.ks]:Successfully created the certificate realm:JMS KeysPress any key to continue...
-    ```
-
+   ```
+   Certificate realm filename [jms keys.ks]:Successfully created the certificate realm:JMS KeysPress any key to continue...
+   ```
 10. The keystore is output to the API Gateway instance directory. For example:
 
 ```
@@ -264,30 +261,34 @@ To configure an automatic PIN passphrase, perform the following steps:
 
 1. Edit the API Gateway instance’s `vpkcs11.xml` configuration file. For example:
 
-    ```
-    apigateway/groups/group-2/instance-1/conf/vpkcs11.xml
-    ```
-
+   ```
+   apigateway/groups/group-2/instance-1/conf/vpkcs11.xml
+   ```
 2. Add a `PASSPHRASE_EXEC` command that contains the full path to the script that executes and obtains the passphrase. The script should write the passphrase to stdout, and should have the necessary operating system file and execute protection settings to prevent unauthorized access to the PIN passphrase. The following example shows a `vpkcs11.xml` file that invokes the `hsmpin.sh` to echo the passphrase:
 
-    ```
-    <?xml version="1.0" encoding="utf-8"?>
-     <ConfigurationFragment provider="cryptov">
+   ```
+   <?xml version="1.0" encoding="utf-8"?>
+    <ConfigurationFragment provider="cryptov">
 
-        <Engine name="vpkcs11" defaultFor="">
-            <EngineCommand when="preInit" name="REALMS_DIR"
-                 value="$VINSTDIR/conf/certrealms" />
-            <EngineCommand when="preInit" name="PASSPHRASE_EXEC"
-                 value=""$VDISTDIR/hsmpin.sh"" />
-        </Engine>
-        </ConfigurationFragment>
-    ```
-
+       <Engine name="vpkcs11" defaultFor="">
+           <EngineCommand when="preInit" name="REALMS_DIR"
+                value="$VINSTDIR/conf/certrealms" />
+           <EngineCommand when="preInit" name="PASSPHRASE_EXEC"
+                value=""$VDISTDIR/hsmpin.sh"" />
+       </Engine>
+       </ConfigurationFragment>
+   ```
 3. API Gateway provides the certificate realm as an argument to the script, so you can use the same script to initialize multiple realms. The following examples show scripts that write a PIN of `1234` to stdout when initializing the `JMS Keys` certificate realm:
 
-    ```
-    #!/bin/shcase $1 in"JMS Keys")echo 1234;;esac
-    ```
+   ```
+   #!/bin/sh
+   case $1 in
+     "JMS Keys")
+       # Test your echo command in sh if using special characters.
+       echo 1234
+       ;;
+   esac
+   ```
 
 ## Configure SSH key pairs
 
@@ -321,8 +322,8 @@ You can delete a selected key pair from the certificate store by clicking **Remo
 
 You can use the `ssh-keygen` command provided on Linux to manage SSH keys.
 
-{{% alert title="Note" %}}
-With the release of OpenSSH 7.8, the default private key format for private keys generated from `ssh-keygen` has changed from OpenSSL compatible PEM files to a custom key format created by the OpenSSH developers.{{% /alert %}}
+{{< alert title="Note" color="primary" >}}
+With the release of OpenSSH 7.8, the default private key format for private keys generated from `ssh-keygen` has changed from OpenSSL compatible PEM files to a custom key format created by the OpenSSH developers.{{< /alert >}}
 
 This OpenSSH format is not supported by API Gateway, so the keys should be created in PEM format before the keys can be used. For example, the following command creates an SSH key in PEM format:
 
@@ -476,13 +477,16 @@ Perform the following steps:
 1. In Policy Studio, connect to an API Gateway instance.
 2. In the tree on the left, select **Certificates**. The certificates are displayed in the pane on the right.
 3. Depending on your use case, click the appropriate import button at the bottom right:
-    * Design-time: Click **Keystore**, click **Add to keystore** on the subsequent dialog box. This imports the certificate and private key into the key store for Policy Studio.
-    * Run-time: Click **Create/Import**. This import the certificate and private key into the runtime key store for API Gateway.
+
+   * Design-time: Click **Keystore**, click **Add to keystore** on the subsequent dialog box. This imports the certificate and private key into the key store for Policy Studio.
+   * Run-time: Click **Create/Import**. This import the certificate and private key into the runtime key store for API Gateway.
 4. Configure the **X.509 Certificate** tab as follows:
-    * Click **Import Certificate** if the certificate is in a separate file. If the certificate and key are in the same file, click **Import Certificate + Key**.
-    * Browse to `mycompany.crt` or the file that contains both the certificate and private key. Ensure that the correct file type is set in the file selector at the bottom right (usually `.pem`).
+
+   * Click **Import Certificate** if the certificate is in a separate file. If the certificate and key are in the same file, click **Import Certificate + Key**.
+   * Browse to `mycompany.crt` or the file that contains both the certificate and private key. Ensure that the correct file type is set in the file selector at the bottom right (usually `.pem`).
 5. Configure the **Private Key** tab as follows:
-    * Select the **Private Key** tab (you must import both the certificate and the associated private key).
-    * Click **Import Private Key**.
-    * Browse to `mycompany.key`. Ensure that the correct file type is set in the file selector at the bottom right.
+
+   * Select the **Private Key** tab (you must import both the certificate and the associated private key).
+   * Click **Import Private Key**.
+   * Browse to `mycompany.key`. Ensure that the correct file type is set in the file selector at the bottom right.
 6. Click **OK** to complete importing the key and certificate.
