@@ -39,7 +39,7 @@ To use Central CLI to log in with your AMPLIFY Platform credentials, run the fol
 amplify auth login --client-id apicentral
 ```
 
-A browser will automatically open.
+A browser automatically opens.
 Enter your valid credentials (email address and password). Once the “Authorization Successful” message is displayed, go back to AMPLIFY CLI. The browser may be closed at this point.
 
 If you are a member of multiple AMPLIFY organizations, you may have to choose an organization.
@@ -78,8 +78,8 @@ The installation procedure prompts for the following:
     * **Config Service Setup** defaulted to `Yes`, set to `No` if this is already in use
     * **Config Service Bucket** defaulted to **S3 bucket Name**, where Config Service stores its data
     * **Config Bucket Exists** defaulted to `Yes`, set to `No` to have the CloudFormation create the bucket
-    * **Discovery Agent Queue** defaulted to `aws-apigw-discovery`, the SQS Queue where events for the Discovery Agent are sent. `-[region]` is appended to this
-    * **Traceability Agent Queue** defaulted to `aws-apigw-traceability`, the SQS Queue where events for the Traceability Agent are sent. `-[region]` is appended to this
+    * **Discovery Agent Queue** defaulted to `aws-apigw-discovery`, the SQS Queue where events for the Discovery Agent are sent
+    * **Traceability Agent Queue** defaulted to `aws-apigw-traceability`, the SQS Queue where events for the Traceability Agent are sent
     * **Deployment Type** only `EC2` is available via the CLI at this time
     * **Instance Type** defaulted to `t3.micro`
     * **EC2 SSH Key Pair** the name of the EC2 Key Pair that will be installed on the instance
@@ -141,6 +141,9 @@ To complete the install, run the following AWS CLI command:
     aws cloudformation create-stack --stack-name AxwayAmplifyAgents \
         --template-url https://my-bucket-name.s3-eu-west-1.amazonaws.com/amplify-agents-deploy-all.yaml \
         --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameters "$(cat cloudformation_properties.json)"
+  - Check the CloudFormation Stack:
+    aws cloudformation describe-stacks --stack-name AxwayAmplifyAgents \
+        --query "Stacks[].{\"Name\":StackName,\"Status\":StackStatus}"
 ```
 
 * Create, if necessary, and upload all files to your S3 bucket:
@@ -151,6 +154,8 @@ To complete the install, run the following AWS CLI command:
     * These commands save the AMPLIFY Private and Public Keys to the AWS SSM Parameter Store.
 * Deploy the CloudFormation Stack:
     * This command deploys the CloudFormation template using all the resources uploaded to S3. The end result will be a running EC2 instance with the agents installed and logging to CloudWatch.
+* Check the CloudFormation Stack:
+    * This command returns the stack name and its deployment status.
 
 Once the Cloud formation template creation is completed, the agents should be running in the choosen infrastructure.
 
