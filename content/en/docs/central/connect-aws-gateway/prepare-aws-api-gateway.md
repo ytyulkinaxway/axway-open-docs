@@ -101,7 +101,7 @@ Create a new stack with the S3 URL of the `amplify-agents-deploy-all.yaml` templ
     * Enable **ConfigServiceSetup** to create an IAM role for using Config Service.
     * Set the **ConfigBucketExists** value to `true` to use an existing S3 bucket to store the AWS logs. Be sure the S3 Bucket is accessible and is located in the same region where you run the Cloud Formation template.
     * Set the ConfigBucketName value to the S3 Bucket where you saved all of the files, to store AWS Config logs. When ConfigBucketExists is false the CloudFormation will attempt to create a new bucket using the this name value appending the account id and region to it.
-    * Accept the **DiscoveryQueueName** default value of `aws-apigw-discovery` to hold changes made to the API Gateway resources. The AWS region is appended to this value.
+    * Accept the **DiscoveryQueueName** default value of `aws-apigw-discovery` to hold changes made to the API Gateway resources.
     * Accept the **TraceabilityQueueName** default value of `aws-apigw-traceability` to hold the API call so that the Traceability Agent can push them into the AMPLIFY platform.
 
 * Deployment Type
