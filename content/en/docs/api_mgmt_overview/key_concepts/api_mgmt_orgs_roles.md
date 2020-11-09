@@ -100,14 +100,16 @@ API administrators manage and monitor the virtualized APIs and the clients that 
 
 ### Organization administrator
 
-Organization administrators have full read access to users and applications in their own organizations, but they can be added as `user` in different organizations. If application management is delegated, Organization administrators can also create, update, and delete. However, they can only delete a user if in all organizations, which the user is a member of:
+Organization administrators have full read access to users and applications in their own organizations, but they can be added as `user` in different organizations. If application management is delegated, organization administrators can also create, update, and delete users. However, they can only delete a user if in all organizations in which the user is a member of:
 
-* The Organization administrator role is `Organization administrator`.
+* The organization administrator role is `Organization administrator`.
 * The user role is `user`.
 
 The Organization administrator cannot demote another Organization administrator to a `user` role.
 
-By default, organization administrators require approval from an Administrator to publish APIs owned by users in their organization, and they are not allowed to unpublish APIs. By setting `api.manager.orgadmin.selfservice.enabled` system property to `true`, the Organization administrator will no longer require approval, and will be able to directly publish and unpublish APIs in their own organization.
+By default, organization administrators require approval from an Administrator to publish APIs owned by users in their organization, and they are not allowed to unpublish APIs.
+
+By setting [`api.manager.orgadmin.selfservice.enabled`](/docs/apim_reference/system_props/) system property to `true`, the organization administrator will no longer require approval, and will be able to directly publish and unpublish APIs in their own organization. In addition, they will also be able to deprecate, undeprecate, retire, upgrade, and grant access to APIs. Note that to grant API access to any organization in API Manager, the organization administrator needs to have access to all the organizations and proxies. With the enablement of the system property, this provision is available to an organization administrator.
 
 ### API consumer
 
