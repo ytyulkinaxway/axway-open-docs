@@ -370,19 +370,19 @@ An Access and Secret Key for the user should be created and given to the person 
 
 The inputs to the Resource CloudFormation template (`amplify-agents-resources.yaml`):
 
-| Parameter Name             | Description                                                                                                                                   | Default Value           | Operating Mode |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------- |
+| Parameter Name             | Description                                                                                                                                  | Default Value           | Operating Mode |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------- |
 | SetupConfigService         | This parameter is used to disable the configuration of AWS Config Service, and all of its dependencies, while building the stack             | true                    | continuous     |
 | ConfigBucketName           | The name of the bucket the Config Service, if enabled, will store AWS Config Logs. The account number and region will be appended to this    | apigw-config-discovery  | continuous     |
 | ConfigBucketExists         | If set to true, the Config Bucket will not be created                                                                                        | false                   | continuous     |
 | ConfigServiceRoleArn       | The ARN for the Config Service IAM Role                                                                                                      |                         | continuous     |
-| DiscoveryQueueName         | The name of the queue that will hold only changes made to API Gateway resources. The region will be appended to this                         | aws-apigw-discovery     | continuous     |
+| DiscoveryQueueName         | The name of the queue that will hold only changes made to API Gateway resources                                                              | aws-apigw-discovery     | continuous     |
 | TraceabilityAPIGWCWRoleArn | The ARN for the IAM role that allows API Gateway the permission to write CloudWatch logs. Leave blank if this does not need to be configured |                         | both           |
 | TraceabilityLambdaRoleArn  | The Log Group created to track access of APIC tracked API Gateway endpoints                                                                  |                         | both           |
 | TraceabilityLogGroupName   | The CloudWatch Log Group that will store transaction details for AWS API Gateway usage events                                                | APIGW_Traceability_Logs | both           |
 | TraceabilityFunctionBucket | The S3 Bucket that has the executable for the Traceability Lambda function                                                                   |                         | both           |
 | TraceabilityFunctionKey    | The key of the Traceability Lambda function in the bucket                                                                                    |                         | both           |
-| TraceabilityQueueName      | The name of the queue that will hold traceability logs of API Gateway resources. The region will be appended to this                         | aws-apigw-traceability  | both           |
+| TraceabilityQueueName      | The name of the queue that will hold traceability logs of API Gateway resources                                                              | aws-apigw-traceability  | both           |
 
 #### Resources (Resources only)
 
