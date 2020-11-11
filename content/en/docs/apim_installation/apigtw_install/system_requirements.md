@@ -43,7 +43,9 @@ sudo yum install libnsl
 
 ### Windows
 
-Windows is supported only for a limited set of developer tools, see [Install developer tools on Windows](/docs/apim_installation/apigtw_install/install_dev_tools/). API Gateway and API Manager do not support Windows. This section addresses Policy Studio, Configuration Studio, and Package and Deployment tools only.
+Windows is supported only for a limited set of developer tools, see [Install developer tools on Windows](/docs/apim_installation/apigtw_install/install_dev_tools/). API Gateway and API Manager do not support Windows.
+
+This section addresses Policy Studio, Configuration Studio, and Package and Deployment tools only.
 
 Developer tools supports the following software versions:
 

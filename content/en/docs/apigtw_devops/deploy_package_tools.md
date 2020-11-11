@@ -3,10 +3,10 @@
 "linkTitle": "Packaging and deployment tools",
 "weight":"90",
 "date": "2019-11-19",
-"description": "Use the package and deploy tools to automate packaging, deploying, and upgrading configuration for continuous integration."
+"description": "Use the package and deployment tools to automate packaging, deploying, and upgrading configuration for continuous integration."
 }
 
-You can run the package and deploy tools from the following directory:
+You can run the package and deployment tools from the following directory:
 
 ```
 INSTALL_DIR/apigateway/posix/bin
@@ -65,7 +65,7 @@ The following example shows how to import configuration from specified API Gatew
 projpack --import --replace --dir=/home/user1/testfeds/ --passphrase=my_text --name=my_package --type=fed --add /home/user1/apiprojects/proj1 --projpass=my_text1 --add /home/user1/apiprojects/proj2 --projpass=my_text2
 ```
 
-{{< alert title="Note" color="primary" >}}You can use the `--replace` option before `--add` to override conflicts, otherwise if conflicts are found the command exits. {{< /alert >}}
+{{< alert title="Note" color="primary" >}}You can use the `--replace` option before `--add` to override conflicts. Otherwise, if conflicts are found the command exits. {{< /alert >}}
 
 ### Read passphrases from a file
 
@@ -94,7 +94,7 @@ The following command specifies file permissions:
 sudo chmod 400 <passphrases_file>
 ```
 
-For more examples, see `projpack --help`.
+For more examples, run `projpack --help`.
 
 ## Build and deploy API Gateway configurations
 
@@ -136,7 +136,7 @@ The following example shows how to deploy a specified deployment package and app
 projdeploy --dir=/tests --passphrase=pass --name=mypackage --type=fed --deploy-to --host-name=myhost --port=myport --user-name=myname --password==mypass --group-name=mygroup --includes mygateway1 mygateway2 mygateway3
 ```
 
-For more examples, see `projdeploy --help`.
+For more examples, run `projdeploy --help`.
 
 ## Change the passphrase of an API Gateway project
 
@@ -171,7 +171,7 @@ newPP=newpassPhrase
 confirmPP=newpassPhrase
 ```
 
-For more examples, see `projchangepass --help`.
+For more examples, run `projchangepass --help`.
 
 ## Upgrade an API Gateway project
 
@@ -199,11 +199,11 @@ This example shows how to upgrade the projects contained in a specified director
 projupgrade --projdir=/home/user1/apiprojects --backupdir=/home/user1/backup
 ```
 
-Before the upgrade the projects are backed up to the specified backup directory. As no passphrases are specified the command uses a zero-length string as the passphrase for all projects.
+Before the upgrade, the projects are backed up to the specified backup directory. As no passphrases are specified the command uses a zero-length string as the passphrase for all projects.
 
 #### Upgrade projects with different passphrases using a passphrase file
 
-This example shows how to upgrade the projects contained in a specified directory, and specify the passphrases with the `--projpass` and `--passfile` options:
+This example shows how to upgrade the projects contained in a specified directory, and how to specify the passphrases with the `--projpass` and `--passfile` options:
 
 ```
 projupgrade --projdir=/home/user1/apiprojects --projpass=mypass --passfile=/tmp/passfile.txt
@@ -283,4 +283,4 @@ REPORT 23/Jan/2017:16:00:00.005 ... Logging directory: /tmp/projupgrade_logs_201
 
 The output shows that Project1 was upgraded successfully, but Project2 failed to upgrade because of an `"Invalid group passphrase"`. To fix this, you could write the Project2 passphrase to a file and rerun `projupgrade` with the `--passfile` option.
 
-For more examples, see `projupgrade --help`.
+For more examples, run `projupgrade --help`.

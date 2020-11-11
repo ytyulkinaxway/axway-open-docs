@@ -3,7 +3,7 @@
 "linkTitle": "Install developer tools on Windows",
 "weight":"10",
 "date": "2019-10-02",
-"description": "Install Policy Studio, Configuration Studio, or Package and Deployment Tools on Windows."
+"description": "Install Policy Studio, Configuration Studio, or Package and deployment tools on Windows."
 }
 
 Windows is supported only for a limited set of developer tools that can be used to manage an an existing deployment running on Linux or in Docker containers. API Gateway and API Manager do not support Windows.
@@ -12,7 +12,7 @@ The following tools can be installed on Windows:
 
 * Policy Studio
 * Configuration Studio
-* Package and Deployment Tools
+* Package and deployment tools
 
 You can install the developer tools using the same installer flow as on Linux. To run the installer in the default GUI mode, locate and run the following setup file:
 
