@@ -1,11 +1,10 @@
 {
-    "title": "Open logging schema",
-    "linkTitle": "Open logging schema",
-    "weight":"120",
-    "date": "2019-10-14",
-    "description": "Describes the JSON schema for open logging."
+"title": "Open logging schema",
+  "linkTitle": "Open logging schema",
+  "weight": "120",
+  "date": "2019-10-14",
+  "description": "Describes the JSON schema for open logging."
 }
-
 <!-- TODO Replace this with a link to the actual JSON schema in the static folder? -->
 
 Each line in the Open logging JSON output consists of common properties, and one of four possible content records detailing an activity that occurred during runtime:
@@ -183,204 +182,204 @@ Example of trace record: {
 
 Contains details of the gateway process that logged the activity:
 
-|Property         |Type       |Description|
-|---              |---        |---|
-|`domainId`       |`string`   |Topology ID of the API Gateway system|
-|`groupId`        |`string`   |API Gateway group ID|
-|`groupName`      |`string`   |API Gateway group name|
-|`hostname`       |`string`   |Name of the host that the API Gateway process is running on|
-|`serviceId`      |`string`   |API Gateway instance ID|
-|`serviceName`    |`string`   |API Gateway instance name|
-|`version`        |`string`   |API Gateway product version|
+| Property      | Type     | Description                                                 |
+| ------------- | -------- | ----------------------------------------------------------- |
+| `domainId`    | `string` | Topology ID of the API Gateway system                       |
+| `groupId`     | `string` | API Gateway group ID                                        |
+| `groupName`   | `string` | API Gateway group name                                      |
+| `hostname`    | `string` | Name of the host that the API Gateway process is running on |
+| `serviceId`   | `string` | API Gateway instance ID                                     |
+| `serviceName` | `string` | API Gateway instance name                                   |
+| `version`     | `string` | API Gateway product version                                 |
 
 ## Circuit path
 
 Contains details of the circuit paths executed during a transaction:
 
-|Property         |Type         |Description|
-|---              |---          |---|
-|`execTime`       |`integer`    |Total execution time (ms)|
-|`filters`        |`array`      |Filters executed in the circuit|
-|`policy`         |`string`     |Policy name|
-|`viaProperty`    |`string`     |policy execution context description (optional)|
+| Property      | Type      | Description                                     |
+| ------------- | --------- | ----------------------------------------------- |
+| `execTime`    | `integer` | Total execution time (ms)                       |
+| `filters`     | `array`   | Filters executed in the circuit                 |
+| `policy`      | `string`  | Policy name                                     |
+| `viaProperty` | `string`  | policy execution context description (optional) |
 
 ## Filter
 
 Contains the details of a filter execution:
 
-|Property           |Type       |Description|
-|---                |---        |---|
-|`class`            |`string`   |Java class of the filter|
-|`espk`             |`string`   |Entity store access key of the filter|
-|`execTime`         |`integer`  |Total execution time (in milliseconds) of the filter|
-|`filterMessage`    |`string`   |Filter completion message|
-|`filterTime`       |`integer`  |Timestamp of when the filter was completed|
-|`name`             |`string`   |Name of the filter|
-|`status`           |`string`   |Filter execution status Possible values are: ["`Pass`","`Fail`","`Error`"]|
-|`subPaths`         |`array`    |[Nested circuit paths executions](#Circuit-path)|
-|`type`             |`string`   |Type of the filter|
+| Property        | Type      | Description                                                                |
+| --------------- | --------- | -------------------------------------------------------------------------- |
+| `class`         | `string`  | Java class of the filter                                                   |
+| `espk`          | `string`  | Entity store access key of the filter                                      |
+| `execTime`      | `integer` | Total execution time (in milliseconds) of the filter                       |
+| `filterMessage` | `string`  | Filter completion message                                                  |
+| `filterTime`    | `integer` | Timestamp of when the filter was completed                                 |
+| `name`          | `string`  | Name of the filter                                                         |
+| `status`        | `string`  | Filter execution status Possible values are: ["`Pass`","`Fail`","`Error`"] |
+| `subPaths`      | `array`   | [Nested circuit paths executions](#Circuit-path)                           |
+| `type`          | `string`  | Type of the filter                                                         |
 
 ## Transaction summary
 
 Contains the high-level summary details of a transaction:
 
-|Property           |Type               |Description|
-|---                |---                |---|
-|`path`             |`string` or `null` |URI entry point of the transaction (HTTP only)|
-|`protocol`         |`string` or `null` |Inbound protocol used|
-|`protocolSrc`      |`string` or `null` |Local port or path of the inbound protocol|
-|`serviceContexts`  |`array`            |[OAuth, Web Service, and Service Context elements contain fields describing the service context of a transaction](#service-context)|
-|`status`           |`string`           |Transaction result status. Possible values are: ["`success`","`failure`","`exception`","`unknown`"]|
+| Property          | Type               | Description                                                                                                                         |
+| ----------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `path`            | `string` or `null` | URI entry point of the transaction (HTTP only)                                                                                      |
+| `protocol`        | `string` or `null` | Inbound protocol used                                                                                                               |
+| `protocolSrc`     | `string` or `null` | Local port or path of the inbound protocol                                                                                          |
+| `serviceContexts` | `array`            | [OAuth, Web Service, and Service Context elements contain fields describing the service context of a transaction](#service-context) |
+| `status`          | `string`           | Transaction result status. Possible values are: ["`success`","`failure`","`exception`","`unknown`"]                                 |
 
 ## Service context
 
 OAuth, Web Service, and Service Context elements contain fields describing the service context of a transaction:
 
-|Property           |Type               |Description|
-|---                |---                |---|
-|`app`              |`string` or `null` |Authentication application name|
-|`client`           |`string` or `null` |Identity of the client|
-|`duration`         |`integer`          |Total execution time of this service context in milliseconds|
-|`method`           |`string` or `null` |Protocol method used|
-|`monitor`          |`boolean`          |Is metrics monitoring enabled for this service|
-|`org`              |`string` or `null` |Authentication organization name|
-|`service`          |`string`           |Service context name|
-|`status`           |`string` or `null` |Execution status of this service context. Possible values are: ["`success`","`failure`","`exception`","`unknown`",`null`]|
+| Property   | Type               | Description                                                                                                               |
+| ---------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| `app`      | `string` or `null` | Authentication application name                                                                                           |
+| `client`   | `string` or `null` | Identity of the client                                                                                                    |
+| `duration` | `integer`          | Total execution time of this service context in milliseconds                                                              |
+| `method`   | `string` or `null` | Protocol method used                                                                                                      |
+| `monitor`  | `boolean`          | Is metrics monitoring enabled for this service                                                                            |
+| `org`      | `string` or `null` | Authentication organization name                                                                                          |
+| `service`  | `string`           | Service context name                                                                                                      |
+| `status`   | `string` or `null` | Execution status of this service context. Possible values are: ["`success`","`failure`","`exception`","`unknown`",`null`] |
 
 ## Transaction element
 
 Contains detailed information for an individual element (leg) of a transaction:
 
-|Property           |Type               |Description|
-|---                |---                |---|
-|`duration`         |`integer`          |Total execution time (in milliseconds) of this transaction element|
-|`finalStatus`      |`string` or `null` |Status text of the transaction element execution|
-|`leg`              |`integer`          |Transaction element number|
-|`operation`        |`string` or `null` |SOAP request method used|
-|`protocolInfo`     |`object`           |[Protocol specific information of the transaction element](#protocol-information)|
-|`serviceName`      |`string` or `null` |SOAP service name used|
+| Property       | Type               | Description                                                                       |
+| -------------- | ------------------ | --------------------------------------------------------------------------------- |
+| `duration`     | `integer`          | Total execution time (in milliseconds) of this transaction element                |
+| `finalStatus`  | `string` or `null` | Status text of the transaction element execution                                  |
+| `leg`          | `integer`          | Transaction element number                                                        |
+| `operation`    | `string` or `null` | SOAP request method used                                                          |
+| `protocolInfo` | `object`           | [Protocol specific information of the transaction element](#protocol-information) |
+| `serviceName`  | `string` or `null` | SOAP service name used                                                            |
 
 ## Protocol information
 
 Protocol specific information of the transaction element consists of common properties and one of five possible content records:
 
-|Common properties  |Type               |Description|
-|---                |---                |---|
-|`recvHeader`       |`string` or `null` |Protocol header received|
-|`recvPayload`      |`string` or `null` |Storage path to the received payload|
-|`sentHeader`       |`string` or `null` |Protocol header sent|
-|`sentPayload`      |`string` or `null` |Storage path to the sent payload|
+| Common properties | Type               | Description                          |
+| ----------------- | ------------------ | ------------------------------------ |
+| `recvHeader`      | `string` or `null` | Protocol header received             |
+| `recvPayload`     | `string` or `null` | Storage path to the received payload |
+| `sentHeader`      | `string` or `null` | Protocol header sent                 |
+| `sentPayload`     | `string` or `null` | Storage path to the sent payload     |
 
-| # |Specific record properties  |Type      |Description|
-|---|---                         |---       |---|
-|1  |`http`                      |`object`  |[HTTP protocol properties](#http)|
-|2  |`websock`                   |`object`  |[Websocket protocol properties](#websock)|
-|3  |`dirScan`                   |`object`  |[Directory scanning processing properties](#directory-scanning)|
-|4  |`fileTransfer`              |`object`  |[File transfer properties](#file-transfer)|
-|5  |`jms`                       |`object`  |[JMS protocol properties](#jms)|
+| \#  | Specific record properties | Type     | Description                                                     |
+| --- | -------------------------- | -------- | --------------------------------------------------------------- |
+| 1   | `http`                     | `object` | [HTTP protocol properties](#http)                               |
+| 2   | `websock`                  | `object` | [Websocket protocol properties](#websock)                       |
+| 3   | `dirScan`                  | `object` | [Directory scanning processing properties](#directory-scanning) |
+| 4   | `fileTransfer`             | `object` | [File transfer properties](#file-transfer)                      |
+| 5   | `jms`                      | `object` | [JMS protocol properties](#jms)                                 |
 
 ## HTTP
 
 HTTP protocol properties:
 
-|Property           |Type               |Description|
-|---                |---                |---|
-|`authSubjectId`    |`string` or `null` |Authentication subject ID (login)|
-|`bytesReceived`    |`integer`          |Number of bytes received|
-|`bytesSent`         |`integer`          |Number of bytes sent|
-|`localAddr`        |`string`           |Local host of transaction|
-|`localPort`        |`string`           |Local port of transaction|
-|`method`           |`string`           |HTTP method used|
-|`remoteAddr`       |`string`           |Remote host address of transaction. If the request is sent without a proxy, this is the IP address of the remote host in `remoteName`. If the request is sent via a proxy, the value is the IP address of the proxy server. Note that the host name of the proxy is not currently logged.|
-|`remoteName`       |`string`           |Name representing remote host of the transaction|
-|`remotePort`       |`string`           |Remote port of transaction. If the request is sent via a proxy, the value is the port of the proxy server and the port of the remote host (`remoteName`) is not logged. Note that the host name of the proxy is not currently logged.|
-|`sslSubject`       |`string` or `null` |Subject name of peer certificate used to establish SSL connection|
-|`status`           |`integer`          |HTTP status code returned|
-|`statusText`       |`string`           |HTTP status message returned|
-|`uri`              |`string`           |URI path of request|
-|`vhost`            |`string` or null   |Virtualized API's host|
-|`wafStatus`        |`integer`          |Threat protection profile status. Possible values are: [`0,1,2`]|
+| Property        | Type               | Description                                                                                                                                                                                                                                                                               |
+| --------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `authSubjectId` | `string` or `null` | Authentication subject ID (login)                                                                                                                                                                                                                                                         |
+| `bytesReceived` | `integer`          | Number of bytes received                                                                                                                                                                                                                                                                  |
+| `bytesSent`     | `integer`          | Number of bytes sent                                                                                                                                                                                                                                                                      |
+| `localAddr`     | `string`           | Local host of transaction                                                                                                                                                                                                                                                                 |
+| `localPort`     | `string`           | Local port of transaction                                                                                                                                                                                                                                                                 |
+| `method`        | `string`           | HTTP method used                                                                                                                                                                                                                                                                          |
+| `remoteAddr`    | `string`           | Remote host address of transaction. If the request is sent without a proxy, this is the IP address of the remote host in `remoteName`. If the request is sent via a proxy, the value is the IP address of the proxy server. Note that the host name of the proxy is not currently logged. |
+| `remoteName`    | `string`           | Name representing remote host of the transaction                                                                                                                                                                                                                                          |
+| `remotePort`    | `string`           | Remote port of transaction. If the request is sent via a proxy, the value is the port of the proxy server and the port of the remote host (`remoteName`) is not logged. Note that the host name of the proxy is not currently logged.                                                     |
+| `sslSubject`    | `string` or `null` | Subject name of peer certificate used to establish SSL connection                                                                                                                                                                                                                         |
+| `status`        | `integer`          | HTTP status code returned                                                                                                                                                                                                                                                                 |
+| `statusText`    | `string`           | HTTP status message returned                                                                                                                                                                                                                                                              |
+| `uri`           | `string`           | URI path of request                                                                                                                                                                                                                                                                       |
+| `vhost`         | `string` or null   | Virtualized API's host                                                                                                                                                                                                                                                                    |
+| `wafStatus`     | `integer`          | Threat protection profile status. Possible values are: [`0,1,2`]                                                                                                                                                                                                                          |
 
 ## Websock
 
 Websocket protocol properties:
 
-|Property           |Type               |Description
-|---                |---                |---
-|`authSubjectId`    |`string` or `null` |Authentication subject ID (login)
-|`bytesReceived`    |`integer`          |Number of bytes received
-|`bytesSent`        |`integer`          |Number of bytes sent
-|`length`           |`integer`          |Length of payload in bytes
-|`localAddr`        |`string`           |Local host of transaction
-|`localPort`        |`string`           |Local port of transaction
-|`mask`             |`integer`          |Websocket header mask
-|`opcode`           |`string`           |Websocket opcode mode. Possible values are: ["`text`","`binary`"]
-|`origin`           |`string`           |Origin of transaction. Possible values are: ["`client`","`server`"]
-|`remoteAddr`       |`string`           |Remote host address of transaction
-|`remoteName`       |`string` or null   |Name representing remote host of the transaction
-|`remotePort`       |`string`           |Remote port of transaction
-|`sslSubject`       |`string` or null   |Subject name of peer certificate used to establish SSL connection
-|`uri`              |`string`           |URI path of request
-|`wsPeerLocalAddr`  |`string`           |Local host of Websocket connection
-|`wsPeerLocalPort`  |`string`           |Local port of Websocket connection
-|`wsPeerRemoteAddr` |`string`           |Remote host of Websocket connection
-|`wsPeerRemotePort` |`string`           |Remote port of Websocket connection
+| Property           | Type               | Description                                                         |
+| ------------------ | ------------------ | ------------------------------------------------------------------- |
+| `authSubjectId`    | `string` or `null` | Authentication subject ID (login)                                   |
+| `bytesReceived`    | `integer`          | Number of bytes received                                            |
+| `bytesSent`        | `integer`          | Number of bytes sent                                                |
+| `length`           | `integer`          | Length of payload in bytes                                          |
+| `localAddr`        | `string`           | Local host of transaction                                           |
+| `localPort`        | `string`           | Local port of transaction                                           |
+| `mask`             | `integer`          | Websocket header mask                                               |
+| `opcode`           | `string`           | Websocket opcode mode. Possible values are: ["`text`","`binary`"]   |
+| `origin`           | `string`           | Origin of transaction. Possible values are: ["`client`","`server`"] |
+| `remoteAddr`       | `string`           | Remote host address of transaction                                  |
+| `remoteName`       | `string` or null   | Name representing remote host of the transaction                    |
+| `remotePort`       | `string`           | Remote port of transaction                                          |
+| `sslSubject`       | `string` or null   | Subject name of peer certificate used to establish SSL connection   |
+| `uri`              | `string`           | URI path of request                                                 |
+| `wsPeerLocalAddr`  | `string`           | Local host of Websocket connection                                  |
+| `wsPeerLocalPort`  | `string`           | Local port of Websocket connection                                  |
+| `wsPeerRemoteAddr` | `string`           | Remote host of Websocket connection                                 |
+| `wsPeerRemotePort` | `string`           | Remote port of Websocket connection                                 |
 
 ## Directory scanning
 
 Directory scanning processing properties:
 
-|Property           |Type               |Description
-|---                |---                |---
-|`authSubjectId`    |`string` or `null` |Authentication subject ID (user login set by the policy, not by file processing)
-|`fileHidden`       |`string`           |True if file is a hidden file. Possible values are: ["`true`","`false`"]
-|`fileName`         |`string`           |File name
-|`filePath`         |`string`           |Path of directory containing the file
-|`fileSize`         |`string`           |Size of the file (if available)
-|`readOnly`         |`string`           |Read only status of the file (if available). Possible values are: ["`true`","`false`"]
-|`status`           |`string`           |File operation status. Possible values are: ["`Success`","`Failed`"]
-|`statusText`       |`string` or `null` |File operation error message (if available)
+| Property        | Type               | Description                                                                            |
+| --------------- | ------------------ | -------------------------------------------------------------------------------------- |
+| `authSubjectId` | `string` or `null` | Authentication subject ID (user login set by the policy, not by file processing)       |
+| `fileHidden`    | `string`           | True if file is a hidden file. Possible values are: ["`true`","`false`"]               |
+| `fileName`      | `string`           | File name                                                                              |
+| `filePath`      | `string`           | Path of directory containing the file                                                  |
+| `fileSize`      | `string`           | Size of the file (if available)                                                        |
+| `readOnly`      | `string`           | Read only status of the file (if available). Possible values are: ["`true`","`false`"] |
+| `status`        | `string`           | File operation status. Possible values are: ["`Success`","`Failed`"]                   |
+| `statusText`    | `string` or `null` | File operation error message (if available)                                            |
 
 ## File transfer
 
 File transfer properties:
 
-|Property           |Type               |Description
-|---                |---                |---
-|`authSubjectId`    |`string`           |Authentication subject ID (user login)
-|`direction`        |`string`           |File transfer direction. Possible values are: ["`up`"]
-|`remoteAddr`       |`string`           |Remote host address of transaction
-|`serviceType`      |`string`           |Service protocol used. Possible values are: ["`ftp`","`ftps`","`sftp`"]
-|`size`             |`integer`          |Size of the file
-|`uploadFile`       |`string`           |Absolute path of payload file
+| Property        | Type      | Description                                                             |
+| --------------- | --------- | ----------------------------------------------------------------------- |
+| `authSubjectId` | `string`  | Authentication subject ID (user login)                                  |
+| `direction`     | `string`  | File transfer direction. Possible values are: ["`up`"]                  |
+| `remoteAddr`    | `string`  | Remote host address of transaction                                      |
+| `serviceType`   | `string`  | Service protocol used. Possible values are: ["`ftp`","`ftps`","`sftp`"] |
+| `size`          | `integer` | Size of the file                                                        |
+| `uploadFile`    | `string`  | Absolute path of payload file                                           |
 
 ## JMS
 
 JMS protocol properties:
 
-|Property           |Type               |Description
-|---                |---                |---
-|`authSubjectId`    |`string` or `null` |Authentication subject ID (user login) if available
-|`jmsCorrelationID` |`string`           |Message correlation ID
-|`jmsDeliveryMode`  |`integer`          |Message delivery mode (1 for non-persistent, 2 for persistent). Possible values are: [`1,2`]
-|`jmsDestination`   |`string`           |Message destination
-|`jmsExpiration`    |`integer`          |Message expiration timestamp
-|`jmsMessageID`     |`string`           |Message ID
-|`jmsPriority`      |`integer`          |Messaage priority rank
-|`jmsProviderURL`   |`string`           |Provider URL configured in JMS service
-|`jmsRedelivered`   |`integer`          |Indicates if message is marked for potential redelivery (0 for no). Possible values are: [`0,1`]
-|`jmsReplyTo`       |`string`           |Reply destination configured in message
-|`jmsStatus`        |`string`           |JMS operation status. Possible values are: ["`Success`","`Failed`"]
-|`jmsStatusText`    |`string` or null   |JMS operation error message (if available)
-|`jmsTimestamp`     |`integer`          |Time at which the message was originally handed off to a provider to be sent
-|`jmsType`          |`string`           |Message type identifier
+| Property           | Type               | Description                                                                                      |
+| ------------------ | ------------------ | ------------------------------------------------------------------------------------------------ |
+| `authSubjectId`    | `string` or `null` | Authentication subject ID (user login) if available                                              |
+| `jmsCorrelationID` | `string`           | Message correlation ID                                                                           |
+| `jmsDeliveryMode`  | `integer`          | Message delivery mode (1 for non-persistent, 2 for persistent). Possible values are: [`1,2`]     |
+| `jmsDestination`   | `string`           | Message destination                                                                              |
+| `jmsExpiration`    | `integer`          | Message expiration timestamp                                                                     |
+| `jmsMessageID`     | `string`           | Message ID                                                                                       |
+| `jmsPriority`      | `integer`          | Messaage priority rank                                                                           |
+| `jmsProviderURL`   | `string`           | Provider URL configured in JMS service                                                           |
+| `jmsRedelivered`   | `integer`          | Indicates if message is marked for potential redelivery (0 for no). Possible values are: [`0,1`] |
+| `jmsReplyTo`       | `string`           | Reply destination configured in message                                                          |
+| `jmsStatus`        | `string`           | JMS operation status. Possible values are: ["`Success`","`Failed`"]                              |
+| `jmsStatusText`    | `string` or null   | JMS operation error message (if available)                                                       |
+| `jmsTimestamp`     | `integer`          | Time at which the message was originally handed off to a provider to be sent                     |
+| `jmsType`          | `string`           | Message type identifier                                                                          |
 
 ## Trace message
 
 Contains a single trace message generated by an API Gateway process:
 
-|Property           |Type               |Description
-|---                |---                |---
-|`level`            |`string`           |Trace level. Possible values are: ["`FATAL`","`REPORT`","`ERROR`","`INFO`","`MIN`","`DEBUG`","`DATA`"]
-|`thread`           |`string`           |The ID of the thread that logged the trace message
-|`data`             |`string`           |The contents of the trace message
+| Property | Type     | Description                                                                                            |
+| -------- | -------- | ------------------------------------------------------------------------------------------------------ |
+| `level`  | `string` | Trace level. Possible values are: ["`FATAL`","`REPORT`","`ERROR`","`INFO`","`MIN`","`DEBUG`","`DATA`"] |
+| `thread` | `string` | The ID of the thread that logged the trace message                                                     |
+| `data`   | `string` | The contents of the trace message                                                                      |
