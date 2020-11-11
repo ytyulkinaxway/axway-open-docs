@@ -3,9 +3,10 @@ title: Mesh management
 linkTitle: Mesh management
 weight: 120
 date: 2019-07-30
-description: Understand what mesh governance is, what a hybrid environment is, and how you can manage the APIs and microservices in a hybrid environment from AMPLIFY Central.
+description: Understand what mesh governance is, what a hybrid environment is,
+  and how you can manage the APIs and microservices in a hybrid environment from
+  AMPLIFY Central.
 ---
-
 {{< alert title="Public beta" color="warning" >}}This feature is currently in **public beta** and not yet available for production use.{{< /alert >}}
 
 ## What is mesh governance?
@@ -60,6 +61,6 @@ The service discovery agent (SDA) listens for new services coming up in your hyb
 
 The configuration synchronization agent (CSA) takes policies and rules from AMPLIFY Central (such as proxy deployment information, security information, and so on) and transfers them to the hybrid environment where they are used by the service mesh layer to manage API transactions and service activity.
 
-### Telemetry agent
+### Traceability agent
 
-The telemetry agent (TA) sends metrics and logs for API activity back to AMPLIFY Central so that you can monitor service activity and troubleshoot your services. Only a summary of the API transaction is captured and sent to AMPLIFY Central. Headers and payload remain in the hybrid data plane and can be operated on by other native tools.
+The traceability agent (TA) sends metrics and logs for API activity back to AMPLIFY Central so that you can monitor service activity and troubleshoot your services. Only a summary of the API transaction is captured and sent to AMPLIFY Central. The agent has deployment configuration options that control the optional logging of request and response headers. The payload remains in the hybrid data plane and can be operated on by other native tools.
