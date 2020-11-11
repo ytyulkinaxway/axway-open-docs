@@ -43,16 +43,14 @@ sudo yum install libnsl
 
 ### Windows
 
-Windows is supported only for a limited set of developer tools, see [Install developer tools on Windows](/docs/apim_installation/apigtw_install/install_dev_tools/). API Gateway and API Manager do not support Windows.
+Windows is supported only for a limited set of developer tools, see [Install developer tools on Windows](/docs/apim_installation/apigtw_install/install_dev_tools/). API Gateway and API Manager do not support Windows. This section addresses Policy Studio, Configuration Studio, and Package and Deployment tools only.
 
-This section addresses Policy Studio, Configuration Studio, Package and Deployment Tools only.
-
-API Gateway supports the following software versions:
+Developer tools supports the following software versions:
 
 * Windows 10
 * Windows 8.1
 
-API Gateway supports the following hardware:
+Developer tools supports the following hardware:
 
 * 32-bit Windows on both 32-bit hardware and 64-bit hardware
 * Intel Core or AMD Opteron at 2Ghz with Dual Core or faster
@@ -236,7 +234,7 @@ This section lists additional prerequisites for installing API Gateway.
 
 On Linux, you must ensure that the installation executable has the appropriate permissions in your environment. For example, you can use the `chmod` command to update the file permissions.
 
-### `/tmp` directory mounted with noexec
+### /tmp directory mounted with noexec
 
 If your Linux system has the `/tmp` directory mounted with `noexec`, you must complete some additional steps before installing or running API Gateway.
 
