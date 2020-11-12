@@ -26,7 +26,7 @@ Learn how to build a basic Amazon EC2 private cloud hybrid environment and add t
 * Amazon EC2 instance with Kubernetes and Helm:
 
     * Kubernetes 1.15 is supported
-    * Helm 2.16.7 or later (but not 3.x) is recommended
+    * Helm 3.2.4 is recommended
 
 * Public facing fully qualified domain name (FQDN) of the Amazon EC2 cluster
 * Client system (for example, Linux VM) with the following tools installed for accessing and managing your Amazon EC2 environment remotely:
@@ -34,7 +34,7 @@ Learn how to build a basic Amazon EC2 private cloud hybrid environment and add t
     * AWS CLI 1.16 or later is recommended - Enables you to interact with AWS services from the command line. See the [AWS CLI installation documentation](https://docs.aws.amazon.com/cli/latest/userguide/li-chap-install.html).
     * kubectl 1.16 or later is recommended - Enables you to deploy and manage applications on Kubernetes from the command line. See the [kubectl installation documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
     * kops 1.16 or later is recommended - Helps you create, destroy, upgrade and maintain Kubernetes clusters from the command line. See the [kops installation documentation](https://github.com/kubernetes/kops/blob/master/docs/install.md).
-    * Helm 2.16.7+ (but not 3.x) is recommended - Enables you to install the Axway proprietary service mesh layer later and to export Helm charts. See the [Helm installation documentation](https://helm.sh/docs/using_helm/#installing-helm).
+    * Helm 3.2.4 is recommended - Enables you to install the Axway proprietary service mesh layer later and to export Helm charts. See the [Helm installation documentation](https://helm.sh/docs/using_helm/#installing-helm).
     * Istioctl - Used after the environment is built for the next phase to deploy the service mesh and add this environment to AMPLIFY Central.
 
 ## Build an Amazon EC2 hybrid environment
@@ -73,25 +73,19 @@ kops export kubecfg --name kubernetes-cluster.example.com --state s3://amazonaws
 
 Install Helm on your cluster and add the Axway public repository to Helm:
 
-1. To install the Helm server (Tiller) on the connected cluster:
-
-   ```
-   helm init
-   ```
-2. Verify the Helm version:
+1. Verify the Helm version:
 
    ```
    helm version
-   Client: &version.Version{SemVer:"v2.13.0", GitCommit:"2e55dbe1fdb5fdb96b75ff144a339489417b146b", GitTreeState:"clean"}
-   Server: &version.Version{SemVer:"v2.13.0", GitCommit:"2e55dbe1fdb5fdb96b75ff144a339489417b146b", GitTreeState:"clean"}
+   version.BuildInfo{Version:"v3.2.4", GitCommit:"e5077257b6ca106d1f65652b4ca994736d221ab1", GitTreeState:"clean"}
    ```
-3. Add the Axway public Helm repository to your installation:
+2. Add the Axway public Helm repository to your installation:
 
    ```
    helm repo add axway https://charts.axway.com/charts
    "axway" has been added to your repositories
    ```
-4. Verify that the Axway public repository has been added:
+3. Verify that the Axway public repository has been added:
 
    ```
    helm repo list
