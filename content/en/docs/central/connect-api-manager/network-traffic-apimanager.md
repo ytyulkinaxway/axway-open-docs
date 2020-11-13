@@ -83,7 +83,7 @@ Other ports which may need to be opened so that the Agent may monitor API Gatewa
 
 ## Subscription notifications
 
-SMTP and/or a webhook URL can be set up to send subscription notifications on both subscribe and unsubscribe actions.  You can find the configuration to set up the SMTP or webhook URL here [Deploy your agents](https://docs.axway.com/bundle/axway-open-docs/page/docs/central/connect-api-manager/deploy-your-agents/index.html)
+SMTP and/or a webhook URL can be set up to send subscription notifications on both subscribe and unsubscribe actions.  You can find the configuration to set up the SMTP or webhook URL at [Deploy your agents](https://docs.axway.com/bundle/axway-open-docs/page/docs/central/connect-api-manager/deploy-your-agents/index.html).
 
 ## Using proxies
 
