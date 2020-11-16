@@ -4,6 +4,7 @@ linkTitle: API Gateway and API Manager September 2020
 weight: 60
 date: 2020-08-26T00:00:00.000Z
 ---
+
 ## Summary
 
 API Gateway is available as a software installation or a virtualized deployment in Docker containers. API Manager is a licensed product running on top of API Gateway, and has the same deployment options as API Gateway.
@@ -76,9 +77,9 @@ This initiative focuses on addressing:​
 * Source code which is developer-friendly​.
 * Designed for improved DevOps capability.
 
-{{% alert title="Note" %}}
+{{< alert title="Note" color="primary" >}}
 The YAML configuration capability is released as a technical preview version which is still undergoing final testing before its official release. The feature, its software and all related content are provided on an “as is” and “as available” basis. Axway does not give any warranties, whether express or implied, as to the suitability or usability of the feature, its software or any of its content.
-{{% /alert%}}
+{{< /alert >}}
 
 The XML configuration store is still supported and is enabled as the primary configuration format. See [YAML configuration Reference](/docs/apim_yamles/apim_yamles_references/) for known limitations.
 
@@ -227,9 +228,9 @@ These items are still supported until removal, however we recommend to stop usin
 
 To stay current and align our offerings with customer demand and best practices, Axway might discontinue support for some capabilities. As part of this review, the following features have been removed:
 
-### Run `update-apimanager.py` script to upgrade API Manager
+### Run update-apimanager.py script to upgrade API Manager
 
-The requirement to run `update-apimanager.py` has been removed. For more information see [Update API Manager](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-api-manager).
+The script `update-apimanager.py` has been removed, but you still need to perform an update of the API Manager FED file. For more information, see [Update API Manager](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-api-manager).
 
 ## Fixed issues
 
@@ -277,7 +278,7 @@ This version of API Gateway and API Manager includes:
 | RDAPI-21482 | 01187410                                                                                                               | **Issue**: Empty JSON Body due to JSON Remove Node removing the only node causes Exception. **Resolution**: Successfully parsed JSON body no longer throws Exception when writing content.                                                                                                                                                                                                                                                                              |
 | RDAPI-21483 | 01187661  01187906  01188834                                                                                           | **Issue**: Compare Attribute filter fix RDAPI-20017 causes breaking changes for existing customers **Resolution**: RDAPI-20017 is reverted to remove breaking changes and will be analyzed further.                                                                                                                                                                                                                                                                     |
 | RDAPI-21505 | 01187335                                                                                                               | **Issue**: In a multi-node setup, API Manager does not notify all instances of remote host configuration changes **Resolution**: Remote host configuration changes are now broadcasted across all instances so that configuration changes can take effect.                                                                                                                                                                                                              |
-| RDAPI-20923 | 01198145  01172404  01184847  01190517                                                                                                               | **Issue**: Application pagination was not behaving as expected **Resolution**: Application pagination now behaves correctly.                                                                                                                                                                                                               |
+| RDAPI-20923 | 01198145  01172404  01184847  01190517                                                                                 | **Issue**: Application pagination was not behaving as expected **Resolution**: Application pagination now behaves correctly.                                                                                                                                                                                                                                                                                                                                            |
 
 ## Known issues
 
