@@ -91,7 +91,6 @@ The installation procedure prompts for the following:
       * **SSH IP Range** defaulted to 0.0.0.0/0, set to the IP range that is allowed to SSH to the EC2 instance
     * ECS Deployment Prompts
       * **ECS Cluster Name** the name of the Cluster the ECS tasks will be deployed to
-      * **VPC ID** the ID of the VPC the ECS tasks will be assigned to
       * **Security Group ID** the security group (ex. sg-xxxxxxx) to assign to the ECS tasks
       * **Subnet ID** the subnet (ex. subnet-xxxxxx) the ECS tasks will run in
     * **Discovery Agent Log Group** defaulted to `amplify-discovery-agent-logs`, the log group the Discovery Agent will use
@@ -104,8 +103,8 @@ Once you have answered all questions, the cloud formation templates are download
 The current directory contains the following files:
 
 ```shell
-da_env_vars.env
-ta_env_vars.env
+da_env_vars.env                   *EC2 Deployment Only
+ta_env_vars.env                   *EC2 Deployment Only
 private_key.pem
 public_key.pem
 amplify-agents-deploy-all.yaml
