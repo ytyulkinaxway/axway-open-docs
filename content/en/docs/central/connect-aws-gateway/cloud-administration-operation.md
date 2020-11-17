@@ -135,13 +135,18 @@ The inputs to the IAM Setup CloudFormation Template (`amplify-agents-deploy-all.
 | ECSClusterName                | The name of the ECS Fargate Cluster for the ECS tasks to be deployed to                                                                   |                                 | continuous |
 | ECSCentralOrganizationID      | The AMPLIFY Central Organization ID to add to the ECS tasks                                                                               |                                 | continuous |
 | ECSCentralEnvironmentName     | The AMPLIFY Central Environment that the agents will be associated with                                                                   |                                 | continuous |
+| ECSCentralDiscoveryAgentName    | The Amplify Discovery Agent name                                                                                                        |                                 | continuous |
+| ECSCentralTraceabilityAgentName | The Amplify Traceability Agent name                                                                                                     |                                 | continuous |
+| ECSCentralURL                   | The Amplify Central URL to connect to, required for EU region                                                                           |                                 | continuous |
+| ECSCentralDeployment            | The Amplify Central Deployment, required for EU region                                                                                  |                                 | continuous |
+| ECSCentralTraceabilityHost      | The Amplify Central Traceability host, required for EU region                                                                           |                                 | continuous |
 | ECSCentralClientID            | The AMPLIFY Central Client ID (DOSA_xxxxxxx) that the agents will use to communicate to AMPLIFY                                           |                                 | continuous |
 | DiscoveryAgentLogGroupName    | The name that the Discovery Agent running on EC2 will log to                                                                              | amplify-discovery-agent-logs    | continuous |
 | TraceabilityAgentLogGroupName | The name that the Traceability Agent running on EC2 will log to                                                                           | amplify-traceability-agent-logs | continuous |
 | SSMPrivateKeyParameter        | The key name in SSM Parameter Store holding the AMPLIFY Private Key                                                                       | AmplifyPrivateKey               | continuous |
 | SSMPublicKeyParameter         | The key name in SSM Parameter Store holding the AMPLIFY Public Key                                                                        | AmplifyPublicKey                | continuous |
-| SecurityGroup                 | The Security Group ID to associate with the ECS task or EC2 instance, if not deploying complete infrastructure                             |                                 | continuous |
-| Subnet                        | The Subnet to associate with the ECS task or EC2 instance, if not deploying complete infrastructure                                        |                                 | continuous |
+| SecurityGroup                 | The Security Group ID to associate with the ECS task or EC2 instance, if not deploying complete infrastructure                            |                                 | continuous |
+| Subnet                        | The Subnet to associate with the ECS task or EC2 instance, if not deploying complete infrastructure                                       |                                 | continuous |
 
 #### Resources (IAM and Resources)
 
