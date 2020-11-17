@@ -1,17 +1,16 @@
 {
 "title": "Installation",
-"linkTitle": "Installation",
-"weight":"6",
-"date": "2019-10-02",
-"description": "Install API Gateway on Linux using the installer."
+  "linkTitle": "Installation",
+  "weight": "6",
+  "date": "2019-10-02",
+  "description": "Install API Gateway on Linux using the provided installer."
 }
 
 {{< alert title="Note" color="primary" >}}Windows is supported only for a limited set of developer tools, see [Install developer tools on Windows](/docs/apim_installation/apigtw_install/install_dev_tools). API Gateway and API Manager do not support Windows.{{< /alert >}}
 
 ## Prerequisites
 
-* You have downloaded the installation setup file for your target operating system from Axway Support at <https://support.axway.com>.
-    The download instructions are in the welcome letter that Axway sent you in an email message.
+* You have downloaded the installation setup file for your target operating system from [Axway Support](https://support.axway.com). The download instructions are in the welcome letter that Axway sent you in an email message.
 * You have obtained a valid Axway license file for API Gateway, and optionally API Manager or API Gateway Analytics. Also, if you intend to run API Gateway in FIPS-compliant mode, you have ensured that your license file allows this. You can obtain the required licenses from your Axway account manager.
 * You have obtained a valid McAfee license file if you intend to use the **McAfee Anti-Virus** filter.
 * You have reviewed the [prerequisites and system requirements](/docs/apim_installation/apigtw_install/system_requirements) and have ensured that your target system is suitable.
@@ -65,6 +64,8 @@ Select this option to install all API Gateway components with API Manager. This 
 
 #### Custom
 
+You must select this option if you are upgrading from a previous API Gateway version. For more details, see the [API Gateway Upgrade Guide](/docs/apim_installation/apigw_upgrade/).
+
 Select this option to customize which components are installed. You can install each API Gateway component separately. The API Gateway installer enables you to perform the following:
 
 * [Install the API Gateway server](/docs/apim_installation/apigtw_install/install_gateway/)
@@ -79,13 +80,9 @@ Select this option to customize which components are installed. You can install 
 
 {{< alert title="Note" color="primary" >}}The API Tester component is deprecated, and is only installed in a **Custom** setup. {{< /alert >}}
 
-You must select this option if you are upgrading from a previous API Gateway version. For more details, see the [API Gateway Upgrade Guide](/docs/apim_installation/apigw_upgrade/).
-
 #### QuickStart tutorial
 
-The **Standard** and **Complete** setup types install the QuickStart tutorial by default, or you can select to install it during the **Custom** setup type. This installs a preconfigured domain and API Gateway instance. If you do not install the QuickStart tutorial, you must configure a domain and API Gateway instance when the installation is complete.
-
-For more details, see [Initial configuration](/docs/apim_installation/apigtw_install/post_overview##initial-configuration).
+The **Standard** and **Complete** setup types install the QuickStart tutorial by default, or you can select to install it during the **Custom** setup type. This installs a preconfigured domain and API Gateway instance. If you do not install the QuickStart tutorial, you must configure a domain and API Gateway instance when the installation is complete. For more details, see [Initial configuration](/docs/apim_installation/apigtw_install/post_overview##initial-configuration).
 
 Click **Next** to continue.
 
@@ -109,7 +106,7 @@ Enter a location or click the browse button to specify the directory where the g
 
 Enter the location or click the browse button to specify a valid Axway license file. For more details, see [Software and license keys](/docs/apim_installation/apigtw_install/system_requirements/#software-and-license-keys).
 
-{{< alert title="Note" color="primary" >}}API Gateway, API Gateway Analytics, and API Manager each require a valid Axway license file. If you have separate license files for each of these components, specify the API Gateway license at this step, and you will be prompted for the API Gateway Analytics and API Manager license files at a later step. Alternatively, you can specify a single license file that covers all licensed components.{{< /alert >}}
+Note that API Gateway, API Gateway Analytics, and API Manager each require a valid Axway license file. If you have separate license files for each of these components, specify the API Gateway license at this step, and you will be prompted for the API Gateway Analytics and API Manager license files at a later step. Alternatively, you can specify a single license file that covers all licensed components.
 
 ### Cassandra configuration
 
@@ -129,7 +126,7 @@ If you selected to install an Apache Cassandra database, configure the following
 
 It is important to secure your API Gateway system to protect it from internal and external threats. This window enables you to set the administrator user name and password used to log in to Policy Studio and API Gateway Manager. These administrator credentials are also used by `managedomain` when connecting to an Admin Node Manager.
 
-Select **Change the default user name and password** to set the user name and password for the administrator account, and enter a user name and password. This option is selected by default to ensure that you set your own administrator user name and password. To use a default administrator user name and password, you must deselect this option. The default credentials are available from your Axway account manager.
+Select **Change the default user name and password** to set the user name and password for the administrator account, and enter a username and password. This option is selected by default to ensure that you set your own administrator user name and password. To use a default administrator user name and password, you must deselect this option. The default credentials are available from your Axway account manager.
 
 {{< alert title="Caution" color="warning" >}}You must ensure that you remember these credentials or you will not be able to log in to Policy Studio or API Gateway Manager.
 This is especially important when planning to install Policy Studio on Windows later because you do not have the option to set the credentials then.{{< /alert >}}
@@ -199,3 +196,20 @@ A window is displayed to indicate that the installation is complete. If you sele
 The URL of the Admin Node Manager is displayed (for example, `https://127.0.0.1:8090`). You can go to this URL in your browser to access the API Gateway Manager tools.
 
 Click **Finish** to complete the installation. Policy Studio is launched if you selected that option. If you selected to install the QuickStart tutorial, it is also launched in a browser window.
+
+## Uninstall API Gateway with uninstaller
+
+After you run the installer for the first time, it creates an uninstaller file (`uninstall.exe`) and a file to store the items configuration (`uninstall.dat`). After that, every time that you rerun the installer, it overwrites the `uninstall.dat` with the most recently added items.
+
+The uninstaller does not take any options, it only prompts you to confirm that you wish to uninstall. After you confirm, it will then remove the files added by the prior run according to the data present in `uninstall.dat`. This means that if the installer was run more than once, only the most recently added items will be removed.
+
+The uninstaller does not remove your `apiprojects` folder.
+
+## Manually uninstall API Gateway
+
+To uninstall API Gateway manually:
+
+1. Run `killall vshell` to stop any running instances or Node Managers
+2. Delete the install directory, as well as any `init.d` or `systemd` service scripts that might have been created by the user to automatically start gateway components on restart.
+
+On Windows platforms, the client tools can be uninstalled by deleting the installation directory.  There are no registry entries.
