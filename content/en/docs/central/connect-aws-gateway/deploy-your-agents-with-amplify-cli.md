@@ -80,14 +80,20 @@ The installation procedure prompts for the following:
     * **Config Bucket Exists** defaulted to `Yes`, set to `No` to have the CloudFormation create the bucket
     * **Discovery Agent Queue** defaulted to `aws-apigw-discovery`, the SQS Queue where events for the Discovery Agent are sent
     * **Traceability Agent Queue** defaulted to `aws-apigw-traceability`, the SQS Queue where events for the Traceability Agent are sent
-    * **Deployment Type** only `EC2` is available via the CLI at this time
-    * **Instance Type** defaulted to `t3.micro`
-    * **EC2 SSH Key Pair** the name of the EC2 Key Pair that will be installed on the instance
-    * **VPC ID** the ID of the VPC (ex. vpc-xxxxxxx) to deploy the instance in, leave blank to have the CloudFormation deploy the entire EC2 Infrastructure
+    * **Deployment Type** select between `EC2` or `ECS Fargate`
+    * EC2 Deployment Prompts
+      * **Instance Type** defaulted to `t3.micro`
+      * **EC2 SSH Key Pair** the name of the EC2 Key Pair that will be installed on the instance
+      * **VPC ID** the ID of the VPC (ex. vpc-xxxxxxx) to deploy the instance in, leave blank to have the CloudFormation deploy the entire EC2 Infrastructure
       * **Public IP Address** when using existing infrastructure, set to `No` if the VPC has an Internet Gateway, as the Instance needs internet Access to communicate with AMPLIFY
       * **Security Group ID** when using existing infrastructure, the security group (ex. sg-xxxxxxx) to assign to the EC2 instance
       * **Subnet ID** when using existing infrastructure, the subnet (ex. subnet-xxxxxx) to deploy the EC2 instance to
-    * **SSH IP Range** defaulted to 0.0.0.0/0, set to the IP range that is allowed to SSH to the EC2 instance
+      * **SSH IP Range** defaulted to 0.0.0.0/0, set to the IP range that is allowed to SSH to the EC2 instance
+    * ECS Deployment Prompts
+      * **ECS Cluster Name** the name of the Cluster the ECS tasks will be deployed to
+      * **VPC ID** the ID of the VPC the ECS tasks will be assigned to
+      * **Security Group ID** the security group (ex. sg-xxxxxxx) to assign to the ECS tasks
+      * **Subnet ID** the subnet (ex. subnet-xxxxxx) the ECS tasks will run in
     * **Discovery Agent Log Group** defaulted to `amplify-discovery-agent-logs`, the log group the Discovery Agent will use
     * **Traceability Agent Log Group** defaulted to `amplify-traceability-agent-logs`, the log group the Traceability Agent will use
     * **SSM Private Key Parameter** defaulted to `AmplifyPrivateKey`, the Parameter Name in AWS SSM where the Amplify Private key is stored
@@ -103,7 +109,8 @@ ta_env_vars.env
 private_key.pem
 public_key.pem
 amplify-agents-deploy-all.yaml
-amplify-agents-ec2.yaml
+amplify-agents-ec2.yaml           *EC2 Deployment Only
+amplify-agents-ecs-fargate.yaml   *ECS Fargate Deployment Only
 amplify-agents-resources.yaml
 cloudformation_properties.json
 traceability_lambda.zip
@@ -113,13 +120,13 @@ traceability_lambda.zip
 
 `private_key.pem` and `public_key.pem` are the generated key pair the agent will use to securely talk with the AMPLIFY Platform (if you choose to let the installation generate them).
 
-`amplify-agents-deploy-all.yaml` / `amplify-agents-ec2.yaml` / `amplify-agents-resources.yaml` are the CloudFormation files to configure AWS services / infrastructure.
+`amplify-agents-deploy-all.yaml` / `amplify-agents-ec2.yaml` / `amplify-agents-ecs-fargate.yaml` / `amplify-agents-resources.yaml` are the CloudFormation files to configure AWS services / infrastructure.
 
 `cloudformation_properties.json` contains the parameter values required as input to the CloudFormation execution.
 
 `traceability_lambda.zip` is referenced in the CloudFormation scripts to setup the AWS Lambda function required.
 
-### Step 3: Deploying the agent in EC2 or ECS-fargate infrastructure
+### Step 3: Deploying the agent in EC2 or ECS Fargate infrastructure
 
 The installation summary contains the AWS CLI commands needed to finish the installation.
 
@@ -157,6 +164,6 @@ To complete the install, run the following AWS CLI command:
 * Check the CloudFormation Stack:
     * This command returns the stack name and its deployment status.
 
-Once the Cloud formation template creation is completed, the agents should be running in the choosen infrastructure.
+Once the Cloud formation template creation is completed, the agents should be running in the chosen infrastructure.
 
 See [Administer AWS Gateway cloud](/docs/central/connect-aws-gateway/cloud-administration-operation/) for additional information about agent features.
