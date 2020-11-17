@@ -488,3 +488,23 @@ If you change this setting, you must clear your browser cache so that the old se
 When `allowAPIExportAsClearText` is set to `true`, the **Export API** dialog also includes an **Encrypt** option, which enables you to select whether to encrypt the export file using the specified password. For example:
 
 ![Export API collection](/Images/docbook/images/api_mgmt/api_mgmt_export.png)
+
+## Perform zero downtime updates to an API
+
+Sometimes it is necessary to make non-breaking changes to an API. For example, when the front-end API remains unchanged but the back-end API must be updated, or when the front-end API has additional methods or parameters that are backwards compatible. In this case, you must perform a zero downtime update.
+
+Consider the following example with only the v1.0.0 of an API published in API Manager:
+
+![API v1.0.0 published in API Manager](/Images/APIGateway/only_v1.0_api.png)
+
+To upgrade the access to a newer version of the API (v1.1.0) to all organizations and applications that had access to the old version, as well as to deprecate or retire the old API, perform a zero downtime update as follows:
+
+1. Add the new API v1.1.0 to API Manager and publish it.
+
+    ![Both old and new APIs published in API Manager](/Images/APIGateway/both_published.png)
+
+2. Select the old v1.0.0 API, click **Manage selected**, and choose **Upgrade access to newer API**, which brings you to the following screen:
+
+    ![Grant API access screen in API Manager](/Images/APIGateway/grant_api_access.png)
+
+After this is done and the old API is unpublished, the new API will be invoked and traffic will flow through the new API.
