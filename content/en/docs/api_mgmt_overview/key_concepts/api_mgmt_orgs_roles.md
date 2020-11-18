@@ -100,10 +100,15 @@ API administrators manage and monitor the virtualized APIs and the clients that 
 
 ### Organization administrator
 
-Organization administrators have full read access to users and applications in their own organizations, but they can be added as `user` in different organizations. If application management is delegated, organization administrators can also create, update, and delete users. However, they can only delete a user if in all organizations in which the user is a member of:
+Organization administrators can manage APIs lifecycle that are exposed to API consumers. They can also create and share applications without relying on the API administrator for approval, all within the scope of the organization they belong as an Organization administrator.
 
-* The organization administrator role is `Organization administrator`.
+In addition, the Organization administrator has full read access to users and applications in their own organizations, but they can be added as `user` in different organizations.
+
+Organization administrators can also create, update, and delete users. However, they can only delete a user under the following set of criteria:
+
 * The user role is `user`.
+* The `user` and the Organization administrator belong to the same organization.
+* When a `user` belongs to more than one organization, only the user account in which the `user` and the Organization administrator shares the same scope will be deleted. The other organizations outside the scope of the Organization administrator will remain intact.
 
 The Organization administrator cannot demote another Organization administrator to a `user` role.
 
