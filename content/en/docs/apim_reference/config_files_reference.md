@@ -18,7 +18,7 @@ apigateway/system/conf/redaction.xml
 
 ## Node Manager entity store
 
-Contains the entity store configuration for Node Manager.
+The following directory contains the entity store configuration for Node Manager.
 
 ```
 apigateway/conf/fed
@@ -26,7 +26,7 @@ apigateway/conf/fed
 
 ## API Gateway group entity store
 
-Contains the entity store configuration for the gateway.
+The following directory contains the entity store configuration for the gateway.
 
 ```
 apigateway/groups/group-id/conf
@@ -74,6 +74,15 @@ Configure JVM settings.
 apigateway/system/conf/jvm.xml
 ```
 
+The following directories can also be used to define the JVM.XML
+
+```
+apigateway/conf
+apigateway/groups/group-2/instance-1/conf
+```
+
+For more information, see [JVM System Properties](/docs/apim_reference/system_props/)
+
 ## ext/libs entries
 
 Directory for customer JARs. These can be third-party JARs or JARs with Java code that they have written for their own custom filters. Customers are warned that third-party JARs could conflict with those already installed with the API Gateway in the `system/lib` directory.
@@ -111,21 +120,6 @@ apigateway/groups/group-id/instance-id/conf/jvm.xml
    <VMArg name="-Ddont.expect.100.continue=true"/>
 </ConfigurationFragment>
 ```
-
-The following table lists ext/Linux.x86_64 properties:
-
-| Property | Type | Default | Description |
-| --- | --- | --- | --- |
-| `com.axway.apimanager.api.data.cache` | boolean | `false` | Enable caching to improve general system performance and speed by setting the value to `true`. External clients, API keys, and OAuth credentials cache are optimized so that updates to the cache no longer block API Manager runtime traffic, resulting in performance improvements for corresponding API Manager APIs. As a result of the non-blocking cache updates, API Manager memory consumption will increase, particularly in systems with large numbers of external clients, API keys or OAuth credentials. |
-| `com.axway.apimanager.api.model.disable.confidential.fields` | boolean | `false` | Fields that contain confidential information are no longer returned in some API calls. For example, a call to `GET /api/portal/v1.3/proxies` does not return the password in the `AuthenticationProfile.parameters\["password"]` field. For compatibility with earlier versions, you can continue to return confidential fields. Set the to `true` under `groups/group-x/instance-y/conf`. **Setting this property to true is not recommended as it could pose a security risk to your API Gateway installation.** |
-| `com.axway.apimanager.apirepo.allowWSDLUpdate` | boolean | `false` | By default back-end WSDL APIs cannot be updated in API Manager. Set value to `true` to allow updates. |
-| `com.axway.apimanager.use404AuthSuccessNoMatch` | boolean | `false` | To configure the status code of an unsuccessful match of an API to `HTTP 404 Not Found` instead of `HTTP 403 No match found for request` when authentication is successful, set to `true`.
-| `com.axway.apimanager.csrf` | boolean | `true` | If you are using the API Manager Management APIs, Client Application Registry APIs, and API Gateway APIs you might need to disable the CSRF token check implemented in v7.5.3 SP9 and later. To disable this check, set to `false`. |
-| `com.coreapireg.apimethod.contenttype.legacy` | boolean | `false` | API Manager generates a `No Match For Request` error when `Content-Type` was not equal to the API method MIME type. To disable this check for single API method exact `Content-Type` matching, set to `true`.
-| `com.vordel.apimanager.uri.path.trailingSlash.preserve` | boolean | `false` | When a back-end API is created from a Swagger definition file that contains trailing slashes in the path, API Manager keeps the API method paths as designed, it does not remove the trailing slashes from the paths. Set to `true`, when it is required to match inbound API Manager traffic requests with trailing slash against API methods that have no trailing slash in the path definition, and vice-versa. The outbound requests are processed by API Manager as per the corresponding Swagger API definition. |
-| `com.vordel.apimanager.swagger.method.singleslash.ignore` | boolean | `false` |When this property is set to `true`, API Manager will build an API request to the back-end without trailing slash, only for an API method defined as a single slash in the Swagger API definition. |
-| `com.vordel.dwe.auto204response`  | boolean | `true` | API Gateway rewrites the `HTTP 200 OK` status code by default to `HTTP 204 No Content` if the message payload is empty. When set to `false` you can disable this behavior, for example, if you require that `HEAD` requests keep the  exact same status code as `GET`.  |
-| `dont.expect.100.continue` | boolean | `false` | Using an `HTTP 1.1` remote host, API Gateway always sends an `Expect: 100-Continue` HTTP header to the back-end server. Set to `true` to disable this behavior. |
 
 ## SSO Configuration files
 
