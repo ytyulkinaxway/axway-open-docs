@@ -104,6 +104,8 @@ The promotion properties are described as follows:
 | `application.oauthresource.upgrade` | Specify whether to promote an existing OAuth resource if there is a conflict in the consumer organization (`true` or `false`). |
 | `api.publish.virtualhost`           | Specify an optional virtual host name and port on which the promoted APIs are available. The host name should be DNS resolvable. |
 | `api.unpublished.remove`            | Specify whether to remove an old unpubished API from the development organization (`true` or `false`). This only applies when an upgrade occurs. For example, if there is a conflict and `api.conflict.upgrade` is set to `true`, this results in two APIs (existing and upgraded). The `api.unpublished.remove` option specifies whether to keep or delete the existing API that has been unpublished. |
+| `application.apis.remove.all`       | Specifies whether, on API conflict, all current API access granted to applications should be removed (`true` or `false`). When enabled, requires that api.conflict.upgrade is set to `true` also.|
+| `organization.apis.remove.all`      | Specifies whether, on API conflict, all current API access granted to organizations should be removed (`true` or `false`). When enabled, requires that api.conflict.upgrade is set to `true` also.|
 
 After running the `apimanager-promote` command, press **F5** to reload the API Manager web console in the target environment.
 
