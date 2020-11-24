@@ -76,3 +76,5 @@ Select one of the following options:
     Select this option and click **Signing Key** to select a private key certificate, and use it to verify the ID token.
 * **With Client Secret**:
     Select this option to verify the ID token using a client secret.
+
+Note that at execution time of this filter, the `aud` claim of the given OpenID connect token is additionally verified, which must match to clientId of the used [OAuth-Client-Application](/docs/apim_policydev/apigw_oauth/gw_oauth_client) (`oauth.client.application.getClientId()`).
