@@ -274,7 +274,7 @@ To configure an automatic PIN passphrase, perform the following steps:
            <EngineCommand when="preInit" name="REALMS_DIR"
                 value="$VINSTDIR/conf/certrealms" />
            <EngineCommand when="preInit" name="PASSPHRASE_EXEC"
-                value=""$VDISTDIR/hsmpin.sh"" />
+                value="$VDISTDIR/hsmpin.sh" />
        </Engine>
        </ConfigurationFragment>
    ```
