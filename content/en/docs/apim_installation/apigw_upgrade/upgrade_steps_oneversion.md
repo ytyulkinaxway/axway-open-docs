@@ -53,7 +53,7 @@ To install the update on your existing API Gateway 7.7 server installation, perf
 
    ```
    mkdir 77update
-   tar -xzvf APIGateway_7.7.YYYYMMDD_Core_linux-x86-64_BNnn.tar.gz -C 77update
+   tar xzvf APIGateway_7.7.YYYYMMDD_Core_linux-x86-64_BNnn.tar.gz -C 77update
    ```
 
    {{< alert title="Note" color="primary" >}}You must extract the file into a new directory, and not into the existing API Gateway installation directory.{{< /alert >}}
