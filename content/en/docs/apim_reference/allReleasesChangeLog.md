@@ -1,9 +1,9 @@
 {
 "title": "API Management release change log",
-"linkTitle": "Release change log",
-"weight":"90",
-"date": "2020-10-20",
-"description": "Functionality change log for all supported versions of API Gateway, API Manager, and API Portal since version 7.5.3."
+  "linkTitle": "Release change log",
+  "weight": "90",
+  "date": "2020-10-20",
+  "description": "Functionality change log for all supported versions of API Gateway, API Manager, and API Portal since version 7.5.3."
 }
 
 List of the major changes made in each release of API Gateway, API Manager, and API Portal. This is a reference information to help you to decided the best strategy to migrate your product to the latest API Management release.
@@ -14,8 +14,11 @@ You can find the release notes for all service packs on [Axway Support](https://
 
 |Update       |Highlights        |Deprecated features  |Release Date|
 |---------    |---               |---                  |---         |
+|[7.7.20201130](/docs/apim_relnotes/20201130_apimgr_relnotes/)|JVM Flag added to allow orgAdmins to manage API Lifecycles||30/11/2020
+||OAS3 runtime bugs resolved||
+||Simplified Cassandra backup and restore scripts||
 |[7.7.20200930](/docs/apim_relnotes/20200930_apimgr_relnotes/)|API Manager Remote Hosts aligned with PolicyStudio functionality | API Management REST APIs versions 1.1 and 1.2 are deprecated. |30/09/2020|
-|                                                                                                |YAML-based configuration store (Technical preview) |Swagger version 1.1 is deprecated |
+|                                                                                                |YAML-based configuration store (Technical preview) |Swagger version 1.1 is deprecated ||
 |                                                                                                |Database integration updates |The requirement to run `update-apimanager.py` has been removed from the upgrade steps. | |
 |                                                                                                |User membership in multiple organizations. | | |
 |                                                                                                |New API Management REST API version 1.4. | | |
