@@ -7,6 +7,7 @@ description: Learn how to install the AMPLIFY CLI and authorize it to use the
   AMPLIFY Central APIs. This enables you to integrate the CLI into your DevOps
   pipeline.
 ---
+
 ## Before you start
 
 * You will need an administrator account for AMPLIFY Central ([Managing Accounts](https://docs.axway.com/bundle/AMPLIFY_Dashboard_allOS_en/page/managing_accounts.html)).
@@ -31,12 +32,14 @@ The following table describes the operating system supported configurations that
    [sudo] npm install -g @axway/amplify-cli
    ```
 
-   Use `sudo` on Mac OS X or Linux if you do not own the directory where npm installs packages to. On Windows, you do not need to run as     Administrator as npm installs packages into your AppData directory.
+   Use `sudo` on Mac OS X or Linux if you do not own the directory where npm installs packages to. On Windows, you do not need to run as Administrator as npm installs packages into your AppData directory.
+
 3. Run AMPLIFY package manager to install AMPLIFY Central CLI:
 
    ```
    [sudo] amplify pm install @axway/amplify-central-cli
    ```
+
 4. Run AMPLIFY package manager list command to view available packages:
 
    ```
@@ -68,6 +71,7 @@ Install OpenSSL if not installed already:
 2. Install OpenSSL, and ensure it is added to your path (`C:\Program Files\OpenSSL-Win64\bin`) in environment variables.
 
    ![Environment variables](/Images/central/cli_central/env_variables.png)
+
 3. Verify that OpenSSL is installed and configured correctly.
 
    ```
@@ -85,36 +89,39 @@ You can use the following options to authorize your CLI:
 
 ### Option 1 - Log in with your AMPLIFY Platform credentials
 
-To use Central CLI to log in with your AMPLIFY Platform credentials, run the following command and used `apicentral` as the client identifier:
+To use Central CLI to log in with your AMPLIFY Platform credentials, run the following command:
 
 ```
-amplify auth login --client-id apicentral
+amplify auth login
 ```
 
-Enter valid credentials (email address and password) on the dialog box displayed.
-An "Authorization Successful" message is displayed, and you can go back to the Central CLI.
+On the dialog box displayed, enter valid credentials (email address and password). An "Authorization Successful" message is displayed, and you can go back to the Central CLI.
 
-If you are a member of multiple AMPLIFY organizations, you may have to choose an organization.
+If you are a member of multiple AMPLIFY organizations, you might have to choose an organization. After that, you have completed the authorization of your CLI.
 
-To check that your client identifier is set correctly to `apicentral`, run:
+If you have used the `client-id` configuration to authorize with the CLI, you must remove it. To verify that you have used `client-id`, run:
 
-```
+```bash
 amplify central config list
 ```
 
 Expected response:
 
-```
-{ 'client-id': 'apicentral' }
+```bash
+{
+   ...
+   'client-id': 'apicentral',
+   ...
+}
+# OR if used a "DOSA" account before
+{
+   ...
+   'client-id': 'DOSA_105cf15d051c432c8cd2e1313f54c2da',
+   ...
+}
 ```
 
-If the client identifier is not set to `apicentral`, set the client identifier for future operations by running:
-
-```
-amplify central config set --client-id=apicentral
-```
-
-You have completed the authorization of your CLI with your AMPLIFY Platform credentials.
+To remove `client-id`, you must manually edit the configuration file `~/.axway/central.json` and remove the `client-id` value from it.
 
 ### Option 2 - Authenticate and authorize your service account
 
