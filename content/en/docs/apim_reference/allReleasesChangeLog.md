@@ -8,6 +8,8 @@
 
 List of the major changes made in each release of API Gateway, API Manager, and API Portal. This is a reference information to help you to decided the best strategy to migrate your product to the latest API Management release.
 
+You can find the release notes for all service packs on [Axway Support](https://support.axway.com).
+
 ## Version 7.7
 
 |Update       |Highlights        |Deprecated features  |Release Date|
@@ -42,8 +44,8 @@ List of the major changes made in each release of API Gateway, API Manager, and 
 |                                                                                                |Undesirable cipher suites disabled by default when using SSL/TLS. | | |
 |                                                                                                |Endpoint identification algorithms for LDAPS enabled by default. | | |
 |                                                                                                |Fields that contain confidential information are no longer returned in some API calls.| | |
-|[7.7 SP2](https://delivery.axway.int/GUI/file/GUI_file_readme.php?3i3aljnfkbsu3pn69e0s7ga307&fileId=74993&readmeId=38812&pdtId=394)|OpenSSL updated to 1.0.2t-fips to fix security vulnerabilities. | |21/12/2019 |
-|[7.7 SP1](https://delivery.axway.int/GUI/file/GUI_file_readme.php?3i3aljnfkbsu3pn69e0s7ga307&fileId=73780&readmeId=38290&pdtId=394)| | |29/08/2019 |
+|7.7 SP2|OpenSSL updated to 1.0.2t-fips to fix security vulnerabilities. | |21/12/2019 |
+|7.7 SP1| | |29/08/2019 |
 |[7.7](/docs/apim_relnotes/201904_release/)|Traffic monitor enhancements.|Support for MySQL Server 2005 has been removed.|12/04/2019 |
 |                                                                                                |Filter JMS transactions by custom property in Traffic Monitor.| | |
 |                                                                                                |Entity Explorer added to API Gateway client tools installer.| | |
@@ -53,12 +55,12 @@ List of the major changes made in each release of API Gateway, API Manager, and 
 
 |Update       |Highlights        |Deprecated features  |Release Date|
 |---------    |---               |---                  |---         |
-|[7.6.2 SP5](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=76798&readmeId=39732&pdtId=394)|The jre directory in Policy Studio/Configuration Studio must be remove before applying the Service Pack| |17/07/2020|                          |User membership in multiple organizations | | |
-|[7.6.2 SP4](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=73574&readmeId=38165&pdtId=394)|JQuery upadated to 3.4.0 to fix security vulnerabilities.| |19/07/2019 |
-|[7.6.2 SP3](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=72882&readmeId=37699&pdtId=394)|jQuery updated to 3.3.1 to fix security vulnerabilities.| |18/04/2019 |
+|7.6.2 SP5|The jre directory in Policy Studio/Configuration Studio must be remove before applying the Service Pack| |17/07/2020|                          |User membership in multiple organizations | | |
+|7.6.2 SP4|JQuery upadated to 3.4.0 to fix security vulnerabilities.| |19/07/2019 |
+|7.6.2 SP3|jQuery updated to 3.3.1 to fix security vulnerabilities.| |18/04/2019 |
 |                                                                                                                       |JRE updated to 1.8.0_202 to fix security vulnerabilities.| | |
-|[7.6.2 SP2](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=71828&readmeId=37215&pdtId=394)| | | 17/12/2018|
-|[7.6.2 SP1](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=71453&readmeId=36940&pdtId=394)|Spring framework updated to 4.3.18.RELEASE to fix security vulnerabilities | | 01/11/2018|
+|7.6.2 SP2| | | 17/12/2018|
+|7.6.2 SP1|Spring framework updated to 4.3.18.RELEASE to fix security vulnerabilities | | 01/11/2018|
 |                                                                                                                |OpenSSL updated to 1.0.2p-fips to fix security vulnerabilities.| | |
 |                                                                                                                |Bouncy Castle library updated to 1.60 to fix security vulnerabilities.| | |
 |[7.6.2](https://docs.axway.com/bundle/APIGateway_762_ReleaseNotes_allOS_en_HTML5/page/Content/ReleaseNotesPortal/APIGateway_ReleaseNotes_allOS_en.htm)|Elastic topology container deployment.|Axway physical appliance deployment option was removed. | 26/07/2018|
@@ -69,40 +71,40 @@ List of the major changes made in each release of API Gateway, API Manager, and 
 
 |Update       |Highlights        |Deprecated features  |Release Date|
 |---------    |---               |---                  |---         |
-|[7.5.3 SP13](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=76137&readmeId=39449&pdtId=394)|Dojo updated to 1.10.10 to fix security vulnerability |  |01/05/2020|
-|[7.5.3 SP12](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=74514&readmeId=38555&pdtId=394)|Improvements in the XML redaction.|  |26/102019|
+|7.5.3 SP13|Dojo updated to 1.10.10 to fix security vulnerability |  |01/05/2020|
+|7.5.3 SP12|Improvements in the XML redaction.|  |26/102019|
 |                                                                                                               |Jackson-databind updated to 2.9.10 to fix security vulnerabilities.|  | |
-|[7.5.3 SP11](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=73425&readmeId=38063&pdtId=394)|The Gateway now includes Zulu OpenJDK 1.8 JRE instead of Oracle JRE 1.8.|To allow legacy API method matching excluding the method’s defined MIME type, the Java property com.coreapireg.apimethod.contenttype.legacy must be set to true. |25/06/2019|
+|7.5.3 SP11|The Gateway now includes Zulu OpenJDK 1.8 JRE instead of Oracle JRE 1.8.|To allow legacy API method matching excluding the method’s defined MIME type, the Java property com.coreapireg.apimethod.contenttype.legacy must be set to true. |25/06/2019|
 |                                                                                                               |It is possible to allow inbound API requests with trailing slash to match an API path with no trailing slash.|  | |
 |                                                                                                               |An API method’s Content-Type is now checked against the API method’s defined MIME type when performing path matching.|  | |
 |                                                                                                               |OpenSSL updated to 1.0.2r-fips.|  | |
 |                                                                                                               |Added CSRF token protection for API Gateway Management APIs.|  | |
 |                                                                                                               |JQuery updated to 3.4.0.|  | |
-|[7.5.3 SP10](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=72293&readmeId=37499&pdtId=394)|Jython updated to 2.7.1 to fix this security vulnerability.|Internet Explorer versions 8.0 and 9.0 are no longer officially supported by API Gateway. |22/02/2019|
+|7.5.3 SP10|Jython updated to 2.7.1 to fix this security vulnerability.|Internet Explorer versions 8.0 and 9.0 are no longer officially supported by API Gateway. |22/02/2019|
 |                                                                                                               |jQuery updated to 3.3.1 to fix this security vulnerability.|  | |
 |                                                                                                               |JRE updated to 1.8.0_202 to fix this security vulnerability.|  | |
-|[7.5.3 SP9](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=71603&readmeId=37068&pdtId=394)|IBM MQ updated to 7.5.0.8 to fix this security vulnerability.| |16/11/2018|
+|7.5.3 SP9|IBM MQ updated to 7.5.0.8 to fix this security vulnerability.| |16/11/2018|
 |                                                                                                               |OpenSSL updated to 1.0.2p-fips to fix this security vulnerability.|  | |
 |                                                                                                               |JRE updated to 1.8.0_191-b12 to fix this security vulnerability.|  | |
 |                                                                                                               |`apimanager-promote` script requires decryption password or passfile.|  | |
-|[7.5.3 SP8](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=70731&readmeId=36410&pdtId=394)|Bouncy Castle library updated to 1.60 to fix this security vulnerability.| |23/08/2018|
+|7.5.3 SP8|Bouncy Castle library updated to 1.60 to fix this security vulnerability.| |23/08/2018|
 |                                                                                                               |Spring framework updated to 4.3.17.RELEASE to fix this security vulnerability.| | |
 |                                                                                                               |JRE updated to 8u181 to fix this security vulnerability.| | |
 |  
-|[7.5.3 SP7](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=69650&readmeId=35691&pdtId=394)|Jackson-databind updated to 2.9.5 to fix this security vulnerability.| |08/06/2018|
+|7.5.3 SP7|Jackson-databind updated to 2.9.5 to fix this security vulnerability.| |08/06/2018|
 |                                                                                                               |JRE updated to 8u172 to fix this security vulnerability.| | |
 |                                                                                                               |OpenSSL updated to 1.0.2o to fix this security vulnerability.| | |
-|[7.5.3 SP6](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=68637&readmeId=35129&pdtId=394)|OpenSSL updated to v1.0.2.n to fix security vulnerability.| |27/04/201|
+|7.5.3 SP6|OpenSSL updated to v1.0.2.n to fix security vulnerability.| |27/04/201|
 |                                                                                                               |Apache Log4j updated to 2.8.2 to fix security vulnerability.| | |
 |                                                                                                               |When exporting API collections from API Manager, the generated file is now encrypted and not plainText.| | |
-|[7.5.3 SP5](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=68215&readmeId=34904&pdtId=394)|OpenSSL updated to 1.0.2m-fips to fix security vulnerability.| |23/01/2018|
+|7.5.3 SP5|OpenSSL updated to 1.0.2m-fips to fix security vulnerability.| |23/01/2018|
 |                                                                                                               |JQuery updated to 2.2.4, to fix security vulnerability.| | |
 |                                                                                                               |commons-email updated to 1.5 to fix security vulnerability.| | |
-|[7.5.3 SP4](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=67207&readmeId=34311&pdtId=394)|Nimbus JOSE+JWT library updated to v4.41.2 to fix security vulnerability.| |06/11/2017|
+|7.5.3 SP4|Nimbus JOSE+JWT library updated to v4.41.2 to fix security vulnerability.| |06/11/2017|
 |                                                                                                               |RE version updated to v1.8u152 to fix security vulnerability.| | |
-|[7.5.3 SP3](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=66867&readmeId=34191&pdtId=394)| | |02/10/2017|
-|[7.5.3 SP2](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=66298&readmeId=33893&pdtId=394)|JSCH update to 0.1.54 to fix security vulnerabilities. | |31/07/2017|
-|[7.5.3 SP1](https://delivery.axway.int/GUI/file/GUI_file_readme.php?p93l6105cr4j87nrgp10c4jqj7&fileId=65525&readmeId=33421&pdtId=394)|JRE updated to v8u131 to fix security vulnerability. | |15/06/2017|
+|7.5.3 SP3| | |02/10/2017|
+|7.5.3 SP2|JSCH update to 0.1.54 to fix security vulnerabilities. | |31/07/2017|
+|7.5.3 SP1|JRE updated to v8u131 to fix security vulnerability. | |15/06/2017|
 |[7.5.3](https://docs.axway.com/bundle/APIGateway_753_ReleaseNotes_allOS_en_HTML5/page/Content/ReleaseNotesPortal/APIGateway_ReleaseNotes_allOS_en.htm)|Apache ActiveMQ updated to 5.14.3 to fix security vulnerabilities.| | 11/04/2017|
 |                                                                                                               |JSCH update to 0.1.54 to fix security vulnerabilities.|Sun Access Manager filters have been deprecated and will be removed in a future release.| |
 |                                                                                                               |owasp esapi updated to 2.1.0.1 to fix security vulnerabilities.|API Gateway Analytics is deprecated and will be removed in a future release. | |
