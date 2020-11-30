@@ -1,6 +1,7 @@
 {
-"title": "Build and run API Portal using Dockerfile",
+  "title": "Build and run API Portal using Dockerfile",
   "linkTitle": "Build and run using Dockerfile",
+  "draft": "true",
   "weight": "1",
   "date": "2019-08-09",
   "description": "Build an API Portal Docker image using the `Dockerfile` in the sample package."

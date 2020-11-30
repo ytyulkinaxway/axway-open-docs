@@ -18,15 +18,15 @@ Ideally, a standard IDE can be used to create a project and edit the files of a 
 
 Policy Studio is not supported for YAML configuration as yet. Making minor changes to an existing policy or other configuration using an IDE of your choice should be straightforward using an IDE with YAML syntax checking. The `yamles` validate option should also be used to check the validity of the configuration.
 
-Building a new complex policy without an existing YAML format example may prove challenging. One way to simplify this level of development would be to use the ES Explorer tool.
+Building a new complex policy without an existing YAML format example may prove challenging. One way to simplify this level of development would be to use the ES Explorer tool, or Policy Studio as follows:
 
-Otherwise you could still:
+* Use Policy Studio, or ES Explorer and develop the structure of the policy.
+* Export the policy to a configuration fragment.
+* Convert the XML configuration fragment to YAML using `yamles frag2yaml` command.
+* Import the YAML configuration fragment into your main YAML project using `yamles import` command.
+* Repeat the export, `frag2yaml` and `import` steps as many times as required to import all the required configuration into your main YAML configuration.
 
-* Use Policy Studio and develop the structure of the policy.
-* Convert that XML federated configuration to YAML in another directory using `yamles fed2yaml` command.
-* Copy the policy's YAML file from that conversion into your main YAML project.
-
-It is recommended to develop that new complex policy in an XML project that contains all the configuration you previously converted to YAML, so that you can reference other existing configuration. You will need to ensure all referenced entities that need to be resolvable can be resolved. This might mean copying other files into the YAML directory structure.
+It is recommended to develop a new complex policy in an XML project that contains all the configuration you previously converted to YAML, so that you can reference other existing configuration. You will need to ensure all referenced entities that need to be resolvable can be resolved eventually.
 
 ## Add a new certificate and private key to a YAML configuration
 

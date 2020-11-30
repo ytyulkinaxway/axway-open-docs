@@ -6,7 +6,7 @@
 "description": "Learn how entity types are described in a YAML configuration."
 }
 
-The `types.yaml` located under the `META-INF` directory of a YAML configuration contains the definition of all the entity types in the Entity Store model. An [entity type](/docs/apigtw_devguide/entity_store/#entity-types) is a description of an entity in the Entity Store.
+The `_types.yaml` located under the `META-INF` directory of a YAML configuration contains the definition of all the entity types in the Entity Store model. An [entity type](/docs/apigtw_devguide/entity_store/#entity-types) is a description of an entity in the Entity Store.
 
 The YAML Entity Store supports all entity types but custom types.
 
@@ -99,7 +99,7 @@ children:
 |   ?    |  0  |  1  |    No     |
 |   *    |  0  |  ∞  |    No     |
 
-## Navigate in Types.yaml
+## Navigate in _types.yaml
 
 To create a 'NetService' type
 

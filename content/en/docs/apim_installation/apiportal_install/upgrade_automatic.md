@@ -7,7 +7,7 @@
 }
 This section does not describe how to upgrade API Gateway. For information on upgrading API Gateway, see [API Gateway Upgrade Guide](/docs/apim_installation/apigw_upgrade/).
 
-You can use the [cumulative upgrade script](#upgrade-api-portal-using-the-cumulative-upgrade-script) to upgrade your 7.5.5 or 7.6.2 API Portal installation (including all service packs) directly to [7.7 July](/docs/apim_relnotes/20200730_apip_relnotes/), or you can upgrade versions incrementally:
+You can use the [cumulative upgrade script](#upgrade-api-portal-using-the-cumulative-upgrade-script) to upgrade your 7.5.5 or 7.6.2 API Portal installation (including all service packs) directly to [7.7 November](/docs/apim_relnotes/20201130_apip_relnotes/), or you can upgrade versions incrementally:
 
 | From   | To                                                                                                                                                   | Download Package                                                                                                                                       |
 | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -27,9 +27,9 @@ Before you upgrade your API Portal, complete the following prerequisites. These 
 
 ## Upgrade API Portal using the cumulative upgrade script
 
-If you have a **7.5.5** or **7.6.2** API Portal installation, you can upgrade directly to API Portal **7.7 July** by using the cumulative script, without having to install any other version before **7.7 July**.
+If you have a **7.5.5** or **7.6.2** API Portal installation, you can upgrade directly to API Portal **7.7 November 2020** by using the cumulative script.
 
-1. Download the [API Portal cumulative upgrade package](https://support.axway.com/en/downloads/download-details/id/1445191).
+1. Download [API Portal cumulative upgrade package](https://support.axway.com/en/search/index/type/Downloads/sort/created%7Cdesc/ipp/10/product/545/version/3036/subtype/44).
 2. Change to the directory where you saved the upgrade package, and extract it:
 
    ```

@@ -1,6 +1,7 @@
 {
   "title":"Customize API Portal topology in Docker",
   "linkTitle":"Customize API Portal topology",
+  "draft": "true",
   "weight":"3",
   "date":"2019-08-09",
   "description":"customize your Docker-based API Portal topology to suit your environment"

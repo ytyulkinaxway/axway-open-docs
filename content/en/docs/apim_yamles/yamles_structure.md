@@ -35,29 +35,28 @@ Any other file is ignored, YAML or not.
 
 ### Top level directories
 
-The root entity has many direct children. To sort them out, a first level of hierarchy has been setup. See [YAML Entity Store Directory Mapping](/docs/apim_yamles/apim_yamles_references/yamles_top_directories) for details.
+The root entity has many direct children. To sort them out, a first level of hierarchy has been setup. For more information, see [YAML Entity Store Directory Mapping](/docs/apim_yamles/apim_yamles_references/yamles_top_directories).
 
 | Policy Studio Hierarchy       | YAML configuration top level directory |
 | ----------------------------- | -------------------------------------- |
 | APIs                          | APIs                                   |
-| Deployment package properties | META-INF/*.mf                          |
-| Environment Configuration     |                                        |
-| Many of non-editable settings | System                                 |
 | Policies                      | Policies                               |
 | Resources                     | Resources                              |
 | Server Settings               | Server Settings                        |
-| Policy Studio Hierarchy       | YAML configuration top level directory |
-| External Connections        | External Connections                   |
-| Libraries                   | Libraries                              |
-| Listeners                   | Environment Configuration/Service      |
+| Environment Configuration     | Environment Configuration              |
+| - External Connections        |  - External Connections                   |
+| - Libraries                   |  - Libraries                              |
+| - Listeners                   |  - Environment Configuration/Services     |
+| Deployment package properties | META-INF/*.mf                          |
+| Many of non-editable settings | System                                 |
 
 ### META-INF
 
-The META-INF folder contains the `Types.yaml` file. This file contains the definition of all the entity types in the entity store model. This it is where you can find useful information about the fields you can use for an [entity type](/docs/apim_yamles/apim_yamles_references/yamles_types).
+The META-INF folder contains the `_types.yaml` file. This file contains the definition of all the entity types in the entity store model. This it is where you can find useful information about the fields you can use for an [entity type](/docs/apim_yamles/apim_yamles_references/yamles_types).
 
 ### _parent.yaml
 
-A `_parent.yaml` is a special type of file within the YAML entity store. It is an entity, but it is best described as a container entity. Its  purpose is to contain other child entities, hence the *parent* name. It is named `_parent.yaml` so it can be identified as a different file. Thus, every `.yaml` file at the same level are child entities of the entity defined in `_parent.yaml`.
+A `_parent.yaml` is a special type of file within the YAML entity store. It is an entity, but it is best described as a container entity. Its purpose is to contain other child entities, hence the *parent* name. Thus, every `.yaml` file at the same level are child entities of the entity defined in `_parent.yaml`.
 
 The directory in which `_parent.yaml` is stored is named after its content by default, but it can be named differently.
 
@@ -90,35 +89,52 @@ Children entities:
 * `System Metric Group Types.yaml`
 * `System Metric Types.yaml`
 
-A directory containing a `_parent.yaml` is a container for other entity.
+A directory containing a `_parent.yaml` is a container for other entities.
 
 ### Key fields
 
 Each entity in the entity store is identified by one or several key fields. For most types, it is a single field called "name". For others, it can be just one field, such as ID or URL, or a combination of several. For example, RadiusServer entity type has two key fields: "host" and "port".
 
-### Best practices
+### Default naming convention
 
 By default, after having converted your entity store to YAML:
 
 * A directory is named after the key field value in `_parent.yaml` contained in the directory. The key field is `name` in most of the cases.
-* A YAML file is named after the value of its key fields. In case of multiple key fields, it is concatenation of them separated by a coma.
+* A YAML file is named after the value of its key fields. In case of multiple key fields, it is a concatenation of them separated by coma.
 
-{{< alert title="Note">}}File system incompatible characters such as `/\":<>*?|` will be replaced by `_` (underscores).{{< /alert >}}
+Also, File system incompatible characters such as `/\":<>*?|` are replaced by counter parts:
 
-These are the good practices to name your entities and files:
+| Symbol | Replacement |
+|:------:|-------------|
+|  `/`   | (slash)     |
+|  `\`   | (bslash)    |
+|  `"`   | (quote)     |
+|  `:`   | (colon)     |
+|  `<`   | (lt)        |
+|  `>`   | (gt)        |
+|  `*`   | (asterisk)  |
+|  `?`   | (qmark)     |
+|  `|`   | (pipe)      |
 
-* Name your file after your entity. If it has several key fields, do your best to represent those key fields.
-* Use short but meaningful names. If a name exceeds 40 characters, the last part of the name will be replaced by a hash code.
-* Use only letters and numbers.
+For example, for entity type `JSONSchema` key field is `URL`. If the value of URL is `http://json-schema.org/address`, then:
 
-Sometimes you cannot respect the rules, and some key fields will contain forbidden characters. For example, for entity type `JSONSchema` key field is `URL`. If the value of URL is `http://json-schema.org/address`, then the YamlPK could be `/Resources/JSON Schemas/http://json-schema.org/address`.
+* The entity will be identified (YamlPK) with: `/Resources/JSON Schemas/http://json-schema.org/address`.
+* The entity will stored in `Resources/JSON Schemas/http(colon)(slash)(slash)json-schema.org(slash)address.yaml`
 
-The YAML entity store will handle this case as follows:
+See the [Yaml PK section](#yamlpk-and-references).
 
-* The file will be named `http_json-schema.org_address.yaml` (with `:` and `/` replaced by `_`).
-* The YamlPK is still valid even if it contains several `/`. It is used as a whole internally.
+### Best practices
 
-If your entity file is not named using the entity key fields, it will work. However, if the entity is modified by ES Explorer, or via the entity store API, your files will be renamed to use the default naming scheme, that is, the name of the entity or the concatenation of the key fields.
+The following are the good practices to name your entities:
+
+* Use short but meaningful names. Make sure to create names shorter than 40 symbols (Some systems do not supports it).
+* It is preferable to use only letters and numbers.
+* Name your file after your entity (in 95% if the cases, it is value of the field 'name').
+* File names for multiple key fields are rare, try to keep as meaningful as possible.
+
+Sometimes you cannot follow those best practices and some key fields will contain incompatible characters for a filename. You can follow the default convention mentioned above, or not but, make sure your YAML files name are close enough to the key fields values. By doing so, it will simplify troubleshooting, as you will easily find your files when the only piece of information you get is a YamlPK printed out in logs (Gateway, yamles validation, and so on).
+
+See the [Yaml PK section](#yamlpk-and-references).
 
 ## Entity files model
 

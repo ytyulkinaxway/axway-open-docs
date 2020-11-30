@@ -30,13 +30,13 @@ To convert your XML federated configuration to YAML:
 2. Convert the XML to YAML:
 
     ```
-    ./yamles fed2yaml -u federated:file:/home/user/apiprojects/test/configs.xml -o /path/to/yamles
+    ./yamles fed2yaml -s /home/user/apiprojects/test -o /path/to/yamles
     ```
 
 3. Validate the converted YAML configuration:
 
     ```
-    ./yamles validate -u yaml:file:/path/to/yamles
+    ./yamles validate -s /path/to/yamles
     ```
 
 For deployment to an API Gateway runtime, see [Packaging and deployment](/docs/apim_yamles/yamles_packaging_deployment/).

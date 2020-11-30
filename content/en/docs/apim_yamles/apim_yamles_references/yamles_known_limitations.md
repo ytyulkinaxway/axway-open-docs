@@ -20,44 +20,42 @@ Custom entity types are not supported in YAML configuration.
 
 ## Team development
 
-* Limited support of Team development.
-* No tooling support to look for merge conflicts.
-* Ordering of tar-level merges needs to be considered.
-* See [Team Development with YAML configuration](/docs/apim_yamles/apim_yamles_references/yamles_team_development) for details.
+* Support of Team development using `yamles import` command, where you must import each project one at a time.
+* No explicit support for project dependencies.
+* No explicit support to look for merge conflicts. You must use `_fragment.yaml` directives to manage it.
+
+For more information, see [Team development with YAML configuration](/docs/apim_yamles/apim_yamles_references/yamles_team_development).
 
 ## ES Explorer
 
 Support of ES Explorer is limited to viewing and editing YAML configurations.
 
-When an entity store is edited via ES Explorer or the entity store API, some fields in other entities might get reordered, creating more `diffs` than are really required.
+When an entity store is edited via ES Explorer or the entity store API, some fields in other entities might get reordered, creating more `diffs` than what was really modified.
 
-## Config Fragment
+## Config fragment
 
-There is no YAML equivalent of a configuration fragment for export or import purposes.
+* You can convert an XML configuration fragment to YAML.
+* You can view and edit the YAML configuration fragment in ES Explorer.
+* It is not yet possible to import or export YAML configuration fragments in ES Explorer, this can only be done using the `yamles` CLI.
+
+## Import of config fragment into environmentalized YAML configuration
+
+When you import a YAML configuration fragment into a YAML configuration using `yamles import`, the environmentalization settings (for example, `{{ db.host }}`) in entity YAML files are replaced with their resolved values if they can be resolved, or `invalid field`, if they cannot be resolved.
+
+We recommend you to avoid importing into YAML configurations that use environmentalization.
 
 ## Environmentalized key fields
 
 YAML configuration does not support environmentalized key fields.
 
-## Windows OS
-
-`yamles` CLI cannot run on Windows.
-
-To run on Windows:
-
-1. Create a Linux VM that runs on your Windows machine.
-2. Run the API Gateway installer on the Linux VM, and select the **Package & Deploy Tools** option to install client tooling only.
-
-The `yamles` CLI can then be used from the `apigateway/posix/bin` directory on your Linux VM.
-
-## API Gateway Group Instance
+## API Gateway group instance
 
 An API Gateway instance cannot be added to a group when the group has a YAML configuration deployed to it.
 
 ## Certificate
 
-Private keys are in external files in DER format.
-Certificates are in external files in PEM format, with the PEM header and footer lines removed.
+* Private keys are in external files in DER format.
+* Certificates are in external files in PEM format. The PEM header and footer lines removed.
 
 There is no support for either DER or PEM formats.
 
@@ -79,17 +77,17 @@ The YAML format supports API Manager. However, is not possible to run `setup-api
 The format of API Manager data stored in Cassandra is the same regardless of whether a YAML configuration or an XML federated configuration is deployed.
 {{< /alert >}}
 
-## Encrypt or change the passphrase of YAML Configuration that contains API Manager configuration
+## Encrypt or change the passphrase of YAML configuration that contains API Manager configuration
 
 When the default factory API Manager configuration is included in the YAML configuration it cannot be encrypted or re-encrypted. This issue occurs because some fields in the factory configuration do not adhere to the cardinality defined in the Entity Store model.
 
 This issue occurs when the `encrypt` or `change-passphrase` options are used in the `yamles` CLI tool, or when the group passphrase is changed through the `managedomain --change_passphrase` command.
 
-To workaround this, add values or a `/null` value for the missing fields.
+To workaround this, add values or a `/null` value, for the missing fields.
 
 ## Encrypt or change the passphrase of YAML Configuration that contains environmentalized settings
 
-When a YAML configuration with environmentalized settings is encrypted or re-encrypted, the resolved values are written into the YAML entity files when encryption completes. For example if my YAML policy file has the following content:
+When a YAML configuration with environmentalized settings is encrypted or re-encrypted, the resolved values are written into the YAML entity files after the encryption completes. For example, if a YAML policy file has the following content:
 
 ```yaml
 ---
@@ -107,7 +105,7 @@ children:
     name: Trace Filter
 ```
 
-after an encryption the file will get rewritten as follows (assuming the environment variable `TRACE_MESSAGE` is set and has a value `"The trace message"`):
+after the encryption the file will get rewritten as follows (assuming the environment variable `TRACE_MESSAGE` is set and its value is `"The trace message"`):
 
 ```yaml
 ---
@@ -141,16 +139,8 @@ YAML configuration for Analytics is not supported.
 
 ## YAML factory configuration
 
-A YAML factory configuration is not provided out-of-the-box, but can be created by converting the XML federated factory configuration using `yamles fed2yaml`.
+A YAML factory configuration is not provided out-of-the-box, but it can be created by converting the XML federated factory configuration using `yamles fed2yaml`.
 
 ## Deployment archive
 
 You can update the deployment archive package properties by choosing `option 22` of the `managedomain` script. For more information, see [Updating Deployment Archive Properties](/docs/apim_yamles/yamles_packaging_deployment/#updating-deployment-archive-properties).
-
-## Schema Validation filter
-
-In YAML format, when the XML Schema Validation filter uses multiple XML schemas to validate the message body, an issue will occur when the filter attempts to find the schema. To workaround, select one XML schema per Schema Validation filter.
-
-## Configuration containing `{{` in entity field values
-
-If your original XML federated configuration held the content `{{` in an entity field value, the converted YAML might fail to load in the API Gateway because of a `com.github.jknack.handlebars.HandlebarsException`. This could be the case if the field contains JSON. The error occurs as the YAML engine is interpreting the `{{` as the start of its envrionmentalization syntax. To workaround, edit the entity value by placing a whitespace between the curly brackets.
