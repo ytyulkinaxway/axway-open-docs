@@ -154,7 +154,7 @@ This section connects the agent to AMPLIFY Central and determines how to publish
 
 `environment`: The environment name you created when [preparing AMPLIFY Central](/docs/central/connect-api-manager/prepare-amplify-central/).
 
-`apiServerVersion`: The version of AMPLIFY Central API the agent is using. Default value is **v1alpha1**
+`apiServerVersion`: The version of AMPLIFY Central API the agent is using. Default value is **v1alpha1**.
 
 `mode`: The method to send endpoints back to Central. (publishToEnvironment = API Service, publishToEnvironmentAndCatalog = API Service and Catalog asset).  
 
@@ -334,7 +334,7 @@ The log section defines how the agent is managing its logs.
 
 `output`: The output for the log lines (stdout, file, both). Default value is **stdout**.
 
-`maskedValues` : Comma-separated list of keywords to identify within the agent config, which is used to mask its corresponding sensitive data. Keywords are matched by whole words and are case-sensitive. Displaying of agent config to the console requires that the log.level be at debug (level: debug)
+`maskedValues` : Comma-separated list of keywords to identify within the agent config, which is used to mask its corresponding sensitive data. Keywords are matched by whole words and are case-sensitive. Displaying of agent config to the console requires that the log.level be at debug (level: debug).
 
 Once all data is gathered, this section should look like:
 
@@ -346,7 +346,7 @@ log:
   maskedValues: keyword1, keyword2, keyword3
 ```
 
-See [Set up agent configuration](/docs/central/connect-api-manager/agent-variables/) for more options
+See [Set up agent configuration](/docs/central/connect-api-manager/agent-variables/) for more options.
 
 #### Validating your custom Discovery Agent configuration file
 
@@ -875,6 +875,27 @@ output.traceability:
       - "ECDHE-RSA-AES-256-GCM-SHA384"
    pipelining: 0
 #   proxy_url: socks5://username:password@hostname:port
+```
+
+#### Customizing beat queuing section (queue)
+
+The queue section defines the internal Filebeat queue to store events before publishing them. The queue is responsible for buffering and combining events into batches that can be consumed by the outputs. The outputs use bulk operations to send a batch of events in one transaction.
+
+`QUEUE_MEM_EVENTS`: Number of events the queue can store (2048 by default).
+
+`QUEUE_MEM_FLUSH_MINEVENTS`: Minimum number of events required for publishing. If this value is set to 0, the output starts publishing events without additional waiting times. Otherwise, the output must wait for more events to become available (100 by default).
+
+`QUEUE_MEM_FLUSH_TIMEOUT`: Maximum wait time for `QUEUE_MEM_FLUSH_MINEVENTS` to be fulfilled (1 second by default). If set to 0s, events are immediately available for consumption.
+
+Once all data is gathered, this section should look like:
+
+```yaml
+queue:
+  mem:
+    events: ${QUEUE_MEM_EVENTS:2048}
+    flush:
+      min_events: ${QUEUE_MEM_FLUSH_MINEVENTS:100}
+      timeout: ${QUEUE_MEM_FLUSH_TIMEOUT:1s}
 ```
 
 #### Customizing log section (logging)
