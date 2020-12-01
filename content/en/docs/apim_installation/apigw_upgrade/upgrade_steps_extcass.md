@@ -253,7 +253,7 @@ The upgrade of a multi-node-node environment, in general, involves performing th
 1. [Install API Gateway 7.7 on each node](#step-1---install-api-gateway-77-on-each-node).
 2. [Update and check the new installation on each node](#step-2---update-and-check-the-new-installation-on-each-node).
 3. [Export the data from the old installation and upgrade it on each node](#step-3---export-the-data-from-the-old-installation-and-upgrade-it-on-each-node).
-4. [Apply the upgraded data to the new installation on the first Admin Node Manager](##step-4---apply-the-upgraded-data-to-the-new-installation-on-the-first-admin-node-manager).
+4. [Apply the upgraded data to the new installation on the first Admin Node Manager](#step-4---apply-the-upgraded-data-to-the-new-installation-on-the-first-admin-node-manager).
 5. [Apply the upgraded data to the new installation on the other nodes](#step-5---apply-the-upgraded-data-to-the-new-installation-on-the-other-nodes).
 6. [Verify the multi-node upgrade](#step-6---verify-the-multi-node-upgrade).
 
