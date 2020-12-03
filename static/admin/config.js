@@ -381,7 +381,7 @@ const collections = [{
   folder: 'content/en/blog/friends',
 }];
 
-const cms_branch = window.location.hostname.includes('develop') ? 'develop' : 'master';
+const cms_branch = window.location.hostname.includes('developJan21') ? 'developJan21' : 'master';
 
 const config = {
   backend: {
