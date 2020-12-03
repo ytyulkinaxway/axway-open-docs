@@ -28,14 +28,18 @@ Learn how to quickly install and run your Discovery and Traceability agents with
 
 More information is available at [Install AMPLIFY Central CLI](/docs/central/cli_central/cli_install/).
 
-## Installing the agents
+## Install the agents
 
-### Step 1: Identify yourself to AMPLIFY platform with AMPLIFY CLI
+### Step 1: Folder preparation
 
-To use Central CLI to log in with your AMPLIFY Platform credentials, run the following command and use `apicentral` as the client identifier:
+Create an empty directory where AMPLIFY CLI will generate files. Run all AMPLIFY Central CLI from this directory.
+
+### Step 2: Identify yourself to AMPLIFY Platform with AMPLIFY CLI
+
+To use Central CLI to log in with your AMPLIFY Platform credentials, run the following command:
 
 ```shell
-amplify auth login --client-id apicentral
+amplify auth login
 ```
 
 A browser will automatically open.
@@ -45,7 +49,7 @@ If you are a member of multiple AMPLIFY organizations, you may have to choose an
 
 {{< alert title="Note" color="primary" >}}If you do not have a graphical environment, forward the display to an X11 server (Xming or similar tools) using the `export DISPLAY=myLaptop:0.0` command .{{< /alert >}}
 
-### Step 2: Running the agents' install procedure
+### Step 3: Run the agents' install procedure
 
 Agents will be installed in the directory from where the CLI runs. You can install the agent from anywhere, but then you must transfer the agent and its configuration to the API Management system machine for the agent to operate correctly.
 
@@ -83,17 +87,15 @@ Once you have answered all questions, the agents are downloaded, the configurati
 The current directory should contain the following files:
 
 ```shell
-discovery_agent
-discovery_agent.yml
-traceability_agent
-traceability_agent.yml
+discovery_agent           *Binary deployment only
+discovery_agent.yml       *Binary deployment only
+traceability_agent        *Binary deployment only
+traceability_agent.yml    *Binary deployment only
 da_env_vars.env
 ta_env_vars.env
-private_key.pem
-public_key.pem
+private_key.pem           *Only present if a new service account is created
+public_key.pem            *only present if a new service account is created
 ```
-
-`discovery_agent` / `discovery_agent.yml` / `traceability_agent` / `traceability_agent.yml` files will be present only if you choose the binary mode installation.
 
 `da_env_vars.env` / `ta_env_vars.env` contains the specific configuration you entered during the installation procedure.
 
@@ -101,7 +103,7 @@ public_key.pem
 
 `private_key.pem` and `public_key.pem` are the generated key pair the agent will use to securely talk with the AMPLIFY Platform (if you choose to let the installation generate them).
 
-## Starting the agents
+## Start the agents
 
 ### Binary mode
 
@@ -133,6 +135,184 @@ Traceability Agent:
 
 ```shell
 docker run -it --env-file $(pwd)/ta_env_vars.env -v $(pwd):/keys -v EVENT_LOG_PATH_ENTERED_DURING_INSTALLATION:/events axway-docker-public-registry.bintray.io/agent/v7-traceability-agent:latest
+```
+
+### Linux Service mode for binary agent
+
+The agent can be installed as a Linux service with systemd. The following commands will help you utilize the service. These commands install the service abilities and must be run as a root user.
+
+When running as a service, it is best to save your logging to a file rather than the console output. See [Customizing log section (log)](/docs/central/connect-api-manager/gateway-administration#customizing-log-section-log).
+
+* Install the services and execute it as user axway and group axway:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service install -u axway -g axway --envFile /path/to/da_env_file.env
+  sudo ./traceability_agent service install -u axway -g axway --envFile /path/to/ta_env_file.env
+  ```
+
+* Start the services:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service start
+  sudo ./traceability_agent service start
+  ```
+
+* Read service logs, since the machine last booted:
+
+  ```shell
+  cd /home/APIC-agents
+  ./discovery_agent service logs
+  ./traceability_agent service logs
+  ```
+
+* Stop the services:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service stop
+  sudo ./traceability_agent service stop
+  ```
+
+* Enable the services to start when the machine starts:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service enable
+  sudo ./traceability_agent service enable
+  ```
+
+* Get service name:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service name
+  sudo ./traceability_agent service name
+  ```
+
+* Uninstall the services from the machine:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service stop   # to ensure it is not running
+  sudo ./discovery_agent service remove
+  sudo ./traceability_agent service stop   # to ensure it is not running
+  sudo ./traceability_agent service remove
+  ```
+
+## Check that agents are running
+
+### Use the agent status command
+
+Discovery agent:
+
+  ```shell
+  cd /home/APIC-agents
+  ./discovery_agent --status
+  ```
+
+An empty result means the agent is not running; otherwise, you should receive this result:
+
+```shell
+/home/APIC-agents$ ./discovery_agent --status
+{
+  "name": "discovery_agent",
+  "version": "0.0.19-658ebd93",
+  "status": "OK",
+  "statusChecks": {
+    "apimanager": {
+      "name": "API Manager",
+      "endpoint": "apimanager",
+      "status": {
+        "result": "OK"
+      }
+    },
+    "central": {
+      "name": "AMPLIFY Central",
+      "endpoint": "central",
+      "status": {
+        "result": "OK"
+      }
+    }
+  }
+}
+```  
+
+Traceability agent:
+
+  ```shell
+  cd /home/APIC-agents
+  ./traceability_agent --status
+  ```
+
+An empty result means the agent is not running; otherwise, you should receive this result:
+
+```shell
+/home/APIC-agents$ ./traceability_agent status
+{
+  "name": "traceability_agent",
+  "version": "0.0.19-658ebd93",
+  "status": "OK",
+  "statusChecks": {
+    "apimanager": {
+      "name": "API Manager",
+      "endpoint": "apimanager",
+      "status": {
+        "result": "OK"
+      }
+    },
+    "apigateway": {
+      "name": "API Gateway",
+      "endpoint": "apigateway",
+      "status": {
+        "result": "OK"
+      }
+    },
+    "central": {
+      "name": "AMPLIFY Central",
+      "endpoint": "central",
+      "status": {
+        "result": "OK"
+      }
+    }
+  }
+}
+```
+
+### Use the agent service status command
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service status
+  sudo ./traceability_agent service status
+  ```
+
+### Use AMPLIFY Central CLI
+
+After being authenticated to the plaform with `amplify auth login` command, run the following:
+
+* `amplify central get edgeda` to get all discovery agent information.
+* `amplify central get edgeta` to get all traceability agent information.
+
+The STATUS column will help you identify which agent is running.
+
+```shell
+C:\Demos>amplify central get edgeda
+√ Resource(s) successfully retrieved
+
+NAME                                       STATUS   AGE             SCOPE KIND   SCOPE NAME
+EdgeDiscoveryAgent/cli-1607014956109       started  26 minutes ago  Environment  pre-prod
+EdgeDiscoveryAgent/lbean018-discovery      stopped  2 months ago    Environment  prod
+```
+
+```shell
+C:\Demos>amplify central get edgeta
+√ Resource(s) successfully retrieved
+
+NAME                                             STATUS   AGE             SCOPE KIND   SCOPE NAME
+EdgeTraceabilityAgent/cli-1607014956731          started  30 minutes ago  Environment  pre-prod
+EdgeTraceabilityAgent/lbean018-traceability      stopped  2 months ago    Environment  prod
 ```
 
 See [Administer API Gateway](/docs/central/connect-api-manager/gateway-administation/) for additional information about agent features.
