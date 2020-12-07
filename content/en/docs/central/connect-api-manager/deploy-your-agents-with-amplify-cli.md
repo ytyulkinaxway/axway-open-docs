@@ -81,6 +81,8 @@ The installation procedure will prompt for the following:
    * **port** of the API Gateway (8090 by default)
    * user/password
    * event log path
+7. Traceability module connectivity:
+   * Traceability Agent protocol (Lumberjack (tcp) by default)
 
 Once you have answered all questions, the agents are downloaded, the configuration files are updated, the Amplify Central resources are created and the key pair is generated (if you chose to create a new service account).
 
