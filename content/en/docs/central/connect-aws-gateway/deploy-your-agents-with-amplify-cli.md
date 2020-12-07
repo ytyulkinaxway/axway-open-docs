@@ -106,6 +106,8 @@ The installation procedure prompts for the following:
    * **Traceability Agent Log Group** defaulted to `amplify-traceability-agent-logs`, the log group the Traceability Agent will use
    * **SSM Private Key Parameter** defaulted to `AmplifyPrivateKey`, the Parameter Name in AWS SSM where the Amplify Private key is stored
    * **SSM Public Key Parameter** defaulted to `AmplifyPublicKey`, the Parameter Name in AWS SSM where the Amplify Public key is stored
+4. Traceability module connectivity:
+   * Traceability Agent protocol (Lumberjack (tcp) by default)
 
 Once you have answered all questions, the cloud formation templates are downloaded and pre-configured, the agents' configuration files are updated, the Amplify Central resources are created and the key pair is generated (if you chose to create a new service account).
 
