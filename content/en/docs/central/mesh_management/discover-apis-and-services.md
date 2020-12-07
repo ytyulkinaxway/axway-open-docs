@@ -6,11 +6,11 @@ date: 2020-11-19
 description: Learn how to configure the Axway mesh agents to discover your APIs
   and services.
 ---
-{{< alert title="Public beta" color="warning" >}}This is a preview of the new mesh discovery agents that run separately from the current mesh governance agents, which provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they allow for updated visibility to the mesh discovery process.{{< /alert >}}
+{{< alert title="Early Preview" color="warning" >}}This is a preview of the new mesh discovery agents that run separately from the current mesh governance agents, which provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they allow for updated visibility to the mesh discovery process.{{< /alert >}}
 
 ## Before you begin
 
-* You must [deploy your agents with AMPLIFY CLI](/docs/central/connect-api-manager/deploy-your-agents-with-amplify-cli/).
+* Before you start you must follow the article [deploy your agents with the AMPLIFY CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli). This will show you how to use the CLI to install the Mesh agents into your Kubernetes cluster. It will also create default resources to discover the demo service that gets deployed as part of the walkthrough. This article will reference the resources created from the previous article.
 
 ## Prerequisites
 
@@ -68,8 +68,8 @@ When a pod or service is deleted in Kubernetes, the agents check if the deleted 
 The discovery agents use five resources:
 
 1. **K8SCluster** - Represents a Kubernetes cluster.
-2. **`ResourceDiscovery`** - Configuration for the RDA for discovering pods and services in a Kubernetes cluster. It is scoped to a K8SCluster.
-3. **`SpecDiscovery`** - Configuration for the ADA to discover API documentation exposed over an HTTP endpoint. It is scoped to a K8SCluster
+2. **ResourceDiscovery** - Configuration for the RDA for discovering pods and services in a Kubernetes cluster. It is scoped to a K8SCluster.
+3. **SpecDiscovery** - Configuration for the ADA to discover API documentation exposed over an HTTP endpoint. It is scoped to a K8SCluster
 4. **APISpec** - A resource created by the ADA to represent unique API documentation found in a cluster. The same documentation may be found across multiple pods, especially if you are running multiple instances of one pod. One APISpec is created for one unique documentation found in a cluster. If multiple pods expose the same documentation, they will be grouped together in one APISpec. APISpecs are scoped to a K8SCluster and have a reference to a `SpecDiscovery`. APISpecs are created by the ADA as a response to finding a pod that exposes documentation as described by the `SpecDiscovery`.
 5. **K8SResource** - A resource created by the RDA that represents a pod or service discovered in Kubernetes. The K8SResource is scoped to a K8SCluster, and it has a reference to a ResourceDiscoverry. K8SResources are created by the RDA as a response to finding a pod or service that meets the match criteria described by the `ResourceDiscovery`.
 
@@ -81,7 +81,7 @@ Run the following command to log into the Central CLI with your AMPLIFY Platform
 amplify auth login --client-id apicentral
 ```
 
-A dialog box will automatically open. Enter your valid credentials (email address and password), and after the **Authorization Successful** message is displayed, go back to the AMPLIFY CLI.
+A dialog box is shown. Enter your valid credentials (email address and password), and after the authorization successful message is displayed, go back to the AMPLIFY CLI.
 
 If you are a member of multiple AMPLIFY organizations, select an organization and continue.
 
@@ -275,7 +275,7 @@ To create a `SpecDiscovery`, follow these steps:
         - template: docpath.apicentral.io/{{.Port.Name}}
     ```
 
-2. Update the `metadata.scope.name` field to reflect the same name given to the K8SCluster created either on section [Create a K8SCluster](#Create-a-K8SCluster) or [Deploy your agents with AMPLIFY CLI](/docs/central/connect-api-manager/deploy-your-agents-with-amplify-cli/). This links the `SpecDiscovery` to the K8SCluster. To verify the K8SCluster name that is being used for the ADA, run:
+2. Update the `metadata.scope.name` field to reflect the same name given to the K8SCluster. This links the `SpecDiscovery` to the K8SCluster. To verify the K8SCluster name that is being used for the ADA, run:
 
     ```bash
     ~ » kubectl set env deployment/apic-hybrid-ada --list -n apic-control | grep CLUSTERNAME
@@ -361,7 +361,7 @@ Follow these steps to discover the pod:
     ✔ "specdiscovery/sunset-discovery" has successfully been created.
     ```
 
-6. After creating the new `SpecDiscovery`, run the following command to see two SpecDiscoveries. The `sunset-discovery` `SpecDiscovery` is the resource that will be used to find the documentation from the `sunset` pod. The other `SpecDiscovery`, beginning with `cli-`, has been previously created on section [Deploy your agents with AMPLIFY CLI](/docs/central/connect-api-manager/deploy-your-agents-with-amplify-cli/).
+6. After creating the new `SpecDiscovery`, run the following command to see two SpecDiscoveries. The `sunset-discovery` is the resource that will be used to find the documentation from the `sunset` pod.
 
     ```bash
     ~ » amplify central get specdiscoveries -s mesh-env
@@ -389,7 +389,7 @@ Follow these steps to discover the pod:
     sunsetapp100swagger  a few seconds ago  Sunset App  K8SCluster  mesh-env
     ```
 
-If you see an APISpec named `sunsetapp100swagger` scoped to your K8SCluster, then you have successfully configured the ADA to search your Kubernetes cluster for pods exposing documentation. The `sunset` app documentation will now be visible in AMPLIFY Central. The APISpec named `mylist100swagger` came from the `SpecDiscovery` that matched the `apic-hybrid-list` pod running in the `apic-demo` namespace as part of the [Deploy your agents with AMPLIFY CLI](/docs/central/connect-api-manager/deploy-your-agents-with-amplify-cli/) section.
+If you see an APISpec named `sunsetapp100swagger` scoped to your K8SCluster, then you have successfully configured the ADA to search your Kubernetes cluster for pods exposing documentation. The `sunset` app documentation will now be visible in AMPLIFY Central.
 
 ## Defining a pod annotation
 
@@ -523,7 +523,7 @@ Follow these steps to configure a resource discovery agent:
           discover: 'true'
     ```
 
-2. Update the `metadata.scope.name` field to reflect the same name given to the K8SCluster created in section [Create a K8SCluster](#Create-a-K8SCluster), or the K8SCluster created on [Deploy your agents with AMPLIFY CLI](/docs/central/connect-api-manager/deploy-your-agents-with-amplify-cli/) section. This links the ResourceDiscoveries to the K8SCluster. To verify the K8SCluster name that is being used for the ADA, run:
+2. Update the `metadata.scope.name` field to reflect the same name given to the K8SCluster. This links the ResourceDiscoveries to the K8SCluster. To verify the K8SCluster name that is being used for the ADA, run:
 
     ```bash
     ~ » kubectl set env deployment/apic-hybrid-rda --list -n apic-control | grep CLUSTERNAME
@@ -624,4 +624,4 @@ service.sunset-demo.sunset                       a few seconds ago  sunset-servi
 service.apic-demo.apic-hybrid-list               an hour ago        service-cli-1605565746103  K8SCluster  mesh-env
 ```
 
-If you see two K8SResources that include the name `sunset-demo` that are scoped to your K8SCluster, then you have successfully configured the RDA to search your Kubernetes cluster for pods and services based on your own configuration in your ResourceDiscoveries. The K8SResources that contain  `apic-demo` in their names came from the `ResourceDiscovery` that matched the `apic-hybrid-list` pod and service running in the `apic-demo` namespace as part of the [Deploy your agents with AMPLIFY CLI](/docs/central/connect-api-manager/deploy-your-agents-with-amplify-cli/) section.
+If you see two K8SResources that include the name `sunset-demo` that are scoped to your K8SCluster, then you have successfully configured the RDA to search your Kubernetes cluster for pods and services based on your own configuration in your ResourceDiscoveries.
