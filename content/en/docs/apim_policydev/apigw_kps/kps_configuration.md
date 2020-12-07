@@ -1,9 +1,9 @@
 {
 "title": "Configure KPS in Policy Studio",
-"linkTitle": "Configure in Policy Studio",
-"weight":"40",
-"date": "2020-01-06",
-"description": "Define general KPS configuration in Policy Studio."
+  "linkTitle": "Configure in Policy Studio",
+  "weight": "40",
+  "date": "2020-01-06",
+  "description": "Define general KPS configuration in Policy Studio."
 }
 
 For details on data source-specific configuration, see the following topics:
@@ -56,7 +56,11 @@ A KPS collection has one active data source associated with it. All tables in t
 
 ## KPS table structure
 
-When creating a table, you must define the structure of the data that is stored in that table. This consists of property (column) names and types. You can choose from the following types:
+When creating a KPS table, you must define the structure of the data that is stored in that table. This consists of property (column) names and types.
+
+Do not use just `key` as the property (column) name, because this causes deployment errors.
+
+You can choose from the following types:
 
 | Property  | Type |
 | --- | --- |
@@ -64,7 +68,18 @@ When creating a table, you must define the structure of the data that is stored 
 |`List` | Java List of any one of the above Java types.|
 |`Map` | Java Map. The key can be any one of the above Java types. The value can be any one of the above Java types.|
 
-{{< alert title="Note" color="primary" >}}Do not use just `key` as the property (column) name, because this causes deployment errors.{{< /alert >}}
+### Edit the structure of an existing KPS table
+
+You cannot edit the structure of a KPS table that already exists in Cassandra. If you attempt to do so, you will find out that the structure of the KPS table has not changed.
+
+To edit the structure of an existing KPS table:
+
+1. Modify the alias of the old table.
+2. Create a new table with the desired schema and the original alias.
+3. Deploy the configuration.
+4. Transfer the data.
+
+If your only change was to add new properties to the KPS table, you can make a `kpsadmin` backup of the table prior to modifying the alias, then restore the data from that backup after.
 
 ## Query tables using properties and keys
 
