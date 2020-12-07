@@ -25,9 +25,9 @@ Connect your API Management system (v7.6.2 or above) to AMPLIFY Central by using
 
 The Discovery Agent is used to discover new published APIs. The Discovery Agent pushes both REST and SOAP API definitions to AMPLIFY Central.
 
-The Discovery Agent discovers APIs that have PassTrough / API Key / OAuth security only.
+If the Discovery Agent discovers an API where the inbound security is not set to PassThrough / API Key / OAuth, the correlating catalog asset will not be created. Discovered APIs that do not have the correct inbound security will only be available in the environment.
 
-The related APIs are published to AMPLIFY Central in either disconnected mode (catalog item publication) or connected mode (Environment / API Service publication and optionally as Catalog item). For additional information, see [Discovery Agent](/docs/central/connect-api-manager/deploy-your-agents/#discovery-agent).
+The related APIs are published to AMPLIFY Central either as an API Service in environment or an API Service in environment and optionally as Catalog item (default behavior). For additional information, see [Discovery Agent](/docs/central/connect-api-manager/deploy-your-agents/#discovery-agent).
 
 ![Service Discovery](/Images/central/connect-api-manager/servicediscoveryapim.png)
 
