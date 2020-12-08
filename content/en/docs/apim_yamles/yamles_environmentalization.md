@@ -15,7 +15,7 @@ YAML environmentalization capabilities can be applied to:
 * All entities.
 * The value of a field. This is possible for all types of fields: numeric, string, references, passwords.
 * Part of the value of a string.
-* Some or all of the content in externalized files such as Scripts, Messages, and JSON Schemas. For more information, see **Environmentalization possible inside file content** column of the [Externalized files naming Scheme](/docs/apim_yamles/yamles-externalized_files#externalized-files-naming-scheme) table.
+* Some or all of the content in externalized files such as Scripts, Messages, and JSON Schemas. For more information, see **Environmentalization possible inside file content** column of the [Externalized files naming Scheme](/docs/apim_yamles/yamles-externalized_files/#externalized-files-naming-scheme) table.
 
 The following table describes all of the supported environmentalization options for the YAML format:
 

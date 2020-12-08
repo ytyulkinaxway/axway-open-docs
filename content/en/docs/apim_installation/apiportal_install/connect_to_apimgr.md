@@ -24,7 +24,7 @@ To connect API Portal to API Manager:
 
 API Portal is now connected to API Manager.
 
-To log into API Portal you must have a user configured in API Manager. For more information, see [Manage users](/docs/apim_administration/apimgr_admin/api_mgmt_admin/index.html#manage-users). Note that, by default, only users with **Organization administrator** or **User** roles are allowed to login to API Portal.
+To log into API Portal you must have a user configured in API Manager. For more information, see [Manage users](/docs/apim_administration/apimgr_admin/api_mgmt_admin/#manage-users). Note that, by default, only users with **Organization administrator** or **User** roles are allowed to login to API Portal.
 
 ## Connect API Portal to multiple API Managers
 

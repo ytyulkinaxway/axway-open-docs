@@ -10,7 +10,7 @@
 
 * Install or upgrade an existing system to [API Gateway version v7.7.0-20200930](/docs/apim_relnotes/20200930_apimgr_relnotes/).
 * Run client tools on a linux-based system.
-* Before converting your XML federated configuration you must upgrade it using [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics/#upgradeconfig-options) or [projupgrade](docs/apim_reference/devopstools_ref/#projupgrade-command-options).
+* Before converting your XML federated configuration you must upgrade it using [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics/#upgradeconfig-options) or [projupgrade](/docs/apim_reference/devopstools_ref/).
 
 ## Convert XML federated configuration to YAML
 

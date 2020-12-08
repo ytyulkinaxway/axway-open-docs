@@ -82,7 +82,7 @@ Select this option to customize which components are installed. You can install 
 
 #### QuickStart tutorial
 
-The **Standard** and **Complete** setup types install the QuickStart tutorial by default, or you can select to install it during the **Custom** setup type. This installs a preconfigured domain and API Gateway instance. If you do not install the QuickStart tutorial, you must configure a domain and API Gateway instance when the installation is complete. For more details, see [Initial configuration](/docs/apim_installation/apigtw_install/post_overview##initial-configuration).
+The **Standard** and **Complete** setup types install the QuickStart tutorial by default, or you can select to install it during the **Custom** setup type. This installs a preconfigured domain and API Gateway instance. If you do not install the QuickStart tutorial, you must configure a domain and API Gateway instance when the installation is complete. For more details, see [Initial configuration](/docs/apim_installation/apigtw_install/post_overview/#initial-configuration).
 
 Click **Next** to continue.
 

@@ -76,7 +76,7 @@ The prerequisites for the node on which you intend to run the `zdupgrade` script
 
 * You must use the same operating system on the control node and the remote nodes.
 * You must install Python 2.6 or later (Python 2.7 recommended) and the `pip` package manager. For more details, see the [Python documentation](https://www.python.org/doc/). We recommend that you do not install Python under a path that contains spaces.
-* On Linux, you must install cryptography dependencies. For more details, see the [Cryptography.io](https://cryptography.io/en/latest/installation/).
+* On Linux, you must install cryptography dependencies. For more details, see [Cryptography Installations](https://cryptography.io/en/latest/installation.html).
 * You must install the `paramiko` and `enum34` Python modules and their dependencies.
 * You must download and install the ZDU sample script package from [Axway Support](https://support.axway.com/).
 * You must have an RSA key for password-less login to the remote nodes over SSH. For more information, see [Configure SSH server](#configure-ssh-server).

@@ -9,7 +9,7 @@ description: Learn how your DevOps process can use AMPLIFY Central CLI to build
 
 ## Before you start
 
-* You will need to [authorize your DevOps service to use the DevOps API](/docs/central/cli_getstarted/)
+* You must [authorize your DevOps service to use the DevOps API](/docs/central/cli_central/cli_install/#authorize-your-cli-to-use-the-amplify-central-apis)
 * Verify the @axway/amplify-central-cli version is at minimum 0.1.3.
 
 ## Objectives
@@ -59,7 +59,7 @@ Optional flags:
 -f, --file = (filename.yml, filename.yaml, filename.json)
 ```
 
-Try out the [create_environments.json](https://axway-open-docs.netlify.app/samples/central/create_environments.json) or [create_environments.yaml](https://axway-open-docs.netlify.app/samples/central/create_environments.yaml) samples to create an environment.
+Try out the [create_environments.json](/samples/central/create_environments.json) or [create_environments.yaml](/samples/central/create_environments.yaml) samples to create an environment.
 
 ## Retrieve a list of all available environments
 

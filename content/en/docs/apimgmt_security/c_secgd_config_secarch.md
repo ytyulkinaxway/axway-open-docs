@@ -23,4 +23,4 @@ The diagram includes the following components:
 
 The following diagram shows the API Portal architecture from a security perspective. The legend explains the security level on connections (SSL by default, always SSL, can be SSL, and so on) and on data storage (signed or encrypted).
 
-![Configuration architecture for API Portal](/Images/APIPortal/API%20Portal_security_arch.png)
+![Configuration architecture for API Portal](/Images/APIPortal/api_portal_security_architecture.png)
