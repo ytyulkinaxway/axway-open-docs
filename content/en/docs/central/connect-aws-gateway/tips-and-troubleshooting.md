@@ -3,7 +3,10 @@ title: Get help with Connected AWS Gateway
 linkTitle: Get help with Connected AWS Gateway
 draft: false
 weight: 100
-description: This section provides troubleshooting, known limitations and	restrictions that you may encounter while you are working with the connected managed environment for AWS API Gateway within AMPLIFY Central. It also provides tips you may find useful when working with this environment.
+description: This section provides troubleshooting, known limitations
+  and	restrictions that you may encounter while you are working with the
+  connected managed environment for AWS API Gateway within AMPLIFY Central. It
+  also provides tips you may find useful when working with this environment.
 ---
 
 ## Troubleshooting
@@ -53,6 +56,10 @@ description: This section provides troubleshooting, known limitations and	restri
 | 1304   | no email template found for action                                                                          | See [Manage subscription workflow](/docs/central/connect-aws-gateway/subscription-for-the-consumer/) for the SMTP template settings                                                                                                                                    |
 | 1305   | error sending email to SMTP server                                                                          | See [Manage subscription workflow](/docs/central/connect-aws-gateway/subscription-for-the-consumer/) for the SMTP settings                                                                                                                                             |
 | 1401   | error parsing configuration values, check the config referenced in error                                                                | See [Deploy agents - advanced functionality](/docs/central/connect-aws-gateway/deploy-your-agents-1/)                                                                                             |
+| 1402   | error in overriding configuration using file with environment variables                                                                | See [Deploy your agents - advanced functionality](/docs/central/connect-api-manager/deploy-your-agents/). Make sure the env_vars file exists and is properly formatted                                                                                               |
+| 1403   | invalid value for statusHealthCheckPeriod. Value must be between 1 and 5 minutes                                                       | See [Deploy your agents - advanced functionality](/docs/central/connect-api-manager/deploy-your-agents/). Make sure the env_vars file exists and is properly formatted                                                                                               |
+| 1404   | invalid value for statusHealthCheckInterval. Value must be between 30 seconds and 5 minutes                                           | See [Deploy your agents - advanced functionality](/docs/central/connect-api-manager/deploy-your-agents/). Make sure the env_vars file exists and is properly formatted                                                                                               |
+| 1405   | a key file could not be read                          | On Linux, give the User ID in the container read access to the file. `setfacl -m u:2500:r private_key.pem`                                                                                               |
 | 1410 | invalid configuration settings for the logging setup                                                        | See [Set up agent configuration](/docs/central/connect-aws-gateway/deploy-your-agents-1/) for logging configuration options            |
 | 1501   | failed to publish events                                                                                    | See [Administer AWS Gateway network traffic](/docs/central/connect-aws-gateway/network-traffic-aws/)                                                                                                                                                            |
 | 1502   | error closing connection with Condor                                                                        | Likely a timeout error, processing will retry automatically                                                                                                                                                                                                                                                                        |
