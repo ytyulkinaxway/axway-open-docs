@@ -22,10 +22,6 @@ API Portal is available as a software installation or a virtualized deployment i
 
 To expand compliance with many customers internal security guidelines, which discourage or disallow root access, we have added the ability to install and run API Portal using `sudo` commands.​ To learn more, watch [How to install API Portal without being a root user](https://www.youtube.com/watch?v=H5RZjP9Zl7k&list=PLSlCpG9zsECpo8-JMZ2Cx4REDyUvpwy9v)​.
 
-### Easy upgrade from 7.5.5 and 7.6.2
-
-With end of support for API Portal 7.5.5 and 7.6.2 looming in November 2020, we are looking at ways to help customers make the jump to the latest 7.7 update.​ The `apiportal_cumulative_upgrade.sh` is a cumulative script that you can use to upgrade an environment from 7.5.5 or 7.6.2 directly to the latest 7.7 update​. See [Cumulative upgrade script](/docs/apim_installation/apiportal_install/upgrade_automatic/#upgrade-api-portal-using-the-cumulative-upgrade-script).
-
 ### CentOS 8​ support
 
 We have expanded official support to include CentOS 8 for the standalone (non-docker) installation of API Portal.
