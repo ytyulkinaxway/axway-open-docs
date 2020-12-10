@@ -33,7 +33,7 @@ To configure the API Gateway connection to the metrics database, perform the fol
 1. Expand the **Environment Configuration > External Connections > Database Connections** node in the Policy Studio tree.
 2. Right-click the **Default Database Connection** tree node, and select **Edit**.
 3. Configure the database connection to point to your metrics database.
-4. Verify that your database connection is configured correctly by clicking the **Test Connection** button on the **Configure Database Connection** dialog. This step requires network connectivity between the machine running Policy Studio and the database server.
+4. Ensure that Policy Studio can make a network connection to the database server, and click the **Test Connection** button on the **Configure Database Connection** dialog to verify that the connection to the database is configured successfully. This enables you to detect any configuration errors at design time instead at runtime.
 
 You can troubleshoot your database connection by viewing the contents of your server `.trc` file in the `INSTALL_DIR/apigateway/trace` directory. For more details, see [Configure API Gateway diagnostic trace](/docs/apim_administration/apigtw_admin/tracing/).
 

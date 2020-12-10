@@ -1,9 +1,9 @@
 {
 "title": "Configure database connections",
-"linkTitle": "Configure database connections",
-"weight": 3,
-"date": "2019-10-17",
-"description": "Configure database connections and database queries."
+  "linkTitle": "Configure database connections",
+  "weight": 3,
+  "date": "2019-10-17",
+  "description": "Configure database connections and database queries."
 }
 
 ## Configure database connections
@@ -115,7 +115,7 @@ The API Gateway validates connections by running a simple SQL query (for example
 
 ### Test the connection
 
-When you have specified all the database connection details, you can click the **Test Connection** button to verify that the connection to the database is configured successfully. This enables you to detect any configuration errors at design time instead at runtime.
+Ensure that Policy Studio can make a network connection to the database server, and click the **Test Connection** button to verify that the connection to the database is configured successfully. This enables you to detect any configuration errors at design time instead at runtime.
 
 ## Configure database queries
 
