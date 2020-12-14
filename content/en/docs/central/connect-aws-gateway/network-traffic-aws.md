@@ -16,6 +16,7 @@ The destination for:
 * AWS API Gateway data is  `apicentral.axway.com`
 
 * API Event data is `ingestion-lumberjack.datasearch.axway.com`
+, `ingestion.datasearch.axway.com`, `ingestion-lumberjack.visibility.eu-fr.axway.com` or `ingestion.visibility.eu-fr.axway.com`
 
 ## Communication ports
 
@@ -25,12 +26,16 @@ Open the following ports to benefit from all the Agent functionalities:
 
 **Outbound**:
 
-| Host                                       | Port               | Protocol  | Data                                |
-|--------------------------------------------|--------------------|-----------|-------------------------------------|
-| apicentral.axway.com                       | 443                | HTTPS     | API definitions, Subscription info  |
-| login.axway.com                            | 443                | HTTPS     | Authentication                      |
-| ingestion-lumberjack.datasearch.axway.com  | 453                | TCP       | API event data                      |
-| platform.axway.com                        | 443  | HTTPS    | Platform user info                 |
+| Region | Host                                                                                    | Port               | Protocol     | Data                               |
+|--------|-----------------------------------------------------------------------------------------|--------------------|--------------|------------------------------------|
+| US/EU  | platform.axway.com                                                                      | 443                | HTTPS        | Platform user info                 |
+| US/EU  | login.axway.com                                                                         | 443                | HTTPS        | Authentication                     |
+| US     | apicentral.axway.com                                                                    | 443                | HTTPS        | API definitions, Subscription info |
+| EU     | central.eu-fr.axway.com                                                                 | 443                | HTTPS        | API definitions, Subscription info |
+| US     | ingestion-lumberjack.datasearch.axway.com or ingestion.datasearch.axway.com             | 453 or 443         | TCP or HTTPS | API event data                     |
+| EU     | ingestion-lumberjack.visibility.eu-fr.axway.com or ingestion.visibility.eu-fr.axway.com | 453 or 443         | TCP or HTTPS | API event data                     |
+
+Note: _Region_ column is representing the region where your AMPLIFY organization is deployed. EU means deployed in European data center and US meaning deployed in US data center. Be sure to use the corresponding _Host_/_Port_ for your agents to operate correctly.
 
 **Inbound**:
 
@@ -56,7 +61,15 @@ curl -s -o /dev/null -w "%{http_code}"  https://login.axway.com
 
 A return of **"200"** validates the connection was established.
 
-**Connecting to AMPLIFY Central Event Traffic host:**
+**Connecting to AMPLIFY Central Event Traffic host, HTTPS:**
+
+```shell
+curl -s -o /dev/null -w "%{http_code}" https://ingestion.datasearch.axway.com
+```
+
+A return of **"200"** validates the connection was established.
+
+**Connecting to AMPLIFY Central Event Traffic host, Lumberjack:**
 
 ```shell
 curl ingestion-lumberjack.datasearch.axway.com:453
@@ -78,7 +91,15 @@ curl -x {{proxy_host}}:{{proxy_port}} -s -o /dev/null -w "%{http_code}"  https:/
 
 A return of **"200"** validates the connection was established.
 
-**Connecting to AMPLIFY Central Event Traffic host:**
+**Connecting to AMPLIFY Central Event Traffic host, HTTPS:**
+
+```shell
+curl -x {{proxy_host}}:{{proxy_port}} -s -o /dev/null -w "%{http_code}" https://ingestion.datasearch.axway.com
+```
+
+A return of **"200"** validates the connection was established.
+
+**Connecting to AMPLIFY Central Event Traffic host, Lumberjack:**
 
 ```shell
 curl -x socks5://{{proxy_host}}:{{proxy_port}} ingestion-lumberjack.datasearch.axway.com:453
