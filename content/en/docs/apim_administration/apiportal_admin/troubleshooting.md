@@ -3,9 +3,9 @@ title: Troubleshooting API Portal
 linkTitle: Troubleshooting
 weight: 110
 date: 2019-07-30
-description: General troubleshooting steps for API Portal, as well as specific problems and recommended solutions.
+description: General troubleshooting steps for API Portal, as well as specific
+  problems and recommended solutions.
 ---
-
 ## General troubleshooting steps
 
 1. Check if your issue and a workaround for it is listed as a known issue in the [Release Notes](/docs/apim_relnotes/) for your installed API Portal version.
@@ -16,7 +16,9 @@ description: General troubleshooting steps for API Portal, as well as specific p
 
 The Apache `error_log` file is located at `/var/log/apache2/`.
 
-Turn on Joomla! error reporting on the **System > Global Configuration > Server** tab in the JAI, and set the error reporting to the desired level. However, use caution, because this may lead to warnings and errors on the API Portal pages. It is recommended that you do this only in critical situations, and not in a production environment.
+To enable Joomla! error reporting, in JAI, click **System > Global Configuration > Server** and set the error reporting to the desired level. However, use caution, because this may lead to warnings and errors on the API Portal pages. We recommended you to enable the error reporting only in critical situations, and not in a production environment.
+
+For more information, see [Supported log files](/docs/apim_administration/apiportal_admin/apip_logging/).
 
 ## API response class details missing
 
