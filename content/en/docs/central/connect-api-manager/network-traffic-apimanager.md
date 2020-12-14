@@ -59,12 +59,16 @@ Open the following ports so that agents can communicate to the AMPLIFY platform:
 
 **Outbound**:
 
-| Host                                      | Port | Protocol | Data                               |
-| ----------------------------------------- | ---- | -------- | ---------------------------------- |
-| apicentral.axway.com                      | 443  | HTTPS    | API definitions, Subscription info |
-| login.axway.com                           | 443  | HTTPS    | Authentication                     |
-| ingestion-lumberjack.datasearch.axway.com | 453  | TCP      | API event data                     |
-| platform.axway.com                        | 443  | HTTPS    | Platform user info                 |
+| Region | Host                                                                                    | Port               | Protocol     | Data                               |
+|--------|-----------------------------------------------------------------------------------------|--------------------|--------------|------------------------------------|
+| US/EU  | platform.axway.com                                                                      | 443                | HTTPS        | Platform user info                 |
+| US/EU  | login.axway.com                                                                         | 443                | HTTPS        | Authentication                     |
+| US     | apicentral.axway.com                                                                    | 443                | HTTPS        | API definitions, Subscription info |
+| EU     | central.eu-fr.axway.com                                                                 | 443                | HTTPS        | API definitions, Subscription info |
+| US     | ingestion-lumberjack.datasearch.axway.com or ingestion.datasearch.axway.com             | 453 or 443         | TCP or HTTPS | API event data                     |
+| EU     | ingestion-lumberjack.visibility.eu-fr.axway.com or ingestion.visibility.eu-fr.axway.com | 453 or 443         | TCP or HTTPS | API event data                     |
+
+Note: _Region_ column is representing the region where your AMPLIFY organization is deployed. EU means deployed in European data center and US meaning deployed in US data center. Be sure to use the corresponding _Host_/_Port_ for your agents to operate correctly.
 
 Other ports which may need to be opened so that the Agent may monitor API Gateway / Manager are:
 
@@ -83,7 +87,7 @@ Other ports which may need to be opened so that the Agent may monitor API Gatewa
 
 ## Subscription notifications
 
-SMTP and/or a webhook URL can be set up to send subscription notifications on both subscribe and unsubscribe actions.  You can find the configuration to set up the SMTP or webhook URL at [Deploy your agents](https://docs.axway.com/bundle/axway-open-docs/page/docs/central/connect-api-manager/deploy-your-agents/index.html).
+SMTP and/or a webhook URL can be set up to send subscription notifications on both subscribe and unsubscribe actions.  You can find the configuration to set up the SMTP or webhook URL at [Deploy your agents](/docs/central/connect-api-manager/deploy-your-agents/).
 
 ## Using proxies
 
@@ -117,7 +121,15 @@ curl -s -o /dev/null -w "%{http_code}"  https://login.axway.com
 
 A return of **"200"** validates the connection was established.
 
-**Connecting to AMPLIFY Central Event Traffic host:**
+**Connecting to AMPLIFY Central Event Traffic host, HTTPS:**
+
+```shell
+curl -s -o /dev/null -w "%{http_code}" https://ingestion.datasearch.axway.com
+```
+
+A return of **"200"** validates the connection was established.
+
+**Connecting to AMPLIFY Central Event Traffic host, Lumberjack:**
 
 ```shell
 curl ingestion-lumberjack.datasearch.axway.com:453
@@ -139,7 +151,15 @@ curl -x {{proxy_host}}:{{proxy_port}} -s -o /dev/null -w "%{http_code}"  https:/
 
 A return of **"200"** validates the connection was established.
 
-**Connecting to AMPLIFY Central Event Traffic host:**
+**Connecting to AMPLIFY Central Event Traffic host, HTTPS:**
+
+```shell
+curl -x {{proxy_host}}:{{proxy_port}} -s -o /dev/null -w "%{http_code}" https://ingestion.datasearch.axway.com
+```
+
+A return of **"200"** validates the connection was established.
+
+**Connecting to AMPLIFY Central Event Traffic host, Lumberjack:**
 
 ```shell
 curl -x socks5://{{proxy_host}}:{{proxy_port}} ingestion-lumberjack.datasearch.axway.com:453
