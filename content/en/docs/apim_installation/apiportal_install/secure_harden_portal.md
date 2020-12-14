@@ -121,14 +121,6 @@ If you have APIs that are virtualized and published on a host other than an API 
 
 If you do not add your trusted API hosts to this field, all requests to those hosts will be rejected by API Portal.
 
-## Change the location of API Portal log files
-
-By default, API Portal saves the Apache log files in the `htdocs` directory. For increased security, you can configure a different location to save the log files:
-
-1. In the JAI, click **System > Global Configuration**.
-2. On the **System** tab, enter the new location in the **Path to Log Folder** field. Apache must have permission to write to the new location.
-3. Click **Save**.
-
 ## Configure Apache
 
 ### Update apiportal.conf
@@ -333,17 +325,7 @@ RRewriteRule ^(.*)$ https://APIPORTAL_YOUR_DOMAIN/ [R=301,L]
 
 ## Protect the integrity of the logging system
 
-You must ensure that security logs are protected against tampering, repudiation, and unauthorized access or modification. Store logs in a secure and tamper-proof location so that the logs can be used as evidence, for example, in any form of legal proceedings.
-
-To protect the integrity of the application generated logs:
-
-* Store logs on write-once media
-* Forward a copy of the logs to a centralized security information and event management (SIEM) system
-* Generate message digests for each log file
-
-This approach ensures that you can detect and prevent tampering.
-
-API Portal logs are located in the `logs` folder in the API Portal root directory.
+To protect the integrity of the application generated logs, see [these security best practices for storing log files](/docs/apim_administration/apiportal_admin/apip_logging/).
 
 ## Utilize synchronized time source
 
