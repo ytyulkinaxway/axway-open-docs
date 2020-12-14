@@ -26,6 +26,7 @@ Connect to your MySQL or MariaDB database, and configure the database for API P
 5. Set the size of the buffer pool in `innodb_buffer_pool_size`.
 6. Set the size of the log files in a log group in `innodb_log_file_size`.
 7. Set the size of database storage to a minimum of 100 MB. This is the recommended value for the most common environments, which include the use of blog posts, forums, comments, and so on.
+8. Enable the creation of non-deterministic stored functions by setting `log_bin_trust_function_creators` to `1`.
 
 For more details on the variables and how they affect the performance of the database server, see [MySQL Server System Variables](https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html) or [MariaDB Server System Variables](https://mariadb.com/kb/en/mariadb/server-system-variables/).
 
