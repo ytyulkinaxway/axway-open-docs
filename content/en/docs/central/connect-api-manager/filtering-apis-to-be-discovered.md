@@ -1,6 +1,6 @@
 ---
-title: Discover APIs
-linkTitle: Discover APIs
+title: Feature - Discover APIs
+linkTitle: Feature - Discover APIs
 draft: false
 weight: 40
 description: Learn how to set up tag-based condition expression(s) using the

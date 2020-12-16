@@ -1,7 +1,7 @@
 ---
 title: Unpublish an API
 linkTitle: Unpublish an API
-draft: false
+draft: true
 weight: 60
 description: Understand the implications of unpublishing your API in API Manager
   in the centralMode (publishToEnvironmentAndCatalog), especially as it relates

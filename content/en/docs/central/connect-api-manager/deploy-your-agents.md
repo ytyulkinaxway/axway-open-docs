@@ -1,7 +1,7 @@
 ---
 title: Deploy your agents - advanced functionality
 linkTitle: Deploy your agents - advanced functionality
-draft: false
+draft: true
 weight: 30
 description: Learn how to deploy your Discovery Agent and Traceability Agent so
   that you can manage your Axway API Gateway environment within AMPLIFY Central.

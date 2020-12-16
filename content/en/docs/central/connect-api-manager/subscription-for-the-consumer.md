@@ -1,8 +1,8 @@
 ---
-title: Manage subscription
-linkTitle: Manage subscription workflow
+title: Feature - Manage subscription workflow
+linkTitle: Feature - Manage subscription workflow
 draft: false
-weight: 90
+weight: 45
 description: >-
   A subscription provides the consumer, or subscriber, with the required
   security and endpoint materials to correctly consume the API.

@@ -1,7 +1,7 @@
 ---
 title: Run your agents in CLI
 linkTitle: Run your agents in CLI
-draft: false
+draft: true
 weight: 80
 description: Use the following parameters [flags] when issuing the
   traceability_agent and discovery_agent commands. View these flags with command

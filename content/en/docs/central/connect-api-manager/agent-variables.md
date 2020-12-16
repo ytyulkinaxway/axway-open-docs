@@ -1,8 +1,8 @@
 ---
-title: Set up agent configuration
-linkTitle: Set up agent configuration
+title: Reference - Agent configuration
+linkTitle: Reference - Agent configuration
 draft: false
-weight: 70
+weight: 50
 description: Use the following environment variables to control your Discovery and Traceability agents
 ---
 As the Discovery and Traceability agents share many parameters, it is more efficient to use environment variables and reference these parameters, instead of declaring parameters twice.

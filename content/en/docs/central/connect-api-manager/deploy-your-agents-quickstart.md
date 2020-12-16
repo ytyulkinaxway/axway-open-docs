@@ -1,7 +1,7 @@
 ---
 title: Deploy your agents - quickstart
 linkTitle: Deploy your agents - quickstart
-draft: false
+draft: true
 weight: 25
 description: Learn how to quickly deploy your Discovery Agent and Traceability
   Agent so that you can manage your Axway API Gateway environment within AMPLIFY

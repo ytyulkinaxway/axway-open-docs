@@ -2,7 +2,7 @@
 title: Administer API Manager network traffic
 linkTitle: Administer API Manager network traffic
 draft: false
-weight: 100
+weight: 30
 description: Traffic is always initiated by the Agent to API Manager, API
   Gateway, and AMPLIFY Central. No sessions are ever initiated back to the
   Agent.

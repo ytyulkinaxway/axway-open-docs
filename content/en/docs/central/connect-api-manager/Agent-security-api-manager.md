@@ -2,7 +2,7 @@
 title: Administer API Manager agent security
 linkTitle: Administer API Manager agent security
 draft: false
-weight: 110
+weight: 35
 description: This section describes the main security features of the API Manager agents.
 ---
 

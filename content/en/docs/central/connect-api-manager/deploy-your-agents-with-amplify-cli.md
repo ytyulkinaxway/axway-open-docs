@@ -2,7 +2,7 @@
 title: Deploy your agents with AMPLIFY CLI
 linkTitle: Deploy your agents with AMPLIFY CLI
 draft: false
-weight: 37
+weight: 20
 description: Learn how to deploy your agents using AMPLIFY CLI so that you can
   manage your Axway API Gateway environment within AMPLIFY Central.
 ---
@@ -82,7 +82,7 @@ The installation procedure will prompt for the following:
    * user/password
    * event log path
 7. Traceability module connectivity:
-   * Traceability Agent protocol (Lumberjack (tcp) by default)
+   * Traceability Agent protocol (**Lumberjack** (tcp) by default recommended for production environment or **HTTPs** recommended for testing purpose)
 
 Once you have answered all questions, the agents are downloaded, the configuration files are updated, the Amplify Central resources are created and the key pair is generated (if you chose to create a new service account).
 
