@@ -1,7 +1,7 @@
 ---
 title: Manage your environments and gateways
 linkTitle: Manage your environments and gateways
-weight: 15
+weight: 110
 date: 2020-11-18
 description: Understand environments in a topology, what they are, and what can you do with them.
 ---
