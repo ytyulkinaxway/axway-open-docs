@@ -1,10 +1,14 @@
-{
-"title": "Connect API Manager",
-"linkTitle": "Connect API Manager",
-"weight": 130,
-"date": "2020-15-15",
-"description": "Understand why you would connect Axway API Manager to AMPLIFY Central. Learn how you can publish to the AMPLIFY Catalog from your API Management System in order to obtain a global view of your APIs and present this Catalog to your consumers. Learn how you can collect the traffic of all your gateways and see it in a single place in AMPLIFY Central Observability."
-}
+---
+title: Connect API Manager
+linkTitle: Connect API Manager
+weight: 130
+date: 2020-15-15
+description: Understand why you would connect Axway API Manager to AMPLIFY
+  Central. Learn how you can publish to the AMPLIFY Catalog from your API
+  Management System in order to obtain a global view of your APIs and present
+  this Catalog to your consumers. Learn how you can collect the traffic of all
+  your gateways and see it in a single place in AMPLIFY Central Observability.
+---
 
 ## What is Axway API Manager connected?
 
@@ -41,7 +45,7 @@ The Traceability Agent sends log information about APIs that have been discovere
 
 * Axway API Manager / Axway API Gateway versions 7.6.2 SPx and 7.7 SPx up and running using a Linux installation (CentOS 6.x, 7.x, 8.x,  Oracle Linux 6.x, 7.x, Red Hat Enterprise Linux 6.x, 7.x, 8.x, SUSE Linux Enterprise Server 11.x, 12.x)
 * The Linux machine where API Manager and API Gateway are running must be accessible and have `sudo` rights to run the Agents
-* The agents must be installed on the same machine that API Manager and/or API Gateway is running.
+* The agents must be installed on the same machine that API Manager and/or API Gateway is running
 
 ## Region support
 
