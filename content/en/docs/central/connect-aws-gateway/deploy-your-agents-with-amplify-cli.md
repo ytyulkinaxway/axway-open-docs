@@ -72,12 +72,11 @@ The installation procedure prompts for the following:
 
 1. Select the type of gateway you want to connect to (AWS API Gateway in this scenario).
 2. Platform connectivity:
-
    * **Environment**: can be an existing environment or a new one that will be created by the installation procedure
    * **Team**: can be an existing team or a new one that will be created by the installation procedure
    * **Service account**: can be an existing service account or a new one that will be created by the installation procedure. If you choose an existing one, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the AMPLIFY Platform. If you choose to create a new one, the generated private and public keys will be provided.
 3. AWS Configuration Setup options:
-
+   * **Deployment Type** select between `EC2`, `ECS Fargate`, or `Docker Container Only`
    * **Region** of the AWS API Gateway resources
    * **S3 Bucket Name** within the same region as the AWS API Gateway resouces
    * **API Gateway Cloud Watch Setup** defaulted to `Yes`, sets up the IAM role and configures API Gateway to log API Gateway transactions to CloudWatch
@@ -87,9 +86,8 @@ The installation procedure prompts for the following:
    * **Config Bucket Exists** defaulted to `Yes`, set to `No` to have the CloudFormation create the bucket
    * **Discovery Agent Queue** defaulted to `aws-apigw-discovery`, the SQS Queue where events for the Discovery Agent are sent
    * **Traceability Agent Queue** defaulted to `aws-apigw-traceability`, the SQS Queue where events for the Traceability Agent are sent
-   * **Deployment Type** select between `EC2` or `ECS Fargate`
-   * EC2 Deployment Prompts
 
+   * EC2 Deployment Prompts
      * **Instance Type** defaulted to `t3.micro`
      * **EC2 SSH Key Pair** the name of the EC2 Key Pair that will be installed on the instance
      * **VPC ID** the ID of the VPC (ex. vpc-xxxxxxx) to deploy the instance in, leave blank to have the CloudFormation deploy the entire EC2 Infrastructure
@@ -97,8 +95,8 @@ The installation procedure prompts for the following:
      * **Security Group ID** when using existing infrastructure, the security group (ex. sg-xxxxxxx) to assign to the EC2 instance
      * **Subnet ID** when using existing infrastructure, the subnet (ex. subnet-xxxxxx) to deploy the EC2 instance to
      * **SSH IP Range** defaulted to 0.0.0.0/0, set to the IP range that is allowed to SSH to the EC2 instance
-   * ECS Deployment Prompts
 
+   * ECS Deployment Prompts
      * **ECS Cluster Name** the name of the Cluster the ECS tasks will be deployed to
      * **Security Group ID** the security group (ex. sg-xxxxxxx) to assign to the ECS tasks
      * **Subnet ID** the subnet (ex. subnet-xxxxxx) the ECS tasks will run in
@@ -107,15 +105,15 @@ The installation procedure prompts for the following:
    * **SSM Private Key Parameter** defaulted to `AmplifyPrivateKey`, the Parameter Name in AWS SSM where the Amplify Private key is stored
    * **SSM Public Key Parameter** defaulted to `AmplifyPublicKey`, the Parameter Name in AWS SSM where the Amplify Public key is stored
 4. Traceability module connectivity:
-   * Traceability Agent protocol (Lumberjack (tcp) by default)
+   * Traceability Agent protocol (Lumberjack (tcp) by default recommended for production environment or HTTPs recommended for testing purpose), select between `Lumberjack`, or `HTTPS`
 
 Once you have answered all questions, the cloud formation templates are downloaded and pre-configured, the agents' configuration files are updated, the Amplify Central resources are created and the key pair is generated (if you chose to create a new service account).
 
 The current directory contains the following files:
 
 ```shell
-da_env_vars.env                   *EC2 Deployment Only
-ta_env_vars.env                   *EC2 Deployment Only
+da_env_vars.env                   *EC2 and Docker Container Deployments Only
+ta_env_vars.env                   *EC2 and Docker Container Deployments Only
 private_key.pem
 public_key.pem
 amplify-agents-deploy-all.yaml
@@ -136,7 +134,7 @@ traceability_lambda.zip
 
 `traceability_lambda.zip` is referenced in the CloudFormation scripts to setup the AWS Lambda function required.
 
-### Step 3: Deploy the agent in EC2 or ECS Fargate infrastructure
+### Step 4a: Deploy the agent in EC2 or ECS Fargate infrastructure
 
 The installation summary contains the AWS CLI commands needed to finish the installation.
 
@@ -153,32 +151,76 @@ To complete the install, run the following AWS CLI command:
   - If necessary, create EC2 KeyPair, for EC2 login:
     aws ec2 create-key-pair --key-name keypair --query KeyMaterial --output text > MyKeyPair.pem
   - Create the SSM parameter:
-    aws ssm put-parameter --type SecureString --name AmplifyPrivateKey --value "$(cat private_key.pem)"
-    aws ssm put-parameter --type SecureString --name AmplifyPublicKey --value "$(cat public_key.pem)"
+    aws ssm put-parameter --type SecureString --name AmplifyPrivateKey --value "file://private_key.pem"
+    aws ssm put-parameter --type SecureString --name AmplifyPublicKey --value "file://public_key.pem"
   - Deploy the CloudFormation Stack:
     aws cloudformation create-stack --stack-name AxwayAmplifyAgents \
         --template-url https://my-bucket-name.s3-eu-west-1.amazonaws.com/amplify-agents-deploy-all.yaml \
-        --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameters "$(cat cloudformation_properties.json)"
+        --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND CAPABILITY_NAMED_IAM --parameters "file://cloudformation_properties.json"
   - Check the CloudFormation Stack:
     aws cloudformation describe-stacks --stack-name AxwayAmplifyAgents \
         --query "Stacks[].{\"Name\":StackName,\"Status\":StackStatus}"
 ```
 
 * Create, if necessary, and upload all files to your S3 bucket:
-
     * These commands create the bucket, if needed, then uploads all resources to the bucket.
 * If necessary, create EC2 KeyPair, for EC2 login:
-
     * This command creates the EC2 Key Pair, if necessary, and saves the private key to MyKeyPair.pem.
 * Create the SSM parameter:
-
     * These commands save the AMPLIFY Private and Public Keys to the AWS SSM Parameter Store.
 * Deploy the CloudFormation Stack:
-
     * This command deploys the CloudFormation template using all the resources uploaded to S3. The end result will be a running EC2 instance with the agents installed and logging to CloudWatch.
 * Check the CloudFormation Stack:
-
     * This command returns the stack name and its deployment status.
+
+### Step 4b: Deploy the agent in Docker Container Only infrastructure
+
+The installation summary contains the AWS CLI commands needed to finish the installation.
+
+Example:
+
+```shell
+To complete the install, run the following AWS CLI command:
+  - Create, if necessary, and upload all files to your S3 bucket:
+    aws s3api create-bucket --bucket my-bucket-name --create-bucket-configuration LocationConstraint=eu-west-1
+    aws s3 sync --exclude "*" --include "traceability_lambda.zip" --include "amplify-agents-deploy-all.yaml" --include "amplify-agents-resources.yaml" ./ s3://my-bucket-name
+    
+  - Deploy the CloudFormation Stack:
+    aws cloudformation create-stack --stack-name AxwayAmplifyAgents \
+        --template-url https://my-bucket-name.s3-eu-west-1.amazonaws.com/amplify-agents-deploy-all.yaml \
+        --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND CAPABILITY_NAMED_IAM --parameters "file://cloudformation_properties.json"
+  - Check the CloudFormation Stack:
+    aws cloudformation describe-stacks --stack-name AxwayAmplifyAgents \
+        --query "Stacks[].{\"Name\":StackName,\"Status\":StackStatus}"
+  Wait for the CloudFormation Stack to complete.
+  - Create AWS Access and Secret Keys and copy resulting "AccessKeyId" & "SecretAccessKey":
+    aws iam create-access-key  --user-name AxwayAmplifyAgentsUser-eu-west-1 \
+        --query "AccessKey.{"AccessKeyId":AccessKeyId,"SecretAccessKey":SecretAccessKey}"
+  - Add "AccessKeyId" & "SecretAccessKey" variables to both agent .env files, da_env_vars.env & ta_env_vars.env:
+    AWS_AUTH_ACCESSKEY=Your_AccessKeyId
+    AWS_AUTH_SECRETKEY=Your_SecretAccessKey
+
+  - Pull the latest image of the Discovery Agent:
+    docker pull axway-docker-public-registry.bintray.io/agent/aws-apigw-discovery-agent:latest
+  - Pull the latest image of the Traceability Agent:
+    docker pull axway-docker-public-registry.bintray.io/agent/aws-apigw-traceability-agent:latest
+  - Run the latest Discovery Agent:
+    docker run --env-file "$(pwd)"/da_env_vars.env -v "$(pwd)":/keys \
+        axway-docker-public-registry.bintray.io/agent/aws-apigw-discovery-agent:latest
+  - Run the latest Traceability Agent:
+    docker run --env-file "$(pwd)"/ta_env_vars.env -v "$(pwd)":/keys \
+        axway-docker-public-registry.bintray.io/agent/aws-apigw-traceability-agent:latest
+```
+
+* Create, if necessary, and upload all files to your S3 bucket:
+    * These commands create the bucket, if needed, then uploads all resources to the bucket.
+* Create AWS Access and Secret Keys and copy results:
+    * This command creates the Access and Secret Key Pair.
+* Add the results from the Key Pair creation above into the environment files, da_env_vars.env & ta_env_vars.env, after the appropriate variables, `AWS_AUTH_ACCESSKEY=` and `AWS_AUTH_SECRETKEY=`.
+* Pull the latest images of the Discovery/Traceability Agents:
+    * These two commands pull the latest released agents from axway-docker-public-registry.bintray.io.
+* Run the latest images of the Discovery/Traceability Agents:
+    * These two commands run the Docker Containers using the created environment files, and mounting the directory of the location of the appropriate keys, `public_key.pem` & `private_key.pem`, which were either generated during the installation, or available from an existing service account.
 
 Once the Cloud formation template creation is completed, the agents should be running in the chosen infrastructure.
 
