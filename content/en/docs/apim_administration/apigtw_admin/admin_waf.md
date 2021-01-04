@@ -136,8 +136,6 @@ You can filter this tab to display by **Threat Protection** to quickly locate al
 
     **Fail**: Transactions that violate any active ModSecurity engine rules are marked with this status. These transactions should be monitored because they represent a false positive the   protection rules might need to be adjusted), or malicious client traffic. You can view more details about the failure reason and specific rule violation by drilling own a specific   transaction and looking at the trace details.
 
-    **Exception**: Transactions that cause a rule processing or other unknown error are marked with this status. These should not occur and probably indicate some rule configuration problem.
-
 4. Click **Apply**.
 
 For example, the following shows detailed trace output from drilling down a failed transaction:
