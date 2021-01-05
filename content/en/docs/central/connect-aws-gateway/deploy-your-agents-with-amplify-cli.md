@@ -2,7 +2,7 @@
 title: Deploy your agents with AMPLIFY CLI
 linkTitle: Deploy your agents with AMPLIFY CLI
 draft: false
-weight: 35
+weight: 20
 description: Learn how to deploy your agents using AMPLIFY CLI so that you can
   manage your AWS API Gateway environment within AMPLIFY Central.
 ---
@@ -26,7 +26,7 @@ Learn how to quickly install and run your Discovery and Traceability agents with
 * Node.js 8 LTS or later
 * Access to npm package (for installing AMPLIFY cli)
 * Access to login.axway.com on port 443
-* Minimum AMPLIFY Central CLI version: 0.2.0 (check version using `amplify central --version`)
+* Minimum AMPLIFY Central CLI version: 0.5.0 (check version using `amplify central --version`)
 
 For more information, see [Install AMPLIFY Central CLI](/docs/central/cli_central/cli_install/).
 

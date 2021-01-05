@@ -1,8 +1,8 @@
 ---
-title: Deploy agents - advanced functionality
-linkTitle: Deploy your agents - advanced functionality
+title: Reference - Agent configuration
+linkTitle: Reference - Agent configuration
 draft: false
-weight: 30
+weight: 50
 description: >-
   Learn how to deploy your Discovery Agent and Traceability Agent using Docker
   containers so that you can manage  your AWS API Gateway environment within

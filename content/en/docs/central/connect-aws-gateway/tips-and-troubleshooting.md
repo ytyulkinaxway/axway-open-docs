@@ -2,7 +2,7 @@
 title: Get help with Connected AWS Gateway
 linkTitle: Get help with Connected AWS Gateway
 draft: false
-weight: 100
+weight: 55
 description: This section provides troubleshooting, known limitations
   and	restrictions that you may encounter while you are working with the
   connected managed environment for AWS API Gateway within AMPLIFY Central. It

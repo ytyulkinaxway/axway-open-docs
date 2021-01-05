@@ -1,8 +1,8 @@
 ---
 title: Deploy agents - quickstart
 linkTitle: Deploy your agents - quickstart
-draft: false
-weight: 25
+draft: true
+weight: 
 description: >-
   Learn how to deploy your Discovery Agent and Traceability Agent using Docker
   containers so that you can manage your AWS API Gateway environment within

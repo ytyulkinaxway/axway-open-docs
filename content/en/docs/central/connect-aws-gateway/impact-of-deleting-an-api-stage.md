@@ -1,8 +1,8 @@
 ---
 title: Delete an API Stage or API
 linkTitle: Delete an API Stage or API
-draft: false
-weight: 50
+draft: true
+weight: 
 description: Understand the implications of deleting an API stage or an API in
   AWS API Gateway in the centralMode (publishToEnvironmentAndCatalog), especially as it relates to subscriptions and
   your AMPLIFY Central Catalog items.

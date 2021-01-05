@@ -1,8 +1,8 @@
 ---
 title: Prepare AMPLIFY Central
 linkTitle: Prepare AMPLIFY Central
-draft: false
-weight: 10
+draft: true
+weight: 
 description: Learn how to virtualize AWS API Gateway within AMPLIFY Central by
   using an environment. Secure the connection between AMPLIFY Central and the
   agents by using a Service Account.

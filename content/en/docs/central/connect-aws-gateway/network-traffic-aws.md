@@ -2,7 +2,7 @@
 title: Administer AWS Gateway network traffic
 linkTitle: Administer AWS Gateway network traffic
 draft: false
-weight: 70
+weight: 30
 description: Traffic is always initiated by the Agent to AWS and AMPLIFY
   Central. No sessions are ever initiated back to the Agent.
 ---

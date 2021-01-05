@@ -1,12 +1,11 @@
 ---
-title: Discover APIs
-linkTitle: Discover APIs
+title: Feature - Discover APIs
+linkTitle: Feature - Discover APIs
 draft: false
 weight: 40
 description: >-
   You can set up tag-based condition expression(s) using the AWS_FILTER
   environment variable to discover APIs that could be added to AMPLIFY Central.
-
 
   Conditional expressions statements use logical operators to compare values. This section provides sample syntax for defining expressions.
 ---
@@ -19,9 +18,9 @@ description: >-
 tag.<tagName>.Exists() == true | false
 ```
 
-Sample to discover all APIs having a tag name API_TYPE: `filter: tag.API_TYPE.Exists() == true`
+Sample to discover all APIs having a tag name API_TYPE: `AWS_FILTER=tag.API_TYPE.Exists() == true`
 
-Sample to discover all APIs not having a tag name API_TYPE: `filter: tag.API_TYPE.Exists() == false`
+Sample to discover all APIs not having a tag name API_TYPE: `AWS_FILTER=tag.API_TYPE.Exists() == false`
 
 ## Filter based on tag value
 
@@ -29,9 +28,9 @@ Sample to discover all APIs not having a tag name API_TYPE: `filter: tag.API_TYP
 tag.Any() == | != <tagValue>
 ```
 
-Sample to discover all APIs having a tag that has Finance in its value: `filter: tag.Any() == Finance`
+Sample to discover all APIs having a tag that has Finance in its value: `AWS_FILTER=tag.Any() == Finance`
 
-Sample to discover all APIs having a tag that does not have Finance in its value: `filter: tag.Any() != Finance`
+Sample to discover all APIs having a tag that does not have Finance in its value: `AWS_FILTER=tag.Any() != Finance`
 
 ## Filter based on tag name and tag value
 
@@ -39,9 +38,9 @@ Sample to discover all APIs having a tag that does not have Finance in its value
 tag.<tagName> == | != <tagValue>
 ```
 
-Sample to discover all APIs having a tag name API_TYPE that has ‘Finance’ in its value: `filter: tag.API_TYPE == Finance`
+Sample to discover all APIs having a tag name API_TYPE that has ‘Finance’ in its value: `AWS_FILTER=tag.API_TYPE == Finance`
 
-Sample to discover all APIs having a tag name API_TYPE that does not have ‘Finance’ in its value: `filter: tag.API_TYPE != Finance`
+Sample to discover all APIs having a tag name API_TYPE that does not have ‘Finance’ in its value: `AWS_FILTER=tag.API_TYPE != Finance`
 
 ## Filter based on partial value
 
@@ -49,9 +48,9 @@ Sample to discover all APIs having a tag name API_TYPE that does not have ‘Fin
 tag.<tagName>.contains(<value>) == true |  false
 ```
 
-Sample to discover all APIs having a tag name containing API: `tag.API_TYPE.contains(API) == true`
+Sample to discover all APIs having a tag name containing API: `AWS_FILTER=tag.API_TYPE.contains(API) == true`
 
-Sample to discover all APIs having a tag name not containing API: `tag.API_TYPE.contains(API) == false`
+Sample to discover all APIs having a tag name not containing API: `AWS_FILTER=tag.API_TYPE.contains(API) == false`
 
 ## Filter using MatchRegEx
 

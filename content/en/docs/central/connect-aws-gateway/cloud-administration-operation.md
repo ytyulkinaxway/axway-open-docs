@@ -2,7 +2,7 @@
 title: Administer AWS Gateway cloud
 linkTitle: Administer AWS Gateway cloud
 draft: false
-weight: 90
+weight: 25
 description: As a Cloud Administrator / Operator, you are responsible for
   configuring and managing your organization’s AWS infrastructure. This topic
   contains setup and test details for the additional AWS services that are

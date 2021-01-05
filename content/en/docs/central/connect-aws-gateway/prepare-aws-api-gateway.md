@@ -1,8 +1,8 @@
 ---
 title: Prepare AWS API Gateway
 linkTitle: Prepare AWS API Gateway
-draft: false
-weight: 20
+draft: true
+weight: 
 description: Learn how to use the provided CoudFormation templates to initialize
   AWS Services, which enables the agents to collect API / traffic data.
 ---

@@ -1,8 +1,8 @@
 ---
-title: Manage subscription workflow
-linkTitle: Manage subscription workflow
+title: Feature - Manage subscription workflow
+linkTitle: Feature - Manage subscription workflow
 draft: false
-weight: 60
+weight: 45
 description: A subscription provides the consumer, or subscriber, with the
   required security, quota and endpoint materials to correctly consume the API.
   The security material and/or quota to access an API is configured inside the

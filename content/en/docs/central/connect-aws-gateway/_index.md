@@ -1,14 +1,14 @@
 ---
 title: Connect AWS Gateway
 linkTitle: Connect AWS Gateway
-no_list: true
-draft: false
 weight: 140
+date: 2021-01-04
 description: Understand why you would want a connected / managed environment for
   AWS API Gateway within AMPLIFY Central. Learn how you can govern and monitor
   the creation / deployment / publishing and subscriptions of the AWS API
   Gateway hosted APIs in one central location.
 ---
+
 ## Why do you want to connect AWS API Gateway and AMPLIFY Central?
 
 Connecting AWS API Gateway to AMPLIFY Central will provide you with a global centralized view of your APIs and their related traffic.
@@ -55,6 +55,13 @@ For additional logging information, see <https://docs.aws.amazon.com/apigateway/
 * AWS Lambda
 * CloudFormation template. Download from [https://axway.bintray.com/generic-repo/aws-agents/aws_apigw_agent_config/](<https://axway.bintray.com/generic-repo/aws-agents/aws_apigw_agent_config/>).
 
-## Quickstart
+## Connect AWS API Gateway to AMPLIFY Central using CLI
 
-* To get your agents up and running see [Deploy agents - quickstart](/docs/central/connect-aws-gateway/deploy-your-agents-quickstart)
+The following is a high-level overview of the required steps to connect an AWS API Gateway environment to AMPLIFY Central:
+
+* Create a service account for the agent to communicate with AMPLIFY platform
+* Create an environment to group the APIs
+* Configure AWS services / roles (optional) / Infrastructure (oprional)
+* Deploy the agent in the choosen infrastructure (EC2 / ECS-fargate / Docker only)
+
+You will be guided through this procedure using AMPLIFY Central CLI. See [Deploy your agents with AMPLIFY CLI](/docs/central/connect-aws-gateway/deploy-your-agents-with-amplify-cli)

@@ -2,7 +2,7 @@
 title: Administer AWS Gateway agent security
 linkTitle: Administer AWS Gateway agent security
 draft: false
-weight: 80
+weight: 35
 description: This section describes the main security features of the AWS API
   Gateway agents.
 ---
