@@ -199,6 +199,7 @@ For more information on the syntax of this setting, see the [OpenSSL documentati
     * **Do not use the TLS v1.2 protocol**: TLS v1.2 is not use for incoming connections to avoid any weaknesses in this protocol. This is *not* selected by default.
     * **Do not use the TLS v1.3 protocol**: TLS v1.3 is not use for incoming connections to avoid any weaknesses in this protocol. This is *not* selected by default.
     * **Prefer local cipher preferences over client's proposal**: When choosing a cipher during the SSL/TLS handshake, the client's preferences are selected by default from the list of ciphers supported by the client and the server. When this option is selected, the server's preferences are used instead. This option is *not* selected by default. For more details on ciphers, see the [OpenSSL documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html).
+    * **Disable renegotiation in TLSv1.2 and earlier**: Disable renegotiation, do not send HelloRequest messages, and ignore renegotiation requests via ClientHello. This is selected by default.
 
 ### Configure conditions for an HTTP Interface
 
