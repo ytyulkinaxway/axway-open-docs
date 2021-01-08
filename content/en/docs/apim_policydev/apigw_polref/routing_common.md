@@ -91,6 +91,7 @@ You can configure the following SSL protocol options:
 * **Do not use the TLS v1.1 protocol**: TLS v1.1 is not used for incoming connections to avoid any weaknesses in this protocol. This is selected by default.
 * **Do not use the TLS v1.2 protocol**: TLS v1.2 is not used for incoming connections to avoid any weaknesses in this protocol. This is *not* selected by default.
 * **Do not use the TLS v1.3 protocol**: TLS v1.3 is not used for incoming connections to avoid any weaknesses in this protocol. This is *not* selected by default.
+* **Disable renegotiation in TLSv1.2 and earlier**: Disable renegotiation, do not send HelloRequest messages, and ignore renegotiation requests via ClientHello. This is selected by default. If you disable this option and allow SSL renegotiation, both secure and legacy insecure renegotiation with unpatched servers will be possible.
 
 **Ciphers**:
 
