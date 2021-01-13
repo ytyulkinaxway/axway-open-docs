@@ -41,53 +41,22 @@ To create a certificate and private key, click **Create/Import**. The **Configur
 
 Configure the following settings to create a certificate:
 
-* **Subject**:
-
-Click **Edit** to configure the *Distinguished Name* (DName) of the subject.
-
-* **Alias Name**:
-
-This mandatory field enables you to specify a friendly name (or alias) for the certificate. Alternatively, you can click **Use Subject** to add the DName of the certificate in he text box instead of a certificate alias.
-
-* **Public Key**:
-
-Click **Import** to import the subject's public key (usually from a PEM or DER-encoded file).
-
-* **Version**:
-
-This read-only field displays the X.509 version of the certificate.
-
-* **Issuer**:
-
-This read-only field displays the distinguished name of the CA that issued the certificate.
-
-* **Choose Issuer Certificate**:
-
-Select to explicitly specify an issuer certificate for this certificate (for example, to avoid a potential clash or expiry issue with another certificate using the same intermediary certificate). You can then click the browse button on the right to select an issuer certificate. This setting is not selected by default.
-
-* **Not valid before**:
-
-Select a date to define the start of the validity period of the certificate.
-
-* **Not valid after**:
-
-Select a date to define the end of the validity period of the certificate.
-
-* **Sign Certificate**:
-
-You must click this button to sign the certificate. The certificate can be self-signed, or signed by the private key belonging to a trusted CA whose key pair is stored in the certificate store.
+* **Subject**: Click **Edit** to configure the *Distinguished Name* (DName) of the subject.
+* **Alias Name**: This mandatory field enables you to specify a friendly name (or alias) for the certificate. Alternatively, you can click **Use Subject** to add the DName of the certificate in he text box instead of a certificate alias.
+* **Public Key**: Click **Import** to import the subject's public key (usually from a PEM or DER-encoded file).
+* **Version**: This read-only field displays the X.509 version of the certificate.
+* **Issuer**: This read-only field displays the distinguished name of the CA that issued the certificate.
+* **Choose Issuer Certificate**: Select to explicitly specify an issuer certificate for this certificate (for example, to avoid a potential clash or expiry issue with another certificate using the same intermediary certificate). You can then click the browse button on the right to select an issuer certificate. This setting is not selected by default.
+* **Not valid before**: Select a date to define the start of the validity period of the certificate.
+* **Not valid after**: Select a date to define the end of the validity period of the certificate.
+* **Sign Certificate**: You must click this button to sign the certificate. The certificate can be self-signed, or signed by the private key belonging to a trusted CA whose key pair is stored in the certificate store.
 
 ### Import certificates
 
 You can use the following buttons to import or export certificates into the certificate store:
 
-* **Import Certificate**:
-
-Click to import a certificate (for example, from a `.pem` or `.der` file).
-
-* **Export Certificate**:
-
-Click to export the certificate (for example, to a `.pem` or `.der` file).
+* **Import Certificate**: Click to import a certificate (for example, from a `.pem` or `.der` file).
+* **Export Certificate**: Click to export the certificate (for example, to a `.pem` or `.der` file).
 
 ## Configure a private key
 
@@ -101,35 +70,21 @@ API Gateway supports PKCS#11-compatible HSM devices. For example, this includes 
 
 If the private key is stored in the API Gateway certificate store, select **Private key stored locally**. The following options are available for keys stored locally:
 
-* **Private key stored locally**:
-
-This read-only field displays details of the private key.
-
-* **Import Private Key**:
-
-Click to import the subject's private key (usually from a PEM or DER-encoded file).
-
-* **Export Private Key**:
-
-Click to export the subject's private key to a PEM or DER-encoded file.
+* **Private key stored locally**: This read-only field displays details of the private key.
+* **Import Private Key**: Click to import the subject's private key (usually from a PEM or DER-encoded file).
+* **Export Private Key**: Click to export the subject's private key to a PEM or DER-encoded file.
 
 ### Private key provided by OpenSSL engine
+
+{{< alert title="Warning" color="warning" >}}Engines from OpenSSL 1.0 are not compatible with OpenSSL 1.1. When configuring and using an OpenSSL engine, make sure it has been made for version 1.1.{{< /alert >}}
 
 If the private key that corresponds to the public key in the certificate is provided by an OpenSSL engine, select **Private key provided by OpenSSL Engine**.
 
 Configure the following fields to associate a key provided by the OpenSSL engine with the current certificate:
 
-* **Engine name**:
-
-Enter the name of the OpenSSL engine to use to interface to an HSM. All vendor implementations of the OpenSSL Engine API are identified by a unique name. See your vendor's penSSL engine implementation or HSM documentation to find out the name of the engine.
-
-* **Key Id**:
-
-Enter the key ID used to uniquely identify a specific private key from all others stored on an HSM. When you complete this dialog, the private key is associated with the certificate that you are currently editing. Private keys are identified by their key ID by default.
-
-* **Conversation**:
-
-If the HSM requires the server to provide a specific response to a specific request from the HSM, you can enter the response in this field. This enables the server to conduct an automated dialog with a HSM when it requires access to a private key. For example, in a simple case, the server response might be a specific passphrase.
+* **Engine name**: Enter the name of the OpenSSL engine to use to interface to an HSM. All vendor implementations of the OpenSSL Engine API are identified by a unique name. See your vendor's penSSL engine implementation or HSM documentation to find out the name of the engine.
+* **Key Id**: Enter the key ID used to uniquely identify a specific private key from all others stored on an HSM. When you complete this dialog, the private key is associated with the certificate that you are currently editing. Private keys are identified by their key ID by default.
+* **Conversation**: If the HSM requires the server to provide a specific response to a specific request from the HSM, you can enter the response in this field. This enables the server to conduct an automated dialog with a HSM when it requires access to a private key. For example, in a simple case, the server response might be a specific passphrase.
 
 ### Private key stored on external HSM
 
@@ -138,6 +93,8 @@ If the private key that corresponds to the public key stored in the certificate 
 To use the API Gateway's PKCS#11 engine to access objects in an external HSM, the corresponding HSM provider and certificate realms must also be configured. For more details, see [Configure HSMs and certificate realms](#configure-hsms-and-certificate-realms).
 
 ## Configure HSMs and certificate realms
+
+{{< alert title="Warning" color="warning" >}}OpenSSL 1.1 no longer supports FIPS and requires use of X.509 cryptographic operations. HSM hardware, and its corresponding driver, must be compatible with those requirements.{{< /alert >}}
 
 *Certificate realms* are abstractions of private keys and public key certificates, which mean that policy developers do not need to enter HSM-specific configuration such as slots and key labels. Instead, if a private key exists on an HSM, the developer can configure the certificate to show that its private key uses a specific certificate realm, which is simply an alias for a private key (for example, `JMS Keys`).
 
@@ -298,19 +255,9 @@ To configure public-private key pairs in the certificate store, select **Environ
 
 To add a public-private key pair, click **Add** on the right, and configure the following settings in the dialog:
 
-* **Alias**:
-
-Enter a unique name for the key pair.
-
-* **Algorithm**:
-
-Enter the algorithm used to generate the key pair. Defaults to `RSA`.
-
-* **Load**:
-
-Click to select the public key or private key files to use. The **Fingerprint** field is auto-populated when you load a public key.
-
-* The keys must be OpenSSL compatible PEM keys. RSA keys are supported, but DSA keys are not supported. The keys must not be passphrase protected.
+* **Alias**: Enter a unique name for the key pair.
+* **Algorithm**: Enter the algorithm used to generate the key pair. Defaults to `RSA`.
+* **Load**: Click to select the public key or private key files to use. The **Fingerprint** field is auto-populated when you load a public key. The keys must be OpenSSL compatible PEM keys. RSA keys are supported, but DSA keys are not supported. The keys must not be passphrase protected.
 
 ### Edit a key pair
 
@@ -351,13 +298,8 @@ To configure Pretty Good Privacy (PGP) key pairs in the certificate store, selec
 
 To add a PGP public-private key pair, click the **Add** on the right, and configure the following settings in the dialog:
 
-**Alias**:
-
-Enter a unique name for the PGP key pair.
-
-**Load**:
-
-Click **Load** to select the public key and private key files to use.
+**Alias**: Enter a unique name for the PGP key pair.
+**Load**: Click **Load** to select the public key and private key files to use.
 
 The PGP keys added must not be passphrase protected.
 
