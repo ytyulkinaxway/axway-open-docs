@@ -1,11 +1,10 @@
 {
-    "title": "Register REST APIs in API Manager",
-    "linkTitle": "Register REST APIs",
-    "weight": "50",
-    "date": "2019-09-17",
-    "description": "Create or import a back-end REST API in API Manager."
+"title": "Register REST APIs in API Manager",
+  "linkTitle": "Register REST APIs",
+  "weight": "50",
+  "date": "2019-09-17",
+  "description": "Create or import a back-end REST API in API Manager."
 }
-
 API owners can use the API Manager web interface to register back-end REST APIs. You can manually create a new back-end API, or import a definition for an existing API (for example, in Swagger, OAS3, or WSDL format). Using API Manager to register REST APIs means that you can register APIs in a browser, in multiple formats, without any service outage.
 
 When a back-end API is registered, you can then virtualize it as a publicly exposed front-end API. Registered and virtualized APIs are governed by the API Gateway using configured policies. API owners and API administrators can use API Manager to manage registered APIs, and API consumers can use API Manager or API Portal to consume virtualized APIs in their applications.
@@ -50,14 +49,16 @@ To automatically register an existing back-end REST API in API Manager, perform 
 
 1. Click the **API Registration** > **Backend API** view in API Manager.
 2. Click **New API** and select one of the following:
-    * **Import Swagger API**: Import an API in Swagger format. Only JSON format is supported for Swagger API definition files. For more details on Swagger, see [http://swagger.io](http://swagger.io/).
-    * **Import WADL API**: Import an API in Web Application Description Language (WADL) format. For more details on WADL, see <https://wadl.java.net/>.
+
+   * **Import Swagger API**: Import an API in Swagger format. Only JSON format is supported for Swagger API definition files. For more details on Swagger, see [http://swagger.io](http://swagger.io/).
+   * **Import WADL API**: Import an API in Web Application Description Language (WADL) format. For more details on WADL, see <https://wadl.java.net/>.
 3. In the **Import API** dialog, complete the following:
-    * **Source**: Select the source type from the list (for example, Swagger, WADL definition file or URL).
-    * **File** or **URL**: Click the browse button to select the definition file, or enter the URL.
-    * **API Name**: A user-friendly name for the API (for example, `Test API`).
-    * **Organization**: Select the organization from the list (for example, **Acme Inc**).
-    * **Authentication**: For URL-based APIs only, enter a **User name** and **Password** if required.
+
+   * **Source**: Select the source type from the list (for example, Swagger, WADL definition file or URL).
+   * **File** or **URL**: Click the browse button to select the definition file, or enter the URL.
+   * **API Name**: A user-friendly name for the API (for example, `Test API`).
+   * **Organization**: Select the organization from the list (for example, **Acme Inc**).
+   * **Authentication**: For URL-based APIs only, enter a **User name** and **Password** if required.
 
 When the REST API has been imported, it is displayed as read only in API Manager. The following example shows two imported APIs based on WADL and Swagger definitions:
 
@@ -74,10 +75,11 @@ To import an existing web service-based back-end API in API Manager, perform the
 1. Click the **API Registration** > **Backend API** view in API Manager.
 2. Click **New API** > **Import WSDL API**.
 3. In the **Import Web Service** dialog, complete the following:
-    * **URL**: Enter the URL for the web service. For example, `http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL`.
-    * **API Name**: A user-friendly name for the API (for example, `Weather API`).
-    * **Organization**: Select the organization from the list (for example, **Acme Inc**).
-    * **Authentication**: For URL-based APIs only, enter a **User name** and **Password** if required.
+
+   * **URL**: Enter the URL for the web service. For example, `http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL`.
+   * **API Name**: A user-friendly name for the API (for example, `Weather API`).
+   * **Organization**: Select the organization from the list (for example, **Acme Inc**).
+   * **Authentication**: For URL-based APIs only, enter a **User name** and **Password** if required.
 4. Click **Import** to import the API into the catalog.
 
 ### Limitations of web services support
@@ -113,16 +115,17 @@ To import an existing back-end REST or SOAP API that is already deployed on an 
 1. Click the **API Registration** > **Backend API** view in API Manager.
 2. Click **New API** > **Import API from Topology**.
 3. In the **Import from Topology** dialog, complete the following required settings:
-    * **Host**: Enter the Admin Node Manager host name (for example, `localhost`).
-    * **Port**: Enter the Admin Node Manager port number (for example, `8090`).
-    * **Login Name**: Enter your Admin Node Manager login name.
-    * **Password**: Enter your Admin Node Manager password.
-    * **Group**: Select the API Gateway group name (for example, **AcmeGatewayGroup**).
-    * **Instance**: Select the API Gateway instance name (for example, **AcmeGateway**).
-    * **Service Type**: Select **REST API** or **SOAP service**.
-    * **Service**: Select the API Gateway service name (for example, **AcmePayment**.
-    * **API name**: Enter the API name (for example, **Acme Payment API**).
-    * **Organization**: Select the organization (for example **Acme Inc**).
+
+   * **Host**: Enter the Admin Node Manager host name (for example, `localhost`).
+   * **Port**: Enter the Admin Node Manager port number (for example, `8090`).
+   * **Login Name**: Enter your Admin Node Manager login name.
+   * **Password**: Enter your Admin Node Manager password.
+   * **Group**: Select the API Gateway group name (for example, **AcmeGatewayGroup**).
+   * **Instance**: Select the API Gateway instance name (for example, **AcmeGateway**).
+   * **Service Type**: Select **REST API** or **SOAP service**.
+   * **Service**: Select the API Gateway service name (for example, **AcmePayment**.
+   * **API name**: Enter the API name (for example, **Acme Payment API**).
+   * **Organization**: Select the organization (for example **Acme Inc**).
 4. Click **Import** to import the API into the catalog.
 
 ## Manually register a new back-end REST API
@@ -132,39 +135,44 @@ To manually register a new back-end REST API in API Manager, perform the followi
 1. Click the **API Registration** > **Backend API** view in API Manager.
 2. Click **New API** > **New**.
 3. In the **API** tab, complete the following general details:
-    * **API name**: Enter a required name for the API (for example, **Acme API**).
-    * **Service type**: Enter a service type for the API (for example, defaults to **REST**).
-    * **Organization**: Select a required organization for the API (for example, **Acme Inc**).
-    * **Backend URL**: Select a back-end URL (Available only for OAS3 APIs with multiple backends).
-    * **Base path URL**: Enter a resource path. Defaults to `http://basepath.org`.
-        * Do not use spaces or the URL encoded `%20` in the base path URL.
-    * **Summary**: Enter an optional summary for the API to display in the **API Catalog**.
-    * **Resource path**: Enter a resource path for the API. Defaults to `/api`.
-    * **API version**: Enter an optional version number for the API. Defaults to `1.0`.
-    * **Description**: Click the **Edit** tab, and enter an optional description for the API.
+
+   * **API name**: Enter a required name for the API (for example, **Acme API**).
+   * **Service type**: Enter a service type for the API (for example, defaults to **REST**).
+   * **Organization**: Select a required organization for the API (for example, **Acme Inc**).
+   * **Backend URL**: Select a back-end URL (Available only for OAS3 APIs with multiple backends).
+   * **Base path URL**: Enter a resource path. Defaults to `http://basepath.org`.
+
+     * Do not use spaces or the URL encoded `%20` in the base path URL.
+   * **Summary**: Enter an optional summary for the API to display in the **API Catalog**.
+   * **Resource path**: Enter a resource path for the API. Defaults to `/api`.
+   * **API version**: Enter an optional version number for the API. Defaults to `1.0`.
+   * **Description**: Click the **Edit** tab, and enter an optional description for the API.
 
 ## Create REST API methods
 
 To add a REST API method to a newly registered API, perform the following steps:
 
 1. On the **API Methods** tab, complete the following details:
-    * **Method Name**: Enter a required name for the API method (for example, `GetProducts`), and enter an optional **Method summary**.
-    * **Verb**: Enter a required HTTP verb for the API method. Defaults to `GET`.
-    * **Path**: Enter the path for the method. Defaults to `/`.
-    * **Description**: Click the **Edit** tab, and enter an optional description for the API.
+
+   * **Method Name**: Enter a required name for the API method (for example, `GetProducts`), and enter an optional **Method summary**.
+   * **Verb**: Enter a required HTTP verb for the API method. Defaults to `GET`.
+   * **Path**: Enter the path for the method. Defaults to `/`.
+   * **Description**: Click the **Edit** tab, and enter an optional description for the API.
 2. To add a parameter exposed by the API method, click the add button in the **PARAMETERS** section, and complete the following details:
-    * **NAME**: Enter a required name for the parameter (for example, `customer_name`).
-    * **DESCRIPTION**: Enter an optional description for the parameter.
-    * **TYPE**: Select the parameter type (for example, `query`, `path`, `form`, `body`, or `header`). Defaults to `query`.
-    * **DATA TYPE**: Select the parameter data type (for example, `string`, `int`, `boolean`, and so on). Defaults to `string`.
-    * **REQUIRED**: Select whether the parameter is required. Defaults to `No`.
-    * **ALLOW MULTIPLE**: Select whether multiple parameters are allowed. Defaults to `No`.
+
+   * **NAME**: Enter a required name for the parameter (for example, `customer_name`).
+   * **DESCRIPTION**: Enter an optional description for the parameter.
+   * **TYPE**: Select the parameter type (for example, `query`, `path`, `form`, `body`, or `header`). Defaults to `query`.
+   {{% alert title="" %}}The [Swagger specification](https://swagger.io/docs/specification/2-0/describing-request-body/) only allows a method to have one `body` parameter.{{% /alert %}}
+   * **DATA TYPE**: Select the parameter data type (for example, `string`, `int`, `boolean`, and so on). Defaults to `string`.
+   * **REQUIRED**: Select whether the parameter is required. Defaults to `No`.
+   * **ALLOW MULTIPLE**: Select whether multiple parameters are allowed. Defaults to `No`.
 3. To specify content types that can be consumed by the API method, click the plus (+) button in the **Consumes content-type**
-    section, and enter the content type. For example, `application/xml`, `text/plain`, and so on. Defaults to `application/json`.
+   section, and enter the content type. For example, `application/xml`, `text/plain`, and so on. Defaults to `application/json`.
 4. To specify content types that can be produced by the API method, click the plus (+) button in the **Produces content-type**
-    section, and enter the content type. For example, `application/xml`, `text/plain`, and so on. Defaults to `application/json`.
+   section, and enter the content type. For example, `application/xml`, `text/plain`, and so on. Defaults to `application/json`.
 5. To specify response codes that can be produced by the API method, click the plus (+) button in the **Response codes**
-    section, and select the response codes (for example, `Create codes (201, 403, 500)`).
+   section, and select the response codes (for example, `Create codes (201, 403, 500)`).
 6. To add more API methods, click the add button on the top left.
 
 ## Create the REST API data model
