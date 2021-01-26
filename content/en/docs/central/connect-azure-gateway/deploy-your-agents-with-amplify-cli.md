@@ -30,6 +30,11 @@ Learn how to quickly install and run your Discovery and Traceability agents with
 
 For more information, see [Install AMPLIFY Central CLI](/docs/central/cli_central/cli_install/).
 
+## Azure prerequisistes
+
+* An Azure Service principal
+* An Azure Event Hub
+
 ## Installing the agents
 
 ### Step 1: Folder preparation
@@ -70,10 +75,71 @@ amplify central install agents --region=EU
 
 The installation procedure will prompt for the following:
 
-1. Select the type of gateway you want to connect to (Azure gateway in this scenario).
+1. Select the type of gateway you want to connect to (Azure API Gateway in this scenario).
 2. Platform connectivity:
-   * **environment**: can be an existing environment or a new one that will be created by the installation procedure
-   * **team**: can be an existing team or a new one that will be created by the installation procedure
-   * **service account**: can be an existing service account or a new one that will be created by the installation procedure. If you choose an existing one, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the AMPLIFY Platform. If you choose to create a new one, the generated private and public keys will be provided.
-3. Select the agents you want to install: Discovery / Traceability / all.
-4. Azure connectivity
+   * **Environment**: can be an existing environment or a new one that will be created by the installation procedure
+   * **Team**: can be an existing team or a new one that will be created by the installation procedure
+   * **Service account**: can be an existing service account or a new one that will be created by the installation procedure. If you choose an existing one, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the AMPLIFY Platform. If you choose to create a new one, the generated private and public keys will be provided.
+3. Select the agent(s) you want to install: Discovery / Traceability / All Agents.
+4. Azure Discovery Agent Configuration Setup options:
+   * **Tenant ID** can be found in the *Directory ID* box on the Properties page
+   * **Subscription ID** is a GUID that uniquely identifies your subscription to use Azure services
+   * **Service Principal Client ID** represents the application that needs to deploy or configure resources through Azure Resource Manager
+   * **Service Principal Client Secret** is the authentication used for service principals
+   * **Resource Group Name** is the representation of group related resources for your application
+   * **API Management Service Name** refers to both the service and the corresponding Azure resource
+5. Azure Traceability Agent Configuration Setup options:
+   * **Event Hub Namespace** is the management container for one of multiple Event Hub instances
+   * **Event Hub Name** associated with the subscription
+   * **Policy Name** associated with the Event Hub
+   * **Policy Key** associated with the Policy Name
+6. Traceability module connectivity:
+   * Traceability Agent protocol (Lumberjack (tcp) by default recommended for production environment or HTTPs recommended for testing purpose), select between `Lumberjack`, or `HTTPS`
+
+Once you have answered all questions, the agents' configuration files are updated, the Amplify Central resources are created and the key pair is generated (if you chose to create a new service account).
+
+The current directory contains the following files:
+
+```shell
+da_env_vars.env                   
+ta_env_vars.env                   
+private_key.pem          *newly created service account only
+public_key.pem           *newly created service account only
+
+```
+
+`da_env_vars.env` / `ta_env_vars.env` contains the specific configuration you entered during the installation procedure. These files are required to start the agents.
+
+`private_key.pem` and `public_key.pem` are the generated key pair the agent will use to securely talk with the AMPLIFY Platform (if you choose to let the installation generate them).
+
+### Step 4: Deploy the agent in Docker Container
+
+The installation summary contains the Docker commands needed to finish the installation.
+
+Example:
+
+```shell
+To utilize the agents, pull the latest Docker images and
+run them using the appropriate supplied environment files, (da_env_vars.env & ta_env_vars.env):
+
+  - Pull the latest Discovery Agent:
+    docker pull beano.swf-artifactory.lab.phx.axway.int/beano/azure-discovery-agent:latest
+  - Pull the latest Traceability Agent:
+    docker pull beano.swf-artifactory.lab.phx.axway.int/beano/azure-traceability-agent:latest
+
+  - Run the latest Discovery Agent:
+    docker run --env-file "$(pwd)"/da_env_vars.env -v "$(pwd)":/keys \
+        beano.swf-artifactory.lab.phx.axway.int/beano/azure-discovery-agent:latest
+  - Run the latest Traceability Agent:
+    docker run --env-file "$(pwd)"/da_env_vars.env -v "$(pwd)":/keys \
+        beano.swf-artifactory.lab.phx.axway.int/beano/azure-traceability-agent:latest
+```
+
+* Pull the latest images of the Discovery/Traceability Agents:
+    * These two commands pull the latest released agents from axway-docker-public-registry.bintray.io.
+* Run the latest images of the Discovery/Traceability Agents:
+    * These two commands run the Docker Containers using the created environment files, and mount the directory of the location of the appropriate keys, `public_key.pem` & `private_key.pem`, which were either generated during the installation, or available from an existing service account.
+
+Once the pull and run commands are completed, the agents should be running in the Docker infrastructure.
+
+See [Connect Azure Gateway](/docs/central/connect-azure-gateway/) for additional information about connecting Azure API Management Services to Amplify Central.
