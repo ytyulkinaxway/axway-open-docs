@@ -77,7 +77,7 @@ Other ports which may need to be opened so that the Agent may monitor API Gatewa
 | Host             | Port           | Protocol | Data                                                                                                   |
 | ---------------- | -------------- | -------- | ------------------------------------------------------------------------------------------------------ |
 | API Manager Host | 8075 (default) | HTTPS    | API Discovery                                                                                          |
-| API Gateway Host | 8090 (default) | HTTPS    | API Transaction Header data (see [APIGATEWAY GETHEADERS](/docs/central/connect-api-manager/agent-variables/#specific-variables-for-traceability-agent) |
+| API Gateway Host | 8090 (default) | HTTPS    | API Transaction Header data (see [APIGATEWAY GETHEADERS](/docs/central/connect-api-manager/agent-variables/#specific-variables-for-traceability-agent)) |
 
 **Inbound (used for the agent status server)**:
 
@@ -87,7 +87,7 @@ Other ports which may need to be opened so that the Agent may monitor API Gatewa
 
 ## Subscription notifications
 
-SMTP and/or a webhook URL can be set up to send subscription notifications on both subscribe and unsubscribe actions.  You can find the configuration to set up the SMTP or webhook URL at [Deploy your agents](/docs/central/connect-api-manager/deploy-your-agents/).
+SMTP and/or a webhook URL can be set up to send subscription notifications on both subscribe and unsubscribe actions.  You can find the configuration to set up the SMTP or webhook URL at [Deploy your agents](/docs/central/connect-api-manager/deploy-your-agents-with-amplify-cli/).
 
 ## Using proxies
 
