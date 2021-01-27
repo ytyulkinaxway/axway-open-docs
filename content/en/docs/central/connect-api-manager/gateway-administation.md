@@ -212,25 +212,25 @@ The SMTP Notification section defines how the agent manages email settings for s
 
 `authtype`: The authentication type based on the email server.  You may have to refer to the email server properties and specifications. This value defaults to NONE.
 
-`subscribe.subject`: Subject of the email notification for action subscribe. Default is **Subscription Notification**.
+`subscribe.subject`: Subject of the email notification for action subscribe. Default is `Subscription Notification`.
 
-`subscribe.body`: Body of the email notification for action subscribe. Default is **Subscription created for Catalog Item:  ${catalogItemName} ${authtemplate}**.
+`subscribe.body`: Body of the email notification for action subscribe. Default is `Subscription created for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a><br/>${authtemplate}<br/>`.
 
-`subscribe.oauth:` Body of the email notification for action subscribe on OAuth authorization is **Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=${clientID} and client_secret=${clientSecret}**.
+`subscribe.oauth:` Body of the email notification for action subscribe on OAuth authorization is `Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>${clientID}</b> and client_secret=<b>${clientSecret}</b>`.
 
-`subscribe.apikeys`: Body of the email notification for action subscribe on APIKey authorization is **Your API is secured using an APIKey credential:header:${keyHeaderName}/value:${key}**.
+`subscribe.apikeys`: Body of the email notification for action subscribe on APIKey authorization is `Your API is secured using an APIKey credential: header: <b>${keyHeaderName}</b> / value: <b>${key}</b>`.
 
-`unsubscribe.subject`: Subject of the email notification for action unsubscribe. Default is **Subscription Removal Notification**.
+`unsubscribe.subject`: Subject of the email notification for action unsubscribe. Default is `Subscription Removal Notification`.
 
-`unsubscribe.body`: Body of the email notification for action unsubscribe. Default is **Subscription for Catalog Item: ${catalogItemName} has been unsubscribed**.
+`unsubscribe.body`: Body of the email notification for action unsubscribe. Default is `Subscription for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a> has been unsubscribed`.
 
-`subscribeFailed.subject`: Subject of the email notification for action subscribe failed. Default is **Subscription Failed Notification**.
+`subscribeFailed.subject`: Subject of the email notification for action subscribe failed. Default is `Subscription Failed Notification`.
 
-`subscribeFailed.body`: Body of the email notification for action subscribe failed. Default is **Could not subscribe to CatalogItem: ${catalogItemName}**.
+`subscribeFailed.body`: Body of the email notification for action subscribe failed. Default is `Could not subscribe to CatalogItem: <a href= ${catalogItemUrl}> ${catalogItemName}</a>`.
 
-`unsubscribeFailed.subject`: Subject of the email notification for action unsubscribe failed. Default is **Subscription Removal Failed Notification**.
+`unsubscribeFailed.subject`: Subject of the email notification for action unsubscribe failed. Default is `Subscription Removal Failed Notification`.
 
-`unsubscribeFailed.body` : Body of the email notification for action unsubscribe failed. Default is **Could not unsubscribe to Catalog Item: ${catalogItemURL} ${catalogItemName}**.
+`unsubscribeFailed.body` : Body of the email notification for action unsubscribe failed. Default is `Could not unsubscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a>`.
 
 #### Customizing email servers
 
@@ -303,25 +303,33 @@ subscriptions:
       fromAddress: fromAddress@outlook.com
       username: outlookuser
       password:
+```
+
+If you want to customize your SMTP email notifications to be something different than the defaults, you can add to the configuration file as follows:
+
+```yaml
+subscriptions:
+  notifications:
+    smtp:
       subscribe:
         subject: Subscription Notification
         body: |
-          Subscription created for Catalog Item:  <a href= ${catalogItemUrl}> ${catalogItemName} </a> <br/>
+          Subscription created for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a><br/>${authtemplate}<br/>
           ${authtemplate}<br/>
         oauth: Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>${clientID}</b> and client_secret=<b>${clientSecret}</b>
-        apikeys: Your API is secured using an APIKey credential:header:<b>${keyHeaderName}</b>/value:<b>${key}</b>
+        apikeys: Your API is secured using an APIKey credential: header: <b>${keyHeaderName}</b> / value: <b>${key}</b>
       unsubscribe:
         subject: Subscription Removal Notification
         body: |
-          Subscription for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a> has been unsubscribed
+          Subscription for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a> has been unsubscribed
       subscribeFailed:
-        subject: Subscription Failed Notification
+        subject: Custom Subscription Failed Notification
         body: |
-          Could not subscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a> Error: ${message}
+          Could not subscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a> Error: ${message}
       unsubscribeFailed:
-        subject: Subscription Removal Failed Notification
+        subject: Custom Subscription Removal Failed Notification
         body: |
-          Could not unsubscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a>
+          Could not unsubscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a>
 ```
 
 #### Customizing log section (log)
@@ -397,22 +405,22 @@ subscriptions:
       subscribe:
         subject: Subscription Notification
         body: |
-            Subscription created for Catalog Item:  <a href= ${catalogItemUrl}> ${catalogItemName} </a> <br/>
+          Subscription created for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a><br/>${authtemplate}<br/>
           ${authtemplate}<br/>
         oauth: Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>${clientID}</b> and client_secret=<b>${clientSecret}</b>
-        apikeys: Your API is secured using an APIKey credential:header:<b>${keyHeaderName}</b>/value:<b>${key}</b>
+        apikeys: Your API is secured using an APIKey credential: header: <b>${keyHeaderName}</b> / value: <b>${key}</b>
       unsubscribe:
         subject: Subscription Removal Notification
         body: |
-          Subscription for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a> has been unsubscribed
+          Subscription for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a> has been unsubscribed
       subscribeFailed:
-        subject: Subscription Failed Notification
+        subject: Custom Subscription Failed Notification
         body: |
-          Could not subscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a> Error: ${message}
+          Could not subscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a> Error: ${message}
       unsubscribeFailed:
-        subject: Subscription Removal Failed Notification
+        subject: Custom Subscription Removal Failed Notification
         body: |
-          Could not unsubscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a>
+          Could not unsubscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a>
 
 log:
   level: info
