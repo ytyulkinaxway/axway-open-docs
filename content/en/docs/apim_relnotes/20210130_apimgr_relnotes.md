@@ -63,9 +63,7 @@ There are no major changes in this update.
 
 <!-- As part of our software development life cycle we constantly review our API Management offering. In this update, the following capabilities have been deprecated. -->
 
-In the [January 2020](/docs/apim_relnotes/20200130_apimgr_relnotes/) update, we have announced the deprecation of all the Antivirus filters in API Gateway, and that in July 2021 the filters will be removed from API Gateway.
-
-This is a reminder that in July 2021 we will remove the Antivirus filters from API Gateway. So, we recommend you to use the API Gateway's ICAP capability, which allows the gateway to integrate with ICAP capable external virus scanners.
+In the [January 2020](/docs/apim_relnotes/20200130_apimgr_relnotes/) update, we have announced the deprecation of all the Antivirus filters in API Gateway. This is a reminder that in July 2021 we will remove the Antivirus filters from API Gateway. So, we recommend you to use the API Gateway's ICAP capability, which allows the gateway to integrate with ICAP capable external virus scanners.
 
 ## Removed features
 
