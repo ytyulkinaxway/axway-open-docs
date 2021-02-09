@@ -85,6 +85,8 @@ The script uses the passphrase to encrypt the database password, which is now st
 
 Only the password is decrypted on each connection request, not the whole payload, so no significant performance impact is expected.
 
+If you need to update the encrypted password, you must first change the password for the database, then run the `apiportal_db_pass_encryption.sh` script again and provide the new database password to use.
+
 {{< alert title="Note" color="primary" >}}This option cannot be used in combination with [database secure connection](#disable-tls-1-0-and-tls-1-1-on-apache).{{< /alert >}}
 
 ## Limit the number of failed login attempts
