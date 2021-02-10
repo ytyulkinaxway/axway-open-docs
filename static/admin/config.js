@@ -359,7 +359,7 @@ const collections = [{
   description: 'All pages relating to AMPLIFY Unified Catalog.',
   format: 'frontmatter',
 }, {
-  ...docsDefaults('catalog/catalog_relnotes', 'catalog/catalog_relnotes'),
+  ...docsDefaults('catalog/catalog_relnotes', 'catalog'),
   name: 'catalog_relnotes',
   label: 'AMPLIFY Unified Catalog Release notes',
   label_singular: 'page in AMPLIFY Unified Catalog Release notes section',
