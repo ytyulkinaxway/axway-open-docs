@@ -214,7 +214,7 @@ You can verify signed tokens using a selector expression containing the value of
 * Fail with `reason: unknown header`, if the JWT token has a crit header list specified and you did not configured any list for your JWT verify filter.
 * Fail with `reason: crit header cannot be empty`, if the JWT token has an empty “crit” header list.
 
-**Claims**: In thi tab, you can select a policy that allows you to enable a claim. If a JWT Header claim policy is defined, the validation of the claim works as follows:
+**Claims**: You can select a policy that allows you to validate a claim. If a JWT Header claim policy is defined, the validation of the claim works as follows:
 
 * Successful: The policy will be invoked and displayed in the policy execution path, in [Traffic monitor](/docs/apim_reference/monitor_traffic_events_metrics/).
 * Fail: The failure path from the JWT Verify filter is executed.
