@@ -5,18 +5,37 @@
   "date": "2020-10-02",
   "description": "System property change log for all supported versions of API Gateway and API Manager since version 7.5.3."
 }
-Traditionally, the JVM.xml file has allowed customers to tweak the behavior of the API Gateway by defining Java system properties. This page lists all of the Axway-defined Java system properties, per version, from 7.5.3 up to the present, and explains their purpose and the context in which they are employed.
+Traditionally, the `JVM.xml` file has allowed customers to tweak the behavior of the API Gateway by defining Java system properties.
 
-* The first table, [7.5.3](#753), contains the all the properties created in this version.
+This page lists all of the Axway-defined Java system properties, per version, from 7.5.3 up to the present, and it explains their purpose and the context in which they are employed.
+
+* The first table, [7.5.3](#753), contains all the properties created in this version.
 * All subsequent tables contain newly added properties introduced in that specific version, or service pack, and the assumption is that properties listed in previous tables are inherited.
 * Note that because of fix ports, some properties might be duplicated among the three versions: 7.5.3, 7.6.2, and 7.7.
+
+{{% alert title="Caution" color="warning" %}}
+Do not change the system `jvm.xml` file located at `/apigateway/system/conf`. This file is replaced during both updates and upgrades, so any changes made to it will be lost. The `jvm.xml` file defines *include* points that allow you to add custom configuration, which will not be lost when this file is replaced.
+{{% /alert %}}
+
+You must update the extension `jvm.xml` file, located at `/apigateway/groups/[group X]/[instance Y]/conf`, to apply settings to a single API Gateway instance, and you must update the extension `jvm.xml` file, located at `/apigateway/conf/`, to apply changes to all API Gateway instances on the local machine.
+
+These files do not exist by default, so you must create them first. Both files require that all settings are wrapped in a single `<ConfigurationFragment>` tag, for example:
+
+```
+<ConfigurationFragment>
+<!-- Your notes, e.g. a link to this page. -->
+<VMArg name="-Dsome.property=some.value"/>
+</ConfigurationFragment>
+```
+
+It is best practice to add XML comments as a reminder for what the setting does, and why the change in behavior is required.
 
 ## 7.5.3
 
 All Java system properties that exist in the code up to and including the 7.5.3 release.
 
 | System property                           | Context                                                        | Description  |
-| ----------------------------------------- | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ----------------------------------------- | -------------------------------------------------------------- |---           |
 | OAUTH_DIGEST_ALGORITHM                    | API Gateway; OAuth                                             | Specifies the digest algorithm used to store and retrieve tokens from a datastore. When a token is generated it will be hashed with the specified algorithm for storage, when a token is received its value is hashed to retrieve the token properties. The token is also used to store OAuth request state during a three-legged flow. A state ID is generated and the state of a request is stored in a cache against the hash of the state ID. The state can be retrieved in a later request by hashing the state ID and looking it up in the cache. Default value: SHA1. |
 | oam.compatibility.mode                    | API Gateway; Oracle Access Manager; Filter Runtime             | Specifies the Oracle Access Manager server version to which the Oracle Access Manager filter connects. Possible values: OAM_10G, OAM_11G (default value).                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | oam.install.dir                           | API Gateway; Oracle Access Manager; Filter Runtime             | Specifies the path to the OAM Access SDK directory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
