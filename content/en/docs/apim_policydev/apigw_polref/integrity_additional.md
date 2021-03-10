@@ -207,6 +207,22 @@ You can configure the following optional setting in the **JWK from external sour
 **JSON web key**:
 You can verify signed tokens using a selector expression containing the value of a `JSON Web Key (JWK)`. The return type of the selector expression must be of type String.
 
+**Detached Signature**: The format of a detached JWS is `<header>..<signature>`. When a JWS is in a detached format, its payload is omitted from the JWS and it is sent separately. The payload missing from the JWS must be added to the Message via a selector expression, which is typically a `${content.body}`, but it is configurable in the filter.
+
+The detached signature is disabled by default in the JWT Verify filter. To enable it, select **Support detached payload** and specify the location of the payload, which defaults to `${content.body}`.
+
+The validation of the detached signature works as follows:
+
+* When detached signatures are enabled and a JWS token with a detached signature is processed at runtime, the filter will:
+    * pass, if the correct payload can be found in the location specified.
+    * fail, if the correct payload cannot be found in the location specified.
+* When detached signatures are disabled and a JWS token with a detached signature is processed at runtime, the filter will fail.
+* When detached signatures are either enabled or disabled, and a compact JWS token is processed at runtime, the filter will pass if the token is correct.
+
+For more information about detached JWS, see [Appendix F of JWS RFC 7515](https://tools.ietf.org/html/rfc7515#appendix-F).
+
+{{< alert title="Note" color="primary" >}}When using detached signatures, the detached payload must not be base64 encoded. You must add a `"b64: false"` header claim to the JWS token to enforce this behavior. See [JWS Unencoded Payload Option RFC 7797](https://tools.ietf.org/html/rfc7797) for more information.{{< /alert >}}
+
 **Critical Headers**: You can add a list of acceptable “crit” headers (list of JWT claims), which will be validated against the list of claims present in the “crit” header of the JWT token being processed. The validation works as follows:
 
 * Successful, if all claims present in the “crit” header list of the JWT token match the lists you have configured.
