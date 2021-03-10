@@ -1,9 +1,9 @@
 {
 "title": "Install an Apache Cassandra database",
-"linkTitle": "Install Apache Cassandra",
-"weight":"8",
-"date": "2019-10-02",
-"description": "Install Apache Cassandra to store data for API Manager or API Gateway client registry (API key and OAuth)."
+  "linkTitle": "Install Apache Cassandra",
+  "weight": "8",
+  "date": "2019-10-02",
+  "description": "Install Apache Cassandra to store data for API Manager or API Gateway client registry (API key and OAuth)."
 }
 
 Apache Cassandra is required to store data for API Manager (for example, API catalog, quotas, and client registry) or API Gateway client registry (API key and OAuth). In addition, Cassandra is optional to store data for the following API Gateway components:
@@ -33,7 +33,7 @@ This section describes Cassandra-specific prerequisites in addition to the gener
 
 ### Production environment requirements
 
-API Gateway supports the following in production:
+API Gateway supports the following in a production environment:
 
 * **Operating systems**:
     * All supported Linux platforms
@@ -47,9 +47,15 @@ For details on requirements for high availability, see [Configure a Cassandra HA
 
 The default API Gateway installation includes a 64-bit OpenJDK JRE (`apigateway/Linux.x86_64/jre/bin`). You can configure Cassandra to use the API Gateway JRE (for example, in a demo environment), but it is recommended that you install a separate JRE (OpenJDK or Oracle) for use with Cassandra. When using a separate JRE, use the same version (or at least the same major version) as the API Gateway uses.
 
+### Cassandra hardware
+
+Cassandra is designed to run on commodity distributed drives, and therefore it is strongly recommended not to use a storage area network (SAN) for Cassandra deployments.
+
+For more information on Cassandra hardware choice recommendations, see [Hardware choices]( https://cassandra.apache.org/doc/latest/operating/hardware.html).
+
 ## Install Apache Cassandra
 
-{{< alert title="Note" color="primary" >}}Apache Cassandra 2.2.12 is installed by default in an API Gateway Standard or Complete setup.{{< /alert >}}
+{{< alert title="Note" color="primary" >}}Apache Cassandra 2.2.12 is installed by default in an API Gateway standard or Complete setup.{{< /alert >}}
 
 ### Install Cassandra in GUI mode
 
