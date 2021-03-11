@@ -1,11 +1,10 @@
 {
 "title": "General settings in Policy Studio",
-"linkTitle": "General settings",
-"weight":"70",
-"date": "2019-10-18",
-"description": "Set global configuration settings in Policy Studio to optimize the behavior of API Gateway for your environment."
+  "linkTitle": "General settings",
+  "weight": "70",
+  "date": "2019-10-18",
+  "description": "Set global configuration settings in Policy Studio to optimize the behavior of API Gateway for your environment."
 }
-
 To configure these settings, in the Policy Studio tree, select the **Server Settings** node, and click **General**. To confirm updates to these settings, click **Apply changes** at the bottom right of the screen.
 
 After changing any settings, you must deploy to API Gateway for the changes to be enforced. You can do this in the Policy Studio main menu by selecting **Server > Deploy**. Alternatively, click the **Deploy** button in the toolbar, or press F6.
@@ -26,7 +25,7 @@ The **Active Timeout** value is also used as a wait time when the maximum number
 
 **Cache refresh interval**: Configures the number of seconds that the server caches data loaded from an external source before refreshing data from that source. Defaults to `5` seconds. To disable the cache, set this to `0`. This cache applies to attributes retrieved from external databases, LDAP directories, internal user stores, and IBM Tivoli. It also applies to query results for authentication against LDAP or databases, and to certificate revocation lists for certificate validation (CRL and XKMS only).
 
-**Transaction timeout**: A configurable transaction timeout that detects slow HTTP attacks (slow header write, slow body write, slow read) and rejects any transaction that keeps the worker threads occupied for an excessive amount of time. The default value is `240000` milliseconds. You can override this setting in the **Remote host** settings**. For more details, see [Configure remote host settings](/docs/apim_policydev/apigw_gw_instances/general_remote_hosts/).
+**Transaction timeout**: A configurable transaction timeout that detects slow HTTP attacks (slow header write, slow body write, slow read) and rejects any transaction that keeps the worker threads occupied for an excessive amount of time. The default value is `240000` milliseconds. You can override this setting in the **Remote host** settings. For more details, see [Configure remote host settings](/docs/apim_policydev/apigw_gw_instances/general_remote_hosts/).
 
 **Maximum sent bytes per transaction**: The maximum number of bytes sent in a transaction. This is the maximum length for the transmitted data on transactions that API Gateway can handle. This helps to prevent denial-of-service (DoS) attacks. This setting limits the entire amount of data sent over the link, regardless of whether it consists of body, headers, or request line. The default value is `20` MB (`20971520` bytes). You can override this setting in the **Remote host** settings. For more details, see [Configure remote host settings](/docs/apim_policydev/apigw_gw_instances/general_remote_hosts/).
 
@@ -50,11 +49,13 @@ This setting applies to outgoing connections, and its value can be overridden on
 
 **Token drift time**: Specifies the number of seconds drift allowed for WS-Security tokens. This is important in cases where API Gateway is checking the date on incoming WS-Security tokens. It is likely that the machine on which the token was created is out-of-sync with the machine on which API Gateway is running. The drift time allows for differences in the respective machine clock times.
 
-**Allowed number of operations to limit XPath transforms**: Specifies the total number of node operations permitted in XPath transformations. Complex XPath expressions (or those constructed together with content to produce expensive processing) might lead to a denial-of-service risk. Defaults to `4096`.
+**Allowed number of operations to limit XPath transforms**: Specifies the total number of node operations permitted in XPath transformations done by LibXML. Defaults to `4096`. Complex XPath expressions (or those constructed together with content to produce expensive processing) might lead to a denial-of-service risk. The number of operations required scales with both the size of the XML document and the complexity of the XPath expression, but it can be reduced to improve performance or get under the limit. When this limit is surpassed, it results in an **XPath complexity limit exceeded** error, indicating that this setting must be increased to permit the operation.
 
-**Input encodings**: Click the browse button to specify the HTTP content encodings that API Gateway instance can accept from peers. The available content encodings include `gzip` and `deflate`. Defaults to no context encodings. For more details, see [Compressed content encoding](https://github.com/scaro-axway/axway-open-docs/blob/cms/scaro-axway/axway-open-docs/apigw_gw_instances/general_services/docs/apim_policydev/apigw_gw_instances/common_compress_encoding). This setting can be overridden at **HTTP interface** level and at **Remote Host** level.
+There is no way to determine how high a limit must be for a particular operation other than repeated testing. This number should be tuned by slowly increasing it in increments of a few thousand while monitoring the performance to ensure that the chosen XPath evaluation will not take an unreasonable amount of time.
 
-**Output encodings**: Click the browse button to specify the HTTP content encodings that API Gateway instancecan apply to outgoing messages. The available content encodings include `gzip` and `deflate`. Defaults to no context encodings. For more details, see [Compressed content encoding](https://github.com/scaro-axway/axway-open-docs/blob/cms/scaro-axway/axway-open-docs/apigw_gw_instances/general_services/docs/apim_policydev/apigw_gw_instances/common_compress_encoding). This setting can be overridden at **HTTP interface** level and at **Remote Host** level.
+**Input encodings**: Click the browse button to specify the HTTP content encodings that API Gateway instance can accept from peers. The available content encodings include `gzip` and `deflate`. Defaults to no context encodings. For more details, see [Compressed content encoding](/docs/apim_policydev/apigw_gw_instances/common_compress_encoding). This setting can be overridden at **HTTP interface** level and at **Remote Host** level.
+
+**Output encodings**: Click the browse button to specify the HTTP content encodings that API Gateway instancecan apply to outgoing messages. The available content encodings include `gzip` and `deflate`. Defaults to no context encodings. For more details, see [Compressed content encoding](/docs/apim_policydev/apigw_gw_instances/common_compress_encoding). This setting can be overridden at **HTTP interface** level and at **Remote Host** level.
 
 **Server's SSL cert's name must match name of requested server**: Ensures that the certificate presented by the server matches the name of the host address being connected to. This prevents host spoofing and man-in-the-middle attacks. This setting is enabled by default.
 
@@ -66,7 +67,9 @@ This setting applies to outgoing connections, and its value can be overridden on
 
 The MIME settings list a number of default common content types that are used when transmitting Multipurpose Internet Mail Extensions (MIME) messages. You can configure API Gateway's **Content Type** filter to accept or block messages containing specific MIME types. Therefore, the contents of the MIME types library act as the set of all MIME types that API Gateway can filter messages with.
 
-All of the MIME types listed in the table are available for selection in the **Content Type** filter. For example, you can configure this filter to accept only XML-based types, such as `application/xml`, `application/*+xml`, `text/xml`, and so on. Similarly, you can block certain MIME types (for example, `application/zip`, `application/octet-stream`, and `video/mpeg`).
+All of the MIME types are available for selection in the **Content Type** filter. For example, you can configure this filter to accept only XML-based types, such as `application/xml`, `application/*+xml`, `text/xml`, and so on. Similarly, you can block certain MIME types (for example, `application/zip`, `application/octet-stream`, and `video/mpeg`).
+
+The file extensions are used to set the `Content-Type` headers returned by a [Static Content Provider](/docs/apim_policydev/apigw_gw_instances/general_services). If the file extension is not listed in the MIME settings configuration, a default `Content-Type` of `application/octet-stream` will be sent by the Static Content Provider.
 
 ### MIME settings configuration
 
