@@ -1,9 +1,9 @@
 {
 "title": "Upgrade from API Gateway 7.5.x or 7.6.x",
-"linkTitle": "Upgrade from API Gateway 7.5.x or 7.6.x",
-"weight": 20,
-"date": "2019-10-07",
-"description": "Upgrade from API Gateway 7.5.1 or later to API Gateway 7.7."
+  "linkTitle": "Upgrade from API Gateway 7.5.x or 7.6.x",
+  "weight": 20,
+  "date": "2019-10-07",
+  "description": "Upgrade from API Gateway 7.5.1 or later to API Gateway 7.7."
 }
 In API Gateway 7.5.1 and later versions, the Apache Cassandra database is fully separated from the API Gateway. This means that the data contained in Apache Cassandra does not need to be exported and imported along with the other configuration data when upgrading.
 
@@ -87,15 +87,25 @@ If you are using a metrics database with API Manager and not API Gateway Analyti
 
 #### Task 6 - Identify components and configuration requiring manual upgrade steps
 
-Not all components and configuration from earlier API Gateway versions can be upgraded automatically with the `sysupgrade` command. However, you can upgrade these items manually.
+Not all components and configuration from earlier API Gateway versions can be upgraded automatically with the `sysupgrade` command. In this case, you must upgrade these items manually.
 
 Check your old installation and identify if you are using any of the following:
 
-* Redaction files – For more information on migrating redaction files, contact Axway Support.
-* Customizations to OAuth sample `.md` files – For more information on upgrading these files, contact Axway Support.
-* API firewalling – For more information on upgrading API firewalling, contact Axway Support.
-* QuickStart tutorial – For more information on migrating the QuickStart tutorial, see [Migrate the QuickStart tutorial](#migrate-the-quickstart-tutorial).
-* API Gateway services – If you are running API Gateway processes as services on Linux, you must upgrade these manually. See [Upgrade services](#upgrade-services).
+* **Redaction files** – You must copy the `redaction.xml` file from your old installalation to the new gateway, then include it from the `service.xml` file as described in [Enable redaction for an API Gateway](/docs/apim_administration/apigtw_admin/admin_redactors/#enable-redaction-for-an-api-gateway) and validate your configuration.
+* **Customizations to OAuth sample .md files** – For more information on how to set up OAuth, see [Configure OAuth](/docs/apim_policydev/apigw_oauth/).
+* **API firewalling** – You must set up API firewalling again using the configuration from the old installation. For more information, see [API Firewalling](/docs/apim_administration/apigtw_admin/admin_waf/).
+* **QuickStart tutorial** – For more information on migrating the QuickStart tutorial, see [Migrate the QuickStart tutorial](#migrate-the-quickstart-tutorial).
+* **API Gateway services** – If you are running API Gateway processes as services on Linux, you must upgrade these manually. See [Upgrade services](#upgrade-services).
+* **Java file changes** - If you have customized Java files like `cacerts` or `java.security`, you must apply these changes again, in the new installation.
+    Do not simply copy these files to the new installation as they might have other changes, like newer copies of CA certificates. Instead, you must redo your customization on the new copies of these files in the new installation.
+* **JVM settings changes** - Any custom properties from `/apigateway/system/conf/jvm.xml` is lost. You must move all customized JVM properties you wish to preserve to one of the separate include files as described in [System property changes](/docs/apim_reference/system_props/) and [KB 167287](https://support.axway.com/kb/167287/language/en). Settings, which are correctly separated, are preserved during upgrade, and the system JVM file is overwritten.
+
+All Node Manager customizations are lost on upgrade, and they must be redone from scratch in the new installation. Examples of such customizations include:
+
+* RBAC and integration with [OpenLDAP](/docs/apim_administration/apigtw_admin/general_rbac_openldap/) or [Active Directory](/docs/apim_administration/apigtw_admin/eneral_rbac_ad_ldap/).
+* [HA setup for Admin Node Managers](/docs/apim_administration/apigtw_admin/admin_node_mngr/index.html#admin-node-manager-backup-and-disaster-recovery).
+* [Customizations to security headers on API Gateway Manager (8090)](/docs/apim_policydev/apigw_gw_instances/general_services/index.html#customize-http-security-headers).
+* [Changes to the Admin Node Manager certificate via managedomain](/docs/apim_reference/managedomain_ref/index.html#domain-ssl-certificates.)
 
 ### Checklist for the new API Gateway 7.7 installation
 
@@ -395,6 +405,14 @@ The configuration files are:
 * `trustStore.jks` - Truststore for SSO related HTTPS communications
 
 You must repeat this for each instance configured with SSO.
+
+## Support services
+
+The Axway Global Support team provides worldwide 24 x 7 support for customers with active support agreements.
+
+Email <mailto:support@axway.com> or visit Axway Support at <https://support.axway.com>.
+
+See [Get help with API Gateway](/docs/apim_administration/apigtw_admin/trblshoot_get_help/) for the information that you should be prepared to provide when you contact Axway Support.
 
 ## Where to go next
 
