@@ -1,5 +1,5 @@
 {
-  "title": "Run API Portal using Docker Compose",
+"title": "Run API Portal using Docker Compose",
   "linkTitle": "Run using Docker Compose",
   "weight": "50",
   "date": "2021-01-05",
@@ -9,8 +9,8 @@
 
 * [Docker Engine](https://docs.docker.com/engine/).
 * [Docker Compose](https://docs.docker.com/compose/).
-* API Portal Docker image, available from [Axway Support](https://support.axway.com).
-* API Portal Docker sample package, available from [Axway Support](https://support.axway.com).
+* API Portal Docker image, available from [Axway Support](https://support.axway.com/en/search/index/type/Downloads/q/API%20Portal%20/ipp/10/product/545/version/3036/subtype/89).
+* API Portal Docker sample package, available from [Axway Support](https://support.axway.com/en/search/index/type/Downloads/q/API%20Portal%20/ipp/10/product/545/version/3036/subtype/88).
 
 ## About Docker Compose
 
