@@ -1,12 +1,11 @@
 {
-"title":"Run API Portal using ready-made Docker image",
-"linkTitle":"Run using ready-made Docker image",
-"weight":"20",
-"date":"2019-08-09",
-"description":"Use the ready-made API Portal Docker image to run your API Portal in Docker containers."
+"title": "Run API Portal using ready-made Docker image",
+  "linkTitle": "Run using ready-made Docker image",
+  "weight": "20",
+  "date": "2019-08-09",
+  "description": "Use the ready-made API Portal Docker image to run your API Portal in Docker containers."
 }
-
-This topic describes how to use the ready-made API Portal Docker image to run in Docker containers. The image is ready out-of-the-box, so you do not have to build it using the `Dockerfile`.
+This topic describes how to use the ready-made API Portal Docker image to run you API Portal in Docker containers. The image is ready out-of-the-box, so you do not have to build it using the `Dockerfile`.
 
 ## Prerequisites
 
@@ -14,7 +13,7 @@ The following components are required on your system before you can deploy API 
 
 * [Docker engine](https://docs.docker.com/engine/).
 * MySQL server.
-* API Portal Docker image, available from [Axway Support](https://support.axway.com).
+* API Portal Docker image, available from [Axway Support](https://support.axway.com/en/search/index/type/Downloads/q/API%20Portal%20/ipp/10/product/545/version/3036/subtype/89).
 
 Optional components:
 
@@ -28,9 +27,47 @@ The following are the recommended hardware disk space and memory requirements fo
 * 100 GB or more disk space
 * 8 GB or more RAM
 
+## Run a Docker container using the image
+
+1. Download the API Portal Docker image from [Axway Support](https://support.axway.com/en/search/index/type/Downloads/q/API%20Portal%20/ipp/10/product/545/version/3036/subtype/89).
+2. Upload the file to your Docker host machine.
+3. Enter the following command to load the image:
+
+   ```
+   docker load -i APIPortal_7.7_Docker_Image_linux-x86-64_<build number>.tgz
+   ```
+4. Run the API Portal Docker container, for example:
+
+   ```
+   docker container run --name apiportal \
+     -d -p 8080:80 \
+     -e MYSQL_HOST=mysql.axway.com \
+     -e MYSQL_PORT=3306 \
+     -e MYSQL_DATABASE=joomla \
+     -e MYSQL_USER=joomla \
+     -e MYSQL_PASSWORD=XXXXX \
+     apiportal:7.7
+   ```
+
+   This example performs the following:
+
+   * Runs an API Portal Docker container from an image named `apiportal`:`7.7` in detached mode.
+   * Sets environment variables for connecting to the MySQL server.
+   * Binds port 80 of the container to port 8080 on the host machine.
+
+API Portal is now running in a Docker container.
+
+To access your API Portal, you must first link it to your API Manager. For more details, see [Connect API Portal to API Manager](/docs/apim_installation/apiportal_install/connect_to_apimgr/).
+
+If you plan to configure API Manager with environment variables, you must [install API Manager and API Gateway](/docs/apim_installation/apigtw_install/) on-premise or in containers before you deploy API Portal in containers.
+
+{{< alert title="Note" color="primary" >}}
+API Portal Docker container exposes Apache ports `80` and `443`. Port `443` is used only when SSL in Apache is configured.
+{{< /alert >}}
+
 ## Access API Portal Docker image self-documentation
 
-To see the Docker image help, run the following command:
+To get help with the Docker image, run the following command:
 
 ```
 docker container run --rm <apiportal-image-tag> --help
@@ -42,46 +79,9 @@ To list the environment variables available in the Docker image, run the followi
 docker container run --rm <apiportal-image-tag> --env
 ```
 
-## Run a Docker container using the image
-
-1. Download the API Portal Docker image from [Axway Support](https://support.axway.com).
-2. Upload the file to your Docker host machine.
-3. Enter the following command to load the image:
-
-    `docker load -i APIPortal_7.7_Docker_Image_linux-x86-64_<build number>.tgz`
-
-4. Run the API Portal Docker container, for example:
-
-    ```
-    docker container run --name apiportal \
-      -d -p 8080:80 \
-      -e MYSQL_HOST=mysql.axway.com \
-      -e MYSQL_PORT=3306 \
-      -e MYSQL_DATABASE=joomla \
-      -e MYSQL_USER=joomla \
-      -e MYSQL_PASSWORD=XXXXX \
-      apiportal:7.7
-    ```
-
-    This example performs the following:
-
-    * Runs an API Portal Docker container from an image named `apiportal`:`7.7` in detached mode.
-    * Sets environment variables for connecting to the MySQL server.
-    * Binds port 80 of the container to port 8080 on the host machine.
-
-API Portal is now running in a Docker container.
-
-To access your API Portal, you must first link it to your API Manager. For more details, see [Connect API Portal to API Manager](/docs/apim_installation/apiportal_install/connect_to_apimgr/).
-
-If you plan to configure API Manager with environment variables, you must [install API Manager and API Gateway](/docs/apim_installation/apigtw_install/) on-premise or in containers before you deploy API Portal in containers.
-
-{{% alert title="Note" %}}
-API Portal Docker container exposes `80` and `443` Apache ports. Port `443` is used only when SSL in Apache is configured.
-{{% /alert %}}
-
 ## Configure API Portal runtime with environment variables
 
-API Portal container supports a wide range of environment variables that allows you to configure API Portal runtime and Joomla! Administrator Interface (JAI) settings, partially.
+API Portal container supports a wide range of environment variables that allows you to configure API Portal runtime and some of the Joomla! Administrator Interface (JAI) settings.
 
 The following is an example that you can copy and paste to an `env` file, then edit the values and use the `env` file with `docker run` command:
 
@@ -285,7 +285,7 @@ docker container run --env-file .env \
   <more-options...>
 ```
 
-Note that inline environment variables take precedence over variables from the `env` file. So, in this example, `very_secret_password` and certificate taken from `apiportal.key` file will override the password and certificate in the `.env` file.
+Note that inline environment variables take precedence over variables from the `env` file. So, in this example, `very_secret_password` and certificate, taken from `apiportal.key` file, will override the password and certificate in the `.env` file.
 
 ### Configure certificates using volumes
 
