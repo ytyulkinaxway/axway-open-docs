@@ -1,5 +1,5 @@
 {
-  "title": "Build API Portal image using Dockerfile",
+"title": "Build API Portal image using Dockerfile",
   "linkTitle": "Build using Dockerfile",
   "weight": "40",
   "date": "2019-08-09",
@@ -11,14 +11,14 @@ MySQL image is not included with the API Portal Docker sample package. You must
 ## Prerequisites
 
 * [Docker engine](https://docs.docker.com/engine/).
-* API Portal Docker sample package, available from [Axway Support](https://support.axway.com).
+* API Portal Docker sample package, available from [Axway Support](https://support.axway.com/en/search/index/type/Downloads/q/API%20Portal%20/ipp/10/product/545/version/3036/subtype/88).
 * MySQL server.
 
 A running MySQL server is required to build API Portal image. During the build process, a new database is created, and it is deleted automatically when the build is finished.
 
 ## Download API Portal Docker sample package
 
-You can download the API Portal Docker sample package from [Axway Support](https://support.axway.com/).
+You can download the API Portal Docker sample package from [Axway Support](https://support.axway.com/en/search/index/type/Downloads/q/API%20Portal%20/ipp/10/product/545/version/3036/subtype/88).
 
 The package structure is as follows:
 
