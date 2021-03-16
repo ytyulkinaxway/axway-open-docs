@@ -5,18 +5,20 @@ weight: 160
 date: 2020-12-0
 description: Use the Amplify CLI to deploy Axway Istio agents.
 ---
-{{< alert title="Public beta" color="warning" >}}This is a preview of new Istio discovery agents, which run separately from the current mesh governance agents and provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they allow for updated visibility to the Kubernetes resource discovery process.{{< /alert >}}
+{{< alert title="Public beta" color="warning" >}}This is a preview of new Istio agents, which run separately from the Istio POC agents that provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they monitor Kubernetes resource discovery and Istio traffic activity.{{< /alert >}}
 
 ## Before you begin
 
 Ensure you have the following tools installed:
 
-* Amplify Central CLI 0.10.0 or later
+* Amplify Central CLI 0.13.0 or later
 * Helm 3.2.4 or later
-* Istioctl 1.6.8
-* Kubectl 1.16 or later
-* Node.js 10.13.0 or later
+* Istioctl 1.8.2
+* Kubectl 1.18 or later
+* Node.js >= 10.13.0 and <= 12.14.1
 * OpenSSL 2.8.3 or later
+
+**Note:** The most recently validated Kubernetes version was 1.19.8.
 
 For more information about installing the CLI, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/).
 
@@ -133,6 +135,16 @@ The following prompts are related to the details about the Axway Istio agents.
     Discovery agent
     Traceability agent
     ```
+
+    If you choose to deploy Traceability Agent. Select the mode in which you want the Traceability aAgent to run.
+
+    The ALS agent has two modes namely default and verbose. The default mode captures only the headers specified in the EnvoyFilter and the verbose mode captures all the headers in request and response flows. Once selected, you will be able to switch modes if required. Refer to [Service Mesh Traceability- Toggling the Traceability Agent](docs/central/mesh_management/traceability_agent_configuration.md#toggling-the-traceability-agent)
+
+   ```bash
+    Select Traceability Agent HTTP header publishing mode:  (Use arrow keys)
+    ❯ Default
+      Verbose
+   ```
 
 2. Enter the namespace where you would like to deploy the agents or accept the default option by pressing `enter`. The CLI collects a list of all your existing namespaces and provides an option to deploy to one of those. You can also choose to create a new Kubernetes namespace and deploy there instead.
 
@@ -324,3 +336,5 @@ helm upgrade --install --namespace apic-control apic-hybrid axway/apicentral-hyb
 ## Where to go next
 
 For more information on the details of the resources and how the discovery process works, see [Discover APIs and services](/docs/central/mesh_management/discover-apis-and-services).
+
+For more information on the details on how the service mesh traceability works, see [Service Mesh Traceability](docs/central/mesh_management/traceability_agent_configuration.md).
