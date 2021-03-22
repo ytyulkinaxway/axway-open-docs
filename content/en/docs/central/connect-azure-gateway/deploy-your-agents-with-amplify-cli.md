@@ -30,7 +30,7 @@ Learn how to quickly install and run your Discovery and Traceability agents with
 
 For more information, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/).
 
-## Azure prerequisistes
+## Azure prerequisites
 
 * An Azure Service principal
 * An Azure Event Hub
@@ -80,7 +80,7 @@ The installation procedure will prompt for the following:
    * **Environment**: can be an existing environment or a new one that will be created by the installation procedure
    * **Team**: can be an existing team or a new one that will be created by the installation procedure
    * **Service account**: can be an existing service account or a new one that will be created by the installation procedure. If you choose an existing one, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the Amplify Platform. If you choose to create a new one, the generated private and public keys will be provided.
-3. Select the agent(s) you want to install: Discovery / Traceability / All Agents.
+3. Select the agents you want to install: Discovery / Traceability / All Agents.
 4. Azure Discovery Agent Configuration Setup options:
    * **Tenant ID** can be found in the *Directory ID* box on the Properties page
    * **Subscription ID** is a GUID that uniquely identifies your subscription to use Azure services

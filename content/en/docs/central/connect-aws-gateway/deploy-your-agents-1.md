@@ -25,7 +25,7 @@ Learn how to create your Discovery Agent and Traceability Agent configuration fi
 
 The Discovery Agent is used to discover new deployments and stage updates to existing deployments. Once they are discovered, the related APIs are published to Amplify Central so that they become available for any consumer.
 
-The Discovery Agent only discovers published APIs where the stage has a tag(s) defined in the agent configuration file. See AWS_DISCOVERYTAGS.
+The Discovery Agent only discovers published APIs where the stage has tags defined in the agent configuration file. See AWS_DISCOVERYTAGS.
 
 There are two operating modes of the Discovery Agent, one is receiving continuous changes from AWS API Gateway and pushing to Amplify Central. The other synchronizing all APIs and then exits.
 
@@ -165,7 +165,7 @@ When configured, a webhook notification will create an HTTP Post request to the 
 The post request can include optional headers specified in the CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_WEBHOOK_HEADERS environment variables. Here is an example of specifying multiple headers in the environment file:
 
 ```
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_WEBHOOK_HEADERS=Header=contentType,Value=application/json, Header=Elements-Formala-Instance-Id,Value=5551212, Header=Authorization,Value=authvalue
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_WEBHOOK_HEADERS=Header=contentType,Value=application/json, Header=Elements-Formula-Instance-Id,Value=5551212, Header=Authorization,Value=authvalue
 ```
 
 The data posted will be a JSON object with the following structure:
@@ -224,7 +224,7 @@ AWS_FILTER=tag.PushToAmplify == true
 AWS_PUSHTAGS=true
 
 #Amplify Central connectivity
-# organisation config:
+# organization config:
 CENTRAL_ORGANIZATIONID=<YOUR ORGANIZATION ID>
 CENTRAL_TEAM=<THE TEAM NAME>
 CENTRAL_ENVIRONMENT=<NAME OF THE CENTRAL TOPOLOGY ENVIRONMENT>

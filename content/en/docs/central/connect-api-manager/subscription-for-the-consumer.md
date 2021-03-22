@@ -168,7 +168,7 @@ Request sample sent to the webhook endpoint:
              }
          }
      ```
-2. (Optional) An API provider adds API access on the application(s) for each API they wish to allow their subscriber to subscribe to.
+2. (Optional) An API provider adds API access on the applications for each API they wish to allow their subscriber to subscribe to.
 
 3. (Optional) An API provider allows the consumer to create an application during the subscription flow (add the property `APIMANAGER_ALLOWAPPLICATIONAUTOCREATION=true` to the discovery agent configuration file).
 
@@ -192,7 +192,7 @@ Request sample sent to the webhook endpoint:
 
 4. The subscriber consumes the API:
 
-   * The API can be consumed once the API crendential details are received.
+   * The API can be consumed once the API credential details are received.
 
 {{< alert title="Note" color="primary" >}}Depending on the poll interval settings for the Discovery Agent, it will take a little time from when the user subscribes an API to an application until Amplify Central shows the subscription state of **Active**. This is because of the time it takes to discover the change on API Manager and send events back and forth between API Manager and Amplify Central.{{< /alert >}}
 

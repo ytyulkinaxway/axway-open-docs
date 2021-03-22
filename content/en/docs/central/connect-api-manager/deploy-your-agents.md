@@ -28,7 +28,7 @@ The Discovery Agent is used to discover new published APIs or any updated APIs. 
 * **Environment / API Service publication** : Customers publish their APIs to the Amplify platform.
 * **Environment / API Service publication / Catalog item publication** (default mode): Same as previous plus automatically expose the APIs to the consumer via the Amplify Catalog.
 
-The Discovery Agent only discovers APIs that have the tag(s) defined in the agent configuration file. See [Discover APIs](/docs/central/connect-api-manager/filtering-apis-to-be-discovered/). By default, the filter is empty and thus the agent will discover all published APIs.
+The Discovery Agent only discovers APIs that have  tags defined in the agent configuration file. See [Discover APIs](/docs/central/connect-api-manager/filtering-apis-to-be-discovered/). By default, the filter is empty and thus the agent will discover all published APIs.
 
 As soon as an API is published, the identifier of the asset in Amplify Central is kept in a custom field at the API level in API Manager to help the agent remember what is already published.
 

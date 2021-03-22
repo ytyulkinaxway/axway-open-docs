@@ -29,10 +29,10 @@ The Discovery Agent sends the following information to the Axway Amplify platfor
 
 Only traffic related to discovered APIs is sent to the platform.
 
-The agent reads the logs written on the file system (\[INSTALL_DIR]/apigateway/events/group-X_instance-Y.log) by the Gateway(s) to get the transaction summary:
+The agent reads the logs written on the file system (\[INSTALL_DIR]/apigateway/events/group-X_instance-Y.log) by the Gateways to get the transaction summary:
 
 * Transaction HTTP status
-* Transction URLs (frontend / backend API)
+* Transaction URLs (frontend / backend API)
 * Transaction duration and timestamp
 * Transaction service called: method (POST / GET...) + uri path
 

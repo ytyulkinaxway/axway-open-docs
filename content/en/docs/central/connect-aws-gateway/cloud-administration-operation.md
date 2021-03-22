@@ -34,7 +34,7 @@ In order for the Discovery Agent to receive the API details, the following AWS s
 
 ![Service Discovery](/Images/central/connect-aws-gateway/aws-discovery-agent_v2.png)
 
-The AWS Discovery Agent discovers newly created, previously undiscovered REST APIs, as well as changes to the APIs stage(s), which then updates the logging that enables the Traceability Agent (see below).
+The AWS Discovery Agent discovers newly created, previously undiscovered REST APIs, as well as changes to the API's stages, which then updates the logging that enables the Traceability Agent (see below).
 
 The agent only publishes APIs that pass the tagging criteria that is configured in the agent configuration file, see [Discover APIs](/docs/central/connect-aws-gateway/filtering-apis-to-be-discovered-1/). The agent will use the tags which are associated with the stage that is associated with the API.
 
@@ -108,7 +108,7 @@ The Cloud formation templates are designed to be as flexible as possible. They p
     * Manually create the IAM resources [CloudFormation (without IAM)](#cloudformation-without-iam)
     * Allow the CloudFormation the ability to create the resources on your behalf. The resources created vary depending on the agent deployment type. [Resources (IAM and Resources)](#resources-iam-and-resources)
 * Agents deployment options:
-    * **EC2** - optionally creates the entire infrastruture around the EC2 instance or specify the VPC, Subnet, and Security Group for the instance
+    * **EC2** - optionally creates the entire infrastructure around the EC2 instance or specify the VPC, Subnet, and Security Group for the instance
     * **ECS Fargate** - requires an ECS Fargate cluster and EC2 Subnet and Security Group for deployment. [ECS Fargate Cluster](https://docs.aws.amazon.com/AmazonECS/latest/userguide/create_cluster.html)
     * **Other** - creates an IAM Group and User, access and secret keys must be generated, for the agents to run with. The agent must be installed manually in a Docker container.
 
@@ -179,7 +179,7 @@ The resources created by the CloudFormation template:
 | AWS::Lambda::Function                 | TraceabilityLambda                |                                                          | The Lambda function that takes Cloud Watch events in the Log Group and sends them to the SQS Queue | both           |
 | AWS::Lambda::Permission               | TraceabilityLambdaCWInvoke        |                                                          | Allows Cloud Watch events to trigger the Lambda Function                                           | both           |
 | AWS::SQS::Queue                       | TraceabilitySqsQueue              |                                                          | The Queue that all API Gateway access logs are pushed to                                           | both           |
-| AWS::Logs::SubscriptionFilter         | TraceabilityLogToLambdaFilter     |                                                          | Filter events from the Tracebaility Logs to the Lambda Function                                    | both           |
+| AWS::Logs::SubscriptionFilter         | TraceabilityLogToLambdaFilter     |                                                          | Filter events from the Traceability Logs to the Lambda Function                                    | both           |
 | amplify-agents-ec2.yaml               |                                   |                                                          |                                                                                                    | continuous     |
 | AWS::EC2::VPC                         | AgentsVPC                         | VpcID not blank                                          | The VPC the instance will be deployed to                                                           | continuous     |
 | AWS::EC2::Subnet                      | AgentsSubnet                      | VpcID not blank                                          | The Subnet to deploy the EC2 instance in                                                           | continuous     |
@@ -188,7 +188,7 @@ The resources created by the CloudFormation template:
 | AWS::EC2::Route                       | AllowInternetTraffic              | VpcID not blank                                          | The route to direct all traffic in the VPC to the internet                                         | continuous     |
 | AWS::EC2::SecurityGroup               | AgentsSecurityGroup               | VpcID not blank                                          | The Security Group assigned to the VPC, allowing SSH only to the host                              | continuous     |
 | AWS::EC2::InternetGateway             | InternetGW                        | VpcID not blank                                          | The Internet Gateway so the agents can talk to Amplify Central                                     | continuous     |
-| AWS::EC2::VPCGatewayAttachment        | GatewayAttachement                | VpcID not blank                                          | Attaches the Internet Gateway to the VPC                                                           | continuous     |
+| AWS::EC2::VPCGatewayAttachment        | GatewayAttachment                | VpcID not blank                                          | Attaches the Internet Gateway to the VPC                                                           | continuous     |
 | AWS::EC2::Instance                    | AgentsHost                        |                                                          | The EC2 instance that the agents wil run in                                                        | continuous     |
 | amplify-agents-ecs-fargate.yaml       |                                   |                                                          |                                                                                                    | continuous     |
 | AWS::ECS::TaskDefinition              | AmplifyAgentsTask                 |                                                          | The ECS task that defines both of the agents                                                       | continuous     |
@@ -516,8 +516,8 @@ Note that these privileges do not include those necessary for rollback, if the s
 | ec2:DescribeInstances                 | AgentsHost                                                                                      | continuous | amplify-agents-ec2         |                              |
 | ec2:RunInstances                      | AgentsHost                                                                                      | continuous | amplify-agents-ec2         |                              |
 | ec2:AssociateIamInstanceProfile       | AgentsHost                                                                                      | continuous | amplify-agents-ec2         |                              |
-| ec2:DescribeKeyPairs                  | Key(s) that can be added to the Instance                                                        | continuous | amplify-agents-ec2         |                              |
-| ec2:DecsribeVpcs                      | AgentsVPC or parameter VpcId (EC2StackVPCID)                                                    | continuous | amplify-agents-ec2         | VpcId = ""                   |
+| ec2:DescribeKeyPairs                  | Keys that can be added to the Instance                                                        | continuous | amplify-agents-ec2         |                              |
+| ec2:DescribeVpcs                      | AgentsVPC or parameter VpcId (EC2StackVPCID)                                                    | continuous | amplify-agents-ec2         | VpcId = ""                   |
 | ec2:CreateVpc                         | AgentsVPC                                                                                       | continuous | amplify-agents-ec2         | VpcId = ""                   |
 | ec2:ModifyVpcAttribute                | AgentsVPC                                                                                       | continuous | amplify-agents-ec2         | VpcId = ""                   |
 | ec2:AssociateRouteTable               | AgentsVPC                                                                                       | continuous | amplify-agents-ec2         | VpcId = ""                   |
@@ -528,7 +528,7 @@ Note that these privileges do not include those necessary for rollback, if the s
 | ec2:CreateSubnet                      | AgentsSubnet                                                                                    | continuous | amplify-agents-ec2         | VpcId = ""                   |
 | ec2:DescribeSubnets                   | AgentsSubnet or parameter Subnet (EC2StackSubnet)                                               | continuous | amplify-agents-ec2         |                              |
 | ec2:CreateInternetGateway             | AgentsInternetGW                                                                                | continuous | amplify-agents-ec2         | VpcId = ""                   |
-| ec2:DecsribeInternetGateways          | AgentsInternetGW                                                                                | continuous | amplify-agents-ec2         | VpcId = ""                   |
+| ec2:DescribeInternetGateways          | AgentsInternetGW                                                                                | continuous | amplify-agents-ec2         | VpcId = ""                   |
 | ec2:DescribeAvailabilityZones         | Availability Zones in Region                                                                    | continuous | amplify-agents-ec2         | VpcId = ""                   |
 | ec2:DescribeRouteTables               | AgentsRouteTable                                                                                | continuous | amplify-agents-ec2         | VpcId = ""                   |
 | ec2:CreateRouteTable                  | AgentsRouteTable                                                                                | continuous | amplify-agents-ec2         | VpcId = ""                   |

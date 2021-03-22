@@ -24,7 +24,7 @@ In order to be able to switch easily from one environment to another, the follow
 #API Manager connectivity
 #
 APIMANAGER_HOST=ApiManagerHostName (localhost by default)
-APIMANAGER_PORT=ApiManagerPortNunber (8075 by default)
+APIMANAGER_PORT=ApiManagerPortNumber (8075 by default)
 APIMANAGER_AUTH_USERNAME=AnApiManagerUserName
 APIMANAGER_AUTH_PASSWORD=AnApiManagerUserPassword
 #
@@ -159,7 +159,7 @@ Note: For logging, it is recommended to set it up in the agent configuration fil
 
 | Variable name                 | Description                                                                                                                                                 |
 |-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| EVENT_LOG_PATHS               | The path(s), comma separated, to the event logs that need to be watched.                                                                                     |
+| EVENT_LOG_PATHS               | The paths, comma separated, to the event logs that need to be watched.                                                                                     |
 | TRACEABILITY_HOST             | The host name and port of the ingestion service to forward the transaction log entries (default value: US = `<ingestion-lumberjack.datasearch.axway.com:453>` / EU = `ingestion-lumberjack.visibility.eu-fr.axway.com:453`).  |
 | TRACEABILITY_PROTOCOL         | Protocol (https or tcp) to be used for communicating with ingestion service (default value: `tcp`).                                                         |
 | TRACEABILITY_PROXYURL         | The socks5 or http URL of the proxy server for ingestion service (`<socks5://hostname:port>`). If empty, no proxy is defined.                               |

@@ -3,7 +3,7 @@ title: Prepare AWS API Gateway
 linkTitle: Prepare AWS API Gateway
 draft: true
 weight: null
-description: Learn how to use the provided CoudFormation templates to initialize
+description: Learn how to use the provided CloudFormation templates to initialize
   AWS Services, which enables the agents to collect API / traffic data.
 ---
 ## Before you start
@@ -114,7 +114,7 @@ Create a new stack with the S3 URL of the `amplify-agents-deploy-all.yaml` templ
     * Set the **EC2KeyName** to the KeyName you want to use for connecting to the EC2 instance.
  `MyKeyName` is the value from the command above.
     * Accept the **EC2VPCID** default value of blank to create all EC2 resources.
-    * Enable **EC2PublicIPAddress** value to assign a public IP to your EC2 instance so it can connect to the Internet and the AMPIFY Platform.
+    * Enable **EC2PublicIPAddress** value to assign a public IP to your EC2 instance so it can connect to the Internet and the Amplify Platform.
     * Accept the **EC2SSHLocation** default value of `0.0.0.0/0` to allow all SSH connections with a valid key access to the instance.
 
 * ECS Deployment Settings (ignore if **DeploymentType** is **NOT** `ECS Fargate`).

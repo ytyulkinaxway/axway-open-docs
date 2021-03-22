@@ -144,7 +144,7 @@ Request sample sent to the webhook endpoint:
 ## Subscription workflow
 
 1. (Optional) An administrator creates one or more usage plans on AWS API Gateway that provides the necessary security feature (API key / authorizer) and quota, if needed.
-2. An administrator adds associated API stages to the usage plan(s).
+2. An administrator adds associated API stages to the usage plans.
 3. A consumer initiates the subscription in Amplify Central:
 
    1. Open an Amplify Catalog item.

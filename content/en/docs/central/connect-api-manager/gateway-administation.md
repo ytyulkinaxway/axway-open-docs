@@ -28,7 +28,7 @@ The Discovery Agent is used to discover new published APIs or any updated APIs. 
 * **Environment / API Service publication**: Customers publish their APIs to the Amplify platform.
 * **Environment / API Service publication / Catalog item publication** (default mode): Same as previous plus automatically expose the APIS to the consumer via the Amplify Catalog.
 
-The Discovery Agent only discovers APIs that have the tag(s) defined in the agent configuration file. See [Discover APIs](/docs/central/connect-api-manager/filtering-apis-to-be-discovered/). By default, the filter is empty and thus the agent will discover all APIs.
+The Discovery Agent only discovers APIs that have tags defined in the agent configuration file. See [Discover APIs](/docs/central/connect-api-manager/filtering-apis-to-be-discovered/). By default, the filter is empty and thus the agent will discover all APIs.
 
 The binary agent can run in the following mode:
 
@@ -105,7 +105,7 @@ This section connects the agent to API Manager and determines which APIs should 
 
 `APIMANAGER_DISCOVERYIGNORETAGS` (optional): Comma-separated blacklist of tags. If an API has one or several of these blacklist tags, the agent ignores this API and will not publish it to Amplify Central. This property takes precedence over the filter property below. The default value is empty, which means no API is ignored.
 
-`AMPMANGE_FILTER` (optional): Expression to filter the API you want the agent to discover. See [Discover APIs](/docs/central/connect-api-manager/filtering-apis-to-be-discovered/). Leaving this field empty tells the agent to discover all published APIs (REST / SOAP).
+`APIMANAGER_FILTER` (optional): Expression to filter the API you want the agent to discover. See [Discover APIs](/docs/central/connect-api-manager/filtering-apis-to-be-discovered/). Leaving this field empty tells the agent to discover all published APIs (REST / SOAP).
 
 `APIMANAGER_SUBSCRIPTIONAPPLICATIONFIELD` (optional): The field name used to store Amplify Central subscription identifier inside the API Manager application securing the front end proxy. Default value is **subscriptions**. If you do not intend to change it, comment this property. Be aware that the field will not be visible in the API Manager application, as it is a specific configuration. If you want to see that field or customize it, refer to Add a custom property to applications in [Customize API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_custom/#customize-api-manager-data/) documentation.
 
@@ -176,7 +176,7 @@ CENTRAL_TEAM=Dev
 CENTRAL_ORGANIZATIONID=68794y2
 CENTRAL_ENVIRONMENT=my-v7-env
 #CENTRAL_APISERVERVERSION=v1alpha1
-#CENTRAL_MODE=publishToEnvironmmentAndCatalog
+#CENTRAL_MODE=publishToEnvironmentAndCatalog
 #CENTRAL_AUTH_URL=https://login.axway.com/auth
 #CENTRAL_AUTH_REALM=Broker
 CENTRAL_AUTH_CLIENTID=DOSA_66743...
@@ -367,7 +367,7 @@ CENTRAL_TEAM=Dev
 CENTRAL_ORGANIZATIONID=68794y2
 CENTRAL_ENVIRONMENT=my-v7-env
 #CENTRAL_APISERVERVERSION=v1alpha1
-#CENTRAL_MODE=publishToEnvironmmentAndCatalog
+#CENTRAL_MODE=publishToEnvironmentAndCatalog
 #CENTRAL_AUTH_URL=https://login.axway.com/auth
 #CENTRAL_AUTH_REALM=Broker
 CENTRAL_AUTH_CLIENTID=DOSA_66743...
