@@ -13,22 +13,22 @@ API Portal provides an API consumer-facing interface that you can customize to 
 
 API Portal is available as a software installation or a virtualized deployment in a Docker container. For more information, see the following options:
 
-* If you are installing API Portal for the first time using this update, see [Install API Portal](/docs/apim_installation/apiportal_install/)
-* If you are already using API Portal (7.5.x, 7.6.x, 7.7.x) and want to install this update, see [Upgrade API Portal](/docs/apim_installation/apiportal_install/upgrade_automatic/)
-* If you want to deploy API Portal in Docker containers, see [Deploy API Portal in containers](/docs/apim_installation/apiportal_docker/)
+* If you are installing API Portal for the first time using this update, see [Install API Portal](/docs/apim_installation/apiportal_install/).
+* If you are already using API Portal (7.5.x, 7.6.x, 7.7.x) and want to install this update, see [Upgrade API Portal](/docs/apim_installation/apiportal_install/upgrade_automatic/).
+* You can use the [cumulative upgrade script](/docs/apim_installation/apiportal_install/upgrade_automatic/#upgrade-api-portal-using-the-cumulative-upgrade-script) to upgrade directly from earlier versions (for example, 7.5.5, 7.6.2) to API Portal 7.7 November.
+* See [API Portal single version upgrade](/docs/apim_installation/apiportal_install/upgrade_automatic/#upgrade-from-api-portal-7-6-2) to upgrade versions incrementally.
+* To deploy API Portal in Docker containers, see [Deploy API Portal in containers](/docs/apim_installation/apiportal_docker/).
 
 ## New features and enhancements
 
 ### Production-ready Docker container
 
-In this update, we are releasing the phase 1 of the production-ready docker container, which involves the following:
+In this update, we are releasing the phase 1 of API Portal production-ready Docker container image, which involves the following:
 
 * Internal security review completed.
 * Support for CentOS 8.
 * Build and run docker as non-root user.
 * The container is upgradable.
-
-{{< alert title="Note" color="primary" >}}No upgrade is supported from any previous docker containers of the API Portal.{{< /alert >}}
 
 ### Red Hat Enterprise 8 support
 
@@ -42,7 +42,7 @@ In this update, we are releasing the phase 1 of the production-ready docker cont
 
 ### Cumulative upgrade script
 
-We had previously released a [cumulative upgrade](/docs/apim_relnotes/20200730_apip_relnotes/#easy-upgrade-from-755-and-762) script to help customers to upgrade from 7.5.5 and 7.6.2 to the 7.7 July 2020​ update. This script has been updated to upgrade customers to the 7.7 November 2020 update in line with the end of support for the 7.5.x and 7.6.x product lines​ in November 2020.
+We had previously released a [cumulative upgrade](/docs/apim_relnotes/20200730_apip_relnotes/#easy-upgrade-from-755-and-762) script to help customers to upgrade from 7.5.5 and 7.6.2 to the [7.7 July 2020​](/docs/apim_relnotes/20200730_apip_relnotes/) update. This script has been updated to upgrade customers to the 7.7 November 2020 update in line with the end of support for the 7.5.x and 7.6.x product lines​ in November 2020.
 
 For more information, see [Upgrade API Portal using the cumulative upgrade script](/docs/apim_installation/apiportal_install/upgrade_automatic/#upgrade-api-portal-using-the-cumulative-upgrade-script).
 
@@ -61,9 +61,9 @@ Configuration setting in the Joomla Administration Interface (JAI) to show or hi
 This update has the following limitations:
 
 * API Portal 7.7.20201130 is compatible with API Gateway and API Manager 7.7.20201130 only.
-* Upgrade to API Portal 7.7.20201130 is supported from [API Portal 7.7](/docs/apim_relnotes/201904_release/apip_relnotes/) only. You can use the [cumulative upgrade script](/docs/apim_installation/apiportal_install/upgrade_automatic/#upgrade-api-portal-using-the-cumulative-upgrade-script) to upgrade directly from earlier versions (for example, 7.5.5, 7.6.2) to API Portal 7.7 November, or see [API Portal single version upgrade](/docs/apim_installation/apiportal_install/upgrade_automatic/#upgrade-from-api-portal-7-6-2) to upgrade versions incrementally.
-* Upgrading from previous API Portal Docker image is not supported.
+* Upgrade to API Portal 7.7.20201130 is supported from [API Portal 7.7](/docs/apim_relnotes/201904_release/apip_relnotes/) only.
 * This update is not available as a virtual appliance or as a managed service on Axway Cloud.
+* Upgrading from previous API Portal Docker image is not supported.
 
 ## Important changes
 

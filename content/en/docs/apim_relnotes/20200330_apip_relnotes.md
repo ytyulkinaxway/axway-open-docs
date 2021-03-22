@@ -11,11 +11,14 @@ API Portal provides an API consumer-facing interface that you can customize to 
 
 ## Installation
 
-API Portal is available as a software installation or a virtualized deployment in a Docker container. For more information, see the following options:
+API Portal is available as a software installation or a virtualized deployment in Docker containers. For more information, see:
 
-* If you are installing API Portal for the first time using this update, see [Install API Portal](https://axway-open-docs.netlify.com/docs/apim_installation/apiportal_install/)
-* If you are already using API Portal (7.5.x, 7.6.x, 7.7.x) and want to install this update, see [Upgrade API Portal](/docs/apim_installation/apiportal_install/upgrade_automatic/)
-* If you want to deploy API Portal in Docker containers, see [Deploy API Portal in containers](/docs/apim_installation/apiportal_docker/)
+* If you are installing API Portal for the first time using this update, see [Install API Portal](/docs/apim_installation/apiportal_install/).
+* If you are already using API Portal (7.5.x, 7.6.x, 7.7.x) and want to install this update, see [Upgrade API Portal](/docs/apim_installation/apiportal_install/upgrade_automatic/).
+
+API Portal in Docker containers is available for production environment from [API Portal 7.7 November 2020](/docs/apim_relnotes/20201130_apip_relnotes/) update. For more information, see [Production-ready Docker container](/docs/apim_relnotes/20201130_apip_relnotes/#production-ready-docker-container).
+
+*This section was updated to amend the information about API Portal in Docker containers.*
 
 ## New features and enhancements
 
@@ -35,12 +38,10 @@ For more information, see [Customize API Catalog](https://axway-open-docs.netlif
 This update has the following limitations:
 
 * API Portal 7.7.20200330 is compatible with API Gateway and API Manager 7.7.20200330 only.
-* Upgrade to API Portal 7.7.20200330 is supported from API Portal 7.7.0 only. To upgrade from earlier versions (for example, 7.5.x, 7.6.x) you must first upgrade to API Portal 7.7.
-* The ready-made API Portal Docker image 7.7.20200330 is strictly for development environments only, and it is not recommended for use in production environments.
-
-    * It is not recommended to use the image in production environments because the image is built with CentOS as a base OS, and our Axway security scans have detected multiple security concerns with this OS. We continue to monitor the latest versions of this base OS to determine if these issues have been resolved, but until we can ship a hardened image that passes our security concerns, we cannot advise customers to use this image in a production environment. Delivery a Docker image for production use is already planned in the [API Portal 2020 roadmap](https://community.axway.com/s/api-portal).
-* Upgrading from previous API Portal Docker image is not supported.
+* Upgrade to API Portal 7.7.20200330 is supported from [API Portal 7.7](/docs/apim_relnotes/201904_release/apip_relnotes/). To upgrade from earlier versions, you must first upgrade to API Portal 7.7.
 * This update is not available as a virtual appliance or as a managed service on Axway Cloud.
+
+*This section was updated to remove the information about API Portal in Docker containers.*
 
 ## Removed features
 
