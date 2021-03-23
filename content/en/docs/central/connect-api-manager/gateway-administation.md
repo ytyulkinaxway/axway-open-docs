@@ -327,7 +327,7 @@ The log section defines how the agent is managing its logs.
 
 `LOG_FILE_PATH`: The path (relative / absolute) to save log files, if output is file or both.
 
-`LOG_FILE_ROTATEEVERYMEGABYTES`: The maximum size, im megabytes, that log file can grow to.
+`LOG_FILE_ROTATEEVERYBYTES`: The maximum size, in bytes, that log file can grow to.
 
 `LOG_FILE_KEEPFILES`: The maximum number of log file backups to keep.
 
