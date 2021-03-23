@@ -5,20 +5,20 @@ weight: 30
 date: 2020-11-19
 description: Learn how to configure the Axway Istio agents to discover your APIs and services.
 ---
-{{< alert title="Early Preview" color="warning" >}}This is a preview of new Istio discovery agents, which are deployed separately from the Istio POC agents that provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they monitor Kubernetes resource discovery.{{< /alert >}}
+{{< alert title="Early Preview" color="warning" >}}This is a preview of the new Istio agents, which run separately from previous Istio POC agents that provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they monitor Kubernetes resource discovery.{{< /alert >}}
 
 ## Before you begin
 
 Before you start, see [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli) to learn how to use the CLI to install the mesh agents into your Kubernetes cluster and to create default resources to discover the demo service that gets deployed.
 
-This page will reference the resources created from the [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli) procedure.
+This page references the resources created from the [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli) procedure.
 
 ## Prerequisites
 
 These prerequisites are required by the Amplify Central CLI, which you will use to configure the Istio discovery agents.
 
-* Node.js 8 LTS or later
-* Minimum Amplify Central CLI version: 0.13.0
+* Node.js >= 10.13.0 and <= 12.14.1
+* Minimum Amplify Central CLI version: 0.17.0
 
 For more information, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/index.html).
 
@@ -28,13 +28,13 @@ Discovery agents are services that get installed into your Kubernetes cluster as
 
 The API Discovery Agent (ADA) uses a resource called `SpecDiscovery` to find Swagger documentation exposed over an HTTP endpoint. The `SpecDiscovery` provides configuration details to the ADA to instruct it where to find documentation inside of a cluster.
 
-You can configure the ADA with one or multiple SpecDiscoveries. As long as the ADA has at least one `SpecDiscovery` it will check all new events coming from Kubernetes to check if that event meets the match criteria defined by any of the known SpecDiscoveries. If the event is triggered by a pod, and the pod meets the match criteria, then the ADA will create an `APISpec` to capture the existence of documentation for that pod in the cluster, and save it in Amplify Central.
+You can configure the ADA with one or multiple SpecDiscoveries. As long as the ADA has at least one `SpecDiscovery` it will check all new events coming from Kubernetes for events that meet the match criteria defined by any of the known SpecDiscoveries. If the event is triggered by a pod, and the pod meets the match criteria, then the ADA will create an `APISpec` to capture the existence of documentation for that pod in the cluster, and save it in Amplify Central.
 
 The Resource Discovery Agent (RDA) uses a resource called `ResourceDiscovery` to find pods and services running in a cluster. The `ResourceDiscovery` provides configuration details to the RDA to instruct it where to find pods and services inside of a cluster.
 
 You can configure the RDA with one or multiple ResourceDiscoveries. As long as the RDA has at least one `ResourceDiscovery` it will check all new events coming from Kubernetes to see if that event meets the match criteria defined by any of the known ResourceDiscoveries. If the event is triggered by a pod or service, and if the pod or service meets the match criteria, then the RDA will create a K8SResource to capture the existence of the resource and save it in Amplify Central.
 
-For more information about the discovery agents, see [Amplify Central resources for discovering APIs and services](#Amplify-Central-resources-for-discovering-APIs-and-services).
+For more information about the discovery agents, see [Amplify Central resources for discovering APIs and services](#amplify-central-resources-for-discovering-apis-and-services).
 
 ## Start the discovery agents
 
@@ -89,73 +89,93 @@ A dialog box is shown. Enter your valid credentials (email address and password)
 
 If you are a member of multiple Amplify organizations, select an organization and continue.
 
-## Create a K8SCluster
+## Create an Amplify Central Environment
 
-The K8SCluster resource is a representation of your Kubernetes cluster. All of the other resources previously mentioned will be scoped to a K8SCluster.
+The Environment resource is a representation of your Kubernetes cluster. In order for resources to be discovered, the agents must be connected to an Environment and a K8SCluster.
 
-If you previously followed [Deploy the service mesh and Axway Istio agents](/docs/central/mesh_management/add_env/#deploy-the-service-mesh-and-axway-mesh-agents), then the ADA and RDA will already be configured with your selected K8SCluster, and you can skip to [Configure the API Discovery Agent](#Configure-the-API-discovery-agent).
+If you previously followed [Deploy the service mesh and Axway Istio agents](/docs/central/mesh_management/add_env/#deploy-the-service-mesh-and-axway-mesh-agents), then the ADA and RDA will already be configured with your selected Environment and K8SCluster, and you can skip to [Configure the API Discovery Agent](#configure-the-api-discovery-agent).
 
-If you do not have the ADA and RDA configured, or if you would like the agents to use a different K8SCluster, follow these steps:
+If you do not have the ADA and RDA configured, or if you would like the agents to use a different Environment, follow the steps below:
 
-1. To create a K8SCluster on your local environment, create a file called `k8scluster.yaml` with the following content.
+1. Create an Environment. Copy the content below into a file called `environment.yaml`. You may change the names of the following resources to fit your needs.
 
-   ```yaml
-   apiVersion: v1alpha1
-   group: management
-   kind: K8SCluster
-   name: mesh-env
-   title: mesh-env
-   spec: {}
-   ```
-2. Change the name and the title of the K8SCluster to represent your cluster:
+    ```yaml
+    apiVersion: v1alpha1
+    title: env
+    name: env
+    kind: Environment
+    spec:
+      description: demo hybrid env
+    ```
 
-   ```bash
-   amplify central create -f ./k8scluster.yaml
-   ```
+2. Create a Mesh resource. Copy the content below into a file called `mesh.yaml`.
 
-3. If the command was successful, you should see a message indicating that the resource was created:
+    ```yaml
+    apiVersion: v1alpha1
+    group: management
+    kind: Mesh
+    name: mesh
+    title: mesh
+    spec: {}
+    ```
 
-   ```bash
-   ~ » amplify central create -f ./k8scluster.yaml
-   ✔ "k8scluster/mesh-env" has successfully been created.
-   ```
+3. Create a MeshDiscovery. Copy the content below into a file called `mesh-discovery.yaml`. The MeshDiscovery should have the `metadata.scope.name` field set to the name of the Mesh resource, and it should have the `spec.environmentRef` set to the name of the Environment resource.
 
-4. Run the following command to retrieve the K8SCluster and view the YAML content:
+    ```yaml
+    apiVersion: v1alpha1
+    group: management
+    kind: MeshDiscovery
+    name: mesh-discovery
+    title: mesh-discovery
+    metadata:
+      scope:
+        kind: Mesh
+        name: mesh
+    spec:
+      environmentRef: env
+    ```
 
-   ```bash
-   ~ » amplify central get k8sclusters mesh-env -o yaml
-   group: management
-   apiVersion: v1alpha1
-   kind: K8SCluster
-   name: mesh-env
-   title: mesh-env
-   metadata:
-     id: 8ac992d875ac0c170175b3bd93fd0000
-     audit:
-       createTimestamp: '2020-11-10T19:59:07.261+0000'
-       createUserId: 31c9538c-32ad-4db7-a5e4-020470accd0c
-       modifyTimestamp: '2020-11-10T19:59:07.261+0000'
-       modifyUserId: 31c9538c-32ad-4db7-a5e4-020470accd0c
-     resourceVersion: '309'
-     references: []
-     selfLink: "/management/v1alpha1/k8sclusters/mesh-env"
-   attributes: {}
-   finalizers: []
-   tags: []
-   spec: {}
-   ```
+4. Create a K8SCluster. Copy the content below into a file called `k8s-cluster.yaml`. The K8SCluster should have the `spec.mesh` field set to the name of the Mesh resource.
 
-5. After the K8SCluster is created, you must update the `apic-hybrid-ada` and `apic-hybrid-rda` pods to connect to the new K8SCluster. Run the following commands to update each pod with the new environment variable:
+    ```yaml
+    apiVersion: v1alpha1
+    group: management
+    kind: K8SCluster
+    name: k8s-mesh
+    title: k8scluster
+    spec:
+      mesh: mesh
+    ```
 
-   ```bash
-   ~ » kubectl set env deployment/apic-hybrid-ada CLUSTERNAME=<YOUR-K8SCLUSTER-NAME> -n apic-control
-   deployment.extensions/apic-hybrid-ada env updated
-   ```
+5. Create the resources:
 
-   ```bash
-   ~ » kubectl set env deployment/apic-hybrid-rda CLUSTERNAME=<YOUR-K8SCLUSTER-NAME> -n apic-control
-   deployment.extensions/apic-hybrid-ada env updated
-   ```
+    ```bash
+    amplify central create -f ./environment.yaml
+    amplify central create -f ./mesh.yaml
+    amplify central create -f ./mesh-discovery.yaml
+    amplify central create -f ./k8s-cluster.yaml
+    ```
+
+6. If the commands were successful, you should see output indicating that the resources were created:
+
+    ```bash
+    ✔ "environment/env" has successfully been created.
+    ✔ "mesh/mesh" has successfully been created.
+    ✔ "meshdiscovery/mesh-discovery" has successfully been created.
+    ✔ "k8scluster/k8s-mesh" has successfully been created.
+     ```
+
+7. After the K8SCluster is created, you must update the `apic-hybrid-ada` and `apic-hybrid-rda` pods to connect to the new K8SCluster. Run the following commands to update each pod with the new environment variable:
+
+    ```bash
+    ~ » kubectl set env deployment/apic-hybrid-ada CLUSTERNAME=<YOUR-K8SCLUSTER-NAME> -n apic-control
+    deployment.extensions/apic-hybrid-ada env updated
+    ```
+
+    ```bash
+    ~ » kubectl set env deployment/apic-hybrid-rda CLUSTERNAME=<YOUR-K8SCLUSTER-NAME> -n apic-control
+    deployment.extensions/apic-hybrid-ada env updated
+    ```
 
 ## Deploy the Sunset app
 
@@ -256,7 +276,7 @@ To create a `SpecDiscovery`, follow these steps:
    metadata:
      scope:
        kind: K8SCluster
-       name: mesh-env
+       name: k8s-mesh
    spec:
      namespaceFilter:
        names:
@@ -276,7 +296,7 @@ To create a `SpecDiscovery`, follow these steps:
 
    ```bash
    ~ » kubectl set env deployment/apic-hybrid-ada --list -n apic-control | grep CLUSTERNAME
-   CLUSTERNAME=mesh-env
+   CLUSTERNAME=k8s-mesh
    ```
 
    Take the name from the output of the command above and place it in the `metadata.scope.name` field.
@@ -294,7 +314,7 @@ Read through the descriptions of the fields below, and update the `SpecDiscovery
 * `spec.targets.exactPaths.path`: The endpoint where the documentation can be found. The full host name is not needed because the discovery agent will have already matched the pod, and it will use the pod's IP address and this path to find the documentation. The ADA will make one request to this endpoint for every exposed port found in the pod.
 * `spec.targets.exactPaths.headers`: The headers to send with the request.
 * `spec.targets.exactPaths.fromAnnotations`: A list of annotations that the `SpecDiscovery` might use to make a request to a pod to fetch documentation. If this field is provided, and if the ADA finds a pod with a matching annotation found in this list, then the ADA will make a request to the pod based on the value of the pod annotation.
-* `spec.targets.exactPaths.fromAnnotations.template`: A string template that matches an annotation found on a pod. To learn more about this field, see [Defining a pod annotation](#Defining-a-pod-annotation)
+* `spec.targets.exactPaths.fromAnnotations.template`: A string template that matches an annotation found on a pod. To learn more about this field, see [Defining a pod annotation](#defining-a-pod-annotation)
 
 ### Discover your APIs
 
@@ -356,12 +376,12 @@ Follow these steps to discover the pod:
 6. After creating the new `SpecDiscovery`, run the following command to see two SpecDiscoveries. The `sunset-discovery` is the resource that will be used to find the documentation from the `sunset` pod.
 
    ```bash
-   ~ » amplify central get specdiscoveries -s mesh-env
+   ~ » amplify central get specdiscoveries -s k8s-mesh
    ✔ Resource(s) has successfully been retrieved
 
    NAME                 AGE             TITLE                SCOPE KIND  SCOPE NAME
-   sunset-discovery     18 minutes ago  apic-demo-discovery  K8SCluster  mesh-env
-   cli-1605551801337    2 hours ago     cli-1605551801337    K8SCluster  mesh-env
+   sunset-discovery     18 minutes ago  apic-demo-discovery  K8SCluster  k8s-mesh
+   cli-1605551801337    2 hours ago     cli-1605551801337    K8SCluster  k8s-mesh
    ```
 7. The `apic-hybrid-ada` pod will see the new `SpecDiscovery` configuration and will start looking for pods that match the criteria it has specified. Run the following command to retrieve your APISpecs. APISpecs are created from the ADA in response to finding a pod that matches, based on the `SpecDiscovery` match criteria.
 
@@ -372,15 +392,15 @@ Follow these steps to discover the pod:
    Returns the APISpec that was created in response to the pod that matched the `SpecDiscovery`.
 
    ```bash
-   ~ » amplify central get apispecs -s mesh-env
+   ~ » amplify central get apispecs -s k8s-mesh
    ✔ Resource(s) has successfully been retrieved
 
    NAME              AGE         TITLE   SCOPE KIND  SCOPE NAME
-   mylist100swagger  1 hour ago  mylist  K8SCluster  mesh-env
-   sunsetapp100swagger  a few seconds ago  Sunset App  K8SCluster  mesh-env
+   mylist100swagger  1 hour ago  mylist  K8SCluster  k8s-mesh
+   sunsetapp100swagger  a few seconds ago  Sunset App  K8SCluster  k8s-mesh
    ```
 
-If you see an APISpec named `sunsetapp100swagger` scoped to your K8SCluster, then you have successfully configured the ADA to search your Kubernetes cluster for pods exposing documentation. The `sunset` app documentation will now be visible in Amplify Central.
+If you see an APISpec named `sunsetapp100swagger` scoped to your K8SCluster, then you have successfully configured the ADA to search your Kubernetes cluster for pods exposing documentation. The `sunset` app documentation is now be visible in Amplify Central.
 
 ### Defining a pod annotation
 
@@ -477,7 +497,7 @@ Follow these steps to configure a resource discovery agent:
     metadata:
       scope:
         kind: K8SCluster
-        name: mesh-env
+        name: k8s-mesh
     spec:
       kind: Pod
       group: ''
@@ -499,7 +519,7 @@ Follow these steps to configure a resource discovery agent:
     metadata:
       scope:
         kind: K8SCluster
-        name: mesh-env
+        name: k8s-mesh
     spec:
       kind: Service
       group: ''
@@ -518,7 +538,7 @@ Follow these steps to configure a resource discovery agent:
 
    ```bash
    ~ » kubectl set env deployment/apic-hybrid-rda --list -n apic-control | grep CLUSTERNAME
-   CLUSTERNAME=mesh-env
+   CLUSTERNAME=k8s-mesh
    ```
 
    Take the name from the output of the command, and place it in the `metadata.scope.name` field.
@@ -598,14 +618,14 @@ To discover pods and services, follow these steps:
 8. Finally, run the following command to return the K8SResources that were created in response to the pod that matched the `SpecDiscovery`.
 
    ```bash
-   amplify central get k8sresources -s mesh-env
+   amplify central get k8sresources -s k8s-mesh
    ✔ Resource(s) has successfully been retrieved
-   
+
    NAME                                             AGE         TITLE                      SCOPE KIND  SCOPE NAME
-   pod.apic-demo.apic-hybrid-list-598f8f9b4b-jb7ds  an hour ago        pod-cli-1605565746103      K8SCluster  mesh-env
-   pod.sunset-demo.sunset-749ddd444-ld7rf           a few seconds ago  sunset-pod-discovery       K8SCluster  mesh-env
-   service.sunset-demo.sunset                       a few seconds ago  sunset-service-discovery   K8SCluster  mesh-env
-   service.apic-demo.apic-hybrid-list               an hour ago        service-cli-1605565746103  K8SCluster  mesh-env
+   pod.apic-demo.apic-hybrid-list-598f8f9b4b-jb7ds  an hour ago        pod-cli-1605565746103      K8SCluster  k8s-mesh
+   pod.sunset-demo.sunset-749ddd444-ld7rf           a few seconds ago  sunset-pod-discovery       K8SCluster  k8s-mesh
+   service.sunset-demo.sunset                       a few seconds ago  sunset-service-discovery   K8SCluster  k8s-mesh
+   service.apic-demo.apic-hybrid-list               an hour ago        service-cli-1605565746103  K8SCluster  k8s-mesh
    ```
 
 If you see two K8SResources that include the name `sunset-demo` that are scoped to your K8SCluster, then you have successfully configured the RDA to search your Kubernetes cluster for pods and services based on your own configuration in your ResourceDiscoveries.

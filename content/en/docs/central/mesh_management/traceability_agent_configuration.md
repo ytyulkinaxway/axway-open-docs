@@ -5,7 +5,7 @@ weight: 160
 date: 2021-03-03
 description: Observe transactions in mesh.
 ---
-{{< alert title="Public beta" color="warning" >}}This is a preview of a new Istio ALS Traceability Agent, which is deployed separately from the Istio POC agents that provide full governance of your hybrid environment. This new agent is deployed and configured from the Axway CLI, and it allows for observability of API traffic in the mesh environment.{{< /alert >}}
+{{< alert title="Public beta" color="warning" >}}This is a preview of the new Istio ALS Traceability Agent, which is deployed separately from previous Istio POC agents that provide full governance of your hybrid environment. This new agent is deployed and configured from the Axway CLI, and it allows for observability of API traffic in the mesh environment.{{< /alert >}}
 
 ## Before you begin
 
@@ -17,8 +17,8 @@ This page will reference the resources created from the [Deploy your agents with
 
 These prerequisites are required by the Amplify Central CLI, which you will use to configure the Istio discovery agents.
 
-* Node.js 10.13.0 or later
-* Minimum Amplify Central CLI version: 0.13.0
+* Node.js >= 10.13.0 and <= 12.14.1
+* Minimum Amplify Central CLI version: 0.17.0
 
 For more information, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/index.html).
 

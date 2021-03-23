@@ -5,13 +5,13 @@ weight: 160
 date: 2020-12-0
 description: Use the Amplify CLI to deploy Axway Istio agents.
 ---
-{{< alert title="Public beta" color="warning" >}}This is a preview of new Istio agents, which run separately from the Istio POC agents that provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they monitor Kubernetes resource discovery and Istio traffic activity.{{< /alert >}}
+{{< alert title="Public beta" color="warning" >}}This is a preview of the new Istio agents, which run separately from previous Istio POC agents that provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they monitor Kubernetes resource discovery and Istio traffic activity.{{< /alert >}}
 
 ## Before you begin
 
 Ensure you have the following tools installed:
 
-* Amplify Central CLI 0.13.0 or later
+* Amplify Central CLI 0.17.0 or later
 * Helm 3.2.4 or later
 * Istioctl 1.8.2
 * Kubectl 1.18 or later
@@ -36,7 +36,7 @@ If you are a member of multiple Amplify organizations, select an organization an
 
 ## Install Axway Istio agents
 
-1. Run the `install` command to begin the installation of the Axway Istio agents. The first section of the installation collects information about the Istio deployment, such as the domain name to use for the gateway, the protocol, and the TLS certificate details.
+1. Run the `install` command to begin the installation of the Axway Istio agents. The first section of the installation collects information about the Istio deployment.
 
     ```bash
     amplify central install agents
@@ -51,15 +51,45 @@ If you are a member of multiple Amplify organizations, select an organization an
     Kubernetes
     ```
 
-2. Select `Kubernetes` as your gateway. The next prompts are related to the deployment of Istio in your cluster.
+2. Select `Kubernetes` as your gateway. The next prompt asks if you already have Istio installed.
 
-3. Enter the domain name of the cluster:
+### If Istio is already installed
+
+1. If Istio is already installed in your cluster, select 'Yes'.
 
     ```bash
-    Enter the fully qualified domain name (URL) of your Kubernetes cluster:
+    ? Use existing Istio installation?:  (Use arrow keys)
+    ❯ Yes
+      No
     ```
 
-4. Enter the protocol to use for the Istio gateway:
+2. Select from the list the namespace that the ingress-gateway is running in.
+
+    ```bash
+    ? Select the namespace where the Istio ingress gateway is running:
+      default
+    ❯ istio-system
+    ```
+
+The rest of the prompts relate to the Istio agents. Continue on with the section [Select the agents to install](#select-the-agents-to-install).
+
+### If Istio is not installed
+
+1. If Istio is not installed, select No.
+
+    ```bash
+    ? Use existing Istio installation?:  (Use arrow keys)
+      Yes
+    ❯ No
+    ```
+
+2. Enter the domain name of the cluster. If you do not know the domain name for the cluster at this time, yleave the prompt blank and you will not be asked any details about the protocol, port, or certificate.
+
+    ```bash
+    Enter the public domain name for your cluster (FQDN), if available. (leave blank to skip):
+    ```
+
+3. Enter the protocol to use for the Istio gateway:
 
     ```bash
     Enter the protocol to use for the ingress gateway:
@@ -67,27 +97,26 @@ If you are a member of multiple Amplify organizations, select an organization an
     HTTPS
     ```
 
-5. Enter the port on which you want to expose the gateway. If you choose `HTTPS`, the default port will be `443`. If you choose `HTTP`, the default port will be `8080`.
+4. Enter the port on which you want to expose the gateway. If you choose `HTTPS`, the default port is `443`. If you choose `HTTP`, the default port is `8080`.
 
     ```bash
     Enter the Kubernetes cluster port: (443)
     ```
 
-6. Enter the name of the Kubernetes secret to store the certificate. By default, Istio gets deployed in the `istio-system` namespace, and the secret for the gateway certificate is saved to this namespace. The creation of this namespace is handled by the deployment of Istio, if it does not exists yet.
+5. Enter the name of the Kubernetes secret to store the certificate. By default, Istio is deployed in the `istio-system` namespace, and the secret for the gateway certificate is saved to this namespace. The creation of this namespace is handled by the deployment of Istio, if it does not exists yet.
 
    ```bash
    Enter the name of the secret to store the Istio gateway certificate: (gateway-cert)
    ```
 
-7. Choose if you would like to generate a self-signed certificate or provide your own certificate.
+6. Choose if you would like to generate a self-signed certificate or provide your own certificate.
 
-    If you choose to generate a certificate, the Amplify CLI will use OpenSSL to create the private key and the certificate, which will be placed in the current directory where you are running the Amplify CLI. If you choose to provide an existing certificate, you will be prompted with the file path to the private key and the certificate.
+    If you choose to generate a certificate, the Amplify CLI uses OpenSSL to create the private key and the certificate, which is placed in the current directory where you are running the Amplify CLI. If you choose to provide an existing certificate, you are prompted with the file path to the private key and the certificate.
 
 ### Generate a self-signed certificate
 
-To generate a self-signed certificate:
-
 1. Select `Generate self signed certificate`.
+
 2. Press `enter`.
 
     ```bash
@@ -106,14 +135,11 @@ Created secret/gateway-cert in the istio-system namespace.
 
 ### Provide certificate
 
-To provide your own certificate:
-
 1. Select `Provide certificate`.
+
 2. Press `enter`.
 
-    The next prompt asks for the file path to the private key. The path is relative to the directory where you invoked the Amplify CLI command from. If your certificate and key are stored in another directory from where you are running the CLI, then you must provide the full path to the files.
-
-3. Provide the path for both the private key and the certificate. After that, the CLI will create the secret in the `istio-system` namespace.
+3. Provide the path for both the private key and the certificate. Note that the path is relative to the directory where you invoked the Amplify CLI command from. If your certificate and key are stored in another directory from where you are running the CLI, then you must provide the full path to the files.
 
     ```bash
     Enter the name of the secret to store the Istio gateway certificate: gateway-cert
@@ -122,12 +148,13 @@ To provide your own certificate:
     Enter the file path to the certificate: /Users/axway/certificate.crt
     Created secret/gateway-cert in the istio-system namespace.
     ```
+    The CLI will create the secret in the `istio-system` namespace.
 
 ## Select the agents to install
 
 The following prompts are related to the details about the Axway Istio agents.
 
-1. Select what you would like to install. You can install only one of the agents, or both. The discovery agent option deploys the API Discovery Agent and the Resource Discovery Agent.
+1. Select what you would like to install. You can install only one of the agents, or both. The Discovery agent option deploys the API Discovery Agent and the Resource Discovery Agent.
 
     ```bash
     Select which agents to install: (Use arrow keys)
@@ -136,9 +163,9 @@ The following prompts are related to the details about the Axway Istio agents.
     Traceability agent
     ```
 
-    If you choose to deploy Traceability Agent. Select the mode in which you want the Traceability aAgent to run.
+    If you choose to deploy Traceability agent, select the mode in which you want the Traceability Agent to run.
 
-    The ALS agent has two modes namely default and verbose. The default mode captures only the headers specified in the EnvoyFilter and the verbose mode captures all the headers in request and response flows. Once selected, you will be able to switch modes if required. Refer to [Service Mesh Traceability- Toggling the Traceability Agent](docs/central/mesh_management/traceability_agent_configuration.md#toggling-the-traceability-agent)
+    The ALS agent has two modes, default and verbose. The default mode captures only the headers specified in the EnvoyFilter. The verbose mode captures all the headers in the request and response flows. Once selected, you will be able to switch modes if required. Refer to [Service Mesh Traceability- Toggling the Traceability Agent](docs/central/mesh_management/traceability_agent_configuration.md#toggling-the-traceability-agent).
 
    ```bash
     Select Traceability Agent HTTP header publishing mode:  (Use arrow keys)
@@ -168,8 +195,6 @@ The following prompts are related to the details about the Axway Istio agents.
 
 ### Create a new DOSA account
 
-To create a new DOSA account, follow these steps:
-
 1. Select `Create a new account` and press `enter`.
 
     ```bash
@@ -180,7 +205,7 @@ To create a new DOSA account, follow these steps:
     ──────────────
     ```
 
-2. Enter a name for the new DOSA account name. Creating a new DOSA account will override any file named `public_key.pem` or `private_key.pem` in the directory where you invoked the Amplify CLI from.
+2. Enter a name for the new DOSA account. Creating a new DOSA account will override any file named `public_key.pem` or `private_key.pem` in the directory where you invoked the Amplify CLI from.
 
     ```bash
     Select a service account (DOSA):  Create a new account
@@ -198,7 +223,7 @@ To create a new DOSA account, follow these steps:
     The public key has been placed at /Users/axway/public_key.pem
     ```
 
-3. Enter a name for the Kubernetes secret to store the keys. The CLI will create the secret automatically in the namespace that you selected for the Istio agent installation.
+3. Enter a name for the Kubernetes secret to store the keys. The CLI creates the secret automatically in the namespace that you selected for the Istio agent installation.
 
     ```bash
     The secret will be created with the same `private_key.pem` and `public_key.pem` that was auto generated to create the DOSA Account.
@@ -207,8 +232,6 @@ To create a new DOSA account, follow these steps:
     ```
 
 ### Use an existing DOSA account
-
-To use an existing DOSA account for the Axway Istio agents, follow these steps:
 
 1. Select the DOSA account from the list and press `enter`.
 
@@ -259,17 +282,24 @@ A message indicating that the new environment has been created is shown.
 
 After the new environment is created, the CLI creates the following:
 
-* `istio-override.yaml` and `hybrid-override.yaml` files, and place them in your current directory.
-* `Mesh`, `MeshDiscovery`, `K8SCluster`, `SpecDiscovery`, and two `ResourceDiscoveries` resources to be used to discover and promote the kubernetes resources of the demo service to the provided environment.
+* `istio-override.yaml` and `hybrid-override.yaml` files, and places them in your current directory.
+* `Mesh`, `MeshDiscovery`, `K8SCluster`, `SpecDiscovery`, and two `ResourceDiscoveries` resources are used to discover and promote the kubernetes resources of the demo service to the provided environment.
 
 The demo service is packaged along with the `apicentral-hybrid` helm chart.
 
 ## Install Istio
 
-Run the following command to install Istio:
+If Istio is not yet installed the final output of the install prompts will provide the command below to install Istio.
 
 ```bash
 istioctl install --set profile=demo -f istio-override.yaml
+```
+
+If Istio is already installed then no install command will be provided. Instead, the CLI will provide instructions for you to merge the provided istio-override.yaml file with your own Istio configuration.
+
+```bash
+Istio override file has been placed at /Users/Axway/istio-override.yaml
+  Please merge the generated istio-override.yaml file with your Istio configuration to allow the Traceability Agent to function.
 ```
 
 ## Finish the installation of the agents
