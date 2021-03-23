@@ -22,6 +22,8 @@ Ensure you have the following tools installed:
 
 For more information about installing the CLI, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/).
 
+**Note:** Istio agents are compatible with RedHat OpenShift 4.7 and later. For more information see [Using RedHat OpenShift](/docs/central/mesh_management/using_redhat_openshift)
+
 ## Log in to the Amplify Central CLI
 
 Run the following command to log into the Central CLI with your Amplify Platform credentials:
