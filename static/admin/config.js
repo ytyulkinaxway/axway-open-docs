@@ -310,6 +310,13 @@ const collections = [{
   description: 'All pages relating to AMPLIFY Central.',
   format: 'frontmatter',
 }, {
+  ...docsDefaults('central/env_gw_mgmt', 'central/env_gw_mgmt'),
+  name: 'env_gw_mgmt',
+  label: 'Manage your environments and gateways documentation',
+  label_singular: 'page in Manage your environments and gateways',
+  description: 'All pages relating to Manage your environments and gateways.',
+  format: 'frontmatter',
+}, {
   ...docsDefaults('central/mesh_management', 'central/mesh_management'),
   name: 'mesh_management',
   label: 'Mesh management documentation',
