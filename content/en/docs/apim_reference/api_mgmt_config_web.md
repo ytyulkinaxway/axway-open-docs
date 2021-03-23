@@ -128,8 +128,11 @@ For more details on API Portal, see [Administer API Portal](/docs/apim_adminis
 
 ### Password, login, and session management settings
 
+**Session timeout (minutes)**
+: Enter the number of minutes after which API Manager sessions time out. Defaults to `720` minutes (12 hours). Changing this value takes effect immediately.
+
 **Idle session timeout (minutes)**
-: Enter the number of minutes after which idle API Manager sessions time out. Defaults to `60` minutes. Changing this value only affects logins made after the change.
+: Enter the number of minutes after which idle API Manager sessions time out. Defaults to `60` minutes. Changing this value takes effect immediately.
 
 **Change password on first login**
 : Select whether to enforce a change of password when a user logs into API Manager for the first time. This is enabled by default.
