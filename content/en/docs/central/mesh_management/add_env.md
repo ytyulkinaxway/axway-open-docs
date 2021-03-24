@@ -10,8 +10,8 @@ description: Learn how to add your environments to AMPLIFY Central so that you
 
 ## Before you start
 
-* Read [AMPLIFY Central mesh governance overview](/docs/central/mesh_management).
-* You will need a private cloud Kubernetes cluster that meets the minimum requirements for an AMPLIFY Central hybrid environment, and a client system from which you can access and manage the cluster remotely. See [Build your hybrid environment](/docs/central/mesh_management/build_hybrid_env).
+* Read [AMPLIFY Central mesh governance overview](/docs/central/mesh_management/).
+* You will need a private cloud Kubernetes cluster that meets the minimum requirements for an AMPLIFY Central hybrid environment, and a client system from which you can access and manage the cluster remotely. See [Build your hybrid environment](/docs/central/mesh_management/build_hybrid_env/).
 * You will need a basic understanding of OAuth authorization ([RFC 6749](https://tools.ietf.org/html/rfc6749)) and JWT ([RFC 7523](https://tools.ietf.org/html/rfc7523)).
 * You must be familiar with Kubernetes and Helm, including running Helm and kubectl commands.
 * You will need an administrator account for AMPLIFY Central.

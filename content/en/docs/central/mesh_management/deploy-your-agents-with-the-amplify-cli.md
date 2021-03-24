@@ -22,7 +22,7 @@ Ensure you have the following tools installed:
 
 For more information about installing the CLI, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/).
 
-**Note:** Istio agents are compatible with RedHat OpenShift 4.7 and later. For more information see [Using RedHat OpenShift](/docs/central/mesh_management/using_redhat_openshift)
+**Note:** Istio agents are compatible with RedHat OpenShift 4.7 and later. For more information see [Using RedHat OpenShift](/docs/central/mesh_management/using_redhat_openshift/)
 
 ## Log in to the Amplify Central CLI
 
@@ -85,7 +85,7 @@ The rest of the prompts relate to the Istio agents. Continue on with the section
     ❯ No
     ```
 
-2. Enter the domain name of the cluster. If you do not know the domain name for the cluster at this time, yleave the prompt blank and you will not be asked any details about the protocol, port, or certificate.
+2. Enter the domain name of the cluster. If you do not know the domain name for the cluster at this time, leave the prompt blank and you will not be asked any details about the protocol, port, or certificate.
 
     ```bash
     Enter the public domain name for your cluster (FQDN), if available. (leave blank to skip):
@@ -167,7 +167,7 @@ The following prompts are related to the details about the Axway Istio agents.
 
     If you choose to deploy Traceability agent, select the mode in which you want the Traceability Agent to run.
 
-    The ALS agent has two modes, default and verbose. The default mode captures only the headers specified in the EnvoyFilter. The verbose mode captures all the headers in the request and response flows. Once selected, you will be able to switch modes if required. Refer to [Service Mesh Traceability- Toggling the Traceability Agent](docs/central/mesh_management/traceability_agent_configuration.md#toggling-the-traceability-agent).
+    The ALS agent has two modes, default and verbose. The default mode captures only the headers specified in the EnvoyFilter. The verbose mode captures all the headers in the request and response flows. Once selected, you will be able to switch modes if required. Refer to [Service Mesh Traceability - Toggling the Traceability Agent](/docs/central/mesh_management/traceability_agent_configuration/#toggling-the-traceability-agent).
 
    ```bash
     Select Traceability Agent HTTP header publishing mode:  (Use arrow keys)
@@ -367,6 +367,6 @@ helm upgrade --install --namespace apic-control apic-hybrid axway/apicentral-hyb
 
 ## Where to go next
 
-For more information on the details of the resources and how the discovery process works, see [Discover APIs and services](/docs/central/mesh_management/discover-apis-and-services).
+For more information on the details of the resources and how the discovery process works, see [Discover APIs and services](/docs/central/mesh_management/discover-apis-and-services/).
 
-For more information on the details on how the service mesh traceability works, see [Service Mesh Traceability](docs/central/mesh_management/traceability_agent_configuration.md).
+For more information on the details on how the service mesh traceability works, see [Service Mesh Traceability](/docs/central/mesh_management/traceability_agent_configuration/).

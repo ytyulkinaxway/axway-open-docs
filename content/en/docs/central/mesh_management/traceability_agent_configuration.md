@@ -9,9 +9,9 @@ description: Observe transactions in mesh.
 
 ## Before you begin
 
-Before you start, see [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli) to learn how to use the CLI to install the Istio agents into your Kubernetes cluster.
+Before you start, see [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/) to learn how to use the CLI to install the Istio agents into your Kubernetes cluster.
 
-This page will reference the resources created from the [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli) procedure.
+This page will reference the resources created from the [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/) procedure.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ These prerequisites are required by the Amplify Central CLI, which you will use 
 * Node.js >= 10.13.0 and <= 12.14.1
 * Minimum Amplify Central CLI version: 0.17.0
 
-For more information, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/index.html).
+For more information, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/).
 
 ## Overview
 
@@ -37,7 +37,7 @@ The ALS Traceability Agent logs and publishes traffic within the Mesh. In order 
 
 First, we will create a Gateway in the namespace in which we installed our Istio agents. Please note if you already have a Gateway CRD, you can skip this step and specify that Gateway in the Virtual Service.
 
-In the example below we specify the selector as the "istio-apic-ingress" i.e., the Ingress gateway that is installed during the Istio installation step in [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli). If you have a separate Ingress gateway that you would like to use, change the spec.selector.istio field to the label of that Ingress gateway instead.
+In the example below we specify the selector as the "istio-apic-ingress" i.e., the Ingress gateway that is installed during the Istio installation step in [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/). If you have a separate Ingress gateway that you would like to use, change the spec.selector.istio field to the label of that Ingress gateway instead.
 
 **Note** For more information about Gateway CRD please refer to [Istio documentation](https://istio.io/latest/docs/reference/config/networking/gateway/).
 
@@ -267,7 +267,7 @@ curl -v http://demo.sandbox.axwaytest.net:8080/mylist/list
 
 ## Toggling the Traceability agent
 
-After deploying the `apicentral-hybrid` helm chart to your Kubernetes cluster, you can see the ALS Traceability Agent running. The service is called `apic-hybrid-als`. During the step [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli), we were able to select the mode for the ALS agent. If you want to switch the mode please follow the procedure below.
+After deploying the `apicentral-hybrid` helm chart to your Kubernetes cluster, you can see the ALS Traceability Agent running. The service is called `apic-hybrid-als`. During the step [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/), we were able to select the mode for the ALS agent. If you want to switch the mode please follow the procedure below.
 
 **From default to verbose**:
 
@@ -363,7 +363,7 @@ To exclude any headers, remove them from "additional_request_headers_to_log" and
 
 ## Sanitization of Transactions
 
-The ALS Traceability Agent can be configured to sanitize the Transaction information that it publishes; i.e Request/Response headers, Query Parameters, Path Segments. Sanitization configuraiton is passed to the Traceability Agent via Helm.
+The ALS Traceability Agent can be configured to sanitize the Transaction information that it publishes; i.e Request/Response headers, Query Parameters, Path Segments. Sanitization configuration is passed to the Traceability Agent via Helm.
 
 Below is a sample sanitization configuration:
 

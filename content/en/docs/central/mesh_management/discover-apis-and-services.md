@@ -9,9 +9,9 @@ description: Learn how to configure the Axway Istio agents to discover your APIs
 
 ## Before you begin
 
-Before you start, see [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli) to learn how to use the CLI to install the mesh agents into your Kubernetes cluster and to create default resources to discover the demo service that gets deployed.
+Before you start, see [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/) to learn how to use the CLI to install the mesh agents into your Kubernetes cluster and to create default resources to discover the demo service that gets deployed.
 
-This page references the resources created from the [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli) procedure.
+This page references the resources created from the [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/) procedure.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ These prerequisites are required by the Amplify Central CLI, which you will use 
 * Node.js >= 10.13.0 and <= 12.14.1
 * Minimum Amplify Central CLI version: 0.17.0
 
-For more information, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/index.html).
+For more information, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/).
 
 ## Overview
 
@@ -443,7 +443,7 @@ spec:
       protocol: TCP
 ```
 
-Take a look at the array of ports first. The first port is named `sunset-http-port`. The name of the annotation is `docpath.apicentral.io/sunset-http-port`. By providing a template to the SpecDiscovey, such as `docpath.apicentral.io/{.Port.Name}`, the ADA will take the names of all ports and parse the template to create the final string. If the final parsed string matches any of the templates in the pod, then the JSON object that is provided in the annotation will be used to make the request to the pod.
+Take a look at the array of ports first. The first port is named `sunset-http-port`. The name of the annotation is `docpath.apicentral.io/sunset-http-port`. By providing a template to the SpecDiscovery, such as `docpath.apicentral.io/{.Port.Name}`, the ADA will take the names of all ports and parse the template to create the final string. If the final parsed string matches any of the templates in the pod, then the JSON object that is provided in the annotation will be used to make the request to the pod.
 
 There is another port in the example named `no-match`. The ADA will parse the template against all ports found in a pod. This will result in two parsed template: `docpath.apicentral.io/sunset-http-port` and `docpath.apicentral.io/no-match`. The ADA will look for each of these templates in the pod. In this example, there is only one annotation. There is no annotation for `docpath.apicentral.io/no-match`, meaning that the ADA will not perform any action with this parsed template.
 
