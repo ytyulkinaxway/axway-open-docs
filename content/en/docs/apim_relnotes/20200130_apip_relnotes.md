@@ -70,7 +70,11 @@ OAS3 support is enabled and integrated with the Swagger.io UI component to bring
 
 For more information, see [Additional features for API Catalog view](/docs/apim_administration/apiportal_admin/apip_overview/#additional-features-api-catalog-view).
 
-<!-- Use this section to describe any changes in the behavior of the product (as a result of features or fixes). This section could also be used for any important information that doesn't fit elsewhere.-->
+### Further Enhancements
+
+* Support for PHP 7.4 was introduced in this update.
+
+*This section was updated to amend the information about Support for PHP versions.*
 
 ## Limitations of this release
 

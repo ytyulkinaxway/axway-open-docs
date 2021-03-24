@@ -36,7 +36,7 @@ You must have one of the following installed:
 
 ### PHP
 
-API Portal requires PHP 7.1 or later. (Support for PHP 7.4 was introduced in version 7.7.20200130.)
+API Portal requires PHP 7.1 or later. We strongly recommend you to use only [officially supported PHP versions](https://www.php.net/supported-versions.php).
 
 In addition you must have the following PHP packages installed:
 
