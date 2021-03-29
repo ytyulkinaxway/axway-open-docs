@@ -125,13 +125,13 @@ run them using the appropriate supplied environment files, (da_env_vars.env & ta
   - Pull the latest Discovery Agent:
     docker pull axway.jfrog.io/ampc-public-docker-release/agent/azure-discovery-agent:latest
   - Pull the latest Traceability Agent:
-    docker pull docker pull axway.jfrog.io/ampc-public-docker-release/agent/azure-discovery-agent:latest/azure-traceability-agent:latest
+    docker pull axway.jfrog.io/ampc-public-docker-release/agent/azure-traceability-agent:latest
 
   - Run the latest Discovery Agent:
     docker run --env-file "$(pwd)"/da_env_vars.env -v "$(pwd)":/keys \
         axway.jfrog.io/ampc-public-docker-release/agent/azure-discovery-agent:latest
   - Run the latest Traceability Agent:
-    docker run --env-file "$(pwd)"/da_env_vars.env -v "$(pwd)":/keys \
+    docker run --env-file "$(pwd)"/ta_env_vars.env -v "$(pwd)":/keys \
         axway.jfrog.io/ampc-public-docker-release/agent/azure-traceability-agent:latest
 ```
 
