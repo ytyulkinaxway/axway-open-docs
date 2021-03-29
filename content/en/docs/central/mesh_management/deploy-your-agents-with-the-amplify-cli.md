@@ -1,9 +1,9 @@
 ---
-title: Deploy your agents with Amplify CLI
+title: Deploy your agents with Axway CLI
 linkTitle: Deploy your agents
 weight: 160
 date: 2020-12-0
-description: Use the Amplify CLI to deploy Axway Istio agents.
+description: Use the Axway CLI to deploy Axway Istio agents.
 ---
 {{< alert title="Public beta" color="warning" >}}This is a preview of the new Istio agents, which run separately from previous Istio POC agents that provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they monitor Kubernetes resource discovery and Istio traffic activity.{{< /alert >}}
 
@@ -11,28 +11,30 @@ description: Use the Amplify CLI to deploy Axway Istio agents.
 
 Ensure you have the following tools installed:
 
-* Amplify Central CLI 0.17.0 or later
+* Axway Central CLI 0.10.0 or later
 * Helm 3.2.4 or later
 * Istioctl 1.8.2
 * Kubectl 1.18 or later
 * Node.js >= 10.13.0 and <= 12.14.1
 * OpenSSL 2.8.3 or later
 
+## Log in to the Axway Central CLI
+
 **Note:** The most recently validated Kubernetes version was 1.19.8.
 
-For more information about installing the CLI, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/).
+For more information about installing the CLI, see [Install Axway Central CLI](/docs/central/cli_central/cli_install/).
 
-**Note:** Istio agents are compatible with RedHat OpenShift 4.7 and later. For more information see [Using RedHat OpenShift](/docs/central/mesh_management/using_redhat_openshift/)
+**Note:** Istio agents are compatible with RedHat OpenShift 4.7 and later. For more information see [Using RedHat OpenShift](/docs/central/mesh_management/using_redhat_openshift/).
 
 ## Log in to the Amplify Central CLI
 
 Run the following command to log into the Central CLI with your Amplify Platform credentials:
 
 ```shell
-amplify auth login --client-id apicentral
+axway auth login --client-id apicentral
 ```
 
-A dialog box is shown. Enter your valid credentials (email address and password), and after the authorization successful message is displayed, go back to the Amplify CLI.
+A dialog box is shown. Enter your valid credentials (email address and password), and after the authorization successful message is displayed, go back to the Axway CLI.
 
 If you are a member of multiple Amplify organizations, select an organization and continue.
 
@@ -41,7 +43,7 @@ If you are a member of multiple Amplify organizations, select an organization an
 1. Run the `install` command to begin the installation of the Axway Istio agents. The first section of the installation collects information about the Istio deployment.
 
     ```bash
-    amplify central install agents
+    axway central install agents
     ```
 
     The installation displays the following prompts.
@@ -113,7 +115,7 @@ The rest of the prompts relate to the Istio agents. Continue on with the section
 
 6. Choose if you would like to generate a self-signed certificate or provide your own certificate.
 
-    If you choose to generate a certificate, the Amplify CLI uses OpenSSL to create the private key and the certificate, which is placed in the current directory where you are running the Amplify CLI. If you choose to provide an existing certificate, you are prompted with the file path to the private key and the certificate.
+    If you choose to generate a certificate, the Axway CLI will use OpenSSL to create the private key and the certificate, which will be placed in the current directory where you are running the Axway CLI. If you choose to provide an existing certificate, you will be prompted with the file path to the private key and the certificate.
 
 ### Generate a self-signed certificate
 
@@ -141,7 +143,7 @@ Created secret/gateway-cert in the istio-system namespace.
 
 2. Press `enter`.
 
-3. Provide the path for both the private key and the certificate. Note that the path is relative to the directory where you invoked the Amplify CLI command from. If your certificate and key are stored in another directory from where you are running the CLI, then you must provide the full path to the files.
+3. Provide the path for both the private key and the certificate. Note that the path is relative to the directory where you invoked the Axway Central CLI command from. If your certificate and key are stored in another directory from where you are running the CLI, then you must provide the full path to the files.
 
     ```bash
     Enter the name of the secret to store the Istio gateway certificate: gateway-cert
@@ -207,7 +209,7 @@ The following prompts are related to the details about the Axway Istio agents.
     ──────────────
     ```
 
-2. Enter a name for the new DOSA account. Creating a new DOSA account will override any file named `public_key.pem` or `private_key.pem` in the directory where you invoked the Amplify CLI from.
+2. Enter a name for the new DOSA account. Creating a new DOSA account will override any file named `public_key.pem` or `private_key.pem` in the directory where you invoked the Axway Central CLI from.
 
     ```bash
     Select a service account (DOSA):  Create a new account
@@ -254,7 +256,7 @@ The following prompts are related to the details about the Axway Istio agents.
     Enter the file path to the private key:  /Users/axway/private_key.pem
     ```
 
-3. Enter the name of the Kubernetes secret that will store the keys. The Amplify CLI will create the Kubernetes secret for you in the namespace you selected for the Istio agent installation.
+3. Enter the name of the Kubernetes secret that will store the keys. The Axway CLI will create the Kubernetes secret for you in the namespace you selected for the Istio agent installation.
 
     ```bash
     Enter the name of the secret to store your public and private keys:  (agent-secrets)
@@ -342,10 +344,10 @@ helm upgrade --install --namespace apic-control apic-hybrid axway/apicentral-hyb
     apic-hybrid-list-598f8f9b4b-9wsc6   2/2     Running   0          90s
     ```
 
-3. The installation creates resources, which provide configuration to the API Discovery Agent and the Resource Discovery Agent. You can use the Amplify CLI to verify the agents are configured and running, and to list the resources that are expect to exist as a result of the agents discovering the `apic-hybrid-list` service.
+3. The installation creates resources, which provide configuration to the API Discovery Agent and the Resource Discovery Agent. You can use the Axway CLI to verify the agents are configured and running, and to list the resources that are expect to exist as a result of the agents discovering the `apic-hybrid-list` service.
 
     ```bash
-    amplify central get apispecs -s mesh-demo
+    axway central get apispecs -s mesh-demo
     ✔ Resource(s) has successfully been retrieved
 
     NAME              AGE            TITLE   SCOPE KIND  SCOPE NAME
@@ -355,7 +357,7 @@ helm upgrade --install --namespace apic-control apic-hybrid axway/apicentral-hyb
     If you see one resource after running this command, that confirms that the API Discovery Agent is working.
 
     ```bash
-    amplify central get k8sresources -s mesh-demo
+    axway central get k8sresources -s mesh-demo
     ✔ Resource(s) has successfully been retrieved
 
     NAME                                             AGE            TITLE                      SCOPE KIND  SCOPE NAME

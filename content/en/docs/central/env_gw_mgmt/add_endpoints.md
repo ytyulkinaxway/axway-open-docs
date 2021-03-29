@@ -19,8 +19,8 @@ Before adding an endpoint, you must [add a service](/docs/central/env_gw_mgmt/ad
 3. Click **Add and save** to add the endpoint, you can repeat steps 2 and 3 to add more endpoints.
 4. Click **Save** to create the endpoint(s).
 
-> If you want to add an endpoint to an API service using the Amplify Central CLI, please refer to these [docs](/docs/central/cli_central/cli_publish) instead.
+> If you want to add an endpoint to an API service using the Axway Central CLI, please refer to these [docs](/docs/central/cli_central/cli_publish) instead.
   
 ### Errors and debugging
 
-If there is an error while publishing to catalog, the form page will present a large error box explaining the caused of the error. The error may contain references to objects only found when using the CLI or API directly. In this case, please refer to the [Amplify CLI](/docs/central/cli_central/cli_publish) documentation for further guidance.
+If there is an error while publishing to catalog, the form page will present a large error box explaining the caused of the error. The error may contain references to objects only found when using the CLI or API directly. In this case, please refer to the [Axway CLI](/docs/central/cli_central/cli_publish) documentation for further guidance.

@@ -1,9 +1,9 @@
 ---
-title: Build an environment using the AMPLIFY Central CLI
+title: Build an environment using the Axway Central CLI
 linkTitle: Build an environment
 weight: 110
 date: 2020-06-10T00:00:00.000Z
-description: Learn how your DevOps process can use AMPLIFY Central CLI to build
+description: Learn how your DevOps process can use Axway Central CLI to build
   and manage your environments.
 ---
 
@@ -14,7 +14,7 @@ description: Learn how your DevOps process can use AMPLIFY Central CLI to build
 
 ## Objectives
 
-Learn how to create and manage your distributed cloud and on-premise environments using the AMPLIFY Central CLI. This includes the representation of connected Axway Agent environments (AMPLIFY API Management V7 and AWS).
+Learn how to create and manage your distributed cloud and on-premise environments using the Axway Central CLI. This includes the representation of connected Axway Agent environments (Amplify API Management V7 and AWS).
 
 * Create a new environment
 * Retrieve a list of all available environments
@@ -31,25 +31,25 @@ The following are examples of how a DevOps user can run CLI commands to create a
 Create an environment by providing the environment name:
 
  ```
- amplify central create env <name>
+ axway central create env <name>
  ```
 
 Create an environment by providing the environment name and the output in JSON format. (Use `-o yaml` to display the output in YAML format):
 
  ```
- amplify central create env <name> -o json
+ axway central create env <name> -o json
  ```
 
 Create an environment by providing the path to a valid .yaml, .yml, or .json file that defines a specific resource:
 
  ```
- amplify central create -f <filepath>
+ axway central create -f <filepath>
  ```
 
 Create an environment by providing the environment name (`env3`) and a path to a valid .yaml, .yml, or .json file that defines a specific resource:
 
 ```
-amplify central create environment env3 -f <filepath>
+axway central create environment env3 -f <filepath>
 ```
 
 Optional flags:
@@ -66,13 +66,13 @@ Try out the [create_environments.json](https://axway-open-docs.netlify.app/sampl
 The following example shows how to get a list of all environments (names, ages, and titles) for my tenant/organization:
 
 ```
-amplify central get environments
+axway central get environments
 ```
 
 To get a list of all environments details displayed in JSON format. (Use `-o yaml` to display the output in YAML format):
 
 ```
-amplify central get envs -o json
+axway central get envs -o json
 ```
 
 ## Retrieve details for a specific environment
@@ -80,13 +80,13 @@ amplify central get envs -o json
 The following example shows how to get details (name, age, and title) on a specific environment by providing the environment name:
 
 ```
-amplify central get environment <name>
+axway central get environment <name>
 ```
 
 To get details on a specific environment displayed in JSON format. (Use `-o yaml` to display the output in YAML format):
 
 ```
-amplify central get env <name> -o json
+axway central get env <name> -o json
 ```
 
 ## Update a specific environment
@@ -94,13 +94,13 @@ amplify central get env <name> -o json
 The following example shows how to edit the details of a specific environment by providing the environment name:
 
 ```
-amplify central edit environment <name>
+axway central edit environment <name>
 ```
 
 To edit the details of a specific environment, displayed in YAML format in the editor, run:
 
 ```
-amplify central edit env <name> -o yaml
+axway central edit env <name> -o yaml
 ```
 
 ## Delete a specific environment
@@ -112,15 +112,15 @@ This action will delete all API services and resources in the environment specif
 To delete all resources in an environment:
 
 ```
-amplify central delete env <name>
+axway central delete env <name>
 ```
 
 Use `--wait` to delete resources from an environment while waiting for resource deletion confirmation. The `--wait` option will check for resource deletion for up to 10 seconds.
 
 ```
-amplify central delete env <name> --wait
+axway central delete env <name> --wait
 ```
 
 ## Review
 
-You have learned how to use the AMPLIFY Central CLI to build and manage your environments.
+You have learned how to use the Axway Central CLI to build and manage your environments.

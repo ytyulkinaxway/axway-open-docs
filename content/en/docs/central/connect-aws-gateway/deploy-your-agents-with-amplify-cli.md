@@ -1,9 +1,9 @@
 ---
-title: Deploy your agents with Amplify CLI
-linkTitle: Deploy your agents with Amplify CLI
+title: Deploy your agents with Axway CLI
+linkTitle: Deploy your agents with Axway CLI
 draft: false
 weight: 20
-description: Learn how to deploy your agents using Amplify CLI so that you can
+description: Learn how to deploy your agents using Axway CLI so that you can
   manage your AWS API Gateway environment within Amplify Central.
 ---
 ## Before you start
@@ -19,33 +19,33 @@ description: Learn how to deploy your agents using Amplify CLI so that you can
 
 ## Objectives
 
-Learn how to quickly install and run your Discovery and Traceability agents with basic configuration using Amplify Central CLI.
+Learn how to quickly install and run your Discovery and Traceability agents with basic configuration using Axway Central CLI.
 
-## Amplify Central CLI prerequisites
+## Axway Central CLI prerequisites
 
 * [Node.js](https://nodejs.org/en/download/) version 10.13.0 or later
 * Access to npm package (for installing Amplify cli)
 * Access to login.axway.com on port 443
-* Minimum Amplify Central CLI version: 0.5.0 (check version using `amplify central --version`)
+* Minimum Axway Central CLI version: 0.5.0 (check version using `axway central --version`)
 
-For more information, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/).
+For more information, see [Install Axway Central CLI](/docs/central/cli_central/cli_install/).
 
 ## Installing the agents
 
 ### Step 1: Folder preparation
 
-Create an empty directory where Amplify CLI will generate files. Run all Amplify Central CLI from this directory.
+Create an empty directory where Axway CLI will generate files. Run all Axway Central CLI from this directory.
 
-### Step 2: Identify yourself to Amplify Platform with Amplify CLI
+### Step 2: Identify yourself to Amplify Platform with Axway CLI
 
 To use Central CLI to log in with your Amplify Platform credentials, run the following command:
 
 ```shell
-amplify auth login
+axway auth login
 ```
 
 A browser automatically opens.
-Enter your valid credentials (email address and password). Once the “Authorization Successful” message is displayed, go back to Amplify CLI. The browser may be closed at this point.
+Enter your valid credentials (email address and password). Once the “Authorization Successful” message is displayed, go back to Axway CLI. The browser may be closed at this point.
 
 If you are a member of multiple Amplify organizations, you may have to choose an organization.
 
@@ -54,18 +54,18 @@ If you are a member of multiple Amplify organizations, you may have to choose an
 ### Step 3: Run the agents' install procedure
 
 AWS agents are delivered in a Docker image provided by Axway. You can run them from any Docker container that can access the Amplify Platform and AWS API Gateway.
-The Amplify Central CLI will guide you through the configuration of the agents. Cloud formation templates are provided to help you setup either an EC2 architecture or an ECS-fargate architecture. You can also decide to not use any of them and deploy the Docker images in your own Docker container architecture.
+The Axway Central CLI will guide you through the configuration of the agents. Cloud formation templates are provided to help you setup either an EC2 architecture or an ECS-fargate architecture. You can also decide to not use any of them and deploy the Docker images in your own Docker container architecture.
 
 To start the installation procedure, run the following command:
 
 ```shell
-amplify central install agents
+axway central install agents
 ```
 
 If your Amplify subscription is hosted in the EU region, then the following installation command must be used to correctly configure the agents:
 
 ```shell
-amplify central install agents --region=EU
+axway central install agents --region=EU
 ```
 
 The installation procedure prompts for the following:

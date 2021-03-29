@@ -18,7 +18,7 @@ As an asset provider, you can choose to disable subscriptions for your asset, fo
 
 You can also configure the subscription metadata that is required from consumers at the time of subscription. You can configure this when publishing the asset to the AMPLIFY Unified Catalog, or after the asset has been published.
 
-{{< alert title="Note" color="primary" >}}Enabling or disabling subscriptions is currently available only by way of [AMPLIFY Central CLI](/docs/central/cli_central/) or AMPLIFY API.{{< /alert >}}
+{{< alert title="Note" color="primary" >}}Enabling or disabling subscriptions is currently available only by way of [Axway Central CLI](/docs/central/cli_central/) or AMPLIFY API.{{< /alert >}}
 
 ## Subscription scope
 

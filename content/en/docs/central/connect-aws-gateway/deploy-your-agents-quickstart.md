@@ -34,7 +34,7 @@ Learn the basics to create your Discovery Agent and Traceability Agent configura
 
 * Create an environment object in Amplify Central that represents the effective AWS Gateway environment. Depending on your needs, you can create as many environments as required.
 * Each discovered API or Traffic is associated to this environment and eases the filtering.
-* Add your environment to Amplify Central using either the [Amplify Central CLI](/docs/central/cli_central/cli_environments/) or [the UI](/docs/central/connect-api-manager/prepare-amplify-central/#create-environment-using-the-ui).
+* Add your environment to Amplify Central using either the [Axway Central CLI](/docs/central/cli_central/cli_environments/) or [the UI](/docs/central/connect-api-manager/prepare-amplify-central/#create-environment-using-the-ui).
 
 ### 3. Create the agent environment files
 

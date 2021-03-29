@@ -10,7 +10,7 @@ description: Learn how to apply a rate limit configuration to your API.
 
 * You will need an administrator account for AMPLIFY Central
 * Learn how to import your API as an API proxy in AMPLIFY Central (see [Register an API](/docs/central/quickstart/#register-an-api))
-* Learn how to use the AMPLIFY CLI to manage an API proxy (see [Manage an API proxy using AMPLIFY Central CLI](/docs/central/cli_central/cli_proxy_flow))
+* Learn how to use the Axway CLI to manage an API proxy (see [Manage an API proxy using Axway Central CLI](/docs/central/cli_central/cli_proxy_flow))
 
 ## Objectives
 
@@ -18,7 +18,7 @@ Learn how to apply a rate limit configuration to your API:
 
 * Understand what API rate limiting is and how it can be useful
 * Configure and test rate limiting on your API using the AMPLIFY Central UI
-* Configure and test rate limiting on your API using the AMPLIFY Central CLI
+* Configure and test rate limiting on your API using the Axway Central CLI
 
 ## What is API rate limiting?
 
@@ -182,9 +182,9 @@ The passed rate closely matches the enforced rate limit.
 
 A new revision with no rate limit is created. You must deploy the new revision for the configuration to take effect.
 
-## Use the AMPLIFY Central CLI to configure rate limiting on your API
+## Use the Axway Central CLI to configure rate limiting on your API
 
-Ensure that you are logged in to AMPLIFY Central CLI using the service account.
+Ensure that you are logged in to Axway Central CLI using the service account.
 
 ### Create the configuration file and promote your API
 
@@ -214,13 +214,13 @@ The `perProxy` field specifies the desired Transactions Per Second (TPS) limit f
 Create the API proxy:
 
 ```
-amplify central proxies create /myservices/my_service_config.yaml
+axway central proxies create /myservices/my_service_config.yaml
 ```
 
 Promote the proxy to the test runtime group:
 
 ```
-amplify central proxies promote /myservices/my_service_config.yaml --target="Test Runtime"
+axway central proxies promote /myservices/my_service_config.yaml --target="Test Runtime"
 ```
 
 To visualize the API proxy in AMPLIFY Central UI, select **API Proxies** in the left navigation bar, and click the appropriate API proxy in the list. Verify the rate limit configuration in the **Policies** tab.
@@ -414,11 +414,11 @@ proxy:
 Create a new revision of the API proxy:
 
 ```
-amplify central proxies create /myservices/my_service_config.yaml
+axway central proxies create /myservices/my_service_config.yaml
 ```
 
 Promote the new API version and verify that the API proxy is not rate limited anymore.
 
 ## Review
 
-You have learned how rate limiting can help you provide a better API experience to consumers and how to configure a rate limit on your API using both the AMPLIFY Central UI and the AMPLIFY Central CLI.
+You have learned how rate limiting can help you provide a better API experience to consumers and how to configure a rate limit on your API using both the AMPLIFY Central UI and the Axway Central CLI.

@@ -141,4 +141,4 @@ To configure monitoring:
 3. Select the check box to enable monitoring.
 4. Select the Verbose mode and add all headers you want to track. These headers can belong to any request/response (frontend/backend) or you can choose different headers to log using the advanced options.
 
-Now that Azure is all set, you can [Deploy the agents using Amplify Central CLI](/docs/central/connect-azure-gateway/deploy-your-agents-with-amplify-cli) to discover and monitor Azure APIs.
+Now that Azure is all set, you can [Deploy the agents using Axway Central CLI](/docs/central/connect-azure-gateway/deploy-your-agents-with-amplify-cli) to discover and monitor Azure APIs.

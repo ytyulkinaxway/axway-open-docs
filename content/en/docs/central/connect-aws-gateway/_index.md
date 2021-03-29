@@ -50,11 +50,11 @@ For additional logging information, see <https://docs.aws.amazon.com/apigateway/
 * An Axway Amplify Central subscription in the Amplify platform
 * (Optional) An Amplify Central Service Account. See [Create a service account](/docs/central/cli_central/cli_install/#option-2-authenticate-and-authorize-your-service-account)
 * (Optional) An Amplify Central environment. See [Create an environment](/docs/central/cli_central/cli_environments/)
-* API Key credentials on AWS. Allow for CLI access.
+* API Key credentials on AWS. Allow for CLI access
 * Amazon CloudWatch Service
 * Amazon Simple Queue Service (AWS SQS)
 * AWS Lambda
-* CloudFormation template. Download from [https://axway.jfrog.io/artifactory/ampc-public-generic-release/aws-agents/aws_apigw_agent_config/](<https://axway.jfrog.io/artifactory/ampc-public-generic-release/aws-agents/aws_apigw_agent_config/>).
+* CloudFormation template. Download from [https://axway.jfrog.io/artifactory/ampc-public-generic-release/aws-agents/aws_apigw_agent_config/](<https://axway.jfrog.io/artifactory/ampc-public-generic-release/aws-agents/aws_apigw_agent_config/>)
 
 ## System requirements
 
@@ -82,4 +82,4 @@ The following is a high-level overview of the required steps to connect an AWS A
 * Configure AWS services / roles (optional) / Infrastructure (optional)
 * Deploy the agent in the chosen infrastructure (EC2 / ECS-fargate / Docker only)
 
-You will be guided through this procedure using Amplify Central CLI. See [Deploy your agents with Amplify CLI](/docs/central/connect-aws-gateway/deploy-your-agents-with-amplify-cli)
+You will be guided through this procedure using Axway Central CLI. See [Deploy your agents with Axway CLI](/docs/central/connect-aws-gateway/deploy-your-agents-with-amplify-cli).

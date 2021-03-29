@@ -9,18 +9,18 @@ description: Learn how to configure the Axway Istio agents to discover your APIs
 
 ## Before you begin
 
-Before you start, see [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/) to learn how to use the CLI to install the mesh agents into your Kubernetes cluster and to create default resources to discover the demo service that gets deployed.
+Before you start, see [Deploy your agents with the Axway CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/) to learn how to use the CLI to install the mesh agents into your Kubernetes cluster and to create default resources to discover the demo service that gets deployed.
 
-This page references the resources created from the [Deploy your agents with the Amplify CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/) procedure.
+This page references the resources created from the [Deploy your agents with the Axway CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/) procedure.
 
 ## Prerequisites
 
-These prerequisites are required by the Amplify Central CLI, which you will use to configure the Istio discovery agents.
+These prerequisites are required by the Axway Central CLI, which you will use to configure the Istio discovery agents.
 
 * Node.js >= 10.13.0 and <= 12.14.1
-* Minimum Amplify Central CLI version: 0.17.0
+* Minimum Axway Central CLI version: 1.0.0 OR Minimum Amplify Central CLI version: 0.17.0
 
-For more information, see [Install Amplify Central CLI](/docs/central/cli_central/cli_install/).
+For more information, see [Install Axway Central CLI](/docs/central/cli_central/cli_install/).
 
 ## Overview
 
@@ -77,15 +77,15 @@ The discovery agents use following resources:
 * **APISpec** - A resource created by the ADA to represent unique API documentation found in a cluster. The same documentation may be found across multiple pods, especially if you are running multiple instances of one pod. One APISpec is created for one unique documentation found in a cluster. If multiple pods expose the same documentation, they will be grouped together in one APISpec. APISpecs are scoped to a K8SCluster and have a reference to a `SpecDiscovery`. APISpecs are created by the ADA as a response to finding a pod that exposes documentation as described by the `SpecDiscovery`.
 * **K8SResource** - A resource created by the RDA that represents a pod or service discovered in Kubernetes. The K8SResource is scoped to a K8SCluster, and it has a reference to a ResourceDiscovery. K8SResources are created by the RDA as a response to find a pod or service that meets the match criteria described by the `ResourceDiscovery`.
 
-## Log in to the Amplify Central CLI
+## Log in to the Axway Central CLI
 
 Run the following command to log into the Central CLI with your Amplify Platform credentials:
 
 ```shell
-amplify auth login --client-id apicentral
+axway auth login --client-id apicentral
 ```
 
-A dialog box is shown. Enter your valid credentials (email address and password), and after the authorization successful message is displayed go back to the Amplify CLI.
+A dialog box is shown. Enter your valid credentials (email address and password), and after the authorization successful message is displayed go back to the Axway CLI.
 
 If you are a member of multiple Amplify organizations, select an organization and continue.
 
@@ -370,13 +370,13 @@ Follow these steps to discover the pod:
 5. After the `SpecDiscovery` has been updated, you can create the resource and the ADA will look for the `sunset` pod based on the new configuration.
 
    ```bash
-   ~ » amplify central create -f ./spec-discovery.yaml
+   ~ » axway central create -f ./spec-discovery.yaml
    ✔ "specdiscovery/sunset-discovery" has successfully been created.
    ```
 6. After creating the new `SpecDiscovery`, run the following command to see two SpecDiscoveries. The `sunset-discovery` is the resource that will be used to find the documentation from the `sunset` pod.
 
    ```bash
-   ~ » amplify central get specdiscoveries -s k8s-mesh
+   ~ » axway central get specdiscoveries -s k8s-mesh
    ✔ Resource(s) has successfully been retrieved
 
    NAME                 AGE             TITLE                SCOPE KIND  SCOPE NAME
@@ -386,13 +386,13 @@ Follow these steps to discover the pod:
 7. The `apic-hybrid-ada` pod will see the new `SpecDiscovery` configuration and will start looking for pods that match the criteria it has specified. Run the following command to retrieve your APISpecs. APISpecs are created from the ADA in response to finding a pod that matches, based on the `SpecDiscovery` match criteria.
 
    ```bash
-   amplify central get apispecs -s <YOUR-K8SCLUSTER-NAME> -o yaml
+   axway central get apispecs -s <YOUR-K8SCLUSTER-NAME> -o yaml
    ```
 
    Returns the APISpec that was created in response to the pod that matched the `SpecDiscovery`.
 
    ```bash
-   ~ » amplify central get apispecs -s k8s-mesh
+   ~ » axway central get apispecs -s k8s-mesh
    ✔ Resource(s) has successfully been retrieved
 
    NAME              AGE         TITLE   SCOPE KIND  SCOPE NAME
@@ -609,8 +609,8 @@ To discover pods and services, follow these steps:
 7. After the `ResourceDiscovery` is updated, you must create the resource to enable the RDA to look for the `sunset` pod and service based on the new configuration.
 
    ```bash
-   amplify central get k8sresources -s <YOUR-K8SCLUSTER-NAME> -o yaml
-   ~ » amplify central create -f ./resource-discoveries.yaml
+   axway central get k8sresources -s <YOUR-K8SCLUSTER-NAME> -o yaml
+   ~ » axway central create -f ./resource-discoveries.yaml
    ✔ "resourcediscovery/sunset-pod-discovery" has successfully been created.
    ✔ "resourcediscovery/sunset-service-discovery" has successfully been created.
    ```
@@ -618,7 +618,7 @@ To discover pods and services, follow these steps:
 8. Finally, run the following command to return the K8SResources that were created in response to the pod that matched the `SpecDiscovery`.
 
    ```bash
-   amplify central get k8sresources -s k8s-mesh
+   axway central get k8sresources -s k8s-mesh
    ✔ Resource(s) has successfully been retrieved
 
    NAME                                             AGE         TITLE                      SCOPE KIND  SCOPE NAME

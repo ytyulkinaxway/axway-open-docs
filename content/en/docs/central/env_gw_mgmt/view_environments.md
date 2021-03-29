@@ -15,7 +15,7 @@ The environments page contains all of your environments in a searchable and sort
 * Environments using the API service model
     * AWS Gateway environments
     * API Manager environments
-    * Environments that have been defined manually using the AMPLIFY Central CLI or APIs
+    * Environments that have been defined manually using the Axway Central CLI or APIs
 
 To add a new environment, click **+ Environment**.
 

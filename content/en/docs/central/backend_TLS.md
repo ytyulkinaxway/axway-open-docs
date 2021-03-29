@@ -10,7 +10,7 @@ description: Learn how to configure TLS for requests to your back-end API.
 
 * You will need an administrator account for AMPLIFY Central
 * Learn how to import your API as an API proxy in AMPLIFY Central (see [Register an API](/docs/central/quickstart/#register-an-api))
-* Learn how to use the AMPLIFY CLI to manage an API proxy (see [Manage an API proxy using AMPLIFY Central CLI](/docs/central/cli_central/cli_proxy_flow))
+* Learn how to use the Axway Central CLI to manage an API proxy (see [Manage an API proxy using Axway Central CLI](/docs/central/cli_central/cli_proxy_flow))
 
 ## Objectives
 
@@ -21,7 +21,7 @@ Learn how Transport Layer Security (TLS) is applied to requests to the back-end 
 
 ## What is Transport Layer Security?
 
-Transport Layer Security (TLS) is a internet protocol standard designed to allow security communications over the public Internet. It is similar in nature to what is used on most modern browsers to secure the communication from the browser to the server application. As part of the TLS protocol, a cryptographic cipher mechanism and key used to secure the communications is established between the client (AMPLIFY Central API proxy) and the back-end API when it is configured as a HTTPS endpoint (for example, back-end URL `https://petstore.swagger.io/v2`).  
+Transport Layer Security (TLS) is a internet protocol standard designed to allow security communications over the public Internet. It is similar in nature to what is used on most modern browsers to secure the communication from the browser to the server application. As part of the TLS protocol, a cryptographic cipher mechanism and key used to secure the communications is established between the client (AMPLIFY Central API proxy) and the back-end API when it is configured as a HTTPS endpoint (for example, back-end URL `https://petstore.swagger.io/v2`).
 
 There are two versions of TLS Protocol. Version 1.2 is described in [RFC 5246](https://tools.ietf.org/html/rfc5246). Version 1.3 is described in [RFC 8446](https://tools.ietf.org/html/rfc8446). In all versions of TLS, it can be configured to support one-way or two-way TLS.  In one-way TLS, the client (AMPLIFY Central API proxy) requests a signed certificate from the back-end API endpoint. Two-way TLS is the same as one-way TLS with the additional step of the back-end API endpoint also requesting a signed certificate from the AMPLIFY Central API proxy.
 

@@ -58,9 +58,9 @@ https:/<Amplify Central URL>/topology/environments/**apigtw-v77**
 Examples:
 
 ```
-amplify central config set --client-id <DOSA account name>
-amplify central create -f <filename>
-amplify central create env <name> -o json
+axway central config set --client-id <DOSA account name>
+axway central create -f <filename>
+axway central create env <name> -o json
 ```
 
 Options:
@@ -93,4 +93,4 @@ spec:
     data: "[optional base64 encoded image]"
 ```
 
-For information, see [Build an environment using Amplify CLI](/docs/central/cli_central/cli_environments/).
+For information, see [Build an environment using Axway CLI](/docs/central/cli_central/cli_environments/).

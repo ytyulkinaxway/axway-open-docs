@@ -62,7 +62,7 @@ Update the following variables to move data to the EU region:
 * `CENTRAL_URL`= **<https://central.eu-fr.axway.com>**
 * `TRACEABILITY_HOST`= **ingestion-lumberjack.visibility.eu-fr.axway.com:453**
 
-## Connect Axway API Manager to Amplify Central using Amplify Central CLI
+## Connect Axway API Manager to Amplify Central using Axway Central CLI
 
 The following is a high-level overview of the required steps to connect an API Manager V7 environment to Amplify Central:
 
@@ -70,11 +70,11 @@ The following is a high-level overview of the required steps to connect an API M
 * Create an environment to group the APIs
 * Deploy the agent to the gateway: one Discovery Agent per Node Manager and one Traceability Agent per gateway
 
-You will be guided through this procedure using Amplify Central CLI. See [Deploy your agent with Amplify CLI](/docs/central/connect-api-manager/deploy-your-agents-with-amplify-cli/).
+You will be guided through this procedure using Axway Central CLI. See [Deploy your agent with Axway CLI](/docs/central/connect-api-manager/deploy-your-agents-with-amplify-cli/).
 
 ## Connect Axway API Manager to Amplify Central manually
 
-The following demonstrates how to connect an Axway API-Gateway V7 to Amplify-Central without using the Amplify CLI.
+The following demonstrates how to connect an Axway API-Gateway V7 to Amplify-Central without using the Axway CLI.
 
 {{< youtube kugRyYVw5nI >}}
 

@@ -1,9 +1,9 @@
 ---
-title: Deploy your agents with Amplify CLI
-linkTitle: Deploy your agents with Amplify CLI
+title: Deploy your agents with Axway CLI
+linkTitle: Deploy your agents with Axway CLI
 draft: false
 weight: 20
-description: Learn how to deploy your agents using Amplify CLI so that you can
+description: Learn how to deploy your agents using Axway CLI so that you can
   manage your Axway API Gateway environment within Amplify Central.
 ---
 ## Before you start
@@ -17,33 +17,33 @@ description: Learn how to deploy your agents using Amplify CLI so that you can
 
 ## Objectives
 
-Learn how to quickly install and run your Discovery and Traceability agents with basic configuration using Amplify Central CLI.
+Learn how to quickly install and run your Discovery and Traceability agents with basic configuration using Axway Central CLI.
 
-## Amplify Central CLI pre-requisites
+## Axway Central CLI pre-requisites
 
 * [Node.js](https://nodejs.org/en/download/) version 10.13.0 or later
 * Access to npm package (for installing Amplify cli)
 * Access to login.axway.com on port 443
-* Minimum Amplify Central CLI version: 0.1.15 (check version using `amplify central --version`)
+* Minimum Axway Central CLI version: 0.1.15 (check version using `axway central --version`)
 
-More information is available at [Install Amplify Central CLI](/docs/central/cli_central/cli_install/).
+More information is available at [Install Axway Central CLI](/docs/central/cli_central/cli_install/).
 
 ## Install the agents
 
 ### Step 1: Folder preparation
 
-Create an empty directory where Amplify CLI will generate files. Run all Amplify Central CLI from this directory.
+Create an empty directory where Axway CLI will generate files. Run all Axway Central CLI from this directory.
 
-### Step 2: Identify yourself to Amplify Platform with Amplify CLI
+### Step 2: Identify yourself to Amplify Platform with Axway CLI
 
 To use Central CLI to log in with your Amplify Platform credentials, run the following command:
 
 ```shell
-amplify auth login
+axway auth login
 ```
 
 A browser will automatically open.
-Enter your valid credentials (email address and password). Once the “Authorization Successful” message is displayed, go back to Amplify CLI.
+Enter your valid credentials (email address and password). Once the “Authorization Successful” message is displayed, go back to Axway CLI.
 
 If you are a member of multiple Amplify organizations, you may have to choose an organization.
 
@@ -54,13 +54,13 @@ If you are a member of multiple Amplify organizations, you may have to choose an
 Agents will be installed in the directory from where the CLI runs. You can install the agent from anywhere, but then you must transfer the agent and its configuration to the API Management system machine for the agent to operate correctly.
 
 ```shell
-amplify central install agents
+axway central install agents
 ```
 
 If your Amplify subscription is hosted in the EU region, then the following installation command must be used to correctly configure the agents:
 
 ```shell
-amplify central install agents --region=EU
+axway central install agents --region=EU
 ```
 
 The installation procedure will prompt for the following:
@@ -290,17 +290,17 @@ An empty result means the agent is not running; otherwise, you should receive th
   sudo ./traceability_agent service status
   ```
 
-### Use Amplify Central CLI
+### Use Axway Central CLI
 
-After being authenticated to the platform with `amplify auth login` command, run the following:
+After being authenticated to the platform with `axway auth login` command, run the following:
 
-* `amplify central get edgeda` to get all discovery agent information.
-* `amplify central get edgeta` to get all traceability agent information.
+* `axway central get edgeda` to get all discovery agent information.
+* `axway central get edgeta` to get all traceability agent information.
 
 The STATUS column will help you identify which agent is running.
 
 ```shell
-C:\Demos>amplify central get edgeda
+C:\Demos>axway central get edgeda
 √ Resource(s) successfully retrieved
 
 NAME                                       STATUS   AGE             SCOPE KIND   SCOPE NAME
@@ -309,7 +309,7 @@ EdgeDiscoveryAgent/lbean018-discovery      stopped  2 months ago    Environment 
 ```
 
 ```shell
-C:\Demos>amplify central get edgeta
+C:\Demos>axway central get edgeta
 √ Resource(s) successfully retrieved
 
 NAME                                             STATUS   AGE             SCOPE KIND   SCOPE NAME

@@ -13,7 +13,7 @@ description: Learn how to virtualize AWS API Gateway within Amplify Central by
 * Read [Amplify Central AWS API Gateway connected overview](/docs/central/connect-aws-gateway/)
 * You will need a basic knowledge of AWS API Gateway
 * Verify that @axway/amplify-central-cli version is at minimum 0.1.4 (Get the [CLI](/docs/central/cli_central/cli_install/))
-    * Check the installed version with `amplify central -v`
+    * Check the installed version with `axway central -v`
 * Install OpenSSL
 
 ## Objectives
@@ -58,9 +58,9 @@ https:/<Amplify Central URL>/topology/environments/**aws-us-east-2**
 Examples:
 
 ```
-amplify central config set --client-id <DOSA account name>
-amplify central create -f <filename>
-amplify central create env <name> -o json
+axway central config set --client-id <DOSA account name>
+axway central create -f <filename>
+axway central create env <name> -o json
 ```
 
 Options:
@@ -93,4 +93,4 @@ spec:
     data: "[optional base64 encoded image]"
 ```
 
-For information, see [Build an environment using Amplify CLI](/docs/central/cli_central/cli_environments/).
+For information, see [Build an environment using Axway CLI](/docs/central/cli_central/cli_environments/).

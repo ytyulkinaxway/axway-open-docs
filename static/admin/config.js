@@ -354,9 +354,9 @@ const collections = [{
 }, {
   ...docsDefaults('central/cli_central', 'central/cli_central'),
   name: 'cli_central',
-  label: 'Get started with AMPLIFY Central CLI',
-  label_singular: 'page in AMPLIFY Central CLI',
-  description: 'All pages relating to AMPLIFY Central CLI.',
+  label: 'Get started with Axway Central CLI',
+  label_singular: 'page in Axway Central CLI',
+  description: 'All pages relating to Axway Central CLI.',
   format: 'frontmatter',
 }, {
   ...docsDefaults('catalog', 'catalog'),

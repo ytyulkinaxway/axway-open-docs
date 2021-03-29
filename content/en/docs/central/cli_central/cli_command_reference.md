@@ -1,12 +1,12 @@
 ---
-title: AMPLIFY Central CLI Command reference
+title: Axway Central CLI Command reference
 linkTitle: CLI commands reference
 weight: 130
 date: 2021-01-13T00:00:00.000Z
-description: Learn about the different AMPLIFY Central CLI commands.
+description: Learn about the different Axway Central CLI commands.
 ---
 
-This section contains the basic commands for creating, fetching, updating, and deleting various Axway API Server assets using the AMPLIFY Central CLI. Each command is followed by a brief description, an explanation of the proper command syntax, including command arguments and options, along with example syntax for various use cases.
+This section contains the basic commands for creating, fetching, updating, and deleting various Axway API Server assets using the Axway Central CLI. Each command is followed by a brief description, an explanation of the proper command syntax, including command arguments and options, along with example syntax for various use cases.
 
 ### The accessibility of resources
 
@@ -20,10 +20,10 @@ If the desired resource type is scoped, you must specify the scope name by provi
 
 You can search for more than one resource if you use comma-separated resources in a command. The search for multiple resources will display multiple result tables, one result table for each resource you fetch.
 
-To see the list of all available resources from AMPLIFY Central, including information about whether those resources are scoped or unscoped, run:
+To see the list of all available resources from Amplify Central, including information about whether those resources are scoped or unscoped, run:
 
 ```
-amplify central get
+axway central get
 ```
 
 ## get
@@ -34,46 +34,46 @@ The following table describes the usage, options, and arguments for the `get` co
 
 |Usage                                                          |                             |
 |---                                                            |---                                   |
-|`amplify central get [options] [<args...>]`                    |                                    |
-|`amplify central get <Resource>`                               |Get a list of the resources          |
-|`amplify central get <Resource1>,<Resource2>,...,<ResourceN>`  |Get a list of multiple resources  |
-|`amplify central get <Resource> <Name> -s/--scope <Scope Name>`|Get a specific resource by name |
+|`axway central get [options] [<args...>]`                    |                                    |
+|`axway central get <Resource>`                               |Get a list of the resources          |
+|`axway central get <Resource1>,<Resource2>,...,<ResourceN>`  |Get a list of multiple resources  |
+|`axway central get <Resource> <Name> -s/--scope <Scope Name>`|Get a specific resource by name |
 |**Options**                                                    |                 |
 |`--client-id=<value>`                                          |Override your DevOps account's client ID |
 |`-o,--output=<value>`                                          |Additional output formats, YAML or JSON  |
 |`-s,--scope=<name>`                                            |Scope name for scoped resources          |
 |**Arguments**                                                  |                   |
-|args...                                                        |Command arguments, run `amplify central get` to see the examples |
+|args...                                                        |Command arguments, run `axway central get` to see the examples |
 
 The following examples show how to use the `get` command:
 
 ```bash
 # To get all environments:
-amplify central get envs
+axway central get envs
 
 # To get all environments in YAML format:
-amplify central get environments -o yaml
+axway central get environments -o yaml
 
 # To get environment by resource, or common name (for example, 'myenv') in JSON format:
-amplify central get env myenv -o json
+axway central get env myenv -o json
 
 # To get all webhooks:
-amplify central get webhooks
+axway central get webhooks
 
 # To get all webhooks by short name:
-amplify central get webh
+axway central get webh
 
 # To get all webhooks and API services by short name:
-amplify central get webh, apis
+axway central get webh, apis
 
 # To get all environments and API services:
-amplify central get envs, apisvc
+axway central get envs, apisvc
 
 # To get an environment and an API service, which matches a resource in a specified scope in JSON format. In the following example, 'env1' is scope, and it is required after the `-s` flag):
-amplify central get env,apisvc commonname -s env1 -o json
+axway central get env,apisvc commonname -s env1 -o json
 ```
 
-For more examples, see [Create and fetch resources via the AMPLIFY Central CLI](/docs/central/cli_central/cli_create_fetch_resources/).
+For more examples, see [Create and fetch resources via the Axway Central CLI](/docs/central/cli_central/cli_create_fetch_resources/).
 
 ## create
 
@@ -83,9 +83,9 @@ The following table describes the usage, options, and arguments for the `create`
 
 |Usage                                                    |                             |
 |---                                                      |---                                   |
-|`amplify central create <command> [options]`             |                                    |
-|`amplify central create -f <path_to_file>`               |Create multiple resources from a file|
-|`amplify central create environment [options] <name>`    |Create an environment with the specified name. Only environments are currently available for this command|
+|`axway central create <command> [options]`             |                                    |
+|`axway central create -f <path_to_file>`               |Create multiple resources from a file|
+|`axway central create environment [options] <name>`    |Create an environment with the specified name. Only environments are currently available for this command|
 |**Commands**                                             |          |
 |`environment`                                            |Create an environment with the specified name  |
 |`service-account`                                        |Create a service account |
@@ -101,16 +101,16 @@ The following examples show how to use the `create` command:
 
 ```bash
 # create new environment with "newenv" name
-amplify central create env newenv
+axway central create env newenv
 
 # create new environment with "newenv" name and output result in YAML
-amplify central create environment newenv -o yaml
+axway central create environment newenv -o yaml
 
 # create multiple resources from file
-amplify central create -f ./some/folder/resources.yaml
+axway central create -f ./some/folder/resources.yaml
 
 # create a service account (DOSA)
-amplify central create service-account
+axway central create service-account
 ```
 
 ## apply
@@ -121,7 +121,7 @@ The following table describes the usage and options for the `apply` command:
 
 |Usage                                                    |                             |
 |---                                                      |---                                   |
-|`amplify central apply [options]`             |                                    |
+|`axway central apply [options]`             |                                    |
 |**Options**                                              |                   |
 |`--client-id=<value>`                                    |Override your DevOps account's client ID |
 |`-f,--file=<path>`                                       |Filename to use to create the resource  |
@@ -132,10 +132,10 @@ The following examples show how to use the `apply` command:
 
 ```bash
 # create multiple resources from file
-amplify central apply -f ./some/folder/resources.yaml
+axway central apply -f ./some/folder/resources.yaml
 
 # create multiple resources from file and output results in YAML format
-amplify central apply -f ./some/folder/resources.json -o yaml
+axway central apply -f ./some/folder/resources.json -o yaml
 ```
 
 ## delete
@@ -146,26 +146,26 @@ The following table describes the usage, options, and arguments for the `delete`
 
 |Usage                                                    |                             |
 |---                                                      |---                                   |
-|`amplify central delete [options] [<args...>]`             |                                    |
+|`axway central delete [options] [<args...>]`             |                                    |
 |**Options**                                              |                   |
 |`--client-id=<value>`                                    |Override your DevOps account's client ID |
 |`-f,--file=<path>`                                       |Filename to use to create the resource  |
 |`-s,--scope=<name>`                                    |Scope name for scoped resources.|
 |`--wait`                                               |Wait for the resources to be completely deleted          |
 |**Arguments**                                            |                   |
-|`args...`                                                  |Command arguments, run `amplify central delete` to see the examples |
+|`args...`                                                  |Command arguments, run `axway central delete` to see the examples |
 
 The following examples show how to use the `delete` command:
 
 ```bash
 # delete environment by name
-amplify central delete environment newenv
+axway central delete environment newenv
 
 # delete API service by name (a scoped resource)
-amplify central delete apisvc someapisvc -s newenv
+axway central delete apisvc someapisvc -s newenv
 
 # delete all resources specified in the file
-amplify central delete -f ./some/folder/resources.yaml
+axway central delete -f ./some/folder/resources.yaml
 ```
 
 ## edit
@@ -176,8 +176,8 @@ The following table describes the usage, options, and arguments for the `edit` c
 
 |Usage                                                    |                             |
 |---                                                      |---                                   |
-|`amplify central edit <command> [options]`             |                                    |
-|`amplify central edit environment [options] <name>`      |`environment` - Edit an environment with the specified name.     |
+|`axway central edit <command> [options]`             |                                    |
+|`axway central edit environment [options] <name>`      |`environment` - Edit an environment with the specified name.     |
 |**Options**                                              |                   |
 |`--client-id=<value>`                                    |Override your DevOps account's client ID |
 |`-o,--output=<value>`                                       |Additional output formats, YAML or JSON |
@@ -188,7 +188,7 @@ The following example shows how to use the `edit` command:
 
 ```bash
 # edit environment by name
-amplify central edit environment newenv
+axway central edit environment newenv
 ```
 
 ## install
@@ -199,17 +199,17 @@ The following table describes the usage, options, and arguments for the `edit` c
 
 |Usage                                                    |                             |
 |---                                                      |---                                   |
-|`amplify central install <command> [options] [<args...>]`             |                                    |
-|`amplify central install agents [options]`             |`agents` - Install API Gateway v7, Amazon API Gateway, Azure API Gateway, Kubernetes agents|
+|`axway central install <command> [options] [<args...>]`             |                                    |
+|`axway central install agents [options]`             |`agents` - Install API Gateway v7, Amazon API Gateway, Azure API Gateway, Kubernetes agents|
 |**Options**                                              |                   |
 |`--client-id=<value>`                                    |Override your DevOps account's client ID |
 |`--region=<value>`                                       |Override your region config |
 |**Arguments**                                            |                   |
-|`args...`                                                  |Command arguments, run `amplify central install` to see the examples |
+|`args...`                                                  |Command arguments, run `axway central install` to see the examples |
 
 The following example shows how to use the `install` command:
 
 ```bash
 # install agent configuration in interactive mode
-amplify central install agents
+axway central install agents
 ```

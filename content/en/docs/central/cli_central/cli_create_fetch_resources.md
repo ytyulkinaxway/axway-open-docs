@@ -1,27 +1,27 @@
 ---
-title: Create and fetch resources with AMPLIFY Central CLI
+title: Create and fetch resources with Axway Central CLI
 linkTitle: Create and fetch resources with the CLI
 weight: 120
 date: 2021-01-13T00:00:00.000Z
-description: Creating and fetch different AMPLIFY Central resources using the CLI.
+description: Creating and fetch different Amplify Central resources using the CLI.
 ---
 
 ## Before You Start
 
-* [Install and authenticate yourself via the AMPLIFY Central CLI](/docs/central/cli_central/cli_install/index.html).
-* Familiarize yourself with the [most commonly used AMPLIFY Central CLI commands](/docs/central/cli_central/cli_command_reference/index.html).
+* [Install and authenticate yourself via the Axway Central CLI](/docs/central/cli_central/cli_install/index.html).
+* Familiarize yourself with the [most commonly used Axway Central CLI commands](/docs/central/cli_central/cli_command_reference/index.html).
 
 ## Objectives
 
-* Learn how to create and fetch various types of resources via the AMPLIFY Central CLI `create` and `get` commands.
-* Learn about the information the AMPLIFY Central CLI provides when you fetch the resources you have created.
+* Learn how to create and fetch various types of resources via the Axway Central CLI `create` and `get` commands.
+* Learn about the information the Axway Central CLI provides when you fetch the resources you have created.
 
 ## Create a resource
 
-AMPLIFY Central CLI supports creating several resources from either a YAML or JSON file, or Stdin. For example:
+Axway Central CLI supports creating several resources from either a YAML or JSON file, or Stdin. For example:
 
 ```
-amplify central create -f <path_to_file>  # Create resources defined in a YAML or JSON file.
+axway central create -f <path_to_file>  # Create resources defined in a YAML or JSON file.
 ```
 
 ## Fetch a resource
@@ -29,33 +29,33 @@ amplify central create -f <path_to_file>  # Create resources defined in a YAML o
 You can query for a singular resource or multiple resources, and the CLI will display a table of the most important information about the specified resource.
 
 ```
-amplify central get <Resource> # Get a list of the resources
+axway central get <Resource> # Get a list of the resources
 ```
 
 ```
-amplify central get <Resource1>,<Resource2>,...,<ResourceN> # Get a list of multiple resources
+axway central get <Resource1>,<Resource2>,...,<ResourceN> # Get a list of multiple resources
 ```
 
 ```
-amplify central get <Resource> <Name> -s/--scope <Scope Name> # Get a specific resource by name
+axway central get <Resource> <Name> -s/--scope <Scope Name> # Get a specific resource by name
 ```
 
 ## Create and fetch examples
 
-The following are examples of how you can use AMPLIFY Central samples to create and fetch different resources.
+The following are examples of how you can use Amplify Central samples to create and fetch different resources.
 
 ### Consumer instances
 
 You can use the [sdkconsumerinstance.json](https://axway-open-docs.netlify.app/samples/central/sdkconsumerinstance.json) sample to create a consumer instance. Then, you can fetch information about your consumer instances as follows:
 
 ```
-amplify central get consumerinstances
+axway central get consumerinstances
 ```
 
 Alternatively, you can use a short name:
 
 ```
-amplify central get consumeri
+axway central get consumeri
 ```
 
 Resource(s) successfully retrieved:
@@ -71,13 +71,13 @@ consumerinst1  a month ago   consumerinst1 title  ConsumerInstance Environment  
 You can use the [apisubscription.json](https://axway-open-docs.netlify.app/samples/central/apisubscription.json) sample to create a consumer subscription definition. Then, you can fetch information about your consumer subscription definitions as follows:
 
 ```
-amplify central get consumersubscriptiondefs
+axway central get consumersubscriptiondefs
 ```
 
 Alternatively, you can use a short name:
 
 ```
-amplify central get consumersd
+axway central get consumersd
 ```
 
 Resource(s) successfully retrieved:
@@ -92,13 +92,13 @@ consumersubdef1  a month ago   consumersubdef1 title ConsumerSubscriptionDefinit
 You can use the [apisecret.json](https://axway-open-docs.netlify.app/samples/central/apisecret.json) sample to create a secret. Then, you can fetch information about your secrets as follows:
 
 ```
-amplify central get secret
+axway central get secret
 ```
 
 Alternatively, you can use a short name:
 
 ```
-amplify central get secrets
+axway central get secrets
 ```
 
 Resource(s) successfully retrieved:
@@ -113,13 +113,13 @@ secretname  4 months ago  secrettitle Secret         Environment  apigtw-v77
 You can use the [apiwebhook.json](https://axway-open-docs.netlify.app/samples/central/apiwebhook.json) sample to create a Webhook. Then, you can then fetch information about your Webhooks as follows:
 
 ```
-amplify central get webhooks
+axway central get webhooks
 ```
 
 Alternatively, you can use a short name:
 
 ```
-amplify central get wh
+axway central get wh
 ```
 
 Resource(s) successfully retrieved:
@@ -142,4 +142,4 @@ You can practice the above pattern of creating and fetching resources using our 
 * API service revisions: [apirevisions1.json](https://axway-open-docs.netlify.app/samples/central/apirevisions1.json)
 * Environments: [create_environments.json](https://axway-open-docs.netlify.app/samples/central/create_environments.json)
 
-Run `amplify central get` to see the entire list of resources supported by the AMPLIFY Central CLI.
+Run `axway central get` to see the entire list of resources supported by the Axway Central CLI.

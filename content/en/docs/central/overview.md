@@ -38,7 +38,7 @@ To learn how to to apply a rate limit configuration to your API, see [Rate limit
 
 AMPLIFY Central supports your DevOps processes by providing an API and a CLI for you to automate your configuration and deployments.
 
-You can create API proxies and deploy them to runtime groups using the AMPLIFY Central DevOps API and the AMPLIFY CLI. You can test the API proxies and view the traffic monitoring results through the AMPLIFY Central UI.
+You can create API proxies and deploy them to runtime groups using the AMPLIFY Central DevOps API and the Axway Central CLI. You can test the API proxies and view the traffic monitoring results through the AMPLIFY Central UI.
 
 ### What is DevOps?
 
@@ -54,7 +54,7 @@ Taking a DevOps approach to API management with AMPLIFY Central enables you to s
 
 ![AMPLIFY Central in your DevOps pipeline](/Images/central/devops.png)
 
-AMPLIFY Central is a CI/CD native solution that you can easily snap in to your existing DevOps pipeline. Simplify and customize how you manage APIs across your organization by using the AMPLIFY CLI and the AMPLIFY Central DevOps API to manage your API proxies in AMPLIFY Central.
+AMPLIFY Central is a CI/CD native solution that you can easily snap in to your existing DevOps pipeline. Simplify and customize how you manage APIs across your organization by using the Axway CLI and the AMPLIFY Central DevOps API to manage your API proxies in AMPLIFY Central.
 
 ### AMPLIFY Central DevOps API
 
@@ -70,7 +70,7 @@ Visit our [API documentation](https://d-api.docs.stoplight.io/).
 
 #### DevOps authentication and authorization
 
-To use the AMPLIFY Central DevOps API in your DevOps pipeline, your DevOps service (for example, Jenkins) must be authenticated with AMPLIFY platform and it must be authorized to use the DevOps API. Use AMPLIFY CLI to log in to AMPLIFY platform with a service account and obtain an access token to perform authorized API calls. For detailed steps, see [Manage an API proxy using AMPLIFY Central CLI](/docs/central/cli_central/cli_proxy_flow).
+To use the AMPLIFY Central DevOps API in your DevOps pipeline, your DevOps service (for example, Jenkins) must be authenticated with AMPLIFY platform and it must be authorized to use the DevOps API. Use Axway CLI to log in to AMPLIFY platform with a service account and obtain an access token to perform authorized API calls. For detailed steps, see [Manage an API proxy using Axway Central CLI](/docs/central/cli_central/cli_proxy_flow).
 
 #### Example DevOps flow
 
@@ -78,13 +78,13 @@ The following shows an example DevOps flow to create, deploy, and promote an API
 
 1. A developer makes a change to the code for the service, updates the YAML configuration file for the desired state of proxy, and commits the changes to Git.
 2. Jenkins build triggers and checks out the latest code and YAML from Git.
-3. Jenkins calls AMPLIFY CLI command `amplify auth login` to authenticate to AMPLIFY platform and obtain an access token.
-4. Jenkins calls AMPLIFY CLI command `amplify apic create` to create or update the API proxy for this service.
+3. Jenkins calls Axway CLI command `axway auth login` to authenticate to AMPLIFY platform and obtain an access token.
+4. Jenkins calls Axway CLI command `axway apic create` to create or update the API proxy for this service.
     * CLI calls the DevOps API `POST /proxies` to create the API proxy in AMPLIFY Central. See [Create proxy API reference](https://d-api.docs.stoplight.io/new-subpage/devops-api/create-proxy).
-5. Jenkins calls AMPLIFY CLI command `amplify apic promote` to deploy the API proxy to the test runtime.
+5. Jenkins calls Axway CLI command `axway apic promote` to deploy the API proxy to the test runtime.
     * CLI calls the DevOps API `POST /promote` to deploy the API proxy on the test runtime. See [Promote proxy API reference](https://d-api.docs.stoplight.io/new-subpage/devops-api/promote-proxy).
 6. Automated tests are run on the AMPLIFY Central test runtime.
-7. Jenkins calls AMPLIFY CLI command `amplify apic promote` to promote the API proxy from the test runtime to the production runtime.
+7. Jenkins calls Axway CLI command `axway apic promote` to promote the API proxy from the test runtime to the production runtime.
     * CLI calls the DevOps API `POST /promote` to deploy the API proxy on the production runtime.
 
 ## Traffic management
