@@ -5,13 +5,14 @@ weight: 160
 date: 2020-12-0
 description: Use the Axway CLI to deploy Axway Istio agents.
 ---
+
 {{< alert title="Public beta" color="warning" >}}This is a preview of the new Istio agents, which run separately from previous Istio POC agents that provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they monitor Kubernetes resource discovery and Istio traffic activity.{{< /alert >}}
 
 ## Before you begin
 
 Ensure you have the following tools installed:
 
-* Axway Central CLI 0.10.0 or later
+* Axway Central CLI 1.2.0 or later
 * Helm 3.2.4 or later
 * Istioctl 1.8.2
 * Kubectl 1.18 or later
@@ -283,6 +284,16 @@ New environment "mesh-demo" has been successfully created.
 ```
 
 A message indicating that the new environment has been created is shown.
+
+Add a name for your Kubernetes cluster. This unique name will be used by the Istio agents. Enter a name and press 'enter'.
+
+```bash
+Enter a new k8s Cluster name:  test-cluster
+Creating a new k8s Cluster
+New k8scluster "test-cluster" has been successfully created.
+```
+
+A message indicating that the new k8s cluster has been created is shown.
 
 After the new environment is created, the CLI creates the following:
 
