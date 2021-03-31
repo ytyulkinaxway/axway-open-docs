@@ -113,8 +113,6 @@ This section connects the agent to API Manager and determines which APIs should 
 
 `APIMANAGER_ALLOWAPPLICATIONAUTOCREATION` (optional): When creating a subscription on Amplify Central, setting this value to true will enable a selection in the App name dropdown for 'Create an application.' This allows the user to either select from an existing API Manager application, or to create a new application in API Manager. The new application in API Manager will be given the name of the subscription ID from Amplify Central. A value of false will cause 'Create an application' to not be shown in the dropdown. Default value is **false**.
 
-`APIMANAGER_SUBSCRIPTIONSISSUENEWCREDENTIALS` (optional): When creating a subscription on Amplify Central, setting this value to true will enable a selection in the App name dropdown for ‘Create an application.’ This allows the user to either select from an existing API Manager application, or to create a new application in API Manager. The new application in API Manager will be given the name of the subscription ID from Amplify Central. A value of false will cause ‘Create an application’ to not be shown in the dropdown. Default value is **true**.
-
 `APIMANAGER_AUTH_USERNAME`: An API Manager user the agent will use to connect to the API Manager. This user must have either the “API Manager Administrator” or “Organization administrator” role. Based on the role of this user, the agent is able to:
 
 * discover any API from any organization (“API Manager Administrator”)  
@@ -135,7 +133,6 @@ APIMANAGER_FILTER=tag.APITAG==value
 # Subscription management
 #APIMANAGER_SUBSCRIPTIONAPPLICATIONFIELD=subscriptions
 #APIMANAGER_ALLOWAPPLICATIONAUTOCREATION=true
-#APIMANAGER_SUBSCRIPTIONSISSUENEWCREDENTIALS=true
 ```
 
 #### Customizing Discovery Agent Central connectivity variables
@@ -359,7 +356,6 @@ APIMANAGER_FILTER=tag.APITAG==value
 # Subscription management
 #APIMANAGER_SUBSCRIPTIONAPPLICATIONFIELD=subscriptions
 #APIMANAGER_ALLOWAPPLICATIONAUTOCREATION=true
-#APIMANAGER_SUBSCRIPTIONSISSUENEWCREDENTIALS=true
 
 # Central connectivity 
 #CENTRAL_URL=https://apicentral.axway.com
