@@ -71,7 +71,9 @@ There are no major changes in this update.
 
 ## Deprecated features
 
-No capabilities have been deprecated in this update.
+As part of our software development life cycle we constantly review our API Management offering. In this update, the following capabilities have been deprecated:
+
+* API Portal versions 7.5.x and 7.6.x reached end of support (EOS) in November 2020.
 
 ## Removed features
 
