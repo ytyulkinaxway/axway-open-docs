@@ -1,7 +1,8 @@
 ---
 title: Amplify Central February 2021 Release Notes
-linktitle: Amplify Central February 2021
+linkTitle: Amplify Central February 2021
 weight: 90
+date: 2021-02-28
 description: Amplify Central enables the user to manage their provider /
   consumer view. For more information, see the Amplify Central documentation.
 ---

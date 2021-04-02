@@ -1,7 +1,7 @@
 ---
 title: Unified Catalog February 2021 Release Notes
-linktitle: February 2021 Release Notes
-weight: 03
+linkTitle: February 2021 Release Notes
+weight: 07
 date: 2021-02-26
 description: The Unified Catalog is the Marketplace of all integration assets in
   the enterprise, that can range from APIs to Managed File Transfer Flows, and
