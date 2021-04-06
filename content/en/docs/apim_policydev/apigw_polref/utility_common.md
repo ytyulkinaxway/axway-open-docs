@@ -5,12 +5,9 @@
   "date": "2019-10-17",
   "description": "Commonly used utility filters, including set and remove attribute, and reflect message."
 }
-
 ## String replace filter
 
-The **String Replace**
-filter enables you to replace all or part of the value of a specified message attribute. You can use this filter to replace any specified string or substring in a message attribute. For example, changing the `from`
-attribute in an email, or changing all or part of a URL.
+The **String Replace** filter enables you to replace all or part of the value of a specified message attribute. You can use this filter to replace any specified string or substring in a message attribute. For example, changing the `from` attribute in an email, or changing all or part of a URL.  The filter only works on `java.lang.String` values.  You will need to convert any object types that cannot be cast to a `java.lang.String`, like `java.net.URI`, before using this filter.  There is an example of how to convert a URI in Axway Knowledge Base article [KB 177221](https://support.axway.com/kb/177221/language/en).
 
 To configure the **String Replace** filter, specify the following fields:
 
@@ -20,11 +17,11 @@ To configure the **String Replace** filter, specify the following fields:
 
 **Specify Destination Attribute**: By default, the value of the specified **Message Attribute** is both the source and destination, and is therefore overwritten. To specify a different destination attribute, select this check box to enable the **Destination Attribute** field, and select a value from the list.
 
-**Replacement String**: The string used to replace the value of the specified source attribute. You can specify this as a selector, which is expanded to the specified value at runtime (for example, `${http.request.uri}`). This is a required field if you specify the **Specify Destination Attribute**.
+**Replacement String**: The string used to replace the value of the specified source attribute. You can specify this as a selector, which is expanded to the specified value at runtime (for example, `${http.request.uri}`).  You can also use values like `$1`, `$2`, and so on to reference values from capturing groups in your regular expression. If you need to use a literal dollar sign you must escape it as `\$`, or it will cause an error due to being misinterpreted. This is a required field if you specify the **Specify Destination Attribute**.
 
 **Straight**: A match string used to search the value of the specified source attribute. You can specify this as a selector, which is expanded to the specified value at runtime. If a straight (exact) match is found, it is replaced with the specified **Replacement String**.
 
-**Regexp**: A match string, specified as a regular expression, used to search the value of the specified source attribute. You can specify this as a selector, which is expanded to the specified attribute value at runtime. If a match is found, it is replaced with the specified **Replacement String**.
+**Regexp**: A match string, specified as a Java syntax regular expression, used to search the value of the specified source attribute. You can specify this as a selector, which is expanded to the specified attribute value at runtime. If a match is found, it is replaced with the specified **Replacement String**.
 
 **First Match**: If a match is found, only replace the first occurrence.
 
