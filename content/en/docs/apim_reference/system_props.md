@@ -392,7 +392,7 @@ Axway-defined Java system properties introduced in the 7.7 20201130 release
 | ------------------------------------------------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |com.coreapireg.apimethod.querystring.passthrough | API Manager |If set to true, query parameters are sent unmodified to the backend service. This flag also removes any undefined query parameters from the resulting backend request, unlike the 7.5.3 JVM property `api.manager.querystring.passthrough`, which passes all parameters to the backend. Default value: false. |
 |api.manager.orgadmin.selfservice.enabled|API Manager|This flag was originally introduced in the 7.7 20200930 release. If set to true, it now allows Organization Admins to manage the API life cycle of APIs in their orgs.|
-|com.axway.apimanager.configure.apis.nonblocking.enabled | API Manager |If set to true, API cache load and API catalog load are detached from boot sequence and trigered after it (this applies for both product startup and configuration deployment). API requests to catalog and virtualized APIs are held during the load time, and only performed after the load is finished. Default value: false. |
+|com.axway.apimanager.configure.apis.nonblocking.enabled | API Manager |If set to true, API cache load and API catalog load are detached from boot sequence and triggered after it (this applies for both product startup and configuration deployment). API requests to catalog and virtualized APIs are held during the load time, and only performed after the load is finished. Default value: false. |
 
 ## 7.7 January 2021
 
@@ -401,3 +401,12 @@ Axway-defined Java system properties introduced in the 7.7 20210130 release
 | System Property                                  | Context     | Description                                                                                                                                                                                                                                                                                                           |
 | ------------------------------------------------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |com.axway.apigw.sftp.knowninsecure.allow | API Gateway |If set to true, the embedded SFTP server will allow connection from clients using known insecure cipher suites. Default value: false. |
+
+## 7.7 March 2021
+
+Axway-defined Java system properties introduced in the 7.7 20210330 release
+
+| System Property                                  | Context     | Description                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|com.axway.apimanager.configure.catalog.parallel.enabled | API Manager |If set to true, enables multi-threaded load of API Catalog. Default value: true. |
+|com.vordel.coreapireg.runtime.broker.parameters.allowEmptyDefault | API Manager; Runtime |If set to true, empty query parameters are permitted by default unless the Swagger query parameter definition contains `allowEmptyValue: false`. Default value: false. |
