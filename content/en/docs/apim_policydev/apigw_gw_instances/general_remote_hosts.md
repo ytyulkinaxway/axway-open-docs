@@ -85,11 +85,13 @@ For example, the remote host's network connection is pulled out of the machine w
 
 The **Active Timeout** value is also used as a wait time when the maximum number of connections for a remote host is reached. For example, when a remote host reaches the **Maximum connections** value, API Gateway waits the active timeout period before giving up on trying to make a new connection.
 
-**Transaction Timeout (ms)** : A configurable transaction timeout that detects slow HTTP attacks (slow header write, slow body write, slow read) and rejects any transaction that keeps the worker threads occupied for an excessive amount of time. The default value is 240000 milliseconds.
+**Transaction Timeout (ms)** : A configurable transaction timeout that detects slow HTTP attacks (slow header write, slow body write, slow read) and rejects any transaction that keeps the worker threads occupied for an excessive amount of time.
 
-**Max Received Bytes** : The maximum number of bytes received in a transaction. This is a configurable maximum length for the received data on transactions that API Gateway can handle. This setting limits the entire amount of data received over the link, regardless of whether it consists of body, headers, or request line. The default value is 10 MB (10485760 bytes).
+Unlike other timeouts, this is not measured with respect to any network transaction, rather it is measured from the start of the API Gateway transaction until the timeout occurs. A rejected transaction will run to completion, though it will not return any response to the client, therefore, you must set this value longer than any legitimate traffic. The default value is 240,000 milliseconds (4 minutes).
 
-**Max Sent Bytes** : The maximum number of bytes sent in a transaction. This is a configurable maximum length for the transmitted data on transactions that API Gateway can handle. This setting limits the entire amount of data sent over the link, regardless of whether it consists of body, headers, or request line. The default value is 10 MB (10485760 bytes).
+**Max Received Bytes** : The maximum number of bytes received in a transaction. This is a configurable maximum length for the received data on transactions that API Gateway can handle. This setting limits the entire amount of data received over the link, regardless of whether it consists of body, headers, or request line. The default value is 10 MiB (10,485,760 bytes) and the maximum value is 16,384 PiB (18,446,744,073,709,551,615 bytes).
+
+**Max Sent Bytes** : The maximum number of bytes sent in a transaction. This is a configurable maximum length for the transmitted data on transactions that API Gateway can handle. This setting limits the entire amount of data sent over the link, regardless of whether it consists of body, headers, or request line. The default value is 10 MiB (10,485,760 bytes) and the maximum value is 16,384 PiB (18,446,744,073,709,551,615 bytes).
 
 **Idle Timeout** : The API Gateway supports HTTP 1.1 persistent connections. The **Idle Timeout** is the time that API Gateway waits after sending a message over a persistent connection to the remote host before it closes the connection. Defaults to 15000 milliseconds (15 seconds).
 
