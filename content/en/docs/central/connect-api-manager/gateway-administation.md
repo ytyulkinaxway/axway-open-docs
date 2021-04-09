@@ -465,6 +465,10 @@ When running as a service, it is best to save your logging to a file rather than
   sudo ./discovery_agent service install -u axway -g axway --envFile /path/to/da_env_file.env
   ```
 
+{{% alert title="Note" %}}
+If you are not in the agent directory while installing the service, it is mandatory to add `--pathConfig /home/APIC-agents` to the previous command. Otherwise, pathConfig will be automatically set with current directory.
+{{% /alert %}}
+
 * Start
 
   To start the service:
@@ -896,6 +900,10 @@ When running as a service, it is best to save your logging to a file rather than
   cd /home/APIC-agents
   sudo ./traceability_agent service install -u axway -g axway --envFile /path/to/ta_env_file.env
   ```
+
+{{% alert title="Note" %}}
+If you are not in the agent directory while installing the service, it is mandatory to add `--pathConfig /home/APIC-agents` to the previous command. Otherwise, pathConfig will be automatically set with current directory.
+{{% /alert %}}
 
 * Start
 
