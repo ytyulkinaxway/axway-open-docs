@@ -467,6 +467,8 @@ When running as a service, it is best to save your logging to a file rather than
 
 {{% alert title="Note" %}}
 If you are not in the agent directory while installing the service, it is mandatory to add `--pathConfig /home/APIC-agents` to the previous command. Otherwise, pathConfig will be automatically set with current directory.
+
+For the service to start correctly, ensure that the variable `CENTRAL_AUTH_PUBLICKEY` and `CENTRAL_AUTH_PRIVATEKEY` are referencing an absolute path to the file.
 {{% /alert %}}
 
 * Start
@@ -902,7 +904,9 @@ When running as a service, it is best to save your logging to a file rather than
   ```
 
 {{% alert title="Note" %}}
-If you are not in the agent directory while installing the service, it is mandatory to add `--pathConfig /home/APIC-agents` to the previous command. Otherwise, pathConfig will be automatically set with current directory.
+If you are not in the agent directory while installing the service, it is mandatory to add `--pathConfig /home/APIC-agents` to the previous command. Otherwise, pathConfig will be automatically set with current directory
+
+For the service to start correctly, ensure that the variable `CENTRAL_AUTH_PUBLICKEY` and `CENTRAL_AUTH_PRIVATEKEY` are referencing an absolute path to the file.
 {{% /alert %}}
 
 * Start
