@@ -352,6 +352,13 @@ const collections = [{
   description: 'All pages relating to Connect Azure Gateway.',
   format: 'frontmatter',
 }, {
+  ...docsDefaults('central/connected_agent_common_reference', 'central/connected_agent_common_reference'),
+  name: 'connected_agent_common_reference',
+  label: 'Connected agent - Common reference',
+  label_singular: 'page in Connected agent - Common reference',
+  description: 'All pages relating to Connected agent - Common reference.',
+  format: 'frontmatter',
+}, {
   ...docsDefaults('central/cli_central', 'central/cli_central'),
   name: 'cli_central',
   label: 'Get started with Axway Central CLI',
