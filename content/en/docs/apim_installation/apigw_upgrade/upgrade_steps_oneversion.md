@@ -256,3 +256,32 @@ Updating API Manager is now carried out during the application of the latest API
 * Policy Studio project upgrades. Importing an existing API Manager Policy Studio project will upgrade API Manager. The upgrade is also applied when creating a new project from an existing `fed` file.
 * API Manager `.fed` files can be upgraded using the [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics#upgradeconfig-options) script.
 * The [projupgrade](/docs/apim_reference/devopstools_ref#projupgrade-command-options) script will apply API Manager updates to any existing projects.
+
+## Update cipher scheme
+
+The cipher scheme for all encrypted data in the system (such as Database/LDAP passwords, private keys, and so on) uses PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks. The cipher scheme is backwards compatible with previous versions of the cipher scheme, and it is able to decrypt data, which was encrypted in the old cipher scheme.
+
+The Entity store is re-encrypted with PBKDF2 as part of API Gateway update process, but the Key property store will not be re-encrypted.
+
+To make use of a more secure cipher scheme, you must re-encrypt your KPS data using the `kpsadmin` command. For more information see, [Re-encrypt the KPS data](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
+
+### Transfer KPS data between environments
+
+Encrypted KPS data cannot be transferred directly between environments even when the passphrase in use is the same in both environments. Instead, you must use one of the following options:
+
+* Use the [KPS Admin Backup and Restore](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#back-up-and-restore) process. The restore command decrypts the data from the source environment and re-encrypts the data for the target environment.
+* Use the [Cassandra Backup and Restore](/docs/cass_admin/cassandra_bur/) process and run [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
+
+### Use the cipher scheme with custom code
+
+When instantiating a `PasswordCipher` in custom libraries or in Policy Studio script filters, be aware that this enhanced cipher algorithm will result in longer generation times. While not recommended, it is possible to revert to the previous weaker cipher if absolutely necessary, should performance be the higher concern.
+
+To revert to the weaker cipher algorithm, you can use the `setMode` method, such as in the following `jython` snippet:
+
+   ```
+   from com.vordel.common.crypto import PasswordCipher
+   
+   def invoke(msg):
+      cipher = PasswordCipher("ThisIsAPassword!123".toCharArray())
+      cipher.setMode(PasswordCipher.Mode.SHA1_3DES)
+   ```

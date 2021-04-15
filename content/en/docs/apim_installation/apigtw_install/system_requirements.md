@@ -82,15 +82,13 @@ This section describes the supported database versions.
 
 API Gateway and API Manager support the following relational databases to store metrics data:
 
-* MySQL Server 5.6, 5.7
+* MySQL Server 5.7, 8.0
 * MariaDB 5.5, 10.1
 * Microsoft SQL Server 2016, 2017, and 2019
 * Oracle 12.2, 18c, and 19c
 * IBM DB2 10.5
 
-{{< alert title="Note" color="primary" >}}If you are using MariaDB you must use the MySQL JDBC driver with the MySQL database connection URL (for example, `jdbc:mysql://DB_HOST:3306/reports`) instead of the provided MariaDB version. You must also ensure that you are using a MySQL JDBC driver version 5.1.x or earlier (for example, 5.1.47), as later versions (for example, 6.x, 8.x) are not currently supported.{{< /alert >}}
-
-For more details, see [Configure the metrics database](/docs/apim_installation/apigtw_install/metrics_db_install).
+For more details, see [Install and configure a metrics database](/docs/apim_installation/apigtw_install/metrics_db_install).
 
 ### Apache Cassandra
 

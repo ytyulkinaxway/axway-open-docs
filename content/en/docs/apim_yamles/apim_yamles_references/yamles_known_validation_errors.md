@@ -115,7 +115,9 @@ Look into the file named `/home/user/yaml/Environment Configuration/Certificate 
 
 **Severity**: ERROR / WARNING
 
-`entity=/Policies/My policy/Sample policy, type=FilterCircuit, field='category', file=/home/user/yaml/Policies/My policy/Sample policy.yaml, message='Cannot resolve reference: /System/Policy Categories/invalidcategory'`
+```
+entity=/Policies/My policy/Sample policy, type=FilterCircuit, field='category', file=/home/user/yaml/Policies/My policy/Sample policy.yaml, message='Cannot resolve reference: /System/Policy Categories/invalidcategory'
+```
 
 Look into the file named `/home/user/yaml/Policies/My policy/Sample policy.yaml`. It contains an entity of type `FilterCircuit`, named `Sample Policy`, with a field named `category`, that is pointing to an entity that does not exists in the configuration. Fix the `YamlPK` value in the `category` field to something like `/System/Policy Categories/authentication`. In this case, removing the field would also fix the issue as long as the default value of `/System/Policy Categories/miscellaneous` is what you want.
 
@@ -125,7 +127,9 @@ If you are validating a configuration project that points to entities that are c
 
 **Severity**: WARNING
 
-`entity=/Environment Configuration/Services/5555, type=SSLInterface, field='serverCert', file=/home/user/yaml/Environment Configuration/Services/5555.yaml, message='${env.SSL.CERT} is used as a reference. Make sure envSettings.props or system.properties is populated accordingly'`
+```
+entity=/Environment Configuration/Services/5555, type=SSLInterface, field='serverCert', file=/home/user/yaml/Environment Configuration/Services/5555.yaml, message='${env.SSL.CERT} is used as a reference. Make sure envSettings.props or system.properties is populated accordingly'
+```
 
 A shorthand key must be set in `envSettings.props` for `env.SSL.CERT`, for example, `env.SSL.CERT=/[Certificates]name=Certificate Store/[Certificate]dname=O=listener\,CN=localhost`, for the gateway to pick up the certificate at startup. If a selector starts with `${system.`, you must add a setting to the `system.properties` file.
 
@@ -135,7 +139,9 @@ This allows users to environmentalize a certificate for a given instance rather 
 
 **Severity**: ERROR / WARNING
 
-`entity=/Policies/cert/XML Signature Generation, type=GenerateSignatureFilter, field='signingCert', file=/home/user/yaml/Policies/cert.yaml, message='Cannot resolve reference: /Environment Configuration/Certificate Store/invalid field'`
+```
+entity=/Policies/cert/XML Signature Generation, type=GenerateSignatureFilter, field='signingCert', file=/home/user/yaml/Policies/cert.yaml, message='Cannot resolve reference: /Environment Configuration/Certificate Store/invalid field'
+```
 
 Look into the file named `/home/user/yaml/Policies/cert.yaml`. It contains an entity of type `GenerateSignatureFilter`, with a field named `signingCert`, which points to a certificate via a reference that does not exist in the configuration. The reference might be environmentalized using a YamlPK like this: `/Environment Configuration/Certificate Store/{{env "CERT"}}`, which has resulted in the "invalid field" in the error message. This issue occurs when you try to validate an environment where the system environment variable `CERT` does not exist. To avoid errors, use the `--allow-invalid-ref` option, or set a dummy value for the environment variable `CERT` in the validating environment.
 
@@ -143,7 +149,9 @@ Look into the file named `/home/user/yaml/Policies/cert.yaml`. It contains an en
 
 **Severity**: ERROR
 
-`entity=/Policies/My policy/Sample policy, type=FilterCircuit, field='category', file=/home/user/yaml/Policies/My policy/Sample policy.yaml, message='Reference '/Policies/My policy/Sample policy/My IP Filter' leads to an entity of type IpFilter instead of PolicyCategory'`
+```
+entity=/Policies/My policy/Sample policy, type=FilterCircuit, field='category', file=/home/user/yaml/Policies/My policy/Sample policy.yaml, message='Reference '/Policies/My policy/Sample policy/My IP Filter' leads to an entity of type IpFilter instead of PolicyCategory'
+```
 
 Look into the file named `/home/user/yaml/Policies/My policy/Sample policy.yaml`. It contains an entity of type `FilterCircuit`, named `Sample Policy`, with a field named `category`, which points to an entity that exists in the configuration but is of the wrong type. It is pointing to an entity of type `IPFilter`, but it needs an entity of type `PolicyCategory`. Fix the YamlPk value in the field `category` to something like `/System/Policy Categories/authentication`. In this case, removing the field would also fix the issue as long as the default value of `/System/Policy Categories/miscellaneous` is what you want.
 
@@ -228,7 +236,9 @@ As the `*` character needs to be contained within double quotation. Refer to the
 
 **Severity**: Non-fatal ERROR
 
-`No value to substitute for {{env "MY_ENV_VARIABLE"}}`
+```
+No value to substitute for {{env "MY_ENV_VARIABLE"}}
+```
 
 You might see this in the `yamles` trace file at validation time because the validation environment does not have the environment variable `MY_ENV_VARIABLE` defined. This is not a problem. The environment variable `MY_ENV_VARIABLE` only needs to be defined in the runtime environment where the API Gateway is running. If you see this at deployment time in the API Gateway trace, create the environment variable in the API Gateway's environment and restart the API Gateway.
 
@@ -236,20 +246,11 @@ You might see this in the `yamles` trace file at validation time because the val
 
 **Severity**: WARNING
 
-`entity=/External Connections/DB Connections/MySQL/local, type=DbConnection, field='setPoolPreparedStatements', file=/home/user/yaml/External Connections/DB Connections/MySQL.yaml, message='Value will be set to 'false' but is neither falsy or truthy. Value: truex'`
+```
+entity=/External Connections/DB Connections/MySQL/local, type=DbConnection, field='setPoolPreparedStatements', file=/home/user/yaml/External Connections/DB Connections/MySQL.yaml, message='Value will be set to 'false' but is neither falsy or truthy. Value: truex'
+```
 
 Look into the file named `/home/user/yaml/External Connections/DB Connections/MySQL.yaml`. It contains an entity of type `DbConnection`, named `local`, with a field named `setPoolPreparedStatements`. Its value is set to `truex`, but a boolean is expected by the model. Fix the field value to be an valid boolean (`true` or `false`). The value defaults to `false`.
-
-## Entities of different types at same level with same PK
-
-**Severity**: WARNING
-
-```
-WARNING: Found entities of different types at same level with same PK for parent PK :'/Path/to/parent' PK end with: (EntityTypeA)MyEntityName
-WARNING: Found entities of different types at same level with same PK for parent PK :'/Path/to/parent' PK end with: (EntityTypeB)MyEntityName
-```
-
-These errors could be generated at conversion time using the `fed2yaml` or `frag2yaml` options if the original XML has entities of different types at the same level with the same PK. To fix after converting, edit the YAML files so that the entities have different values for their key field(s). In general this means editing the `name` field if `name` is the only key field for the entity, and the YAML file name.
 
 ## Filter with same name
 

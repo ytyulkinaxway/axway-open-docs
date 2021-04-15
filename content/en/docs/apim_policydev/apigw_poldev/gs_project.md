@@ -118,4 +118,6 @@ To create a project with API Manager configuration, perform the following steps:
 
 If you create a project from a `.fed` file, a `.pol` file, or a configuration directory from an earlier API Gateway version, the configuration is automatically upgraded to the current version when the new project is created. The configuration directory can be from an API Gateway instance, Admin Node Manager, or API Gateway Analytics.
 
-{{< alert title="Note" color="primary" >}}This feature does not apply when creating a project from an API Gateway instance. You can only download configuration from an API Gateway instance if the Policy Studio version is the same as the API Gateway version.{{< /alert >}}
+## Upgrade of project after 7.7 One Version update
+
+After applying [API Gateway One Version](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/) update to Policy Studio, it is not required to import old projects into the new Policy Studio. Instead, when you open a project after the update, an option to automatically upgrade the project is shown.

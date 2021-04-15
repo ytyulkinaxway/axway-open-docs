@@ -7,9 +7,9 @@
 }
 This topic describes how to run `managedomain` in the following modes:
 
-* *Command interpreter mode* — enter commands from a list using tab completion (default mode)
-* *Interactive mode* — follow instructions at the command prompt
-* *Command mode* — enter specific commands and parameters
+* **Command interpreter mode**: Enter commands from a list using tab completion (default mode).
+* **Interactive mode**: Follow instructions at the command prompt.
+* **Command mode**: Enter specific commands and parameters.
 
 The `managedomain` command is available in the following directory:
 
@@ -138,12 +138,12 @@ create_instance <press TAB>
 ```
 name                       group                      host
 instance_management_port   instance_services_port     passphrase
-sign_with_generated        sign_with_user_provided    sign_with_external_ca
-domain_passphrase          sign_alg                   ca
-key_passphrase             add_service                service_user
-debug                      anm_host                   anm_port
-username                   password                   truststore_file
-truststore_password
+yaml                       sign_with_generated        sign_with_user_provided    
+sign_with_external_ca      domain_passphrase          sign_alg                   
+ca                         key_passphrase             add_service                
+service_user               debug                      anm_host                   
+anm_port                   username                   password
+truststore_file            truststore_password
 ```
 
 The following example creates a new gateway instance with a specific name and group:
@@ -240,7 +240,7 @@ The `managedomain --menu` options for API Gateway management are as follows:
 
 Option `5`: `Create API Gateway instance`
 
-Create a new API Gateway instance. You can also do this in Policy Studio and API Gateway Manager. You can create API Gateway instances locally or on any host configured in the topology.
+Create a new API Gateway instance. You can also do this in Policy Studio and API Gateway Manager. You can create API Gateway instances locally or on any host configured in the topology. You can choose to initialize the first API Gateway instance in a group with a YAML configuration.
 
 Option `6`: `Edit API Gateway (rename, change management port)`
 

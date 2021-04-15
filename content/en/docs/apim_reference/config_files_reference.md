@@ -16,9 +16,9 @@ Contains settings for redaction.
 apigateway/system/conf/redaction.xml
 ```
 
-## Node Manager entity store
+## Node manager entity store
 
-The following directory contains the entity store configuration for Node Manager.
+The following directory contains the entity store configuration for node manager.
 
 ```
 apigateway/conf/fed
@@ -131,9 +131,9 @@ sso.jks
 idp.xml
 ```
 
-## ACL and roles for Node Manager management APIs
+## ACL and roles for node manager management APIs
 
-Used to edit the Access Control List roles for Node Manager management APIs.
+Used to edit the Access Control List roles for node manager management APIs.
 
 ```
 apigateway/conf/acl.json
@@ -155,9 +155,9 @@ A series of rules to control entry to the domain audit log.
 apigateway/conf/apiaudit.xml
 ```
 
-## envSettings.props for Node Manager
+## envSettings.props for node manager
 
-Environment settings for Node Manager, such as host and port information.
+Environment settings for node manager, such as host and port information.
 
 ```
 apigateway/conf/envSettings.props
@@ -181,7 +181,7 @@ apigateway/conf/managedomain.props
 
 ## openssl.cnf
 
-Used for creating the default certs in the Node Manager. Contains the list of predefined variables for the cert.
+Used for creating the default certs in the node manager. Contains the list of predefined variables for the cert.
 
 ```
 apigateway/conf/openssl.cnf
@@ -189,15 +189,23 @@ apigateway/conf/openssl.cnf
 
 ## passwordPolicy.json
 
-This file is edited through the UI, but it can be changed manually. Configures rules around password requirements.
+Used for configuring rules around password requirements. You can edit this file through the UI, or using an editor of your choice.
 
 ```
 apigateway/conf/passwordPolicy.json
 ```
 
-## userconfig.dtd for Node Manager
+## passphrasePolicy.json
 
-User configurations for Node Manager.
+Used for configuring rules around passphrase requirements for node managers and API Gateway groups. You can edit this file through an API call, or using an editor of your choice.
+
+```
+apigateway/conf/passphrasePolicy.json
+```
+
+## userconfig.dtd for node manager
+
+User configurations for node manager.
 
 ```
 apigateway/conf/userconfig.dtd

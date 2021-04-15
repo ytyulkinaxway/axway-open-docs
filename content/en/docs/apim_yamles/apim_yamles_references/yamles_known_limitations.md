@@ -34,23 +34,6 @@ When an entity store is edited via ES Explorer or the entity store API, some fie
 * You can view and edit the YAML configuration fragment in ES Explorer.
 * It is not yet possible to import or export YAML configuration fragments in ES Explorer, this can only be done using the `yamles` CLI.
 
-## Import and export of environmentalized YAML configuration
-
-When you import a YAML configuration fragment into a YAML configuration using `yamles import`, or when you export a YAML configuration fragment from a YAML configuration using `yamles export`, the environmentalization settings (for example, `{{db.host}}`) in entity YAML files are replaced with their resolved values if they can be resolved, or `invalid field`, if they cannot be resolved.
-
-We do not recommend you to import into or export from a YAML configuration that uses environmentalization.
-
-## API Gateway group instance
-
-An API Gateway instance cannot be added to a group when the group has a YAML configuration deployed to it.
-
-## Certificate
-
-* Private keys are in external files in DER format.
-* Certificates are in external files in PEM format. The PEM header and footer lines removed.
-
-There is no support for either DER or PEM formats.
-
 ## API Manager
 
 The YAML format supports API Manager. However, is not possible to run `setup-apimanager` on an API Gateway instance that has a YAML configuration deployed to it. To workaround this limitation:
@@ -84,10 +67,6 @@ YAML configuration for Node manager is not supported.
 ## API Gateway Analytics
 
 YAML configuration for Analytics is not supported.
-
-## YAML factory configuration
-
-A YAML factory configuration is not provided out-of-the-box, but it can be created by converting the XML federated factory configuration using `yamles fed2yaml`.
 
 ## Deployment archive
 

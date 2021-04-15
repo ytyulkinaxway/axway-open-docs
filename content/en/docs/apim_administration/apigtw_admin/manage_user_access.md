@@ -22,21 +22,10 @@ You can create gateway users on the **Users** page. Click the **Add** button on 
 
 To specify the new user details, complete the following fields on the **General** tab:
 
-**User Name**:
-
-Enter a name for the new user.
-
-**Password**:
-
-Enter a password for the new user.
-
-**Confirm Password**:
-
-Re-enter the user's password to confirm.
-
-**Signing Key**:
-
-Click to load the user certificate from the **Certificate Store**. For details on how to create and import certificates, see [Manage certificates and keys](/docs/apim_administration/apigtw_admin/general_certificates/).
+* **User Name**: Enter a name for the new user.
+* **Password**: Enter a password for the new user.
+* **Confirm Password**: Re-enter the user's password to confirm.
+* **Signing Key**: Click to load the user certificate from the **Certificate Store**. For details on how to create and import certificates, see [Manage certificates and keys](/docs/apim_administration/apigtw_admin/general_certificates/).
 
 You can also specify optional user attributes on the **Attributes** tab, which is explained in the next section.
 
@@ -193,3 +182,88 @@ To configure the password policy that applies to admin user passwords, perform t
     * **Minimum special characters**: Defaults to 1 special character (`~!@#$%^&*()-_=+\[{}];:"",< >/?`).
     * If no value is specified in these fields, these rules are disabled.
 5. Click **Apply** when finished.
+
+## Configure a passphrase policy for node managers and API Gateway groups
+
+You can configure a [passphrase policy](/docs/apimgmt_security/c_secgd_bp_intro/#passphrase-policy) that applies to the passphrases of node managers and API Gateway groups to prevent users to create extremely weak passphrases, such as `password` or `1234`.
+
+The passphrase policy is disabled by default. To enable it, perform the following steps as an API Server Administrator:
+
+1. Call the `GET /topology/passphrasepolicy` method of the [API Gateway API v1.0 Topology API](http://apidocs.axway.com/swagger-ui/index.html?productname=apigateway&productversion=7.7.0&filename=api-gateway-swagger.json#!/Topology_API/get_topology_passphrasepolicy) to get the current passphrase policy.
+2. Update the configuration returned from the API call to meet your specifications.
+3. Paste the new configuration into the body of the [PUT /topology/passphrasepolicy](http://apidocs.axway.com/swagger-ui/index.html?productname=apigateway&productversion=7.7.0&filename=api-gateway-swagger.json#!/Topology_API/put_topology_passphrasepolicy) method to enable your passphrase policy.
+
+The following is a sample body, including all available configurations for updating the passphrase policy:
+
+```json
+{
+  "enabled" : true,
+  "assertions" : [ {
+    "description" : "general",
+    "matchCount" : "*",
+    "enabled" : true,
+    "assertion" : [ {
+      "enabled" : true,
+      "resourceID" : "PASSWORD_NOT_NULL",
+      "name" : "Passphrase cannot be empty"
+    }, {
+      "enabled" : true,
+      "resourceID" : "PASSWORD_MIN_LENGTH",
+      "minLength" : "4",
+      "name" : "Passphrase must be longer than N characters"
+    }, {
+      "enabled" : true,
+      "resourceID" : "PASSWORD_NOT_EQUAL_TO_ACC_NAME",
+      "name" : "Passphrase cannot be the same as the domain/node manager/group name"
+    }, {
+      "enabled" : true,
+      "resourceID" : "PASSWORD_NOT_EQUAL_TO_REV_ACC_NAME",
+      "name" : "Passphrase cannot be the same as the reverse of domain/node manager/group name"
+    }, {
+      "enabled" : false,
+      "resourceID" : "PASSWORD_NOT_CONTAINING_ACC_NAME",
+      "name" : "Passphrase cannot contain domain/node manager/group name"
+    }, {
+      "enabled" : false,
+      "resourceID" : "PASSWORD_DISTANCE",
+      "name" : "Passphrase Distance"
+    }, {
+      "enabled" : false,
+      "resourceID" : "PASSWORD_LIFETIME",
+      "name" : "Passphrase Lifetime"
+    }, {
+      "enabled" : false,
+      "resourceID" : "PASSWORD_NOT_IN_HISTORY",
+      "name" : "Passphrase not in history"
+    } ]
+  }, {
+    "description" : "composition",
+    "matchCount" : "*",
+    "enabled" : true,
+    "assertion" : [ {
+      "enabled" : true,
+      "resourceID" : "MUST_HAVE_UPPER_CASE",
+      "name" : "Must contain an upper case character",
+      "count" : "1"
+    }, {
+      "enabled" : true,
+      "resourceID" : "MUST_HAVE_LOWER_CASE",
+      "name" : "Must contain a lower case character",
+      "count" : "1"
+    }, {
+      "enabled" : true,
+      "resourceID" : "MUST_CONTAIN_DIGIT",
+      "name" : "Must contain a number",
+      "count" : "1"
+    }, {
+      "enabled" : true,
+      "characters" : "~!@#$%^&*()-_=+\\|[{}];:'\",<.>/ ?",
+      "resourceID" : "MUST_CONTAIN_SPECIAL_CHARACTERS",
+      "name" : "Must contain a special character",
+      "count" : "1"
+    } ]
+  } ]
+}
+```
+
+{{% alert title="Note" %}}Configuring a passphrase policy is currently not possible by way of API Manager UI.{{% /alert %}}

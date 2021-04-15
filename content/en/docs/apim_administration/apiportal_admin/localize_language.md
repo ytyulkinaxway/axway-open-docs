@@ -32,19 +32,21 @@ The UI strings are stored in initialization (`.ini`) files. Each language has it
 
 ### Add a translated UI string file
 
+All **File upload** sections have a link from which you can download the English version of the file. After that, you just need to translate the strings and upload the new file. You must ensure that the extension of the file is `.ini`, otherwise the upload will fail.
+
 To upload language files:
 
 1. In JAI, click **Components > API Portal > Additional Settings**.
-2. Enable **Upload language file toggle**. The following fields will show after that:
+2. Enable **Upload language file toggle**. The following options are shown:
 
-   * Language - Select the language for which you are uploading translations. All installed languages except English are listed.
-   * Language files context - Select whether the uploaded language files are for the **Site** or **Administrator** part of API Portal.
-   * API Portal component language file - The main language file for API Portal component.
-   * Overridden language file - Some texts in API Portal, such as the messages on the login pages, are stored in different filed and you have to change and upload them separately.
-   * `sys.ini` language file - This field is shown only when **Administrator** is selected as a language files context. This language file contains translations for the administrator components menu drop-down, menu, and component parameters.
-3. Fill in the fields and click **Save**.
+   * **Language**: Select the language for which you are uploading translations. All installed languages except English are listed.
+   * **Language files context**: Select whether the uploaded language files are for the **Site** or **Administrator** part of API Portal.
+   * **API Portal component language file**: The main language file for API Portal component.
+   * **Overridden language file**: Some texts in API Portal, such as the messages on the login pages, are stored in different filed and you must change and upload them separately.
+   * **`sys.ini` language file**: This options is shown only when **Administrator** is selected as a language files context. This language file contains translations for the administrator components menu drop-down, menu, and component parameters.
+3. Click **Save & Close**.
 
-Note that all **File upload** sections have a link from which you can download the English version of the file. After that, you just need to translate the strings and upload the new file it. When uploading the file, ensure that its extension is `.ini`, otherwise you will not be able to upload it.
+To translate labels or values of custom properties, you must add a new row to the translation `.ini` file, with the desired `key/value` pair, and ensure that the value of the key is in capital letters. For example, to translate a custom property with label "Environment" to French, add the following line to the translation file: `ENVIRONMENT="Environnement"`.
 
 ## Provide API Portal in multiple languages
 
@@ -61,7 +63,7 @@ To add a new content language and main menu, follow these steps:
 1. In the JAI left navigation bar, click **Language(s) > Content Languages**.
 2. Click **New** to add a new content language.
 
-   {{< alert title="Note" color="primary" >}}If you have already installed a new language, a corresponding content language will already exist for that language and you can skip the following steps 3 to 7, and continue from step 8.{{< /alert >}}
+   {{< alert title="Note" color="primary" >}}If you have already installed a new language, a corresponding content language will already exist for that language and you can skip steps 3 to 7, and continue from step 8.{{< /alert >}}
 3. On the **Details** tab, enter the **Title** and **Title Native** for the new language. The titles can be the same.
 4. Enter the Joomla! **Language Tag**. Ensure that you enter the tag in the correct format. You must use "`-`" instead of "`_`" (for example, `fr-FR`).
 5. In **URL Language Code**, enter the language identifier to use in the language-specific URL (for example, `fr`). The identifier must be unique for each language.
@@ -98,7 +100,7 @@ You must also duplicate your page template styles for each language. By default,
 5. Select the respective language as the **Default**. This sets this template as the default for pages using the selected language.
 6. Click the **Navigation** tab and change the **Menu** to the correct main menu for the language.
 7. Click the **Assignment** tab and assign the menu items from the correct language to the template. To select or deselect all menu items, click the toggle button next to the main menu title.
-8. Click **Save** and click **Close** to close the template style.
+8. Click **Save & Close**.
 
 ### Duplicate the homepage template style
 
@@ -110,7 +112,7 @@ You must also duplicate your homepage template style for each language.
 4. Edit the **Style Name** to update the name of your new homepage.
 5. Click the **Navigation** tab and change the **Menu** to the correct main menu for the language.
 6. Click the **Assignment** tab and select only **Home** from the **Main menu** of the correct language.
-7. Click **Save** and click **Close** to close the template style.
+7. Click **Save & Close**.
 
 ### Create homepage modules for the new language
 
@@ -122,7 +124,7 @@ On the Home page layout there are available positions where you can add modules.
 4. For the **Language**, select the new installed language.
 5. On the **Menu assignment** tab, select **Only on the pages selected** from the **Module assignment** list.
 6. Select the Home page of the new language from the **Menu selection** field.
-7. Click **Save**  
+7. Click **Save & Close**.
 
 ### Publish additional languages
 
@@ -227,7 +229,7 @@ By default, API Portal uses the Purity III template style. After following this
 5. Select the respective language as the **Default**. This sets this template as the default for pages using the selected language.
 6. Click the **Navigation** tab, and change the **Menu** to the correct main menu for the language.
 7. Click the **Assignment** tab, and assign the menu items from the correct language to the template. To select or deselect all menu items, click the toggle button next to the main menu title.
-8. Click **Save** and click **Close** to close the template style.
+8. Click **Save & Close**.
 
 #### Duplicate the template style for all languages
 
@@ -242,7 +244,7 @@ Finally, edit the original template style for the English language:
 3. Select English as the **Default**. This sets this template as the default for pages using the English language.
 4. Click the **Navigation** tab, and change the **Menu** to `Main menu - EN`.
 5. Click the **Assignment** tab, and assign the menu items from the English language to the template. To select or deselect all menu items, click the toggle button next to the main menu title.
-6. Click **Save** and click **Close** to close the template style.
+6. Click **Save & Close**.
 
 ### Enable the language switcher
 

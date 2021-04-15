@@ -1,11 +1,10 @@
 {
-    "title": "Set up API Manager",
-    "linkTitle": "Set up API Manager",
-    "weight": "10",
-    "date": "2019-09-17",
-    "description": "Learn how to enable API Manager after installation, and how to configure it with signed certificates, monitoring,  and HTTP proxy servers."
+"title": "Set up API Manager",
+  "linkTitle": "Set up API Manager",
+  "weight": "10",
+  "date": "2019-09-17",
+  "description": "Learn how to enable API Manager after installation, and how to configure it with signed certificates, monitoring,  and HTTP proxy servers."
 }
-
 ## Prerequisites
 
 * Ensure that both API Manager and API Gateway and are installed. API Manager is a layered product running on API Gateway, which provides the underlying gateway capabilities. API Gateway is a prerequisite product for API Manager.
@@ -22,20 +21,18 @@ To enable API Manager, perform the following steps:
 2. Select **File > Configure API Manager**.
 3. If you do not have any Cassandra hosts configured, you must add a Cassandra host before you can continue:
 
-    * Enter a name for the Cassandra server (for example, `local_cassandra`).
-    * Enter the Cassandra host name (for example, `localhost`).
-    * Enter the Cassandra port (for example, `9042`).
-
+   * Enter a name for the Cassandra server (for example, `local_cassandra`).
+   * Enter the Cassandra host name (for example, `localhost`).
+   * Enter the Cassandra port (for example, `9042`).
 4. On API Manager settings screen, enter the required values to set up API Manager.
 
-    {{< alert title="Note" color="primary" >}}The default API administrator user name and password set in Policy Studio are used only when creating the administrator account in Cassandra. After the account has been created in Cassandra, you cannot change the credentials in Policy Studio. You must use API Manager to change the administrator credentials. {{< /alert >}}
-
+   {{< alert title="Note" color="primary" >}}The default API administrator user name and password set in Policy Studio are used only when creating the administrator account in Cassandra. After the account has been created in Cassandra, you cannot change the credentials in Policy Studio. You must use API Manager to change the administrator credentials. {{< /alert >}}
 5. Configure additional API Manager settings under **Server Settings > API Manager**. For example, you can specify custom policies that are called as traffic passes through API Manager. For more details, see [Configure API Manager settings in Policy Studio](/docs/apim_administration/apimgr_admin/api_mgmt_config_ps/).
 6. Click the **Deploy** button in the toolbar to deploy the updated configuration to API Gateway.
 7. After deployment completes, enter the following URL in your browser to log in to apimanager: `https://HOSTNAME:8075`
 8. Log in using the API administrator credentials that you specified when installing API Manager, or when configuring API Manager in Policy Studio. For security reasons, you must change the default credentials.
 
-{{< alert title="Note" color="primary" >}}In earlier versions, API Manager was configured using the `setup-apimanager` script in the `INSTALL_DIR/apigateway/posix/bin` directory. This script is still supported for backwards compatibility, but it is best to use Policy Studio to configure API Manager in this version. Cassandra must be installed and running before you run the `setup-apimanager` script. For more details, run the script with the `--help` option. {{< /alert >}}
+{{< alert title="Note" color="primary" >}}In earlier versions, API Manager was configured using the `setup-apimanager` script in the `INSTALL_DIR/apigateway/posix/bin` directory. This script is still supported for backwards compatibility, but we recommend you to use Policy Studio to configure API Manager in this version. Cassandra must be installed and running before you run the `setup-apimanager` script. For more details, run the script with the `--help` option. {{< /alert >}}
 
 ## Configure signed certificates for API Manager ports
 
@@ -46,15 +43,14 @@ To configure signed server certificates for these API Manager ports, perform the
 1. Add the server certificates signed by a trusted Certificate Authority to the API Gateway certificate store, and ensure that their start and expiry dates are valid.
 2. Configure the API Manager port to use the signed server certificate:
 
-    1. Select **Environment Configuration > Listeners > API Gateway > API Portal > Ports**.
-    2. Double-click **API Portal Port** on the right to open the **Configure HTTPS Interface** dialog. The default port is `8075`.
-    3. On the **Network** tab, click **X.509 Certificate** to select the signed server certificate.
-
+   1. Select **Environment Configuration > Listeners > API Gateway > API Portal > Ports**.
+   2. Double-click **API Portal Port** on the right to open the **Configure HTTPS Interface** dialog. The default port is `8075`.
+   3. On the **Network** tab, click **X.509 Certificate** to select the signed server certificate.
 3. Configure the API Manager runtime traffic port to use the signed server certificate:
 
-    1. Select **Environment Configuration > Listeners > API Gateway > API Manager Traffic > Ports**.
-    2. Double-click **Portal Traffic HTTPS Interface** on the right to open the **Configure HTTPS Interface** dialog. The default port is `8065`.
-    3. On the **Network** tab, click **X.509 Certificate** to select the signed server certificate.
+   1. Select **Environment Configuration > Listeners > API Gateway > API Manager Traffic > Ports**.
+   2. Double-click **Portal Traffic HTTPS Interface** on the right to open the **Configure HTTPS Interface** dialog. The default port is `8065`.
+   3. On the **Network** tab, click **X.509 Certificate** to select the signed server certificate.
 
 ## Configure an API Manager monitoring database
 
@@ -62,11 +58,10 @@ To monitor APIs in API Manager, you must perform the following steps:
 
 1. Configure a JDBC-compliant database used to store historic traffic. The following databases are supported:
 
-    * Oracle
-    * MySQL
-    * Microsoft SQL Server
-    * IBM DB2
-
+   * Oracle
+   * MySQL
+   * Microsoft SQL Server
+   * IBM DB2
 2. Configure the API Manager for monitoring. For example, you must ensure that real-time monitoring is enabled on the API Gateway, and that writing metrics data to the database is enabled.
 
 For more details, see [Monitor APIs and applications in API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_monitor/).
@@ -102,3 +97,24 @@ The following JVM setting is also required when importing the API in API Manage
 ## Configure API Manager in a multi-datacenter environment
 
 For details on configuring API Manager for a large amount of APIs and data in a multi-datacenter environment, see [Configure API Management in multiple datacenters](/docs/apimgmt_multi_dc/).
+
+## Configure API Manager request rate limiter
+
+Rate limit monitors the number of requests that a user can send to API Manager during an active session. If the number of requests in an individual session exceeds the configured boundaries, the session is terminated, and the user must log in again to continue using API Manager.
+
+To configure the request rate limiter for your user's sessions in API Manager, perform the following steps in Policy Studio:
+
+1. Select **Environment Configuration > Listeners > API Gateway > API Portal > Paths** in the Policy Studio tree.
+2. Double-click the `API Portal v1.4 ('v1.4')` servlet to open its dialog box.
+3. On the servlet dialog box, click to **Edit** the `jersey.config.server.provider.classnames` property.
+4. Add `com.vordel.apiportal.api.filter.RateLimitBindingFeature` to the existing comma-separated list of class names.
+5. Click to **Add** two new properties to the **Servlet Properties** list :
+
+   * **Name**: `RateLimitFilter.rateLimitSize`. **Value**: Enter the number of requests a user can make in a period of time. Defaults to `200`.
+   * **Name**: `RateLimitFilter.rateLimitOffset`. **Value**: Enter the amount of time, in milliseconds, that the request rate limiter should allow between the user’s most recent request and the configured number of requests. Defaults to `60000` milliseconds (`1` minute).
+6. Click **OK**.
+
+{{< alert title="Note" color="primary" >}}A user login to API Manager generates multiple requests. Therefore, it is recommended to set `RateLimitFilter.rateLimitSize` to higher than `50` at a minimum.
+
+Customers with a large number of entities will also generate large volumes of API Manager requests and should, therefore, consider increasing the default value for `RateLimitFilter.rateLimitSize.`
+{{< /alert >}}

@@ -91,7 +91,7 @@ A directory containing a `_parent.yaml` is a container for other entities.
 
 ### Key fields
 
-Each entity in the entity store is identified by one or several key fields. For most types, it is a single field called "name". For others, it can be just one field, such as ID or URL, or a combination of several. For example, RadiusServer entity type has two key fields: "host" and "port".
+Each entity in the entity store is identified by one or several key fields. For most types, it is a single field called `name`. For others, it can be just one field, such as ID or URL, or a combination of several. For example, RadiusServer entity type has two key fields: `host` and `port`.
 
 ### Default naming convention
 
@@ -116,10 +116,10 @@ Also, File system incompatible characters such as `/\":<>*?|` are replaced by co
 
 For example, for entity type `JSONSchema` key field is `URL`. If the value of URL is `http://json-schema.org/address`, then:
 
-* The entity will be identified (YamlPK) with: `/Resources/JSON Schemas/http://json-schema.org/address`.
+* The entity will be identified (YamlPK) with `/Resources/JSON Schemas/http://json-schema.org/address`.
 * The entity will stored in `Resources/JSON Schemas/http(colon)(slash)(slash)json-schema.org(slash)address.yaml`
 
-See the [Yaml PK section](#yamlpk-and-references).
+For more information, see [Yaml PK section](#yamlpk-and-references).
 
 ### Best practices to name entities
 
@@ -223,7 +223,7 @@ children:
 * To learn more about syntax, such as `./First Filter` or `../Second Filter`, see [YamlPK and References](/docs/apim_yamles/yamles_structure/#yamlpk-and-references).
 * To learn more about the different ways to write your YAML `.fed`, see [YAML syntax considerations](/docs/apim_yamles/apim_yamles_references/yamles_syntax_considerations).
 
-## YamlPK and References
+## The YamlPK key
 
 Each entity in the YAML entity store is uniquely identified in a YamlPK. A YamlPK takes account of:
 
@@ -376,7 +376,7 @@ def invoke(msg)         {
 }
 ```
 
-### Limitations
+### Changes to the YamlPK key
 
 YamlPK is not an immutable key, it is a concatenation of all the parent key fields and child key fields. This has two consequences:
 
@@ -398,8 +398,22 @@ fields:
 name: Filter Database IP
 ```
 
-It now has a YamlPK of `/Policies/App Policies/Core Policy/Filter Database IP`. This means that all other entities pointing to this policy through a reference field must be changed to reflect this.
+The YamlPK of the entity is now `/Policies/App Policies/Core/Filter Database IP`. This means that all other entities pointing to this policy through a reference field must be changed to reflect this.
 
-**Two or more entities at the same level in the hierarchy should not have the same key field value regardless of their types**: This was allowed for entities of different types in the XML federated configuration, but is not allowed in the YAML configuration regardless of the types. This limitation allows the YamlPk form to stay as simple as possible by avoiding inclusion of type information.
+If you are using the `EntityStore` API, in case an entity's YamlPK is changed due to a change in any of its key fields, all referring entities are automatically updated to reflect the change.
 
-See [Known conversion errors](/docs/apim_yamles/apim_yamles_references/yamles_known_conversion_errors/) for details.
+**Two or more entities with the same key fields at the same level in the hierarchy**: In this case, the YamlPK is formed differently to avoid ambiguity.
+
+For instance if you have:
+
+* `/Policies/App Policies/Core`: a policy
+* `/Policies/App Policies/Core`: container for other policies
+* `/Policies/App Policies/Core/Throttling`: a policy
+
+If there is a conflict, YAML Entity Store handle this by adding the entity type to the respective YamlPK:
+
+* `/Policies/App Policies/(FilterCircuit)Core`
+* `/Policies/App Policies/(CircuitContainer)Core`
+* `/Policies/App Policies/(CircuitContainer)Core/Throttling`
+
+If you want to refer to `Throttling` you must use `/Policies/App Policies/(CircuitContainer)Core/Throttling`.

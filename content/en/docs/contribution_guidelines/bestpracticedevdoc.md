@@ -1,12 +1,11 @@
 ---
-title: "Best practices for developer documentation"
-linkTitle: "Best practices"
+title: Best practices for developer documentation
+linkTitle: Best practices
 weight: 70
 date: 2020-03-16
-description: >
-    Follow these best practices when developing Axway product documentation.
+description: |
+  Follow these best practices when developing Axway product documentation.
 ---
-
 ## Organizing your documentation
 
 Present your documentation in a way that it is easy to read and helpful for customers.
@@ -19,9 +18,9 @@ Organize similar type of contents under the same menu. For example, you can plac
 
 More than three levels can make the menu confusing to navigate.
 
-{{% alert title="Note" %}}
+{{< alert title="Note" color="primary" >}}
 Although it is a good practice to have a well-structured menu hierarchy to help users when they are navigating in your documentation website, have in mind that users usually land on a page from a search  result. In this case, the order of the menu is not relevant.
-{{% /alert %}}
+{{< /alert >}}
 
 Example:
 

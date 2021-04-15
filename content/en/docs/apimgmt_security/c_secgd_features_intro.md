@@ -27,9 +27,17 @@ The following secure connections are available:
 
 The following passwords are stored securely by API Gateway:
 
-* Administrator user passwords: The administrator user passwords are stored in the `INSTALL_DIR/apigateway/conf/adminUsers.json` file as a base 64-encoded salted hash of the plain text password. The salt is a 16-byte value generated using the SHA1PRNG pseudo-random number generator algorithm. The algorithm used is provided by JCE and is PBKDF2 with HMACSHA256 using a key length of 256 bits. The algorithm repeats the digest of the password along with the salt for 102400 iterations. A new salt is used for each password hash, which results in different password hashes for the same password.
-* Passwords stored in the Entity Store: All sensitive data (local user store passwords, private keys and their passwords, and passwords required to connect to third-party services) can be encrypted in the Entity Store using PBE with the Entity Store passphrase. The password and a random 8-byte salt are converted using the PKCS #12 mechanism to a key and IV for the encryption algorithm. The encryption algorithm used is 3DES, EDE, 3 key, with the SHA1 digest used for generating the IV and key material.
-* API Manager user passwords: API Manager users are stored in KPS. The encryption mechanism and algorithms used to store sensitive data in KPS is inherited from the API Gateway Entity Store. The encryption for KPS data is applied only when the corresponding Entity Store is protected with a passphrase.
+* **Administrator user passwords**: The administrator user's passwords are stored in the `INSTALL_DIR/apigateway/conf/adminUsers.json` file as a base 64-encoded salted hash of the plain text password. The salt is a 16-byte value generated using the SHA1PRNG pseudo-random number generator algorithm. The algorithm used is provided by JCE and is PBKDF2 with HMACSHA256 using a key length of 256 bits. The algorithm repeats the digest of the password along with the salt for 102400 iterations. A new salt is used for each password hash, which results in different password hashes for the same password.
+* **Passwords stored in the Entity Store**: All sensitive data (local user store passwords, private keys and their passwords, and passwords required to connect to third-party services) can be [encrypted in the Entity Store](/docs/apim_administration/apigtw_admin/general_passphrase/). The process behind the encryption uses Password-Based Encryption (PBE) with the Entity Store passphrase:
+
+    1. A high entropy master key (MK) of size 32 bytes is created using PBKDF2 with inputs of the entity store passphrase, a 16 byte salt generated using a pseudo random number generator (PRNG), and a 100,000 iteration count.
+    2. An MK = PBKDF2 (HMAC-SHA512, passphrase, unique salt, iteration count, MK length) is used as key material input into the generation of a data protection key (DPK).
+    3. The DPK of size 32 bytes is derived from the MK again using PBKDF2, unique random salt and MK.
+    4. DPK = PBKDF2 (HMAC-SHA512, MK, unique salt, iteration count, DPK length). The number of iterations is 2 for the DPK generation to maintain acceptable performance in the runtime environment.
+
+    To encrypt plaintext, we generate a cipher using AES/GCM encryption and the DPK as the secret key, then we store the unique salt with the cipher text.
+
+* **API Manager user passwords**: API Manager users are stored in KPS. The encryption mechanism and algorithms used to store sensitive data in KPS is inherited from the API Gateway Entity Store. The encryption for KPS data is applied only when the corresponding Entity Store is protected with a passphrase.
 
 ## API Portal password management features
 

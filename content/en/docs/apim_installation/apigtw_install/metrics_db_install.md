@@ -36,7 +36,11 @@ You do not need to install API Gateway Analytics to view monitoring data in API 
 
 You must add the JDBC driver files for your chosen third-party database to your API Gateway and Policy Studio installations as appropriate.
 
-{{< alert title="Note" color="primary" >}}If you are using MariaDB you must use the MySQL JDBC driver with the MySQL database connection URL (for example, `jdbc:mysql://DB_HOST:3306/reports`) instead of the provided MariaDB version. You must also ensure that you are using a MySQL JDBC driver version 5.1.x or earlier (for example, 5.1.47), as later versions (for example, 6.x, 8.x) are not currently supported.{{< /alert >}}
+If you are using MariaDB, you must use the MySQL JDBC driver with the MySQL database connection URL, for example, `jdbc:mysql://DB_HOST:3306/reports`. You must also ensure that you are using MySQL JDBC driver version 5.1.29 or earlier, as the later MySQL JDBC driver versions (later 5.1.x, 6.x, 8.x) are not compatible with Maria DB 10.2.
+
+If you are using MySQL 8, you will not be able to use both MySQL 8 and Maria DB 10.2 databases in the same configuration. For example, use MySQL 8 as the metrics database and Maria DB 10.2 as the KPS. Also, if using MySQL 8, by default, only the 5.1.x series of JDBC drivers (from 5.1.47 upwards) will work.
+
+If you wish to use a later MySQL JDBC driver version, for example, 8.x, then the MySQL Driver class name in the JDBC Drivers section of the entity store must be updated from `org.gjt.mm.mysql.Driver` to `com.mysql.cj.jdbc.Driver`.
 
 ### Add JDBC drivers to API Gateway
 

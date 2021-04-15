@@ -9,7 +9,7 @@ The `kpsadmin` command-line tool provides KPS management functions, independent 
 
 The `kpsadmin` tool is especially useful in a development environment. In a production environment, you should also use data source-specific tools and administration procedures for data backup, restore, security, optimization, monitoring and so on.
 
-{{< alert title="Caution" color="warning" >}}You must use `kpsadmin` operations with caution. Ensure that you have a verified backup before you run destructive operations such as clear, restore, and re-encrypt. You should always try out these options in a development environment first.{{< /alert >}}
+{{< alert title="Caution" color="warning" >}}You must use `kpsadmin` operations with caution. Ensure that you have a verified backup before you run destructive operations such as clear, restore, and re-encrypt. You should always try out these options in a development environment first. Depending on data volumes, the key property store re-encryption or restore operations can take some time. These actions should be undertaken during a maintenance window. {{< /alert >}}
 
 ## Start `kpsadmin`
 

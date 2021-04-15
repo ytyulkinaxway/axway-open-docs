@@ -2,11 +2,9 @@
 title: API Portal 7.7 January 2021 Release Notes
 linkTitle: API Portal January 2021
 weight: 100
-date: 2021-01-06
+date: 2021-01-30
+description: API Portal updates are cumulative, comprising new features and changes delivered in previous updates, unless specifically indicated otherwise in the Release notes.
 ---
-## Summary
-
-API Portal provides an API consumer-facing interface that you can customize to match your corporate brand. API Portal is a layered product linked to API Manager, and requires both API Manager and API Gateway. For more information, see the API Gateway and API Manager documentation.
 
 ## Installation
 
@@ -134,9 +132,9 @@ Related Issue: IAP-308
 
 ## Documentation
 
-This section describes documentation enhancements and related documentation.
+<!-- This section describes documentation enhancements and related documentation.
 
-### Documentation enhancements
+### Documentation enhancements -->
 
 There are no major changes in this update.
 
@@ -149,10 +147,7 @@ To find all available documentation for this product version:
 
 Customers with active support contracts need to log in to access restricted content.
 
-The following reference documents are also available:
-
-* [Supported Platforms](https://docs.axway.com/bundle/Axway_Products_SupportedPlatforms_allOS_en) - Lists the different operating systems, databases, browsers, and thick client platforms supported by each Axway product.
-* [Interoperability Matrix](https://docs.axway.com/bundle/Axway_Products_InteroperabilityMatrix_allOS_en) - Provides product version and interoperability information for Axway products.
+For information on the different operating systems, databases, browsers, and thick client platforms supported by each Axway product, see [Supported Platforms](https://docs.axway.com/bundle/Axway_Products_SupportedPlatforms_allOS_en).
 
 ## Support services
 

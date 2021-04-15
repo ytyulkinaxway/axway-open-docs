@@ -2,15 +2,22 @@
 title: API Gateway and API Manager 7.7 January 2021 Release Notes
 linkTitle: API Gateway and API Manager January 2021
 weight: 100
-date: 2021-01-06
+date: 2021-01-31
+description: API Gateway and API Manager updates are cumulative, comprising new features and changes delivered in previous updates, unless specifically indicated otherwise in the Release notes.
 ---
-## Summary
 
-API Gateway is available as a software installation or a virtualized deployment in Docker containers. API Manager is a licensed product running on top of API Gateway, and has the same deployment options as API Gateway.
+## Installation
 
-The software installation is available on Linux. For more details on supported platforms for software installation, see [System requirements](/docs/apim_installation/apigtw_install/system_requirements/).
+* To **update** your API Gateway, see [Update from API Gateway One Version](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/).
+* To **upgrade** from an older version, see [Upgrade from API Gateway 7.5.x or 7.6.x](/docs/apim_installation/apigw_upgrade/upgrade_steps_extcass/).
+* For more details on supported platforms for software installation, see [System requirements](/docs/apim_installation/apigtw_install/system_requirements/).
+* For a summary of the system requirements for a Docker deployment, see [Set up Docker environment](/docs/apim_installation/apigw_containers/docker_scripts_prereqs/).
 
-Docker deployment is supported on Linux. For a summary of the system requirements for a Docker deployment, see [Set up Docker environment](/docs/apim_installation/apigw_containers/docker_scripts_prereqs/).
+### Update a container deployment
+
+Any custom `fed` files deployed to a container must be upgraded using [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics#upgradeconfig-options) or [projupgrade](/docs/apim_reference/devopstools_ref#projupgrade-command-options). They must be upgraded the same way, regardless of whether they are API Manager enabled or not.
+
+The `.fed` files contain the updates for the API Manager configuration and can be used to build containers.
 
 ## New features and enhancements
 
@@ -212,21 +219,11 @@ These new properties were added in JAXP 1.5 specification, which is supported by
 
 Related Issue: RDAPI-22218
 
-## Update a classic (non-container) deployment
-
-To **update** your API Gateway, see [Update from API Gateway One Version](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/).
-
-To **upgrade** from an older version, see [Upgrade from API Gateway 7.5.x or 7.6.x](/docs/apim_installation/apigw_upgrade/upgrade_steps_extcass/).
-
-## Update a container deployment
-
-Any custom `fed` files deployed to a container must be upgraded using [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics#upgradeconfig-options) or [projupgrade](/docs/apim_reference/devopstools_ref#projupgrade-command-options). They must be upgraded the same way, regardless of whether they are API Manager enabled or not.
-
-The `fed` now contains the updates for the API Manager configuration and can be used to build containers.
-
 ## Documentation
 
-<!-- This section describes documentation enhancements and related documentation. -->
+<!-- This section describes documentation enhancements and related documentation.
+
+### Documentation enhancements -->
 
 There are no major changes in this update.
 
@@ -239,10 +236,7 @@ To find all available documentation for this product version:
 
 Customers with active support contracts need to log in to access restricted content.
 
-The following reference documents are also available:
-
-* [Supported Platforms](https://docs.axway.com/bundle/Axway_Products_SupportedPlatforms_allOS_en) - Lists the different operating systems, databases, browsers, and thick client platforms supported by each Axway product.
-* [Interoperability Matrix](https://docs.axway.com/bundle/Axway_Products_InteroperabilityMatrix_allOS_en) - Provides product version and interoperability information for Axway products.
+For information on the different operating systems, databases, browsers, and thick client platforms supported by each Axway product, see [Supported Platforms](https://docs.axway.com/bundle/Axway_Products_SupportedPlatforms_allOS_en).
 
 ## Support services
 
