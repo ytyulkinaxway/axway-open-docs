@@ -15,12 +15,9 @@ description: >-
 * **Application has no access to the API** in Axway API Manager: the agent adds access to the API from the selected application.
 * **Application already has access to the API** in Axway API Manager: the agent has nothing to do.
 
-## Supported use cases for issuing consumer credentials
+## Supported use case for issuing consumer credentials
 
-The property `APIMANAGER_SUBSCRIPTIONSISSUENEWCREDENTIALS` allows the API provider to issue new credentials each time a consumer subscribes to an API (default behavior) or reuse existing credentials.
-
-* **generate new credentials** (default): new credentials (ApiKey / oauth client&secret ) are generated per subscription and store within the selected application.
-* **reuse existing credentials** (property `APIMANAGER_SUBSCRIPTIONSISSUENEWCREDENTIALS=false` set in the Discovery Agent configuration file): the agent sends the first non-repudiated credentials available in the application to the subscriber.
+Each time a consumer subscribes to an API, new credentials (ApiKey / oauth client&secret ) are generated per subscription and are stored within the selected application.
 
 ## Supported use cases for subscription approval
 

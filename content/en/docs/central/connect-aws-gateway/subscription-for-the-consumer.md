@@ -14,12 +14,9 @@ description: A subscription provides the consumer, or subscriber, with the
 * **Usage plan has no access to the API** in AWS API Gateway: the agent adds access to the API from the selected usage plan.
 * **Usage plan already has access to the API** in AWS API Gateway: the agent has nothing to do.
 
-## Supported use cases for issuing consumer credentials
+## Supported use case for issuing consumer credentials
 
-The property `AWS_SUBSCRIPTIONSISSUENEWCREDENTIALS` allows the API provider to issue new credentials each time a consumer subscribes to an API (default behavior) or reuse existing credentials.
-
-* **generate new credentials** (default): new ApiKey is generated per subscription and store within the selected usage plan.
-* **reuse existing credentials** (property `AWS_SUBSCRIPTIONSISSUENEWCREDENTIALS=false` set in the Discovery Agent configuration file): The agent sends the first non repudiated credentials available in the usage plan to the subscriber.
+Each time a consumer subscribes to an API, a new ApiKey is generated per subscription and is stored within the selected usage plan.
 
 ## Supported use cases for subscription approval
 
