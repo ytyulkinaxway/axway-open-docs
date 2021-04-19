@@ -38,14 +38,14 @@
 /static/admin/ @andreamussap @winghonlai
 
 # Documentation files for AMPCentral
-/content/en/docs/central/ @andreamussap
-/content/en/docs/catalog/ @andreamussap
+/content/en/docs/central/ @lbadenhop
+/content/en/docs/catalog/ @lbadenhop
 /content/en/docs/central/connect-api-manager/ @lbadenhop @cbordier
 /content/en/docs/central/connect-aws-gateway/ @lbadenhop @cbordier
 /content/en/docs/central/connect-azure-gateway/ @lbadenhop @cbordier
 
 # Documentation files for Streams
-# /content/en/docs/streams/ @andreamussap @allandenis38
+# /content/en/docs/streams/ @lbadenhop @allandenis38
 
 # Documentation files for Shared services
 /content/en/docs/shared_services/ @andreamussap @danailgrigorov
