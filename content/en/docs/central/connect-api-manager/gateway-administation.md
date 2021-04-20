@@ -606,7 +606,7 @@ unzip traceability_agent-latest.zip
 
 #### To install the Dockerized Traceability Agent
 
-Create your Discovery Agent environment file, `ta_env_vars.env`. See [Traceability Agent variables](/docs/central/connect-api-manager/agent-variables/) for a reference to variable descriptions.
+Create your Traceability Agent environment file, `ta_env_vars.env`. See [Traceability Agent variables](/docs/central/connect-api-manager/agent-variables/) for a reference to variable descriptions.
 After customizing all the sections, your `ta_env_vars.env` file should look like this example file:
 
 ```shell
@@ -619,6 +619,8 @@ APIMANAGER_AUTH_PASSWORD=<PASSWORD>
 APIGATEWAY_HOST=<HOST>
 APIGATEWAY_AUTH_USERNAME=<USER>
 APIGATEWAY_AUTH_PASSWORD=<PASSWORD>
+# Uncomment this value if APIM is installed in a Docker environment as headers are not accessible in this configuration.
+#APIGATEWAY_GETHEADERS=false
 
 # Amplify connectivity
 CENTRAL_ORGANIZATIONID=<ORGANIZATIONID>
@@ -684,6 +686,8 @@ APIMANAGER_AUTH_PASSWORD=apiManagerUserPassword
 #### Customizing Traceability Agent API Gateway connectivity variables
 
 This section helps the agent to collect the header from request/response from the API Gateway system.
+
+{{< alert title="Note" color="primary" >}}When APIM is installed in a Docker environment, request/response headers will not be available for the Traceability Agent. Set `APIGATEWAY_HEADERS=false` only in this section.{{< /alert >}}
 
 `APIGATEWAY_GETHEADERS`: Tells the agent to  call the API Gateway API to get additional transaction details (headers). Default value is **true**. If false, API Gateway config does not need to be set and no headers will be send to Amplify Central.
 
@@ -815,7 +819,8 @@ APIGATEWAY_HOST=localhost
 APIGATEWAY_PORT=8090
 APIGATEWAY_AUTH_USERNAME=myApiGatewayOperatorUser
 APIGATEWAY_AUTH_PASSWORD=myApiGatewayOperatorUserPassword
-#APIGATEWAY_GETHEADERS=true 
+# Uncomment this value if APIM is installed in a Docker environment as headers are not accessible in this configuration.
+#APIGATEWAY_GETHEADERS=false
 #APIGATEWAY_POLLINTERVAL
 
 # Central connectivity

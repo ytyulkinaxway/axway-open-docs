@@ -33,6 +33,8 @@ APIs including AWS signing / HTTP Basic / Invoke policy / 2-way SSL security can
 
 A change of front-end image only is not detected. Changing the name of the API will create a new one on Central and not delete the previous one.
 
+If APIM is installed in a Docker container, the request/response headers will not be available for the Traceability Agent to read. In this situation, be sure to set `APIGATEWAY_GETHEADERS=false` in the Traceability Agent environment variables.
+
 ## Error Codes and Mitigations
 
 | Code # | Description                                                                                                            | Mitigation                                                                                                                                                                                                                       |
