@@ -78,6 +78,7 @@ To expose an HTTPS endpoint of a service within your environment to external tra
 
    * The domain certificate must match the domain (FQDN) of your environment.
    * The public key certificate must be PEM encoded and match the given private key.
+
 2. Create the Istio namespace. This is the namespace where Istio will be deployed.
 
    Usage: `kubectl create namespace NAMESPACE_NAME`
@@ -209,21 +210,19 @@ After you have created the key pairs and secrets, deploy the Axway proprietary s
    ...Successfully got an update from the "axway" chart repository
    Update Complete. ⎈ Happy Helming!⎈
    ```
+
 2. Change to the directory where you unzipped the hybrid kit:
 
-   ```
-   cd e4fd7216693f50360169492633ab0122/
-   ```
-3. From Istio 1.6+, `Istioctl` is required for installing Istio. Istio version 1.6.8 is recommended and is compatible with the Axway mesh agents. If you have not previously added it to your client system, you can download `Istioctl` using the following command:
+   `cd e4fd7216693f50360169492633ab0122/`
 
-   ```
-   curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.8 TARGET_ARCH=x86_64 sh -
-   ```
+3. `Istioctl` is required for installing Istio. Istio version 1.8.2 is recommended and is compatible with the Axway mesh agents. If you have not previously added it to your client system, you can download `Istioctl` using the following command:
+
+   `curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.8.2 TARGET_ARCH=x86_64 sh -`
+
 4. Export the path where you downloaded `Istioctl` to start using it. Note the use of `$PWD` below and change it accordingly.
 
-   ```
-   export PATH=$PATH:$PWD/istio-1.6.8/bin
-   ```
+   `export PATH=$PATH:$PWD/istio-1.8.2/bin`
+
 5. Install Istio using `Istioctl`. This step can take several minutes to complete.
 
    ```
@@ -237,13 +236,13 @@ After you have created the key pairs and secrets, deploy the Axway proprietary s
     ✔ Addons installed
     ✔ Installation complete
    ```
+
 6. Verify that Istio is deployed successfully:
 
-   ```
-   kubectl get services -n istio-system
-   ```
+   `kubectl get services -n istio-system`
 
    The output of this command should list an domain edge gateway and a number of Istio services.
+
 7. Deploy the Axway mesh agents. This step can take several minutes to complete.
 
    Usage: `helm upgrade --install --namespace NAMESPACE_NAME RELEASE CHART -f /PATH/TO/OVERRIDE/VALUES [OPTIONS]`
@@ -312,20 +311,19 @@ After you have created the key pairs and secrets, deploy the Axway proprietary s
    apic-hybrid-list  2s
    apic-hybrid-sda   2s
    ```
+
 8. Verify that the mesh agents are deployed in the `apic-control` namespace:
 
-   ```
-    kubectl get services -n apic-control
-   ```
+    `kubectl get services -n apic-control`
 
     The output of this command should list the mesh agent services.
+
 9. Verify that the list demo service is deployed in the `apic-demo` namespace:
 
-   ```
-   kubectl get services -n apic-demo
-   ```
+   `kubectl get services -n apic-demo`
 
    The output of this command should list the demo list service.
+
 10. Verify that your environment is now connected in AMPLIFY Central UI:
 
     ![Connected environment in AMPLIFY Central](/Images/central/hybrid__env_connected.png)
