@@ -27,6 +27,8 @@ You can also add multiple relative paths to a HTTP services group, where each pa
 
 This means that relative paths configured under a HTTP services group are bound to all HTTP interfaces configured for that group. If you have two interfaces listening on ports `8080` and `8081`, API Gateway handles requests to `http://<HOST>:8080/a` and `http://<HOST>:8081/a` identically.
 
+{{< alert title="Note" color="primary" >}}The maximum length for a custom URL used in the HTTP connection is limited by the "Maximum Memory per Request" field when configuring a port in the HTTP Services interface of Policy Studio.{{< /alert >}}
+
 ### Example configuration
 
 In this example configuration, a SSL validation policy is added to process requests to `http://<HOST>:443/a`, while the existing Schema Validation policy continues to handle requests for `http://<HOST>:8080/a`. To distinguish between receiving requests on the two different ports, a new `SSL HTTP Services Group` is added alongside the existing `HTTP Services Group`. The new group opens a single HTTPS interface that listens on the SSL port `443`, and is configured with a relative path of `/a` to handle requests on this path:
