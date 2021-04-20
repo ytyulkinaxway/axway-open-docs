@@ -58,9 +58,11 @@ In Policy Studio, you can configure HTTP content encodings in the **Content Enco
 * **Input Encodings**: Specifies the content encodings that the API Gateway can accept from peers.
 * **Output Encodings**: Specifies the content encodings that the API Gateway can apply to outgoing messages.
 
-The available content encodings include `gzip` and `deflate`. By default, the content encodings configured in **Environment Configuration** > **Server Settings** > **General** are used, which apply at the API Gateway instance level. The default is no content encodings.
+The available content encodings include `gzip` and `deflate`.
 
-You can override these settings at the listening interface level (on the **Advanced** tab of the HTTP or HTTPS Interface dialog), and the remote host level (on the **Advanced** tab of the Remote Host Settings dialog).
+API Gateway uses the content encodings configured in the general settings, **Environment Configuration** > **Server Settings** > **General**, by default. This configuration applies at the API Gateway instance level. When these settings list a value of `DEFAULT`, this results in no content encodings unless the value is overridden.
+
+You can override these settings at the listening interface level (on the **Advanced** tab of the HTTP or HTTPS Interface dialog), and the remote host level (on the **Advanced** tab of the Remote Host Settings dialog). When any of these settings have a value of `DEFAULT`, they try to use whatever is configured in the general settings. If the general settings also have a value of `DEFAULT`, then no content is encoded.
 
 ### Add content encodings
 
