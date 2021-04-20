@@ -5,7 +5,6 @@ weight: 10
 date: 2020-12-14
 description: All of your environments displayed in one place.
 ---
-
 {{< alert title="Public beta" color="warning" >}}This feature is currently in **public beta** and not yet available for production use.{{< /alert >}}
 
 The environments page contains all of your environments in a searchable and sortable list. This list contains:
@@ -13,6 +12,7 @@ The environments page contains all of your environments in a searchable and sort
 * Axway Cloud SaaS environment
 * Environments using an API service mesh gateway
 * Environments using the API service model
+
     * AWS Gateway environments
     * API Manager environments
     * Environments that have been defined manually using the Axway Central CLI or APIs
@@ -25,37 +25,39 @@ This page can be sorted by an environment's logical name, title, or by the time 
 
 You can search the environments by their logical name, title, or any tags that are attached to it.
 
-Each environment in the list contains some basic information, describe as follows:
+Each environment in the list contains some basic information:
 
-![Environment Results Details](/Images/central/EnvironmentListResult.png)
+![Environment Results Details](/Images/central/env_gw_mgmt/environmentlistresult.png)
 
-1. Title.
-2. Logical name.
-3. An icon.
-4. The connection status of any AWS Gateway or API Manager discovery and traceability agents that you have connected to the environment. This will display MANUAL SYNC if there is no agent connected.
-5. Description.
-6. Tags.
-7. The number of assets, API services, housed in the environment.
-8. The user who last modified the environment, and when.
-9. Menu with an option to delete the environment.
+1. Title
+2. Logical name
+3. An icon
+4. The connection status of any AWS Gateway or API Manager Discovery and Traceability agents that you have connected to the environment. MANUAL SYNC will be displayed if there is no agent connected. See [Agent environment status](#agent-environment-status).
+5. Description
+6. Tags
+7. The number of assets, API services, housed in the environment
+8. The user who last modified the environment, and when
+9. Menu with an option to delete the environment
 
-You can click the title or logical name of the environment to view additional details.
+Click the title or logical name of the environment to view additional details.
 
 ## View environment details
 
-For environments created using the API service model, the following are shown:
+The following information is displayed for environments created using the API service model:
 
 * The title of the environment
 * The status of any connected discovery and traceability agents
-* Sections **Environment Information**, **Activity Report**, and **Services**.
+* Sections **Environment Information**, **Activity Report**, and **Services**
 
-![Environment Details Page](/Images/central/EnvironmentDetailsPage.png)
+![Environment Details Page](/Images/central/env_gw_mgmt/environmentdetailspage2.png)
 
 * **Environment Information**: This section contains general information and any tags or attributes that are specific to the environment asset. Attributes in this context are key and value pairs used for extending functionality and integrations with third-party systems.
-* **Activity Report**: Dashboard, which shows the aggregated values for how your environment assets are distributed and how many subscriptions exist across all of those assets.
+* **Activity Report**: Dashboard, which shows the aggregated values for how your environment assets are distributed and how many subscriptions exist across all of those assets:
+
     * Services: The total count of API services represented in the environment.
     * Catalog Items: The total count of published catalog items.
     * Subscriptions: The total count of subscribers to all the published catalog items.
+
 * **Services**: This section shows all API services that exist within the environment. It is sortable by title, logical name, and when the service was created or last modified. You can search by title, name, or tag. For each API service, it shows the number of versions, the user who last modified the API service, and when.
 
 For more information about other types of environments, see:
@@ -70,6 +72,18 @@ To delete an API service:
 1. Click the **Ellipsis** icon at the far right of the API service's row.
 2. Click **Delete** on the menu that is shown.
 
+### Agent Environment Status
+
+**Agents resources scoped to the environment**:
+
+| STATUS              | BADGE                                                                 | SCENARIOS                                                                                                                                         |
+| ------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Connected           | ![Connected](/Images/central/env_gw_mgmt/statusConnected.png)         | All agents are running                                                                                                                            |
+| Connection Error    | ![Connection Error](/Images/central/env_gw_mgmt/statusError.png)      | One or more agents have failed                                                                                                                    |
+| Disconnected        | ![Disconnected](/Images/central/env_gw_mgmt/statusDisconnected.png)   | All agents are stopped                                                                                                                            |
+| Manual Sync         | ![Manual Sync](/Images/central/env_gw_mgmt/statusManual.png)          | No reported agent status resource values, **or** one or more agents have been stopped and one or more agents have never been started (no status)  |
+| Partially Connected | ![Partially Connected](/Images/central/env_gw_mgmt/statusPartial.png) | One or more agents are stopped and the other agents are running, **or** one or more agents are running and the other agents have never been started |
+
 ### View the details of an API Service
 
 To view the details of your API Service and its versions:
@@ -83,6 +97,7 @@ The following describes the sections on the API Service details page:
 
 * **Service Information**: Contains general information and any tags or attributes that are specific to the API service asset. Attributes in this context are key and value pairs used for extending functionality and integrations with third party systems.
 * **Activity Report**: Dashboard, which shows the aggregated values for how your API service version assets are distributed and how many subscriptions exist across all of those assets.
+
     * Endpoints: The total count of endpoints associated with this API service version.
     * Catalog Items: The total count of successfully published items in the Unified Catalog. This number might differ from the number of items available in the **Catalog Items** table. This count only recognizes items that are available in the Unified Catalog, whereas the table also contains items that were not published or that are in an error state.
     * Subscriptions: The total count of subscribers to all the published catalog items.
