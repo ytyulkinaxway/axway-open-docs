@@ -163,7 +163,16 @@ In order to link agent binary with the appropriate agent resource, you have to u
 
 Sample: CENTRAL_AGENTNAME=my-discovery-agent-name
 
-Once the Discovery Agent starts correctly, you should see the environment status (AMPLIFY Central / Topology) change from `Manual sync.` to `Connected`. If the agent stops, the environment status will move to `Disconnected`. Finally, if the agent cannot reach the Gateway, the status will be `Connection error`.
+Once the Discovery Agent successfully starts, the agent status (AMPLIFY Central / Topology) will change to `Running`. If there are no other agents linked to that environment, then the environment status will change from `Manual Sync` to `Connected`.
+{{% alert title="Note" %}}
+The environment status is calculated from the aggregate status of all agents linked to that environment:
+
+* If all the agents in the environment are `Running`, the environment status will be `Connected`.
+* If all the agents are `Stopped`, the environment status will be `Disconnected`.
+* If one or more agents are `Failed` and the agent cannot reach the Gateway, then the environment status will be `Connection Error`.
+* If one or more agents are `Stopped` and the other agents are `Running`, **or** one or more agents are `Running` and the other agents have never been started, then the environment status will be `Partially Connected`.
+* If there are no reported agent status resource values, **or** one or more agents are `Stopped` and one or more agents have never been started (no agent status), then the environment status will be `Manual Sync`.
+{{% /alert %}}
 
 Opening the environment details page displays all agents and status linked to this environment.
 
