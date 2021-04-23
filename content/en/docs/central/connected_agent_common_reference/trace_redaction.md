@@ -3,10 +3,10 @@ title: Trace redaction
 linkTitle: Trace redaction
 draft: false
 weight: 10
-description: "Understand how the Traceability Agent will redact and sanitize
+description: Understand how the Traceability Agent will redact and sanitize
   information that is sent to Amplify Central.  Learn how you can control the
   information that is sent to Amplify Central by using the redaction
-  configuration. "
+  configuration. 
 ---
 ## Before you start
 
@@ -14,7 +14,7 @@ description: "Understand how the Traceability Agent will redact and sanitize
 
 ## Objectives
 
-Learn how to to set up redaction and sanitization rules used to ALLOW transaction path, query arguments, request headers, and response headers when sending data to Amplify Central. With the agent default configuration, this information will not be sent to Amplify.
+Learn how to set up redaction and sanitization rules used to ALLOW transaction path, query arguments, request headers, and response headers when sending data to Amplify Central. With the agent default configuration, this information will not be sent to Amplify.
 
 ## Path show rules
 
