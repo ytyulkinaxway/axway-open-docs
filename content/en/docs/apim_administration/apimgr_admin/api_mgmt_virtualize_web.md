@@ -1,9 +1,9 @@
 {
 "title": "Virtualize REST APIs in API Manager",
-"linkTitle": "Virtualize REST APIs",
-"weight": "60",
-"date": "2019-09-17",
-"description": "Virtualize a registered back-end API as a publicly exposed front-end API."
+  "linkTitle": "Virtualize REST APIs",
+  "weight": "60",
+  "date": "2019-09-17",
+  "description": "Virtualize a registered back-end API as a publicly exposed front-end API."
 }
 When you have registered a back-end REST API, you can then virtualize it as a publicly exposed front-end API. The **API Catalog**
 stores information about the REST APIs that have been virtualized as front-end APIs. Virtualized REST APIs published in the **API Catalog** can be made available in API Manager for consumption by API consumers, and for administration by API administrators.
@@ -464,7 +464,7 @@ When you have registered the back-end REST API, you can select it in the list of
 * **Deprecate**: Select whether to **Retire API at specific date**, and enter a **Retirement date**. When selected, the published API is displayed with a date when it will be retired (unpublished) from the API Catalog, and is no longer available to client applications. When deprecated, the API is still published and clients can continue to discover and use the API. Only a published API can be deprecated and unpublished.
 * **Undeprecate**: Undeprecates the selected deprecated REST API.
 * **Upgrade access to newer API**: Upgrades all organizations and applications that had access to the original API to a more recent version of the API (if one exists). You can also deprecate and retire the original API as options.
-* **Grant Access**: Grants organizations access to the selected APIs. You can select whether to **Grant API access to** all organizations, specific organizations, or organizations with access to specific APIs.
+* **Grant Access**: Grants organizations access to the selected APIs. You can select whether to **Grant API access to** all organizations, specific organizations, or organizations with access to specific APIs. For more information see [Manage API access](#manage-api-access).
 * **Export API collection**: Exports a copy of the selected front-end REST APIs to your chosen directory. The APIs are exported in JSON format in a `.dat` file, which combines the front-end API, back-end API, security profiles, and so on. You must specify the following in the dialog:
 
     * **Export file name**: Specify a file name to export (defaults to `api-export.dat`)
@@ -501,10 +501,64 @@ To upgrade the access to a newer version of the API (v1.1.0) to all organization
 
 1. Add the new API v1.1.0 to API Manager and publish it.
 
-    ![Both old and new APIs published in API Manager](/Images/APIGateway/both_published.png)
-
+   ![Both old and new APIs published in API Manager](/Images/APIGateway/both_published.png)
 2. Select the old v1.0.0 API, click **Manage selected**, and choose **Upgrade access to newer API**, which brings you to the following screen:
 
-    ![Grant API access screen in API Manager](/Images/APIGateway/grant_api_access.png)
+   ![Grant API access screen in API Manager](/Images/APIGateway/grant_api_access.png)
 
 After this is done and the old API is unpublished, the new API will be invoked and traffic will flow through the new API.
+
+## Manage API access
+
+You can grant or revoke access to your APIs, as well as you can view a list of the organizations and applications that have access to your APIs. The scope of access is as follows:
+
+* API Administrator (API Admin):
+
+    * Grant access to any API belonging to any organization.
+    * Dependency view for all published APIs from all organizations.
+    * Revoke access to any API belonging to any organization.
+
+* Organization Administrator (Org Admin):
+
+    * Grant access to APIs that belong to an organization within the scope of the Org Admin.
+    * Dependency view to APIs that belong to an organization within the scope of the Org Admin.
+    * Revoke access to APIs that belong to an organization within the scope of the Org Admin.
+
+### Grant access to an API
+
+Both API Admins and Org Admins can grant API access to organizations. After access has been granted to an API, it can then be used in any application within the organization, but the Org Admin still needs access to all the organizations and proxies to be able to manage the API. For more information on how to enable API management access to Org Admins, see [Organization administrator](/docs/api_mgmt_overview/key_concepts/api_mgmt_orgs_roles/#organizationadministrator).
+
+To grant access to an API, perform the following steps:
+
+1. Click **Frontend API** view in API Manager, then select one or more APIs from the list.
+2. Click the **Manage selected** drop-down list, then choose **Grant access**.
+3. Choose an option in the **Grant API access dialog** dialog box, then click **OK**.
+    ![Grant API access](/Images/docbook/images/api_mgmt/grant-api-access-example.png)
+
+### List resources with access to the API
+
+To view the list of organizations and applications, which can access an API, perform the following steps:
+
+1. Click **Frontend API** view in API Manager, then select an API from the list.
+2. In the details of the API, click the **API Access** tab.
+    A table containing two tabs, **Organizations** and **Applications**, is shown.
+
+    ![Dependency view by applications](/Images/docbook/images/api_mgmt/dependency-view-applications-tab.png)
+
+You can view the usage of published front-end APIs that have been granted access to external organizations and their applications, as well as the access granted date.
+
+### Revoke access to an API
+
+You can revoke an API access from applications and organizations. When you revoke access at the organizational level, this automatically also remove the access from all applications belonging to that organization, which were using the API.
+
+Note that you cannot revoke access to the original organization that API belongs to, no self-revoke access is allowed.
+
+To revoke access to organizations or applications, perform the following steps:
+
+1. Click **Frontend API** view in API Manager and select an API from the list.
+2. In the details of the API, click the **API Access** tab.
+3. From the **Organizations** tab, select the organizations you wish to revoke access from. The **Manage selected** drop-down list is enabled.
+4. Click the **Manage selected** drop-down list, and select **Revoke access**.
+5. Click **Revoke** in the **Revoke API Access** dialog box to confirm the operation.
+
+    The organization is removed form the list.
