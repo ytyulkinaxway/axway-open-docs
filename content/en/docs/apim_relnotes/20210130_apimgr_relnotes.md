@@ -39,16 +39,9 @@ If the parameter is not specified the script will prompt for a passphrase. The p
 
 ### Content Security Policy header to improve security
 
-The Content Security Policy (CSP) header sets a policy that instructs the browser to only fetch resources, such as scripts, images, or objects, from the specified locations. A compliant browser will deny loading any resources from locations not listed in the policy. The CSP header reduces an attacker's ability to inject malicious content, and helps to protect a web page from attacks like Cross-Site Scripting (XSS), dynamic code execution, and clickjacking.
+The Content Security Policy (CSP) header sets a policy that instructs the browser to only fetch resources, such as scripts, images, or objects, from the specified locations. A compliant browser will deny loading any resources from locations not listed in the policy. The CSP header reduces an attacker's ability to inject malicious content and helps to protect a web page from attacks like Cross-Site Scripting (XSS), dynamic code execution, and clickjacking.
 
-CSP header is added for both API Gateway and API Manager. Its value, or policy, is set in an environment variable, which is available from the following locations:
-
-* For API Gateway: Variable `env.MANAGEMENT.CONTENTSECURITYPOLICY`, in the `_apigateway/conf/envSettings.props_` file.
-* For API Manager: Variable `env.SERVICES.CONTENTSECURITYPOLICY`, in the `_apigateway/groups/{group-id}/{instance-id}/conf/envSettings.props_` file.
-
-{{< alert title="Note" color="primary" >}}
-We recommend that you review the contents of the default Content Security Policy, as per your system requirements, as the default value may be tuned to be more or less strict.
-{{< /alert >}}
+For more information, see [Define a restrictive content security policy](/docs/apim_installation/apiportal_install/secure_harden_portal/#define-a-restrictive-content-security-policy).
 
 ### YAML configuration store (Technical preview capability)
 
@@ -91,12 +84,12 @@ This version of API Gateway and API Manager includes:
 
 ### Fixed security vulnerabilities
 
-| Internal ID | Case ID            | Cve Identifier                               | Description                                                                                                                                                                                                                                                                                                 |
-| ----------- | ------------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RDAPI-19851 | 01155164 | CVE-2018-10237 CVE-2018-1324 CVE-2018-11771 | **Issue:** API Gateway included `commons-compress-1.14.jar`, which contains vulnerabilities CVE-2018-1324 and CVE-2018-11771, and `guava-20.jar`, which contains vulnerability CVE-2018-10237. **Resolution:** API Gateway now includes `commons-compress-1.20.jar` and `guava-30.0-jre.jar`, and it is no longer vulnerable.                                                                                                                           |
-| RDAPI-22021 | 01184311  01184328 | CVE-2019-13118 CVE-2019-13117 CVE-2019-11068 | **Issue**: API Gateway includes libxlst library that has known vulnerabilities. **Resolution**: API Gateway is update to use libxslt 1.1.34 that addresses known vulnerabilities.                                                                                                                           |
-| RDAPI-22685 | 01218205           | CVE-2020-1971                                | **Issue**: API Gateway was including OpenSSL 1.1.1g version which has known vulnerabilities. **Resolution**: API Gateway is updated to include OpenSSL 1.1.1i addressing CVE-2020-1971.For more details, see [OpenSSL Security Advisory 08 December 2020](https://www.openssl.org/news/secadv/20201208.txt) |
-| RDAPI-22716 | 01216866  01216225 |                                              | **Issue**: There was a security vulnerability of Persistent Cross Site Scripting attack (XSS) in the API Gateway Manager UI. It interprets the data written in Key Property Store (KPS) as code and thus executes what is stored inside a KPS entry. **Resolution**: Security vulnerability has been fixed. |
+| Internal ID | Case ID            | Cve Identifier                               | Description                                                                                                                                                                                                                                                                                                                   |
+| ----------- | ------------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RDAPI-19851 | 01155164           | CVE-2018-10237 CVE-2018-1324 CVE-2018-11771  | **Issue:** API Gateway included `commons-compress-1.14.jar`, which contains vulnerabilities CVE-2018-1324 and CVE-2018-11771, and `guava-20.jar`, which contains vulnerability CVE-2018-10237. **Resolution:** API Gateway now includes `commons-compress-1.20.jar` and `guava-30.0-jre.jar`, and it is no longer vulnerable. |
+| RDAPI-22021 | 01184311  01184328 | CVE-2019-13118 CVE-2019-13117 CVE-2019-11068 | **Issue**: API Gateway includes libxlst library that has known vulnerabilities. **Resolution**: API Gateway is update to use libxslt 1.1.34 that addresses known vulnerabilities.                                                                                                                                             |
+| RDAPI-22685 | 01218205           | CVE-2020-1971                                | **Issue**: API Gateway was including OpenSSL 1.1.1g version which has known vulnerabilities. **Resolution**: API Gateway is updated to include OpenSSL 1.1.1i addressing CVE-2020-1971.For more details, see [OpenSSL Security Advisory 08 December 2020](https://www.openssl.org/news/secadv/20201208.txt)                   |
+| RDAPI-22716 | 01216866  01216225 |                                              | **Issue**: There was a security vulnerability of Persistent Cross Site Scripting attack (XSS) in the API Gateway Manager UI. It interprets the data written in Key Property Store (KPS) as code and thus executes what is stored inside a KPS entry. **Resolution**: Security vulnerability has been fixed.                   |
 
 ### Other fixed issues
 

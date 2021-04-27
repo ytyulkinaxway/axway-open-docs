@@ -383,13 +383,16 @@ These are some general recommendations:
     * Toolkits like `mod_security`. For more details, see [ModSecurity rules](https://modsecurity.org/rules.html).
     * Firewall configurations. For more details see the official documentation of your firewall.
 * Google Analytics - has abnormal detection features. Very commonly used and reliable tool. For more information, see [Google Analytics Anomaly Detection](https://support.google.com/analytics/answer/7507748?hl=en).
-* Log analysis tools - can be installed to act upon different logs. For example, see [Loggly Anomoly Detection](https://www.loggly.com/docs/anomaly-detection/).
+* Log analysis tools - can be installed to act upon different logs. For example, see [Loggly Anomaly Detection](https://www.loggly.com/docs/anomaly-detection/).
 
 ## Define a restrictive content security policy
 
 The HTTP Content Security Policy ([CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)) response header instructs compliant browsers on how they may interact with external sites while in the current context. This enables the server to control interaction with code and content from third-parties, mitigating some client-side code injection attacks. The policy allows the server to specify what connections are permitted for each type of resource (scripts, styles, fonts, and so on).
 
-We recommend you to configure this policy either in your `.htaccess` file or virtual host file with *least privilege* to allow only interactions that are explicitly required.
+You can configure the CSP header for both API Gateway and API Manager. To set the header, you must update the product's Java properties file, `envSettings.props`, which is available in the following locations:
+
+* For API Gateway, set the variable `env.MANAGEMENT.CONTENTSECURITYPOLICY`, in the `apigateway/conf/envSettings.props` file.
+* For API Manager, set the variable `env.SERVICES.CONTENTSECURITYPOLICY`, in the `apigateway/groups/{group-id}/{instance-id}/conf/envSettings.props` file.
 
 ## Define retention periods for personal data
 
