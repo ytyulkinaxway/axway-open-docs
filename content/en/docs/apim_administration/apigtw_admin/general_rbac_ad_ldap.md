@@ -1,9 +1,9 @@
 {
 "title": "Authentication and RBAC with Active Directory",
-"linkTitle": "Authentication and RBAC with Active Directory",
-"weight":"126",
-"date": "2019-10-14",
-"description": "Use LDAP to authenticate and perform Role-Based Access Control (RBAC) of API Gateway management services, and reconfigure API Gateway to use a Microsoft Active Directory LDAP repository."
+  "linkTitle": "Authentication and RBAC with Active Directory",
+  "weight": "126",
+  "date": "2019-10-14",
+  "description": "Use LDAP to authenticate and perform Role-Based Access Control (RBAC) of API Gateway management services, and reconfigure API Gateway to use a Microsoft Active Directory LDAP repository."
 }
 
 This section uses the sample **Protect Management Interfaces (LDAP)** policy, meaning that the gateway uses an LDAP repository instead of the local Admin User store for authentication and RBAC of users attempting to access the gateway management services.
@@ -195,16 +195,19 @@ To test this policy configuration, perform the following steps:
 
 If the authentication and RBAC filters pass, you can now use this policy to protect the management interfaces. To ensure that you do not lock yourself out of the server, perform the following steps:
 
-1. Make a copy of the `conf/fed` directory contents from the server installation, and put it into a directory accessible from the Policy Studio.
-2. Make another backup copy of the `conf/fed` directory, which will remain unmodified.
-3. In the Policy Studio, select **File** > **New project**, enter a name, and click **Next**.
-4. Select **From existing configuration**, and click **Next**.
-5. Browse to `INSTALL_DIR/apigateway/conf/fed`, and click **Finish**.
-6. Under the **Environment Configuration** > **Listeners** > **Node Manager** > **Management Services** node, select the `/` and the `/configuration/deployments` relative paths, and set the **Path Specify Policy** to the **Protect Management Interfaces (LDAP)** policy.
-7. Remove the previously created `LDAP Test` HTTP Services, and close the connection to the file.
-8. Copy the `fed` directory back to the Admin Node Manager’s `conf` directory.
-9. Reboot the Admin Node Manager.
-10. Start the Policy Studio, and connect to the Admin Node Manager using `admin` and password `Axway123` (the LDAP user credentials). You should now be able to edit the gateway configurations as usual.
+1. Make a copy of the `/apigateway/conf/fed` directory contents from the server installation and put it into a directory accessible from Policy Studio.
+2. In Policy Studio, select **File** > **New project**, enter a name, and click **Next**.
+3. Select **From existing configuration**, then click **Next**.
+4. Browse to the copy of `/conf/fed`, and click **Finish** to make a new project out of this config.
+
+    Policy Studio then opens the project files located in `/apiprojects/YOUR_PROJECT_NAME` for editing. This means that no change is applied to the original files, located in `/conf/fed`, and they can be used as a backup.
+5. Click **Environment Configuration** > **Listeners** > **Node Manager** > **Management Services** node, select the `/` and the `/configuration/deployments` relative paths, and set the **Path Specify Policy** to the **Protect Management Interfaces (LDAP)** policy.
+6. Remove the previously created `LDAP Test` HTTP Services, and close the connection to the file.
+7. Copy all of the `.XML` and `.MD5` files from `/apiprojects/YOUR_PROJECT_NAME` directory back to the Admin Node Manager’s `/conf` directory.
+
+    This overwrites the files that were previously in the `/conf` directory.
+8. Restart the Admin Node Manager process.
+9. Start Policy Studio and connect to the Admin Node Manager using `admin` and password `Axway123` (the LDAP user credentials). You should now be able to edit the gateway configurations as usual.
 
 ## Add an LDAP user with limited access to management services
 
