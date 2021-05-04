@@ -24,7 +24,7 @@ Learn how to upgrade an existing agent installation.
     * [AWS gateway](/docs/central/connect-aws-gateway/deploy-your-agents-1)
     * [Azure gateway](/docs/central/connect-azure-gateway/agent-variables)
 
-For converting a YAML entry into an environment variable entry, all the YAML paths you traverse to reach a value should become part of the environment variable name. The name of the environment variable is compose of each capitilized path separated by an underscore.
+For converting a YAML entry into an environment variable entry, all the YAML paths you traverse to reach a value should become part of the environment variable name. The name of the environment variable is compose of each capitalized path separated by an underscore.
 
 Original YAML file:
 
