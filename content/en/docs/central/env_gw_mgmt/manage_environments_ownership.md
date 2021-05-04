@@ -1,7 +1,7 @@
 ---
 title: Assign an environment owner
 linkTitle: Assign an environment owner
-weight: 05
+weight: 5
 description: Learn how to limit access to environments and API Services by
   assigning an owning team.
 ---
@@ -65,3 +65,9 @@ To retrieve the team id:
 ![Team info](/Images/central/central_teams.png)
 
 {{< alert title="" color="warning" >}}This feature is not available yet in the Central UI.{{< /alert >}}
+
+#### Resource access by user role
+
+The table below describes the Amplify Central roles and the resources they have access to.
+
+![Resource Access by Role](/Images/central/env_gw_mgmt/resourcepermissionsbyrole.png)
