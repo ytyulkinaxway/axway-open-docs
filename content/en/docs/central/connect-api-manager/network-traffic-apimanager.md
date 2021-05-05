@@ -22,6 +22,7 @@ The destination for:
 * API definition (Swagger or WSDL) and API documentation data is `apicentral.axway.com`
 * API Event data, the transaction summary and headers, is `ingestion-lumberjack.datasearch.axway.com`
 * Subscription notification for getting platform user information is `platform.axway.com`
+* API usage statistics, the number of calls placed to, is `https://lighthouse.admin.axway.com`
 
 ## Data exchanged
 
@@ -64,7 +65,10 @@ Open the following ports so that agents can communicate to the Amplify platform:
 | EU/US  | platform.axway.com                                                                        | 34.211.114.227 | 443        | HTTPS        |                                    |
 |        |                                                                                           | 54.201.86.113  |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
-| US/EU  | login.axway.com                                                                           | 52.58.132.2    | 443        | HTTPS        |                                    |
+| EU/US  | lighthouse.admin.axway.com                                                                |                | 443        | HTTPS        | API usage statics                  |
+|        |                                                                                           |                |            |              |                                    |
+|        |                                                                                           |                |            |              |                                    |
+| EU/US  | login.axway.com                                                                           | 52.58.132.2    | 443        | HTTPS        |                                    |
 |        |                                                                                           | 52.29.4.35     |            |              |                                    |
 |        |                                                                                           | 54.93.140.145  |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
@@ -100,15 +104,15 @@ Other ports which may need to be opened so that the Agent may monitor API Gatewa
 
 **Internal**:
 
-| Host             | Port           | Protocol | Data                                                                                                   |
-| ---------------- | -------------- | -------- | ------------------------------------------------------------------------------------------------------ |
-| API Manager Host | 8075 (default) | HTTPS    | API Discovery                                                                                          |
+| Host             | Port           | Protocol | Data                                                                                                                                                    |
+|------------------|----------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| API Manager Host | 8075 (default) | HTTPS    | API Discovery                                                                                                                                           |
 | API Gateway Host | 8090 (default) | HTTPS    | API Transaction Header data (see [APIGATEWAY GETHEADERS](/docs/central/connect-api-manager/agent-variables/#specific-variables-for-traceability-agent)) |
 
 **Inbound (used for the agent status server)**:
 
 | Host          | Port           | Protocol | Data                                                               |
-| ------------- | -------------- | -------- | ------------------------------------------------------------------ |
+|---------------|----------------|----------|--------------------------------------------------------------------|
 | Agent Host(s) | 8989 (default) | HTTPS    | Serves the status of the agent and its dependencies for monitoring |
 
 ## Subscription notifications

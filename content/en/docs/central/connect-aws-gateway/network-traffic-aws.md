@@ -12,11 +12,10 @@ description: Traffic is always initiated by the Agent to AWS and Amplify
 The destination for:
 
 * Agent Authentication data is `login.axway.com`
-
 * AWS API Gateway data is  `apicentral.axway.com`
-
-* API Event data is `ingestion-lumberjack.datasearch.axway.com`
-, `ingestion.datasearch.axway.com`, `ingestion-lumberjack.visibility.eu-fr.axway.com` or `ingestion.visibility.eu-fr.axway.com`
+* API Event data is `ingestion-lumberjack.datasearch.axway.com`, `ingestion.datasearch.axway.com`, `ingestion-lumberjack.visibility.eu-fr.axway.com` or `ingestion.visibility.eu-fr.axway.com`
+* Subscription notification for getting platform user information is `platform.axway.com`
+* API usage statistics, the number of calls placed to, is `https://lighthouse.admin.axway.com`
 
 ## Communication ports
 
@@ -31,7 +30,10 @@ Open the following ports to benefit from all the Agent functionalities:
 | EU/US  | platform.axway.com                                                                        | 34.211.114.227 | 443        | HTTPS        |                                    |
 |        |                                                                                           | 54.201.86.113  |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
-| US/EU  | login.axway.com                                                                           | 52.58.132.2    | 443        | HTTPS        |                                    |
+| EU/US  | lighthouse.admin.axway.com                                                                |                | 443        | HTTPS        | API usage statics                  |
+|        |                                                                                           |                |            |              |                                    |
+|        |                                                                                           |                |            |              |                                    |
+| EU/US  | login.axway.com                                                                           | 52.58.132.2    | 443        | HTTPS        |                                    |
 |        |                                                                                           | 52.29.4.35     |            |              |                                    |
 |        |                                                                                           | 54.93.140.145  |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
@@ -67,9 +69,9 @@ Note: _Region_ column is representing the region where your Amplify organization
 
 The docker container does not expose any ports outside of the container. Within the container the following listen:
 
-| Host                                       | Port               | Protocol  | Data                                |
-|--------------------------------------------|--------------------|-----------|-------------------------------------|
-| Docker Container                           | 8989 (default)     | HTTPS     |Serves the status of the agent and its dependencies for monitoring  |
+| Host             | Port           | Protocol | Data                                                               |
+|------------------|----------------|----------|--------------------------------------------------------------------|
+| Docker Container | 8989 (default) | HTTPS    | Serves the status of the agent and its dependencies for monitoring |
 
 ## Validation
 
