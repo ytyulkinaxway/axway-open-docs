@@ -20,39 +20,89 @@ Learn how to set up redaction and sanitization rules used to ALLOW transaction p
 
 Parts of the URI path will be redacted before the information is sent to Amplify Central. When this is done, the Traceability Agent replaces the path value with "{*}" in the transaction details.
 
-By default, everything is redacted and rules must be set to show the path elements. When using environment variables, the variable name is `TRACEABILITY_REDACTION_PATH_SHOW`:
+By default, everything is redacted and rules must be set to show the path elements. When using environment variables, the variable name is `TRACEABILITY_REDACTION_PATH_SHOW`.
+
+### Example: Send all path values
 
 ```bash
-# Send all path values, no redactions
 TRACEABILITY_REDACTION_PATH_SHOW=[{keyMatch:".*"}]
 ```
 
-Example: `https://somehost.com/pathof/my/api/uses/thispath` is redacted to `https://somehost.com/pathof/my/api/uses/thispath`
+If the agent finds a path of `https://somehost.com/pathof/my/api/uses/thispath` then `https://somehost.com/pathof/my/api/uses/thispath`will be sent to the platform.
 
-Separate by comma to provide multiple allowed matches:
+### Example: Send only path values which start with 'ele' or end with 'point'
 
 ```bash
-# Send paths that start with path or paths that end with path
-TRACEABILITY_REDACTION_PATH_SHOW=[{keyMatch:"^path"},{keyMatch:"path$"}]
+TRACEABILITY_REDACTION_PATH_SHOW=[{keyMatch:"^ele"},{keyMatch:"point$"}]
 ```
 
-Example: `https://somehost.com/pathof/my/api/uses/thispath` is redacted to `https://somehost.com/pathof/{*}/{*}/{*}/thispath`
+If the agent finds a path of `https://somehost.com/path/element/to/my/api/endpoint` then `https://somehost.com/{*}/element/{*}/{*}/{*}/endpoint` will be sent to the platform.
 
 ## Query argument and header show rules
 
 Query argument and header show rules work like the path rules above, but only match the key portion and not the value. When a key does not match a show rule, that key and value is completely removed from the transaction details.
 
-The environment variable names are `TRACEABILITY_REDACTION_QUERYARGUMENT_SHOW`, `TRACEABILITY_REDACTION_REQUESTHEADER_SHOW`, and `TRACEABILITY_REDACTION_RESPONSEHEADER_SHOW`:
+The environment variable names are `TRACEABILITY_REDACTION_QUERYARGUMENT_SHOW`, `TRACEABILITY_REDACTION_REQUESTHEADER_SHOW`, and `TRACEABILITY_REDACTION_RESPONSEHEADER_SHOW`.
+
+### Example: Send query arguments with their key set to 'id'
 
 ```bash
-# Send only query arguments with the key 'id'
 TRACEABILITY_REDACTION_QUERYARGUMENT_SHOW=[{keyMatch:"^id$"}]
+```
 
-# Send request headers that have 'header' anywhere in the key
-TRACEABILITY_REDACTION_REQUESTHEADER_SHOW=[{keyMatch:"header"}]
+If the agent finds the following query arguments:
 
-# Send all response headers
+```bash
+arg1=val1
+id=myid
+arg2=val2
+```
+
+then the the following will be sent to the platform:
+
+```bash
+id=myid
+```
+
+### Example: Send request headers that have 'authorization' anywhere in the key
+
+```bash
+TRACEABILITY_REDACTION_REQUESTHEADER_SHOW=[{keyMatch:"authorization"}]
+```
+
+If the agent finds the following request headers:
+
+```bash
+authorization: auth-value-1
+x-authorization-header: auth-value-2
+other-key3: value3
+```
+
+then the following will be sent to the platform:
+
+```bash
+authorization: auth-value-1
+x-authorization-header: auth-value-2
+```
+
+### Example: Send all response headers
+
+```bash
 TRACEABILITY_REDACTION_RESPONSEHEADER_SHOW=[{keyMatch:".*"}]
+```
+
+If the agent finds the following response headers:
+
+```bash
+content-type: my-content-type
+res-header: just-a-value
+```
+
+then the following will be sent to the platform:
+
+```bash
+content-type: my-content-type
+res-header: just-a-value
 ```
 
 ## Query argument and header value sanitization rules
@@ -63,32 +113,73 @@ The environment variable names are `TRACEABILITY_REDACTION_QUERYARGUMENT_SANITIZ
 
 Much like the show rules, the sanitization rules have a keyMatch which is used to match the argument or header key.  When a keyMatch is found, the additional valueMatch expression is applied to the value and any matching portions are replaced with "{*}".
 
-The following examples assume that the key has already passed one or more show rules and that all path values are allowed:
+### Example: Sanitize the whole value of the 'id' query argument
 
 ```bash
-# Sanitize the whole value of the `id` query argument
+TRACEABILITY_REDACTION_QUERYARGUMENT_SHOW=[{keyMatch:"^id$"}]
 TRACEABILITY_REDACTION_QUERYARGUMENT_SANITIZE=[{keyMatch:"^id$",valueMatch:".*"}]
 ```
 
-Example: `https://somehost.com/api?id=12345` is sanitized to `https://somehost.com/api?id={*}`
+If the agent finds the following query arguments:
 
 ```bash
-# Sanitize the first five characters of any header with a key that has 'header' in it
-TRACEABILITY_REDACTION_REQUESTHEADER_SANITIZE=[{keyMatch:"header",valueMatch:"^.{0,5}"}]
+arg1=val1
+id=myid
+arg2=val2
 ```
 
-Example: `x-header-example=header-value` is sanitized to `x-header-example={*}r-value`
+then the the following will be sent to the platform:
 
 ```bash
-# Sanitize the word password, wherever it is found, of any header that starts with 'response'
-TRACEABILITY_REDACTION_RESPONSEHEADER_SANITIZE=[{keyMatch:"^response",valueMatch:"password"}]
+id={*}
 ```
 
-Example: `response-header=mypasswordissafe` is sanitized to `response-header=my{*}issafe`
+### Example: Sanitize the first five characters of any request header with a key that has 'header' in it
+
+```bash
+TRACEABILITY_REDACTION_REQUESTHEADER_SHOW=[{keyMatch:"authorization"}]
+TRACEABILITY_REDACTION_REQUESTHEADER_SANITIZE=[{keyMatch:"authorization",valueMatch:"^.{0,5}"}]
+```
+
+If the agent finds the following request headers:
+
+```bash
+authorization: auth-value-1
+x-authorization-header: auth-value-2
+other-key3: value3
+```
+
+then the following will be sent to the platform:
+
+```bash
+authorization: auth-{*}
+x-authorization-header: {*}value-2
+```
+
+### Example: Sanitize the response headers of the word 'data', wherever it is found, in any header that starts with 'content'
+
+```bash
+TRACEABILITY_REDACTION_RESPONSEHEADER_SHOW=[{keyMatch:".*"}]
+TRACEABILITY_REDACTION_RESPONSEHEADER_SANITIZE=[{keyMatch:"^content",valueMatch:"data"}]
+```
+
+If the agent finds the following response headers:
+
+```bash
+content-type: return-data-type
+res-header: just-a-value
+```
+
+then the following will be sent to the platform:
+
+```bash
+content-type: return-{*}-type
+res-header: just-a-value
+```
 
 ## Redaction configuration samples
 
-### Send path, headers and query parameters to Amplify platform without restriction
+### Send path, headers, and query parameters to Amplify platform without restriction
 
 ```bash
 # path
@@ -121,6 +212,6 @@ TRACEABILITY_REDACTION_REQUESTHEADER_SHOW=[{keyMatch:".*"}]
 TRACEABILITY_REDACTION_RESPONSEHEADER_SHOW=[{keyMatch:".*"}]
 # sanitize Authorization request header to mask the ten first characters or less
 TRACEABILITY_REDACTION_REQUESTHEADER_SANITIZE=[{keyMatch:"Authorization",valueMatch:"^.{0,10}"}]
-# sanitize client response header to mask last ten values or less
+# sanitize client response header to mask last ten characters or less
 TRACEABILITY_REDACTION_RESPONSEHEADER_SANITIZE=[{keyMatch:"client",valueMatch:".{0,10}$"}]
 ```
