@@ -27,7 +27,7 @@ You can search the environments by their logical name, title, or any tags that a
 
 Each environment in the list contains some basic information:
 
-![Environment Results Details](/Images/central/env_gw_mgmt/environmentlistresult.png)
+![Environment Results Details](/Images/central/env_gw_mgmt/environmentlistresults.png)
 
 1. Title
 2. Logical name
@@ -37,7 +37,9 @@ Each environment in the list contains some basic information:
 6. Tags
 7. The number of assets, API services, housed in the environment
 8. The user who last modified the environment, and when
-9. Menu with an option to delete the environment
+9. The Production/Non-Production status of the environment. PRODUCTION indicates that the environment will be used to perform production processing or connect to a non-Axway gateway. This usage will be reflected in your entitled quota.
+10. The Axway/Consumer Managed status of the environment. AXWAY MANAGED indicates that this environment is hosted in the Axway Managed Cloud.
+11. Menu with an option to delete the environment
 
 Click the title or logical name of the environment to view additional details.
 
@@ -57,7 +59,6 @@ The following information is displayed for environments created using the API se
     * Services: The total count of API services represented in the environment.
     * Catalog Items: The total count of published catalog items.
     * Subscriptions: The total count of subscribers to all the published catalog items.
-
 * **Services**: This section shows all API services that exist within the environment. It is sortable by title, logical name, and when the service was created or last modified. You can search by title, name, or tag. For each API service, it shows the number of versions, the user who last modified the API service, and when.
 
 For more information about other types of environments, see:
@@ -76,13 +77,13 @@ To delete an API service:
 
 **Agents resources scoped to the environment**:
 
-| STATUS              | BADGE                                                                 | SCENARIOS                                                                                                                                         |
+| STATUS              | BADGE                                                                 | SCENARIOS                                                                                                                                           |
 | ------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Connected           | ![Connected](/Images/central/env_gw_mgmt/statusConnected.png)         | All agents are running                                                                                                                            |
-| Connection Error    | ![Connection Error](/Images/central/env_gw_mgmt/statusError.png)      | One or more agents have failed                                                                                                                    |
-| Disconnected        | ![Disconnected](/Images/central/env_gw_mgmt/statusDisconnected.png)   | All agents are stopped                                                                                                                            |
-| Manual Sync         | ![Manual Sync](/Images/central/env_gw_mgmt/statusManual.png)          | No reported agent status resource values, **or** one or more agents have been stopped and one or more agents have never been started (no status)  |
-| Partially Connected | ![Partially Connected](/Images/central/env_gw_mgmt/statusPartial.png) | One or more agents are stopped and the other agents are running, **or** one or more agents are running and the other agents have never been started |
+| Connected           | ![Connected](/Images/central/env_gw_mgmt/statusconnected.png)         | All agents are running                                                                                                                              |
+| Connection Error    | ![Connection Error](/Images/central/env_gw_mgmt/statuserror.png)      | One or more agents have failed                                                                                                                      |
+| Disconnected        | ![Disconnected](/Images/central/env_gw_mgmt/statusdisconnected.png)   | All agents are stopped                                                                                                                              |
+| Manual Sync         | ![Manual Sync](/Images/central/env_gw_mgmt/statusmanual.png)          | No reported agent status resource values, **or** one or more agents have been stopped and one or more agents have never been started (no status)  |
+| Partially Connected | ![Partially Connected](/Images/central/env_gw_mgmt/statuspartial.png) | One or more agents are stopped and the other agents are running, **or** one or more agents are running and the other agents have never been started |
 
 ### View the details of an API Service
 
