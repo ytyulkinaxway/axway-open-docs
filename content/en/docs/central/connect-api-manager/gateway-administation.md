@@ -335,7 +335,7 @@ Once all data is gathered, this section should look like:
 ```shell
 LOG_LEVEL=info
 LOG_OUTPUT=stdout
-LOG_PATH=logs
+LOG_FILE_PATH=logs
 LOG_MASKEDVALUES=keyword1, keyword2, keyword3
 LOG_FILE_NAME=discovery_agent.log
 ```
@@ -403,7 +403,7 @@ CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubs
 # logging
 LOG_LEVEL=info
 LOG_OUTPUT=stdout
-LOG_PATH=logs
+LOG_FILE_PATH=logs
 LOG_MASKEDVALUES=keyword1, keyword2, keyword3
 ```
 
@@ -573,7 +573,7 @@ cd /home/APIC-agents
 
 ## Traceability Agent
 
-The Traceability Agent is used to filter the Axway API Gateway logs that are related to discovered APIs and prepare the transaction events that are sent to Amplify platform. Each time an already discovered API is called by a consumer, an event (summary + detail) is sent to Amplify Central and is visible in API Observer.
+The Traceability Agent is used to prepare the transaction events that are sent to Amplify platform. Each time an API is called by a consumer, an event (summary + detail) is sent to Amplify Central and is visible in API Observer.
 
 The binary agent can run in the following mode:
 
@@ -670,7 +670,6 @@ EVENT_LOG_PATHS=<API GATEWAY INSTALL DIRECTORY>/apigateway/events/group-2_instan
 
 #### Customizing Traceability Agent API Manager connectivity variables
 
-This section tells the agent which API needs to be monitored=one that has been discovered by the Discovery Agent.
 This section is exactly the same as the [Discovery Agent - API Manager](/docs/central/connect-api-manager/gateway-administation/#customizing-discovery-agent-api-manager-connectivity-variables)
 
 Once all data is gathered, this section should look like:
@@ -751,9 +750,11 @@ This section describes where the logs should be sent on Amplify Central.
 
 `TRACEABILITY_COMPRESSIONLEVEL`: The gzip compression level for the output event. Default value is **3**.
 
-`TRACEABILITY_BULKMAXSIZE`: Maximum number of events to bulk in  a single ingestion request. Default value is 100.
+`TRACEABILITY_BULKMAXSIZE`: Maximum number of events to bulk in a single ingestion request. Default value is 100.
 
 `TRACEABILITY_TIMEOUT`: Time to wait for ingestion response. Default value is 300s.
+
+`TRACEABILITY_WORKER`: The number of workers in the Traceability agent making connections to the TRACEABILITY_HOST. It is recommended to change this for high volume machine. Default value is **2**.
 
 Security connection settings: By default, for connecting to API Gateway, the agent uses TLS 1.2 with a predefined list of cipher suites. Refer to [Administer API Manager agent security](/docs/central/connect-api-manager/agent-security-api-manager/) section for changing this behavior.
 
@@ -767,6 +768,7 @@ TRACEABILITY_PROTOCOL=tcp
 #TRACEABILITY_COMPRESSIONLEVEL=3
 #TRACEABILITY_BULKMAXSIZE=100
 #TRACEABILITY_TIMEOUT=300s
+#TRACEABILITY_WORKER=2
 ```
 
 #### Customizing Traceability Agent beat queuing section variables
@@ -796,7 +798,7 @@ Once all data is gathered, this section should look like this for standard outpu
 ```shell
 LOG_LEVEL=info
 LOG_OUTPUT=stdout
-LOG_PATH=logs
+LOG_FILE_PATH=logs
 LOG_FILE_NAME=traceability_agent.log
 ```
 
@@ -849,7 +851,7 @@ TRACEABILITY_PROTOCOL=tcp
 #logging
 LOG_LEVEL=info
 LOG_OUTPUT=stdout
-LOG_PATH=logs
+LOG_FILE_PATH=logs
 LOG_FILE_NAME=traceability_agent.log
 ```
 

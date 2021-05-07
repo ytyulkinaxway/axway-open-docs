@@ -31,7 +31,7 @@ The related APIs are published to Amplify Central either as an API Service in en
 
 ### Traceability Agent
 
-The Traceability Agent sends log information about APIs that have been discovered and published to Amplify Central.
+The Traceability Agent sends log information about APIs in API Gateway and publishes the events to Amplify Central.
 
 ## Pre-requisites
 
