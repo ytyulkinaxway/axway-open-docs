@@ -60,7 +60,7 @@ The `/Policies/Common security.yaml` file exists in the `common-security` projec
 CI/CD pipelines for the `common-security` and `test-api` projects might each publish a `.tar.gz` into Artifactory. These need to get merged before deployment using the `yamles import` command.
 
 ```
-./yamles import --source ~/team-dev/archives/common-security.tar.gz --target ~/team-dev/archives/test-api.tar.gz
+./yamles import --source ~/team-dev/archives/common-security.tar.gz --target ~/team-dev/archives/test-api.tar.gz --allow-invalid-ref --allow-invalid-cardinality
 ```
 
 The updated `test-api.tar.gz` will contain the policies from the `test-api` and `common-security` projects. The `test-api.tar.gz` should validate without the `--allow-invalid-ref option`:

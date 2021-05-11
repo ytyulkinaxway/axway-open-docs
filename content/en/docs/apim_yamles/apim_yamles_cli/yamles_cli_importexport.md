@@ -103,8 +103,8 @@ You can specify the source configuration using the `--source` parameter as a dir
 
 You can specify other parameters as follows:
 
-`--export-descriptor`: Specifies the `_fragment.yaml` file, which determines what gets exported.
-`--targz`: Generates a `.tar.gz` file of the newly created YAML configuration fragment.
+* `--export-descriptor`: Specifies the `_fragment.yaml` file, which determines what gets exported.
+* `--targz`: Generates a `.tar.gz` file of the newly created YAML configuration fragment.
 
 The passphrase is not needed for the `export` command. If the source configuration is encrypted with a passphrase, the generated YAML configuration fragment will be encrypted with the same passphrase. It can be changed later using the `encrypt` or [`change-passphrase`](/docs/apim_yamles/apim_yamles_cli/yamles_cli_ecryption)  commands.
 
@@ -150,11 +150,18 @@ You can specify the source and target configuration using the `--source` and `--
 
 You can use the `--targz` parameter to generate a `.tar.gz` file from the updated target configuration. If the target configuration is already a `.tar.gz` file, this parameter is ignored as the result is already packaged into a `.tar.gz` file.
 
-If either the source or target configuration is encrypted with a non-default passphrase, the passphrases must be provided via the `--source-passphrase` or `target-passphrase` parameters respectively. If source and target configurations have different passphrases, the source is re-encrypted in a temporary location before it is imported into the target configuration. Passphrase checking is performed on both the source and target configurations where possible.
+If either the source or target configuration is encrypted with a non-default passphrase, the passphrases must be provided via the `--source-passphrase` or `--target-passphrase` parameters respectively. If source and target configurations have different passphrases, the source is re-encrypted in a temporary location before it is imported into the target configuration. Passphrase checking is performed on both the source and target configurations where possible.
 
-To check the passphrase, an ESConfiguration entity must exist in the configuration. If a passphrase check cannot be performed, a warning is shown on stdout. If passphrase checks cannot be done, and your configurations contains encrypted data, you must ensure the passphrases for the source and target configurations are correct so that the sensitive data can be decrypted successfully from the resulting target configuration. The target configuration passphrase is used for the updated target configuration that contains the merged configuration.
+To check the passphrase, an ESConfiguration entity must exist in the configuration. If a passphrase check cannot be performed, a warning is shown on stdout. If passphrase checks cannot be done and your configurations contains encrypted data, you must ensure the passphrases for the source and target configurations are correct so that the sensitive data can be decrypted successfully from the resulting target configuration. The target configuration passphrase is used for the updated target configuration that contains the merged configuration.
 
-The following are examples of how you can use the `import` option in the `yamles` CLI to import a YAML configuration into another YAML configuration.
+When using [Team development in Policy Studio](/docs/apigtw_devops/team_dev_practices/#enable-team-development-in-policy-studio) or when your configuration is fragmented into smaller pieces, it is very likely that you import incomplete, invalid stores into a main store. To workaround these validation issues, you can set two flags with `yamles import`:
+
+* Set `--allow-invalid-ref` if some references can only be resolved in the main store.
+* Set `--allow-invalid-cardinality` if the import returns cardinality errors.
+
+This is to mitigate some legacy small inconsistencies in some entity types. The YAML Entity Store is a little more strict than the Federated Store when an entity gets updated.
+
+The following are examples show you how you can use the `import` option in the `yamles` CLI to import a YAML configuration into another YAML configuration.
 
 **Example 1**: Specify the YAML configuration directory names:
 
@@ -184,6 +191,12 @@ The following are examples of how you can use the `import` option in the `yamles
 
 ```
 ./yamles import --source /home/user/yaml-source.tar.gz --target /home/user/yaml-target
+```
+
+**Example 6**: Typical Team development import options to overcome intermediate validation issues:
+
+```
+./yamles import --source /home/user/app-part-1 --target /home/user/yaml-main-config --allow-invalid-ref --allow-invalid-cardinality
 ```
 
 You can run the following help command for more details on each parameter:
