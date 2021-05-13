@@ -3,12 +3,12 @@ title: Configure a CFT Profile
 linkTitle: Configure a CFT Profile
 weight: 90
 date: 2019-07-30
-description: Learn how to configure a CFT (Cross File Transfer) profile in AMPLIFY Central.
+description: Learn how to configure a CFT (Cross File Transfer) profile in Amplify Central.
 ---
 
 ## Before you start
 
-* You will need a user account for AMPLIFY Central
+* You will need a user account for Amplify Central
 
 ## Objectives
 
@@ -36,8 +36,8 @@ To delete the Profile, click the **Trash can** icon.
 
 {{< alert title="Note" color="" >}}A **Profile** used for a catalog subscription cannot be updated or deleted.{{< /alert >}}
 
-For more information on how to create and deploy a flow using Flow Central, see [Transfer CFT](https://docs.axway.com/bundle/FlowManager_20_allOS_en_HTML5/page/first_flow_manager_file_transfer.html).
+For more information on how to create and deploy a flow using Flow Central, see [Transfer CFT](https://docs.axway.com/bundle/FlowManager_20_allOS_en_HTML5/page/flows_deployed_on_transfer_cft.html).
 
 ## Review
 
-You have learned how to add, update, and delete a CFT Profile to an app in AMPLIFY Central.
+You have learned how to add, update, and delete a CFT Profile to an app in Amplify Central.

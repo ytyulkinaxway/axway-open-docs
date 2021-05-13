@@ -4,21 +4,21 @@ linkTitle: Set up integrations through Webhooks
 weight: 100
 date: 2019-07-30
 description: Learn how you can configure webhooks to receive notifications from
-  AMPLIFY Central and AMPLIFY Unified Catalog, and enable a seamless integration
-  between AMPLIFY Central, AMPLIFY Unified Catalog, and your internal systems.
+  Amplify Central and Amplify Unified Catalog, and enable a seamless integration
+  between Amplify Central, Amplify Unified Catalog, and your internal systems.
 ---
 ## Before you start
 
 * You know how to [create a representation of an environment and API Service using the Axway Central CLI](/docs/central/cli_central/cli_apiservices/).
-* You know how to [create and publish other resource types to the AMPLIFY Unified Catalog](/docs/central/cli_central/cli_publish/).
+* You know how to [create and publish other resource types to the Amplify Unified Catalog](/docs/central/cli_central/cli_publish/).
 
 ## Objectives
 
-Learn how to create and configure webhooks in AMPLIFY Central, as well as the event structure that corresponds to a set of actions, such as catalog asset updated and new subscription request submitted.
+Learn how to create and configure webhooks in Amplify Central, as well as the event structure that corresponds to a set of actions, such as catalog asset updated and new subscription request submitted.
 
 ## API Server
 
-[Axway API Server](https://apicentral.axway.com/apis/docs) exposes a standard CRUD interface for all resources available in AMPLIFY Central, and provides a way to model the governance for different data planes in the system.
+[Axway API Server](https://apicentral.axway.com/apis/docs) exposes a standard CRUD interface for all resources available in Amplify Central, and provides a way to model the governance for different data planes in the system.
 
 The API Server leverages standard RESTful terminology to describe its concepts:
 
@@ -31,15 +31,15 @@ The API Server leverages standard RESTful terminology to describe its concepts:
 
 API Server **management** group supports the following resources.
 
-* **Environment**: A logical group of API assets within a user or customer defined context. For example, you can create an environment to represent your remote gateway environment, such as AWS or AMPLIFY API Manager.
+* **Environment**: A logical group of API assets within a user or customer defined context. For example, you can create an environment to represent your remote gateway environment, such as AWS or Amplify API Manager.
 * **API Service**: An API asset, including all its revisions and deployed endpoints, and additional information to represent your API. For example, description, environment scope, image encoded in base64.
 * **API Service Revision:** Indicates incremental changes to an API asset. It comprises of the interface (contract), implementation, and instance of the API. An API can have multiple revisions. A client can call different versions of an API to realize different behaviors.
 * **API Service Instance:** Instance where an API revision (version) is deployed. This endpoint is consumable by clients and it is typically represented as a URL with a port number.
-* **Consumer Subscription Definition**: A subscription definition contains the configuration of the data needed for a consumer to subscribe or register to an asset in the AMPLIFY Unified Catalog. It has a reference to a webhook that will be invoked on a subscription or registration event. The subscription definition is referenced in the Consumer Instance resource.
-* **Consumer Instance:** Contains all the configuration for publishing an asset in the AMPLIFY Unified Catalog for consumption.
+* **Consumer Subscription Definition**: A subscription definition contains the configuration of the data needed for a consumer to subscribe or register to an asset in the Amplify Unified Catalog. It has a reference to a webhook that will be invoked on a subscription or registration event. The subscription definition is referenced in the Consumer Instance resource.
+* **Consumer Instance:** Contains all the configuration for publishing an asset in the Amplify Unified Catalog for consumption.
 * **Webhook**: Defines the webhook URL that will be invoked on certain events.
 * **Integrations:** Logical grouping of webhook integrations.
-* **Resource Hook**: Allows you to configure webhooks for resources (environments, API Service) in AMPLIFY Central.
+* **Resource Hook**: Allows you to configure webhooks for resources (environments, API Service) in Amplify Central.
 
 All resources support CRUD operations.
 
@@ -52,7 +52,7 @@ API Server supports **scoped** and **unscoped** types of resources. The resource
 
 ## Webhooks
 
-Webhooks allow you to configure integrations on resources in AMPLIFY Central or on subscriptions to assets in the AMPLIFY Unified Catalog. When one of those events is triggered, AMPLIFY Central sends an HTTP POST payload to the URL configured in the webhook.
+Webhooks allow you to configure integrations on resources in Amplify Central or on subscriptions to assets in the Amplify Unified Catalog. When one of those events is triggered, Amplify Central sends an HTTP POST payload to the URL configured in the webhook.
 
 You can use webhooks to define a custom approval flow, set up a policy, or deploy to your production server.
 
@@ -113,7 +113,7 @@ Example of a webhook payload referencing a secret:
 
 ### Configure a webhook on resources
 
-You can setup a webhook on any resource in AMPLIFY Central by configuring a **Resource hook**. An event will be published on any CRUD operation. When the resource hook trigger conditions match, the resource hook referenced webhooks will be invoked, and an HTTP `POST` payload will be sent to the webhook's URL. For example, the webhook can be invoked when a new API asset is created.
+You can setup a webhook on any resource in Amplify Central by configuring a **Resource hook**. An event will be published on any CRUD operation. When the resource hook trigger conditions match, the resource hook referenced webhooks will be invoked, and an HTTP `POST` payload will be sent to the webhook's URL. For example, the webhook can be invoked when a new API asset is created.
 
 The following are examples of the **Resource Hook** payload.
 
@@ -272,7 +272,7 @@ The following is an example which suggests "When resource type of kind `APIServi
 
 ### Webhook Events
 
-An event is triggered whenever an action is taken on the resources in AMPLIFY Central and sent to the webhook.
+An event is triggered whenever an action is taken on the resources in Amplify Central and sent to the webhook.
 
 The following is an example of an event payload sent to the webhook configured via a resource hook:
 
@@ -332,15 +332,15 @@ The following is an example of an event payload sent to the webhook configured v
 
 ## Configure webhooks on catalog asset subscriptions
 
-AMPLIFY Unified Catalog provides event-driven subscription management capabilities that enable you to create custom subscription flows for each registered environment in AMPLIFY Central, enabling complex approval flows and integration with existing systems to streamline the experience and reduce the time for approval.
+Amplify Unified Catalog provides event-driven subscription management capabilities that enable you to create custom subscription flows for each registered environment in Amplify Central, enabling complex approval flows and integration with existing systems to streamline the experience and reduce the time for approval.
 
-To publish an asset to the AMPLIFY Unified Catalog with a custom subscription flow that will be triggered on any subscription events, you will need to:
+To publish an asset to the Amplify Unified Catalog with a custom subscription flow that will be triggered on any subscription events, you will need to:
 
-* Create an environment in AMPLIFY Central.
+* Create an environment in Amplify Central.
 * Create an API service, API service instance, and API service revision.
 * Create a webhook with a secret, if you want to secure the webhook.
 * Create a custom subscription definition that references the webhook.
-* Create a consumer instance that references the subscription definition for publishing the asset to the AMPLIFY Unified Catalog.
+* Create a consumer instance that references the subscription definition for publishing the asset to the Amplify Unified Catalog.
 
 To configure the resources listed above, see [Axway Central CLI](/docs/central/cli_central/). Alternatively, you can use the example provided in our [Postman Collection](https://documenter.getpostman.com/view/2125605/SzKbLaVV?version=latest#44df18e7-2802-4786-bd60-7efb7cf5e63a).
 
@@ -392,7 +392,7 @@ The following is an example of a consumer instance with a custom subscription th
 ```
 
 * **$spec.webhooks**: Array of references to webhook resources, which will be invoked when on subscriptions to a catalog asset that references this subscription definition.
-* **$spec.schema**: Any valid JSON schema specifying the information required during subscription from the consumers. AMPLIFY Unified Catalog currently only supports JSON schema `draft-04`, so the provided schema in the subscription definition must be [draft-04](http://json-schema.org/draft-04/schema#).
+* **$spec.schema**: Any valid JSON schema specifying the information required during subscription from the consumers. Amplify Unified Catalog currently only supports JSON schema `draft-04`, so the provided schema in the subscription definition must be [draft-04](http://json-schema.org/draft-04/schema#).
 
 The following is an example of a consumer instance payload referencing a subscription definition:
 
@@ -441,18 +441,18 @@ The following is an example of a consumer instance payload referencing a subscri
 }
 ```
 
-For the example provided, the following information will be required when a consumer subscribes to a catalog asset from the AMPLIFY Unified Catalog.
+For the example provided, the following information will be required when a consumer subscribes to a catalog asset from the Amplify Unified Catalog.
 
 ![custom subscription definition](/Images/central/custom_subscription_definition.png "Custom Subscription Definition")
 
 ## Subscription events
 
-A `SubscriptionUpdatedEvent` event is triggered when an action is taken on a subscription to a catalog asset in the AMPLIFY Unified Catalog.
+A `SubscriptionUpdatedEvent` event is triggered when an action is taken on a subscription to a catalog asset in the Amplify Unified Catalog.
 
 Click [subscriptionEventSchema.json](https://axway-open-docs.netlify.app/samples/central/subscriptionEventSchema.json) to download a sample of a subscription event schema.
 
 * **type**: The type of the event, declared as a string. Accepts `SubscriptionUpdatedEvent` value.
-* **consumerInstance**: The referenced consumer instance object created to publish the asset to the AMPLIFY Unified Catalog.
+* **consumerInstance**: The referenced consumer instance object created to publish the asset to the Amplify Unified Catalog.
 * **subscription**: The payload contains the subscription object to a catalog asset.
 * **$subscription.currentState**: The state of the subscription. Accepted values: REQUESTED, APPROVED, ACTIVE, REJECTED, UNSUBSCRIBED, UNSUBSCRIBE_INITIATED, FAILED_TO_SUBSCRIBE, FAILED_TO_UNSUBSCRIBE.
 * **$subscription.currentStateDescription**: Description of the state. You can use it to provide a reason for rejection, a message to the provider when subscribing or unsubscribing, or a reason for a failure.
@@ -468,4 +468,4 @@ Click [subscriptionEventPayload.json](https://axway-open-docs.netlify.app/sample
 
 ## Further information
 
-* See the [AMPLIFY Unified Catalog tutorials](https://github.com/Axway/unified-catalog-integrations) for setting up integrations with the AMPLIFY Unified Catalog.
+* See the [Amplify Unified Catalog tutorials](https://github.com/Axway/unified-catalog-integrations) for setting up integrations with the Amplify Unified Catalog.

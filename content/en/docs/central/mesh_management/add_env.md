@@ -1,45 +1,45 @@
 ---
-title: Add your environment to AMPLIFY Central
-linkTitle: Add your environment to AMPLIFY Central
+title: Add your environment to Amplify Central
+linkTitle: Add your environment to Amplify Central
 weight: 146
 date: 2020-03-18
-description: Learn how to add your environments to AMPLIFY Central so that you
+description: Learn how to add your environments to Amplify Central so that you
   can manage your microservices and any related APIs they expose.
 ---
 {{< alert title="Public beta" color="warning" >}}This feature is currently in **public beta** and not yet available for production use.{{< /alert >}}
 
 ## Before you start
 
-* Read [AMPLIFY Central mesh governance overview](/docs/central/mesh_management/).
-* You will need a private cloud Kubernetes cluster that meets the minimum requirements for an AMPLIFY Central hybrid environment, and a client system from which you can access and manage the cluster remotely. See [Build your hybrid environment](/docs/central/mesh_management/build_hybrid_env/).
+* Read [Amplify Central mesh governance overview](/docs/central/mesh_management/).
+* You will need a private cloud Kubernetes cluster that meets the minimum requirements for an Amplify Central hybrid environment, and a client system from which you can access and manage the cluster remotely. See [Build your hybrid environment](/docs/central/mesh_management/build_hybrid_env/).
 * You will need a basic understanding of OAuth authorization ([RFC 6749](https://tools.ietf.org/html/rfc6749)) and JWT ([RFC 7523](https://tools.ietf.org/html/rfc7523)).
 * You must be familiar with Kubernetes and Helm, including running Helm and kubectl commands.
-* You will need an administrator account for AMPLIFY Central.
+* You will need an administrator account for Amplify Central.
 
 ## Objectives
 
-Learn how to add your private cloud hybrid environment to AMPLIFY Central, so that you can manage your microservices and any related APIs they expose, from AMPLIFY Central in AMPLIFY Central public cloud.
+Learn how to add your private cloud hybrid environment to Amplify Central, so that you can manage your microservices and any related APIs they expose, from Amplify Central in Amplify Central public cloud.
 
-* Add your Kubernetes environment to AMPLIFY Central
+* Add your Kubernetes environment to Amplify Central
 * Download the generated hybrid kit for your Kubernetes environment
 * Generate a key pair and secret for the domain edge gateway and deploy it into the Istio namespace
 * Generate a key pair and secret for the Axway mesh agents and deploy them into the mesh agent namespace
 * Deploy the Axway proprietary service mesh layer into your environment
 * Create and test an API proxy for the API exposed by a demo microservice
 
-## Add your environment to AMPLIFY Central
+## Add your environment to Amplify Central
 
-Follow these steps to add your environment to AMPLIFY Central:
+Follow these steps to add your environment to Amplify Central:
 
-1. Log in to AMPLIFY Central UI as an administrator.
-2. Navigate to the **Topology** section using the side navigation bar. (You will see a list of your environments that are managed in AMPLIFY Central.)
+1. Log in to Amplify Central UI as an administrator.
+2. Navigate to the **Topology** section using the side navigation bar. (You will see a list of your environments that are managed in Amplify Central.)
 3. Click **+ Environment** at the top right.
 
 ![Environments List Page](/Images/central/environments_list_page.png)
 
 ## Add your Kubernetes environment
 
-To add an AMPLIFY Central environment for your private cloud Kubernetes cluster:
+To add an Amplify Central environment for your private cloud Kubernetes cluster:
 
 1. Click **Kubernetes** on the **Add a New Environment** page.
 2. Enter your environment details.
@@ -95,7 +95,7 @@ To expose an HTTPS endpoint of a service within your environment to external tra
 
    Usage: `kubectl create secret tls SECRET_NAME -n NAMESPACE_NAME --key /PATH/TO/KEY/FILE --cert /PATH/TO/CERT/FILE`
 
-   `SECRET_NAME` must match the field `secretName` in the `istioOverride.yaml` Helm chart that you downloaded from AMPLIFY Central as part of the hybrid kit. The `secretName` in the Helm chart  is generated from your domain name, for example, `kubernetes-cluster-example-certs` for the domain `kubernetes-cluster.example.com`.
+   `SECRET_NAME` must match the field `secretName` in the `istioOverride.yaml` Helm chart that you downloaded from Amplify Central as part of the hybrid kit. The `secretName` in the Helm chart  is generated from your domain name, for example, `kubernetes-cluster-example-certs` for the domain `kubernetes-cluster.example.com`.
 
    Example:
 
@@ -114,9 +114,9 @@ Before you can deploy the Axway mesh agents in your environment, you must genera
 
 #### What are these keys used for?
 
-Mesh agents use service accounts when communicating from your environment to the AMPLIFY Central SaaS control plane. A service account is provisioned in AMPLIFY Central when you create a new environment in the AMPLIFY Central UI. When a mesh agent starts for the first time it uses a one-time credential to authenticate itself to AMPLIFY Central. The agent registers a public key with AMPLIFY Central, and the agent must have access to the associated private key during registration.
+Mesh agents use service accounts when communicating from your environment to the Amplify Central SaaS control plane. A service account is provisioned in Amplify Central when you create a new environment in the Amplify Central UI. When a mesh agent starts for the first time it uses a one-time credential to authenticate itself to Amplify Central. The agent registers a public key with Amplify Central, and the agent must have access to the associated private key during registration.
 
-AMPLIFY Central uses the public key to authenticate signed JWT tokens from the agent. The agent signs the JWT token with its private key, and the agent private key never leaves your environment. This registration step uses a one-time registration access token (`registrationToken`) that is contained in the `hybridOverride.yaml` Helm chart that you downloaded from AMPLIFY Central as part of the hybrid kit.
+Amplify Central uses the public key to authenticate signed JWT tokens from the agent. The agent signs the JWT token with its private key, and the agent private key never leaves your environment. This registration step uses a one-time registration access token (`registrationToken`) that is contained in the `hybridOverride.yaml` Helm chart that you downloaded from Amplify Central as part of the hybrid kit.
 
 #### Generate key pair for SDA
 
@@ -168,7 +168,7 @@ Create Kubernetes secrets to hold the mesh agents' public certificates and priva
 
 Usage: `kubectl create secret generic SECRET_NAME --namespace NAMESPACE_NAME --from-file=publicKey=/PATH/TO/PUBLIC/KEY/FILE --from-file=privateKey=/PATH/TO/PRIVATE/KEY/FILE --from-file=password=PASSWORD_FILE --from-literal=password=PASSWORD -o yaml`
 
-* Each `SECRET_NAME` must match the corresponding SDA or CSA field `keysSecretName` in the `hybridOverride.yaml` Helm chart that you downloaded from AMPLIFY Central as part of the hybrid kit.
+* Each `SECRET_NAME` must match the corresponding SDA or CSA field `keysSecretName` in the `hybridOverride.yaml` Helm chart that you downloaded from Amplify Central as part of the hybrid kit.
 * The SDA default value of `keysSecretName` is `sda-secrets`.
 * The CSA default value of `keysSecretName` is `csa-secrets`.
 * To change the secret store names, edit the `keysSecretName` values in the `hybridOverride.yaml` file before you execute the helm upgrade deployment steps.
@@ -324,9 +324,9 @@ After you have created the key pairs and secrets, deploy the Axway proprietary s
 
    The output of this command should list the demo list service.
 
-10. Verify that your environment is now connected in AMPLIFY Central UI:
+10. Verify that your environment is now connected in Amplify Central UI:
 
-    ![Connected environment in AMPLIFY Central](/Images/central/hybrid__env_connected.png)
+    ![Connected environment in Amplify Central](/Images/central/hybrid__env_connected.png)
 
 ### Create and test an API proxy for the demo service
 
@@ -334,7 +334,7 @@ The list demo service is now deployed in your hybrid environment. You can create
 
 ![Create a proxy for API exposed by microservice](/Images/central/hybrid_env_proxy_demo.gif)
 
-You can test the API proxy in AMPLIFY Central UI or using a REST client. The following example uses `curl` to send a `GET` request to the `/list` endpoint:
+You can test the API proxy in Amplify Central UI or using a REST client. The following example uses `curl` to send a `GET` request to the `/list` endpoint:
 
 Example:
 
@@ -360,4 +360,4 @@ x-envoy-upstream-service-time: 5
 
 ## Review
 
-You have learned how to add your private cloud hybrid environment to AMPLIFY Central, and how to create and test an API proxy for an API exposed by a demo microservice deployed in the hybrid environment.
+You have learned how to add your private cloud hybrid environment to Amplify Central, and how to create and test an API proxy for an API exposed by a demo microservice deployed in the hybrid environment.

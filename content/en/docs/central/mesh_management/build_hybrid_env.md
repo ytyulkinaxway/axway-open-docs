@@ -11,7 +11,7 @@ description: Learn how to build a basic Amazon EC2 private cloud hybrid
 
 ## Before you start
 
-* Read [AMPLIFY Central mesh governance overview](/docs/central/mesh_management/).
+* Read [Amplify Central mesh governance overview](/docs/central/mesh_management/).
 * You will need a basic knowledge of Amazon Web Services (AWS), Amazon EC2 instances, and associated tools.
 * You will need to be familiar with Kubernetes and Helm, including running Helm, kubectl, and kops commands.
 
@@ -19,7 +19,7 @@ description: Learn how to build a basic Amazon EC2 private cloud hybrid
 
 Learn how to build a basic Amazon EC2 private cloud hybrid environment and add the required tools to enable you to access and manage it remotely from a client system.
 
-{{< alert title="Tip" color="" >}}For the latest Amazon EC2 build instructions and more client system configuration details, see [Set up AMPLIFY Central mesh governance documentation on GitHub](https://github.com/Axway/Setup-Amplify-Mesh-Governance).{{< /alert >}}
+{{< alert title="Tip" color="" >}}For the latest Amazon EC2 build instructions and more client system configuration details, see [Set up Amplify Central mesh governance documentation on GitHub](https://github.com/Axway/Setup-Amplify-Mesh-Governance).{{< /alert >}}
 
 ## Minimum requirements
 
@@ -35,7 +35,7 @@ Learn how to build a basic Amazon EC2 private cloud hybrid environment and add t
     * kubectl 1.18 or later is recommended - Enables you to deploy and manage applications on Kubernetes from the command line. See the [kubectl installation documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
     * kops 1.19 or later is recommended - Helps you create, destroy, upgrade and maintain Kubernetes clusters from the command line. See the [kops installation documentation](https://github.com/kubernetes/kops/blob/master/docs/install.md).
     * Helm 3.2.4 is recommended - Enables you to install the Axway proprietary service mesh layer later and to export Helm charts. See the [Helm installation documentation](https://helm.sh/docs/using_helm/#installing-helm).
-    * Istioctl - Used after the environment is built for the next phase to deploy the service mesh and add this environment to AMPLIFY Central.
+    * Istioctl - Used after the environment is built for the next phase to deploy the service mesh and add this environment to Amplify Central.
 
 ## Build an Amazon EC2 hybrid environment
 
@@ -121,4 +121,4 @@ Your cluster kubernetes-cluster.example.com is ready
 
 ## Review and next steps
 
-You have learned how to build a basic Amazon EC2 hybrid environment and add the required tools to enable you to access and manage it from your client system. Next, read [Add your environment to AMPLIFY Central](/docs/central/mesh_management/add_env/) to learn how to add your environment to AMPLIFY Central.
+You have learned how to build a basic Amazon EC2 hybrid environment and add the required tools to enable you to access and manage it from your client system. Next, read [Add your environment to Amplify Central](/docs/central/mesh_management/add_env/) to learn how to add your environment to Amplify Central.

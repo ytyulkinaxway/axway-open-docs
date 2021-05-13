@@ -28,15 +28,15 @@ Follow these steps to require an OAuth policy on an API proxy:
 4. On the dialog box, select **OAuth Token** from the **Authentication type** list.
 5. On the **Deployments** tab, click **Deploy** to deploy or update a runtime group with the OAuth security.
 
-Watch the animation to learn how to do this in AMPLIFY Central UI.
+Watch the animation to learn how to do this in Amplify Central UI.
 
 ![Add OAuth security](/Images/central/OAuthaddproxyauth_animation.gif)
 
 ## Use an API proxy secured with an OAuth policy
 
-To use the proxy, the provider must first set up a third-party OAuth server with a valid application. A single application from the third-party server's application will directly relate to a single AMPLIFY Central application.
+To use the proxy, the provider must first set up a third-party OAuth server with a valid application. A single application from the third-party server's application will directly relate to a single Amplify Central application.
 
-{{< alert title="Note" >}}The AMPLIFY Central OAuth proxy support is RFC 7662 compliant and it should work with any standard OAuth 2.0 authorization server. At this time, Okta is the only verified supported third-party OAuth provider. See more detailed configuration examples showing Okta as an integrated (external) authorization server in [Okta documentation](https://developer.okta.com/docs/guides/customize-authz-server/overview/).{{< /alert >}}
+{{< alert title="Note" >}}The Amplify Central OAuth proxy support is RFC 7662 compliant and it should work with any standard OAuth 2.0 authorization server. At this time, Okta is the only verified supported third-party OAuth provider. See more detailed configuration examples showing Okta as an integrated (external) authorization server in [Okta documentation](https://developer.okta.com/docs/guides/customize-authz-server/overview/).{{< /alert >}}
 
 ### Create an application profile
 
@@ -60,4 +60,4 @@ After your third-party OAuth server has generated a valid OAuth token, paste tha
 
 ## Review
 
-You have learned how to set up an OAuth front-end security policy on an API proxy in AMPLIFY Central.
+You have learned how to set up an OAuth front-end security policy on an API proxy in Amplify Central.

@@ -54,7 +54,7 @@ Unified Catalog allows you to control who can view and subscribe to catalog asse
 
 ## Manage categories
 
-Searching through an unordered list of catalog assets can become a dauting tasks and make assets not easily discoverable. Central Admin users can create categories to group assets in the AMPLIFY Unified Catalog to make searching for assets more effective and improve discovery.
+Searching through an unordered list of catalog assets can become a dauting tasks and make assets not easily discoverable. Central Admin users can create categories to group assets in the Amplify Unified Catalog to make searching for assets more effective and improve discovery.
 
 Categories allow for a broader grouping of catalog assets into different topics or themes. They are created once, and multiple catalog asset can be assigned to them. One catalog asset can be in multiple categories.
 
@@ -88,7 +88,7 @@ Categories can be removed from an asset simply by removing the category from the
 1. In the Unified Catalog, click on the cogwheel and select **Manage categories.** This will bring up a screen where you can see the list of available categories.
 2. Click the ellipsis menu and select **Edit** to change the category or **Delete** to remove it.
 
-{{< alert title="Note" color="primary" >}}You can configure and manage categories from the WebUI or using the AMPLIFY Unified Catalog APIs. Please refer to our [Postman Collection](https://documenter.getpostman.com/view/3636185/TVYGddhi), for an example of how to create and manage categories via our APIs.{{< /alert >}}
+{{< alert title="Note" color="primary" >}}You can configure and manage categories from the WebUI or using the Amplify Unified Catalog APIs. Please refer to our [Postman Collection](https://documenter.getpostman.com/view/3636185/TVYGddhi), for an example of how to create and manage categories via our APIs.{{< /alert >}}
 
 Watch the video below to see how to create and assign categories.
 

@@ -3,22 +3,22 @@ title: Manage subscriptions
 linkTitle: Manage subscriptions
 weight: 10
 date: 2019-12-16T00:00:00.000Z
-description: Lear how to manage your AMPLIFY Unified Catalog subscriptions.
+description: Lear how to manage your Amplify Unified Catalog subscriptions.
 ---
 
 ## Objective
 
-Learn how subscriptions work in AMPLIFY Unified Catalog, and configure a custom subscription workflow.
+Learn how subscriptions work in Amplify Unified Catalog, and configure a custom subscription workflow.
 
 ## How subscriptions work
 
-You can use subscriptions to secure access to an asset in the AMPLIFY Unified Catalog. Consumers must subscribe to an asset before getting access to it.
+You can use subscriptions to secure access to an asset in the Amplify Unified Catalog. Consumers must subscribe to an asset before getting access to it.
 
 As an asset provider, you can choose to disable subscriptions for your asset, for instance, if you want to publish an API that is not secured with an API key. In this case, consumers can use the asset without having to subscribe.
 
-You can also configure the subscription metadata that is required from consumers at the time of subscription. You can configure this when publishing the asset to the AMPLIFY Unified Catalog, or after the asset has been published.
+You can also configure the subscription metadata that is required from consumers at the time of subscription. You can configure this when publishing the asset to the Amplify Unified Catalog, or after the asset has been published.
 
-{{< alert title="Note" color="primary" >}}Enabling or disabling subscriptions is currently available only by way of [Axway Central CLI](/docs/central/cli_central/) or AMPLIFY API.{{< /alert >}}
+{{< alert title="Note" color="primary" >}}Enabling or disabling subscriptions is currently available only by way of [Axway Central CLI](/docs/central/cli_central/) or Amplify API.{{< /alert >}}
 
 ## Subscription scope
 
@@ -57,7 +57,7 @@ The following image shows the transition between different subscription states:
 
 To view the historical transition of a subscription request:
 
-1. In AMPLIFY Central, select **Subscriptions** in the left navigation bar,
+1. In Amplify Central, select **Subscriptions** in the left navigation bar,
 2. Use the top filter drop-down to filter the subscription by their status.
 3. Click a subscription to select it. The subscription details screen is shown.
 4. Click the **History** tab. The historical activity on a subscription request is shown
@@ -73,7 +73,7 @@ As an asset provider, you can configure how subscription requests will be approv
 There are two possible options for subscription approval:
 
 * **Automatic**: There is no manual intervention required from the asset provider, and the user is automatically granted access to consume the asset.
-* **Manual**: The asset provider manually approves or rejects each request, either from AMPLIFY Central or by delegating the approval mechanism through an external system, for example,  Microsoft Teams, Flow Manager.
+* **Manual**: The asset provider manually approves or rejects each request, either from Amplify Central or by delegating the approval mechanism through an external system, for example,  Microsoft Teams, Flow Manager.
 
 Follow these steps to enable manual approvals:
 
@@ -87,11 +87,11 @@ Follow these steps to enable manual approvals:
 
 ## Approve or reject a subscription
 
-As an asset provider, you can approve or reject subscription requests to assets in the AMPLIFY Unified Catalog. However, only users that are assigned to the Central Admin role and DevOps Service accounts can approve or reject subscriptions.
+As an asset provider, you can approve or reject subscription requests to assets in the Amplify Unified Catalog. However, only users that are assigned to the Central Admin role and DevOps Service accounts can approve or reject subscriptions.
 
 Follow the steps below to approve a subscription:
 
-1. In AMPLIFY Central, select **Subscriptions** in the left navigation bar.
+1. In Amplify Central, select **Subscriptions** in the left navigation bar.
 2. Use the top filter drop-down to filter the subscription by their status.
 3. Select a subscription that has the status set to **Awaiting Approval.**
 4. Review the asset subscription request details.
@@ -106,7 +106,7 @@ Watch a quick animation on how to approve a subscription:
 
 To unsubscribe from an asset:
 
-* In AMPLIFY Central, select **Subscriptions** from the left navigation bar.
+* In Amplify Central, select **Subscriptions** from the left navigation bar.
 * Click **Unsubscribe** on the subscription of your choice. You can enter an optional text for unsubscribing from the asset.
 
 You can also unsubscribe from the **Subscription** detail page as shown below.

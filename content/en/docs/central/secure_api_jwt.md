@@ -9,8 +9,8 @@ description: Learn how to secure your API using a JWT token.
 ## Before you start
 
 * You will need a basic understanding of JWT ([RFC 7523](https://tools.ietf.org/html/rfc7523))
-* You will need a user account for AMPLIFY Central
-* Import your API as an API proxy in AMPLIFY Central (see [Register an API](/docs/central/quickstart/#register-an-api))
+* You will need a user account for Amplify Central
+* Import your API as an API proxy in Amplify Central (see [Register an API](/docs/central/quickstart/#register-an-api))
 
 ## Objectives
 
@@ -24,7 +24,7 @@ Follow these steps to add JWT client authentication to your API proxy:
 2. On the **Policies** tab change the client authentication policy to `JWT Token`.
 3. On the **Deployments** tab deploy or update a runtime group with this revision of your API proxy.
 
-Watch the animation to learn how to do this in AMPLIFY Central UI.
+Watch the animation to learn how to do this in Amplify Central UI.
 
 ![Add JWT authentication](/Images/central/JWTaddproxyauth_animation.gif)
 
@@ -44,7 +44,7 @@ To be able to test your API, create an app to manage client access to your API:
 
 ## Test an API proxy with JWT authentication
 
-To test your API proxy in AMPLIFY Central:
+To test your API proxy in Amplify Central:
 
 {{< alert title="Tip" color="" >}}You need to create a JWT token to test the API proxy, which is explained in [Create a JWT token](#create-a-jwt-token).{{< /alert >}}
 
@@ -54,7 +54,7 @@ To test your API proxy in AMPLIFY Central:
 4. Paste your JWT token in the **JWT Token** field.
 5. Execute an API method. It should be successful and return a `200 OK` response.
 
-Watch the animation to learn how to do this in AMPLIFY Central UI.
+Watch the animation to learn how to do this in Amplify Central UI.
 
 ![Test API with JWT](/Images/central/JWTtestapi_animation.gif)
 
@@ -68,7 +68,7 @@ There are many libraries and methods for creating signed JWT tokens. The first s
 
 ### Generate a key pair
 
-This script creates an RSA key pair. The private component must be kept secret and is used for signing authentication tokens. The public component is added to the application in AMPLIFY Central. The public key is converted to a JWK and AMPLIFY Central uses it to validate the authentication tokens.
+This script creates an RSA key pair. The private component must be kept secret and is used for signing authentication tokens. The public component is added to the application in Amplify Central. The public key is converted to a JWK and Amplify Central uses it to validate the authentication tokens.
 
 ```bash
 #!/usr/bin/env bash
@@ -141,7 +141,7 @@ Copy the sample above to a script called `signJWT.sh` and execute with:
  source ./signJWT.sh sigjwt_private_no_passphrase.key <paste_application_id_here> <paste_jwt_key_id_here>
 ```
 
-Copy and paste the **Application ID** and **Key ID** from the API proxy in AMPLIFY Central.
+Copy and paste the **Application ID** and **Key ID** from the API proxy in Amplify Central.
 
 This sets the signed token in an environment variable called `$JWT`. The JWT will look something like this:
 
@@ -191,9 +191,9 @@ Copy the sample above to a script called `signPrvtKey.sh` and execute it with:
 
 This example uses [jwt.io](https://jwt.io/) to create a JWT token:
 
-* Use the default public key from jwt.io as the **JWT Key** for your app in AMPLIFY Central or create a public key as detailed in [Generate a key pair](#generate-a-key-pair).
-* To create the JWT token, you need the **Application ID** and **JWT Key ID** from the API proxy in AMPLIFY Central.
-* Use the generated JWT token from jwt.io as the **JWT Token** to test your API in AMPLIFY Central.
+* Use the default public key from jwt.io as the **JWT Key** for your app in Amplify Central or create a public key as detailed in [Generate a key pair](#generate-a-key-pair).
+* To create the JWT token, you need the **Application ID** and **JWT Key ID** from the API proxy in Amplify Central.
+* Use the generated JWT token from jwt.io as the **JWT Token** to test your API in Amplify Central.
 
 {{< alert title="Caution" color="warning" >}} This method is for testing only as it requires you to share your private key with a third party website.{{< /alert >}}
 
@@ -202,7 +202,7 @@ To create a JWT token on jwt.io:
 1. On the jwt.io website, click **Debugger**.
 2. Select `RS256` for the algorithm.
 3. A default key pair is now available under the Verify Signature section. Copy the public key for use in [Manage access to an API proxy with JWT authentication](#manage-access-to-an-api-proxy-with-jwt-authentication).
-4. Edit the Header section. Copy and paste the **JWT Key ID** from the **Test Methods** tab of the API proxy in AMPLIFY Central as the `kid` field. For example:
+4. Edit the Header section. Copy and paste the **JWT Key ID** from the **Test Methods** tab of the API proxy in Amplify Central as the `kid` field. For example:
 
     ```
     {
@@ -213,7 +213,7 @@ To create a JWT token on jwt.io:
     ```
 
 5. Edit the Payload section.
-    * Copy and paste the **Application ID** from the **Test Methods** tab of the API proxy in AMPLIFY Central as the `sub`, `aud`, and `iss` fields.
+    * Copy and paste the **Application ID** from the **Test Methods** tab of the API proxy in Amplify Central as the `sub`, `aud`, and `iss` fields.
     * For the `iat` and `exp` fields, enter epoch values for when the token was issued at and when it expires. For example:
 
         ```
@@ -240,4 +240,4 @@ To create a JWT token on jwt.io:
 
 ## Review
 
-You have learned how to secure your API with a JWT token in AMPLIFY Central.
+You have learned how to secure your API with a JWT token in Amplify Central.
