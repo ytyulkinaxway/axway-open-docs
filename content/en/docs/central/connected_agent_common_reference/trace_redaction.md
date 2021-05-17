@@ -6,7 +6,7 @@ weight: 10
 description: Understand how the Traceability Agent will redact and sanitize
   information that is sent to Amplify Central.  Learn how you can control the
   information that is sent to Amplify Central by using the redaction
-  configuration. 
+  configuration.
 ---
 ## Before you start
 
@@ -111,7 +111,13 @@ In addition to using the show rules for query arguments and headers, it is also 
 
 The environment variable names are `TRACEABILITY_REDACTION_QUERYARGUMENT_SANITIZE`, `TRACEABILITY_REDACTION_REQUESTHEADER_SANITIZE`, and `TRACEABILITY_REDACTION_RESPONSEHEADER_SANITIZE`.
 
-Much like the show rules, the sanitization rules have a keyMatch which is used to match the argument or header key.  When a keyMatch is found, the additional valueMatch expression is applied to the value and any matching portions are replaced with "{*}".
+Much like the show rules, the sanitization rules have a keyMatch that is used to match the argument or header key. When a keyMatch is found, the additional valueMatch expression is applied to the value and any matching portions are replaced with the masking characters "{*}".
+
+You can change the masking characters with the environment variable `TRACEABILITY_REDACTION_MASKING_CHARACTERS`. Acceptable characters are alphanumeric, between 1-5 characters, and can contain '-' (hyphen), '*' (star), '#' (sharp), '^' (caret), '~' (tilde), '.' (dot), '{' (open curly bracket), and '}' (closing curly bracket) only.
+
+{{% alert title="Note" %}}
+The environment variable must be in double double-quotes to correctly parse the characters that start with a bracket. For example, `TRACEABILITY_REDACTION_MASKING_CHARACTERS=""{*^*}""`.
+{{% /alert %}}
 
 ### Example: Sanitize the whole value of the 'id' query argument
 
@@ -161,6 +167,7 @@ x-authorization-header: {*}value-2
 ```bash
 TRACEABILITY_REDACTION_RESPONSEHEADER_SHOW=[{keyMatch:".*"}]
 TRACEABILITY_REDACTION_RESPONSEHEADER_SANITIZE=[{keyMatch:"^content",valueMatch:"data"}]
+TRACEABILITY_REDACTION_MASKING_CHARACTERS=""{##}""
 ```
 
 If the agent finds the following response headers:
@@ -173,7 +180,7 @@ res-header: just-a-value
 then the following will be sent to the platform:
 
 ```bash
-content-type: return-{*}-type
+content-type: return-{##}-type
 res-header: just-a-value
 ```
 
