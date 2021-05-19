@@ -27,7 +27,7 @@ You can search the environments by their logical name, title, or any tags that a
 
 Each environment in the list contains some basic information:
 
-![Environment Results Details](/Images/central/env_gw_mgmt/environmentlistresults.png)
+![Environment Results Details](/Images/central/env_gw_mgmt/environmentlistresultupdate.png)
 
 1. Title
 2. Logical name
@@ -38,7 +38,7 @@ Each environment in the list contains some basic information:
 7. The number of assets, API services, housed in the environment
 8. The user who last modified the environment, and when
 9. The Production/Non-Production status of the environment. PRODUCTION indicates that the environment will be used to perform production processing or connect to a non-Axway gateway. This usage will be reflected in your entitled quota.
-10. The Axway/Consumer Managed status of the environment. AXWAY MANAGED indicates that this environment is hosted in the Axway Managed Cloud.
+10. HOSTED indicates that this environment is hosted in the Axway Managed Cloud.
 11. Menu with an option to delete the environment
 
 Click the title or logical name of the environment to view additional details.
