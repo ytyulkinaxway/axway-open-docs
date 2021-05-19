@@ -115,8 +115,8 @@ This section connects the agent to API Manager and determines which APIs should 
 
 `APIMANAGER_AUTH_USERNAME`: An API Manager user the agent will use to connect to the API Manager. This user must have either the “API Manager Administrator” or “Organization administrator” role. Based on the role of this user, the agent is able to:
 
-* discover any API from any organization (“API Manager Administrator”)  
-* discovery any API from a specific organization (“Organization administrator”)
+* Discover any API from any organization (“API Manager Administrator”)  
+* Discover any API from a specific organization (“Organization administrator”)
 
 `APIMANAGER_AUTH_PASSWORD`: The password of the API Manager user in clear text.
 
@@ -456,9 +456,7 @@ The agent can be installed as a Linux service with systemd. The following comman
 
 When running as a service, it is best to save your logging to a file rather than the console output. See [Customizing log section (log)](#customizing-log-section-log) above.
 
-* Install
-
-  To install the service and have it execute as user axway and group axway:
+**`install`** - To install the service and have it execute as user axway and group axway:
 
   ```shell
   cd /home/APIC-agents
@@ -468,57 +466,62 @@ When running as a service, it is best to save your logging to a file rather than
 {{% alert title="Note" %}}
 If you are not in the agent directory while installing the service, it is mandatory to add `--pathConfig /home/APIC-agents` to the previous command. Otherwise, pathConfig will be automatically set with current directory.
 
-For the service to start correctly, ensure that the variable `CENTRAL_AUTH_PUBLICKEY` and `CENTRAL_AUTH_PRIVATEKEY` are referencing an absolute path to the file.
+For the service to start correctly, ensure that the variables `CENTRAL_AUTH_PUBLICKEY` and `CENTRAL_AUTH_PRIVATEKEY` are referencing an absolute path to the file.
 {{% /alert %}}
 
-* Start
+**`update`** - The service definition may need to be updated for the following reasons:
 
-  To start the service:
+* A change to the user or group to execute the agent as
+* A change in the path to the configuration or environment variable files
+* Service definition change between agent versions
+
+  To update the service definition and have the agent execute as user axway and group axway:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service update -u axway -g axway --envFile /path/to/da_env_file.env
+  ```
+
+{{% alert title="Note" %}}
+When using the update command, the current service definition will be removed and a new one will be created.  Therefore, it is required to supply all of the necessary values, such as the user and group arguments.
+{{% /alert %}}
+
+**`start`** - To start the service:
 
   ```shell
   cd /home/APIC-agents
   sudo ./discovery_agent service start
   ```
 
-* Logs
-
-  To get all logs for the service, since the machine last booted:
+**`logs`** - To get all logs for the service, since the machine last booted:
 
   ```shell
   cd /home/APIC-agents
   ./discovery_agent service logs
   ```
 
-* Stop
-
-  To stop the service:
+**`stop`** - To stop the service:
 
   ```shell
   cd /home/APIC-agents
   sudo ./discovery_agent service stop
   ```
 
-* Enable
-
-  To enable the service to start when the machine starts:
+**`enable`** - To enable the service to start when the machine starts:
 
   ```shell
   cd /home/APIC-agents
   sudo ./discovery_agent service enable
   ```
 
-* Name
-
-  To get the name of the service:
+**`name`** - To get the name of the service:
 
   ```shell
   cd /home/APIC-agents
   sudo ./discovery_agent service name
   ```
 
-* Remove
-
-  To uninstall the service from the machine:
+**`remove`** - To uninstall the service from the machine:
 
   ```shell
   cd /home/APIC-agents
@@ -901,9 +904,7 @@ The agent can be installed as a Linux service, with systemd. The following comma
 
 When running as a service, it is best to save your logging to a file rather than the console output. See [Customizing log section (logging)](#customizing-log-section-logging) above.
 
-* Install
-
-  To install the service and have it execute as user axway and group axway:
+**`install`** - To install the service and have it execute as user axway and group axway:
 
   ```shell
   cd /home/APIC-agents
@@ -916,54 +917,59 @@ If you are not in the agent directory while installing the service, it is mandat
 For the service to start correctly, ensure that the variable `CENTRAL_AUTH_PUBLICKEY` and `CENTRAL_AUTH_PRIVATEKEY` are referencing an absolute path to the file.
 {{% /alert %}}
 
-* Start
+**`update`** - The service definition may need to be updated for the following reasons:
 
-  To start the service:
+* A change to the user or group to execute the agent as
+* A change in the path to the configuration or environment variable files
+* Service definition change between agent versions
+
+To update the service definition and have the agent execute as user axway and group axway:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./traceability_agent service update -u axway -g axway --envFile /path/to/ta_env_file.env
+  ```
+
+{{% alert title="Note" %}}
+When using the update command, the current service definition will be removed and a new one will be created. Therefore, it is required to supply all of the necessary values, such as the user and group arguments.
+{{% /alert %}}
+
+**`start`** - To start the service:
 
   ```shell
   cd /home/APIC-agents
   sudo ./traceability_agent service start
   ```
 
-* Logs
-
-  To get all logs for the service, since the machine last booted:
+**`logs`** - To get all logs for the service, since the machine last booted:
 
   ```shell
   cd /home/APIC-agents
   ./traceability_agent service logs
   ```
 
-* Stop
-
-  To stop the service:
+**`stop`** - To stop the service:
 
   ```shell
   cd /home/APIC-agents
   sudo ./traceability_agent service stop
   ```
 
-* Enable
-
-  To enable the service to start when the machine starts:
+**`enable`** - To enable the service to start when the machine starts:
 
   ```shell
   cd /home/APIC-agents
   sudo ./traceability_agent service enable
   ```
 
-* Name
-
-  To get the name of the service:
+**`name`** - To get the name of the service:
 
   ```shell
   cd /home/APIC-agents
   sudo ./traceability_agent service name
   ```
 
-* Remove
-
-  To uninstall the service from the machine:
+**`remove`** - To uninstall the service from the machine:
 
   ```shell
   cd /home/APIC-agents
@@ -982,7 +988,7 @@ cd /home/APIC-agents
 
 ##### Install and run Dockerized Traceability Agent
 
-* See "To install the Dockerized Discovery Agent" section above for the `ta_env_vars.env` configuration.
+See "To install the Dockerized Discovery Agent" section above for the `ta_env_vars.env` configuration.
 
 1. Copy the `private_key.pem` and `public_key.pem` files that were originally created when you set up your Service Account to a keys directory. Make sure the directory is located on the machine being used for deployment.
 2. Start the Traceability Agent pointing to the `ta_env_vars.env` file, `keys`, and the logging `events` directory. `pwd` relates to the local directory where the docker command is run. For Windows, the absolute path is preferred.

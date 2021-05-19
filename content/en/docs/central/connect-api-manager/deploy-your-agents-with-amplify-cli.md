@@ -153,6 +153,14 @@ When running as a service, it is best to save your logging to a file rather than
   sudo ./traceability_agent service install -u axway -g axway --envFile /path/to/ta_env_file.env
   ```
 
+* Update the services and execute them as user axway and group axway:
+
+  ```shell
+  cd /home/APIC-agents
+  sudo ./discovery_agent service update -u axway -g axway --envFile /path/to/da_env_file.env
+  sudo ./traceability_agent service update -u axway -g axway --envFile /path/to/ta_env_file.env
+  ```
+
 * Start the services:
 
   ```shell
