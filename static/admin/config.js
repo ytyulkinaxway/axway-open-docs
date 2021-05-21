@@ -328,7 +328,7 @@ const collections = [{
   name: 'amplify_relnotes',
   label: 'AMPLIFY Release notes',
   label_singular: 'page in AMPLIFY Release notes section',
-  description: 'Release notes for AMPLIFY Central',
+  description: 'Release notes for AMPLIFY Central.',
   format: 'frontmatter',
 }, {
   ...docsDefaults('central/connect-api-manager', 'central/connect-api-manager'),
@@ -377,7 +377,7 @@ const collections = [{
   name: 'catalog_relnotes',
   label: 'AMPLIFY Unified Catalog Release notes',
   label_singular: 'page in AMPLIFY Unified Catalog Release notes section',
-  description: 'Release notes for AMPLIFY Unified Catalog',
+  description: 'Release notes for AMPLIFY Unified Catalog.',
   format: 'frontmatter',
 }, {
   ...docsDefaults('contribution_guidelines', 'contributing'),
