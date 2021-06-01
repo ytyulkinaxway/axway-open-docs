@@ -5,7 +5,7 @@ draft: false
 weight: 10
 description: Understand how the Traceability Agent can sample the transaction
   information that is sent to Amplify Central.  Learn how you can control the
-  sampling by using the sampling configuration. 
+  sampling by using the sampling configuration.
 ---
 ## Objectives
 
@@ -34,6 +34,13 @@ The `TRACEABILITY_SAMPLING_PER_API` variable, defaulted to `true`, may be change
 
 * A value of `true` means that the percentage is applied to each API ID within the transaction. In this case, regardless of usage, all APIs will have transaction representation in API Observer.
 * A value of `false` means that the percentage is applied globally to all APIs. In this case, APIs with lower utilization may never be seen in API Observer, as the sampling is always the first x of each 100 transactions.
+
+#### Report All Errors
+
+The `TRACEABILITY_SAMPLING_REPORTALLERRORS` variable, defaulted to `false`, may be changed to send all error transaction events to Condor.
+
+* A value of `true` means that all transaction events with a transaction status of *Failure* are sent to Condor and may be seen in API Observer, regardless of the sampling percentage.
+* A value of `false` means that transaction events with a transaction status of *Failure* will follow the sampling percentage and may or may not not be seen in API Observer, as the sampling is always the first x of each 100 transactions.
 
 ### Preparing Traceability Agent
 
