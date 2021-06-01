@@ -84,14 +84,6 @@ INSTALL_DIR/apigateway/groups/GROUP/conf/group.xml
 
 {{< alert title="Note" color="primary" >}}To use this feature you must have set a passphrase for the server using `managedomain` as referenced above.{{< /alert >}}
 
-{{< alert title="Caution" color="warning" >}}
-
-* The correct passphrase for the group must be supplied when new API Gateway servers are created. If the wrong passphrase is supplied, then the newly created API Gateway servers will fail to start.
-* If the group passphrase is not correctly set in the group.xml file, then newly created API Gateway servers will fail to start.
-* If newly created API Gateway servers expect to use a script to provide the passphrase and the group passphrase cannot be correctly set in the group.xml file, then it should be set to "(prompt)" as describe in [Prompt for the passphrase at server startup](/docs/apim_administration/apigtw_admin/general_passphrase/#prompt-for-the-passphrase-at-server-startup).
-
-{{< /alert >}}
-
 Alternatively, you can use a script to automatically provide the passphrase when the API Gateway server starts up. Perform the following steps:
 
 1. Open the following file in your API Gateway installation:
@@ -126,6 +118,12 @@ Alternatively, you can use a script to automatically provide the passphrase when
     The following files should also be protected:
     * `../system/conf/nodemanager.xml`
     * `../skel/service.xml`
+
+{{< alert title="Caution" color="warning" >}}
+
+1. If the group passphrase is not correctly set in the `group.xml` file, then newly created API Gateway servers will fail to start.
+2. If newly created API Gateway servers expect to use a script to provide the passphrase and the group passphrase cannot be correctly set in the `group.xml` file, then you must set the `pvalue` attribute to `"(prompt)"`, as described in [Prompt for the passphrase at server startup](/docs/apim_administration/apigtw_admin/general_passphrase/#prompt-for-the-passphrase-at-server-startup). In this scenario, you must provide the correct passphrase for the group when new API Gateway servers are created. Failing to provide the correct passphrase causes the newly created API Gateway servers fail to start.
+{{< /alert >}}
 
 ## Promotion between environments
 
