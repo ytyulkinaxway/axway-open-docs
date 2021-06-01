@@ -46,7 +46,7 @@ If no threat protection profiles have been configured, perform the following:
 
     **Rules directory**: Enter the name of the subdirectory that stores the threat protection rules. When you download or create ModSecurity security rules, you must put them in this subdirectory. The embedded ModSecurity engine loads all `.conf` files in this directory. The default is `${environment.VDISTDIR}/system/conf/threat-protection/default/activated_rules`.
 
-    **Alert policy**: Select an API Gateway policy you have configured that is executed when a threat protection rule is triggered. The policy can, for example, include an Alert filter to send alert notifications to monitoring systems, or call an API. This setting is optional.
+    **Alert policy**: Select an API Gateway policy you have configured that is executed when a threat protection rule is triggered and `SecRuleEngine` is set to `On`. The policy can, for example, include an Alert filter to send alert notifications to monitoring systems, or call an API. This setting is optional.
 
 3. Deploy the updated configuration to API Gateway after changing any threat protection settings.
 
