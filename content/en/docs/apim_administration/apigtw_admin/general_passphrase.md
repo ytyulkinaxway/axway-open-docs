@@ -1,9 +1,9 @@
 {
 "title": "Configure encryption passphrase",
-"linkTitle": "Configure encryption passphrase",
-"weight":"55",
-"date": "2019-10-14",
-"description": "Encrypt API Gateway configuration data using an encryption passphrase."
+  "linkTitle": "Configure encryption passphrase",
+  "weight": "55",
+  "date": "2019-10-14",
+  "description": "Encrypt API Gateway configuration data using an encryption passphrase."
 }
 
 By default, the API Gateway configuration data is stored unencrypted. However, you can encrypt sensitive information such as passwords and private keys using an encryption passphrase. When the passphrase has been set (and the data has been encrypted with it), you must then enter the passphrase when connecting to API Gateway with Policy Studio, or when API Gateway is starting up, so that the encrypted data can be decrypted. You can enter an encryption passphrase at the level of a local Policy Studio project on the local file system, and at the level of a running API Gateway group instance.
@@ -83,6 +83,14 @@ INSTALL_DIR/apigateway/groups/GROUP/conf/group.xml
 ### Provide the passphrase automatically at startup using a script
 
 {{< alert title="Note" color="primary" >}}To use this feature you must have set a passphrase for the server using `managedomain` as referenced above.{{< /alert >}}
+
+{{< alert title="Caution" color="warning" >}}
+
+* The correct passphrase for the group must be supplied when new API Gateway servers are created. If the wrong passphrase is supplied, then the newly created API Gateway servers will fail to start.
+* If the group passphrase is not correctly set in the group.xml file, then newly created API Gateway servers will fail to start.
+* If newly created API Gateway servers expect to use a script to provide the passphrase and the group passphrase cannot be correctly set in the group.xml file, then it should be set to "(prompt)" as describe in [Prompt for the passphrase at server startup](/docs/apim_administration/apigtw_admin/general_passphrase/#prompt-for-the-passphrase-at-server-startup).
+
+{{< /alert >}}
 
 Alternatively, you can use a script to automatically provide the passphrase when the API Gateway server starts up. Perform the following steps:
 
