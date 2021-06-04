@@ -6,6 +6,30 @@
 "description": "List of known limitations related to the YAML configuration."
 }
 
+## Upgrade YAML configurations made with a Technical Preview release
+
+YAML configuration upgrade is supported in a fully automated way. However, upgrade support to YAML configurations created using a technical preview release, can be performed following these criteria:
+
+* Technical preview releases can be upgraded with manual steps, as described in following sections.
+* Any YAML configuration created before [API Gateway March 21 update](/docs/apim_relnotes/20210330_apimgr_relnotes/) cannot be upgraded.
+* The service pack update (`update_apigw.sh`) script does not support YAML configuration upgrade prior to [API Gateway May 21 update](/docs/apim_relnotes/20210530_apimgr_relnotes/#yaml-configuration-store-ga).
+
+### Upgrade Technical Preview releases
+
+To upgrade configurations made with a [Technical Preview release](/docs/apim_relnotes/20210330_apimgr_relnotes/), perform the following steps:
+
+1. Change directory to your configuration root directory.
+2. Create a file named `_version.yaml` in the `META-INF` directory.
+3. Add the following content to your recently created `META-INF/_version.yaml` file:
+
+  ```yaml
+  ---
+  version: 0.0.0
+
+  ```
+
+You are now ready to run the `yamles upgrade` command. For more information, see [Upgrade YAML configuration](/docs/apim_yamles/apim_yamles_cli/yamles_cli_upgrade).
+
 ## Policy Studio
 
 There is no support for YAML configurations in Policy Studio.
@@ -28,11 +52,7 @@ Support of ES Explorer is limited to viewing and editing YAML configurations.
 
 When an entity store is edited via ES Explorer or the entity store API, some fields in other entities might get reordered, creating more `diffs` than what was really modified.
 
-## Config fragment
-
-* You can convert an XML configuration fragment to YAML.
-* You can view and edit the YAML configuration fragment in ES Explorer.
-* It is not yet possible to import or export YAML configuration fragments in ES Explorer, this can only be done using the `yamles` CLI.
+It is not yet possible to import or export YAML configuration fragments in ES Explorer, this can only be done using the `yamles` CLI.
 
 ## API Manager
 

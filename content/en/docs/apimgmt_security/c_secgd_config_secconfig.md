@@ -6,6 +6,80 @@
 "description": "Describes the main configurable security features of API Gateway, API Manager, and API Portal."
 }
 
+## Default security response headers
+
+The following are out-of-the-box security response headers supported in API Gateway, API Manager, API Client Registry, and API Analytics.
+
+* Strict-Transport-Security
+* Content-Security-Policy
+* X-XSS-Protection
+* X-Content-Type-Options (No-Sniff)
+* X-Frame-Options
+* Cache-Control (no-cache)
+
+### HTTP Strict Transport Security
+
+A Strict-Transport-Security HTTP header is sent with each HTTPS response.
+
+```
+Syntax: Strict-Transport-Security: max-age=<seconds>[; includeSubDomains]
+```
+
+The `max-age` parameter sets the time frame, in seconds, for the secure connection (HTTPS) requirement. It's recommended to set this to a high value, for example, several months. A value below `7776000` is considered too low. The `includeSubDomains` flag defines that the policy applies also for subdomains of the sender of the response.
+
+For more information, see [Configure HTTP Strict Transport Security](/docs/apim_policydev/apigw_gw_instances/configure_http_strict_transport_security).
+
+### Content Security Policy
+
+Content Security Policy [(CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) sets a policy that instructs the browser to only fetch resources, such as scripts, images, or objects, from the specified locations. After CSP is configured, a compliant browser loads resources from locations listed in the policy. CSP reduces the ability of an attacker to inject malicious content and helps to protect a web page from attacks like Cross-Site Scripting (XSS), dynamic code execution, and clickjacking.
+
+```
+Syntax: Content-Security-Policy: <directive> <value>; <directive> <value>;...
+```
+
+The CSP header is enabled by default in API Gateway and API Manager. To change its configuration, you must update the product's Java properties file, `envSettings.props`, which is available in the following locations:
+
+* For API Gateway, update the variable `env.MANAGEMENT.CONTENTSECURITYPOLICY` in the `apigateway/conf/envSettings.props` file.
+* For API Manager, update the variable `env.SERVICES.CONTENTSECURITYPOLICY` in the `apigateway/groups/{group-id}/{instance-id}/conf/envSettings.props` file.
+
+For API Portal settings, see [Define a restrictive Content Security Policy](/docs/apim_installation/apiportal_install/secure_harden_portal/#define-a-restrictive-content-security-policy).
+
+### X-XSS-Protection
+
+The HTTP X-XSS-Protection response header stops pages from loading when they detect reflected cross-site scripting (XSS) attacks.
+
+```
+Syntax: X-XSS-Protection: 1; mode=block
+```
+
+### No-Sniff
+
+The No-Sniff response header helps to protect web applications from being vulnerable to cross-site scripting (XSS) attacks. When this header is not configured, certain browsers might determine the content type and encoding of the response even when these properties are defined correctly. For example, the Internet Explorer and Safari browsers might treat responses with the content type `text/plain` as `HTML`, if they contain HTML tags.
+
+```
+Syntax: X-Content-Type-Options: nosniff
+```
+
+### X-Frame-Options
+
+The X-Frame-Options header avoids click-jacking attacks by ensuring that the content is not embedded into other sites, for example, by denying a page to be displayed in a frame.
+
+This is similar to the `frame-ancestors none` directive in the Content-Security-Policy (CSP) header.
+
+```
+Syntax: X-Frame-Options: DENY
+```
+
+### Cache-Control (No caching)
+
+You can configure the `Cache-Control` directive to prevent the response to be stored in any cache, and any stale stored responses are revalidated. Set `Pragma` for backward compatibility with HTTP/1.0 caches where the Cache-Control HTTP/1.1 header is not yet present.
+
+```
+Syntax:
+Cache-Control: no-cache, no-store, must-revalidate
+Pragma: no-cache
+```
+
 ## API Gateway inbound SSL configuration
 
 API Gateway supports mutual SSL connections on most inbound interfaces, such as HTTPS interfaces, SMTP services, FTP pollers, and JMS services.  Each of these interfaces allows an administrator to configure the server certificate, the list of certificates that are considered trusted to validate the client certificate, and the cipher suite to use in SSL connections.

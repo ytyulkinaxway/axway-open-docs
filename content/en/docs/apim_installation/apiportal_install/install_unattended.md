@@ -16,12 +16,12 @@ To install API Portal in unattended mode by entering all the script options in t
 2. Log in to the host machine as the `root` user.
 3. Extract the installation package:
 
-   ```
+   ```shell
    tar xpvzf <package_name>.tgz
    ```
 4. Run the installation script with the appropriate options. For example:
 
-   ```
+   ```shell
    ./apiportal_install.sh --mysql-ssl=n --install-path="/opt/axway/apiportal/htdoc" --mysql-database=joomla --mysql-host=localhost --mysql-port=3306 --mysql-username=apiportal --mysql-password=password --mysql-encrypt-password=y --mysql-password-passphrase=passphrase --weak-mysql-password=y --initial-ha-instance=n --php-ini="/etc/" --apache-config="/etc/httpd/conf.d/" --use-encryption-key=n --use-ssl=y --ssl-type=2 --restart-apache=y
    ```
 
@@ -35,8 +35,8 @@ To uninstall API Portal in unattended mode by entering all the script options in
 2. Change to the directory containing the API Portal installation package.
 3. Run the uninstall script with the appropriate script options. For example:
 
-   ```
-   ./apiportal_uninstall.sh --mysql-database=testDB --mysql-host=localhost --mysql-port=3306 --mysql-username=root --mysql-password=Admin@123
+   ```shell
+   ./apiportal_uninstall.sh --mysql-keep=n --mysql-database=testDB --mysql-host=localhost --mysql-port=3306 --mysql-username=root --mysql-password=Admin@123
    ```
 
 For more information about the options used with the script, see [Scripts reference](#scripts-reference).
@@ -58,6 +58,12 @@ The following is an example that you can copy and paste, then edit the values, a
 # Accepts yY/nN. Flag indicating whether user wants to
 # continue when PHP could not be detected in Apache.
 apache-without-php=
+
+# Accepts yY/nN. Flag indicating whether API Portal database
+# will be removed. This option only takes effect on
+# API Portal uninstallation. All other mysql options are
+# disregarded when the flag is enabled.
+mysql-keep=
 
 # Accepts yY/nN. Flag indicating whether to use MySQL
 # in SSL mode.
@@ -181,7 +187,7 @@ Example:
 ./apiportal_install.sh --optionfile=options.conf
 ```
 
-```
+```shell
 # uninstall API Portal
 ./apiportal_uninstall.sh --optionfile=options.conf
 ```
@@ -195,6 +201,10 @@ You can use inline options to override the configuration file values.
 This can be useful to avoid adding sensitive data to the configuration file, or when you want to use same file for multiple environments, like different database servers.
 
 {{< alert title="Note" color="primary" >}}Do not add sensitive information to the configuration file.{{< /alert >}}
+
+Watch this video to learn how to install and uninstall API Portal using a configuration file:
+
+{{< youtube HqQ77Cj2s5E >}}
 
 ## Encrypt the Public API user password in unattended mode
 
@@ -218,6 +228,8 @@ To encrypt the Public API mode user password in unattended mode:
 The following lists the options that you can use with the install and uninstall scripts:
 
 * `--apache-without-php`: Accepts yY/nN. Indicates whether to continue when PHP could not be detected in Apache.
+* `--mysql-keep`: Accepts yY/nN. Flag indicating whether API Portal database will be removed. This option only takes effect on API Portal uninstallation. All other mysql options are disregarded when the flag is enabled.
+
 * `--mysql-ssl`: Accepts yY/nN. Indicates whether to use MySQL in SSL mode.
 * `--mysql-ssl-method`: Indicates the method used when SSL mode for MySQL is wanted. Accepts `1` (one-way authentication) or `2` (two-way authentication).
 * `--install-path`: The install path for API Portal. Example: `/opt/axway/apiportal/htdoc`.

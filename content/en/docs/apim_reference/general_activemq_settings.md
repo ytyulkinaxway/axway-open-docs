@@ -56,7 +56,7 @@ Configure the following settings to secure the communication with JMS clients, a
 
 **Enable SSL**:
 
-Specifies whether to use Secure Sockets Layer (SSL) to secure the communication with JMS clients, and between ActiveMQ brokers.
+Specifies whether to use Secure Sockets Layer (SSL) to secure the communication with JMS clients and between ActiveMQ brokers.
 
 **Server Cert**:
 
@@ -64,15 +64,23 @@ When **Enable SSL** is selected, click to select the server certificate with a p
 
 **Accepted cipher suites**:
 
-When **Enable SSL** is selected, select which cipher suites should be accepted by the JMS server when the SSL communication is being established.
-
-* If no cipher suites are selected, the default cipher suites from the Java Security Socket Extension (JSSE) are used.
+When **Enable SSL** is selected, select which cipher suites should be accepted by the JMS server when the SSL communication is being established. If no cipher suites are selected, the default cipher suites from the Java Security Socket Extension (JSSE) are used.
 
 **Require Client Certificates**:
 
-When **Enable SSL** is set, specifies whether to require client certificates for client SSL authentication. For example, for mutual (two-way) SSL communication, you must trust the issuer of the client certificate by importing the client certificate issuer into the certificate store. For details on importing certificates, see [Manage X.509 certificates and keys](/docs/apim_administration/apigtw_admin/general_certificates).
+When **Enable SSL** is set, click to require client certificates for client SSL authentication. For example, for mutual (two-way) SSL communication, you must trust the issuer of the client certificate by importing the client certificate issuer into the certificate store. For details on importing certificates, see [Manage X.509 certificates and keys](/docs/apim_administration/apigtw_admin/general_certificates).
 
 When **Require client certificates** is selected, you can then select the root certificate authorities that are trusted for mutual (two-way) SSL communication between ActiveMQ brokers. For details on importing certificates into the API Gateway certificate store, see [Manage X.509 certificates and keys](/docs/apim_administration/apigtw_admin/general_certificates).
+
+**Enable Hostname Verification**:
+
+When **Enable SSL** is set, click to execute hostname verification between all JMS clients and embedded ActiveMQ brokers. The X509 Certificate used must have the **Subject Alternative Names** (SANs) extension set with `localhost`, `127.0.0.1`, a fully qualified domain name and IP address for each gateway in the group.
+
+Policy Studio does not enable certificate creation with SANs, but you can create certificates using third-party services or tools for example, OpenSSL, then import and deploy them with Policy Studio. For details on importing certificates, see [Manage X.509 certificates and keys](/docs/apim_administration/apigtw_admin/general_certificates).
+
+{{% alert title="Caution" color="warning" %}}
+Disabling hostname verification is a less secure option than using a certificate with SANs populated.
+{{% /alert %}}
 
 ### Authentication settings
 

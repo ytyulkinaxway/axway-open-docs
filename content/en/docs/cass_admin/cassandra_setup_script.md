@@ -1,9 +1,9 @@
 ---
-title: "setup-cassandra script reference"
-linkTitle: "setup-cassandra script"
+title: setup-cassandra script reference
+linkTitle: setup-cassandra script
 weight: 7
 date: 2019-06-05
-description: >
+description: |
   A reference to the `setup-cassandra` script.
 ---
 
@@ -20,14 +20,6 @@ This topic describes how to run the `setup-cassandra` script, and how to configu
 ## Prerequisites
 
 The following prerequisites apply for the `setup-cassandra` script:
-
-### Python
-
-* Cassandra 2.2.5 requires Python 2.7.x *(up to 2.7.10)*
-* Cassandra 2.2.8 requires Python 2.7.x *(up to the latest)*
-* Cassandra 2.2.12 requires Python 2.7.x *(up to the latest)*
-
-{{% alert title="Note" %}}API Gateway 7.7 supports Cassandra 2.2.12. API Gateway 7.5.3 supports Cassandra versions 2.2.5 and 2.2.8.{{% /alert %}}
 
 ### User name and password authentication
 
@@ -159,7 +151,13 @@ You must export and save the node certificate and private key as a PKCS12 file, 
 * For node-to-node: `server.p12` and `server-ca.pem`
 * For client-to-node: `client.p12` and `client-ca.pem`
 
-You must place these files into the same directory where you run the setup-cassandra script from.
+Run the following commands to create keystore and truststore files:
+
+```
+/home/centos/Axway-7.7/apigateway/platform/jre/bin/keytool -keystore /tmp/client-truststore.jks -importcert -file client-ca.pem -storepass JolHiEfuGzb3s -noprompt
+/home/centos/Axway-7.7/apigateway/platform/jre/bin/keytool -importkeystore -deststorepass IMLKW9RqFa9iM -destkeypass IMLKW9RqFa9iM -destkeystore /tmp/client-keystore.jks -srckeystore client.p12 -srcstoretype PKCS12
+/home/centos/Axway-7.7/apigateway/platform/jre/bin/keytool -keystore /tmp/client-keystore.jks -importcert -file client-ca.pem -storepass IMLKW9RqFa9iM -noprompt
+```
 
 To configure TLS/SSL encryption, add the `--enable-server-encryption` or `--enable-client-encryption` option to the script. For example:
 

@@ -17,8 +17,6 @@ The FTP poller supports the following file transfer protocols:
 
 To add a new FTP poller, in the Policy Studio tree, under the **Environment Configuration** > **Listeners** node, right-click the instance name (for example, `API Gateway`), and select **FTP Poller**
 
-> **Add**. This topic describes how to configure the fields on the **FTP Poller Settings** dialog.
-
 For details on how to configure the API Gateway to act as a file transfer service that listens on a port for remote clients, see [Configure a file transfer service](/docs/apim_policydev/apigw_gw_instances/general_file_transfer/).
 
 ## General settings
@@ -109,4 +107,4 @@ The following security settings apply to SFTP connections only:
 
 **Present following key for authentication**: Click the button on the right, and select a previously configured key to be used for authentication from the tree. To add a key, right-click the **Key Pairs** node, and select **Add**. Alternatively, you can import key pairs under the **Environment Configuration** > **Certificates and Keys** node in the Policy Studio tree.
 
-**SFTP host must present key with the following finger print**: Enter the fingerprint of the public key that the SFTP host must present (for example, `43:51:43:a1:b5:fc:8b:b7:0a:3a:a9:b1:0f:66:73:a8`).
+**SFTP server must present key with the following fingerprint**: Enter the fingerprint of the public key that the SFTP server must present, for example, `SHA-256` hash algorithm and `Zs5O+Y+gyl7pmq0hC68nz3M1ehZOTTn5Vyl3WbWERzE` fingerprint value.

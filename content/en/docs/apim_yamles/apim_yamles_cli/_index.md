@@ -20,9 +20,10 @@ The following lists the CLI options and their descriptions:
 * `frag2yaml`: Convert an XML [configuration fragment](/docs/apim_yamles/apim_yamles_cli/yamles_cli_convert/#convert-your-xml-configuration-fragment-to-a-yaml-configuration-fragment) to a YAML configuration fragment.
 * `validate`: [Validate](/docs/apim_yamles/apim_yamles_cli/yamles_cli_validate/#validate-configuration-changes-in-the-yaml-configuration) a YAML configuration.
 * `export`: [Export](/docs/apim_yamles/apim_yamles_cli/yamles_cli_importexport/#export-from-a-yaml-configuration) part of a YAML configuration to create another YAML configuration.
-* `import`: [Import](/docs/apim_yamles/apim_yamles_cli/yamles_cli_importexport/#import-a-yaml-configuration-into-another-yaml-configuration)  a YAML entity store or config fragment into another YAML entity store. For more information.
+* `import`: [Import](/docs/apim_yamles/apim_yamles_cli/yamles_cli_importexport/#import-a-yaml-configuration-into-another-yaml-configuration)  a YAML configuration or a YAML configuration fragment into another YAML configuration.
 * `encrypt`: [Encrypt](/docs/apim_yamles/apim_yamles_cli/yamles_cli_encryption/#encrypt-an-unencrypted-yaml-configuration)  an unencrypted YAML configuration, a string, or a file. For more information.
-* `change-passphrase`: [Change the passphrase](/docs/apim_yamles/apim_yamles_cli/yamles_cli_encryption/#change-the-encryption-passphrase-of-a-yaml-configuration) of a YAML entity store.
+* `change-passphrase`: [Change the passphrase](/docs/apim_yamles/apim_yamles_cli/yamles_cli_encryption/#change-the-encryption-passphrase-of-a-yaml-configuration) of a YAML configuration.
+* `upgrade`: [Upgrade](/docs/apim_yamles/apim_yamles_cli/yamles_cli_upgrade) a YAML configuration.
 
 To get help with a specific option, run:
 

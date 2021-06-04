@@ -6,7 +6,6 @@
   "hide_readingtime": "true",
   "description": "Learn how to use YAML-based configuration with AMPLIFY API Management solution."
 }
-{{< alert title="Public beta" color="warning" >}}This feature is currently a **technical preview** and not yet supported for production use.{{< /alert >}}
 
 ## Introduction
 

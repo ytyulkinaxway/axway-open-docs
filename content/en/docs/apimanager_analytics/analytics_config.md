@@ -45,7 +45,8 @@ Perform the following steps to run `configureserver` in interactive mode:
 5. The following are examples of connection URLs for the supported databases, where `reports` is the name of the database and `DB_HOST` is the IP address or host name of the machine on which the database is running:
     * Oracle: `jdbc:oracle:thin:@DB_HOST:1521:reports`
     * Microsoft SQL Server: `jdbc:sqlserver://DB_HOST:1433;DatabaseName=reports;integratedSecurity=false;`
-    * MySQL/MariaDB: `jdbc:mysql://DB_HOST:3306/reports`
+    * MySQL: `jdbc:mysql://DB_HOST:3306/reports`
+    * MariaDB: `jdbc:mariadb://DB_HOST:3306/reports`
     * IBM DB2: `jdbc:db2://DB_HOST:50000/reports`
 6. Enter the database user name. Defaults to `root`.
 7. Enter the database password.

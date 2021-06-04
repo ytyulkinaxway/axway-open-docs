@@ -1,6 +1,6 @@
 {
-"title": "Configure HTTP strict transport security",
-  "linkTitle": "Configure HTTP strict transport security",
+"title": "Configure HTTP Strict Transport Security",
+  "linkTitle": "Configure HTTP Strict Transport Security",
   "weight": 150,
   "date": "2021-02-26",
   "description": "Create an HSTP profile and configure it for HTTP services."

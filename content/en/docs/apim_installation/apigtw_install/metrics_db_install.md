@@ -15,7 +15,8 @@ The prerequisites for setting up the database are as follows.
 
 You must install a JDBC-compliant database to store the monitoring and transaction data. Axway provides setup scripts for the following databases:
 
-* MySQL or MariaDB
+* MySQL
+* MariaDB
 * Microsoft SQL Server
 * Oracle
 * IBM DB2
@@ -35,11 +36,9 @@ You do not need to install API Gateway Analytics to view monitoring data in API 
 
 You must add the JDBC driver files for your chosen third-party database to your API Gateway and Policy Studio installations as appropriate.
 
-If you are using MariaDB, you must use the MySQL JDBC driver with the MySQL database connection URL, for example, `jdbc:mysql://DB_HOST:3306/reports`. You must also ensure that you are using MySQL JDBC driver version 5.1.29 or earlier, as the later MySQL JDBC driver versions (later 5.1.x, 6.x, 8.x) are not compatible with Maria DB 10.2.
+If you are using MariaDB, you must use the MariaDB JDBC driver (MariaDB Connector/J 2.7.2) with the MariaDB database connection URL, for example, `jdbc:mariadb://DB_HOST:3306/reports`.
 
-If you are using MySQL 8, you will not be able to use both MySQL 8 and Maria DB 10.2 databases in the same configuration. For example, use MySQL 8 as the metrics database and Maria DB 10.2 as the KPS. Also, if using MySQL 8, by default, only the 5.1.x series of JDBC drivers (from 5.1.47 upwards) will work.
-
-If you wish to use a later MySQL JDBC driver version, for example, 8.x, then the MySQL Driver class name in the JDBC Drivers section of the entity store must be updated from `org.gjt.mm.mysql.Driver` to `com.mysql.cj.jdbc.Driver`.
+If you are using MySQL 8, only the later 5.1.x series of JDBC drivers (from 5.1.47 upwards) will work. If you wish to use a later MySQL JDBC driver version, for example, 8.x, then the MySQL Driver class name in the JDBC Drivers section of the entity store must be updated from `org.gjt.mm.mysql.Driver` to `com.mysql.cj.jdbc.Driver`.
 
 ### Add JDBC drivers to API Gateway
 
@@ -74,7 +73,8 @@ To add the third-party JDBC driver files for your database to API Gateway Analyt
 
 API Gateway Analytics and API Manager monitoring read message metrics from a third-party JDBC database and display this information in a visual format to administrators. This is the same database in which API Gateway stores its message metrics and audit trail data. You must first create this database using the third-party database of your choice:
 
-* MySQL or MariaDB
+* MySQL
+* MariaDB
 * Microsoft SQL Server
 * Oracle
 * IBM DB2
@@ -210,11 +210,10 @@ Schema successfully upgraded to:002-leaf
 As an alternative to using the `dbsetup` command, API Gateway also provides separate SQL schema scripts to set up the database tables for each of the supported databases. However, these scripts set up new tables only, and do not perform any upgrades of existing tables. These scripts are provided in the `INSTALL_DIR/analytics/system/conf/sql` or `INSTALL_DIR/apigateway/system/conf/sql` directory in the following sub-directories:
 
 * `/mysql`
+* `/mariadb`
 * `/mssql`
 * `/oracle`
 * `/db2`
-
-The scripts in the `/mysql` folder apply to both MySQL and MariaDB.
 
 You can run the SQL commands in the `analytics.sql` file in the appropriate directory for your database. The following example shows creating the tables for a MySQL database:
 

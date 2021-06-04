@@ -94,6 +94,8 @@ The following JVM setting is also required when importing the API in API Manage
 </ConfigurationFragment>
 ```
 
+If the proxy server is capable of receiving traffic over HTTPS, it is recommended to add a VMArg to send the download request securely over HTTPS, for example, ```<VMArg name="-Dhttp.proxyScheme=https" />```. In addition to the VMArg, you should also add the server cert of the proxy server to the API Gateway's trusted certificate store, which can be done in Policy Studio, see [Manage X.509 certificates and keys](/docs/apim_administration/apigtw_admin/general_certificates). The download request is sent over HTTP if `http.proxyScheme` is set to `http` or if the `http.proxyScheme VMArg` is omitted from the jvm.xml file.
+
 ## Configure API Manager in a multi-datacenter environment
 
 For details on configuring API Manager for a large amount of APIs and data in a multi-datacenter environment, see [Configure API Management in multiple datacenters](/docs/apimgmt_multi_dc/).

@@ -54,13 +54,23 @@ You can customize what API Portal page your API consumers see on first log in, 
 
 You can change the API Portal page users see when they first log in successfully to API Portal. The default behavior is:
 
-* Display the Applications page if at least one application exists
-* Display the API Catalog page if no applications exist
+* Display the Applications page if at least one application exists.
+* Display the API Catalog page if no applications exist.
 
 To change this, follow these steps:
 
 1. In JAI, click **Components > API Portal > Additional Settings**.
 2. In the **Redirect after login** field, enter a menu link (for example, `/index.php?option=com_apiportal&view=home`) or a menu alias (for example, `/home`) to redirect the user to after successful login.
+3. Click **Save**.
+
+### Change the page displayed after unauthorized request
+
+You can change the API Portal page that the users are redirected to after unauthorized request. By default they are redirected to the sign-in page.
+
+To change this, follow these steps:
+
+1. In JAI, click **Components > API Portal > Additional Settings**.
+2. In the **Redirect on unauthorized request** field, enter a menu link (for example, `/index.php?option=com_apiportal&view=home`) or a menu alias (for example, `/home`).
 3. Click **Save**.
 
 ### Enable ReCaptcha and user account locking

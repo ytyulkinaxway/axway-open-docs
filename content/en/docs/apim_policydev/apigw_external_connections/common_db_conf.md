@@ -54,10 +54,9 @@ Enter the fully qualified URL of the location of the database. The following tab
 |--------------------------|--------------------------------------------------------------------------------|
 | **Oracle**               | `jdbc:oracle:thin:@DB_HOST:1521:reports`                                       |
 | **Microsoft SQL Server** | `jdbc:sqlserver://DB_HOST:1433;DatabaseName=reports;integratedSecurity=false;` |
-| **MySQL/MariaDB**        | `jdbc:mysql://DB_HOST:3306/reports`                                            |
+| **MySQL**                | `jdbc:mysql://DB_HOST:3306/reports`                                            |
+| **MariaDB**              | `jdbc:mariadb://DB_HOST:3306/reports`                                          |
 | **IBM DB2**              | `jdbc:db2://DB_HOST:50000/reports`                                             |
-
-{{< alert title="Note" color="primary" >}}You can use the `jdbc:mysql://DB_HOST:3306/reports` URL with both MySQL and MariaDB databases.{{< /alert >}}
 
 **User Name**:
 The user name to use to access the database.

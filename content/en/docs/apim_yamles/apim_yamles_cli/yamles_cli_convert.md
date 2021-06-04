@@ -17,8 +17,6 @@ A YAML configuration generated using `fed2yaml` or `frag2yaml` must be [validate
 
 To start using the YAML format, you must convert an existing valid upgraded XML federated configuration, which can be stored in a `.fed` file, a `.pol`, or a `.pol` and `.env`, or in the usual format of a set of XML files.
 
-Before converting your XML federated configuration, you must upgrade it using [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics/#upgradeconfig-options) or [projupgrade](docs/apim_reference/devopstools_ref/#projupgrade-command-options).
-
 The `--output-dir` must always be specified. This is the location where the YAML configuration will be written. Optionally, if the `--targz` option is used, the conversion will also create a `.tar.gz` file that is ready for deployment. The `.tar.gz` is created in addition to the content in the `--output-dir`.
 
 The following are examples of how you can use `fed2yaml` in the `yamles` CLI to convert an XML federated configuration:
@@ -30,7 +28,7 @@ The following are examples of how you can use `fed2yaml` in the `yamles` CLI to 
 * Create a `.tar.gz` file of the content of `/home/user/yaml`.
 
 ```
-./yamles fed2yaml --source /home/user/apiprojects/myfed --output-dir /home/user/yaml --targz myconfig.tar.gz
+./yamles fed2yaml --source /home/user/apiprojects/myfed --output-dir /home/user/yaml --targz /home/user/archives/myconfig.tar.gz
 ```
 
 **Example 2:**

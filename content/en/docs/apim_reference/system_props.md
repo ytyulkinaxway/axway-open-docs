@@ -411,3 +411,13 @@ Axway-defined Java system properties introduced in the 7.7 20210330 release
 |com.axway.apimanager.user.tlds | API Manager|Specifies a list of user defined top level domains to be included in domain valiation when adding a Trusted Certificate to an API Manager front-end API using a url. |
 |com.axway.apimanager.configure.catalog.parallel.enabled | API Manager |If set to true, enables multi-threaded load of API Catalog. Default value: true. |
 |com.vordel.coreapireg.runtime.broker.parameters.allowEmptyDefault | API Manager; Runtime |If set to true, empty query parameters are permitted by default unless the Swagger query parameter definition contains `allowEmptyValue: false`. Default value: false. |
+
+## 7.7 May 2021
+
+Axway-defined Java system properties introduced in the 7.7 20210530 release
+
+| System Property                                  | Context     | Description   |
+| ------------------------------------------------ | ----------- | ------------- |
+|http.proxyScheme | API Manager | Specifies the scheme to be used, HTTP or HTTPS, when importing an API from a URL through a HTTP Proxy or HTTPS Proxy Server.  |
+|com.axway.apimanager.fault.legacy.soap | API Manager; WSDL; SOAP | If set to true, it will revert to the legacy error response codes for invalid SOAP 1.1 requests. Default value: false. |
+|com.vordel.oathAuthorizationRecordsThreshold | API Manager | Specifies the threshold for the records displayed on OAuth Authorizations page. Default value: 10000. |

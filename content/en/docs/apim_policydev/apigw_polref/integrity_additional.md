@@ -186,9 +186,9 @@ You can configure the following settings in this tab:
 * **Alternate JWT Audiences**: Allows to set the JWT `aud` value to be an array of case-sensitive strings, each string containing a StringOrURI value.
 * **Extend JWT Payload using a Policy**: Select a policy that when called, the contents of its invocation are added to the JWT Payload.
 
-### Output
+### Sign Output
 
-From the **Output** tab you can configure how the filter returns a JWS object. You can configure the following options:
+The **Output** tab lets you configure how the filter returns a JWS object. You can configure the following options:
 
 * **Set an attribute with the generated signature**: Takes an **Attribute Name** as a parameter. When the filter completes, the JWS object will be accessible in that attribute through the use of a selector.
 * **Add the generated signature to an HTTP Header**: Sets the JWS as an HTTP header on the current circuit Message. You must enter the header name, and select one of the following options:
@@ -349,6 +349,20 @@ For more information about detached JWS, see [Appendix F of JWS RFC 7515](https:
 {{< alert title="Note" color="primary" >}}When using detached signatures, the detached payload must not be base64 encoded. You must add a `"b64: false"` header claim to the JWS token to enforce this behavior. See [JWS Unencoded Payload Option RFC 7797](https://tools.ietf.org/html/rfc7797) for more information.{{< /alert >}}
 
 **Validate payload claims**: Select a policy to perform additional validation of the token payload. The payload value is made available to the policy via the `${jwt.body}` message attribute. If a detached signature is configured, the `${jwt.body}` is not created and the attribute with the location of the payload, which defaults to `${content.body}`, should be used instead.
+
+### Verify Output
+
+The **Output** tab lets you configure how the filter returns a JWS object. Configuring the payload options in this tab is not necessary if **Detached Signature** is selected in the **Advanced** tab, as the payload will be available in the `detached payload message` attribute instead.
+
+You can configure the following options:
+
+* **Set payload as Content Body**: Writes the JWT payload to the `${content.body}` attribute.
+* **Use cty header for content-type**: Sets the content-type of the message body to be the value of the `cty` header in the JWT.
+* **Default content-type**: Defines a default content-type, which is used if **Use cty header for content-type** is not selected, or if it is selected but not present. Default value is `application/octet-stream`.
+* **Set payload message attribute**: Takes an **Attribute Name** as a parameter. When the filter completes, the JWT payload is accessible in that attribute through the use of a selector. There is also an **Attribute Format** selector to specify whether the attribute should be a `string` or a `JSON object`.
+* **Set header message attribute**: Takes an **Attribute Name** as a parameter. When the filter completes, the JWT header is accessible in that attribute through the use of a selector.
+
+{{< alert title="Note" color="primary" >}}When setting the payload message attribute with the **Attribute Format** set to *JSON*, the filter will fail if the payload is not valid *JSON*.{{< /alert >}}
 
 ### Additional JWT verification steps
 

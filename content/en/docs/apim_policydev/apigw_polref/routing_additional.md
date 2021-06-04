@@ -122,7 +122,7 @@ The following security settings apply to SFTP connections only:
 
 **Present following key for authentication**: Click the button on the right, and select a previously configured key to be used for authentication from the tree. To add a key, right-click the **Key Pairs** node, and select **Add**. Alternatively, you can import key pairs under the **Environment Configuration** > **Certificates and Keys** node in the Policy Studio tree.
 
-**SFTP host must present key with the following finger print**: Enter the fingerprint of the public key that the SFTP host must present (for example, `43:51:43:a1:b5:fc:8b:b7:0a:3a:a9:b1:0f:66:73:a8`).
+**SFTP server must present key with the following fingerprint**: Enter the fingerprint of the public key that the SFTP server must present, for example, `SHA-256` hash algorithm and `Zs5O+Y+gyl7pmq0hC68nz3M1ehZOTTn5Vyl3WbWERzE` fingerprint value.
 
 ## File download filter
 
@@ -190,7 +190,7 @@ The following security settings apply to SFTP connections only:
 
 **Present following key for authentication**: Click the button on the right, and select a previously configured key to be used for authentication from the tree. To add a key, right-click the **Key Pairs** node, and select **Add**. Alternatively, you can import key pairs under the **Environment Configuration** > **Certificates and Keys** node in the Policy Studio tree.
 
-**SFTP host must present key with the following finger print**: Enter the fingerprint of the public key that the SFTP host must present (for example, `43:51:43:a1:b5:fc:8b:b7:0a:3a:a9:b1:0f:66:73:a8`).
+**SFTP server must present key with the following fingerprint**: Enter the fingerprint of the public key that the SFTP server must present (for example, `SHA-256` hash algorithm and `Zs5O+Y+gyl7pmq0hC68nz3M1ehZOTTn5Vyl3WbWERzE` fingerprint value).
 
 ## Extract path parameters filter
 

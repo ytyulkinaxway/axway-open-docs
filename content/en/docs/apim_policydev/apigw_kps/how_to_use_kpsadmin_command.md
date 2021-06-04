@@ -195,6 +195,7 @@ The full `kpsadmin` command options are:
 | `--uuid=UUID`                 | Specify the UUID required when backing up or restoring data.                                 |
 | `--mdc`                       | When using the `diagnostics` command, specify that this is a multi-datacenter configuration. |
 | `--passphrase`                | KPS backup passphrase. Leave it blank if none was set.                                       |
+| `--oldpassphrase`             | Old KPS passphrase. Leave it blank if none was set.                                       |
 
 ### Example `kpsadmin` scriptable commands
 
@@ -214,10 +215,10 @@ To back up and restore an API Gateway group from a staging environment to a prod
 After an encryption passphrase change and deployment, you must re-encrypt the KPS data. To re-encrypt at the group level:
 
 ```
-./kpsadmin --username admin --password changeme --group "Staging" --name "Gateway1" reencrypt
+./kpsadmin --username admin --password changeme --oldpassphrase "" --group "Staging" --name "Gateway1" reencrypt
 ```
 
-You are prompted to enter the passphrase.
+Leave the old passphrase blank if none was set.
 
 #### Show KPS table details
 

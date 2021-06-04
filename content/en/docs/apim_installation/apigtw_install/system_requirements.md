@@ -29,16 +29,16 @@ Axway makes every effort to add support for new kernels and distributions in a t
 
 Your Linux system must have the `LANG` environment variable set. If this variable is not configured correctly, your system might have issues handling Unicode characters in file names. A full installation of Linux should configure this for you automatically. If you are running the API Gateway in a Docker image that you have built, set this variable in your Dockerfile as follows:
 
- ```
+```
 ENV LANG=en_US.UTF-8
 ```
 
-This variable is set for you in EMT mode.
+This variable is automatically set for you in EMT mode.
 
-In CentOS 8.x and Red Hat Enterprise Linux 8.x `glibc` no longer includes `libnsl` library. This was included in earlier releases and is required by the API Gateway. To install the library:
+In CentOS 8.x and Red Hat Enterprise Linux 8.x, the GNU C Library (glibc) no longer includes `libnsl` and `glibc-langpack-en` libraries. However, those were included in previous releases and are required by the API Gateway. To install the missing libraries, run the following command:
 
 ```
-sudo yum install libnsl
+sudo yum install libnsl glibc-langpack-en
 ```
 
 ### Windows
@@ -83,7 +83,7 @@ This section describes the supported database versions.
 API Gateway and API Manager support the following relational databases to store metrics data:
 
 * MySQL Server 5.7, 8.0
-* MariaDB 5.5, 10.1
+* MariaDB 10.2, 10.5
 * Microsoft SQL Server 2016, 2017, and 2019
 * Oracle 12.2, 18c, and 19c
 * IBM DB2 10.5
