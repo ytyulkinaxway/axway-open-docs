@@ -206,14 +206,6 @@ This is very useful for development or local environment, when your YAML configu
 
 The placeholder will be replaced by an encrypted value in case a non-empty passphrase is set.
 
-### Sub expression
-
-**Scope**:
-
-* `values.yaml` files.
-* YAML Entity files (not recommended).
-* You can combine expressions together. For example, ```{{base64 (env "DB_PASSSWORD" "s3cr3t")}}```. This `base64` example encodes the content of the environment variable `DB_PASSSWORD` or `s3cr3t` if unset.
-
 ### Reserved words
 
 The following words are not allowed at the beginning of a `{{...}}` expression:
@@ -222,8 +214,6 @@ The following words are not allowed at the beginning of a `{{...}}` expression:
 * `true` and `false`
 * `undefined`
 * Digits, as first characters. For example, `{{42_foo.bar}}`.
-
-In `values.yaml`, you can only use letters (including `_`) and digits (not at starting position).
 
 Examples:
 
@@ -313,6 +303,8 @@ db:
   password: {{base64 "changeme"}}
 
  ```
+
+In `values.yaml`, you can only use letters (including `_`) and digits (not at starting position).
 
 ### Usage
 

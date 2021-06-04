@@ -136,6 +136,8 @@ Sometimes you cannot follow these best practices and some key fields will contai
 
 You can use single or multiple entity files.
 
+See [YAML Schema](/docs/apim_yamles/apim_yamles_references/yamles_yaml_schema) for detailed specifications of entity files.
+
 ### Single entity file
 
 The following is an example of how to list all the possible elements you can encounter.
@@ -235,13 +237,17 @@ Each entity in the YAML entity store is uniquely identified in a YamlPK. A YamlP
 
 A YamlPK is composed of the key field values of an entity.
 
+Given the following definition **keyFields** = `keyFieldValue[,nextKeyFieldValue]*`
+
 The format of a YamlPK is:
 
 ```
-/Top-level Folder/parentKeyFieldValue-0[,parentKeyFieldValue-n]*[/.../lastChildKeyFieldValue-0[,lastChildKeyFieldValue-n]*]
+`/Top-level-Folder/keyFields[/keyFields]*`
 ```
 
-Normally, there is only one key field:
+For more information on detailed specification of YamlPK structure see [YAML Schema](/docs/apim_yamles/apim_yamles_references/yamles_yaml_schema/#reference-syntax).
+
+In most cases there is only one key field:
 
 ```
 /Libraries/Cache Manager/HTTP Sessions
@@ -270,7 +276,7 @@ In this example, you can see the entity pointing to a cache named `OAuth AuthZ 
 
 * Child reference `./keyFieldValue-0[,keyFieldValue-1]`
 * Sibling reference `../keyFieldValue-0[,keyFieldValue-1]`
-* Cousin reference `../../keyFieldValue-0[,keyFieldValue-1]/keyFieldValue-0[,keyFieldValue-1]/`
+* Cousin reference `../../keyFieldValue-0[,keyFieldValue-1]/keyFieldValue-0[,keyFieldValue-1]`
 
 Example:
 

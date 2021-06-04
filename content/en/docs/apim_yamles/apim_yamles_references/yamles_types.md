@@ -12,6 +12,8 @@ An [entity type](/docs/apigtw_devguide/entity_store/#entity-types) is a descript
 
 The YAML Entity store supports all entity types and custom types.
 
+Please refer to dedicated page for the [Entity Type files schema](/docs/apim_yamles/apim_yamles_references/yamles_yaml_schema/#entity-type-files)
+
 ## Simple type
 
 ```yaml
@@ -57,10 +59,6 @@ keyFields:
 - name
 loadorder: 1000100
 ```
-
-{{% alert title="Note" color="" %}}
-`{}` is YAML syntax for an empty list as all fields can potentially be a list of values.
-{{% /alert %}}
 
 ## Types with inheritance
 
