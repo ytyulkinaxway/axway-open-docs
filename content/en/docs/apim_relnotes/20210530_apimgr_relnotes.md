@@ -375,12 +375,6 @@ To circumvent this problem, edit the API Gateway server configuration using Poli
 
 Related Issue: RDAPI-23549
 
-### Policy Studio cannot upgrade Nodemanager or Analytics projects on import
-
-Policy Studio cannot directly open or import Nodemanager or Anlytics projects or `.fed` files in this update. You must use the tools `projupgrade` and `upgradeconfig`, located in the `posix/bin/` folder, to upgrade the resources before they are imported in Policy Studio.
-
-Related Issue: RDAPI-23867
-
 ## Documentation
 
 <!-- This section describes documentation enhancements and related documentation.
