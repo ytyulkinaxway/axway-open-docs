@@ -13,24 +13,24 @@ For example, sensitive data such as user passwords or credit card details can be
 
 ## API Gateway redaction configuration
 
-In the API Gateway configuration, message redaction rules are configured in the following XML file:
+In the API Gateway configuration, message redaction rules are configured by adding a reference to include an XML file, usually called `redaction.xml`, within the `service.xml` file located at `apigateway/groups/GROUP/INSTANCE/conf/service.xml`.
 
-```
-apigateway/system/conf/redaction.xml
-```
+The `redaction.xml` file is usually located at `apigateway/groups/GROUP/INSTANCE/conf/redaction.xml`.
 
 When the configuration is loaded, this creates redactors for the specified message protocol and content. This XML-based configuration uses the following model:
 
 ```
-<Redaction enabled=”true” provider="redactors">
+<Redaction enabled="true" provider="redactors">
+    <HTTPRedactor>...</HTTPRedactor>
     <JSONRedactor>...</JSONRedactor>
     <RawRedactor>...</RawRedactor>
     <XMLRedactor>...</XMLRedactor>
-    <HTTPRedactor>...</HTTPRedactor>
     <FormRedactor>...</FormRedactor>
     <TraceRedactor>...</TraceRedactor>
 </Redaction >
 ```
+
+The `HTTPRedactor` element is required because it lists which URLs redaction rules are applied to. The other redactor types are optional.
 
 During the transaction processing, for each traffic monitoring stream, a chain of redactors is created for redacting the received and sent data. Each redactor removes any sensitive data that it finds and passes the data for the next redactor for processing. The redacted content is then written to the traffic monitoring database.
 
@@ -84,7 +84,7 @@ To enable redaction for an API Gateway instance, perform the following steps:
    ...
    </ConfigurationFragment>
    ```
-4. You can customize this file to configure redactors for different message payloads (HTTP, JSON, HTML form, and plain text). This is described in the next sections.
+4. You can customize this file to configure redactors for different message payloads (HTTP, JSON, HTML form, and plain text), but you must ensure that you have an `HTTPRedactor` that specifies which URLs redaction will be applied to. This is described in the next sections.
 5. Edit the following file:
 
    ```
@@ -100,9 +100,9 @@ To enable redaction for an API Gateway instance, perform the following steps:
    ```
 7. Restart the API Gateway instance.
 
-For all message content (HTTP, JSON, HTML form, and plain text), you must first ensure that the appropriate URL is defined in an `HTTPRedactor`.
-
 ## Redact HTTP message content
+
+Within the redaction configuration, you must specify an `HTTPRedactor` with the URLs you wish to enable redaction on. Redaction rules are not processed for URLs not listed in one of the `HTTPURL` values in the `HTTPRedactor`. The other redactors have no effect if an `HTTPRedactor` is not defined.
 
 You can redact any HTTP header or parameter value from the API Gateway message stream based on HTTP URLs specified in configuration. This applies to both HTTP requests and responses. The following shows a simple example configured in `redaction.xml`:
 
@@ -154,6 +154,12 @@ This is different from:
 
 ```
 <HTTPURL value="/order/shiptoaddress"/>
+```
+
+Finally, to define an `HTTPURL` that matches everything, use the following:
+
+```
+<HTTPURL value="/" match="prefix"/>
 ```
 
 ### Supported HTTP features
