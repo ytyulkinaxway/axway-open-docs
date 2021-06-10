@@ -147,12 +147,11 @@ sudo apt-get install -y nodejs
 
 See [Node.js Binary Distributions](https://github.com/nodesource/distributions/blob/master/README.md) for instructions for installing other versions on Ubuntu.
 
-Enter the following commands in WSL to install PostCSS using `npm`:
+Enter the following command in WSL to install PostCSS using `npm`:
 
 ```
 cd ~/axway-open-docs
-sudo npm install -D --save autoprefixer
-sudo npm install -D --save postcss-cli
+sudo npm install
 ```
 
 ## Build the site locally
