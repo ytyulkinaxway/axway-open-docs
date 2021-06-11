@@ -67,7 +67,7 @@ Fixes are only applied if they have not previously been applied.
 To install the update on your existing API Gateway 7.7 server installation, perform the following steps:
 
 1. Ensure that your existing API Gateway instance and Node Manager have been stopped.
-2. Remove any previous patches from your `INSTALL_DIR/ext/lib` and `INSTALL_DIR/META-INF` directories (or the `ext/lib` directory in an API Gateway instance). All patches have already been included in API Gateway One Version, so you do not need to copy patches from a previous version.
+2. Remove any previous patches from your `INSTALL_DIR/apigateway/ext/lib` and `INSTALL_DIR/apigateway/META-INF` directories (or the `ext/lib` directory in an API Gateway instance). All patches have already been included in API Gateway One Version, so you do not need to copy patches from a previous version.
 3. If you have used `setcap` to grant API Gateway permission to use privileged ports (see, [Allow the API Gateway to listen on privileged ports](#allow-the-api-gateway-to-listen-on-privileged-ports)), remove these permissions now because thy might prevent files from being overwritten.
 
    ```
@@ -223,7 +223,12 @@ To install the update on your existing API Gateway Analytics 7.7 installation, p
    ```
    cd $INSTALL_DIR/analytics
    ```
-7. Run the post-install script for API Gateway Analytics.
+7. Enable the `execute` flag for the post-installation script, if it's not enabled yet:
+
+   ```
+   chmod +x apigw_analytics_sp_post_install.sh
+   ```
+8. Run the post-install script for API Gateway Analytics.
 
    ```
    apigw_analytics_sp_post_install.sh
