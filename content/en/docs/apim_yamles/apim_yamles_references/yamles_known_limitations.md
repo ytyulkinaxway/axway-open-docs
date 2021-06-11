@@ -72,14 +72,6 @@ The YAML format supports API Manager. However, is not possible to run `setup-api
 The format of API Manager data stored in Cassandra is the same regardless of whether a YAML configuration or an XML federated configuration is deployed.
 {{< /alert >}}
 
-## Encrypt or change the passphrase of YAML configuration that contains API Manager configuration
-
-When the default factory API Manager configuration is included in the YAML configuration it cannot be encrypted or re-encrypted. This issue occurs because some fields in the factory configuration do not adhere to the cardinality defined in the Entity Store model.
-
-This issue occurs when the `encrypt` or `change-passphrase` options are used in the `yamles` CLI tool, or when the group passphrase is changed through the `managedomain --change_passphrase` command.
-
-To workaround this, add values or a `/null` value, for the missing fields.
-
 ## Node Manager
 
 YAML configuration for Node manager is not supported.
