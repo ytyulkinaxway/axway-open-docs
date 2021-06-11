@@ -22,7 +22,6 @@ When using Apache Cassandra as a KPS:
 * It is recommended that you set up Cassandra as detailed at [Administer Apache Cassandra](/docs/cass_admin/).
 * For a Cassandra-backed KPS, this API allows you to set a Time to Live (TTL) value for each record. The TTL specifies a time period after which a record expires and becomes unavailable from the table. If you set a TTL, you must specify all fields that are not auto-generated when creating or updating records.
 * You should also set the Cassandra `gc_grace_seconds` value to a value larger than the TTL value. This ensures that data is purged sooner than the default (10 days).
-* If you plan to update the KPS table frequently, it is recommended that you configure the Cassandra data source with a **Read Consistency Level** and **Write Consistency Level** of `ONE`.
 
 When configuring KPS tables to use a local Ehcache:
 
