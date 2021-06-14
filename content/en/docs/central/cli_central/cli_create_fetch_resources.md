@@ -61,9 +61,8 @@ axway central get consumeri
 Resource(s) successfully retrieved:
 
 ```
-NAME           AGE           TITLE                RESOURCE KIND    SCOPE KIND   SCOPE NAME
-consumerinst1  a month ago   consumerinst1 title  ConsumerInstance Environment  awsgtw-us-east-2
-
+NAME           AGE           TITLE                RESOURCE KIND    SCOPE KIND   SCOPE NAME          RESOURCE GROUP
+consumerinst1  a month ago   consumerinst1 title  ConsumerInstance Environment  awsgtw-us-east-2    management
 ```
 
 ### Consumer subscription definitions
@@ -83,8 +82,8 @@ axway central get consumersd
 Resource(s) successfully retrieved:
 
 ```
-NAME             AGE           TITLE                 RESOURCE KIND                  SCOPE KIND   SCOPE NAME
-consumersubdef1  a month ago   consumersubdef1 title ConsumerSubscriptionDefinition Environment  awsgtw-us-east-2
+NAME             AGE           TITLE                 RESOURCE KIND                  SCOPE KIND   SCOPE NAME         RESOURCE GROUP
+consumersubdef1  a month ago   consumersubdef1 title ConsumerSubscriptionDefinition Environment  awsgtw-us-east-2   management
 ```
 
 ### Secrets
@@ -104,8 +103,8 @@ axway central get secrets
 Resource(s) successfully retrieved:
 
 ```
-NAME        AGE           TITLE       RESOURCE KIND  SCOPE KIND   SCOPE NAME
-secretname  4 months ago  secrettitle Secret         Environment  apigtw-v77
+NAME        AGE           TITLE       RESOURCE KIND  SCOPE KIND   SCOPE NAME    RESOURCE GROUP
+secretname  4 months ago  secrettitle Secret         Environment  apigtw-v77    management
 ```
 
 ### Webhooks
@@ -125,12 +124,12 @@ axway central get wh
 Resource(s) successfully retrieved:
 
 ```
-NAME                       AGE           TITLE                             RESOURCE KIND  SCOPE KIND   SCOPE NAME
-streams-extension-webhook  a month ago   Streams Extension Webhook         Webhook        Environment  streams-dataplane-integrations
-webhook                    6 months ago  Webhook to invoke requestbin.com  Webhook        Environment  cisco-b2bi
-msflow                     7 months ago  webhook1 title                    Webhook        Environment  swaggerhub
-msflow                     7 months ago  webhook1 title                    Webhook        Environment  azure
-subscriptionwebhook        4 months ago  subscriptionwebhook               Webhook        Environment  apigtw-v77
+NAME                       AGE           TITLE                             RESOURCE KIND  SCOPE KIND   SCOPE NAME                       RESOURCE GRUOP
+streams-extension-webhook  a month ago   Streams Extension Webhook         Webhook        Environment  streams-dataplane-integrations   management
+webhook                    6 months ago  Webhook to invoke requestbin.com  Webhook        Environment  cisco-b2bi                       management
+msflow                     7 months ago  webhook1 title                    Webhook        Environment  swaggerhub                       management
+msflow                     7 months ago  webhook1 title                    Webhook        Environment  azure                            management
+subscriptionwebhook        4 months ago  subscriptionwebhook               Webhook        Environment  apigtw-v77                       management
 ```
 
 ### More sample resources

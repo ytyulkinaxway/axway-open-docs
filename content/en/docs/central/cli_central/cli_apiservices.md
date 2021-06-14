@@ -59,13 +59,13 @@ axway central get apis
 This command outputs a list of all API services in all environments, with information about the API service name, age, title, and environment scope:
 
 ```
-NAME                                  AGE           TITLE                   RESOURCE KIND  SCOPE KIND   SCOPE NAME
-7841311a-3338-11eb-b6eb-0242ac110002  a month ago   PetStore-Secured        APIService     Environment  awsgtw-us-east-2
-2f754bb3-34b2-11eb-986d-000c29b55428  a month ago   Stockquote (V7)         APIService     Environment  cca-m2020-apim
-govuk-pay                             23 days ago   GOV.UK Pay              APIService     Environment  mulesoft
-lyft                                  23 days ago   Lyft                    APIService     Environment  mulesoft
-swagger-petstore-raml                 23 days ago   Swagger Petstore RAML   APIService     Environment  mulesoft
-ably-rest-api                         5 days ago    ably-rest-api           APIService     Environment  apig33
+NAME                                  AGE           TITLE                   RESOURCE KIND  SCOPE KIND   SCOPE NAME         RESOURCE GROUP
+7841311a-3338-11eb-b6eb-0242ac110002  a month ago   PetStore-Secured        APIService     Environment  awsgtw-us-east-2   management
+2f754bb3-34b2-11eb-986d-000c29b55428  a month ago   Stockquote (V7)         APIService     Environment  cca-m2020-apim     management
+govuk-pay                             23 days ago   GOV.UK Pay              APIService     Environment  mulesoft           management
+lyft                                  23 days ago   Lyft                    APIService     Environment  mulesoft           management
+swagger-petstore-raml                 23 days ago   Swagger Petstore RAML   APIService     Environment  mulesoft           management
+ably-rest-api                         5 days ago    ably-rest-api           APIService     Environment  apig33             management
 ```
 
 To get help with a list of supported resource types, run:
@@ -74,41 +74,52 @@ To get help with a list of supported resource types, run:
 axway central get
 ```
 
-This command outputs a table of supported resources, along with their resource kinds and short names:
+This command outputs a table of supported resources, along with their resource kinds, short names, scopes, and resource groups:
 
 ```
 The server supports the following resources:
 
-RESOURCE                  SHORT NAMES  RESOURCE KIND                   SCOPED  SCOPE KIND
-apiserviceinstances       apisi        APIServiceInstance              true    Environment
-apiservicerevisions       apisr        APIServiceRevision              true    Environment
-apiservices               apis         APIService                      true    Environment
-apispecs                  apisp        APISpec                         true    K8SCluster
-awsdataplanes             awsdp        AWSDataplane                    true    Environment
-awsdiscoveryagents        awsda        AWSDiscoveryAgent               true    Environment
-awstraceabilityagents     awsta        AWSTraceabilityAgent            true    Environment
-consumerinstances         consumeri    ConsumerInstance                true    Environment
-consumersubscriptiondefs  consumersd   ConsumerSubscriptionDefinition  true    Environment
-discoveryagents           da           DiscoveryAgent                  true    Environment
-edgedataplanes            edgedp       EdgeDataplane                   true    Environment
-edgediscoveryagents       edgeda       EdgeDiscoveryAgent              true    Environment
-edgetraceabilityagents    edgeta       EdgeTraceabilityAgent           true    Environment
-environments              env          Environment                     false
-integrations              integ        Integration                     false
-k8sclusters               k8sc         K8SCluster                      false
-k8sresources              k8sr         K8SResource                     true    K8SCluster
-meshdiscoveries           meshd        MeshDiscovery                   true    Mesh
-meshes                    mesh         Mesh                            false
-meshservices              meshsvc      MeshService                     true    Mesh
-meshworkloads             meshwrk      MeshWorkload                    true    Mesh
-resourcediscoveries       resourced    ResourceDiscovery               true    K8SCluster
-resourcehooks             resourceh    ResourceHook                    true    Integration
-secrets                   secret       Secret                          true    Integration
-secrets                   secret       Secret                          true    Environment
-specdiscoveries           specd        SpecDiscovery                   true    K8SCluster
-traceabilityagents        ta           TraceabilityAgent               true    Environment
-webhooks                  webh         Webhook                         true    Integration
-webhooks                  webh         Webhook                         true    Environment
+RESOURCE                  SHORT NAMES    RESOURCE KIND                   SCOPED  SCOPE KIND    RESOURCE GROUP
+accessrequestdefinitions  accreqdef      AccessRequestDefinition         true    Environment   management
+accessrequests            accreq         AccessRequest                   true    Environment   management
+apiserviceinstances       apisi          APIServiceInstance              true    Environment   management
+apiservicerevisions       apisr          APIServiceRevision              true    Environment   management
+apiservices               apis           APIService                      true    Environment   management
+apispecs                  apisp          APISpec                         true    K8SCluster    management
+assetmappings             assetmpng      AssetMapping                    true    Environment   management
+assetmappingtemplates     assetmpngtmpl  AssetMappingTemplate            true    Environment   management
+assetreleases             assetrelease   AssetRelease                    false                 catalog
+assetrequestdefinitions   assetreqdef    AssetRequestDefinition          true    Asset         catalog
+assetrequestdefinitions   assetreqdef    AssetRequestDefinition          true    AssetRelease  catalog
+assetrequests             assetreq       AssetRequest                    true    Asset         catalog
+assetrequests             assetreq       AssetRequest                    true    AssetRelease  catalog
+assetresources            assetres       AssetResource                   true    Asset         catalog
+assetresources            assetres       AssetResource                   true    AssetRelease  catalog
+assets                    asset          Asset                           false                 catalog
+consumerinstances         consumeri      ConsumerInstance                true    Environment   management
+consumersubscriptiondefs  consumersd     ConsumerSubscriptionDefinition  true    Environment   management
+discoveryagents           da             DiscoveryAgent                  true    Environment   management
+documents                 docs           Document                        true    Asset         catalog
+documents                 docs           Document                        true    AssetRelease  catalog
+environments              env            Environment                     false                 management
+integrations              integ          Integration                     false                 management
+k8sclusters               k8sc           K8SCluster                      false                 management
+k8sresources              k8sr           K8SResource                     true    K8SCluster    management
+meshdiscoveries           meshd          MeshDiscovery                   true    Mesh          management
+meshes                    mesh           Mesh                            false                 management
+meshservices              meshsvc        MeshService                     true    Mesh          management
+meshworkloads             meshwrk        MeshWorkload                    true    Mesh          management
+releasetags               releasetag     ReleaseTag                      true    Asset         catalog
+resourcediscoveries       resourced      ResourceDiscovery               true    K8SCluster    management
+resourcehooks             resourceh      ResourceHook                    true    Integration   management
+secrets                   secret         Secret                          true    Integration   management
+secrets                   secret         Secret                          true    Environment   management
+specdiscoveries           specd          SpecDiscovery                   true    K8SCluster    management
+stages                    stg            Stage                           false                 catalog
+traceabilityagents        ta             TraceabilityAgent               true    Environment   management
+webhooks                  webh           Webhook                         true    Integration   management
+webhooks                  webh           Webhook                         true    Environment   management
+
 ```
 
 ## Retrieve details of a specific API Service

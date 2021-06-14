@@ -221,8 +221,8 @@ Example:
 axway central get apisvc
 ✔ Resource(s) successfully retrieved
 
-NAME    AGE         TITLE   RESOURCE KIND  SCOPE KIND   SCOPE NAME
-mylist  2 days ago  mylist  APIService     Environment  cli-1618415896316
+NAME    AGE         TITLE   RESOURCE KIND  SCOPE KIND   SCOPE NAME          RESOURCE GROUP
+mylist  2 days ago  mylist  APIService     Environment  cli-1618415896316   management
 ```
 
 ```bash

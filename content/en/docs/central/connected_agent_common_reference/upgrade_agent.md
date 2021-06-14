@@ -135,14 +135,14 @@ Sample of the CLI output when resources are found:
 C:\>axway central get da -s azure
 √ Resource(s) successfully retrieved
 
-NAME                   DATAPLANE TYPE  STATUS   RESOURCE KIND   SCOPE KIND   SCOPE NAME
-azure-discovery-agent  Azure           stopped  DiscoveryAgent  Environment  azure
+NAME                   DATAPLANE TYPE  STATUS   RESOURCE KIND   SCOPE KIND   SCOPE NAME     RESOURCE GROUP
+azure-discovery-agent  Azure           stopped  DiscoveryAgent  Environment  azure          management
 
 C:\>axway central get ta -s azure
 √ Resource(s) successfully retrieved
 
-NAME                      DATAPLANE TYPE  STATUS   RESOURCE KIND      SCOPE KIND   SCOPE NAME
-azure-traceability-agent  Azure           stopped  TraceabilityAgent  Environment  azure
+NAME                      DATAPLANE TYPE  STATUS   RESOURCE KIND      SCOPE KIND   SCOPE NAME   RESOURCE GROUP
+azure-traceability-agent  Azure           stopped  TraceabilityAgent  Environment  azure        management
 ```
 
 Sample of the CLI output when no resources are found:

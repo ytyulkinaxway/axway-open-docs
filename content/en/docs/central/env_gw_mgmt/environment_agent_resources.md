@@ -18,15 +18,15 @@ Refer to `axway central get` to list the resources.
 
 **Discovery Agent resource**:
 
-| RESOURCE                  | SHORT NAMES  | RESOURCE KIND                   | SCOPED  | SCOPE KIND    |
-|---------------------------|--------------|---------------------------------|---------|---------------|
-| discoveryagents           | da           | DiscoveryAgent                  | true    | Environment   |
+| RESOURCE                  | SHORT NAMES  | RESOURCE KIND                   | SCOPED  | SCOPE KIND    | RESOURCE GROUP  |
+|---------------------------|--------------|---------------------------------|---------|---------------|-----------------|
+| discoveryagents           | da           | DiscoveryAgent                  | true    | Environment   | management
 
 **Traceability Agent resource**:
 
-| RESOURCE                  | SHORT NAMES  | RESOURCE KIND                   | SCOPED  | SCOPE KIND    |
-|---------------------------|--------------|---------------------------------|---------|---------------|
-| traceabilityagents        | ta           | TraceabilityAgent               | true    | Environment   |
+| RESOURCE                  | SHORT NAMES  | RESOURCE KIND                   | SCOPED  | SCOPE KIND    | RESOURCE GROUP  |
+|---------------------------|--------------|---------------------------------|---------|---------------|-----------------|
+| traceabilityagents        | ta           | TraceabilityAgent               | true    | Environment   | management
 
 The following samples describe the resources for:
 
@@ -131,8 +131,8 @@ Choose one of following to create an environment:
 Run `axway central get env`. You should see something similar to this:
 
 ```shell
-NAME                            AGE                TITLE                           RESOURCE KIND
-my-amplify-central-environment  a few seconds ago  My beautiful environment title  Environment
+NAME                            AGE                TITLE                           RESOURCE KIND    RESOURCE GROUP
+my-amplify-central-environment  a few seconds ago  My beautiful environment title  Environment      management
 ```
 
 ### Step 3: Create the agent resources
@@ -147,12 +147,12 @@ You should see something similar to this:
 
 ```shell
 // discovery agent
-NAME                     STATUS   AGE           RESOURCE KIND       SCOPE KIND   SCOPE NAME
-my-discovery-agent-name           a minute ago  DiscoveryAgent      Environment  my-amplify-central-environment
+NAME                     STATUS   AGE           RESOURCE KIND       SCOPE KIND   SCOPE NAME                       RESOURCE GROUP
+my-discovery-agent-name           a minute ago  DiscoveryAgent      Environment  my-amplify-central-environment   management
 
 // traceability agent
-NAME                        STATUS   AGE                RESOURCE KIND          SCOPE KIND   SCOPE NAME
-my-traceability-agent-name           a few seconds ago  TraceabilityAgent      Environment  my-amplify-central-environment
+NAME                        STATUS   AGE                RESOURCE KIND          SCOPE KIND   SCOPE NAME                      RESOURCE GROUP
+my-traceability-agent-name           a few seconds ago  TraceabilityAgent      Environment  my-amplify-central-environment  management
 ```
 
 Notice that each agent has an empty column named `STATUS`. This status column will be updated with either `running` when agent is running, `stopped` when agent is stopped or `failed` when the agent cannot establish the connection with the gateway.
