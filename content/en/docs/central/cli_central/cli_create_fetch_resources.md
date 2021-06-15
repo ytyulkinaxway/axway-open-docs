@@ -5,7 +5,6 @@ weight: 120
 date: 2021-01-13T00:00:00.000Z
 description: Creating and fetch different Amplify Central resources using the CLI.
 ---
-
 ## Before You Start
 
 * [Install and authenticate yourself via the Axway Central CLI](/docs/central/cli_central/cli_install/).
@@ -124,7 +123,7 @@ axway central get wh
 Resource(s) successfully retrieved:
 
 ```
-NAME                       AGE           TITLE                             RESOURCE KIND  SCOPE KIND   SCOPE NAME                       RESOURCE GRUOP
+NAME                       AGE           TITLE                             RESOURCE KIND  SCOPE KIND   SCOPE NAME                       RESOURCE GROUP
 streams-extension-webhook  a month ago   Streams Extension Webhook         Webhook        Environment  streams-dataplane-integrations   management
 webhook                    6 months ago  Webhook to invoke requestbin.com  Webhook        Environment  cisco-b2bi                       management
 msflow                     7 months ago  webhook1 title                    Webhook        Environment  swaggerhub                       management
