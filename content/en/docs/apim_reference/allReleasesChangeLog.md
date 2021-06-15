@@ -14,6 +14,14 @@ You can find the release notes for all service packs on [Axway Support](https://
 
 |Update       |New features and enhancements        |Important Changes    |Deprecated features  |Release Date|
 |---------    |---               |---                  |---                  |---         |
+|[7.7.20210530](/docs/apim_relnotes/20210530_apimgr_relnotes/)|Dependency view and revoke access to front-end APIs|From the May update onwards, the update schedule will change from every two months to every three months.                  |PS Antivirus filters                 |30/05/2021|
+||Import APIs over HTTPS through a HTTPS proxy server|Embedded ActiveMQ host name verification|The packet sniffing capability is deprecated from this update                 ||
+||YAML configuration store (GA)|INSTALL_DIR/apigateway folder permissions changed|MariaDB 5.5||
+||Support for MariaDB 10.5|Replacement of MD5 hashed API Gateway configuration files with SHA256|- ||
+||New SHA-256 hash algorithm option on SFTP server fingerprint check|Changes to JWT Verify filter|- ||
+||SFTP server fingerprint check (MD5 hash algorithm)|Analytics CSP Header change|- ||
+||-         |Authorization records threshold added to API Manager OAuth Screen|-||
+|**Update**       |**New features and enhancements**        | **Important Changes**    |**Deprecated features**  |**Release Date**|
 |[7.7.20210330](/docs/apim_relnotes/20210330_apimgr_relnotes/)|Updated cipher scheme |Apache Cassandra security advisory|Antivirus filters |30/03/2021 |
 ||Passphrase policy enforcement|Changes in JWT filters|End of Support for API Management version [7.7 January 2020](/docs/apim_relnotes/20200130_apimgr_relnotes/) |
 ||Security enhancements to JWT Sign and Verify filters|New Cipher schemes for configuration and KPS|End of Support for the browser Internet Explorer 11|
