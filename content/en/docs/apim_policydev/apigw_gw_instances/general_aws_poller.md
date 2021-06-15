@@ -105,4 +105,4 @@ You can optionally configure these settings to tune low level TCP parameters to 
 
 ## Further information
 
-For more detailed information on Amazon Web Services integration, see the *AWS Integration Guide* available from [Axway Support](https://support.axway.com/).
+For more detailed information on Amazon Web Services integration, see the *AWS Integration Guide* available from [Axway Support](https://support.axway.com/kb/176876/language/en).
