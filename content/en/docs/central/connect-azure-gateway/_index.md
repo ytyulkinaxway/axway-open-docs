@@ -98,9 +98,14 @@ You can retrieve your subscription id with the command: `az account show --query
 
 The following is a high-level overview of the required steps to connect Azure API Management services to Amplify Central:
 
+* Create the Service principal
 * Create an Azure Event Hubs Namespace and Event Hub
 * Create an Azure diagnostic setting
 * Configure Azure API's for Azure monitoring
+
+### Creating an Azure service principal for the Traceability Agent
+
+To install an Azure Traceability Agent only, you must create an Azure service principal.  See [Creating an Azure service principal for Discovery Agent](#creating-an-azure-service-principal-for-discovery-agent). To install both an Azure Discovery Agent and an Azure Traceability Agent, use the service principal configuration created in the [Creating an Azure service principal for Discovery Agent](#creating-an-azure-service-principal-for-discovery-agent) section.
 
 ### Creating Azure Event Hubs namespace and Event Hub
 
