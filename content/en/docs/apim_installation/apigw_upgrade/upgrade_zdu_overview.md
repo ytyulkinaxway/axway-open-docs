@@ -1,19 +1,25 @@
 {
-    "title": "Zero downtime upgrade",
-    "linkTitle": "Zero downtime upgrade",
+    "title": "Minimal downtime upgrade",
+    "linkTitle": "Minimal downtime upgrade",
     "weight": 40,
     "date": "2019-10-07",
-    "description": "Perform a zero downtime upgrade (ZDU) to API Gateway 7.7."
+    "description": "Perform a minimal downtime upgrade to API Gateway 7.7."
 }
 
-The standard process to upgrade to API Gateway 7.7 involves a short period of downtime during the apply phase. With most `.fed` files, this downtime should not be more than a few minutes. However, with bigger `.fed` files of large and complex configurations, this downtime can be longer. This topic describes an approach you can take, and some sample scripts you can use as a reference, to achieve a zero downtime upgrade (ZDU) to API Gateway 7.7.
+{{% alert title="Caution" color="warning" %}}
+Zero downtime upgrade (ZDU) is not always achievable for systems with high complexity or restrictions. The following instructions are designed to help you upgrade to API Gateway 7.7 with as little downtime as possible.
+{{% /alert %}}
 
-This approach involves the use of a load balancer to ensure that available API Gateways can always process traffic, and if you are using a DevOps framework, the ZDU sample scripts provide an example for a basic high availability (HA) deployment and an nginx load balancer, to help you understand the required steps. The ZDU sample scripts provide an example only, and although the scripts are somewhat configurable, you must adapt them for your specific needs.
+The standard process to upgrade to API Gateway 7.7 involves a short period of downtime during the _apply_ phase. With most `.fed` files, this downtime should not be more than a few minutes. However, with bigger `.fed` files of large and complex configurations, the downtime can be longer.
 
-The ZDU scripts package is available from [Axway Support](https://support.axway.com/). The package includes scripts for Linux.
+This topic describes an approach you can take, and some sample scripts you can use as a reference, to achieve a minimal downtime upgrade to API Gateway 7.7.
+
+This approach involves the use of a load balancer to ensure that available API Gateways can always process traffic. If you are using a DevOps framework, the sample scripts provide an example for a basic high availability (HA) deployment and an NGINX load balancer to help you understand the required steps. The sample scripts provide an example only, and although the scripts are somewhat configurable, you must adapt them for your specific needs.
+
+You can download the `API Gateway and API Manager 7.7 Zero Downtime Upgrade Scripts` package from [Axway Support](https://support.axway.com/). The package includes scripts for Linux.
 
 {{< alert title="Note" color="primary" >}}
-Use the ZDU sample scripts only for upgrading from API Gateway 7.5.2 or later to 7.7 when Cassandra contains all the shared data.
+Use the sample scripts only for upgrading from API Gateway 7.5.2 or later to 7.7 when Cassandra contains all the shared data.
 
 We recommend that you perform a full upgrade that is completed in a single attempt. Because shared data (in particular quota counts) are involved, it is possible that this data could degrade if an upgraded subset of the domain coexists with a non-upgraded subset for a significant period of time.
 {{< /alert >}}
@@ -30,7 +36,7 @@ The reference configuration is a three-node topology configured as follows:
 
 ![Illustration on the ZDU scripts reference configuration](/Images/UpgradeGuide/APIgw_ZDU_ref_conf.png)
 
-## ZDU script package
+## Description of the ZDU script package
 
 The ZDU script package (for example, `APIGateway_7.7_Package_ZDUScripts_linux-x86-64_BNYYYYMMDDn.zip`) contains the following folders and files:
 
@@ -52,7 +58,7 @@ The following table describes the purpose of each sample script.
 | `command_builder.py`  | Generates the Linux commands to be run (for example, `sysupgrade` commands, commands to start or stop processes).                                                                        |
 | `command_executor.py` | Executes commands on a node (for example, run a `sysupgrade` step, start or stop a process, check if a process is running, roll back). Requires `command_builder` and `command_handler`. |
 | `command_handler.py`  | Handles how commands are run on a node (for example, how to connect to remote nodes to run commands).                                                                                    |
-| `conductor.py`        | Orchestrates the zero downtime upgrade process (for example, connect to all nodes, run sysupgrade steps on each node in sequence, disconnect from all nodes, display a summary).         |
+| `conductor.py`        | Orchestrates the minimal downtime upgrade process (for example, connect to all nodes, run sysupgrade steps on each node in sequence, disconnect from all nodes, display a summary).         |
 | `definitions.py`      | Defines variables used throughout the other scripts.                                                                                                                                     |
 | `load_balancer.py`    | Placeholder script to implement load balancer logic (for example, to enable or disable traffic on a node).                                                                               |
 | `logging_handler.py`  | Provides logging capabilities.                                                                                                                                                           |
