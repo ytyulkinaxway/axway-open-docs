@@ -122,7 +122,7 @@ A browser opens. You are prompted to enter your credentials and choose your plat
 
 If you already have an environment, you can skip this step. Only the environment name will be require later.
 
-Choose one of following to create an environment:
+Create an environment using one of these methods:
 
 * Use the CLI: `axway central create env my-environment-name`.
 * Use the CLI with a file: create a file (myEnvFile.yaml) containing the environment resource definition mentioned above and use `axway central apply -f myEnvFile.yaml` to create it.
@@ -137,11 +137,16 @@ my-amplify-central-environment  a few seconds ago  My beautiful environment titl
 
 ### Step 3: Create the agent resources
 
-Create a file `discovery-agent-res.yaml` with the content explained in the above "Resources descriptions" section. Then execute `axway central apply -f discovery-agent-res.yaml` to create the resource. Be sure to replace the environment name (`my-amplify-central-environment` in the sample) with your environment name in the resource.
+Create agent resources using one of these methods:
 
-Create a file `traceability-agent-res.yaml` with the content explained in "Resources descriptions" section. Then execute `axway central apply -f traceability-agent-res.yaml` to create the resource. Be sure to replace the environment name (`my-amplify-central-environment` in the sample) with your environment name in the resource.
+* Manually use a file containing the content explained in the above [Resources descriptions](#resources-descriptions) section.
+* Use the Axway Central CLI: `axway central create agent-resources`. You will be prompt to select the type of agent (Discovery | Traceability | both), the name of these agents and the type of Gateway (free text).
 
-Once you are done you can verify your work by running the commands `axway central get da` or `axway central get ta` or `axway central get da,ta`
+Reference the CLI output name `CENTRAL_AGENTNAME` variable in your agent configuration file.
+
+Check that the resources were created correctly by using either the Axway Central CLI or by going to **Central WebUI > Topology > Environment**.
+
+Once you are done, verify your work by running the commands `axway central get da` or `axway central get ta` or `axway central get da,ta`
 
 You should see something similar to this:
 

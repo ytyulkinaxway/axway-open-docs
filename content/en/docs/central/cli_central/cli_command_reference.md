@@ -86,9 +86,11 @@ The following table describes the usage, options, and arguments for the `create`
 |`axway central create <command> [options]`             |                                    |
 |`axway central create -f <path_to_file>`               |Create multiple resources from a file|
 |`axway central create environment [options] <name>`    |Create an environment with the specified name. Only environments are currently available for this command|
+|`axway central create agent-resources`                 |Create the mandatory information for connecting agents to Amplify environment|
 |**Commands**                                             |          |
 |`environment`                                            |Create an environment with the specified name  |
 |`service-account`                                        |Create a service account |
+|`agent-resources`                                        |Create the mandatory information for connecting agents to Amplify environment|
 |**Options**                                              |                   |
 |`--client-id=<value>`                                    |Override your DevOps account's client ID |
 |`-f,--file=<path>`                                       |Filename to use to create the resource  |
@@ -111,6 +113,9 @@ axway central create -f ./some/folder/resources.yaml
 
 # create a service account (DOSA)
 axway central create service-account
+
+# create agent resources
+axway central create agent-resources
 ```
 
 ## apply
