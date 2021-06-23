@@ -3,7 +3,7 @@
 "linkTitle": "YAML Schema",
 "weight":"80",
 "date": "2020-09-25",
-"description": "List of all valid syntax and data structures for YAML configuration files."
+"description": "List of all valid syntax and data structures for YAML configuration files." 
 }
 
 {{% alert title="Warning" color="warning" %}}YAML entity store files do not support YAML anchors.{{% /alert %}}
@@ -92,7 +92,7 @@ children:                     # child entity
                               # file placeholder ^
 ```
 
-For more information on how to format YAML, see [YAML Syntax considerations](/docs/apim_yamles/apim_yamles_references/yamles_syntax_considerations).
+For more information on how to format YAML, see [YAML Syntax considerations](/docs/apim_yamles/yamles_edit/#yaml-syntax-considerations).
 
 ### Reference syntax
 

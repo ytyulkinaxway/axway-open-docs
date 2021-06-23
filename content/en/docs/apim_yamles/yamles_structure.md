@@ -3,7 +3,7 @@
 "linkTitle": "YAML entity store structure",
 "weight":"40",
 "date": "2020-09-24",
-"description": "Understand the structure of the YAML entity store."
+"description": "Understand the structure of the YAML entity store." 
 }
 
 The entity store is a generic way to handle any type of configuration. Its model is hierarchical like a file system:
@@ -223,7 +223,7 @@ children:
 ```
 
 * To learn more about syntax, such as `./First Filter` or `../Second Filter`, see [YamlPK and References](/docs/apim_yamles/yamles_structure/#yamlpk-and-references).
-* To learn more about the different ways to write your YAML `.fed`, see [YAML syntax considerations](/docs/apim_yamles/apim_yamles_references/yamles_syntax_considerations).
+* To learn more about the different ways to write your YAML `.fed`, see [YAML syntax considerations](/docs/apim_yamles/yamles_edit/#yaml-syntax-considerations).
 
 ## The YamlPK key
 
