@@ -3,16 +3,16 @@
 "linkTitle": "YAML Schema",
 "weight":"80",
 "date": "2020-09-25",
-"description": "This page list all valid syntax and data structures for YAML configuration files"
+"description": "List of all valid syntax and data structures for YAML configuration files."
 }
 
 {{% alert title="Warning" color="warning" %}}YAML entity store files do not support YAML anchors.{{% /alert %}}
 
 ## Versioning
 
-The schema version of YAML Entity Store is the major version (M) of the jar file located in `%VINST%/apigateway/system/lib/plugins/yaml-entity-store-M.m.p.jar`. You can also find the version in your YAML configuration files in `META-INF/_version.yaml`. The major version is defined following [Semantic Versioning 2.0.0](https://semver.org/) specification.
+The schema version of YAML Entity Store is the major version (M) of the jar file, located in `%VINST%/apigateway/system/lib/plugins/yaml-entity-store-M.m.p.jar`. You can also find the version in your YAML configuration files in `META-INF/_version.yaml`.
 
-When upgrading your configuration switching from a schema to another is transparent for you, it is part of the regular upgrade process.
+The major version is defined following [Semantic Versioning 2.0.0](https://semver.org/) specification.
 
 ## Conventions
 
@@ -34,6 +34,8 @@ This type of file contains configuration (Entity) values.
 
 ### Entity schema
 
+The following is an example template of an entity scheme file:
+
 ```yaml
 ---
 type: string       # Type name, should exist in META-INF/types
@@ -48,11 +50,9 @@ fields:            # Name/value pair(s). Field names exist in the entity type
   ...
 ```
 
-`placeholder` and `reference` syntax are explained in the following sections.
+The `string` value can be any UTF-8 character, except two consecutive `{` that can be replaced by `{{dcb}}`. For more information, see [Placeholders syntax](#placeholders-syntax) section.
 
-`string` value can be any UTF-8 character, except two consecutive `{` that can be replaced by `{{dcb}}` (see dedicated placeholder section).
-
-Example 1:
+The following are examples of entity scheme files:
 
 ```yaml
 ---
@@ -67,8 +67,6 @@ fields:
   wildcardPassword: ""                       # empty string
   timezoneAware: true                        # boolean
 ```
-
-Example 2:
 
 ```yaml
 ---
@@ -94,68 +92,89 @@ children:                     # child entity
                               # file placeholder ^
 ```
 
-For more information on how to format YAML please refer to [YAML Syntax consideration](/docs/apim_yamles/apim_yamles_references/yamles_syntax_considerations)
+For more information on how to format YAML, see [YAML Syntax considerations](/docs/apim_yamles/apim_yamles_references/yamles_syntax_considerations).
 
 ### Reference syntax
 
-A reference is the identifier of an another entity, the YamlPK key. An entity identifier is computed from:
+A reference is the identifier of another entity, the `YamlPK` key. An entity identifier is computed from:
 
 * The position of the entity in the hierarchy.
 * The value of the key fields.
 * What top level directory it is located in.
 
-Definitions:
+The reference entity takes 2 attributes:
 
 * **keyFields**: `keyFieldValue[,nextKeyFieldValue]*`
 * **Type**: entity type name
 
-It is formed as such:
+The reference entity is formed as follows:
 
-`/Top-level-Folder/[(Type)]keyFields[/[(Type)]keyFields]*`
+```
+/Top-level-Folder/[(Type)]keyFields[/[(Type)]keyFields]*
+```
 
-Key values can contains any kind of characters including `/` or `,` this means that a reference is not parsable and ought to be used as a whole.
+* `keyFields` can contains any kind of characters including `/` or `,` this means that a reference is not parsable and it must be used as a whole.
+* `Type` is mandatory when two entities of different types have identical `keyFields` at a given level of hierarchy.
 
-`(Type)` is mandatory when two entities of different types have identical `keyFields` at a given level of hierarchy.
-
-For more information on top level folder see: [YAML Entity Store Directory Mapping](/docs/apim_yamles/apim_yamles_references/yamles_top_directories)
-
-You can get some examples of references in [YAML entity store structure](/docs/apim_yamles/yamles_structure/).
+For more information about the `Top level folder` see, [YAML Entity Store Directory Mapping](/docs/apim_yamles/apim_yamles_references/yamles_top_directories). You can also get some examples of references in [YAML entity store structure](/docs/apim_yamles/yamles_structure/).
 
 #### Absolute reference
 
-An absolute reference starts the root entity `/` and go through all nodes of the hierarchy.
+An absolute reference starts at the root entity and go through all nodes of the hierarchy.
 
-Example:
+Examples:
 
-* `/System/Filter Categories/miscellaneous`
-* `/System/Namespace Configuration/http://schemas.xmlsoap.org/ws/2002/12/secext`
-* `/Policies/(CircuitContainer)Main App` this implies there is another entity with the same name (Main App) at the same hierarchal level with a different type, in this example the other entity would be: `/Policies/(FilterCircuit)Main App`.
+```
+/System/Filter Categories/miscellaneous
+```
+
+```
+/System/Namespace Configuration/http://schemas.xmlsoap.org/ws/2002/12/secext
+```
+
+```
+/Policies/(CircuitContainer)Main App
+```
+
+This example implies that there is another entity with the same name (Main App) at the same hierarchal level with a different type. In this example the other entity would be: `/Policies/(FilterCircuit)Main App`.
 
 #### Relative reference
 
-A reference that points to an entity in the same file, can be written as a relative reference:
+A reference that points to an entity in the same file can be written as a relative reference:
 
-* Child reference `./[(Type)]keyFields`
-* Sibling reference `../[(Type)]keyFields`
-* Cousin reference `../../[(Type)]keyFields/[(Type)]keyFields`
+Child reference:
+
+```
+./[(Type)]keyFields
+```
+
+Sibling reference:
+
+```
+../[(Type)]keyFields
+```
+
+Cousin reference:
+
+```
+../../[(Type)]keyFields/[(Type)]keyFields
+```
 
 #### Selector reference
 
-A reference can also be a selector. See [Selector syntax](/docs/apim_policydev/apigw_poldev/general_selector/#selector-syntax).
+A reference can also be a selector. For more information, see [Selector syntax](/docs/apim_policydev/apigw_poldev/general_selector/#selector-syntax).
 
 #### Null reference
 
-`/null` is a reference that point to *no entity* but remains a valid reference. `/null` is different from `null` that represent *no value*.
+`/null` is a reference that points to *no entity*, but remains a valid reference. `/null` is different from `null`, which represents *no value*.
 
 ### Placeholders syntax
 
-A placeholder starts with `{{` and ends with `}}` leading and trailing space are allowed but eluded during export.
+A placeholder starts with `{{` and ends with `}}`. Leading and trailing spaces are allowed but they are removed during the export task. Placeholders must be surrounded by single quotation marks only if the value of the field `value` starts with a placeholder.
 
-It must be surrounded by single quotes `'` if the fields value starts with a placeholder.
+For more information, see an example of how to [apply placeholders in YAML files](/docs/apim_yamles/yamles_environmentalization/#usage-in-yaml-files).
 
-This page learn you more on how [applying placeholders in YAML files](/docs/apim_yamles/yamles_environmentalization/#usage-in-yaml-files)
-
-The following values are not allowed at the **beginning** of a placeholder:
+The following values are not allowed at the *beginning* of a placeholder:
 
 * `null`
 * `true`
@@ -163,61 +182,60 @@ The following values are not allowed at the **beginning** of a placeholder:
 * `undefined`
 * All digits
 
-#### file placeholder
+#### File
 
-Reads a file to populate a field.
+The `file` placeholder reads a file to populate a field.
 
-`{{file "location" ["pem"|"binary"]}}`
+Syntax:
 
-Locations are relative to the YAML entity file they are declared in. In case the location is relative the file must exists.
+```
+{{file "location" ["pem"|"binary"]}}
+```
 
-Location can also be absolute. Import and upgrade CLI options can support missing absolutes files as their location might only exists at runtime.
+* `location`: The locations are relative to the YAML entity file they are declared in. In case the value of the location is relative, the file must exist, otherwise an error is shown. When value of the location is absolute, the `import` and `upgrade` CLI options can support missing absolutes files as their location might only exist at runtime. But, an error is shown if a file does not exist at deployment time in API Gateway.
+* `pem`: For base64 encoded files containing certificate (or key) PEM headers and footers (`----- BEGIN CERTIFICATE -----`, `----- END PRIVATE KEY -----`...)
+* `binary`: If the file is a binary file that ought to be encoded in base64, it corresponds to `binary` type fields.
 
-In any cases that case an error will be raised if a file do not exists at deployment time in API Gateway.
+#### base64
 
-**pem** option:
+The `base64` placeholder encodes a token in base64.
 
-For base64 encoded files containing certificate (or key) PEM headers and footers (`----- BEGIN CERTIFICATE -----`, `----- END PRIVATE KEY -----`...)
+Syntax:
 
-**binary** option:
+```
+{{base64 "token to encode"}}
+```
 
-If the fine is a binary file that ought to be encoded in base64, it corresponds to `binary` type fields.
+#### env
 
-#### base64 placeholder
+The `env` placeholder reads an environment variable, and a JVM property, if the environment variable does not exist.
 
-Encodes a token in base64.
+If the environment variable is not found, `env` tries to read the it again, this time, in lowercase.
 
-`{{base64 "token to encode"}}`
+If it does not find a value for the environment variable or the JVM property, an `invalid field` string is returned, unless a default value is provided.
 
-#### env placeholder
-
-Reads an environment variable, then a JVM property in case environment variable do not exists. For each of the latter, if the variable is not found, read is performed with the variable name in lowercase. If none of the alternative reads a value, `invalid field` string is returned unless a default value is provided.
-
-`{{env "variable_name" [[default=]"some default value"]}}`
+```
+{{env "variable_name" [[default=]"some default value"]}}
+```
 
 Examples:
 
-`{{env "HOME"}}` will return the home directory
+* `{{env "HOME"}}` - Returns the home directory.
+* `{{env "OS.NAME"}}` - Returns the JVM property `os.name`.
+* `{{env "APP_DB_HOST" default="localhost"}}` - Return `localhost` if, and only if, `APP_DB_HOST` or `app_db_host` are not environment variables, or `-DAPP_DB_HOST` or `-Dapp_db_host` are not set when starting the JVM.
 
-`{{env "OS.NAME"}}` will return the JVM property `os.name`
+#### dcb
 
-`{{env "APP_DB_HOST" default="localhost"}}` will return `localhost` if and only if `APP_DB_HOST` or `app_db_host` is not an environment variable or `-DAPP_DB_HOST` or `-Dapp_db_host` is not set when starting the JVM.
+The `dcb` placeholder allows to escape `{{`. "dbc" stands for **d**ouble **c**urly **b**races.
 
-#### dcb placeholder
-
-Allow to escape `{{`.
-
-`{{dbc}}` will be rendered as `{{`.
-
-`{{dbc "close"}}` will render `}}` although `}}` generally do not need to be escaped.
-
-`dbc` stands for **d**ouble **c**urly **b**races
+* `{{dbc}}` is rendered as `{{`
+* `{{dbc "close"}}` is rendered as `}}`, although `}}` generally do not need to be escaped.
 
 #### values
 
-All other placeholders allow to read property out of `values.yaml` file.
+The `values` placeholders allow you to read properties out of `values.yaml` file.
 
-Allowed characters for a property are:
+Allowed characters for a property from the `values.yaml` file are:
 
 * letters (case insensitive)
 * digits (except in first position)
@@ -226,7 +244,7 @@ Allowed characters for a property are:
 **Special characters**:
 
 * `.` is the property separator
-* `.[x]` or `.x` where `x` is a integer is indexed property accessor
+* `.[x]` or `.x`, where `x` is a integer, is the indexed property accessor
 
 **Expressions**:
 
@@ -243,18 +261,23 @@ Allowed characters for a property are:
 
 #### Sub expression
 
-Placeholder expression can be combined. One placeholder can contain a "call" to another placeholder.
+The `Sub expression` placeholder can be combined with other expressions. One placeholder can contain a "call" to another placeholder.
 
 `{{placeholder1 (placeholder2a)[ (placeholder2b)]}}`
 
 Examples:
 
-* `{{base64 (env "DB_PASSSWORD" "s3cr3t")}}`
-* `{{file (env "CERT_FILE") "pem"}}`
+```
+{{base64 (env "DB_PASSSWORD" "s3cr3t")}}
+```
+
+```
+{{file (env "CERT_FILE") "pem"}}
+```
 
 ## Specialized entity files
 
-For policies, entity files contain two extra properties to group routing and logging related fields that are present for all sub entity types of `Filter`.
+Entity files, used in a policy, contain two extra properties to group routing and logging related fields that are present for all sub-entity types of `Filter`.
 
 ```yaml
 ---
@@ -289,7 +312,7 @@ Property names cannot start with:
 * `false`
 * `undefined`
 
-As it is free from, a proper schema definition do not apply as long as the file is YAML compliant.
+Because the `values.yaml` file follows a free format, a proper schema definition does not apply as long as the file is YAML compliant.
 
 ```yaml
 ---
@@ -319,7 +342,11 @@ Test:
 
 ## Fragment descriptor
 
-Fragment descriptor must located in `META-INF/_fragment.yaml` when importing a fragment although the file is not mandatory. There is no requirement to export a fragment the file can have any name and can be placed anywhere although providing a file is mandatory, for more information see [Import and export YAML configuration using CLI](/docs/apim_yamles/apim_yamles_cli/yamles_cli_importexport).
+The fragment descriptor must be located in the `META-INF/_fragment.yaml` folder. However, when importing a fragment, the file is not mandatory.
+
+When exporting a fragment, the file can have any name and can be placed anywhere. But, providing a file is mandatory.
+
+For more information, see [Import and export YAML configuration using CLI](/docs/apim_yamles/apim_yamles_cli/yamles_cli_importexport).
 
 ```yaml
 ---
@@ -358,7 +385,7 @@ cutBranchIfPresent:
 
  ```
 
-Missing `META-INF/_fragment.yaml` during import is equivalent to this descriptor (imports all entities without override) :
+Missing `META-INF/_fragment.yaml` during import is equivalent to the following descriptor, which imports all entities without override:
 
 ```yaml
 ---
@@ -372,36 +399,36 @@ addIfAbsent:
 
 ## Version file
 
-This file is mandatory in YAML configurations and must be located in `META-INF/_version.yaml`
+This file is mandatory in YAML configurations and must be located in `META-INF/_version.yaml`.
 
 ```yaml
 ---
 version: string # format is: {0-9}+.{0-9}+.{0-9}+
 ```
 
-This is file generated automatically and matches the implementation version.
+This file generated automatically and matches the implementation version.
 
 ## Entity Type files
 
-All entity types are located in `META-INF/types` in there own file. For more information and examples see [Entity types in YAML configuration](/docs/apim_yamles/apim_yamles_references/yamles_types)
+All entity types are located in the `META-INF/types` folder, in there own file. For more information and examples see [Entity types in YAML configuration](/docs/apim_yamles/apim_yamles_references/yamles_types).
 
-In the following schema `AnyTypeName` represent any other type amongst existing types in the configuration.
+In the following schema, `AnyTypeName` represents any other type amongst existing types in the configuration.
 
 ```yaml
-name: string                 # by convention name are CamelCase (with leading capital) and contains only letters
+name: string                 # by convention, name is CamelCase (with leading capital) and contains only letters
 version: integer (non negative)
 [class]: string
 [constants]:
-  constantField1:            # name are camelCase and are of {a-z}{A-Z}{0-9}+ '_' is discourage despite being legal 
+  constantField1:            # name is camelCase and is of {a-z}{A-Z}{0-9}+ '_' is discourage despite being legal 
     type: {integer | long | boolean | string | base64 | utctime}
     value: {integer | long | boolean | string {text|base64} | array} 
-fields:                      # is not mandatory but is restricted to some internal types
-  field1:                    # same rule to name fields
+fields:                      # The name of the field isn't mandatory but is restricted to some internal types
+  field1:                    # same rule as the name of the fields
     type: {integer | long | boolean | string | binary | encrypted | utctime | @AnyTypeName}
     defaultValues:
     - {data|ref}: {integer | long | boolean | string {text|base64} | pk (iff ref) | array (of any type)}
     - {}                     # set this -> {} when no default values is set and cardinality is {'?'|'*'}
-    cardinality: {'?'|1|'*'|'+'} # default is 1
+    cardinality: {'?'|1|'*'|'+'} # defaults to 1
   field2:
     ...
 [components]:
@@ -413,17 +440,24 @@ fields:                      # is not mandatory but is restricted to some intern
 [abstract: true]             # false by default
 ```
 
-The `pk` (a YamlPK key) is formatted as such for default values and is somehow a `reference`:
+The `pk` (a YamlPK key) is formatted as such for default values and is somehow a `reference`. `keyFields` and `Type` tokens are already defined for `reference`.
 
-*keyFields* and *Type* tokens are already defined for `reference`.
+The following shows the format of a `pk`:
 
-`/Top-level-Folder/(Type)keyFields[/(Type)keyFields]*`
+```
+/Top-level-Folder/(Type)keyFields[/(Type)keyFields]*
+```
 
-In `reference` the type is generally not specified, with these it is the mandatory and therefor `pk` are parsable.
+In a `reference` syntax, the `type` is generally not specified, but in Entity type files it is mandatory. As a result, `pk` are parsable.
 
-Examples:
+Examples of `pk` usage:
 
-* `/System/(CategoryGroup)Filter Categories/(Category)miscellaneous`
-* `/System/(NamespacesConfiguration)Namespace Configuration/(WSSENamespace)http://schemas.xmlsoap.org/ws/2002/12/secext`
+```
+/System/(CategoryGroup)Filter Categories/(Category)miscellaneous
+```
 
-This way of writing reference **cannot** be used in entity fields as it expects the format described in the `reference` section.
+```
+/System/(NamespacesConfiguration)Namespace Configuration/(WSSENamespace)http://schemas.xmlsoap.org/ws/2002/12/secext
+```
+
+This way of writing a `reference` expects the format described in the [reference](#reference-syntax) section, therefore it *cannot* be used in entity fields.
