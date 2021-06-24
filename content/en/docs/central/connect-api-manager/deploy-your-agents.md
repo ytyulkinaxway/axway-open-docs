@@ -203,91 +203,12 @@ To install the binary Traceability Agent:
 
 2. Unzip the file `traceability_agent-latest.zip` to get the agent binary (`traceability_agent`) and the template configuration (`traceability_agent.yml`).
 3. Copy both files (`traceability_agent`, `traceability_agent.yml`) into a folder (i.e., `/home/APIC-agents`) on the machine where the API Manager environment is located.
-4. Customize traceability_agent section by setting configuration values to point to the event logs path,  API Gateway, API Manager, and Amplify Central.  There are 2 options to set values:
+4. Customize traceability_agent by setting the necessary environment variables:
 
    * `env_vars` file
    * `traceability_agent.yml`:
-
-   ```yaml
-   ################### Beat Configuration #########################
-   traceability_agent:
-     inputs:
-       - type: log
-        paths:
-         - <PATH_TO>/group-X_instance-Y.log
-        include_lines: ['.*"type":"transaction".*"type":"http".*']
-
-     central:
-        url: https://apicentral.axway.com
-        organizationID: 68794y2
-        team: Dev
-        deployment: prod
-        environment: my-v7-env
-        auth:
-          url: https://login.axway.com/auth
-          realm: Broker
-          clientId: "DOSA_68732642t64545..."
-          privateKey: /home/APIC-agents/private_key.pem}
-          publicKey: /home/APIC-agents/public_key.pem}
-          keyPassword: ""
-        timeout: 10s
-     apigateway:
-       getHeaders: true
-       host: localhost
-       port: 8090
-       pollInterval: 1m
-       auth:
-         username: myApiGatewayOperatorUser
-         password: myApiGatewayOperatorUserPassword
-     apimanager:
-       host: localhost
-       port: 8075
-       pollInterval: 1m
-       apiVersion: 1.3
-       auth:
-         username: myApiManagerUserName
-         password: myApiManagerUserPassword
-
-   # Send output to Central Database
-   output.traceability:
-     enabled: true
-     hosts: ${TRACEABILITY_HOST:ingestion-lumberjack.datasearch.axway.com:453}
-     protocol: ${TRACEABILITY_PROTOCOL:"tcp"}
-     compression_level: ${TRACEABILITY_COMPRESSIONLEVEL:3}
-     bulk_max_size: ${TRACEABILITY_BULKMAXSIZE:100}
-     timeout: ${TRACEABILITY_TIMEOUT:300s}
-     pipelining: 0
-     ssl:
-       enabled: true
-       verification_mode: none
-       cipher_suites:
-         - "ECDHE-ECDSA-AES-128-GCM-SHA256"
-         - "ECDHE-ECDSA-AES-256-GCM-SHA384"
-         - "ECDHE-ECDSA-AES-128-CBC-SHA256"
-         - "ECDHE-ECDSA-CHACHA20-POLY1305"
-         - "ECDHE-RSA-AES-128-CBC-SHA256"
-         - "ECDHE-RSA-AES-128-GCM-SHA256"
-         - "ECDHE-RSA-AES-256-GCM-SHA384"
-     proxy_url: ${TRACEABILITY_PROXYURL:""}
-
-   queue:
-     mem:
-       events: ${QUEUE_MEM_EVENTS:2048}
-       flush:
-         min_events: ${QUEUE_MEM_FLUSH_MINEVENTS:100}
-         timeout: ${QUEUE_MEM_FLUSH_TIMEOUT:1s}
-
-   logging:
-     metrics:
-        enabled: false
-   # Send all logging output to stderr
-     to_stderr: true
-   # Set log level
-     level: ${LOG_LEVEL:info}
-   ```
-
-   * The value for *organizationID* can be found in Amplify Central Platform > Organization.
-   * The value for *clientId* can be found in Service Account. See [Create a Service in Amplify Central](/docs/central/connect-api-manager/prepare-amplify-central/).
+   * The value for *CENTRAL_ORGANIZATIONID* can be found in Amplify Central Platform > Organization.
+   * The value for *CENTRAL_AUTH_CLIENTID* can be found in Service Account. See [Create a Service in Amplify Central](/docs/central/connect-api-manager/prepare-amplify-central/).
    * Traceability Agent variables can be found at [Agent variables](/docs/central/connect-api-manager/agent-variables/).
 5. Run the binary Traceability Agent:
 
@@ -303,7 +224,7 @@ To install the binary Traceability Agent:
      cd /home/APIC-agents
      ./traceability_agent --envFile ./env_vars
      ```
-6. The Traceability Agent parses through the files based on the `event-file` path and pattern provided. Depending on the data found, the agent pushes it to Amplify Central.
+6. The Traceability Agent parses through the files based on the `EVENT_LOG_PATHS` or `OPENTRAFFIC_LOG_PATHS` path and pattern provided. Depending on the data found, the agent pushes it to Amplify Central.
 7. Go to Amplify Central and open the API Observer tab to verify that the agent is working. You should see the monitoring data for the APIs discovered earlier. If you don’t see any data, then invoke a few different API methods in the exposed API.
 8. Click on any of the transactions to see the details. You will see the lifecycle of an API call, such as time taken / request and response headers / etc.
 
@@ -330,9 +251,9 @@ CENTRAL_AUTH_CLIENTID=<CLIENTID, ie. DOSA_12345...>
 CENTRAL_ENVIRONMENT=<Environment>
 ```
 
-* The value for *team* can be found in [Amplify Central > Access > Team Assets](https://apicentral.axway.com/access/teams/).
-* The value for *organizationID* can be found in Amplify Central Platform > Organization.
-* The value for *clientId* can be found in Service Account. See [Create a service account](/docs/central/cli_central/cli_install/#create-a-service-account).
+* The value for *CENTRAL_TEAM* can be found in [Amplify Central > Access > Team Assets](https://apicentral.axway.com/access/teams/).
+* The value for *CENTRAL_ORGANIZATIONID* can be found in Amplify Central Platform > Organization.
+* The value for *CENTRAL_AUTH_CLIENTID* can be found in Service Account. See [Create a Service in Amplify Central](/docs/central/connect-api-manager/prepare-amplify-central/).
 
 ##### Install and run Dockerized Traceability Agent
 
@@ -343,12 +264,13 @@ CENTRAL_ENVIRONMENT=<Environment>
    docker pull axway.jfrog.io/ampc-public-docker-release/agent/v7-traceability-agent:latest
    ```
 
-3. Start the Traceability Agent pointing to the `env_vars` file, `keys`, and the logging `events` directory. `pwd` relates to the local directory where the docker command is run. For Windows, the absolute path is preferred.
+3. Start the Traceability Agent pointing to the `env_vars` file, `keys`, and the logging directory (events or opentraffic). `pwd` relates to the local directory where the docker command is run. For Windows, the absolute path is preferred.
 
    ```shell
-   docker run --env-file ./env_vars -v <pwd>/keys:/keys -v <pwd>/events:/events axway.jfrog.io/ampc-public-docker-release/agent/v7-traceability-agent:latest
+   docker run --env-file ./env_vars -v <pwd>/keys:/keys -v <pwd>/events:/events -v <pwd>/data:/data axway.jfrog.io/ampc-public-docker-release/agent/v7-traceability-agent:latest
    ```
 
+   * The `/data` volume here is used for persisting agent state for container restarts.
    * See [Create and start API Gateway Docker container](/docs/apim_installation/apigw_containers/docker_script_gwimage/#mount-volumes-to-persist-logs-outside-the-api-gateway-container/) for more  information regarding the persistent API Gateway trace and event logs to a directory on your host machine.
    * Run the following health check command to ensure the agent is up and running:
 

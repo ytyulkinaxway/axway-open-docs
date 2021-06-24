@@ -597,7 +597,7 @@ The containerized agent can run in the following mode:
 curl -L "https://axway.jfrog.io/artifactory/ampc-public-generic-release/v7-agents/v7_traceability_agent/latest/traceability_agent-latest.zip" -o traceability_agent-latest.zip
 ```
 
-**Step 2**: Unzip the file traceability_agent-latest.zip to get the agent binary (traceability_agent) and a template configuration file (traceability_agent.yml).
+**Step 2**: Unzip the file traceability_agent-latest.zip to get the agent binary (traceability_agent) and a template configuration file (traceability_agent.yml):
 
 ```shell
 unzip traceability_agent-latest.zip
@@ -605,7 +605,7 @@ unzip traceability_agent-latest.zip
 
 **Step 3**: Copy those 2 files into a folder (/home/APIC-agents for instance) on the machine where the API Manager environment is located.
 
-**Step 4**: If not done yet, move the `private_key.pem` and `public_key.pem` files that were originally created when you set up your Service Account to the agent directory (APIC-agents). Note that the `public_key` comes from Steps 3 or 4 of [Create a Service Account](/docs/central/cli_central/cli_install/#authorize-your-cli-to-use-the-amplify-central-apis) depending if you choose to use the `der` format or not.
+**Step 4**: If not done yet, move the `private_key.pem` and `public_key.pem` files that were originally created when you set up your Service Account to the agent directory (APIC-agents). Note that the `public_key` comes from Steps 3 or 4 of [Create a Service Account](/docs/central/cli_central/cli_install/#authorize-your-cli-to-use-the-amplify-central-apis), depending on whether you choose to use the `der` format.
 
 #### To install the Dockerized Traceability Agent
 
@@ -646,34 +646,69 @@ docker pull axway.jfrog.io/ampc-public-docker-release/agent/v7-traceability-agen
 
 The `ta_env_vars.env` configuration file contain six sections to customize: the beat input, API Manager connectivity, API Gateway connectivity, central connectivity, output ingestion service and logging.
 
-#### Customizing beat input variables
+#### Customizing Traceability Agent beat input variables
 
 This section describes where the API Gateway logs are located on the machine so the beat can read them.
 
-`EVENT_LOG_PATHS`: List all API Gateway event log files (absolute path) the beat will listen to. It could be a single file if there is only one gateway installed on the machine, or multiple files if several gateways are installed on the same machine.
+The agent can work either with the Gateway event logs (**default**) or the Gateway open traffic log. To configure the open traffic log from the Axway Gateway, you must turn it on using Policy Studio. Refer to this [page](/docs/apim_administration/apigtw_admin/admin_open_logging) for more information.
 
-Single Gateway - explicit file name
+##### Sourcing Gateway traffic from event log file(s)
+
+This section describes how to use Gateway event logs for traceability reporting.
+
+`EVENT_LOG_INPUT`: Used to turn on or off the event log input for the Traceability agent. Defaulted is `true`, set to false when using [open traffic](#sourcing-gateway-traffic-from-open-traffic-files).
+`EVENT_LOG_PATHS`: List all API Gateway event log files (absolute path) the beat will listen to. It could be a single file if there is only one Gateway installed on the machine, or multiple files if several Gateways are installed on the same machine.
+
+Single Gateway - explicit file name:
 
 ```shell
 EVENT_LOG_PATHS=<API GATEWAY INSTALL DIRECTORY>/apigateway/events/group-2_instance-1.log
 ```
 
-Multiple Gateways on the same machine - explicit file names
+Multiple Gateways on the same machine - explicit file names:
 
 ```shell
 EVENT_LOG_PATHS=<API GATEWAY INSTALL DIRECTORY>/apigateway/events/group-2_instance-1.log <API GATEWAY INSTALL DIRECTORY>/apigateway/events/group-2_instance-3.log <API GATEWAY INSTALL DIRECTORY>/apigateway/events/group-2_instance-7.log
 ```
 
-Multiple Gateways on the same machine - file path with wildcard
+Multiple Gateways on the same machine - file path with wildcard:
 
 ```shell
 # Input files
 EVENT_LOG_PATHS=<API GATEWAY INSTALL DIRECTORY>/apigateway/events/group-2_instance-?.log
 ```
 
+##### Sourcing Gateway traffic from open traffic file(s)
+
+This section describes how to use API Gateway open traffic logs for traceability reporting, rather than the default event log configuration.
+
+`OPENTRAFFIC_LOG_INPUT`: Used to turn on or off the open traffic log input for the Traceability Agent. Default is `false`. Set `EVENT_LOG_INPUT` to false when using this.
+`OPENTRAFFIC_LOG_PATHS`: List all API Gateway open traffic log files (absolute path) the beat will listen to. It could be a single file if there is only one Gateway installed on the machine, or multiple files if several Gateways are installed on the same machine.
+
+Single Gateway handling log rotation - file path with wildcard:
+
+```shell
+# sample configuration for Gateway standard installation: 
+EVENT_LOG_INPUT=false
+OPENTRAFFIC_LOG_INPUT=true
+OPENTRAFFIC_LOG_PATHS=<API GATEWAY INSTALL DIRECTORY>/apigateway/logs/opentraffic/group-*_instance-*.log
+```
+
+```shell
+# sample configuration for Gateway EMT installation: 
+EVENT_LOG_INPUT=false
+OPENTRAFFIC_LOG_INPUT=true
+OPENTRAFFIC_LOG_PATHS=/events/DefaultGroup_*.log
+```
+
+{{< alert title="Notes" color="" >}}Be careful when entering the file name in `OPENTRAFFIC_LOG_PATHS` variable, as based on the Gateway deployment (standard VS EMT mode). The default name **group-\*_instance-\*.log** might not be accurate if any customization occurred!
+
+When using the open traffic logs, it is not required to configure the Gateway connectivity (`APIGATEWAY_*` variables), as all information the Traceability Agent needs to report is present in the open traffic log.
+{{< /alert >}}
+
 #### Customizing Traceability Agent API Manager connectivity variables
 
-This section is exactly the same as the [Discovery Agent - API Manager](/docs/central/connect-api-manager/gateway-administation/#customizing-discovery-agent-api-manager-connectivity-variables)
+This section is exactly the same as the [Discovery Agent - API Manager](/docs/central/connect-api-manager/gateway-administation/#customizing-discovery-agent-api-manager-connectivity-variables).
 
 Once all data is gathered, this section should look like:
 
@@ -687,11 +722,11 @@ APIMANAGER_AUTH_PASSWORD=apiManagerUserPassword
 
 #### Customizing Traceability Agent API Gateway connectivity variables
 
-This section helps the agent to collect the header from request/response from the API Gateway system.
+This section helps the agent to collect the request/response headers from the API Gateway system.  This is not needed or used when `OPENTRAFFIC_LOG_INPUT` is true.
 
 {{< alert title="Note" color="primary" >}}When APIM is installed in a Docker environment, request/response headers will not be available for the Traceability Agent. Set `APIGATEWAY_HEADERS=false` only in this section.{{< /alert >}}
 
-`APIGATEWAY_GETHEADERS`: Tells the agent to  call the API Gateway API to get additional transaction details (headers). Default value is **true**. If false, API Gateway config does not need to be set and no headers will be send to Amplify Central.
+`APIGATEWAY_GETHEADERS`: Tells the agent to  call the API Gateway API to get additional transaction details (headers). Default value is **true**. If false, API Gateway config does not need to be set and no headers will be sent to Amplify Central.
 
 `APIGATEWAY_HOST`: The host that Axway API Gateway is running on. Default value is **localhost**.
 
@@ -720,7 +755,7 @@ APIGATEWAY_AUTH_PASSWORD=myApiGatewayOperatorUserPassword
 #### Customizing Traceability Agent Central connectivity variables
 
 This section connects the agent to Amplify Central.
-This section is exactly the same as the [Discovery Agent - Central connectivity](/docs/central/connect-api-manager/gateway-administation/#customizing-discovery-agent-central-connectivity-variables)
+This section is exactly the same as the [Discovery Agent - Central connectivity](/docs/central/connect-api-manager/gateway-administation/#customizing-discovery-agent-central-connectivity-variables).
 
 Once all data is gathered, the variable list should look like:
 
