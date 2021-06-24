@@ -52,7 +52,7 @@ For more information, see:
 
 * [Axway API Management User Group - Learn how to DevOps your configuration](https://community.axway.com/s/article/Axway-APIM-User-Group-Learn-how-to-DevOps-your-Configuration).
 * [YAML configuration reference documentation](/docs/apim_yamles/).
-* [Axway University YAML Entity Store](https://university.axway.com/learn/course/1362/play/1759/about-the-yaml-entity-store) free course.
+* [Axway University YAML Entity Store](https://university.axway.com/learn/course/internal/view/elearning/1362/yaml-entity-store) free course.
 
 To follow-up on what's coming based on this capability, see [API Management Roadmap](https://community.axway.com/s/api-management).
 
