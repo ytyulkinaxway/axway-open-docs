@@ -107,9 +107,32 @@ The following steps will guide you through the upgrade procedure:
     * find the container identifier: `docker container ls`
     * `docker container stop {container id}`
     * `docker rm {container id}`
-3. Start the new container:
-    * Discovery Agent: `docker run --env-file ./da_env_vars.env -v <pwd>/keys:/keys axway.jfrog.io/ampc-public-docker-release/agent/azure-discovery-agent:latest`
-    * Traceability Agent: `docker run --env-file ./ta_env_vars.env -v <pwd>/keys:/keys -v <pwd>/events:/events axway.jfrog.io/ampc-public-docker-release/agent/azure-traceability:latest`
+3. Add the AZURE_* properties coming from the `da_env_vars.env` file to  the `ta_env_vars.env` file for Traceability Agent to use Azure API for fetching the metrics for the usage report:
+
+```shell
+#sample configuration after this step:
+
+# added Azure properties from Discovery Agent configuration
+AZURE_TENANTID=300f59df-....
+AZURE_SUBSCRIPTIONID=0fb0f691-....
+AZURE_RESOURCEGROUPNAME=res-group-name
+AZURE_CLIENTID=3be27ccb-....
+AZURE_CLIENTSECRET=edH~Csgc.....
+AZURE_APIMSERVICENAME=beano-apim
+
+
+# existing Azure properties for Traceability Agent
+AZURE_EVENTHUBNAME=sample-event-hub
+AZURE_EVENTHUBNAMESPACE=event-hub-namespace
+AZURE_SHAREDACCESSKEYNAME=SharedAccess
+AZURE_SHAREDACCESSKEYVALUE=zYn2K4P...
+...
+```
+
+Start the new container:
+
+* Discovery Agent: `docker run --env-file ./da_env_vars.env -v <pwd>/keys:/keys axway.jfrog.io/ampc-public-docker-release/agent/azure-discovery-agent:latest`
+* Traceability Agent: `docker run --env-file ./ta_env_vars.env -v <pwd>/keys:/keys -v <pwd>/events:/events axway.jfrog.io/ampc-public-docker-release/agent/azure-traceability:latest`
 
 ## Troubleshooting your upgrade
 
