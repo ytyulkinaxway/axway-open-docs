@@ -734,6 +734,8 @@ This section helps the agent to collect the request/response headers from the AP
 
 `APIGATEWAY_POLLINTERVAL`: The frequency in which the agent polls the logs in us, ms, s, m, h. Default value is **1m**.
 
+`APIGATEWAY_SENDALLTRAFFIC`: Used to determine whether the Traceability Agent should send all traffic to be reported. When set to **false**, only discovered APIs will be reported. Default value is **true**.
+
 `APIGATEWAY_AUTH_USERNAME`: An Axway API Gateway username with the "API Gateway operator" role.
 
 `APIGATEWAY_AUTH_PASSWORD`: The Axway API Gateway username password in clear text.
@@ -748,6 +750,7 @@ APIGATEWAY_HOST=localhost
 APIGATEWAY_PORT=8090
 APIGATEWAY_AUTH_USERNAME=myApiGatewayOperatorUser
 APIGATEWAY_AUTH_PASSWORD=myApiGatewayOperatorUserPassword
+APIGATEWAY_SENDALLTRAFFIC=false
 #APIGATEWAY_GETHEADERS=true 
 #APIGATEWAY_POLLINTERVAL
 ```
@@ -859,6 +862,7 @@ APIGATEWAY_HOST=localhost
 APIGATEWAY_PORT=8090
 APIGATEWAY_AUTH_USERNAME=myApiGatewayOperatorUser
 APIGATEWAY_AUTH_PASSWORD=myApiGatewayOperatorUserPassword
+APIGATEWAY_SENDALLTRAFFIC=true
 # Uncomment this value if APIM is installed in a Docker environment as headers are not accessible in this configuration.
 #APIGATEWAY_GETHEADERS=false
 #APIGATEWAY_POLLINTERVAL
