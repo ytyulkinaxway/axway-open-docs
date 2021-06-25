@@ -1,11 +1,10 @@
 {
 "title": "Additional utility filters",
-"linkTitle": "Additional utility filters",
-"weight": 106,
-"date": "2019-10-17",
-"description": "Additional utility filters, including policy shortcut and policy shortcut chain, and the scripting language filter."
+  "linkTitle": "Additional utility filters",
+  "weight": 106,
+  "date": "2019-10-17",
+  "description": "Additional utility filters, including policy shortcut and policy shortcut chain, and the scripting language filter."
 }
-
 ## Insert BST filter
 
 You can use the **Insert BST**
@@ -65,7 +64,7 @@ or `sales`
 The possible paths through this filter are as follows:
 
 | Result         | Description                                                |
-|----------------|------------------------------------------------------------|
+| -------------- | ---------------------------------------------------------- |
 | `True`         | The specified user is a member of the specified group.     |
 | `False`        | The specified user is not a member of the specified group. |
 | `CircuitAbort` | An exception occurred while executing the filter.          |
@@ -73,6 +72,15 @@ The possible paths through this filter are as follows:
 ## Execute external process filter
 
 This filter enables you to execute an external process from a policy. It can execute any external process (for example, start an SSH session to connect to another machine, run a script, or send an SMS message).
+
+The output of the external process is captured in two variables on the message whiteboard:
+
+* `exec.output`, which contains everything the process printed to the standard output stream, `STDOUT`.
+* `exec.error`, which contains everything that the process printed to the standard error stream, `STDERR`.
+
+These variables might be empty if the program did not print any output to those streams.
+
+For programs that output data to files, a [Load File Contents filter](/docs/apim_policydev/apigw_polref/conversion_additional/#load-file-contents-filter) might be needed to read the output. Also, in this case, you must ensure to implement a logic to clean up old files.
 
 Complete the following fields:
 
@@ -82,21 +90,21 @@ Enter an appropriate name for the filter to display in a policy.
 The **Command**
 tab includes the following fields:
 
-**Command to execute**: Specify the full path to the command to execute (for example, `c:cygwinbinmkdir.exe`).
+**Command to execute**: Specify the full path to the command to execute (for example, `c:/cygwin/bin/mkdir.exe`).
 
 **Arguments**: Click **Add** to add arguments to your command. Specify an argument in the **Value** field (for example, `dir1`), and click **OK**. Repeat these steps to add multiple arguments (for example, `dir2` and `dir3`).
 
 **Working directory**: Specify the directory to run the command from. You can specify this using a selector that is expanded to the specified value at runtime. Defaults to `${environment.VINSTDIR}`, where `VINSTDIR` is the location of a running API Gateway instance.
 
-**Expected exit code**: Specify the expected exit code for the process when it has finished. Defaults to `0`.
+**Expected exit code**: Specify the expected exit code for the process when it has finished. The filter will follow the `true` path when this exit code is received from the process, and it will follow the `false` path otherwise. By following the Unix convention that processes should return zero on success and non-zero on failure, this filter defaults to `0`.
 
 **Kill if running longer than (ms)**: Specify the number of milliseconds after which the running process is killed. Defaults to `60000`.
 
 The **Advanced**
 tab includes the following fields:
 
-**Environment variables to set**: Click **Add** to add environment variables. In the dialog, specify an **Environment variable name** (for example, `JAVA_HOME`) and a **Value** (for example, `c:jdk1.6.0_18`), and click **OK**. Repeat to add multiple variables.
-  
+**Environment variables to set**: Click **Add** to add environment variables. In the dialog, specify an **Environment variable name** (for example, `JAVA_HOME`) and a **Value** (for example, `c:/jdk1.6.0_18`), and click **OK**. Repeat to add multiple variables.
+
 **Block till process finished**: Select whether to block until the process is finished in the check box. This is enabled by default.
 
 ## Invoke policy per message body filter
@@ -475,15 +483,17 @@ button on the filter's main configuration window.
 When writing the JavaScript, Groovy, or Jython code, you should note the following:
 
 * You must implement the `invoke()` method. This method takes a `com.vordel.circuit.Message`
-object as a parameter, and returns a boolean.
+  object as a parameter, and returns a boolean.
 * You can obtain the value of a message attribute using the `get()` method of the `Message`
-object. However, do not perform attribute substitution as follows:
+  object. However, do not perform attribute substitution as follows:
 
-    ```
-    msg.get("my.attribute.a") == msg.get("my.attribute.b")
-    ```
+  ````
+  ```
+  msg.get("my.attribute.a") == msg.get("my.attribute.b")
+  ```
 
-    This is not thread safe and can cause performance issues.
+  This is not thread safe and can cause performance issues.
+  ````
 
 {{< /alert >}}
 
@@ -530,10 +540,10 @@ Your custom JavaScript, Groovy, or Jython script JARs must also be compiled and 
 
 1. In the Policy Studio main menu, select **Window** > **Preferences** > **Runtime Dependencies**.
 2. Click **Add**
-    to select your script JAR file(s) and any other required third-party JARs.
+   to select your script JAR file(s) and any other required third-party JARs.
 3. Click **Apply**
-    when finished. Copies of these JAR files are added to the `plugins`
-    directory in your Policy Studio installation.
+   when finished. Copies of these JAR files are added to the `plugins`
+   directory in your Policy Studio installation.
 4. You must restart Policy Studio and the server for these changes to take effect. You should restart Policy Studio using the `policystudio -clean` command.
 
 ### Configure a script filter
@@ -553,19 +563,20 @@ button to store the updated script to the **Script library**.
 To add a new script to the library, perform the following steps:
 
 1. Click the **Add**
-    button, which displays the **Script Details**
-    dialog.
+   button, which displays the **Script Details**
+   dialog.
 2. Enter a **Name**
-    and a **Description**
-    for the new script in the fields provided.
+   and a **Description**
+   for the new script in the fields provided.
 3. By default, the **Language**
-    field is set to **JavaScript**, but you can select from the following options:
-    * **Groovy**: Groovy script
-    * **JavaScript**: JavaScript based on Nashorn JavaScript engine (JRE8)
-    * **JavaScript (Rhino engine JRE7 and earlier)**: JavaScript based on Rhino JavaScript engine (JRE7 and earlier)
-    * **Jython**: Jython script
+   field is set to **JavaScript**, but you can select from the following options:
+
+   * **Groovy**: Groovy script
+   * **JavaScript**: JavaScript based on Nashorn JavaScript engine (JRE8)
+   * **JavaScript (Rhino engine JRE7 and earlier)**: JavaScript based on Rhino JavaScript engine (JRE7 and earlier)
+   * **Jython**: Jython script
 4. Write the script in the **Script**
-    text area on the right. For example:
+   text area on the right. For example:
 
 ![Script Library](/Images/docbook/images/utility/utility_scripting_library.gif)
 
