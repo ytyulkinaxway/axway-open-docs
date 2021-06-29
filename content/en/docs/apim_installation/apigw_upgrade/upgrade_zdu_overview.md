@@ -19,9 +19,9 @@ This approach involves the use of a load balancer to ensure that available API G
 You can download the `API Gateway and API Manager 7.7 Zero Downtime Upgrade Scripts` package from [Axway Support](https://support.axway.com/). The package includes scripts for Linux.
 
 {{< alert title="Note" color="primary" >}}
-Use the sample scripts only for upgrading from API Gateway 7.5.2 or later to 7.7 when Cassandra contains all the shared data.
+The sample scripts should only be used for API Gateways moving from version 7.5.2, or higher, to 7.7.
 
-We recommend that you perform a full upgrade that is completed in a single attempt. Because shared data (in particular quota counts) are involved, it is possible that this data could degrade if an upgraded subset of the domain coexists with a non-upgraded subset for a significant period of time.
+To minimize the impact on any shared data, such as quota counts, ensure to complete your upgrade in a single attempt.
 {{< /alert >}}
 
 ## Reference configuration
