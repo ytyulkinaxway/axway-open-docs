@@ -24,12 +24,7 @@ Local caches are used where a single API Gateway instance has been deployed. In 
 
 ### Add a local cache
 
-In the Policy Studio tree, you can add a local cache by selecting the **Environment Configuration** > **Libraries**
-> **Caches**
-node, and clicking the **Add**
-button at the bottom right of the window. Select **Add Local Cache**
-from the menu. You can configure the following fields on the **Configure Local Cache**
-dialog:
+In the Policy Studio tree, you can add a local cache by selecting the **Environment Configuration** > **Libraries** > **Caches** node, and clicking the **Add** button at the bottom right of the window. Select **Add Local Cache** from the menu. You can configure the following fields on the **Configure Local Cache** dialog:
 
 **Cache Name**:
 Enter a name for the cache.
@@ -44,12 +39,10 @@ Sets the maximum number of objects that can be stored in the disk store at any o
 If this option is selected, objects stored in the caches never expire and timeouts have no effect.
 
 **Overflow to Disk**:
-Select this option if you want the cache to overflow to disk when the number of objects in memory has reached the amount set in the **Maximum Elements in Memory**
-field above.
+Select this option if you want the cache to overflow to disk when the number of objects in memory has reached the amount set in the **Maximum Elements in Memory** field above.
 
 **Time to Idle**:
-Determines the maximum amount of time (in seconds) between accesses that an object can remain idle before it expires. A value of zero indicates that objects can idle for infinity, which is the default value. If the **Eternal**
-field is selected, this setting is ignored.
+Determines the maximum amount of time (in seconds) between accesses that an object can remain idle before it expires. A value of zero indicates that objects can idle for infinity, which is the default value. If the **Eternal** field is selected, this setting is ignored.
 
 **Time to Live**:
 Sets the maximum time between when an object is created and when it expires. The default value is zero, which means that the object can live for infinity. If the **Eternal**
@@ -62,8 +55,7 @@ If selected, the disk store is persisted between JVM restarts. This option is di
 Configures the number of seconds between runs of the disk expiry thread. The default is 120 seconds.
 
 **Disk Spool Buffer Size**:
-Indicates the size of memory (in MBs) to allocate the disk store for a spool buffer. Writes are made to this memory and then asynchronously written to disk. The default size is 30 MB. If you get `OutOfMemory`
-exceptions, you can consider lowering this value. However, if you notice poor performance, you should increase the value.
+Indicates the size of memory (in MBs) to allocate the disk store for a spool buffer. Writes are made to this memory and then asynchronously written to disk. The default size is 30 MB. If you get `OutOfMemory` exceptions, you can consider lowering this value. However, if you notice poor performance, you should increase the value.
 
 **Eviction Policy**:
 Select the eviction policy that the cache uses to evict objects from the cache. The default policy is **Least Recently Used**. However, you can also use **First in First Out**
@@ -75,14 +67,9 @@ If you have deployed several API Gateways throughout your network, you might nee
 
 ### Add a distributed cache
 
-You can add a distributed cache by selecting the **Environment Configuration** > **Libraries**
-> **Caches**
-tree node, and clicking the **Add**
-button at the bottom right of the window. Select **Add Distributed Cache**
-from the menu, and configure the following fields on the **Configure Distributed Cache**
-dialog:
+You can add a distributed cache by selecting the **Environment Configuration** > **Libraries** > **Caches** tree node, and clicking the **Add** button at the bottom right of the window.  Select **Add Distributed Cache** from the menu, and configure the following fields on the **Configure Distributed Cache** dialog:
 
-Many of the settings for the distributed cache are identical to those for the local cache. The following fields are specific to the distributed cache.
+Note that many of the settings for the distributed cache are identical to those for the local cache. The following fields are specific to the distributed cache.
 
 **Event Listener Class Name**:
 Enter the name of the listener factory class that enables this cache to register listeners for cache events, such as put, remove, delete, and expire.
@@ -107,10 +94,7 @@ Specify the properties to pass to the `RMICacheReplicatorFactory`. The following
     The asynchronous replicator runs at a set interval of milliseconds. The default is 1000 and the minimum is 10. This property is only applicable if `replicateAsynchronously=true`.
 
 **Cache Bootstrap Class Name**:
-Specifies a `BootstrapCacheLoader`
-factory that the cache can call on initialization to prepopulate itself. The `RMIBootstrapCacheLoader`
-bootstraps caches in clusters where `RMICacheReplicator`
-s are used.
+Specifies a `BootstrapCacheLoader` factory that the cache can call on initialization to prepopulate itself. The `RMIBootstrapCacheLoader` bootstraps caches in clusters where  `RMICacheReplicator`s are used.
 
 **Properties Separator**:
 The character entered here is used to separate the list of properties listed in the field below.
@@ -125,14 +109,11 @@ The properties listed here are used to initialize the `RMIBootstrapCacheLoaderFa
 
 ## Global distributed cache settings
 
-In a distributed cache, there is no master cache controlling all caches in the group. Instead, each cache is a peer in the group and needs to know where all the other peers in the group are located. *Peer Discovery*
-and *Peer Listeners*
-are two essential parts of any distributed cache system.
+In a distributed cache, there is no master cache controlling all caches in the group. Instead, each cache is a peer in the group and needs to know where all the other peers in the group are located. *Peer Discovery* and *Peer Listeners* are two essential parts of any distributed cache system.
 
 ### Edit global distributed cache settings for peer discovery
 
-You can configure the global distributed cache settings by selecting the **Server Settings**
-node in the Policy Studio tree, and clicking **General** > **Cache**. You can configure the following fields:
+You can configure the global distributed cache settings by selecting the **Server Settings** node in the Policy Studio tree, and clicking **General** > **Cache**. You can configure the following fields:
 
 **Peer Provider Class**:
 By default, the built-in peer discovery class factory is used:
@@ -147,14 +128,9 @@ Specify the token used as the separator for the list of properties in the next f
 **Properties**:
 The properties listed specify whether the peer discovery mechanism is automatic or manual. If the automatic mechanism is used, each peer uses TCP multicast to establish and maintain a multicast group. This is the default option because it requires minimal configuration and peers can be automatically added and removed from the group. Each peer pings the group every second. If a peer has not pinged any of the other peers after 5 seconds, it is dropped from the group, while a new peer is admitted to the group if it starts pinging the other peers.
 
-To use automatic peer discovery, ensure that the `peerDiscovery`
-setting is set to `automatic`. You can specify the multicast address and port using the `multicastGroupAddress`
-and `multicastGroupPort`
-settings. You can specify the time to live for multicast datagrams using the `timeToLive`
-setting.
+To use automatic peer discovery, ensure that the `peerDiscovery` setting is set to `automatic`. You can specify the multicast address and port using the `multicastGroupAddress` and `multicastGroupPort` settings. You can specify the time to live for multicast datagrams using the `timeToLive` setting.
 
-Alternatively, you can configure a manual peer discovery mechanism, whereby each peer definitively lists the peers it wants to communicate with. This should only be used in networks where there are problems propagating multicast datagrams. To use a manual peer discovery mechanism, ensure the `peerDiscovery`
-setting is set to `manual`. The list of RMI URLs of the other peers in the group must also be specified, for example:
+Alternatively, you can configure a manual peer discovery mechanism, whereby each peer definitively lists the peers it wants to communicate with. This should only be used in networks where there are problems propagating multicast datagrams. To use a manual peer discovery mechanism, ensure the `peerDiscovery` setting is set to `manual`. The list of RMI URLs of the other peers in the group must also be specified, for example:
 
 ```
 rmiUrls=//server2:40001/sampleCache1|//server2:40001/sampleCache2
@@ -258,11 +234,8 @@ contains the request body). The following fields must be configured for this fil
 
 ### Is Cached?
 
-This filter looks up the cache to see if a response has been stored for the current request. It looks up the cache using the `message.key`
-attribute by default. The `message.key`
-attribute contains a hash of the request message, and can be used as the key for objects in the cache. If the key is found in the cache, the value of the key (cached response for this request) is written to the `content.body`
-attribute, which can be returned to the client using the **Reflect**
-filter. You must configure the following fields:
+This filter looks up the cache to see if a response has been stored for the current request. It looks up the cache using the `message.key` attribute by default. The `message.key`
+attribute contains a hash of the request message, and can be used as the key for objects in the cache. If the key is found in the cache, the value of the key (cached response for this request) is written to the `content.body` attribute, which can be returned to the client using the **Reflect** filter. You must configure the following fields:
 
 * **Name**: Is a response for this request already cached?
 * **Cache containing key**: Response Cache (assuming you have created a cache of this name)
@@ -271,10 +244,7 @@ filter. You must configure the following fields:
 
 ### Reflect
 
-If the **Is Cached?**
-filter passes, it retrieves the response from the cache and stores it in the `content.body`
-message attribute. The **Reflect**
-filter is used to return the cached response to the client.
+If the **Is Cached?** filter passes, it retrieves the response from the cache and stores it in the `content.body` message attribute. The **Reflect** filter is used to return the cached response to the client.
 
 ### Routing
 
@@ -282,14 +252,9 @@ If a response for this request could not be located in the cache, the API Gatewa
 
 ### Cache Attribute
 
-When the response has been received from the service, it should be cached for future use. The **Cache Attribute**
-filter is used to configure the key used to look up the cache and which aspect of the response message is stored as the key value in the cache.
+When the response has been received from the service, it should be cached for future use. The **Cache Attribute** filter is used to configure the key used to look up the cache and which aspect of the response message is stored as the key value in the cache.
 
-{{< alert title="Note" color="primary" >}}This example specifies the value of the `content.body`
-attribute to cache. Because this filter is configured *after*
-the routing filters, this attribute contains the response message. The value entered in the **Attribute Key**
-field should match that entered in the **Attribute containing key**
-field in the **Is Cached?**
+{{< alert title="Note" color="primary" >}}This example specifies the value of the `content.body` attribute to cache. Because this filter is configured *after* the routing filters, this attribute contains the response message. The value entered in the **Attribute Key** field should match that entered in the **Attribute containing key** field in the **Is Cached?**
 filter. {{< /alert >}}
 
 You must configure the following fields:
