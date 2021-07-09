@@ -5,7 +5,6 @@ weight: 160
 date: 2021-03-18
 description: Setup a Red Hat OpenShift 4.7+ managed cluster and install Axway Istio Agents
 ---
-{{< alert title="Public beta" color="warning" >}}This is a preview to create an OCP cluster and install compatible Istio agents.{{< /alert >}}
 
 The Axway Istio agents are compatible with Red Hat® OpenShift® 4.7+ when using Istio 1.8.2.
 

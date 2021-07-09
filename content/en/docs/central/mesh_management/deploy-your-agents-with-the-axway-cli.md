@@ -6,8 +6,6 @@ date: 2020-12-0
 description: Use the Axway CLI to deploy Axway Istio agents.
 ---
 
-{{< alert title="Public beta" color="warning" >}}This is a preview of the new Istio agents, which run separately from previous Istio POC agents that provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they monitor Kubernetes resource discovery and Istio traffic activity.{{< /alert >}}
-
 ## Before you begin
 
 Ensure you have the following tools installed:

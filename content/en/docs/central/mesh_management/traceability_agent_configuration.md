@@ -5,7 +5,6 @@ weight: 160
 date: 2021-03-03
 description: Observe transactions in mesh.
 ---
-{{< alert title="Public beta" color="warning" >}}This is a preview of the new Istio ALS Traceability Agent, which is deployed separately from previous Istio POC agents that provide full governance of your hybrid environment. This new agent is deployed and configured from the Axway CLI, and it allows for observability of API traffic in the mesh environment.{{< /alert >}}
 
 ## Before you begin
 
@@ -62,7 +61,7 @@ metadata:
     name: <<environmentName>>
 attributes:
   externalAPIID: <<clustername-http.name>> # http.name to be used for VS
-spec: {}  
+spec: {}
 ---
 kind: APIServiceRevision
 name: <<revisionName>>
@@ -103,7 +102,7 @@ metadata:
     name: meshone
 attributes:
   externalAPIID: clusterone-mylist
-spec: {}  
+spec: {}
 ---
 kind: APIServiceRevision
 name: list-v1
@@ -271,7 +270,7 @@ Example:
 
 ```yaml
   http:
-  - name: mylist 
+  - name: mylist
 ```
 
 {{% alert title="Note" %}}

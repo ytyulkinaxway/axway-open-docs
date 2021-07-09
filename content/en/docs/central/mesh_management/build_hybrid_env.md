@@ -7,7 +7,6 @@ description: Learn how to build a basic Amazon EC2 private cloud hybrid
   environment and add the required tools to enable you to access and manage it
   remotely from a client system.
 ---
-{{< alert title="Public beta" color="warning" >}}This feature is currently in **public beta** and not yet available for production use.{{< /alert >}}
 
 ## Before you start
 
@@ -121,4 +120,4 @@ Your cluster kubernetes-cluster.example.com is ready
 
 ## Review and next steps
 
-You have learned how to build a basic Amazon EC2 hybrid environment and add the required tools to enable you to access and manage it from your client system. Next, read [Add your environment to Amplify Central](/docs/central/mesh_management/add_env/) to learn how to add your environment to Amplify Central.
+You have learned how to build a basic Amazon EC2 hybrid environment and have added the required tools to access and manage your cluster. Next, read [Deploy your agents with Axway CLI](/docs/central/mesh_management/deploy-your-agents-with-the-axway-cli/) to learn how to add your environment to Amplify Central and to deploy the Istio agents.

@@ -5,11 +5,10 @@ weight: 30
 date: 2020-11-19
 description: Learn how to configure the Axway Istio agents to discover your APIs and services.
 ---
-{{< alert title="Early Preview" color="warning" >}}This is a preview of the new Istio agents, which run separately from previous Istio POC agents that provide full governance of your hybrid environment. The new agents are deployed and configured from the Axway CLI, and they monitor Kubernetes resource discovery.{{< /alert >}}
 
 ## Before you begin
 
-Before you start, see [Deploy your agents with the Axway CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/) to learn how to use the CLI to install the mesh agents into your Kubernetes cluster and to create default resources to discover the demo service that gets deployed.
+Before you start, see [Deploy your agents with the Axway CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/) to learn how to use the CLI to install the Istio agents into your Kubernetes cluster and to create default resources to discover the demo service that gets deployed.
 
 This page references the resources created from the [Deploy your agents with the Axway CLI](/docs/central/mesh_management/deploy-your-agents-with-the-amplify-cli/) procedure.
 
