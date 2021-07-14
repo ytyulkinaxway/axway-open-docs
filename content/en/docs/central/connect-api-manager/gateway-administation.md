@@ -145,9 +145,9 @@ This section connects the agent to Amplify Central and determines how to publish
 
 `CENTRAL_ORGANIZATIONID`: The Organization ID from Amplify Central. Locate this at Platform > User > Organization > Org ID field.
 
-`CENTRAL_ENVIRONMENT`: The environment name you created when [preparing AMPLIFY Central](/docs/central/cli_central/cli_install/).
+`CENTRAL_ENVIRONMENT`: The environment name you created when [preparing Amplify Central](/docs/central/cli_central/cli_install/).
 
-`CENTRAL_APISERVERVERSION`: The version of AMPLIFY Central API the agent is using. Default value is **v1alpha1**.
+`CENTRAL_APISERVERVERSION`: The version of Amplify Central API the agent is using. Default value is **v1alpha1**.
 
 `CENTRAL_MODE`: The method to send endpoints back to Central. (publishToEnvironment = API Service, publishToEnvironmentAndCatalog = API Service and Catalog asset).  
 
@@ -155,7 +155,7 @@ This section connects the agent to Amplify Central and determines how to publish
 
 `CENTRAL_AUTH_REALM`: The Realm used to authenticate for Amplify Central. Default value is **Broker**.
 
-`CENTRAL_AUTH_CLIENTID`: The Client ID of the Service Account (DOSA_....) you created when [preparing Amplify Central](/docs/central/cli_central/cli_install/). Locate this at AMPLIFY Central > Access > Service Accounts.
+`CENTRAL_AUTH_CLIENTID`: The Client ID of the Service Account (DOSA_....) you created when [preparing Amplify Central](/docs/central/cli_central/cli_install/). Locate this at Amplify Central > Access > Service Accounts.
 
 `CENTRAL_AUTH_PRIVATEKEY`: The location of the private key file you created when [preparing Amplify Central](/docs/central/cli_central/cli_install/). Absolute file path is recommended to avoid confusion.
 

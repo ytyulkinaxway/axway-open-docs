@@ -303,7 +303,7 @@ The setup is complete for observability in the mesh. To view transactions in API
 curl -v http://demo.sandbox.axwaytest.net:8080/mylist/list
  ```
 
- ![AMPLIFY Central control plane](/Images/central/Transactions.png)
+ ![Amplify Central control plane](/Images/central/Transactions.png)
 
 ## Toggling the Traceability Agent
 

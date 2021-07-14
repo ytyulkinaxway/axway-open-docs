@@ -168,7 +168,7 @@ In order to link agent binary with the appropriate agent resource, you have to u
 
 Sample: CENTRAL_AGENTNAME=my-discovery-agent-name
 
-Once the Discovery Agent successfully starts, the agent status (AMPLIFY Central / Topology) will change to `Running`. If there are no other agents linked to that environment, then the environment status will change from `Manual Sync` to `Connected`.
+Once the Discovery Agent successfully starts, the agent status (Amplify Central / Topology) will change to `Running`. If there are no other agents linked to that environment, then the environment status will change from `Manual Sync` to `Connected`.
 {{% alert title="Note" %}}
 The environment status is calculated from the aggregate status of all agents linked to that environment:
 

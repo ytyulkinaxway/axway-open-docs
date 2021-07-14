@@ -15,4 +15,4 @@ Watch this series of short videos to learn how to design a custom API and import
 
 ## Try Amplify Central for free
 
-To get full, free access to AMPLIFY Central for a trial period, go to [Amplify platform](https://platform.axway.com/) and sign up for a free trial.
+To get full, free access to Amplify Central for a trial period, go to [Amplify platform](https://platform.axway.com/) and sign up for a free trial.

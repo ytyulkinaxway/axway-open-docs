@@ -287,7 +287,7 @@ const collections = [{
   name: 'glossary',
   label: 'Glossary',
   label_singular: 'page in glossary section',
-  description: 'Glossary for API Management and AMPLIFY Central.',
+  description: 'Glossary for API Management and Amplify Central.',
   folder: 'content/en/docs/glossary',
 }, {
   ...docsDefaults('apim_relnotes', 'docbook/images/release_notes'),
@@ -305,9 +305,9 @@ const collections = [{
 }, {
   ...docsDefaults('central', 'central'),
   name: 'central',
-  label: 'AMPLIFY Central documentation',
-  label_singular: 'page in AMPLIFY Central section',
-  description: 'All pages relating to AMPLIFY Central.',
+  label: 'Amplify Central documentation',
+  label_singular: 'page in Amplify Central section',
+  description: 'All pages relating to Amplify Central.',
   format: 'frontmatter',
 }, {
   ...docsDefaults('central/env_gw_mgmt', 'central/env_gw_mgmt'),
@@ -328,7 +328,7 @@ const collections = [{
   name: 'amplify_relnotes',
   label: 'AMPLIFY Release notes',
   label_singular: 'page in AMPLIFY Release notes section',
-  description: 'Release notes for AMPLIFY Central.',
+  description: 'Release notes for Amplify Central.',
   format: 'frontmatter',
 }, {
   ...docsDefaults('central/connect-api-manager', 'central/connect-api-manager'),

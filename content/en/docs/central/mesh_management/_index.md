@@ -25,7 +25,7 @@ The mesh governance capability of Amplify Central currently supports adding a se
 
 Amplify Central provides a central control plane, hosted in Axway public cloud, which manages your API traffic across multiple cloud and on-premise environments. It can manage data planes in the Axway public cloud as well as in numerous connected private cloud hybrid environments. In Amplify Central, *hybrid* means working across SaaS, multi-cloud, and on-premise environments.
 
-![AMPLIFY Central control plane](/Images/central/hybrid_control_data_plane.png)
+![Amplify Central control plane](/Images/central/hybrid_control_data_plane.png)
 
 ### Control plane
 

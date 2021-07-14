@@ -223,7 +223,7 @@ Promote the proxy to the test runtime group:
 axway central proxies promote /myservices/my_service_config.yaml --target="Test Runtime"
 ```
 
-To visualize the API proxy in AMPLIFY Central UI, select **API Proxies** in the left navigation bar, and click the appropriate API proxy in the list. Verify the rate limit configuration in the **Policies** tab.
+To visualize the API proxy in Amplify Central UI, select **API Proxies** in the left navigation bar, and click the appropriate API proxy in the list. Verify the rate limit configuration in the **Policies** tab.
 
 ### Apply a rate limit for each application consuming your API
 
