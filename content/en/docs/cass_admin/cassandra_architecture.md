@@ -89,7 +89,7 @@ In remote Cassandra HA, Cassandra runs on a different host from API Gateway. The
 * You must provision separate host machines for Cassandra and API Gateway. However, the data can be stored outside the DMZ, and there might be improved performance.
 * You might need to open ports in the firewall to connect to Cassandra outside the DMZ. For more details, see [Configure a highly available Cassandra cluster](/docs/cass_admin/cassandra_config/).
 * You do not have to use the Cassandra component supplied by the API Gateway installer.
-* You can configure the remote node using the `setup-cassandra` script supplied by the API Gateway installation. For more details, see [setup-cassandra script reference](/docs/cass_admin/cassandra_setup_script/). Alternatively, you can perform all necessary Cassandra configuration changes manually.
+* You can configure the remote node using the `setup-cassandra` script supplied by the API Gateway installation. For more details, see [Configure Cassandra clusters with the setup-cassandra script](/docs/cass_admin/cassandra_setup_script/). Alternatively, you can perform all necessary Cassandra configuration changes manually.
 * You must update the API Gateway Cassandra client settings in Policy Studio to connect to the remote Cassandra host nodes.
 
 The following diagram shows remote Cassandra HA mode:

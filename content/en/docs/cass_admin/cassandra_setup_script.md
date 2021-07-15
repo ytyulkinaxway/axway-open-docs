@@ -1,10 +1,10 @@
 ---
-title: setup-cassandra script reference
-linkTitle: setup-cassandra script
+title: Configure Cassandra clusters with the setup-cassandra script
+linkTitle: Configure Cassandra clusters with the setup-cassandra script
 weight: 7
 date: 2019-06-05
 description: |
-  A reference to the `setup-cassandra` script.
+  Configure a Cassandra cluster with the setup-cassandra script.
 ---
 
 The `setup-cassandra` script provided by API Gateway enables you to configure a multi-node Cassandra HA cluster automatically. You can use this script when Cassandra is installed locally along with API Gateway, or installed remotely on a different node. For details on supported Cassandra deployment architectures and HA production environments, see [Configure a highly available Cassandra cluster](/docs/cass_admin/cassandra_config/).
@@ -114,7 +114,7 @@ setup-cassandra --seed-ip=ipA --own-ip=ipB --cassandra-config=/opt/cassandra/con
 
 ## Secure Cassandra HA configuration
 
-This section explains how to use the `setup-cassandra` script to secure your Cassandra HA configuration. The examples assume that Cassandra is installed locally on the same host as API Gateway. See also [Run setup-cassandra on remote Cassandra node](#run-setup-cassandra-on-remote-cassandra-node).
+This section explains how to use the `setup-cassandra` script to secure your Cassandra HA configuration. The examples assume that Cassandra is installed locally on the same host as API Gateway. See also [Run setup-cassandra on remote Cassandra node](#run-setup-cassandra-on-remote-cassandranode).
 
 ### Reset your default user name and password
 
