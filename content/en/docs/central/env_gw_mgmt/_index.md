@@ -3,9 +3,9 @@ title: Manage your environments and gateways
 linkTitle: Manage your environments and gateways
 weight: 110
 date: 2020-11-18
-description: Understand environments in a topology, what they are, and what can you do with them.
+description: Understand environments in a topology, what they are, and what can
+  you do with them.
 ---
-
 {{< alert title="Public beta" color="warning" >}}This feature is currently in **public beta** and not yet available for production use.{{< /alert >}}
 
 Within topology, environments represent a group of assets discovered from a gateway, a repository, or anything manually added to the environment. These grouped assets (API services, webhooks, secrets) are displayed in Amplify Central. Environments are at the highest hierarchical level, and all assets are scoped within.
@@ -35,8 +35,9 @@ Using agents is the recommended way to add API services to your environment. Whe
 
 For more information about the agents, see:
 
-* [Discovery and Traceability Agents for API Manager](/docs/central/connect-api-manager/).
-* [Discovery and Traceability Agents for AWS Gateway](/docs/central/connect-aws-gateway/).
+* [Discovery and Traceability Agents for Axway API Manager](/docs/central/connect-api-manager/).
+* [Discovery and Traceability Agents for AWS API Gateway](/docs/central/connect-aws-gateway/).
+* [Discovery and Traceability Agents for Azure API Management Services](/docs/central/connect-azure-gateway/).
 
 To manually synchronize your environment, you can use the [Axway Central CLI](/docs/central/cli_central/cli_apiservices) or the [Amplify Central APIs](https://apicentral.axway.com/apis/docs). Note that changes in your deployment will not be automatically synchronized with Amplify Central.
 
