@@ -8,7 +8,7 @@ description: As a Cloud Administrator / Operator, you are responsible for
   contains setup and test details for the additional AWS services that are
   required for Axway’s agents to govern your AWS API Gateway service. The
   additional services which will be configured are AWS CloudWatch, AWS SQS, AWS
-  Config, and AWS Lambda.
+  Config, AWS KMS, and AWS Lambda.
 ---
 ## Overview
 
@@ -31,6 +31,7 @@ In order for the Discovery Agent to receive the API details, the following AWS s
 | AWS Config     | Set up to monitor any configuration changes on API Gateway resources, specifically REST APIs and stages. When those changes are detected, they are sent to CloudWatch logs, and then they are sent to SQS.                                                                                                                                |
 | AWS SQS        | The queue receives messages available to the Discovery Agent to find and determine what kind of resource that message is, what type of changes were made (update, delete, create). If needed, it will query against API Gateway to get additional information about those changes. Finally, the information is sent to the Amplify Platform. |
 | AWS CloudWatch | Monitors resources and changes that the Discovery Agent made to the logging.                                                                                                                                                                                                                                                              |
+| AWS KMS        | Used for encrypting and decrypting Discovery Agent SQS queue messages.                                                                                                                                                                                                                                                                    |
 
 ![Service Discovery](/Images/central/connect-aws-gateway/aws-discovery-agent_v2.png)
 
@@ -57,6 +58,7 @@ In order for the Traceability Agent to monitor API traffic, the following AWS se
 | AWS Lambda     | Runs code in response to events and automatically manages the computing resources required by that code. CloudWatch will write whenever a usage of an API is invoked. It is sent to the Lambda function, which parses out some pertinent information in order to track that usage and send it to SQS. |
 | AWS SQS        | SQS messages are read by the Traceability Agent. The REST API ID and the stage ID are then queried back to CloudWatch for the additional transaction details (i.e. headers), in order to fully create a transaction object, which is then sent to the Amplify platform.                                  |
 | AWS CloudWatch | Monitors when an API is consumed, and if the Discovery Agent made changes to the logging. Those events are logged to CloudWatch.                                                                                                                                                                         |
+| AWS KMS        | Used for encrypting and decrypting Traceability Agent SQS queue messages.                                                                                                                                                                                                                                |
 
 The Traceability Agent requires read write access to SQS and read only access to CloudWatch.
 
@@ -71,15 +73,16 @@ The AWS service usage cost for the agents is explain below.
 * [Amazon CloudWatch Service](https://aws.amazon.com/cloudwatch/)
 * [Amazon Simple Queue Service](https://aws.amazon.com/sqs/)
 * [AWS Lambda](https://aws.amazon.com/lambda/)
+* [AWS Key Management Service (KMS)](https://aws.amazon.com/kms/)
 * Agent Config Package [downloaded](https://axway.jfrog.io/artifactory/ampc-public-generic-release/aws-agents/aws_apigw_agent_config/latest/)
 
 ### CloudFormation templates
 
 The agent config package contains a Lambda function (`traceability_lambda.zip`) and CloudFormation templates.
 
-Continuous discovery mode (`amplify-agents-deploy-all.yaml amplify-agents-resources.yaml amplify-agents-ec2.yaml`) which configure the additional AWS services (`CloudWatch, SQS, Lambda, and EC2`) that the agents require to function normally.
+Continuous discovery mode (`amplify-agents-deploy-all.yaml amplify-agents-resources.yaml amplify-agents-ec2.yaml`) which configure the additional AWS services (`CloudWatch, SQS, KMS, Lambda, and EC2`) that the agents require to function normally.
 
-Synchronous discovery mode (`amplify-agents-deploy-all.yaml amplify-agents-resources.yaml`) which configure the additional AWS services (`AWS CloudWatch, AWS SQS, and AWS Lambda`) that the agents require to function normally.
+Synchronous discovery mode (`amplify-agents-deploy-all.yaml amplify-agents-resources.yaml`) which configure the additional AWS services (`AWS CloudWatch, AWS SQS, KMS, and AWS Lambda`) that the agents require to function normally.
 
 Upload all of these resources to an S3 Bucket, within the target region. Take note of the bucket name and URL to the `amplify-agents-deploy-all.yaml`.
 
@@ -124,6 +127,7 @@ The inputs to the IAM Setup CloudFormation Template (`amplify-agents-deploy-all.
 | ConfigServiceSetup            | If set to true, the IAM Role for the Config Service will be created                                                                       | true                            | continuous |
 | ConfigBucketName              | The name of the bucket the Config Service, if enabled, will store AWS Config Logs. The account number and region will be appended to this | apigw-config-discovery          | continuous |
 | ConfigBucketExists            | If set to true, the Config Bucket will not be created                                                                                     | false                           | continuous |
+| EncryptionKeyAlias            | The alias of the key used for encrypting the SQS queues                                                                                   | alias/sqs/encryptionKey         | both       |
 | DiscoveryQueueName            | The name of the Queue that the Discovery Agent will read from                                                                             | aws-apigw-discovery             | continuous |
 | TraceabilityQueueName         | The name of the Queue that the Traceability Lambda will be writing to and the Traceability Agent will read from                           | aws-apigw-traceability          | both       |
 | DeploymentType                | How the agents will be deployed for this installation. (EC2, ECS Fargate, Other)                                                          | EC2                             | continuous |
@@ -193,6 +197,7 @@ The resources created by the CloudFormation template:
 | amplify-agents-ecs-fargate.yaml       |                                   |                                                          |                                                                                                    | continuous     |
 | AWS::ECS::TaskDefinition              | AmplifyAgentsTask                 |                                                          | The ECS task that defines both of the agents                                                       | continuous     |
 | AWS::ECS::Service                     | AmplifyAgentsService              |                                                          | The ECS service that runs the agents ECS task                                                      | continuous     |
+| AWS::KMS::Key                         | sqs/encryptionKey                 |                                                          | The key used for Discovery and Traceability SQS queue encryption                                   | both           |
 
 #### Outputs (IAM and Resources)
 
@@ -312,6 +317,7 @@ Policies
 | Allow  | s3:GetObject            | The bucket set as the AgentsResourceBucket when creating the stack | Used by the EC2 instance to get all the files in the resources directory of the bucket, for the agent execution |
 | Allow  | ssm:GetParameter        | The Parameters for the Amplify keys in the region                  | Used by the EC2 instance or ECS task to get the keys needed to access Amplify Central resources                 |
 | Allow  | ssm:GetParameters       | The Parameters for the Amplify keys in the region                  | Used by the EC2 instance or ECS task to get the keys needed to access Amplify Central resources                 |
+| Allow  | kms:*                   | Queue encryption key ARN                                           | Used by the agents for SQS encryption                                                                           |
 
 ##### AgentsInstanceRole
 
@@ -381,6 +387,7 @@ The inputs to the Resource CloudFormation template (`amplify-agents-resources.ya
 | ConfigBucketName           | The name of the bucket the Config Service, if enabled, will store AWS Config Logs. The account number and region will be appended to this    | apigw-config-discovery  | continuous     |
 | ConfigBucketExists         | If set to true, the Config Bucket will not be created                                                                                        | false                   | continuous     |
 | ConfigServiceRoleArn       | The ARN for the Config Service IAM Role                                                                                                      |                         | continuous     |
+| EncryptionKeyAlias         | The alias of the key used for encrypting the SQS queues                                                                                   | alias/sqs/encryptionKey         | both       |
 | DiscoveryQueueName         | The name of the queue that will hold only changes made to API Gateway resources                                                              | aws-apigw-discovery     | continuous     |
 | TraceabilityAPIGWCWRoleArn | The ARN for the IAM role that allows API Gateway the permission to write CloudWatch logs. Leave blank if this does not need to be configured |                         | both           |
 | TraceabilityLambdaRoleArn  | The Log Group created to track access of APIC tracked API Gateway endpoints                                                                  |                         | both           |
@@ -407,6 +414,7 @@ The services that are configured with this CloudFormation template:
 | AWS::Lambda::Permission            | TraceabilityLambdaCWInvoke     |                           | Allows Cloud Watch events to trigger the Lambda Function                                           | both           |
 | AWS::SQS::Queue                    | TraceabilitySqsQueue           |                           | The Queue that all API Gateway access logs are pushed to                                           | both           |
 | AWS::Logs::SubscriptionFilter      | TraceabilityLogToLambdaFilter  |                           | Filter events from the Traceability Logs to the Lambda Function                                    | both           |
+| AWS::KMS::Key                      | sqs/encryptionKey              |                           | The key used for Discovery and Traceability SQS queue encryption                                   | both           |
 
 #### Outputs (Resources only)
 
@@ -461,21 +469,24 @@ The following are the costs of the AWS services the Agents rely on:
 * AWS [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/)</br>
   You should be able to operate with the free tier, as the agent requires only one monitoring metrics (APIGW_Traceability_Logs).
 * AWS [Simple Queue Service pricing](https://aws.amazon.com/sqs/pricing/)</br>
-  Two standard queues are set up: one for Discovery Agent and one for Traceability Agent. The Discovery Agent queue will contain every stage deployment. The Traceability Agent queue will contain every call to discovered APIs. One million Amazon SQS requests for free each month. After free tier, it cost $0.40 per million requests.
+  Two standard queues are set up: one for Discovery Agent and one for Traceability Agent. The Discovery Agent queue will contain every stage deployment. The Traceability Agent queue will contain every call to discovered APIs. One million Amazon SQS requests for free each month. After free tier, it costs $0.40 per million requests.
 * AWS [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/)</br>
   The Amazon API Gateway free tier includes one million API calls received for REST APIs, one million API calls received for HTTP APIs, and one million messages and 750,000 connection minutes for WebSocket APIs per month for up to 12 months. If you exceed this number of calls per month, you will be charged the API Gateway usage rates. There are different rates based on the API type (HTTP / REST / Websocket).
+* AWS [Key Management pricing](https://aws.amazon.com/kms/pricing/)</br>
+  The Amazon Key Management free tier includes 20,000 free AWS Key Management Service (KMS) requests per month. Each customer master key (CMK) that you create in KMS costs $1/month until you delete it. After free tier, each API request to KMS costs $0.03 per 10,000 requests.
 
 Summary:
 
-| AWS Service          | Cost in USD per month                                                                                                                                             |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Cloud Formation      | 0                                                                                                                                                                 |
-| S3 bucket            | 0                                                                                                                                                                 |
-| Config               | 0.003 * (# config)                                                                                                                                                |
-| Lambda execution     | ((# lambda call \* lambda execution time \* (lambda memory / 1024) - 400,000freeGB-s) \* **0.0000166667**) + ((# lambda call - 1M free request) \* **0.0000002**) |
-| CloudWatch           | 0                                                                                                                                                                 |
-| Simple Queue Service | One million requests free or $0.40 per million requests thereafter                                                                                                |
-| API Gateway          | refer to [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/) for details                                                                           |
+| AWS Service            | Cost in USD per month                                                                                                                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Cloud Formation        | 0                                                                                                                                                                 |
+| S3 bucket              | 0                                                                                                                                                                 |
+| Config                 | 0.003 * (# config)                                                                                                                                                |
+| Lambda execution       | ((# lambda call \* lambda execution time \* (lambda memory / 1024) - 400,000freeGB-s) \* **0.0000166667**) + ((# lambda call - 1M free request) \* **0.0000002**) |
+| CloudWatch             | 0                                                                                                                                                                 |
+| Simple Queue Service   | One million requests free or $0.40 per million requests thereafter                                                                                                |
+| API Gateway            | refer to [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/) for details                                                                           |
+| Key Management Service | refer to [Key Management pricing](https://aws.amazon.com/kms/pricing/) for details                                                                           |
 
 ### Minimum rights for CloudFormation deployment
 
