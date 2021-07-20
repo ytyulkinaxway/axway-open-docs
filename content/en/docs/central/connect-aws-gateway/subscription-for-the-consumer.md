@@ -34,6 +34,8 @@ CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_URL={The webhook URL that subscription da
 CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_HEADERS={The headers that will be used when posting data to the webhook url}
 ```
 
+{{< alert title="Note" color="primary" >}}Each API that is discovered in AWS API Gateway contains the subscription approval mode for its corresponding Amplify Central catalog item, which is set when the API is discovered and published. The only way to change a catalog item's subscription approval mode is to update the agent configuration mode (refer to `CENTRAL_SUBSCRIPTIONS_APPROVAL_MODE`), restart the agent, and then rediscover the API in AWS API Gateway.{{< /alert >}}
+
 ## Supported use cases for receiving API credentials
 
 Once the subscription is approved, the agent catches this event from Amplify Central and, based on its configuration, can forward the credentials using either an SMTP server or a webhook.
