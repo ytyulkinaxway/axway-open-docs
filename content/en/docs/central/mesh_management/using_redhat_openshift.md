@@ -6,7 +6,7 @@ date: 2021-03-18
 description: Setup a Red Hat OpenShift 4.7+ managed cluster and install Axway Istio Agents
 ---
 
-The Axway Istio agents are compatible with Red Hat® OpenShift® 4.7+ when using Istio 1.8.2.
+The Axway Istio agents are compatible with Red Hat® OpenShift® 4.7+ when using Istio 1.9.5.
 
 ## Prerequisites
 

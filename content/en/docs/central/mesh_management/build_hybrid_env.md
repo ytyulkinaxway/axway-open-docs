@@ -24,17 +24,17 @@ Learn how to build a basic Amazon EC2 private cloud hybrid environment and add t
 
 * Amazon EC2 instance with Kubernetes and Helm:
 
-    * Kubernetes 1.18 & 1.19 are supported
+    * Kubernetes 1.19 is supported
     * Helm 3.2.4 or later is recommended
 
 * Public facing fully qualified domain name (FQDN) of the Amazon EC2 cluster
 * Client system (for example, Linux VM) with the following tools installed for accessing and managing your Amazon EC2 environment remotely:
 
     * AWS CLI 1.16 or later is recommended - Enables you to interact with AWS services from the command line. See the [AWS CLI installation documentation](https://docs.aws.amazon.com/cli/latest/userguide/li-chap-install.html).
-    * kubectl 1.18 or later is recommended - Enables you to deploy and manage applications on Kubernetes from the command line. See the [kubectl installation documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+    * kubectl 1.19 or later is recommended - Enables you to deploy and manage applications on Kubernetes from the command line. See the [kubectl installation documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
     * kops 1.19 or later is recommended - Helps you create, destroy, upgrade and maintain Kubernetes clusters from the command line. See the [kops installation documentation](https://github.com/kubernetes/kops/blob/master/docs/install.md).
     * Helm 3.2.4 is recommended - Enables you to install the Axway proprietary service mesh layer later and to export Helm charts. See the [Helm installation documentation](https://helm.sh/docs/using_helm/#installing-helm).
-    * Istioctl - Used after the environment is built for the next phase to deploy the service mesh and add this environment to Amplify Central.
+    * Istioctl 1.9.5 - Used after the environment is built for the next phase to deploy the service mesh and add this environment to Amplify Central.
 
 ## Build an Amazon EC2 hybrid environment
 
