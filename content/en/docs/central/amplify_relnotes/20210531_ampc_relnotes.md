@@ -46,12 +46,6 @@ The agents include the following enhancements:
 * The subscription application drop-down list includes all Axway Gateway applications that have access to the API that matches the selected catalog asset.
 * The Discovery and Traceability agents have a new property `CENTRAL_REPORTACTIVITYFREQUENCY` that is used to select the frequency to report their statuses to Amplify platform. Default value is `5min`.
 
-### Amplify Central API
-
-A new Amplify Central Traceability API is now available for for dynamically querying traffic metrics directly. This API is based on the Lexus query API used in mobile analytics and can be used to retrieve raw metrics for API usage, return codes, and call graph details. It provides filtering and aggregation on any transaction attribute.
-
-The Amplify Central API includes the following enhancements: None.
-
 ### Mesh Governance / Istio agent
 
 Amplify Central mesh governance enables you to govern and manage your APIs, public and private services, along with the hybrid environments where they are located.

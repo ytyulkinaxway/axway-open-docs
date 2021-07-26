@@ -49,12 +49,6 @@ The agents include the following enhancements:
 * **Unhealthy status**: A new status is available for the agent to report when a connectivity issue occurs while the agent is running. This unhealthy status does not prevent the agent from continuing to work. The agent will attempt to recover on regular intervals. The status is visible in the Central UI > Topology. If an unhealthy status is raised, the environment status linked to the agent will become "Partially connected."
 * **Open traffic**: The v7 Traceability Agent can now source either the APIM event log or the APIM open logs. New variables have been introduced to select one input or the other: `EVENT_LOG_INPUT=true` (default) and `OPENTRAFFIC_LOG_INPUT=false` (default). `OPENTRAFFIC_LOG_PATHS` variable will contain the path and file name where the open traffic is written on the file system. See [Customizing beat input variables](/docs/central/connect-api-manager/gateway-administation/#customizing-traceability-agent-beat-input-variables) for details.
 
-### Amplify Central API
-
-A new Amplify Central Traceability API is now available for dynamically querying traffic metrics directly. This API is based on the Lexus query API used in mobile analytics and can be used to retrieve raw metrics for API usage, return codes, and call graph details. It provides filtering and aggregation on any transaction attribute.
-
-The Amplify Central API includes the following enhancements:
-
 ### Mesh governance / Istio agent
 
 Amplify Central mesh governance enables you to govern and manage your APIs, public and private services, along with the hybrid environments where they are located.

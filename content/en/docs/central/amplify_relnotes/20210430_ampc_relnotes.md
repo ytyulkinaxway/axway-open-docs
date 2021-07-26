@@ -49,14 +49,6 @@ The agents include the following enhancements:
 * Azure Discovery Agent can now read the tags associated to an Azure API and then add those tags to the published API Service and Catalog item.
 * AWS agents now use the AWS SDK 2.0 to communicate with AWS services.
 
-### Amplify Central API
-
-A new Amplify Central Traceability API is now available for for dynamically querying traffic metrics directly. This API is based on the Lexus query API used in mobile analytics and can be used to retrieve raw metrics for API usage, return codes, and call graph details. It provides filtering and aggregation on any transaction attribute.
-
-The Amplify Central API includes the following enhancements:
-
-* none
-
 ### Mesh Governance / Istio agent
 
 Amplify Central mesh governance enables you to govern and manage your APIs, public and private services, along with the hybrid environments where they are located.
