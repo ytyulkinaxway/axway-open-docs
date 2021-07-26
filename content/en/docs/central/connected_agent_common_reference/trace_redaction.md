@@ -184,9 +184,74 @@ content-type: return-{##}-type
 res-header: just-a-value
 ```
 
+## JMS properties show rules
+
+JMS properties show rules work like the argument and header show rules above, except that the `jmsStatus` and `jmsTimestamp` properties are always sent.
+
+The environment variable name is `TRACEABILITY_REDACTION_JMSPROPERTIES_SHOW`.
+
+### Example: Send JMS properties that have 'jmsDestination' and 'jmsReplyTo' in their keys
+
+```bash
+TRACEABILITY_REDACTION_JMSPROPERTIES_SHOW=[{keyMatch:"jmsDestination"},{keyMatch:"jmsReplyTo"}]
+```
+
+If the agent finds the following jmsProperties:
+
+```bash
+jmsStatus: Success
+jmsTimestamp: 123456789
+jmsDestination: queue://destination
+jmsReplyTo: queue://replyTo
+jmsMessageID: messageID123
+jmsProviderURL: http://provider.com
+```
+
+then the following will be sent to the platform:
+
+```bash
+jmsStatus: Success
+jmsTimestamp: 123456789
+jmsDestination: queue://destination
+jmsReplyTo: queue://replyTo
+```
+
+## JMS properties value sanitization rules
+
+JMS properties value sanitization rules work like the argument and header value sanitization rules above, except that the `jmsStatus` and `jmsTimestamp` properties are never sanitized.
+
+The environment variable names are `TRACEABILITY_REDACTION_JMSPROPERTIES_SANITIZE`.
+
+### Example: Sanitize everything after and including the '//' in the jmsDestination and jmsReplyTo properties
+
+```bash
+TRACEABILITY_REDACTION_JMSPROPERTIES_SHOW=[{keyMatch:"jmsDestination"},{keyMatch:"jmsReplyTo"}]
+TRACEABILITY_REDACTION_JMSPROPERTIES_SANITIZE=[{keyMatch:"jmsDestination",valueMatch:"//.*$"},{keyMatch:"jmsReplyTo",valueMatch:"//.*$"}]
+```
+
+If the agent finds the following request headers:
+
+```bash
+jmsStatus: Success
+jmsTimestamp: 123456789
+jmsDestination: queue://destination
+jmsReplyTo: queue://replyTo
+jmsMessageID: messageID123
+jmsProviderURL: http://provider.com
+```
+
+then the following will be sent to the platform:
+
+```bash
+jmsStatus: Success
+jmsTimestamp: 123456789
+jmsDestination: queue:{*}
+jmsReplyTo: queue:{*}
+```
+
 ## Redaction configuration samples
 
-### Send path, headers, and query parameters to Amplify platform without restriction
+### Send path, headers, query parameters, and JMS properties to Amplify platform without restriction
 
 ```bash
 # path
@@ -197,6 +262,8 @@ TRACEABILITY_REDACTION_QUERYARGUMENT_SHOW=[{keyMatch:".*"}]
 TRACEABILITY_REDACTION_REQUESTHEADER_SHOW=[{keyMatch:".*"}]
 # response header
 TRACEABILITY_REDACTION_RESPONSEHEADER_SHOW=[{keyMatch:".*"}]
+# response header
+TRACEABILITY_REDACTION_JMSPROPERTIES_SHOW=[{keyMatch:".*"}]
 ```
 
 ### Send path and query parameters only to Amplify platform without restriction
@@ -217,8 +284,12 @@ TRACEABILITY_REDACTION_PATH_SHOW=[{keyMatch:".*"}]
 TRACEABILITY_REDACTION_REQUESTHEADER_SHOW=[{keyMatch:".*"}]
 # send all response headers
 TRACEABILITY_REDACTION_RESPONSEHEADER_SHOW=[{keyMatch:".*"}]
+# send all JMS properties
+TRACEABILITY_REDACTION_JMSPROPERTIES_SHOW=[{keyMatch:".*"}]
 # sanitize Authorization request header to mask the ten first characters or less
 TRACEABILITY_REDACTION_REQUESTHEADER_SANITIZE=[{keyMatch:"Authorization",valueMatch:"^.{0,10}"}]
 # sanitize client response header to mask last ten characters or less
 TRACEABILITY_REDACTION_RESPONSEHEADER_SANITIZE=[{keyMatch:"client",valueMatch:".{0,10}$"}]
+# sanitize jmsDestination and jmsReplyto properties to show only characters before '//'
+TRACEABILITY_REDACTION_JMSPROPERTIES_SANITIZE=[{keyMatch:"jmsDestination",valueMatch:"//.*$"},{keyMatch:"jmsReplyTo",valueMatch:"//.*$"}]
 ```

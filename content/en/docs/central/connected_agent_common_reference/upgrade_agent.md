@@ -207,6 +207,8 @@ TRACEABILITY_REDACTION_QUERYARGUMENT_SHOW=[{keyMatch:".*"}]
 TRACEABILITY_REDACTION_REQUESTHEADER_SHOW=[{keyMatch:".*"}] 
 # response headers
 TRACEABILITY_REDACTION_RESPONSEHEADER_SHOW=[{keyMatch:".*"}]
+# jms properties
+TRACEABILITY_REDACTION_JMSPROPERTIES_SHOW=[{keyMatch:".*"}]
 ```
 
 See [Trace redaction](/docs/central/connected_agent_common_reference/trace_redaction) for more information.
