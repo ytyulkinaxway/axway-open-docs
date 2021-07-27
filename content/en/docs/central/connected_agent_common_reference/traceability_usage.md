@@ -3,7 +3,8 @@ title: Use Traceability Agent to report Gateway usage
 linkTitle: Use Traceability Agent to report Gateway usage
 draft: false
 weight: 10
-description: Understand how the Traceability Agent reports the Gateway usage to Amplify platform.
+description: Understand how the Traceability Agent reports the Gateway usage to
+  Amplify platform.
 ---
 ## Before you start
 
@@ -15,10 +16,12 @@ Learn how to install and set up the Traceability Agent to automatically report t
 
 ## Traceability Agent overview
 
-The Traceability Agent is attached to a Gateway and monitors the traffic crossing it. The collected traffic is reported to Amplify platform in different event:
+The Traceability Agent is attached to a Gateway and monitors the traffic crossing it. The collected traffic is reported to Amplify platform in different events:
 
 * **Usage** event: report the total number of API calls during a period of time. This feature cannot be inactivated.
-* **Transaction** event: report the transaction summary (API name, duration, status), as well as the transaction details (request/response headers from the frontend and backend of the API). This feature can be inactivated be either using the environment variable `CENTRAL_PUBLISHTRAFFIC=false`, or you can reduce the number of transaction sent to the platform using the [sampling feature](/docs/central/connected_agent_common_reference/trace_sampling).
+* **Transaction** event: report the transaction summary (API name, duration, status), as well as the transaction details (request/response headers from the frontend and backend of the API). This feature can be inactivated by either using the environment variable `CENTRAL_PUBLISHTRAFFIC=false`, or you can reduce the number of transactions sent to the platform using the [sampling feature](/docs/central/connected_agent_common_reference/trace_sampling).
+
+If you want to use the agent for logging usage only, then you do not need to report transactions and you should set `CENTRAL_PUBLISHTRAFFIC=false.`
 
 ## Network pre-requisites
 
@@ -27,9 +30,9 @@ All outbound traffic is sent over SSL via TCP / UDP.
 Open the following ports so that agents can communicate to the Amplify platform:
 
 | Region | Host                                                                                      | IP             | port       | Protocol     | data                               |
-|--------|-------------------------------------------------------------------------------------------|----------------|------------|--------------|------------------------------------|
+| ------ | ----------------------------------------------------------------------------------------- | -------------- | ---------- | ------------ | ---------------------------------- |
 |        |                                                                                           |                |            |              |                                    |
-| EU/US  | login.axway.com                                                                           | 52.58.132.2    | 443        | HTTPS        | Platform authentication |
+| EU/US  | login.axway.com                                                                           | 52.58.132.2    | 443        | HTTPS        | Platform authentication            |
 |        |                                                                                           | 52.29.4.35     |            |              |                                    |
 |        |                                                                                           | 54.93.140.145  |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
@@ -47,23 +50,23 @@ Open the following ports so that agents can communicate to the Amplify platform:
 |        |                                                                                           | 13.36.52.216   |            |              |                                    |
 |        |                                                                                           | 15.236.7.112   |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
-| EU/US  | lighthouse.admin.axway.com                                                                |                | 443        | HTTPS        | API usage event                  |
+| EU/US  | lighthouse.admin.axway.com                                                                |                | 443        | HTTPS        | API usage event                    |
 |        |                                                                                           |                |            |              |                                    |
-| US     | ingestion-lumberjack.datasearch.axway.com or ingestion.datasearch.axway.com               | 54.225.171.111 | 453 or 443 | TCP or HTTPS | API transaction event                     |
+| US     | ingestion-lumberjack.datasearch.axway.com or ingestion.datasearch.axway.com               | 54.225.171.111 | 453 or 443 | TCP or HTTPS | API transaction event              |
 |        |                                                                                           | 54.225.2.221   |            |              |                                    |
 |        |                                                                                           | 54.146.97.250  |            |              |                                    |
 |        |                                                                                           | 54.147.98.128  |            |              |                                    |
 |        |                                                                                           | 52.206.193.184 |            |              |                                    |
 |        |                                                                                           | 54.225.92.97   |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
-| EU     | ingestion-lumberjack.visibility.eu-fr.axway.com  or  ingestion.visibility.eu-fr.axway.com | 15.236.125.123 | 453 or 443 | TCP or HTTPS | API transaction event                     |
+| EU     | ingestion-lumberjack.visibility.eu-fr.axway.com  or  ingestion.visibility.eu-fr.axway.com | 15.236.125.123 | 453 or 443 | TCP or HTTPS | API transaction event              |
 |        |                                                                                           | 35.180.77.202  |            |              |                                    |
 |        |                                                                                           | 13.36.27.97    |            |              |                                    |
 |        |                                                                                           | 13.36.33.229   |            |              |                                    |
 
-{{% alert title="Note" %}}
+{{< alert title="Note" color="primary" >}}
 _Region_ column represents the region where your Amplify organization is deployed. EU means deployed in European data center and US meaning deployed in US data center. You must use the corresponding _Host_/_Port_ for your agents to operate correctly.
-{{% /alert %}}
+{{< /alert >}}
 
 ## Install Traceability Agent
 
@@ -71,15 +74,13 @@ To report usage to Amplify platform, the traceability Agent must be installed an
 
 1. Install Axway CLI and Axway Central CLI
 
-   * Install Axway CLI: `npm install -g axway`.
-   * Install Axway Central CLI: `axway pm install @axway/axway-central-cli`.
+   * Install Axway CLI: `npm install -g axway`
+   * Install Axway Central CLI: `axway pm install @axway/axway-central-cli`
    * Download and install OpenSSL, if not already present on the machine. This will help you generate a public/private key pair to secure the connection between Traceability Agent and Amplify platform.
 
       More information regarding the CLI installation is available [here](/docs/central/cli_central/cli_install/)
-
-2. Authorize your CLI to use the Amplify Central APIs: `axway auth login`.
-
-3. Install the Traceability Agent using Axway Central CLI: `axway central install agents`:
+2. Authorize your CLI to use the Amplify Central APIs: `axway auth login`
+3. Install the Traceability Agent using Axway Central CLI: `axway central install agents`
 
    * For usage tracking, only the Traceability Agent is required.
    * Answer ALL questions when prompted (environment / team / connectivity with Gateway).
@@ -136,9 +137,9 @@ Based on the frequency you choose, the Traceability Agent reports to the platfor
 
 The following known limitations exist in the current implementation.
 
-{{% alert title="Note" %}}
+{{< alert title="Note" color="primary" >}}
 The usage report is based on the transactions the Traceability Agent monitors. If the transactions are not provided by the Gateway, the usage report will be inaccurate.
-{{% /alert %}}
+{{< /alert >}}
 
 ### Axway API Gateway
 
