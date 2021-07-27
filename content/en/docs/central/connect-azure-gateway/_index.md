@@ -12,7 +12,11 @@ description: Understand why you would connect Azure API Management Services to
 ---
 ## What is Azure API Management Service connected?
 
-Connect your Azure Management Services to Amplify Central by using two agents: Discovery and Traceability. These two agents will help you to represent and expose your API Management eco-system in Amplify Central:
+Connect your Azure Management Services to Amplify Central by using two agents: Discovery and Traceability.
+
+{{< alert title="Note" color="primary" >}}You will be notified at the startup of the agent if your agent is outdated: New version available. Please consider upgrading from version _(running version)_ to version _(latest version)_.{{< /alert >}}
+
+These two agents will help you to represent and expose your API Management eco-system in Amplify Central:
 
 * Create an environment in Amplify Central that represent your actual API Management eco-system.
 * Detect a published API using the Discovery Agent. The Discovery Agent discovers the API from API Manager and makes it available in Amplify Central. An API Service in Central is created to reference the API from API Management Service and then you can optionally tell the agent to publish it to the Amplify Catalog to allow your consumer to discover it.
