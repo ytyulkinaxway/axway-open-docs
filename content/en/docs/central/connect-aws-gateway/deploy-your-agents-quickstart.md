@@ -76,5 +76,5 @@ Learn the basics to create your Discovery Agent and Traceability Agent configura
 
 ### 4. Setup using AWS CloudFormation
 
-* Get the required templates at [https://axway.jfrog.io/artifactory/ampc-public-generic-release/aws-agents/aws_apigw_agent_config/](<https://axway.jfrog.io/artifactory/ampc-public-generic-release/aws-agents/aws_apigw_agent_config/>).
+* Get the required templates at [https://axway.jfrog.io/ui/repos/tree/General/ampc-public-generic-release%2Faws-agents%2Faws_apigw_agent_config](<https://axway.jfrog.io/ui/repos/tree/General/ampc-public-generic-release%2Faws-agents%2Faws_apigw_agent_config>).
 * Setup and deploy the CloudFormation Stack [AWS CloudFormation](/docs/central/connect-aws-gateway/prepare-aws-api-gateway/#set-up-the-cloudformation).

@@ -56,9 +56,7 @@ For additional logging information, see <https://docs.aws.amazon.com/apigateway/
 * Amazon CloudWatch Service
 * Amazon Simple Queue Service (AWS SQS)
 * AWS Lambda
-* CloudFormation template. Download from [https://axway.jfrog.io/artifactory/ampc-public-generic-release/aws-agents/aws_apigw_agent_config/](<https://axway.jfrog.io/artifactory/ampc-public-generic-release/aws-agents/aws_apigw_agent_config/>)
-
-## System requirements
+* CloudFormation template. Download from [https://axway.jfrog.io/ui/repos/tree/General/ampc-public-generic-release%2Faws-agents%2Faws_apigw_agent_config](<https://axway.jfrog.io/ui/repos/tree/General/ampc-public-generic-release%2Faws-agents%2Faws_apigw_agent_config>)
 
 ## Region support
 
