@@ -401,74 +401,42 @@ To exclude any headers, remove them from "additional_request_headers_to_log" and
  kubectl apply -f <fileName>.yaml
  ```
 
-## Sanitization of Transactions
+## Transaction Redaction
 
-The ALS Traceability Agent can be configured to sanitize the Transaction information that it publishes; i.e Request/Response headers, Query Parameters, Path Segments. Sanitization configuration is passed to the Traceability Agent via Helm.
+The Traceability Agent enforces redaction by default. The agent can be configured to show certain paths, query parameters, and header information based on redaction environment variables provided to it. For instructions on how to set the redaction configuration, see [Trace Redaction](/docs/central/connected_agent_common_reference/trace_redaction.md).
 
-Below is a sample sanitization configuration:
+Once the environment variables are set, put them in a helm override configuration:
 
 ```yaml
 als:
-  sanitization:
-    pathFilters:
-    - keyMatch: "list" #Regex to remove path segment "list"
-    argsFilters:
-      remove:
-        - keyMatch: "id" #Regex to remove query parameter "id" 
-      sanitize:
-        - keyMatch: "city"  #Regex to sanitize first three characters of query param "city"
-          valueMatch: "^.{0,3}"
-    requestHeaderFilters:
-      remove:
-        - keyMatch: "^x-amplify.*" #Regex to remove all x-amplify headers in Reqheaders
-      sanitize:
-        - keyMatch: "x-axway"
-          valueMatch: "list" #Regex (can be specified as a string literal) to sanitize "list" x-axway headers in Reqheaders
-    responseHeaderFilters:
-      remove:
-        - keyMatch: "x-envoy.*" #Regex to remove all x-envoy headers in Resheaders
-      sanitize:
-        - keyMatch: "ip"  #Regex to sanitize ip in ResHeaders as per Regex specified in Valuematch 
-          valueMatch: ".{0,3}$"
-
-# Also Valid Configuration (or to disable all sanitization rules) 
-als:
-  sanitization:
-    pathFilters:
-    argsFilters:
-      remove:
-      sanitize:
-    requestHeaderFilters:
-      remove:
-      sanitize:
-    responseHeaderFilters:
-      remove:
-      sanitize:
+  redaction:
+    path:
+      show: ${TRACEABILITY_REDACTION_PATH_SHOW:[]}
+    queryArgument:
+      show: ${TRACEABILITY_REDACTION_QUERYARGUMENT_SHOW:[]}
+      sanitize: ${TRACEABILITY_REDACTION_QUERYARGUMENT_SANITIZE:[]}
+    requestHeader:
+      show: ${TRACEABILITY_REDACTION_REQUESTHEADER_SHOW:[]}
+      sanitize: ${TRACEABILITY_REDACTION_REQUESTHEADER_SANITIZE:[]}
+    responseHeader:
+      show: ${TRACEABILITY_REDACTION_RESPONSEHEADER_SHOW:[]}
+      sanitize: ${TRACEABILITY_REDACTION_RESPONSEHEADER_SANITIZE:[]}
 ```
 
-### Description of the yaml configuration
+Below is a sample redaction configuration:
 
-**Path Segments**:
+```yaml
+als:
+  redaction:
+    path:
+      show: '[{keyMatch:".*"}]'
+    requestHeader:
+      show: '[{keyMatch:".*"}]'
+```
 
-* "pathFilters" is used to apply apply redaction to path segments in URI path. The "pathFilters" section is an array of "keyMatch" which is used to specify the path segments to be removed from the URI Path. This keyMatch value is a Regex. "pathFilters" can be empty i.e "keyMatch" is not required. However, keyMatch cannot be empty if specified.
+The configuration above will display all URI path information and all request headers.
 
-**Query Parameters**:
-
-* "argsFilters" is used to apply redaction to query parameters. "argsFilters" can be empty.
-
-* Under "remove" section, the user can specify an array of keyMatch Regex to remove query parameters. The "remove" section can be empty (i.e., "keyMatch" is optional). However, "keyMatch" cannot be empty if specified.
-
-* Under "sanitize" section, the user can specify the keyMatches Regex of the query parameters to be partially obfuscated. The "valueMatch" is a Regex which specifies the portion that is to be sanitized. For example, if only the first three characters are to be obfuscated, the "valueMatch" would be "^.{0,3}". The "sanitize" section can be empty (i.e., "keyMatch & valueMatch" pair is optional). However, both keyMatch and valueMatch have to specified in pairs if non empty.
-
-**Request and Response Headers**:
-
-* "requestHeaderFilters" and "responseHeaderFilters" are used to apply redaction to request and response headers respectively.  Both "requestHeaderFilters" and "responseHeaderFilters" can be empty.
-
-* Under "remove" section, the user can specify an array of keyMatch Regex to remove headers. The "remove" section can be empty (i.e., "keyMatch" is optional). However, "keyMatch" cannot be empty if specified.
-
-* Under "sanitize" section, the user can specify the keyMatches Regex of the headers to be partially obfuscated. The "valueMatch" is a Regex which specifies the portion that is to be sanitized. For example, if only the first three characters are to be obfuscated, the "valueMatch" would be "^.{0,3}". The "sanitize" section can be empty (i.e., "keyMatch & valueMatch" pair is optional). However, both keyMatch and valueMatch have to specified in pairs if non empty.
-
-Put your sanitization configuration into a file and then execute the following command:
+Put your redaction configuration into a file and then execute the following command:
 
 ```bash
 helm upgrade --install ampc-hybrid axway/ampc-hybrid --namespace apic-control -f hybrid-override.yaml -f <pathToConfigFile>/config.yaml
