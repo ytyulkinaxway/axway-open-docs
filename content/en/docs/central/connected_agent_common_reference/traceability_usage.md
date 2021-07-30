@@ -18,10 +18,10 @@ Learn how to install and set up the Traceability Agent to automatically report t
 
 The Traceability Agent is attached to a Gateway and monitors the traffic crossing it. The collected traffic is reported to Amplify platform in different events:
 
-* **Usage** event: report the total number of API calls during a period of time. This feature cannot be inactivated.
-* **Transaction** event: report the transaction summary (API name, duration, status), as well as the transaction details (request/response headers from the frontend and backend of the API). This feature can be inactivated by either using the environment variable `CENTRAL_PUBLISHTRAFFIC=false`, or you can reduce the number of transactions sent to the platform using the [sampling feature](/docs/central/connected_agent_common_reference/trace_sampling).
+* **Usage** event: reports the total number of API calls during a period of time. This feature cannot be inactivated.
+* **Transaction** event: reports the transaction summary (API name, duration, status), and the transaction details (request/response headers from the frontend and backend of the API). If your API calls JMS endpoints, the JMS properties are also reported. To reduce the number of transactions sent to the platform, use the [sampling feature](/docs/central/connected_agent_common_reference/trace_sampling).
 
-If you want to use the agent for logging usage only, then you do not need to report transactions and you should set `CENTRAL_PUBLISHTRAFFIC=false.`
+{{< alert title="Disabling transacation report" color="warning" >}}To use the Traceability Agent for logging usage only, set `TRACEABILITY_SAMPLING_PERCENTAGE=0` and `TRACEABILITY_SAMPLING_REPORTALLERRORS=false` in the `ta_env_vars.env` file to disable the transaction report. Restart the Traceability Agent to use the new configuration.{{< /alert >}}
 
 ## Network pre-requisites
 
