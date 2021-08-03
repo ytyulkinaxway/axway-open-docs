@@ -69,7 +69,7 @@ The installation procedure will prompt for the following:
 2. Platform connectivity:
    * **environment**: can be an existing environment or a new one that will be created by the installation procedure
    * **team**: can be an existing team or a new one that will be created by the installation procedure
-   * **service account**: can be an existing service account or a new one that will be created by the installation procedure. If you choose an existing one, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the Amplify Platform. If you choose to create a new one, the generated private and public keys will be provided.
+   * **service account**: can be an existing service account (from platform or Central). The installation procedure creates only a Central service account. If you choose an existing service account, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the Amplify Platform. If you choose to create a new one, the generated private and public keys will be provided.
 3. Select the agents you want to install: Discovery / Traceability / all.
 4. Select the agent deployment mode: binary / Docker image.
 5. API Manager connectivity:

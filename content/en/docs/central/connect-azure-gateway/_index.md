@@ -40,7 +40,10 @@ The Traceability Agent sends log information about APIs that have been discovere
 ## Prerequisites
 
 * An Axway Amplify Central subscription in the Amplify Platform
-* An Amplify Central Service Account
+* (Optional) An Amplify Central Service Account (see [Create a service account](/docs/central/cli_central/cli_install/#authorize-your-cli-to-use-the-amplify-central-apis)) or a Platform Service Account (see [Managing service accounts](https://docs.axway.com/bundle/Amplify_Platform_Management_allOS_en/page/managing_organizations.html#ManagingOrganizations-service_accountsManagingserviceaccounts)).
+
+{{< alert title="Note" color="primary" >}}Although both service account types are currently supported, the Amplify Central Service Account will soon be retired. For this reason, it is recommended that you use the Platform Service Account.{{< /alert >}}
+
 * An Amplify Central environment
 * An Azure Service principal for the Discovery Agent to use Azure APIs
 * An Azure Event Hub for the Traceability Agent to report API traffic to Amplify Platform
