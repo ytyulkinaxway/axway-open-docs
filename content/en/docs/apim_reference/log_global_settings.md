@@ -26,33 +26,19 @@ You can configure the API Gateway to log to the following locations described in
 
 To configure the API Gateway to log in text format to a file, click the **Text File** tab, and select **Enable logging to file**. You can configure the following fields:
 
-**File Name**:
+**File Name**: Enter the name of the text-based file that the API Gateway logs to. The default is `transactionLog`.
 
-Enter the name of the text-based file that the API Gateway logs to. The default is `transactionLog`.
+**File Extension**: Enter the file extension of the log file. Defaults to `.log`.
 
-**File Extension**:
+**Directory**: Enter the directory of the log file in this field. By default, all log files are stored in the `/logs/transaction` directory of your API Gateway installation.
 
-Enter the file extension of the log file. Defaults to `.log`.
+**File Size (MB)**: Enter the maximum size that the log file grows to. When the file reaches the specified limit, a new log file is created. By default, the maximum file size is 1000 MB.
 
-**Directory**:
+**Roll Log Daily**: Specify whether to roll over the log file at the start of each day. This is enabled by default.
 
-Enter the directory of the log file in this field. By default, all log files are stored in the `/logs/transaction` directory of your API Gateway installation.
+**Number of Files**: Specify the number of log files that are stored. The default number is 20.
 
-**File Size (MB)**:
-
-Enter the maximum size that the log file grows to. When the file reaches the specified limit, a new log file is created. By default, the maximum file size is 1000 MB.
-
-**Roll Log Daily**:
-
-Specify whether to roll over the log file at the start of each day. This is enabled by default.
-
-**Number of Files**:
-
-Specify the number of log files that are stored. The default number is 20.
-
-**Format**:
-
-You can specify the format of the logging output using the values entered here. You can use selectors to output logging information that is specific to the request. The default logging format is as follows:
+**Format**: You can specify the format of the logging output using the values entered here. You can use selectors to output logging information that is specific to the request. The default logging format is as follows:
 
 ```
 ${level} ${timestamp} ${id} ${text} ${filterType} ${filterName}
@@ -68,9 +54,7 @@ The available logging properties are described as follows:
 * `filterType`: The type of the filter that logged the message.
 * `ip`: The IP address of the client that sent the request.
 
-**Signing Key**:
-
-To sign the log file, select a **Signing Key** from the Certificates Store that is used in the signing process. By signing the log files, you can verify their integrity at a later stage.
+**Signing Key**: To sign the log file, select a **Signing Key** from the Certificates Store that is used in the signing process. By signing the log files, you can verify their integrity at a later stage.
 
 To confirm updates to these settings, click **Save** at the bottom right of the screen.
 
@@ -80,33 +64,19 @@ To configure the API Gateway to log to an XML file, click the **XML File** tab, 
 
 You can configure the following fields on the **XML File** tab:
 
-**File Name**:
+**File Name**: Enter the name of the text-based file that the API Gateway logs to. By default, the log file is called `axway`.
 
-Enter the name of the text-based file that the API Gateway logs to. By default, the log file is called `axway`.
+**File Extension**: Enter the file extension of the log file in this field. By default, the log file is given the `.log` extension.
 
-**File Extension**:
+**Directory**: Enter the directory of the log file in this field. By default, all log files are stored in the `/logs/transaction` directory of your API Gateway installation.
 
-Enter the file extension of the log file in this field. By default, the log file is given the `.log` extension.
+**File Size**: Enter the maximum size that the log file grows to. When the file reaches the specified limit, a new log file is created.By default, the maximum file size is 1000 kilobytes.
 
-**Directory**:
+**Roll Log Daily**: Specify whether to roll over the log file at the start of each day. This is enabled by default.
 
-Enter the directory of the log file in this field. By default, all log files are stored in the `/logs/transaction` directory of your API Gateway installation.
+**Number of Files**: Specify the number of log files that are persisted. The default number is 20.
 
-**File Size**:
-
-Enter the maximum size that the log file grows to. When the file reaches the specified limit, a new log file is created.By default, the maximum file size is 1000 kilobytes.
-
-**Roll Log Daily**:
-
-Specify whether to roll over the log file at the start of each day. This is enabled by default.
-
-**Number of Files**:
-
-Specify the number of log files that are persisted. The default number is 20.
-
-**Signing Key**:
-
-To sign the log file, select a **Signing Key** from the Certificates Store that will be used in the signing process. By signing the log files, you can verify their integrity at a later stage.
+**Signing Key**: To sign the log file, select a **Signing Key** from the Certificates Store that will be used in the signing process. By signing the log files, you can verify their integrity at a later stage.
 
 ### Log to Database
 
@@ -116,37 +86,25 @@ Before configuring the API Gateway to log to a database, you must first create t
 
 When you have set up the logging database tables, you can configure the API Gateway to log to the database. Click the **Database** tab, and select **Enable logging to database**. You can configure the following fields on the **Database** tab:
 
-**Connection**:
+**Connection**: Select an existing database from the **Connection** drop-down list. To add a database connection, click the **External Connections** button on the left, right-click the **Database connections** tree node, and select **Add a Database Connection**.
 
-Select an existing database from the **Connection** drop-down list. To add a database connection, click the **External Connections** button on the left, right-click the **Database connections** tree node, and select **Add a Database Connection**.
-
-**Signing Key**:
-
-You can sign log messages stored in the database to ensure that they are not tampered with. Click **Signing Key** to open the list of certificates in the Certificate Store, and select the key to use to sign log messages.
+**Signing Key**: You can sign log messages stored in the database to ensure that they are not tampered with. Click **Signing Key** to open the list of certificates in the Certificate Store, and select the key to use to sign log messages.
 
 ### Log to Local Syslog
 
 To configure the API Gateway to send logging information to the local UNIX syslog, click the **Local Syslog** tab, and select the **Enable logging to local UNIX Syslog** checkbox. You can configure the following fields:
 
-**Select Syslog server**:
+**Select Syslog server**: Select the local syslog facility that the API Gateway should log to. The default is `LOCAL0`.
 
-Select the local syslog facility that the API Gateway should log to. The default is `LOCAL0`.
-
-**Format**:
-
-You can specify the format of the log message using the values (including selectors) entered in this field.
+**Format**: You can specify the format of the log message using the values (including selectors) entered in this field.
 
 ### Log to Remote Syslog
 
 To configure the API Gateway to send logging information to a remote syslog, click the **Remote Syslog** tab, and select the **Enable logging to Remote Syslog** checkbox. You can configure the following fields:
 
-**Syslog Server**:
+**Syslog Server**: Select a previously configured **Syslog Server** from the list. For details on how to configure Syslog Server, see [Configure external connections](/docs/apim_policydev/apigw_external_connections/).
 
-Select a previously configured **Syslog Server** from the list. For details on how to configure Syslog Server, see [Configure external connections](/docs/apim_policydev/apigw_external_connections/).
-
-**Format**:
-
-You can specify the format of the log message using the values (including properties) entered in this field. For details on the properties that are available, see [Log to Text File](#log-to-text-file).
+**Format**: You can specify the format of the log message using the values (including properties) entered in this field. For details on the properties that are available, see [Log to Text File](#log-to-text-file).
 
 ### Log to System Console
 
@@ -225,36 +183,21 @@ To configure the access log in the Policy Studio tree, select the **Server Setti
 
 You can configure the following fields to enable the server to write an access log to file:
 
-**Writing to Transaction Access Log**:
+**Writing to Transaction Access Log**: Select whether to configure the API Gateway instance to start writing event data to the transaction access log. This setting is disabled by default.
 
-Select whether to configure the API Gateway instance to start writing event data to the transaction access log. This setting is disabled by default.
+**File name**: Enter the name of the access log file. When the file rolls over (because the maximum file size has been reached, or because the date has changed), a suitable increment is appended to the file name. Defaults to `access`.
 
-**File name**:
+**File extension**: Enter the file extension for the log file. Defaults to `.log`.
 
-Enter the name of the access log file. When the file rolls over (because the maximum file size has been reached, or because the date has changed), a suitable increment is appended to the file name. Defaults to `access`.
+**Directory**: Enter the directory for the access log file. Defaults to the `logs/access` directory of your product installation.
 
-**File extension**:
+**File size (MB)**: Specify the maximum size that the log file is allowed reach before it rolls over to a new file. Defaults to `1000` MB.
 
-Enter the file extension for the log file. Defaults to `.log`.
+**Roll log daily**: Select whether to roll over the log file at the start of each day. This is enabled by default.
 
-**Directory**:
+**Number of log files**: Specify the number of log files that are stored. Defaults to `20`.
 
-Enter the directory for the access log file. Defaults to the `logs/access` directory of your product installation.
-
-**File size (MB)**:
-
-Specify the maximum size that the log file is allowed reach before it rolls over to a new file. Defaults to `1000` MB.
-
-**Roll log daily**:
-
-Select whether to roll over the log file at the start of each day. This is enabled by default.
-
-**Number of log files**:
-
-Specify the number of log files that are stored. Defaults to `20`.
-
-**Format**:
-Enter the access log file format. This is based on the syntax used in Apache HTTP Server access log files, for example:
+**Format**: Enter the access log file format. This is based on the syntax used in Apache HTTP Server access log files, for example:
 
 ```
 %h %l %u %t "%r" %s %b
@@ -398,39 +341,21 @@ Event log `transaction` entries contain details about a specific message transac
 
 The fields in the transaction entries include the following:
 
-**type**:
+**type**: `transaction` - Entries of type transaction describe a transaction and the transaction legs. A transaction entry is recorded for each API call.
 
-`transaction`
+**time**: Timestamp of the event (in milliseconds since the epoch, taken from `System.currentTimeMillis()`).
 
-Entries of type transaction describe a transaction and the transaction legs. A transaction entry is recorded for each API call.
+**path**: Resource path representing the transaction.
 
-**time**:
+**protocol**: Inbound protocol.
 
-Timestamp of the event (in milliseconds since the epoch, taken from `System.currentTimeMillis()`).
+**protocolSrc**: Local inbound protocol port (or path).
 
-**path**:
+**duration**: Execution time of the transaction element (in ms).
 
-Resource path representing the transaction.
+**status**: Transaction result status.
 
-**protocol**:
-
-Inbound protocol.
-
-**protocolSrc**:
-
-Local inbound protocol port (or path).
-
-**duration**:
-
-Execution time of the transaction element (in ms).
-
-**status**:
-
-Transaction result status.
-
-**serviceContexts**:
-
-OAuth, web service, and service context elements. Each service context contains the following fields:
+**serviceContexts**: OAuth, web service, and service context elements. Each service context contains the following fields:
 
 * **monitor**: Indicates if metrics monitoring is enabled for this service.
 * **client**: Identity of the client.
@@ -440,101 +365,53 @@ OAuth, web service, and service context elements. Each service context contains 
 * **status**: Execution status of this service context.
 * **duration**: Processing time of this service context.
 
-**customMsgAtts**:
+**customMsgAtts**: Custom message attributes that have been added to the event log (see [Configure the transaction event log](#configure-the-transaction-event-log) for details of how to configure these attributes globally).
 
-Custom message attributes that have been added to the event log (see [Configure the transaction event log](#configure-the-transaction-event-log) for details of how to configure these attributes globally).
+**correlationId**: Transaction correlation ID.
 
-**correlationId**:
+**legs**: Legs processed during the transaction. Each leg contains the following fields:
 
-Transaction correlation ID.
+**status**: HTTP status code returned.
 
-**legs**:
+**statustext**: HTTP status message returned.
 
-Legs processed during the transaction. Each leg contains the following fields:
+**method**: HTTP method used.
 
-**status**:
+**Vhost**: Virtualized API's host.
 
-HTTP status code returned.
+**wafStatus**: Threat protection profile status.
 
-**statustext**:
+**bytesSent**: Number of bytes sent.
 
-HTTP status message returned.
+**bytesReceived**: Number of bytes received.
 
-**method**:
+**remoteName**: Name representing remote host of the transaction.
 
-HTTP method used.
+**remoteAddr**: Remote host address of transaction.
 
-**Vhost**:
+**localAddr**: Local host of transaction.
 
-Virtualized API's host.
+**remotePort**: Remote port of transaction.
 
-**wafStatus**:
+**localPort**: Local port of transaction.
 
-Threat protection profile status.
+**Sslsubject**: Subject name of peer certificate used to establish SSL connection.
 
-**bytesSent**:
+**leg**: Transaction element number.
 
-Number of bytes sent.
+**timestamp**: Event timestamp.
 
-**bytesReceived**:
+**duration**: Execution time of the transaction element (in ms).
 
-Number of bytes received.
+**serviceName**: API Gateway instance name.
 
-**remoteName**:
+**subject**: Authenticated user (content of attribute `authentication.subject.id`).
 
-Name representing remote host of the transaction.
+**operation**: SOAP request method used.
 
-**remoteAddr**:
+**type**: Protocol used.
 
-Remote host address of transaction.
-
-**localAddr**:
-
-Local host of transaction.
-
-**remotePort**:
-
-Remote port of transaction.
-
-**localPort**:
-
-Local port of transaction.
-
-**Sslsubject**:
-
-Subject name of peer certificate used to establish SSL connection.
-
-**leg**:
-
-Transaction element number.
-
-**timestamp**:
-
-Event timestamp.
-
-**duration**:
-
-Execution time of the transaction element (in ms).
-
-**serviceName**:
-
-API Gateway instance name.
-
-**subject**:
-
-Authenticated user (content of attribute `authentication.subject.id`).
-
-**operation**:
-
-SOAP request method used.
-
-**type**:
-
-Protocol used.
-
-**finalStatus**:
-
-Status text of the transaction element (global policy) execution. Only written after all policies have been executed. Initialized to "null". Possible values: "Pass", "Fail", or "Error".
+**finalStatus**: Status text of the transaction element (global policy) execution. Only written after all policies have been executed. Initialized to "null". Possible values: "Pass", "Fail", or "Error".
 
 The following example shows the JSON format used for an HTTP `transaction` event with a service context and inbound and outbound transaction legs:
 
@@ -633,59 +510,35 @@ Event log `alert` entries contain details about a specific system alert. For exa
 
 The fields in the alert entries include the following:
 
-**type**:
+**type**: `alert` - Entries of type alert describe API Gateway alerts.
 
-`alert`
+**time**: Time the alert event was created.
 
-Entries of type alert describe API Gateway alerts.
-
-**time**:
-
-Time the alert event was created.
-
-**alertType**:
-
-Type of the alert:
+**alertType**: Type of the alert:
 
 * AlertMessage
 * SlaBreachAlertMessage
 * SlaClearAlertMessage
 
-**level**:
-
-Integer representing the level of the alert:
+**level**: Integer representing the level of the alert:
 
 * 1 (ERROR)
 * 2 (WARNING)
 * 3 (INFO)
 
-**id**:
+**id**: Unique ID of the alert record.
 
-Unique ID of the alert record.
+**srcId**: API Gateway instance ID.
 
-**srcId**:
+**msgId**: ID of the message processed during the alert.
 
-API Gateway instance ID.
+**defaultMsg**: Custom message configured in the alert.
 
-**msgId**:
+**clientIP**: Client IP address in use when alert was triggered.
 
-ID of the message processed during the alert.
+**policy**: Policy name.
 
-**defaultMsg**:
-
-Custom message configured in the alert.
-
-**clientIP**:
-
-Client IP address in use when alert was triggered.
-
-**policy**:
-
-Policy name.
-
-**filter**:
-
-Alert filter name.
+**filter**: Alert filter name.
 
 The following example shows the JSON format used for an HTTP `transaction` event with a service context and inbound and outbound transaction legs:
 
@@ -713,30 +566,18 @@ To configure the transaction event log in the Policy Studio tree, select the **S
 
 Configure the following fields to enable the API Gateway instance to write a transaction event log to a file:
 
-**Writing to Transaction Event Log**:
+**Writing to Transaction Event Log**: Enables writing to an event log for all message transactions received by the API Gateway. This setting is enabled by default, and is required for API Gateway Analytics and API Manager metrics. For example, you could deselect this setting to optimize performance.
 
-Enables writing to an event log for all message transactions received by the API Gateway. This setting is enabled by default, and is required for API Gateway Analytics and API Manager metrics. For example, you could deselect this setting to optimize performance.
-
-**Write transaction event logs to directory**:
-
-Specifies the directory where transaction event logs are written. Defaults to `${environment.VDISTDIR}/events`.
+**Write transaction event logs to directory**: Specifies the directory where transaction event logs are written. Defaults to `${environment.VDISTDIR}/events`.
 
 * If transaction event logs are being used to populate the metrics database, you must also update the `sourceEventLogDir` property in the Node Manager configuration if you change this directory.
 
-**System event frequency (secs)**:
+**System event frequency (secs)**: Specifies how often in seconds that a system entry is written to each event log file. Defaults to `60` seconds. For more details, see [Event log system entries](#event-log-system-entries).
 
-Specifies how often in seconds that a system entry is written to each event log file. Defaults to `60` seconds. For more details, see [Event log system entries](#event-log-system-entries).
+**Maximum disk space for event logs (MB)**: Specifies the maximum amount of disk space used for event logs. When the directory reaches the specified limit, the oldest log files are deleted. Defaults to `1024` MB.
 
-**Maximum disk space for event logs (MB)**:
+**Check disk space interval (secs)**: Specifies how often the amount of available disk space used for event logs is checked. Defaults to `600` seconds.
 
-Specifies the maximum amount of disk space used for event logs. When the directory reaches the specified limit, the oldest log files are deleted. Defaults to `1024` MB.
-
-**Check disk space interval (secs)**:
-
-Specifies how often the amount of available disk space used for event logs is checked. Defaults to `600` seconds.
-
-**Select the message attributes to be stored in transaction events**:
-
-Enables you to specify custom message attributes to write to the transaction event logs (for example, the HTTP request URI). To specify an attribute, click **Add**, and enter the attribute name in the dialog.
+**Select the message attributes to be stored in transaction events**: Enables you to specify custom message attributes to write to the transaction event logs (for example, the HTTP request URI). To specify an attribute, click **Add**, and enter the attribute name in the dialog.
 
 To confirm updates to these settings, click **Save** at the bottom right of the window. Click **Deploy** in the toolbar to deploy the updated configuration to the API Gateway.
