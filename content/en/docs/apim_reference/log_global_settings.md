@@ -534,7 +534,7 @@ Protocol used.
 
 **finalStatus**:
 
-Status text of the transaction element execution.
+Status text of the transaction element (global policy) execution. Only written after all policies have been executed. Initialized to "null". Possible values: "Pass", "Fail", or "Error".
 
 The following example shows the JSON format used for an HTTP `transaction` event with a service context and inbound and outbound transaction legs:
 
