@@ -9,14 +9,16 @@
 
 [Docker](https://www.docker.com/) containers are software containers that wrap software in a complete file system containing everything the software in question needs to run properly, such as code, runtime, system tools, and system libraries. This guarantees that the software always runs the same way, regardless of environment. In addition, you can configure several containers to run on a single host machine, without the overhead of starting and maintaining separate virtual machines.
 
-Docker containers enable you to run API Portal on any host operating system or cloud platform that supports Docker. For details on how to deploy your Docker infrastructure in the cloud, see the product documentation for your chosen third-party cloud platform or Platform as a Service (PaaS) environments, such as [Amazon Web Services](https://aws.amazon.com/).
+Docker containers enable you to run API Portal on any host operating system or cloud platform that supports Docker. Because API Gateway and API Manager also support Docker containers, you can run the full API Management solution in Docker containers. This makes it easy to quickly build, test, and run API Management solutions for standalone or high availability (HA) deployment.
 
-Because API Gateway and API Manager also support Docker containers, you can run the full API Management solution in Docker containers. This makes it easy to quickly build, test, and run API Management solutions for standalone or high availability (HA) deployment.
+For details on how to deploy your Docker infrastructure in the cloud, see the product documentation for your chosen third-party cloud platform or Platform as a Service (PaaS) environments, such as [Amazon Web Services](https://aws.amazon.com/).
 
 For more details on Docker, see the following:
 
 * [Docker overview](https://docs.docker.com/engine/understanding-docker/)
 * [Install Docker](https://docs.docker.com/engine/install/)
+
+{{< alert title="Note" color="primary" >}}API Portal running standalone has been validated in a [HA scenario](/docs/apiportal_ha/). However, API Portal running in Docker containers has not been fully tested or validated in a HA scenario yet.{{< /alert >}}
 
 ## Interaction example
 

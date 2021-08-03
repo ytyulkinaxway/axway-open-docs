@@ -11,6 +11,8 @@ You can configure API Portal for high availability (HA) deployment to ensure th
 
 API Portal supports HA deployment in both a single datacenter or multiple datacenters. In either case the deployment is always done in active-active mode that ensures data is constantly backed up when it is replicated between API Portal instances and datacenters.
 
+{{< alert title="Note" color="primary" >}}API Portal running standalone has been validated in a HA scenario. However, API Portal running in [Docker containers](/docs/apim_installation/apiportal_docker/) has not been fully tested or validated in a HA scenario yet.{{< /alert >}}
+
 ## API Portal HA in a single datacenter
 
 The HA deployment provides both high availability and horizontal scalability. To achieve a API Portal high-availability (HA) deployment, you must deploy at least two API Portal instances with a shared file system for data storage behind a load balancer.
