@@ -141,7 +141,7 @@ This section connects the agent to Amplify Central and determines how to publish
 
 `CENTRAL_URL`: The Amplify Central url. Default value is **<https://apicentral.axway.com>**.
 
-`CENTRAL_TEAM`: The Team name in Amplify Central that all APIs will be linked to. Locate this at Amplify Central > Access > Team Assets.
+`CENTRAL_TEAM`: The default team the agent will assign if no team corresponds to the API Manager organization that the API belongs to. If the value is left empty, "Default team" will be used by the agent when no team correspond to the API organization. Locate this at Amplify Central > Access > Team Assets.
 
 `CENTRAL_ORGANIZATIONID`: The Organization ID from Amplify Central. Locate this at Platform > User > Organization > Org ID field.
 
