@@ -44,7 +44,7 @@ Following are the attributes expected by API Portal, and  examples of mappings 
 `role` (mandatory)
 
 * The API Portal role associated with the logged in user. Permitted substring values: `Operator`, `User`.
-* The the IdP provides this value, and the IdP attribute has a different name, you can use a `RenameMapping` to transform it to a role attribute. If the IDP does not provide the value associated with the role, you can use an `OutputAttribute` to assign a role to the logged in user. For example:
+* The IdP provides this value, and the IdP attribute has a different name, you can use a `RenameMapping` to transform it to a role attribute. If the IDP does not provide the value associated with the role, you can use an `OutputAttribute` to assign a role to the logged in user. For example:
 
 ```
 <OutputAttribute name="role">Operator</OutputAttribute>
