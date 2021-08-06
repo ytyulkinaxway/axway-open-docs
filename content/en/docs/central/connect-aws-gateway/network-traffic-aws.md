@@ -17,6 +17,60 @@ The destination for:
 * Subscription notification for getting platform user information is `platform.axway.com`
 * API usage statistics, the number of calls placed to, is `https://lighthouse.admin.axway.com`
 
+## Data exchanged
+
+### Traceability Agent
+
+The Traceability Agent reports two sets of data to Amplify platform:
+
+* Usage data
+* Transactions data
+
+#### Usage data
+
+The usage data represent the total number of APIs called during a certain period of time. This usage is automatically reported every 15 minutes by default to Amplify platform and cannot be inactivated. See [Reporting Gateway usage event](/docs/central/connected_agent_common_reference/traceability_usage/#reporting-gateway-usage-event).
+
+It contains the following information:
+
+Structural Fields:
+
+* Unique ID
+* Timestamp
+* Event Identifier
+* Environment Identifier
+* Event version
+
+Data Fields:
+
+* Count
+* Observation Window (start / end)
+
+#### Transactions data
+
+The transaction data represent the number and details of transactions processed by the Gateway during a period of time. You can limit the number of transactions sent to the platform, or completely turn this feature off, by applying a sampling configuration to the Traceability Agent. See [Sampling](/docs/central/connected_agent_common_reference/trace_sampling/#sampling).
+
+The transactions can be redacted (by default) and/or sanitized, according to your need, before sending the information to Amplify platform. See [Trace redaction](/docs/central/connected_agent_common_reference/trace_redaction/).
+
+It contains the following information:
+
+Structural Fields:
+
+* Unique ID
+* Timestamp
+* Event Identifier
+* App Identifier (v7 Gateway application or AWS Usage plan or Azure subscription)
+* Amplify Central environment Identifier
+* Event version
+
+Data Fields:
+
+* API Identifier
+* Transaction status (i.e., HTTP status of the API)
+* URLs (frontend / backend API)
+* Duration and timestamp
+* Service called: method (POST / GET…) + URI path
+* Request/response headers from each API call
+
 ## Communication ports
 
 All outbound traffic is sent over SSL via TCP / UDP.
@@ -51,14 +105,14 @@ Open the following ports to benefit from all the Agent functionalities:
 |        |                                                                                           | 13.36.52.216   |            |              |                                    |
 |        |                                                                                           | 15.236.7.112   |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
-| US     | ingestion-lumberjack.datasearch.axway.com or ingestion.datasearch.axway.com               | 54.225.171.111 | 453 or 443 | TCP or HTTPS | API event data                     |
+| US     | ingestion.datasearch.axway.com                                                            | 54.225.171.111 | 5044 or 443 | TCP or HTTPS | API event data                     |
 |        |                                                                                           | 54.225.2.221   |            |              |                                    |
 |        |                                                                                           | 54.146.97.250  |            |              |                                    |
 |        |                                                                                           | 54.147.98.128  |            |              |                                    |
 |        |                                                                                           | 52.206.193.184 |            |              |                                    |
 |        |                                                                                           | 54.225.92.97   |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
-| EU     | ingestion-lumberjack.visibility.eu-fr.axway.com  or  ingestion.visibility.eu-fr.axway.com | 15.236.125.123 | 453 or 443 | TCP or HTTPS | API event data                     |
+| EU     | ingestion.visibility.eu-fr.axway.com                                                      | 15.236.125.123 | 5044 or 443 | TCP or HTTPS | API event data                     |
 |        |                                                                                           | 35.180.77.202  |            |              |                                    |
 |        |                                                                                           | 13.36.27.97    |            |              |                                    |
 |        |                                                                                           | 13.36.33.229   |            |              |                                    |

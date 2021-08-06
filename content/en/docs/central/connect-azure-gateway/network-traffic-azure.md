@@ -28,22 +28,55 @@ The Discovery Agent sends the following information to the Axway Amplify platfor
 
 ### Traceability Agent
 
-Only traffic related to discovered APIs is sent to the platform.
+The Traceability Agent reports two sets of data to Amplify platform:
 
-The agent reads the logs written on the file system (\[INSTALL_DIR]/apigateway/events/group-X_instance-Y.log) by the Gateways to get the transaction summary:
+* Usage data
+* Transactions data
 
-* Transaction HTTP status
-* Transaction URLs (frontend / backend API)
-* Transaction duration and timestamp
-* Transaction service called: method (POST / GET...) + uri path
+#### Usage data
 
-In order to submit details of the transaction, the Traceability Agent reads the Gateway system to get the transaction details:
+The usage data represent the total number of APIs called during a certain period of time. This usage is automatically reported every 15 minutes by default to Amplify platform and cannot be inactivated. See [Reporting Gateway usage event](/docs/central/connected_agent_common_reference/traceability_usage/#reporting-gateway-usage-event).
 
-* Request/response headers from each API call  
+It contains the following information:
 
-{{< alert title="Note" color="primary" >}}You can disable sending the headers by using the following property:  `traceability_agent.azure.getHeaders: false.` By default, the property is set to true. If collecting the headers is disabled, they will not be visible in Axway Amplify platform Observability module, as the Traceability Agent will send only the transaction summary data (status / url / duration / timestamp / transaction service called) to the platform.{{< /alert >}}
+Structural Fields:
 
-Once the information is extracted it is sent to the Axway platform using the TLS encryption.
+* Unique ID
+* Timestamp
+* Event Identifier
+* Environment Identifier
+* Event version
+
+Data Fields:
+
+* Count
+* Observation Window (start / end)
+
+#### Transactions data
+
+The transaction data represent the number and details of transactions processed by the Gateway during a period of time. You can limit the number of transactions sent to the platform, or completely turn this feature off, by applying a sampling configuration to the Traceability Agent. See [Sampling](/docs/central/connected_agent_common_reference/trace_sampling/#sampling).
+
+The transactions can be redacted (by default) and/or sanitized, according to your need, before sending the information to Amplify platform. See [Trace redaction](/docs/central/connected_agent_common_reference/trace_redaction/).
+
+It contains the following information:
+
+Structural Fields:
+
+* Unique ID
+* Timestamp
+* Event Identifier
+* App Identifier (v7 Gateway application or AWS Usage plan or Azure subscription)
+* Amplify Central environment Identifier
+* Event version
+
+Data Fields:
+
+* API Identifier
+* Transaction status (i.e., HTTP status of the API)
+* URLs (frontend / backend API)
+* Duration and timestamp
+* Service called: method (POST / GET…) + URI path
+* Request/response headers from each API call
 
 ## Communication ports
 
@@ -79,14 +112,14 @@ Open the following ports so that agents can communicate to the Amplify platform:
 |        |                                                                                           | 13.36.52.216   |            |              |                                    |
 |        |                                                                                           | 15.236.7.112   |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
-| US     | ingestion-lumberjack.datasearch.axway.com or ingestion.datasearch.axway.com               | 54.225.171.111 | 453 or 443 | TCP or HTTPS | API event data                     |
+| US     | ingestion.datasearch.axway.com                                                            | 54.225.171.111 | 5044 or 443 | TCP or HTTPS | API event data                     |
 |        |                                                                                           | 54.225.2.221   |            |              |                                    |
 |        |                                                                                           | 54.146.97.250  |            |              |                                    |
 |        |                                                                                           | 54.147.98.128  |            |              |                                    |
 |        |                                                                                           | 52.206.193.184 |            |              |                                    |
 |        |                                                                                           | 54.225.92.97   |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
-| EU     | ingestion-lumberjack.visibility.eu-fr.axway.com  or  ingestion.visibility.eu-fr.axway.com | 15.236.125.123 | 453 or 443 | TCP or HTTPS | API event data                     |
+| EU     | ingestion.visibility.eu-fr.axway.com                                                      | 15.236.125.123 | 5044 or 443 | TCP or HTTPS | API event data                     |
 |        |                                                                                           | 35.180.77.202  |            |              |                                    |
 |        |                                                                                           | 13.36.27.97    |            |              |                                    |
 |        |                                                                                           | 13.36.33.229   |            |              |                                    |
