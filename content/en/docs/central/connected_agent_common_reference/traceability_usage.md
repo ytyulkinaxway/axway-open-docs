@@ -93,24 +93,39 @@ To report usage to Amplify platform, the traceability Agent must be installed an
 
 You can view the environment in **Amplify Central > Topology** once the Traceability Agent is installed. The same environment is visible in Amplify platform under the **Organization** menu.
 
+Use of of the following methods to report usage from the Traceability Agent to the Amplify platform:
+
+* Automatic (connected) - the agent produces the report and sends it to the Amplify platform at regular intervals
+* Manual (offline) - the agent produces the report locally, but must be manually uploaded to the Amplify platform
+
+### Automatic reporting
+
 Once Traceability Agent starts, it detects the Gateway traffic, and begins counting the transactions. On a regular basis (default is 15 minutes), the Traceability Agent sends the usage counter to the platform.
 
-To change the reporting interval, use the `CENTRAL_EVENTAGGREGATIONINTERVAL` variable with either a second, minute or hour notation:
+To change the reporting interval, use the `CENTRAL_USAGEREPORTING_INTERVAL` variable with either a second, minute or hour notation:
 
 ```shell
 # report every 5 minutes expressed in second unit
-CENTRAL_EVENTAGGREGATIONINTERVAL=900s
+CENTRAL_USAGEREPORTING_INTERVAL=900s
 
 # report every 5 minutes expressed in minute unit
-CENTRAL_EVENTAGGREGATIONINTERVAL=15m
+CENTRAL_USAGEREPORTING_INTERVAL=15m
 
 # report every hour expressed in hour unit
-CENTRAL_EVENTAGGREGATIONINTERVAL=1h
+CENTRAL_USAGEREPORTING_INTERVAL=1h
 ```
 
 If for any reason the usage report cannot be uploaded to Amplify platform, the data are kept in memory and will be pushed at the next trigger interval.
 
 If the Traceability Agent is stopped while there are still remaining usage events to be sent, the report is saved on the disk where the Traceability Agent is located. The data will be sent to Amplify platform at the next Traceability Agent startup.
+
+### Manual reporting
+
+When offline usage reporting is on, `CENTRAL_USAGEREPORTING_OFFLINE=true` (default = false), the `CENTRAL_USAGEREPORTING_SCHEDULE` variable determines how often usage numbers are saved (default and minimum = "@hourly"). For additional cron schedules information, see [Scheduled jobs](https://github.com/Axway/agent-sdk/blob/main/pkg/jobs/README.md#scheduled-jobs). Note that offline ignores the `CENTRAL_USAGEREPORTING_INTERVAL` value that is only used for online reporting.
+
+The offline report is generated every month and saved to the [agent_dir]/data/reports directory as `YYYY_MM_DD_usage_report.json`.
+
+When the agent restarts, any usage reports that had been previously generated are saved to a file in the reports directory and the agent starts a new report. If necessary, the agent will add an index to the usage report name (`YYYY_MM_DD_{INDEX}_usage_report.json`). The first usage in the new report contains all events that occurred while the agent was not running.
 
 ## View the usage data from Amplify platform
 
