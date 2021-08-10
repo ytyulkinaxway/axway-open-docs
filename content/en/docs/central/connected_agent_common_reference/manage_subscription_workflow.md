@@ -1,17 +1,35 @@
 ---
-title: Feature - Manage subscriptions
-linkTitle: Feature - Manage subscriptions
+title: Use Discovery Agent to manage subscription workflow
+linkTitle: Use Discovery Agent to manage subscription workflow
 draft: false
-weight: 20
+weight: 30
 description: >-
   A subscription provides the consumer, or subscriber, with the required
   security and endpoint materials to correctly consume the API.
 
-  The security material and/or quota to access an API is configured inside the API Policy and subscription on Azure API Management service.
+  The security material and/or quota to access an API is configured inside the Gateway either on the Application (Axway API Manager) or the Usage plan (AWS Gateway) or subscription (Azure Gateway).
 ---
 ## Supported use cases when consumer subscribes to an API
 
+### API Manager use cases
+
+* **API providers allow the subscriber to create an application** (property `APIMANAGER_ALLOWAPPLICATIONAUTOCREATION=true` set in the discovery agent configuration file): the agent generates the application and adds the access to the API from the newly created application.
+* **Application has no access to the API** in Axway API Manager: the agent adds access to the API from the selected application.
+* **Application already has access to the API** in Axway API Manager: the agent has nothing to do.
+
+### AWS Gateway use cases
+
+* **API providers allow the subscriber to create a usage plan** (property `AWS_ALLOWUSAGEPLANAUTOCREATION=true` set in the Discovery Agent configuration file): the agent generates the usage plan and adds access to the API from the newly created usage plan.
+* **Usage plan has no access to the API** in AWS API Gateway: the agent adds access to the API from the selected usage plan.
+* **Usage plan already has access to the API** in AWS API Gateway: the agent has nothing to do.
+
+### Azure Gateway use cases
+
 Each time the agent received an approved subscription, it generates a new subscription/keys in the Azure API Management service and adds the access to the API from the newly created subscription.
+
+## Supported use case for issuing consumer credentials
+
+Each time a consumer subscribes to an API, new credentials (ApiKey / oauth client&secret depending on the API definition) are generated and stored within the selected API Manager application / AWS usage plan / Azure subscription.
 
 ## Supported use cases for subscription approval
 
@@ -29,7 +47,7 @@ CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_URL={The webhook URL that subscription da
 CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_HEADERS={The headers that will be used when posting data to the webhook url}
 ```
 
-{{< alert title="Note" color="primary" >}}Each API that is discovered in Azure API Gateway contains the subscription approval mode for its corresponding Amplify Central catalog item, which is set when the API is discovered and published. The only way to change a catalog item's subscription approval mode is to update the agent configuration mode (refer to `CENTRAL_SUBSCRIPTIONS_APPROVAL_MODE`), restart the agent, and then rediscover the API in Azure API Gateway.{{< /alert >}}
+{{< alert title="Note" color="primary" >}}Each API that is discovered contains the subscription approval mode for its corresponding Amplify Central catalog item, which is set when the API is discovered and published. The only way to change a catalog item's subscription approval mode is to update the agent configuration mode (refer to `CENTRAL_SUBSCRIPTIONS_APPROVAL_MODE`), restart the agent, and then rediscover the API.{{< /alert >}}
 
 ## Supported use cases for receiving API credentials
 
@@ -135,21 +153,51 @@ Request sample sent to the webhook endpoint:
 }
 ```
 
+## API provider: subscription preparation
+
+If the API provider does not allow an API consumer to create his Application (Axway API Gateway) or Usage plan (AWS Gateway), he has to prepare the required objects (application/Usage plan) in advance for the API consumer to use. There is no need to add credentials at that point: they will be automatically created by the Discovery Agent during the subscription workflow to ensure their uniqueness.
+
+### Axway API Gateway custom field
+
+A custom field track the Amplify Central subscription can be added to the API. Refer to `<API_Gateway_install_dir>/apigateway/webapps//apiportal/vordel/apiportal/app/app.config file` in the **customPropertiesConfig** section. For more details, see [Customize API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_custom/).
+
+Sample application:
+
+```
+customPropertiesConfig: {
+    user: {
+            // custom properties...
+        },
+        organization: {
+            // custom properties...
+        },
+        application: {
+            subscriptions: {
+                label: 'Subscriptions'
+            },
+        },
+        api: {
+            // custom properties...
+        }
+}
+```
+
 ## API consumer: subscription workflow
 
 1. A consumer initiates the subscription in Amplify Central:
 
    1. Open an Amplify Catalog item.
    2. Click **Subscribe**.
-   3. Select the Team for which you want to subscribe. For additional information, see [Manage Amplify Catalog subscriptions.](/docs/catalog/manage_subscriptions/)
+   3. Select the Team and API Manager Application name / Usage Plan for which you want to subscribe. For additional information, see [Manage Amplify Catalog subscriptions.](/docs/catalog/manage_subscriptions/)
 
 2. Based on the API subscription approval (manual vs. automatic), an API provider has to approve the subscription.
 
 3. The Discovery Agent receives the subscription event:
 
-   * Subscription status: **Active**
+   * subscription status: **Active**
 
-      * Agent create the subscription in Azure API Management service.
+      * Subscription ID is automatically added to the **Custom** field of the Application or to the Usage plan.
+      * Agent create the credentials on the Gateway and link them to the Application / Usage plan / Subscription.
       * Agent triggers credentials sending (either via email or via webhook).
       * If a failure occurs for any reason during the process, the subscription status is set to: **Subscription failed**. Refer to the Discovery Agent log for more information. You can delete the subscription and start again from Step 1.
 
@@ -157,7 +205,17 @@ Request sample sent to the webhook endpoint:
 
    * The API can be consumed once the API credential details are received.
 
-{{< alert title="Note" color="primary" >}}Depending on the poll interval settings for the Discovery Agent, it will take a little time from when the user subscribes an API to an application until Amplify Central shows the subscription state of **Active**. This is because of the time it takes to discover the change on Azure API Management service and send events back and forth between API Manager and Amplify Central.{{< /alert >}}
+{{< alert title="Note" color="primary" >}}Depending on the poll interval settings for the Discovery Agent, it will take a little time from when the user subscribes an API to an application/usage plan/subscription until Amplify Central shows the subscription state of **Active**. This is because of the time it takes to send events back and forth between the Gateway and Amplify Central.{{< /alert >}}
+
+{{< alert title="Note" color="primary" >}}If the FrontEnd API on API Manager corresponding to the Catalog item is set to **unpublished** at the time the subscription is initiated, the Discovery Agent will receive the event, but will not allow the subscription to be completed. Instead, it will send back a subscription status of **Subscribe failed**.{{< /alert >}}
+
+{{< alert title="Note" color="primary" >}}The API Manager application and the API must be in the same organization. Otherwise, an error message is displayed in the Discovery Agent log.
+**Workaround**: You can grant the API access to the organization where the application belongs:
+
+1. In the UI, select the API.
+2. Expand **Manage selected**.
+3. Select **Grant access**.
+{{< /alert >}}
 
 ## Unsubscribe workflow
 
@@ -168,7 +226,22 @@ Request sample sent to the webhook endpoint:
 
 2. The Discovery Agent receives the Unsubscribe event:
 
-   * The agent does nothing  
+   * API Manager: The subscription ID is removed from the application's Custom field. The related credentials are removed too.
+   * AWS Gateway: The `subscriptions-<subscriptionID from Amplify Central>` is removed from the usage plan. The related credentials are removed too.
+   * Azure: The subscription is deleted.
+   * Set the Amplify Central subscription status to **unsubscribed** or **unsubscribe failed** in case or error. Refer to Discovery Agent log for more information of the error.
+
+## Impact on subscription when unpublishing an API in API Manager
+
+1. In API Manager, assume there is a FrontEnd API that is published, has been discovered by the Discovery Agent, and has an active subscription to it in Amplify Central.
+2. A user in API Manager unpublishes that API.
+3. The Discovery Agent discovers the change and:
+
+   * Initiates an unsubscribe to Amplify Central for that Catalog item.
+   * The subscription ID is removed from the application's Custom field.
+   * The subscription status is set to **Unsubscribed**.
+
+{{< alert title="Note" color="primary" >}}Depending on the poll interval settings for the Discovery Agent, it will take a little time from when the user unsubscribes an API until Amplify Central shows the subscription state of **Unsubscribed**. This is because of the time it takes to discover the change on API Manager and send events back and forth between API Manager and Amplify Central.{{< /alert >}}
 
 ## Impact of subscription approval mode on subscription workflow
 
@@ -203,7 +276,34 @@ In webhook approval mode, the Discovery Agent must be configured with a webhook 
 5. The subscription status moves to  **Subscribing**.
 6. The Discovery Agent receives the event and sets the status to **Active**, or **Subscribe failed** if there is a failure to subscribe.
 
+{{< alert title="AWS Gateway Note" color="primary" >}}Depending on the poll interval settings for the Discovery Agent, it will take a little time from when the user unsubscribes an API until Amplify Central shows the subscription state of **Unsubscribed**. This is because of the time it takes to discover the change on API Manager and send events back and forth between API Manager and Amplify Central.{{< /alert >}}
+
 ## Subscription failures
+
+### API Manager failures
+
+The agent can mark a subscription as **Failed to subscribe** or **Failed to unsubscribe** for any of the following reasons:
+
+|   | Failure Description                                                                                                                                                                    | Remediation                                                                                                                                                                                     |
+|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1 | The API on API Gateway Manager is unpublished.                                                                                                                                         | Under the API section in API Manager > Manage the Frontend API: Publish the desired API.                                                                                                      |
+| 2 | On API Gateway Manager, the organization to which the application chosen for the subscription has not given API Access to the API, or the access has been given but has been disabled. | Under the Clients section in API Manager > Organizations: Verify that the ORG has "Enabled" toggled correctly (under General) and that the API has been added (under API Access).                 |
+| 3 | On API Gateway Manager, the application chosen for the subscription has not given API Access to the API, or the access has been given but has been disabled.                           | Under the Clients section in API Manager > Applications > Application Tab: Verify that the APP has "Enabled" toggled correctly (under General) and that the API has been added (under API Access). |
+| 4 | On API Gateway Manager, the application chosen for the subscription has not set up any authentication.                                                                                 | Under the Clients section in API Manager > Applications > Authentication Tab: Verify that the APP has the appropriate authentication type setup.                                                   |
+| 5 | On API Gateway Manager, the application chosen for the subscription does not match the inbound security setting for the API.                                                           | Under the API section in API Manager > Manage the Frontend API, click the API > Inbound Tab: Verify that the API has the appropriate Inbound security selected.                               |
+| 6 | The agent fails to communicate to API Gateway Manager.                                                                                                                                 | Check your internet connection. API Gateway Manager requires an HTTPS connection.                                                                                                               |
+
+### AWS Gateway failures
+
+The agent can mark a subscription as **Failed to subscribe** or **Failed to unsubscribe** for one of several reasons:
+
+1. The API on API Gateway Manager is unpublished.
+2. No usage plans have been created on AWS API Gateway.
+3. On AWS API Gateway, usage plans have been created but no API stages have been added to the plan for the chosen subscription's API.
+4. On AWS API Gateway, no API keys have been added to the subscription's chosen usage plan.
+5. The agent fails to communicate with AWS API Gateway.
+
+### Azure Gateway failures
 
 The agent can mark a subscription as **Failed to subscribe** or **Failed to unsubscribe** for any of the following reasons:
 

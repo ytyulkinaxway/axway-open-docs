@@ -1,6 +1,6 @@
 ---
-title: Using secure credentials in configuration
-linkTitle: Using secure credentials in configuration
+title: Use secure credentials in configuration
+linkTitle: Use secure credentials in configuration
 draft: false
 weight: 20
 description: Understand how to secure credentials in the agent configuration by referencing data keys within the secret resource in Central. 
