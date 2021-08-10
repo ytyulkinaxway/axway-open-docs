@@ -404,18 +404,18 @@ subscriptions:
       subscribe:
         subject: Subscription Notification
         body: |
-          Subscription created for Catalog Item:  <a href= ${catalogItemUrl}> ${catalogItemName} </a> <br/>
+          Subscription created for Catalog Item:  <a href= {{.CatalogItemURL}}> {{.CatalogItemName}} </a> <br/>
           Subscription key: <b>${key}</b>
       unsubscribe:
         subject: Subscription Removal Notification
         body: |
-          Subscription for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a> has been unsubscribed
+          Subscription for Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}} </a> has been unsubscribed
       subscribeFailed:
         subject: Subscription Failed Notification
         body: |
-          Could not subscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a>
+          Could not subscribe to Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}} </a>
       unsubscribeFailed:
         subject: Subscription Removal Failed Notification
         body: |
-          Could not unsubscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName} </a>
+          Could not unsubscribe to Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}} </a>
 ```

@@ -55,11 +55,11 @@ Once the subscription is approved, the agent catches this event from Amplify Cen
 
 * **email**: the agent configuration contains the access details to an SMTP server (endpoint / port / credentials, if any) and the templates for the emails. Emails can be triggered when the subscription succeeds, fails or when unsubscribes to an API. The agent configuration allows you to customize the email template with several properties:
 
-    * `${catalogItemUrl}`: url of the catalog item to help consumer find it easily
-    * `${catalogItemName}`: name of the catalog item
-    * `${keyHeaderName}` / `${key}`: apiKey header name and apiKey value
-    * `${clientID}` /  `${clientSecret}`: oauth clientID and clientSecret to request the oauth token
-    * `${message}`: error message raised by the agent when the subscription fails or the unsubscribe fails
+    * `{{.CatalogItemURL}}`: url of the catalog item to help consumer find it easily
+    * `{{.CatalogItemName}}`: name of the catalog item
+    * `{{.KeyHeaderName}}` / `{{.Key}}`: apiKey header name and apiKey value
+    * `{{.ClientID}}` /  `{{.ClientSecret}}`: oauth clientID and clientSecret to request the oauth token
+    * `{{.Message}}`: error message raised by the agent when the subscription fails or the unsubscribe fails
 
 Agent configuration:
 
@@ -74,18 +74,18 @@ CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_FROMADDRESS={The email address that wil
 
 # emails template are defaulted to the following:
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_SUBJECT=Subscription Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a><br/>${authtemplate}<br/>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>${clientID}</b> and client_secret=<b>${clientSecret}</b>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential: header: <b>${keyHeaderName}</b> / value: <b>${key}</b>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a><br/>${authtemplate}<br/>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential: header: <b>{{.KeyHeaderName}}</b> / value: <b>{{.Key}}</b>
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_SUBJECT=Subscription Removal Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_BODY=Subscription for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a> has been unsubscribed
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_BODY=Subscription for Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> has been unsubscribed
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_SUBJECT=Subscription Failed Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_BODY=Could not subscribe to CatalogItem: <a href= ${catalogItemUrl}> ${catalogItemName}</a>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_BODY=Could not subscribe to CatalogItem: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_SUBJECT=Subscription Removal Failed Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>
 ```
 
 For more information about this configuration, see [Customizing SMTP notifications](/docs/central/connect-api-manager/gateway-administation/#customizing-smtp-notification-subscription).

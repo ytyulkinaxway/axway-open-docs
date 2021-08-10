@@ -201,7 +201,7 @@ The SMTP Notification variables defines how the agent manages email settings for
 
 `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_SUBJECT`: Subject of the email notification for action subscribe. Default is `Subscription Notification`.
 
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_BODY`: Body of the email notification for action subscribe. Default is `Subscription created for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a><br/>${authtemplate}<br/>`.
+`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_BODY`: Body of the email notification for action subscribe. Default is `Subscription created for Catalog Item:  <a href= {{.CatalogItemURL}}> {{.CatalogItemName}} {{.CatalogItemID}}.</br></a>{{if .IsAPIKey}} Your API is secured using an APIKey credential:header:<b>{{.KeyHeaderName}}</b>/value:<b>{{.Key}}</b>{{else}} Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>{{end}}`.
 
 `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_OAUTH:` Body of the email notification for action subscribe on OAuth authorization is `Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>${clientID}</b> and client_secret=<b>${clientSecret}</b>`.
 
@@ -209,15 +209,15 @@ The SMTP Notification variables defines how the agent manages email settings for
 
 `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBE_SUBJECT`: Subject of the email notification for action unsubscribe. Default is `Subscription Removal Notification`.
 
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBE_BODY`: Body of the email notification for action unsubscribe. Default is `Subscription for Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a> has been unsubscribed`.
+`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBE_BODY`: Body of the email notification for action unsubscribe. Default is `Subscription for Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> has been unsubscribed`.
 
 `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBEFAILED_SUBJECT`: Subject of the email notification for action subscribe failed. Default is `Subscription Failed Notification`.
 
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBEFAILED_BODY`: Body of the email notification for action subscribe failed. Default is `Could not subscribe to CatalogItem: <a href= ${catalogItemUrl}> ${catalogItemName}</a>`.
+`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBEFAILED_BODY`: Body of the email notification for action subscribe failed. Default is `Could not subscribe to CatalogItem: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>`.
 
 `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBEFAILED_SUBJECT`: Subject of the email notification for action unsubscribe failed. Default is `Subscription Removal Failed Notification`.
 
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBEFAILED_BODY` : Body of the email notification for action unsubscribe failed. Default is `Could not unsubscribe to Catalog Item: <a href= ${catalogItemUrl}> ${catalogItemName}</a>`.
+`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBEFAILED_BODY` : Body of the email notification for action unsubscribe failed. Default is `Could not unsubscribe to Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>`.
 
 #### Customizing Discovery Agent email server for subscription notifications
 
@@ -294,18 +294,18 @@ If you want to customize your SMTP email notifications to be something different
 
 ```shell
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_SUBJECT==Custom Subscription Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item=<a href= ${catalogItemUrl}> ${catalogItemName}</a><br/>${authtemplate}<br/> ${authtemplate}<br/>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>${clientID}</b> and client_secret=<b>${clientSecret}</b>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential=header=<b>${keyHeaderName}</b> / value=<b>${key}</b>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a><br/>{{.Authtemplate}}<br/> {{.Authtemplate}}<br/>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential=header=<b>{{.KeyHeaderName}}</b> / value=<b>{{.Key}}</b>
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_SUBJECT=Custom subscription Removal Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_BODY=Subscription for Catalog Item=<a href= ${catalogItemUrl}> ${catalogItemName}</a> has been unsubscribed
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_BODY=Subscription for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> has been unsubscribed
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_SUBJECT=Custom Subscription Failed Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= ${catalogItemUrl}> ${catalogItemName}</a>.<br/>Error encountered: ${message}
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>.<br/>Error encountered: ${message}
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_SUBJECT=Custom Subscription Removal Failed Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= ${catalogItemUrl}> ${catalogItemName}</a>.<br/>Error encountered: ${message}
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>.<br/>Error encountered: ${message}
 ```
 
 #### Customizing Discovery Agent logging variables
@@ -387,18 +387,18 @@ CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_FROMADDRESS=agentSubscription@email.com
 
 # Subscription email notification
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_SUBJECT==Custom Subscription Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item=<a href= ${catalogItemUrl}> ${catalogItemName}</a><br/>${authtemplate}<br/> ${authtemplate}<br/>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>${clientID}</b> and client_secret=<b>${clientSecret}</b>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential=header=<b>${keyHeaderName}</b> / value=<b>${key}</b>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a><br/>{{.Authtemplate}}<br/> {{.Authtemplate}}<br/>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential=header=<b>{{.KeyHeaderName}}</b> / value=<b>{{.Key}}</b>
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_SUBJECT=Custom subscription Removal Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_BODY=Subscription for Catalog Item=<a href= ${catalogItemUrl}> ${catalogItemName}</a> has been unsubscribed
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_BODY=Subscription for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> has been unsubscribed
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_SUBJECT=Custom Subscription Failed Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= ${catalogItemUrl}> ${catalogItemName}</a>.<br/>Error encountered: ${message}
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>.<br/>Error encountered: {{.Message}}
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_SUBJECT=Custom Subscription Removal Failed Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= ${catalogItemUrl}> ${catalogItemName}</a>.<br/>Error encountered: ${message}
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>.<br/>Error encountered: {{.Message}}
 
 # logging
 LOG_LEVEL=info
