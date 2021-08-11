@@ -3,7 +3,7 @@ title: Discover APIs and services
 linkTitle: Discover APIs and services
 weight: 30
 date: 2020-11-19
-description: Learn how to configure the Axway Istio agents to discover your APIs and services.
+description: Learn how to configure the Amplify Istio Agent to discover your APIs and services.
 ---
 
 ## Before you begin
@@ -14,7 +14,7 @@ This page references the resources created from the [Deploy your agents with the
 
 ## Prerequisites
 
-These prerequisites are required by the Axway Central CLI, which you will use to configure the Istio discovery agents.
+These prerequisites are required by the Axway Central CLI, which you will use to configure the Amplify Istio Discovery Agent.
 
 * Node.js >= 10.13.0 and <= 12.14.1
 * Axway Central CLI 1.7.0 or later
@@ -23,7 +23,7 @@ For more information, see [Install Axway Central CLI](/docs/central/cli_central/
 
 ## Overview
 
-Discovery agents are services that get installed into your Kubernetes cluster as part of deploying the `ampc-hybrid` helm chart.
+Amplify Istio Discovery Agents are services that get installed into your Kubernetes cluster as part of deploying the `ampc-hybrid` helm chart.
 
 The API Discovery Agent (ADA) uses a resource called `SpecDiscovery` to find Swagger documentation exposed over an HTTP endpoint. The `SpecDiscovery` provides configuration details to the ADA to instruct it where to find documentation inside of a cluster.
 
@@ -33,7 +33,7 @@ The Resource Discovery Agent (RDA) uses a resource called `ResourceDiscovery` to
 
 You can configure the RDA with one or multiple ResourceDiscoveries. As long as the RDA has at least one `ResourceDiscovery` it will check all new events coming from Kubernetes to see if that event meets the match criteria defined by any of the known ResourceDiscoveries. If the event is triggered by a pod or service, and if the pod or service meets the match criteria, then the RDA will create a K8SResource to capture the existence of the resource and save it in Amplify Central.
 
-For more information about the discovery agents, see [Amplify Central resources for discovering APIs and services](#amplify-central-resources-for-discovering-apis-and-services).
+For more information about the Amplify Istio Discovery Agent, see [Amplify Central resources for discovering APIs and services](#amplify-central-resources-for-discovering-apis-and-services).
 
 ## Start the discovery agents
 
@@ -92,7 +92,7 @@ If you are a member of multiple Amplify organizations, select an organization an
 
 The Environment resource is a representation of your Kubernetes cluster. In order for resources to be discovered, the agents must be connected to an Environment and a K8SCluster.
 
-If you previously followed [Deploy the service mesh and Axway Istio agents](/docs/central/mesh_management/add_env/#deploy-the-service-mesh-and-axway-mesh-agents), then the ADA and RDA will already be configured with your selected Environment and K8SCluster, and you can skip to [Configure the API Discovery Agent](#configure-the-api-discovery-agent).
+If you previously followed [Deploy the service mesh and Amplify Istio Agents](/docs/central/mesh_management/add_env/#deploy-the-service-mesh-and-axway-mesh-agents), then the ADA and RDA will already be configured with your selected Environment and K8SCluster, and you can skip to [Configure the API Discovery Agent](#configure-the-api-discovery-agent).
 
 If you do not have the ADA and RDA configured, or if you would like the agents to use a different Environment, follow the steps below:
 

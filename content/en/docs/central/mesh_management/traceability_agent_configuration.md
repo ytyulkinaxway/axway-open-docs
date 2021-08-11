@@ -14,7 +14,7 @@ This page will reference the resources created from the [Deploy your agents with
 
 ## Prerequisites
 
-These prerequisites are required by the Axway Central CLI, which you will use to configure the Istio discovery agents.
+These prerequisites are required by the Axway Central CLI, which you will use to configure the Amplify Istio Discovery Agent.
 
 * Node.js >= 10.13.0 and <= 12.14.1
 * Minimum Axway Central CLI version: 1.7.0 or later
@@ -23,14 +23,14 @@ For more information, see [Install Axway Central CLI](/docs/central/cli_central/
 
 ## Overview
 
-The ALS Traceability Agent is installed into your Kubernetes cluster as part of deploying the `ampc-hybrid` helm chart. The Traceability Agent (TA) sends metrics and logs for API activity back to Amplify Central so that you can monitor service activity and troubleshoot your services.
+The Amplify Istio Traceability Agent is installed into your Kubernetes cluster as part of deploying the `ampc-hybrid` helm chart. The Traceability Agent (TA) sends metrics and logs for API activity back to Amplify Central so that you can monitor service activity and troubleshoot your services.
 The agent publishes a summary of the transaction which can be seen in the API Observer. Once the transaction summary is expanded, you can see all the related spans within a transaction including the request and response headers for each.
 
-The ALS agent has two modes; default and verbose. The default mode captures only the headers specified in the EnvoyFilter and the verbose mode captures all the headers in request and response flows.
+The Amplify Istio Traceability Agent has two modes; default and verbose. The default mode captures only the headers specified in the EnvoyFilter and the verbose mode captures all the headers in request and response flows.
 
 ## Setup
 
-The ALS Traceability Agent logs and publishes traffic within the Mesh. In order to generate traffic, we need to create certain custom resource definitions (CRDs) in the mesh.
+The Amplify Istio Traceability Agent logs and publishes traffic within the Mesh. In order to generate traffic, we need to create certain custom resource definitions (CRDs) in the mesh.
 
 ### Amplify Central resources
 
@@ -49,7 +49,7 @@ The cluster name is the value of the field als.clusterName in the agent override
 Next, create the following resources in Central using the Axway CLI:
 
 {{% alert title="Note" %}}
-Create these resources manually only if you are running standalone ALS Traceability Agent. If you are running ALS Traceability Agent along with the Discovery agents, these resources are automatically created and you can skip to [Istio CRDs](#istio-crds).
+Create these resources manually only if you are running standalone Amplify Istio Traceability Agent. If you are running Amplify Istio Traceability Agent along with the Discovery agents, these resources are automatically created and you can skip to [Istio CRDs](#istio-crds).
 {{% /alert %}}
 
 ```yaml
@@ -307,11 +307,11 @@ curl -v http://demo.sandbox.axwaytest.net:8080/mylist/list
 
 ## Toggling the Traceability Agent
 
-After deploying the `ampc-hybrid` helm chart to your Kubernetes cluster, you can see the ALS Traceability Agent running. The service is called `ampc-hybrid-als`. During the step [Deploy your agents with the Axway CLI](/docs/central/mesh_management/deploy-your-agents-with-the-axway-cli/), you were able to select the mode for the ALS agent. If you want to switch the mode, use the following procedure.
+After deploying the `ampc-hybrid` helm chart to your Kubernetes cluster, you can see the Amplify Istio Traceability Agent running. The service is called `ampc-hybrid-als`. During the step [Deploy your agents with the Axway CLI](/docs/central/mesh_management/deploy-your-agents-with-the-axway-cli/), you were able to select the mode for the Amplify Istio Traceability Agent. If you want to switch the mode, use the following procedure.
 
 **From default to verbose**:
 
-Edit the Istio-override.yaml file's configuration under the meshConfig section to set enableEnvoyAccessLogService as true:
+Edit the istio-override.yaml file's configuration under the meshConfig section to set enableEnvoyAccessLogService as true:
 
 ```yaml
 spec:
@@ -326,7 +326,7 @@ After the change, re-install Istio again:
  istioctl install --set profile=demo -f istio-override.yaml
  ```
 
-After the Istio re-installation, run the following command to set the ALS agent's mode to "verbose":
+After the Istio re-installation, run the following command to set the Amplify Istio Traceability Agent's mode to "verbose":
 
   ```bash
 helm repo update
@@ -350,7 +350,7 @@ After the change, re-install Istio again:
  istioctl install --set profile=demo -f istio-override.yaml
  ```
 
-After the Istio re-installation, run the following command to set the ALS agent's mode to "default":
+After the Istio re-installation, run the following command to set the Amplify Istio Traceability Agent's mode to "default":
 
   ```bash
 helm repo update
@@ -442,16 +442,16 @@ Put your redaction configuration into a file and then execute the following comm
 helm upgrade --install ampc-hybrid axway/ampc-hybrid --namespace apic-control -f hybrid-override.yaml -f <pathToConfigFile>/config.yaml
 ```
 
-Monitor whether the ALS Traceability Agent pods have restarted by executing the following command:
+Monitor whether the Amplify Istio Traceability Agent pods have restarted by executing the following command:
 
 ```bash
-kubectl -n <namespace of ALS agent> get pods
+kubectl -n <namespace of Amplify Istio Traceability Agent> get pods
 ```
 
-The deployment of ALS Traceability Agent will fail if invalid configuration is provided. If there is an error in the pods after executing the command above, you can check the log by executing the following command:
+The deployment of Amplify Istio Traceability Agent will fail if invalid configuration is provided. If there is an error in the pods after executing the command above, you can check the log by executing the following command:
 
 ```bash
-kubectl -n <namespace of ALS agent> logs <podName>
+kubectl -n <namespace of Amplify Istio Traceability Agent> logs <podName>
 ```
 
 The logs should display the configuration error. Fix the configuration and repeat the steps above.

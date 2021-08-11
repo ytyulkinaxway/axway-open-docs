@@ -38,7 +38,7 @@ The data plane is where API transactions and related user microservices are host
 The data plane in an Amplify Central hybrid environment is split into a service mesh data plane and a control plane.
 
 * Service mesh data plane – Consists of a set of intelligent proxies (Envoy) deployed as sidecars on your microservices.
-* Service mesh control plane – Axway Istio agents manage Istio, which in turn manages and configures the proxies to route traffic. Istio also controls how Envoy exposes proxies and routes traffic inside the mesh.
+* Service mesh control plane – Amplify Istio Agents manage Istio, which in turn manages and configures the proxies to route traffic. Istio also controls how Envoy exposes proxies and routes traffic inside the mesh.
 
 For more information on Istio and Envoy, see the [Istio documentation](https://istio.io/latest/docs/).
 
@@ -48,9 +48,9 @@ An Amplify Central hybrid environment is the private cloud environment that cont
 
 The service mesh layer separates the Amplify Central public cloud control plane from your on-premise environments, while it allows the transaction data to stay in the local private cloud. This way, you can manage your microservices and APIs (both internal and external) locally.
 
-## Axway Istio agents
+## Amplify Istio Agents
 
-Axway Istio agents provide the secure connection between your hybrid environments and the Amplify Central public cloud. The Istio agents run in the service mesh in your hybrid environment and enables you to manage your microservices from Amplify Central.
+Amplify Istio Agents provide the secure connection between your hybrid environments and the Amplify Central public cloud. The Istio agents run in the service mesh in your hybrid environment and enables you to manage your microservices from Amplify Central.
 
 ### Discovery Agent
 

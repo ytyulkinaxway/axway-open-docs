@@ -3,7 +3,7 @@ title: Deploy your agents with Axway CLI
 linkTitle: Deploy your agents
 weight: 160
 date: 2020-12-0
-description: Use the Axway CLI to deploy Axway Istio agents.
+description: Use the Axway CLI to deploy Amplify Istio Agents.
 ---
 
 ## Before you begin
@@ -35,9 +35,9 @@ A dialog box is shown. Enter your valid credentials (email address and password)
 
 If you are a member of multiple Amplify organizations, select an organization and continue.
 
-## Install Axway Istio agents
+## Install Amplify Istio Agents
 
-1. Run the `install` command to begin the installation of the Axway Istio agents. The first section of the installation collects information about the Istio deployment.
+1. Run the `install` command to begin the installation of the Amplify Istio Agents. The first section of the installation collects information about the Istio deployment.
 
     ```bash
     axway central install agents
@@ -153,9 +153,9 @@ Created secret/gateway-cert in the istio-system namespace.
 
 ## Select the agents to install
 
-The following prompts are related to the details about the Axway Istio agents.
+The following prompts are related to the details about the Amplify Istio Agents.
 
-1. Select what you would like to install. You can install only one of the agents, or both. The Discovery agent option deploys the API Discovery Agent and the Resource Discovery Agent.
+1. Select what you would like to install. You can install only one of the agents, or both. The Discovery agent option deploys the Amplify Istio Discovery Agent.
 
     ```bash
     Select which agents to install: (Use arrow keys)
@@ -166,7 +166,7 @@ The following prompts are related to the details about the Axway Istio agents.
 
     If you choose to deploy Traceability agent, select the mode in which you want the Traceability Agent to run.
 
-    The ALS agent has two modes, default and verbose. The default mode captures only the headers specified in the EnvoyFilter. The verbose mode captures all the headers in the request and response flows. Once selected, you will be able to switch modes if required. Refer to [Service Mesh Traceability - Toggling the Traceability Agent](/docs/central/mesh_management/traceability_agent_configuration/#toggling-the-traceability-agent).
+    The Amplify Istio Traceability Agent has two modes, default and verbose. The default mode captures only the headers specified in the EnvoyFilter. The verbose mode captures all the headers in the request and response flows. Once selected, you will be able to switch modes if required. Refer to [Service Mesh Traceability - Toggling the Traceability Agent](/docs/central/mesh_management/traceability_agent_configuration/#toggling-the-traceability-agent).
 
    ```bash
     Select Traceability Agent HTTP header publishing mode:  (Use arrow keys)
@@ -262,7 +262,7 @@ The following prompts are related to the details about the Axway Istio agents.
 
 ## Provide an environment resource
 
-After the details of the DOSA account have been provided, you are prompted to either create an environment resource in Amplify Central or provide the name of an existing environment resource. The environment will hold the Kubernetes resources that were found by the discovery agent.
+After the details of the DOSA account have been provided, you are prompted to either create an environment resource in Amplify Central or provide the name of an existing environment resource. The environment will hold the Kubernetes resources that were found by the Amplify Istio Discovery Agent.
 
 ```bash
 Create a new environment
@@ -324,7 +324,7 @@ helm repo update
 helm upgrade --install --namespace apic-control ampc-hybrid axway/ampc-hybrid -f hybrid-override.yaml
 ```
 
-Note that the discovery agents polls every 10 seconds for the discovery resources by default. To change this, you must pass a helm override in the form of `--set ada.poll.interval` or `--set rda.poll.interval` accordingly with the desired agents.
+Note that the Amplify Istio Discovery Agent polls every 20 seconds for the discovery resources by default. To change this, you must pass a helm override in the form of `--set ada.poll.interval` or `--set rda.poll.interval` accordingly with the desired agents.
 
 For example, if you want the API Discovery agent to poll every 2 seconds for the discovery resources, you must run the following command to install the agents:
 
