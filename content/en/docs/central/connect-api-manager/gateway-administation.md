@@ -294,7 +294,7 @@ If you want to customize your SMTP email notifications to be something different
 
 ```shell
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_SUBJECT==Custom Subscription Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a><br/>{{.Authtemplate}}<br/> {{.Authtemplate}}<br/>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a><br/>{{.AuthTemplate}}<br/>
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential=header=<b>{{.KeyHeaderName}}</b> / value=<b>{{.Key}}</b>
 
@@ -387,7 +387,7 @@ CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_FROMADDRESS=agentSubscription@email.com
 
 # Subscription email notification
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_SUBJECT==Custom Subscription Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a><br/>{{.Authtemplate}}<br/> {{.Authtemplate}}<br/>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a><br/>{{.AuthTemplate}}<br/>
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential=header=<b>{{.KeyHeaderName}}</b> / value=<b>{{.Key}}</b>
 
@@ -395,10 +395,10 @@ CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_SUBJECT=Custom subscription
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_BODY=Subscription for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> has been unsubscribed
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_SUBJECT=Custom Subscription Failed Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>.<br/>Error encountered: {{.Message}}
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> with following error: {{.Message}}
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_SUBJECT=Custom Subscription Removal Failed Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>.<br/>Error encountered: {{.Message}}
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> with following error: {{.Message}}
 
 # logging
 LOG_LEVEL=info

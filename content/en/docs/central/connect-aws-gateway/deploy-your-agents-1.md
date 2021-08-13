@@ -208,7 +208,7 @@ CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured u
 
 ```
 
-The agent will fill in the appropriate data for the variables specified, i.e., \{{.CatalogItemName}}, {{.KeyHeaderName}} and {{.Authtemplate}} before sending the SMTP message. The variables that may be used are the keys for the JSON data sent to the webhook endpoint, see [Subscription webhook notifications](#subscription-webhook-notifications).
+The agent will fill in the appropriate data for the variables specified, i.e., \{{.CatalogItemName}}, {{.KeyHeaderName}} before sending the SMTP message. The variables that may be used are the keys for the JSON data sent to the webhook endpoint, see [Subscription webhook notifications](#subscription-webhook-notifications).
 
 ### Create your Discovery Agent environment file
 
