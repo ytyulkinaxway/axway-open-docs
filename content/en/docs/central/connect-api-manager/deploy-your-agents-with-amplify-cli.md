@@ -120,7 +120,7 @@ Discovery Agent:
 Traceability Agent:
 
 ```shell
-./discovery_agent --envFile ./ta_env_vars.env
+./traceability_agent --envFile ./ta_env_vars.env
 ```
 
 ### Docker mode
