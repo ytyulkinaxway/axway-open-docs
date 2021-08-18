@@ -11,8 +11,9 @@ This page is **not** available in the Axway docs production portal, but it needs
 
 There's no way to hide it on Netlify and, at the same time, make it available on Zoomin.
 
-{{< alert title="Link using absolute path" color="warning" >}}
-{{< /alert >}}
+## Link using absolute path
+
+{{< alert title="Warning" color="warning" >}} That's the way it works today {{< /alert >}}
 
 This is a link using absolute path, which we **don't** want -> Click to download [create_environments.json](https://axway-open-docs.netlify.app/samples/central/create_environments.json).
 
@@ -22,8 +23,9 @@ The code of the link is:
 [create_environments.json](https://axway-open-docs.netlify.app/samples/central/create_environments.json)
 ```
 
-{{< alert title="Link using relative path" color="primary" >}}
-{{< /alert >}}
+## Link using relative path
+
+{{< alert title="Note" color="primary" >}}That's what we want{{< /alert >}}
 
 This is a link using **relative** path, which we want -> Click to download [create_environments.json](/samples/central/create_environments.json).
 
@@ -33,15 +35,26 @@ The code of the link is:
 [create_environments.json](/samples/central/create_environments.json)
 ```
 
-This relative link works on Netlify but not on Zoomin.
+This link works on Netlify but not on Zoomin.
 
-{{< alert title="Test - add Samples folder under Images" color="primary" >}}
-{{< /alert >}}
+## Test - add Samples folder under Images folder
 
-Click to download [create_environments2.json](/images/samplestest/central/create_environments2.json).
+{{< alert title="Note" color="primary" >}} This is a test just to see if it works, but we won't keep this structure. {{< /alert >}}
+
+Click to download [create_environments2.json](/Images/samplestest/central/create_environments2.json).
 
 The code of the link is:
 
 ```
 [create_environments.json](/images/samplestest/central/create_environments2.json)
+```
+
+## Link to an image
+
+![Preview your PR](/Images/contributing/netlify_preview_PR.png)
+
+The code of the link is:
+
+```
+![Preview your PR](/Images/contributing/netlify_preview_PR.png)
 ```
