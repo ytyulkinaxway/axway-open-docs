@@ -33,4 +33,15 @@ The code of the link is:
 [create_environments.json](/samples/central/create_environments.json)
 ```
 
-This relative link works on Netlify but not on Zoomin
+This relative link works on Netlify but not on Zoomin.
+
+{{< alert title="Test - add Samples folder under Images" color="primary" >}}
+{{< /alert >}}
+
+Click to download [create_environments2.json](/images/samplestest/central/create_environments2.json).
+
+The code of the link is:
+
+```
+[create_environments.json](/images/samplestest/central/create_environments2.json)
+```
