@@ -30,7 +30,7 @@ All outbound traffic is sent over SSL via TCP / UDP.
 Open the following ports so that agents can communicate to the Amplify platform:
 
 | Region | Host                                                                                      | IP             | port       | Protocol     | data                               |
-| ------ | ----------------------------------------------------------------------------------------- | -------------- | ---------- | ------------ | ---------------------------------- |
+|--------|-------------------------------------------------------------------------------------------|----------------|------------|--------------|------------------------------------|
 |        |                                                                                           |                |            |              |                                    |
 | EU/US  | login.axway.com                                                                           | 52.58.132.2    | 443        | HTTPS        | Platform authentication            |
 |        |                                                                                           | 52.29.4.35     |            |              |                                    |
@@ -122,6 +122,8 @@ If the Traceability Agent is stopped while there are still remaining usage event
 ### Manual reporting
 
 When offline usage reporting is on, `CENTRAL_USAGEREPORTING_OFFLINE=true` (default = false), the `CENTRAL_USAGEREPORTING_SCHEDULE` variable determines how often usage numbers are saved (default and minimum = "@hourly"). For additional cron schedules information, see [Scheduled jobs](https://github.com/Axway/agent-sdk/blob/main/pkg/jobs/README.md#scheduled-jobs). Note that offline ignores the `CENTRAL_USAGEREPORTING_INTERVAL` value that is only used for online reporting.
+
+In addition to setting `CENTRAL_USAGEREPORTING_OFFLINE=true`, the `CENTRAL_ENVIRONMENTID` variable must be set.  The usage report requires a valid Environment ID and cannot retrieve it in Offline mode.  This can be retrieved with the axway cli, see [Retrieve a list of all available environments](/docs/central/cli_central/cli_environments#retrieve-a-list-of-all-available-environments).
 
 The offline report is generated every month and saved to the [agent_dir]/data/reports directory as `YYYY_MM_DD_usage_report.json`.
 
