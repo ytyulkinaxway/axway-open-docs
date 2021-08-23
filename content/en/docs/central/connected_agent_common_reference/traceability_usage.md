@@ -52,14 +52,14 @@ Open the following ports so that agents can communicate to the Amplify platform:
 |        |                                                                                           |                |            |              |                                    |
 | EU/US  | lighthouse.admin.axway.com                                                                |                | 443        | HTTPS        | API usage event                    |
 |        |                                                                                           |                |            |              |                                    |
-| US     | ingestion-lumberjack.datasearch.axway.com or ingestion.datasearch.axway.com               | 54.225.171.111 | 453 or 443 | TCP or HTTPS | API transaction event              |
+| US     | ingestion.datasearch.axway.com                                                            | 54.225.171.111 | 5044 or 443 | TCP or HTTPS | API transaction event              |
 |        |                                                                                           | 54.225.2.221   |            |              |                                    |
 |        |                                                                                           | 54.146.97.250  |            |              |                                    |
 |        |                                                                                           | 54.147.98.128  |            |              |                                    |
 |        |                                                                                           | 52.206.193.184 |            |              |                                    |
 |        |                                                                                           | 54.225.92.97   |            |              |                                    |
 |        |                                                                                           |                |            |              |                                    |
-| EU     | ingestion-lumberjack.visibility.eu-fr.axway.com  or  ingestion.visibility.eu-fr.axway.com | 15.236.125.123 | 453 or 443 | TCP or HTTPS | API transaction event              |
+| EU     | ingestion.visibility.eu-fr.axway.com                                                      | 15.236.125.123 | 5044 or 443 | TCP or HTTPS | API transaction event              |
 |        |                                                                                           | 35.180.77.202  |            |              |                                    |
 |        |                                                                                           | 13.36.27.97    |            |              |                                    |
 |        |                                                                                           | 13.36.33.229   |            |              |                                    |
