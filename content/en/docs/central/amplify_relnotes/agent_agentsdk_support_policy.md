@@ -3,9 +3,9 @@ title: Support Policy for Amplify Agents and Amplify Agent SDK
 linkTitle: Support Policy for Amplify Agents and Amplify Agent SDK
 weight: 100
 date: 2021-08-23
-description: Support policies for Amplify agents and the Amplify Agent SDK; which include versioning, release cycles and distribution
+description: Support policies for Amplify agents and the Amplify Agent SDK;
+  which include versioning, release cycles and distribution
 ---
-
 ## Amplify agents
 
 The Amplify agents are software applications that run on your host. The agents are responsible for gathering information that is happening in your data plane and sending it to the Amplify platform. The two types of agents that are supported are Discovery and Traceability Agents.
@@ -20,17 +20,17 @@ Traceability Agents collect usage, metrics, and dataplane traffic details and se
 
 Agents are classified in two categories, agents that are built by Axway and agents provided by the Community:
 
-| Environment                | Support              |                                             |
-|----------------------------|----------------------|---------------------------------------------|
-| Axway API Management       | Axway                |                                             |
-| AWS API Gateway            | Axway                |                                             |
-| Azure API Management       | Axway                |                                             |
-| Istio service mesh         | Axway                |                                             |
-|                            |                      |                                             |
-| MuleSoft Anypoint platform | Community            | [https://github.com/Axway/agents-mulesoft](https://github.com/Axway/agents-mulesoft)  |
-| Kong Gateway               | Community            | [https://github.com/Axway/agents-kong](https://github.com/Axway/agents-kong)      |
-| WSO2 API Management        | Community            | [https://github.com/Axway/agents-wso2](https://github.com/Axway/agents-wso2)      |
-| Apigee API Management      | Community            | [https://github.com/Axway/agents-apigee](https://github.com/Axway/agents-apigee)  |
+| Environment                | Support   |                                            |
+| -------------------------- | --------- | ------------------------------------------ |
+| Axway API Management       | Axway     |                                            |
+| AWS API Gateway            | Axway     |                                            |
+| Azure API Management       | Axway     |                                            |
+| Istio service mesh         | Axway     |                                            |
+|                            |           |                                            |
+| MuleSoft Anypoint platform | Community | <https://github.com/Axway/agents-mulesoft> |
+| Kong Gateway               | Community | <https://github.com/Axway/agents-kong>     |
+| WSO2 API Management        | Community | <https://github.com/Axway/agents-wso2>     |
+| Apigee API Management      | Community | <https://github.com/Axway/agents-apigee>   |
 
 All Amplify agents are built using the Amplify Agent SDK.
 
@@ -52,12 +52,11 @@ Support for the following components is addressed in this document:
 
 As per the current (3.1) version of [Axway’s PLC](https://cdn.axway.com/u/Axway_Product_Lifecycle_3.1.pdf), Amplify agents are versioned based on a 2-digit release numbering scheme, complemented by an Update id and a Patch:
 
+![Axway's PLC numbering scheme](/Images/central/amplify_relnotes/release_matrix.png)
+
 * **Major Release**: updating the major release number will be rare and will only occur when changes made to the agent are not compatible with the previously released version. A new major release of an agent would be indicated by a change from **1**.8 to **2**.0.
-
 * **Minor Release**: A Minor release of an agent will be rare but more likely to happen than a major release, the minor number will be updated when the impact of the change is complex. A new minor release of an agent would be indicated by a change from 1.**0** to 1.**1**.
-
 * **Update**: Axway will release an update to the Amplify agents each quarter. The Update will have new features, enhancements, and other fixes. As an example, an Update to an agent will be indicated by a change from 1.0.**1** to 1.0.**2**.
-
 * **Patch**: Agents may have Patch releases every two weeks that will contain incremental changes. Patches will be included in the next available Update or Release, whichever is first. As an example, a Patch will be indicated by a change from 1.0.1.**1** to 1.0.1.**2**.
 
  Example: The first release of an agent version 1.0.0 occurs in Q1. Between Q1 and Q2, three Patches for the agent are released - 1.0.0.1, 1.0.0.2, 1.0.0.3. The next quarterly Update to the agent occurs in Q2, version 1.0.1.  This Update includes all the Patches between 1.0.0 and 1.0.1. The previous version 1.0.0 would now be under support and follow the lifecycle as described in [Axway’s PLC](https://cdn.axway.com/u/Axway_Product_Lifecycle_3.1.pdf).
@@ -76,7 +75,7 @@ If you discover an issue with the SDK then please file a ticket against the agen
 
 All community contributions are reviewed by the Axway project maintainer, and only upon their approval will the contribution be incorporated into the base code of the SDK and an updated version released.
 
-If you discover an issue with an agent that you are unable to resolve yourself then you should file an issue against the agent project. Make sure your problem does not already exist by looking through the known issues in the repository. Please refer to the contributing guide found in each 3rd-party agent repository, for example: [https://github.com/Axway/agents-mulesoft/blob/main/CONTRIBUTING.md](https://github.com/Axway/agents-mulesoft/blob/main/CONTRIBUTING.md).
+If you discover an issue with an agent that you are unable to resolve yourself then you should file an issue against the agent project. Make sure your problem does not already exist by looking through the known issues in the repository. Please refer to the contributing guide found in each 3rd-party agent repository, for example: <https://github.com/Axway/agents-mulesoft/blob/main/CONTRIBUTING.md>.
 
 If you require an SDK enhancement to support your integration with a 3rd-party Gateway, community members can propose the changes to Axway by following the contribution guidelines in the repository. Axway will provide our best effort to approve and incorporate such SDK changes into the base SDK code; however, we are unable to make commitments as to when and if community-contributed code will be incorporated.
 
