@@ -1,7 +1,7 @@
 ---
 title: Secure an API with OAuth
 linkTitle: Secure an API with OAuth
-weight: 50
+weight: 40
 date: 2019-07-30T00:00:00.000Z
 description: >-
   API proxies can be secured with a client authentication policy. Learn how to

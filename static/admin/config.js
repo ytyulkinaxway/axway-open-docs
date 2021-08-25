@@ -366,7 +366,14 @@ const collections = [{
   description: 'All pages relating to Axway Central CLI.',
   format: 'frontmatter',
 }, {
-  ...docsDefaults('catalog', 'catalog'),
+  ...docsDefaults('central/saas_api_gateway', 'central/saas_api_gateway'),
+  name: 'saas_api_gateway',
+  label: 'SaaS API Gateway Management',
+  label_singular: 'page in SaaS API Gateway Management',
+  description: 'All pages relating to SaaS API Gateway Management.',
+  format: 'frontmatter',
+}, {
+   ...docsDefaults('catalog', 'catalog'),
   name: 'catalog',
   label: 'AMPLIFY Unified Catalog documentation',
   label_singular: 'page in AMPLIFY Unified Catalog',

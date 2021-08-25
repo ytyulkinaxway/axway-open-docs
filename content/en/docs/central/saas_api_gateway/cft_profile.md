@@ -1,7 +1,7 @@
 ---
 title: Configure a CFT Profile
 linkTitle: Configure a CFT Profile
-weight: 90
+weight: 80
 date: 2019-07-30
 description: Learn how to configure a CFT (Cross File Transfer) profile in Amplify Central.
 ---

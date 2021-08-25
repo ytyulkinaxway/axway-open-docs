@@ -1,7 +1,7 @@
 ---
 title: Back-end TLS authentication
 linkTitle: Back-end TLS authentication
-weight: 70
+weight: 60
 date: 2019-10-16
 description: Learn how to configure TLS for requests to your back-end API.
 ---
@@ -9,7 +9,7 @@ description: Learn how to configure TLS for requests to your back-end API.
 ## Before you start
 
 * You will need an administrator account for Amplify Central
-* Learn how to import your API as an API proxy in Amplify Central (see [Register an API](/docs/central/quickstart/#register-an-api))
+* Learn how to import your API as an API proxy in Amplify Central (see [Register an API](/docs/central/saas_api_gateway/quickstart/#register-an-api))
 * Learn how to use the Axway Central CLI to manage an API proxy (see [Manage an API proxy using Axway Central CLI](/docs/central/cli_central/cli_proxy_flow))
 
 ## Objectives
@@ -33,7 +33,7 @@ TLS versions 1.2 and 1.3 are both supported by Amplify Central. Advanced Encrypt
 
 ## Confirm that TLS is negotiated for your API
 
-1. [Register an API proxy](/docs/central/quickstart/#register-an-api) for a HTTPS API endpoint in the Amplify Central UI.
+1. [Register an API proxy](/docs/central/saas_api_gateway/quickstart/#register-an-api) for a HTTPS API endpoint in the Amplify Central UI.
 2. Navigate to the **API Proxies** tab.
 3. Click the API proxy name to open the API proxy details page.
 4. Click the **Policies** tab, and verify the following under the **Request to backend** section:

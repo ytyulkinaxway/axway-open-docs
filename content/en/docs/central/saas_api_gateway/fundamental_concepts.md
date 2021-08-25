@@ -1,9 +1,9 @@
 ---
-title: Amplify Central concepts
+title: SaaS API Gateway concepts
 linkTitle: Concepts
-weight: 20
+weight: 10
 date: 2019-07-30T00:00:00.000Z
-description: Learn the fundamental concepts you will encounter in Amplify Central.
+description: Learn the fundamental SaaS API Gateway concepts you will encounter in Amplify Central.
 ---
 
 ## API and API proxy
