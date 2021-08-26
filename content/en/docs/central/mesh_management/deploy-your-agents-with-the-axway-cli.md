@@ -10,7 +10,7 @@ description: Use the Axway CLI to deploy Amplify Istio Agents.
 
 Ensure you have the following tools installed:
 
-* Axway Central CLI 1.7.0 or later
+* Axway Central CLI 1.24.0 or later
 * Helm 3.2.4 or later
 * Istioctl 1.9.5
 * Kubectl 1.19 or later
@@ -49,10 +49,10 @@ If you are a member of multiple Amplify organizations, select an organization an
     Select the type of gateway you want to connect:
     API Gateway v7
     Amazon API Gateway
-    Kubernetes
+    Istio
     ```
 
-2. Select `Kubernetes` as your gateway. The next prompt asks if you already have Istio installed.
+2. Select `Istio` as your gateway. The next prompt asks if you already have Istio installed.
 
 ### If Istio is already installed
 
@@ -187,7 +187,7 @@ The following prompts are related to the details about the Amplify Istio Agents.
     In this example we will create a new namespace.
 
     ```bash
-    Enter a new namespace name: (apic-control)
+    Enter a new namespace name: (amplify-agents)
     ```
 
 3. After the namespace is created, you are asked for the DevOps Service Account (DOSA) to use, so the agents can authenticate with Amplify Central. You can create a new DOSA account or select an existing one.
@@ -206,7 +206,7 @@ The following prompts are related to the details about the Amplify Istio Agents.
     ──────────────
     ```
 
-2. Enter a name for the new DOSA account. Creating a new DOSA account will override any file named `public_key.pem` or `private_key.pem` in the directory where you invoked the Axway Central CLI from.
+2. Enter a name for the new DOSA account. Creating a new DOSA account will override any file named `public_key.pem` or `private_key.pem` in the directory where you invoked the Axway Central CLI from. The public and private key pair are used to authenticate with Amplify Central. The keys will be placed in a secret in the selected namespace, and will be named "amplify-agents-keys".
 
     ```bash
     Select a service account (DOSA):  Create a new account
@@ -224,14 +224,6 @@ The following prompts are related to the details about the Amplify Istio Agents.
     The public key has been placed at /Users/axway/public_key.pem
     ```
 
-3. Enter a name for the Kubernetes secret to store the keys. The CLI creates the secret automatically in the namespace that you selected for the Istio agent installation.
-
-    ```bash
-    The secret will be created with the same `private_key.pem` and `public_key.pem` that was auto generated to create the DOSA Account.
-    Enter the name of the secret to store your public and private keys: (agent-secrets)
-    Created agent-secrets in the apic-control namespace.
-    ```
-
 ### Use an existing DOSA account
 
 1. Select the DOSA account from the list and press `enter`.
@@ -244,20 +236,13 @@ The following prompts are related to the details about the Amplify Istio Agents.
     ──────────────
     ```
 
-2. Enter the keys that were used to create the account. They must be the **same** keys that were used to create this DOSA account. It is recommended to provide the full file path to the location of the keys.
+2. Enter the keys that were used to create the account. They must be the **same** keys that were used to create this DOSA account. It is recommended to provide the full file path to the location of the keys. The public and private key pair are used to authenticate with Amplify Central. The keys will be placed in a secret in the selected namespace, and will be named "amplify-agents-keys".
 
     ```bash
     Select a service account (DOSA):  mesh
     Please provide the the same "private_key.pem" and "public_key.pem" that was used to create the selected DOSA Account.
     Enter the file path to the public key:  /Users/axway/public_key.pem
     Enter the file path to the private key:  /Users/axway/private_key.pem
-    ```
-
-3. Enter the name of the Kubernetes secret that will store the keys. The Axway CLI will create the Kubernetes secret for you in the namespace you selected for the Istio agent installation.
-
-    ```bash
-    Enter the name of the secret to store your public and private keys:  (agent-secrets)
-    Created agent-secrets in the apic-control namespace.
     ```
 
 ## Provide an environment resource
@@ -321,7 +306,7 @@ After the Istio installation is complete, run the following command to finish th
 
 ```bash
 helm repo update
-helm upgrade --install --namespace apic-control ampc-hybrid axway/ampc-hybrid -f hybrid-override.yaml
+helm upgrade --install --namespace amplify-agents ampc-hybrid axway/ampc-hybrid -f hybrid-override.yaml
 ```
 
 Note that the Amplify Istio Discovery Agent polls every 20 seconds for the discovery resources by default. To change this, you must pass a helm override in the form of `--set ada.poll.interval` or `--set rda.poll.interval` accordingly with the desired agents.
@@ -329,7 +314,7 @@ Note that the Amplify Istio Discovery Agent polls every 20 seconds for the disco
 For example, if you want the API Discovery agent to poll every 2 seconds for the discovery resources, you must run the following command to install the agents:
 
 ```bash
-helm upgrade --install --namespace apic-control ampc-hybrid axway/ampc-hybrid -f hybrid-override.yaml --set ada.poll.interval=2s
+helm upgrade --install --namespace amplify-agents ampc-hybrid axway/ampc-hybrid -f hybrid-override.yaml --set ada.poll.interval=2s
 ```
 
 ## Verify that the pods are running
@@ -337,7 +322,7 @@ helm upgrade --install --namespace apic-control ampc-hybrid axway/ampc-hybrid -f
 1. After the installation is complete, run the command below with the namespace you selected for the Istio agent location and confirm that the pods are all in a running status.
 
     ```bash
-    kgp -n apic-control
+    kgp -n amplify-agents
     NAME                               READY   STATUS    RESTARTS   AGE
     ampc-hybrid-ada-bc5fcd58-6ghvb     1/1     Running   0          18s
     ampc-hybrid-als-76b499bc7c-d4566   1/1     Running   0          17s

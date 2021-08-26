@@ -20,7 +20,7 @@ These two agents will help you to represent and expose your API Management eco-s
 
 * Create an API Gateway environment in Amplify Central that represent your actual API Management eco-system.
 * Detect a published API using the Discovery Agent. The Discovery Agent discovers the API from API Manager and makes it available in Amplify Central. An API Service in Central is created to reference the API from API Manager and then you can optionally tell the agent to publish it to the Amplify Catalog to allow your consumer to discover it.
-* Manage consumer subscription using the Discovery Agent. When a consumer subscribes / unsubscribes to a Catalog asset, the Discovery Agent keeps track of the changes and maintains the API Management system accordingly.  
+* Manage consumer subscription using the Discovery Agent. When a consumer subscribes / unsubscribes to a Catalog asset, the Discovery Agent keeps track of the changes and maintains the API Management system accordingly.
 * Filter the Axway API Gateway logs using the Traceability Agent. The Traceability Agent uses the discovered API to filter API Gateway events to extract the transaction information and send it to the Amplify platform Observability module.
 
 ### Discovery Agent

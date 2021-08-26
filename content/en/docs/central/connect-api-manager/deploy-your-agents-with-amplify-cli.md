@@ -24,7 +24,8 @@ Learn how to quickly install and run your Discovery and Traceability agents with
 * [Node.js](https://nodejs.org/en/download/) version 10.13.0 or later
 * Access to npm package (for installing Axway CLI)
 * Access to login.axway.com on port 443
-* Minimum Axway Central CLI version: 0.1.15 (check version using `axway central --version`)
+* Minimum Axway Central CLI version: 1.24.0 (check version using `axway central --version`)
+* Kubernetes 1.19 (Helm install only)
 
 More information is available at [Install Axway Central CLI](/docs/central/cli_central/cli_install/).
 
@@ -137,6 +138,37 @@ Traceability Agent:
 
 ```shell
 docker run -it --env-file $(pwd)/ta_env_vars.env -v $(pwd):/keys -v EVENT_LOG_PATH_ENTERED_DURING_INSTALLATION:/events docker run -it axway.jfrog.io/ampc-public-docker-release/agent/v7-traceability:latest
+```
+
+### Helm deployment
+
+To deploy the agents in a helm release, select `Helm` as the installation option:
+
+```bash
+? Select the mode of installation:
+  Binaries
+  Dockerized
+❯ Helm
+```
+
+When prompted, provide the details to connect to the API Manager and the API Gateway. The credentials you provide will be used to create two Kubernetes secrets in the cluster in the namespace you select. A secret named `amplify-agents-keys` will hold the public and private key pair information entered during the installation, and a secret named `amplify-agents-credentials` will hold the API Manager and API Gateway authentication details.
+
+Next, select a namespace to install the agents into:
+
+```bash
+? Enter the namespace to use for the Amplify Gateway Agents:
+  Create a new namespace
+  ──────────────
+❯ amplify-agents
+```
+
+The agents can be deployed with the following commands, which are mentioned at the end of the CLI install prompts:
+
+```bash
+helm repo add axway https://charts.axway.com/charts
+helm repo update
+helm upgrade --install --namespace <YOUR_NAMESPACE> v7-discovery axway/v7-discovery -f da-overrides.yaml
+helm upgrade --install --namespace <YOUR_NAMESPACE> v7-traceability axway/v7-traceability -f ta-overrides.yaml
 ```
 
 ### Linux Service mode for binary agent
