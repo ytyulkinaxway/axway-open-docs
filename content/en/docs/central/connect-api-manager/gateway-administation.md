@@ -1030,10 +1030,10 @@ cd /home/APIC-agents
 See "To install the Dockerized Discovery Agent" section above for the `ta_env_vars.env` configuration.
 
 1. Copy the `private_key.pem` and `public_key.pem` files that were originally created when you set up your Service Account to a keys directory. Make sure the directory is located on the machine being used for deployment.
-2. Start the Traceability Agent pointing to the `ta_env_vars.env` file, `keys`, and the logging `events` directory. `pwd` relates to the local directory where the docker command is run. For Windows, the absolute path is preferred.
+2. Start the Traceability Agent pointing to the `ta_env_vars.env` file, `keys`, logging `events`, and the usage metrics `data` directory. `pwd` relates to the local directory where the docker command is run. For Windows, the absolute path is preferred.
 
    ```shell
-   docker run --env-file ./ta_env_vars.env -v <pwd>/keys:/keys -v <pwd>/events:/events axway.jfrog.io/ampc-public-docker-release/agent/v7-traceability:latest
+   docker run --env-file ./ta_env_vars.env -v <pwd>/keys:/keys -v <pwd>/events:/events -v <pwd>/data:/data axway.jfrog.io/ampc-public-docker-release/agent/v7-traceability:latest
    ```
 
    * See [Create and start API Gateway Docker container](/docs/apim_installation/apigw_containers/docker_script_gwimage/#mount-volumes-to-persist-logs-outside-the-api-gateway-container/) for more  information regarding the persistent API Gateway trace and event logs to a directory on your host machine.

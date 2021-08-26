@@ -131,13 +131,13 @@ As mentioned in the installation procedure, agents can be started with the follo
 Discovery Agent:
 
 ```shell
-docker run -it --env-file $(pwd)/da_env_vars.env -v $(pwd):/keys docker run -it axway.jfrog.io/ampc-public-docker-release/agent/v7-discovery-agent:latest
+docker run -it --env-file $(pwd)/da_env_vars.env -v $(pwd):/keys axway.jfrog.io/ampc-public-docker-release/agent/v7-discovery-agent:latest
 ```
 
 Traceability Agent:
 
 ```shell
-docker run -it --env-file $(pwd)/ta_env_vars.env -v $(pwd):/keys -v EVENT_LOG_PATH_ENTERED_DURING_INSTALLATION:/events docker run -it axway.jfrog.io/ampc-public-docker-release/agent/v7-traceability:latest
+docker run -it --env-file $(pwd)/ta_env_vars.env -v $(pwd):/keys -v EVENT_LOG_PATH_ENTERED_DURING_INSTALLATION:/events -v USAGE_METRICS_PATH:/data axway.jfrog.io/ampc-public-docker-release/agent/v7-traceability:latest
 ```
 
 ### Helm deployment
@@ -160,6 +160,24 @@ Next, select a namespace to install the agents into:
   Create a new namespace
   ──────────────
 ❯ amplify-agents
+```
+
+If you are installing the agents in an Openshift environment, you must run this command in the namespace that the agents will be installed in:
+
+```bash
+oc adm policy add-scc-to-group anyuid system:serviceaccounts:<target-namespace>
+```
+
+This allows the Traceability Agent to run with an UID associated with the fsGroup that is specified in the PodSecurityContext of the agent.
+Additionally, while deploying the Traceability Agent, ensure that the Storage class specified in the ta-overrides.yaml file is present in the cluster.
+
+In ta-overrides.yaml:
+
+```bash
+persistentVolumeClaimConfig:
+  data:
+    # storage class to persist contents of data directory in the agent - should be available in the cluster i.e gp2, gp2-csi, default
+    storageClass: gp2-csi
 ```
 
 The agents can be deployed with the following commands, which are mentioned at the end of the CLI install prompts:
