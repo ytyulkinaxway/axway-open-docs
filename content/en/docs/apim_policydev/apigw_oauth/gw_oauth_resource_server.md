@@ -3,7 +3,9 @@ title: API Gateway as an OAuth 2.0 resource server
 linkTitle: API Gateway as an OAuth 2.0 resource server
 weight: 70
 date: 2019-11-18
-description: Configure API Gateway as an OAuth resource server using sample policies as a starting point, and manage client applications and OAuth scopes in the Client Application Registry.
+description: Configure API Gateway as an OAuth resource server using sample
+  policies as a starting point, and manage client applications and OAuth scopes
+  in the Client Application Registry.
 ---
 
 ## Resource server policies and filters
@@ -162,3 +164,10 @@ Select the check box to add a `secure` flag to the `Set-Cookie` header.
 
 **HttpOnly**:
 Select the check box to add a HttpOnly flag to the `Set-Cookie` header.
+
+**SameSite**:
+Select the value of the SameSite attribute of the `Set-Cookie` header. Possible values for the flag are:
+
+* **Strict**: Prevent the cookie from being sent by the browser to the target site in all cross-site browsing contexts, even when following a regular link. This is the default value.
+* **Lax**: Provides a reasonable balance between security and usability for websites that want to maintain user’s logged-in session after the user arrives from an external link
+* **None**: No protection. The browser attaches the cookies in all cross-site browsing contexts.
