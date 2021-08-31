@@ -1,11 +1,10 @@
 {
-    "title": "Configure API Manager settings in Policy Studio",
-    "linkTitle": "Configure settings in Policy Studio",
-    "weight": "20",
-    "date": "2019-09-17",
-    "description": "Configure settings that apply to API Manager and the underlying API Gateway in Policy Studio."
+"title": "Configure API Manager settings in Policy Studio",
+  "linkTitle": "Configure settings in Policy Studio",
+  "weight": "20",
+  "date": "2019-09-17",
+  "description": "Configure settings that apply to API Manager and the underlying API Gateway in Policy Studio."
 }
-
 Policy Studio enables you to configure a range of settings that apply to API Manager and the underlying API Gateway. This topic describes how to create a Policy Studio project with API Manager configuration, and how to configure each of the API Manager settings.
 
 ## Create a Policy Studio project with API Manager configuration
@@ -14,9 +13,10 @@ To create a Policy Studio project with API Manager configuration, perform the fo
 
 1. Ensure that your API Gateway installation has already been configured for API Manager. For more details, see [Enable API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_config/#enable-api-manager).
 2. Create a project from one of the following:
-    * API Gateway instance
-    * API Gateway configuration directory
-    * `.fed`, `.pol`, or `.env` file
+
+   * API Gateway instance
+   * API Gateway configuration directory
+   * `.fed`, `.pol`, or `.env` file
 
 ## Configure API Manager server settings
 
@@ -220,12 +220,21 @@ You must ensure that API Manager is configured with the SMTP server used by your
 For example, to configure your SMTP server, perform the following steps:
 
 1. Click the browse button on the on the right of the **SMTP Server**
-    field.
+   field.
 2. Right-click **Portal SMTP**, and select **Edit**.
 3. Complete the SMTP settings in the dialog. The following example settings use the Gmail SMTP server:
-    * **Name**: Name for your SMTP server (for example, `Acme Portal SMTP Server`).
-    * **SMTP Server Hostname**: Hostname of your SMTP server (for example, `smtp.gmail.com`).
-    * **Port**: SMTP server port number (for example, `465`).
-    * **Connection Security**: Select the type of connection security to use for SMTP. The options are `NONE`, `SSL`, or `TLS`. The default is `NONE`.
-    * **User Name**: Your email user name (for example, `joe.bloggs@gmail.com`).
-    * **Password**: Your email password.
+
+   * **Name**: Name for your SMTP server (for example, `Acme Portal SMTP Server`).
+   * **SMTP Server Hostname**: Hostname of your SMTP server (for example, `smtp.gmail.com`).
+   * **Port**: SMTP server port number (for example, `465`).
+   * **Connection Security**: Select the type of connection security to use for SMTP. The options are `NONE`, `SSL`, or `TLS`. The default is `NONE`.
+   * **User Name**: Your email user name (for example, `joe.bloggs@gmail.com`).
+   * **Password**: Your email password.
+
+### Cookie SameSite Attribute
+
+Select the value of the **SameSite** attribute of the `Set-Cookie` header. Possible values for the flag are:
+
+* **Strict**: Prevent the cookie from being sent by the browser to the target site in all cross-site browsing contexts, even when following a regular link. This is the default value.
+* **Lax**: Provides a reasonable balance between security and usability for websites that want to maintain user’s logged-in session after the user arrives from an external link
+* **None**: No protection. The browser attaches the cookies in all cross-site browsing contexts.
