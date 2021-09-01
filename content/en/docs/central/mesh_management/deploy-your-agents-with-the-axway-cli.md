@@ -80,8 +80,8 @@ The rest of the prompts relate to the Istio agents. Continue on with the section
 
     ```bash
     ? Use existing Istio installation?:  (Use arrow keys)
-      Yes
     ❯ No
+      Yes
     ```
 
 2. Enter the domain name of the cluster. If you do not know the domain name for the cluster at this time, leave the prompt blank and you will not be asked any details about the protocol, port, or certificate.
@@ -189,8 +189,15 @@ The following prompts are related to the details about the Amplify Istio Agents.
     ```bash
     Enter a new namespace name: (amplify-agents)
     ```
+3. Select whether you want to deploy the demo List service. This is an optional demo service which can be leveraged to ensure the Istio agents are working as expected. The demo service can be found in the ampc-hybrid namespace if selected to be deployed.
 
-3. After the namespace is created, you are asked for the DevOps Service Account (DOSA) to use, so the agents can authenticate with Amplify Central. You can create a new DOSA account or select an existing one.
+    ```bash
+    ? Do you want to deploy the optional demo application?:  (Use arrow keys)
+    ❯ No
+      Yes
+    ```
+
+4. Select either an exisiting DevOps Service Account (DOSA), or create a new DOSA account, so the agents can authenticate with Amplify Central.
 
 {{< alert title="Note">}} If you choose to use an existing DOSA account, you must provide the same public and private keys that were used to create the DOSA account you have selected. Failure to do so will cause the agents to fail to authenticate with Amplify Central.{{< /alert >}}
 
@@ -330,10 +337,10 @@ helm upgrade --install --namespace amplify-agents ampc-hybrid axway/ampc-hybrid 
     ampc-hybrid-rda-64cfdb558b-7kz2s   1/1     Running   0          17s
     ```
 
-2. The `ampc-hybrid` helm installation creates a namespace named `apic-demo` and deploys a service called `ampc-hybrid-list`. Run the following command to verify this demo service is running.
+2. If you opted to install the optional demo service, the `ampc-hybrid` helm installation creates a namespace named `ampc-demo` and deploys a service called `ampc-hybrid-list`. Run the following command to verify this demo service is running.
 
     ```bash
-    kgp -n apic-demo
+    kgp -n ampc-demo
     NAME                                READY   STATUS    RESTARTS   AGE
     ampc-hybrid-list-598f8f9b4b-9wsc6   2/2     Running   0          90s
     ```
@@ -355,8 +362,8 @@ helm upgrade --install --namespace amplify-agents ampc-hybrid axway/ampc-hybrid 
     ✔ Resource(s) has successfully been retrieved
 
     NAME                                             AGE            TITLE                      SCOPE KIND  SCOPE NAME
-    service.apic-demo.ampc-hybrid-list               6 minutes ago  service-cli-1605812140608  K8SCluster  mesh-demo
-    pod.apic-demo.ampc-hybrid-list-598f8f9b4b-9wsc6  6 minutes ago  pod-cli-1605812140608      K8SCluster  mesh-demo
+    service.ampc-demo.ampc-hybrid-list               6 minutes ago  service-cli-1605812140608  K8SCluster  mesh-demo
+    pod.ampc-demo.ampc-hybrid-list-598f8f9b4b-9wsc6  6 minutes ago  pod-cli-1605812140608      K8SCluster  mesh-demo
     ```
 
     If you see two resources after running this command, that confirms that the Resource Discovery Agent is working.
