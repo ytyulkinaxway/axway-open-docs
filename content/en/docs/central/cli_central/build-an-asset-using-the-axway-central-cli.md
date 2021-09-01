@@ -3,7 +3,7 @@ title: Build an Asset using the Axway Central CLI
 linkTitle: Build an Asset using the Axway Central CLI
 weight: 125
 description: Learn how your DevOps process can use Axway Central CLI to build
-    and manage your assets.
+  and manage your assets.
 ---
 
 ## Before you start
@@ -33,7 +33,7 @@ Create an asset by providing the path to a valid .yaml, .yml, or .json file that
 axway central create -f <filepath>
 ```
 
-Try out the [create_asset.yaml](/samples/central/create_asset.yaml) sample to create an asset.
+Try out the [create_asset.yaml](https://axway-open-docs.netlify.app/samples/central/create_asset.yaml) sample to create an asset.
 This sample includes optional resources for adding multiple API services to your asset across different environments.
 
 ## Retrieve a list of all available assets
