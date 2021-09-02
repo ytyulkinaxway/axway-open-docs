@@ -1,7 +1,7 @@
 ---
 title: Deploy your agents with Axway CLI
-linkTitle: Deploy your agents
-weight: 160
+linkTitle: Deploy your agents with Axway CLI
+weight: 50
 date: 2020-12-0
 description: Use the Axway CLI to deploy Amplify Istio Agents.
 ---
@@ -13,7 +13,7 @@ Ensure you have the following tools installed:
 * Axway Central CLI 1.24.0 or later
 * Helm 3.2.4 or later
 * Istioctl 1.9.5
-* Kubectl 1.19 or later
+* Kubectl - compatible version with your K8s server side
 * Node.js >= 10.13.0 and <= 12.14.1
 * OpenSSL 2.8.3 or later
 
@@ -166,7 +166,7 @@ The following prompts are related to the details about the Amplify Istio Agents.
 
     If you choose to deploy Traceability agent, select the mode in which you want the Traceability Agent to run.
 
-    The Amplify Istio Traceability Agent has two modes, default and verbose. The default mode captures only the headers specified in the EnvoyFilter. The verbose mode captures all the headers in the request and response flows. Once selected, you will be able to switch modes if required. Refer to [Service Mesh Traceability - Toggling the Traceability Agent](/docs/central/mesh_management/traceability_agent_configuration/#toggling-the-traceability-agent).
+    The Amplify Istio Traceability Agent has two modes, default and verbose. The default mode captures only the headers specified in the EnvoyFilter. The verbose mode captures all the headers in the request and response flows. Once selected, you will be able to switch modes if required. Refer to [Monitor APIs and Services - Toggling the Traceability Agent](/docs/central/mesh_management/traceability_agent_configuration/#toggling-the-traceability-agent).
 
    ```bash
     Select Traceability Agent HTTP header publishing mode:  (Use arrow keys)
@@ -372,4 +372,4 @@ helm upgrade --install --namespace amplify-agents ampc-hybrid axway/ampc-hybrid 
 
 For more information on the details of the resources and how the discovery process works, see [Discover APIs and services](/docs/central/mesh_management/discover-apis-and-services/).
 
-For more information on the details on how the service mesh traceability works, see [Service Mesh Traceability](/docs/central/mesh_management/traceability_agent_configuration/).
+For more information on monitoring APIs and services, see [Monitor APIs and Services](/docs/central/mesh_management/traceability_agent_configuration/).

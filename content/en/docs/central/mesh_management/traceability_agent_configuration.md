@@ -1,7 +1,7 @@
 ---
-title: Service Mesh Traceability
-linkTitle: Service Mesh Traceability
-weight: 160
+title: Monitor APIs and Services
+linkTitle: Monitor APIs and Services
+weight: 70
 date: 2021-03-03
 description: Observe transactions in mesh.
 ---

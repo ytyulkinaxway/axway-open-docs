@@ -1,7 +1,7 @@
 ---
 title: Using Red Hat OpenShift
 linkTitle: Using Red Hat OpenShift
-weight: 160
+weight: 40
 date: 2021-03-18
 description: Setup a Red Hat OpenShift 4.7+ managed cluster and install Amplify Istio Agents
 ---
