@@ -183,129 +183,58 @@ CENTRAL_AUTH_PUBLICKEY=/home/APIC-agents/public_key.pem
 #CENTRAL_AUTH_TIMEOUT=10s
 ```
 
-#### Customizing Discovery Agent SMTP Notification for subscription
+#### Customizing Discovery Agent to manage subscription approval and notifications
 
-The SMTP Notification variables defines how the agent manages email settings for subscriptions.
+Various use cases are supported to approve a subscription using the `CENTRAL_SUBSCRIPTIONS_APPROVAL_MODE` variable:
 
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_HOST`: SMTP server where the email notifications will originate from.
+* manual (default): a provider must manually approve the subscription
+* auto: all subscription are automatically approved
+* webhook: a webhook can be added to the agent configuration. The webhook endpoint will be trigger each time the subscription state is updated. For this, there are 2 additional variables required: `CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_URL` and `CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_HEADERS`.
 
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PORT`: Port of the SMTP server.
+More information can be found in [Supported use cases for subscription approval](/docs/central/connected_agent_common_reference/manage_subscription_workflow/#supported-use-case-for-issuing-consumer-credentials) section.
 
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_FROMADDRESS`: Email address which will represent the sender.
+We also support two use cases to send API credentials to the subscriber:
 
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_USERNAME`: Login user for the SMTP server.
+* via an email: you must configure the email server, as well as the various email templates the agent can send (Subscription success / Subscription failure / Unsubscribing success / Unsubscribing failure)
+* via a webhook: a webhook can be triggered with the subscription credentials payload.
 
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PASSWORD`: Login password for the SMTP server.
+These options are mutually exclusive.
 
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_AUTHTYPE`: The authentication type based on the email server.  You may have to refer to the email server properties and specifications. This value defaults to NONE.
+More information can be found in [Supported use cases for receiving API credentials](/docs/central/connected_agent_common_reference/manage_subscription_workflow/#supported-use-cases-for-receiving-api-credentials) section.
 
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_SUBJECT`: Subject of the email notification for action subscribe. Default is `Subscription Notification`.
-
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_BODY`: Body of the email notification for action subscribe. Default is `Subscription created for Catalog Item:  <a href= {{.CatalogItemURL}}> {{.CatalogItemName}} {{.CatalogItemID}}.</br></a>{{if .IsAPIKey}} Your API is secured using an APIKey credential:header:<b>{{.KeyHeaderName}}</b>/value:<b>{{.Key}}</b>{{else}} Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>{{end}}`.
-
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_OAUTH:` Body of the email notification for action subscribe on OAuth authorization is `Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>${clientID}</b> and client_secret=<b>${clientSecret}</b>`.
-
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_APIKEYS`: Body of the email notification for action subscribe on APIKey authorization is `Your API is secured using an APIKey credential: header: <b>${keyHeaderName}</b> / value: <b>${key}</b>`.
-
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBE_SUBJECT`: Subject of the email notification for action unsubscribe. Default is `Subscription Removal Notification`.
-
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBE_BODY`: Body of the email notification for action unsubscribe. Default is `Subscription for Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> has been unsubscribed`.
-
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBEFAILED_SUBJECT`: Subject of the email notification for action subscribe failed. Default is `Subscription Failed Notification`.
-
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBEFAILED_BODY`: Body of the email notification for action subscribe failed. Default is `Could not subscribe to CatalogItem: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>`.
-
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBEFAILED_SUBJECT`: Subject of the email notification for action unsubscribe failed. Default is `Subscription Removal Failed Notification`.
-
-`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBEFAILED_BODY` : Body of the email notification for action unsubscribe failed. Default is `Could not unsubscribe to Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>`.
-
-#### Customizing Discovery Agent email server for subscription notifications
-
-The `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_HOST`, which represents the email server, can be configured with minimal setup.  This section represents the email servers that have been currently tested. Please note, that all testing has been set up on port 587 signifying TLS support.  
-
-```
-# Google/Gmail server
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_HOST=smtp.gmail.com
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PORT=587
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_USERNAME=your GMAIL account
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PASSWORD=application generated GMAIL password (see note below)
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_AUTHTYPE=PLAIN
-
-# Microsoft office server
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_HOST=smtp.office365.com
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PORT=587
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_USERNAME=your Office Mail account
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PASSWORD=your Office Mail password
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_AUTHTYPE=LOGIN
-
-# Microsoft outlook server
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_HOST=smtp-mail.outlook.com
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PORT=587
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_USERNAME=your Outlook Mail account
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PASSWORD=your Outlook Mail password
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_AUTHTYPE=PLAIN
-
-# Yahoo email server
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_HOST=smtp.mail.yahoo.com
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PORT=587
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_USERNAME=your Yahoo Mail account
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PASSWORD=application generated Yahoo password (see note below)
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_AUTHTYPE=PLAIN
-
-# Amazon Simple Email Service
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_HOST=email-smtp.<region>.amazonaws.com
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PORT=587
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_USERNAME=user access key (see note below)
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PASSWORD=user secret key (see note below)
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_AUTHTYPE=PLAIN
-```
-
-**Note**: You will be required to use an application generated password instead of the actual user email password for the following email servers. Follow the links for application generated passwords.
-
-* Gmail - [Application generated gmail password](https://support.google.com/accounts/answer/185833?hl=en). Use this password in place of your actual password in the agent configuration `password:` field.
-* Yahoo - [Application generated yahoo password](https://help.yahoo.com/kb/generate-third-party-passwords-sln15241.html). Use this password in place of your actual password in the agent configuration `password:` field.
-* [AWS  Simple email service](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-smtp.html). Create your [SMTP credentials](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/smtp-credentials.html) and use them in the username (ACCESS KEY) and password (SECRET KEY) of the agent configuration.
-
-### Customizing Discovery Agent Webhook Notification for subscription
-
-The Webhook Notification section defines how the agent manages to send notifications to a webhook URL. For using the webhook, you should set the variable `CENTRAL_SUBSCRIPTIONS_APPROVAL_MODE` to webhook value. Other available mode are: manual (default) or auto. Manual means that subscription has to be manually approved by an administrator, whereas auto will be automatically approved.
-
-`CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_URL`: url where the webhook server is defined.
-
-`CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_HEADERS`: Information used to verify the webhook. Provided by the customer, and may include such information as contentType and Authorization.
-
-Both webhook and smtp  sections can be configured at the same time.  The agent will attempt the subscription notifications that are set in the agent config.
-
-Once all data is gathered, this section should look like this for webhook and subscription Notification:
+Once all data is gathered, this subscription section should look like this:
 
 ```shell
-CENTRAL_SUBSCRIPTIONS_APPROVAL_MODE=webhook
+# Subscription approval mode
+CENTRAL_SUBSCRIPTIONS_APPROVAL_MODE=[webhook|auto|manual]
 CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_URL=http://mywebhookurl.com
 CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_HEADERS=contentType,Value=application/json
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_HOST=smtpServerHost
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PORT=smtpServerPort
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_USERNAME=userName
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PASSWORD=userPassword
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_AUTHTYPE=PLAIN
+
+# Subscription notification via email - to be commented or removed if you don't want to use it
+## SMTP server
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_HOST=smtpServerHost
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PORT=smtpServerPort
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_USERNAME=userName
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PASSWORD=userPassword
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_AUTHTYPE=PLAIN
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_FROMADDRESS=agentSubscription@email.com
-```
 
-If you want to customize your SMTP email notifications to be something different than the defaults, you can add to the configuration file as follows:
+## email templates
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_SUBJECT=Subscription Notification
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item:  <a href= {{.CatalogItemURL}}> {{.CatalogItemName}} {{.CatalogItemID}}.</br></a>{{if .IsAPIKey}} Your API is secured using an APIKey credential:header:<b>{{.KeyHeaderName}}</b>/value:<b>{{.Key}}</b>{{else}} Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>{{end}}
 
-```shell
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_SUBJECT==Custom Subscription Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a><br/>{{.AuthTemplate}}<br/>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential=header=<b>{{.KeyHeaderName}}</b> / value=<b>{{.Key}}</b>
-
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_SUBJECT=Custom subscription Removal Notification
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_SUBJECT=Subscription Removal Notification
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_BODY=Subscription for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> has been unsubscribed
 
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_SUBJECT=Custom Subscription Failed Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>.<br/>Error encountered: ${message}
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_SUBJECT=Subscription Failed Notification
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>.<br/> Error encountered: ${message}
 
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_SUBJECT=Custom Subscription Removal Failed Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>.<br/>Error encountered: ${message}
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_SUBJECT=Subscription Removal Failed Notification
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>.<br/> Error encountered: ${message}
+
+## webhook notification - to be un-commented if you want to use it
+#CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_WEBHOOK_URL=subscriptionNotificationWebhookURL
+#CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_WEBHOOK_HEADERS=subscriptionWebHookHeader
 ```
 
 #### Customizing Discovery Agent logging variables
@@ -328,7 +257,7 @@ The log section defines how the agent is managing its logs.
 
 `LOG_FILE_KEEPFILES`: The maximum number of log file backups to keep.
 
-`LOG_FILE_CLEANBACKUPS`: The maximum age of a backup up, in days.
+`LOG_FILE_CLEANBACKUPS`: The maximum age of a backup, in days.
 
 Once all data is gathered, this section should look like:
 
@@ -378,18 +307,16 @@ CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_URL=http://mywebhookurl.com
 CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_HEADERS=contentType,Value=application/json
 
 # Subscription SMTP definition
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_HOST=smtpServerHost
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PORT=smtpServerPort
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_USERNAME=userName
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_PASSWORD=userPassword
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_AUTHTYPE=PLAIN
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_HOST=smtpServerHost
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PORT=smtpServerPort
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_USERNAME=userName
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PASSWORD=userPassword
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_AUTHTYPE=PLAIN
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_FROMADDRESS=agentSubscription@email.com
 
 # Subscription email notification
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_SUBJECT==Custom Subscription Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a><br/>{{.AuthTemplate}}<br/>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential=header=<b>{{.KeyHeaderName}}</b> / value=<b>{{.Key}}</b>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item:  <a href= {{.CatalogItemURL}}> {{.CatalogItemName}} {{.CatalogItemID}}.</br></a>{{if .IsAPIKey}} Your API is secured using an APIKey credential:header:<b>{{.KeyHeaderName}}</b>/value:<b>{{.Key}}</b>{{else}} Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>{{end}}
 
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_SUBJECT=Custom subscription Removal Notification
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_BODY=Subscription for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> has been unsubscribed
@@ -409,9 +336,11 @@ LOG_MASKEDVALUES=keyword1, keyword2, keyword3
 
 ### Running the Discovery Agent
 
+Open a shell and run one of the following commands to start your agent:
+
 #### Execute binary Discovery Agent in Foreground
 
-Open a shell and run the following command to start up your agent:
+Open a shell and run the following command to start your agent:
 
 ```shell
 cd /home/APIC-agents
@@ -429,7 +358,7 @@ To stop your binary agent, press Ctrl+C within the shell.
 
 When executing in the background, it is best to save your logging to a file rather than the console output. See [Customizing log section (log)](#customizing-log-section-log) above.
 
-Open a shell and run the following command to start up your agent:
+Open a shell and run the following command to start your agent:
 
 ```shell
 cd /home/APIC-agents
@@ -656,7 +585,7 @@ The agent can work either with the Gateway event logs (**default**) or the Gatew
 
 This section describes how to use Gateway event logs for traceability reporting.
 
-`EVENT_LOG_INPUT`: Used to turn on or off the event log input for the Traceability agent. Defaulted is `true`, set to false when using [open traffic](#sourcing-gateway-traffic-from-open-traffic-files).
+`EVENT_LOG_INPUT`: Used to turn on or off the event log input for the Traceability Agent. Defaulted is `true`, set to false when using [open traffic](#sourcing-gateway-traffic-from-open-traffic-files).
 `EVENT_LOG_PATHS`: List all API Gateway event log files (absolute path) the beat will listen to. It could be a single file if there is only one Gateway installed on the machine, or multiple files if several Gateways are installed on the same machine.
 
 Single Gateway - explicit file name:
@@ -791,9 +720,9 @@ This section describes where the logs should be sent on Amplify Central.
 
 `TRACEABILITY_COMPRESSIONLEVEL`: The gzip compression level for the output event. Default value is **3**.
 
-`TRACEABILITY_BULKMAXSIZE`: Maximum number of events to bulk in a single ingestion request. Default value is 100.
+`TRACEABILITY_BULKMAXSIZE`: Maximum number of events to bulk in a single ingestion request. Default value is **100**.
 
-`TRACEABILITY_TIMEOUT`: Time to wait for ingestion response. Default value is 300s.
+`TRACEABILITY_TIMEOUT`: Time to wait for ingestion response. Default value is **300s**.
 
 `TRACEABILITY_WORKER`: The number of workers in the Traceability agent making connections to the TRACEABILITY_HOST. It is recommended to change this for high volume machine. Default value is **2**.
 
@@ -832,7 +761,7 @@ Once all data is gathered, this section should look like:
 
 #### Customizing Traceability Agent logging variables
 
-The log section defines how the agent manages its logs. This section is similar to the one define for the [Discovery Agent](/docs/central/connect-api-manager/gateway-administation/#customizing-discovery-agent-logging-variables)
+The log section defines how the agent manages its logs. This section is similar to the one defined for the [Discovery Agent](/docs/central/connect-api-manager/gateway-administation/#customizing-discovery-agent-logging-variables).
 
 Once all data is gathered, this section should look like this for standard output logging:
 
@@ -899,11 +828,11 @@ LOG_FILE_NAME=traceability_agent.log
 
 ### Running the binary Traceability Agent
 
-Open a shell and run the following command to start up your agent:
+Open a shell and run one of the following commands to start your agent:
 
 #### Execute binary Traceability Agent in Foreground
 
-Open a shell and run the following command to start up your agent:
+Open a shell and run the following command to start your agent:
 
 ```shell
 cd /home/APIC-agents
@@ -916,7 +845,7 @@ To stop your agent, press Ctrl+C within the shell.
 
 When executing in the background, it is best to save your logging to a file rather than the console output. See [Customizing log section (logging)](#customizing-log-section-logging) above.
 
-Open a shell and run the following command to start up your agent:
+Open a shell and run the following command to start your agent:
 
 ```shell
 cd /home/APIC-agents

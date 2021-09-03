@@ -53,45 +53,121 @@ CENTRAL_SUBSCRIPTIONS_APPROVAL_WEBHOOK_HEADERS={The headers that will be used wh
 
 Once the subscription is approved, the agent catches this event from Amplify Central and, based on its configuration, can forward the credentials using either an SMTP server or a webhook.
 
-* **email**: the agent configuration contains the access details to an SMTP server (endpoint / port / credentials, if any) and the templates for the emails. Emails can be triggered when the subscription succeeds, fails or when unsubscribes to an API. The agent configuration allows you to customize the email template with several properties:
+### Email server and email template configuration
 
-    * `{{.CatalogItemURL}}`: url of the catalog item to help consumer find it easily
-    * `{{.CatalogItemName}}`: name of the catalog item
-    * `{{.KeyHeaderName}}` / `{{.Key}}`: apiKey header name and apiKey value
-    * `{{.ClientID}}` /  `{{.ClientSecret}}`: oauth clientID and clientSecret to request the oauth token
-    * `{{.Message}}`: error message raised by the agent when the subscription fails or the unsubscribe fails
-    * `{{.AuthTemplate}}`: only available for Amplify Gateway Discovery Agent as this gateway can issue either API Key or Oauth client/secret credentials.
+The agent configuration contains the access details to an SMTP server (endpoint / port / credentials, if any) and the templates for the emails. Emails can be triggered when the subscription succeeds, fails or when unsubscribes to an API.
 
-Agent configuration:
+#### SMTP server configuration
 
-```yml
-# SMTP Server definition
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_HOST={SMTP server host}
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PORT={SMTP server port}
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_AUTHTYPE={The authentication type based on the email server.  You may have to refer to the email server properties and specifications. This value defaults to NONE.}
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_USERNAME={The username used to authenticate to the SMTP server, if necessary}
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PASSWORD={The password used to authenticate to the SMTP server, if necessary}
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_FROMADDRESS={The email address that will be listed in the from field}
+The following variables are used to identify the SMTP server and its connectivity:
 
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_HOST`: SMTP server where the email notifications will originate from.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PORT`: Port of the SMTP server.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_FROMADDRESS`: Email address which will represent the sender.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_USERNAME`: Login user for the SMTP server.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PASSWORD`: Login password for the SMTP server.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_AUTHTYPE`: The authentication type based on the email server. You may have to refer to the email server properties and specifications. This value defaults to NONE.
+
+Samples of tested email SMTP server:
+
+```yaml
+# Google/Gmail server
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_HOST=smtp.gmail.com
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PORT=587
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_USERNAME=your GMAIL account
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PASSWORD=application generated GMAIL password (see note below)
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_AUTHTYPE=PLAIN
+
+# Microsoft office server
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_HOST=smtp.office365.com
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PORT=587
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_USERNAME=your Office Mail account
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PASSWORD=your Office Mail password
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_AUTHTYPE=LOGIN
+
+# Microsoft outlook server
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_HOST=smtp-mail.outlook.com
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PORT=587
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_USERNAME=your Outlook Mail account
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PASSWORD=your Outlook Mail password
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_AUTHTYPE=PLAIN
+
+# Yahoo email server
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_HOST=smtp.mail.yahoo.com
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PORT=587
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_USERNAME=your Yahoo Mail account
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PASSWORD=application generated Yahoo password (see note below)
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_AUTHTYPE=PLAIN
+
+# Amazon Simple Email Service
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_HOST=email-smtp.<region>.amazonaws.com
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PORT=587
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_USERNAME=user access key (see note below)
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_PASSWORD=user secret key (see note below)
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_AUTHTYPE=PLAIN
+```
+
+**Note**: You will be required to use an application generated password instead of the actual user email password for the following email servers. Follow the links for application generated passwords.
+
+* Gmail - [Application generated gmail password](https://support.google.com/accounts/answer/185833?hl=en). Use this password in place of your actual password in the agent configuration `password:` field.
+* Yahoo - [Application generated yahoo password](https://help.yahoo.com/kb/generate-third-party-passwords-sln15241.html). Use this password in place of your actual password in the agent configuration `password:` field.
+* [AWS  Simple email service](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-smtp.html). Create your [SMTP credentials](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/smtp-credentials.html) and use them in the username (ACCESS KEY) and password (SECRET KEY) of the agent configuration.
+
+#### Email templates configuration
+
+ The agent configuration allows you to customize the email template with several properties:
+
+* `{{.CatalogItemURL}}`: url of the catalog item to help consumer find it easily
+* `{{.CatalogItemName}}`: name of the catalog item
+* `{{.KeyHeaderName}}` / `{{.Key}}`: apiKey header name and apiKey value
+* `{{.ClientID}}` /  `{{.ClientSecret}}`: oauth clientID and clientSecret to request the oauth token
+* `{{.Message}}`: error message raised by the agent when the subscription fails or the unsubscribe fails
+* `{{.AuthTemplate}}`: only available for Amplify Gateway Discovery Agent as this gateway can issue either API Key or Oauth client/secret credentials.
+
+The following variables are used to define the email content and you can customize them:
+
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_SUBJECT`: Subject of the email notification for action subscribe. Default is `Subscription Notification`.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_BODY`: Body of the email notification for action subscribe. Default is `Subscription created for Catalog Item:  <a href= {{.CatalogItemURL}}> {{.CatalogItemName}} {{.CatalogItemID}}.</br></a>{{if .IsAPIKey}} Your API is secured using an APIKey credential:header:<b>{{.KeyHeaderName}}</b>/value:<b>{{.Key}}</b>{{else}} Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>{{end}}`.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBE_SUBJECT`: Subject of the email notification for action unsubscribe. Default is `Subscription Removal Notification`.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBE_BODY`: Body of the email notification for action unsubscribe. Default is `Subscription for Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> has been unsubscribed`.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBEFAILED_SUBJECT`: Subject of the email notification for action subscribe failed. Default is `Subscription Failed Notification`.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBEFAILED_BODY`: Body of the email notification for action subscribe failed. Default is `Could not subscribe to CatalogItem: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>`.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBEFAILED_SUBJECT`: Subject of the email notification for action unsubscribe failed. Default is `Subscription Removal Failed Notification`.
+* `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_UNSUBSCRIBEFAILED_BODY` : Body of the email notification for action unsubscribe failed. Default is `Could not unsubscribe to Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a>`.
+
+{{< alert title="Note" color="primary" >}}`CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_APIKEYS` and `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_OAUTH`are now deprecated but you can still use them. Be sure to use the {{.AuthTemplate}} string in your `CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_BODY` variable for the agent to replace it with appropriate value. Otherwise you can migrate and use the {{if .IsAPIKEY}} ... {{else}}...{{end}} syntax.
+
+```yaml
+# sample notification with deprecated variables
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_BODY=Subscription created for Catalog Item=<a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a><br/>{{.AuthTemplate}}<br/>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>${clientID}</b> and client_secret=<b>${clientSecret}</b>.
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential: header: <b>${keyHeaderName}</b> / value: <b>${key}</b>.
+```
+
+{{< /alert >}}
+
+```yaml
 # emails template are defaulted to the following:
+## subscription success
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_SUBJECT=Subscription Notification
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a><br/>{{.AuthTemplate}}<br/>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_OAUTH=Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>
-CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_APIKEYS=Your API is secured using an APIKey credential: header: <b>{{.KeyHeaderName}}</b> / value: <b>{{.Key}}</b>
+CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBE_BODY=Subscription created for Catalog Item:  <a href= {{.CatalogItemURL}}> {{.CatalogItemName}} {{.CatalogItemID}}.</br></a>{{if .IsAPIKey}} Your API is secured using an APIKey credential:header:<b>{{.KeyHeaderName}}</b>/value:<b>{{.Key}}</b>{{else}} Your API is secured using OAuth token. You can obtain your token using grant_type=client_credentials with the following client_id=<b>{{.ClientID}}</b> and client_secret=<b>{{.ClientSecret}}</b>{{end}}
 
+## unsubscribe success
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_SUBJECT=Subscription Removal Notification
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBE_BODY=Subscription for Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> has been unsubscribed
 
+## subscription error
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_SUBJECT=Subscription Failed Notification
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_SUBSCRIBEFAILED_BODY=Could not subscribe to CatalogItem: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> with following error: {{.Message}}
 
+## unsubscribe error
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_SUBJECT=Subscription Removal Failed Notification
 CENTRAL_SUBSCRIPTIONS_NOTIFICATIONS_SMTP_UNSUBSCRIBEFAILED_BODY=Could not unsubscribe to Catalog Item: <a href= {{.CatalogItemURL}}> {{.CatalogItemName}}</a> with following error: {{.Message}}
 ```
 
-For more information about this configuration, see [Customizing SMTP notifications](/docs/central/connect-api-manager/gateway-administation/#customizing-smtp-notification-subscription).
+### webhook notification configuration
 
-* **webhook**: the agent configuration contains the webhook details about where to send the payload (catalog asset url / catalog asset name / subscriber email / credentials / action=APPROVE / authtemplate=preconfigure security template sentence).
+The agent configuration contains the webhook details about where to send the payload (catalog asset url / catalog asset name / subscriber email / credentials / action=APPROVE / authtemplate=preconfigure security template sentence).
 
 Agent configuration:
 
@@ -156,7 +232,7 @@ Request sample sent to the webhook endpoint:
 
 ## API provider: subscription preparation
 
-If the API provider does not allow an API consumer to create his Application (Axway API Gateway) or Usage plan (AWS Gateway), he has to prepare the required objects (application/Usage plan) in advance for the API consumer to use. There is no need to add credentials at that point: they will be automatically created by the Discovery Agent during the subscription workflow to ensure their uniqueness.
+If the API provider does not allow an API consumer to create his Application (Axway API Gateway) or Usage plan (AWS Gateway), then he must prepare the required objects (application/Usage plan) in advance for the API consumer to use. It is not necessary to add credentials at that point; they will be automatically created by the Discovery Agent during the subscription workflow to ensure their uniqueness.
 
 ### Axway API Gateway custom field
 
@@ -268,7 +344,7 @@ In auto approval mode, the subscription approval flow is as described at the top
 
 ### Webhook approval mode
 
-In webhook approval mode, the Discovery Agent must be configured with a webhook url, and any webhook headers and authentication secret that the webhook needs. Within the webhook, many things are possible. For example, the webhook could generate an email to notify someone that a subscription is awaiting approval. Or, the webhook could do the subscription approval. Assuming that the webhook is correctly configured and coded, the subscription approval flow is as follows:
+In webhook approval mode, the Discovery Agent must be configured with a webhook url, and any webhook headers and authentication secret that the webhook needs. Within the webhook, many things are possible. For example, the webhook could either generate an email to notify someone that a subscription is awaiting approval, or the webhook could do the subscription approval. Assuming that the webhook is correctly configured and coded, the subscription approval flow is as follows:
 
 1. A consumer in Amplify Central clicks on **Subscribe**.
 2. The subscription status moves to **Waiting for approval...**.
