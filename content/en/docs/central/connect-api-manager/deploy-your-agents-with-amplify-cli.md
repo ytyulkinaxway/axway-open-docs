@@ -72,13 +72,13 @@ The installation procedure will prompt for the following:
    * **team**: the default team the agent will assign when no team corresponds to the API Manager organization that the API belongs to. If the value is left empty, "Default team" will be used by the agent when no team correspond to the API organization.
    * **service account**: can be an existing service account (from platform or Central). The installation procedure creates only a Central service account. If you choose an existing service account, be sure you have the appropriate public and private keys, as they will be required for the agent to connect to the Amplify Platform. If you choose to create a new one, the generated private and public keys will be provided.
 3. Select the agents you want to install: Discovery / Traceability / all.
-4. Select the agent deployment mode: binary / Docker image.
+4. Select the agent deployment mode: binary / Docker image / Helm.
 5. API Manager connectivity:
-   * **hostname** of the API Manager (localhost by default)
+   * **hostname** of the API Manager (localhost by default - use the api manager service name `apimgr` when deploying via helm charts)
    * **port** of the API Manager (8075 by default)
    * user/password
 6. API Gateway connectivity:
-   * **hostname** of the API Gateway (localhost by default)
+   * **hostname** of the API Gateway (localhost by default - use admin node manager service name `anm` when deploying via helm charts)
    * **port** of the API Gateway (8090 by default)
    * user/password
    * event log path
@@ -151,7 +151,7 @@ To deploy the agents in a helm release, select `Helm` as the installation option
 ❯ Helm
 ```
 
-When prompted, provide the details to connect to the API Manager and the API Gateway. The credentials you provide will be used to create two Kubernetes secrets in the cluster in the namespace you select. A secret named `amplify-agents-keys` will hold the public and private key pair information entered during the installation, and a secret named `amplify-agents-credentials` will hold the API Manager and API Gateway authentication details.
+Use the names of the services when prompted for the hostnames of API Manager (`apimgr`) and API Gateway (`anm`). The credentials you provide will be used to create two Kubernetes secrets in the cluster in the namespace you select. A secret named `amplify-agents-keys` will hold the public and private key pair information entered during the installation, and a secret named `amplify-agents-credentials` will hold the API Manager and API Gateway authentication details.
 
 Next, select a namespace to install the agents into:
 
