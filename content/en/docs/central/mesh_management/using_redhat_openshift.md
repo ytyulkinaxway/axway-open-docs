@@ -18,7 +18,7 @@ For example, follow the instructions from [here](https://docs.openshift.com/cont
 
 ## Using Istio 1.8
 
-Once the cluster is ready to use, see [Deploy your agents with the Axway CLI](/docs/central/mesh_management/deploy-your-agents-with-the-axway-cli/) to learn how to use the Amplify CLI to generate override files with cluster and environment specific details. Then use these override files to install Istio and your selected agents.
+Once the cluster is ready to use, see [Deploy your agents with the Axway CLI](/docs/central/mesh_management/deploy-your-agents-with-the-axway-cli/) to learn how to use the Axway CLI to generate override files with cluster and environment specific details. Then use these override files to install Istio and your selected agents.
 
 ## Istio Installation
 

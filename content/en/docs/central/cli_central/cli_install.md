@@ -13,13 +13,13 @@ description: Learn how to install the Axway CLI core package and Axway Central C
 > If you are a current user of the deprecated 'Amplify Central CLI' package, you can uninstall that package by running:
 >
 > ```
->   [sudo] axway pm uninstall @axway/amplify-central-cli
+>   axway pm uninstall @axway/amplify-central-cli
 >```
 
 ## Before you start
 
 * You will need an administrator account for Amplify Central ([Managing Accounts](https://docs.axway.com/bundle/AMPLIFY_Dashboard_allOS_en/page/managing_accounts.html)).
-* You will need [Node.js](https://nodejs.org/en/download/) version 10.13.0 or later.
+* You will need [Node.js](https://nodejs.org/en/download/) version 12.13.0 or later.
 
 ### Operating system supported configurations
 
@@ -27,14 +27,14 @@ The following table describes the operating system supported configurations that
 
 | OS                  | Node.js Version  | Terminal Shells Supported  | Terminal Shells Unsupported |
 | ------------------- | ---------------- | -------------------------- | --------------------------- |
-| Mac OSX or later    | 10.13.0 or later | bash , zsh                 |                             |
-| Windows 10 or later | 10.13.0 or later | Command Prompt, PowerShell | Cygwin, Git Bash            |
-| Linux               | 10.13.0 or later | bash                       |                             |
+| Mac OSX or later    | 12.13.0 or later | bash , zsh                 |                             |
+| Windows 10 or later | 12.13.0 or later | Command Prompt, PowerShell | Cygwin, Git Bash            |
+| Linux               | 12.13.0 or later | bash                       |                             |
 
 ## Install Axway CLI and Axway Central CLI
 
-1. Install `Node.js 10.13.0 LTS` or later.
-2. Install `npm 6.9.0` or later.
+1. Install `Node.js 12.13.0 LTS` or later.
+2. Install `npm 6.12.0` or later.
 3. Run the following command to install Axway CLI:
 
    ```
@@ -46,7 +46,7 @@ The following table describes the operating system supported configurations that
 4. Run Axway package manager to install Axway Central CLI:
 
    ```
-   [sudo] axway pm install @axway/axway-central-cli
+   axway pm install @axway/axway-central-cli
    ```
 
 5. Run Axway package manager list command to view available packages:
@@ -58,16 +58,19 @@ The following table describes the operating system supported configurations that
    Expected response:
 
    ```
-   Axway CLI, version 1.4.0
-   Copyright (c) 2018, Axway, Inc. All Rights Reserved.
-   NAME                           | INSTALLED VERSIONS | ACTIVE VERSION
-   @axway/axway-central-cli       | 1.0.0              | 1.0.0
+   Axway CLI, version 3.0.0
+   Copyright (c) 2018-2021, Axway, Inc. All Rights Reserved.
+
+   Packages directory: <...>
+
+   NAME                      VERSIONS
+   @axway/axway-central-cli  2.0.0
    ```
 
 All the development versions of Axway Central CLI can be found at [NPM install of Axway Central CLI](https://www.npmjs.com/package/@axway/axway-central-cli). To install a specific development version, run the following command:
 
 ```
-[sudo] axway pm install @axway/amplify-central-cli@1.0.0-dev.10
+axway pm install @axway/axway-central-cli@2.0.0
 ```
 
 ### Additional installation steps on Windows
@@ -84,7 +87,7 @@ Install OpenSSL if not installed already:
 3. Verify that OpenSSL is installed and configured correctly.
 
    ```
-    openssl version
+   openssl version
    ```
 
 ## Authorize your CLI to use the Amplify Central APIs
@@ -98,15 +101,13 @@ You can use the following options to authorize your CLI:
 
 ### Option 1 - Log in with your Amplify Platform credentials
 
-To use Central CLI to log in with your Amplify Platform credentials, run the following command:
+To use Axway CLI to launch the default web browser and log in with your Amplify Platform credentials, run the following command:
 
-```
+```bash
 axway auth login
 ```
 
-On the dialog box displayed, enter valid credentials (email address and password). An "Authorization Successful" message is displayed, and you can go back to the Central CLI.
-
-If you are a member of multiple Amplify organizations, you might have to choose an organization. After that, you have completed the authorization of your CLI.
+If you are a member of multiple Amplify organizations, you might have to choose an organization. After logging in, you may return to the terminal.
 
 If you have used the `client-id` configuration to authorize with the CLI, you must remove it. To verify that you have used `client-id`, run:
 
@@ -167,12 +168,11 @@ axway auth login --client-id DOSA_105cf15d051c432c8cd2e1313f54c2da --secret-file
 Expected response:
 
 ```
-Axway CLI, version 1.4.0
-Copyright (c) 2018, Axway, Inc. All Rights Reserved.
+AXWAY CLI, version 3.0.0
+Copyright (c) 2018-2021, Axway, Inc. All Rights Reserved.
 
-You are logged into 8605xxxxxxx28 as DOSA_5ed74d68defxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx604.
-
-This account has been set as active.
+You are logged in as DOSA_5ed74d68defxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx604.
+This account has been set as the default.
 ```
 
 #### Set the active service account
