@@ -421,3 +421,19 @@ Axway-defined Java system properties introduced in the 7.7 20210530 release
 |http.proxyScheme | API Manager | Specifies the scheme to be used, HTTP or HTTPS, when importing an API from a URL through a HTTP Proxy or HTTPS Proxy Server.  |
 |com.axway.apimanager.fault.legacy.soap | API Manager; WSDL; SOAP | If set to true, it will revert to the legacy error response codes for invalid SOAP 1.1 requests. Default value: false. |
 |com.vordel.oauthAuthorizationRecordsThreshold | API Manager | Specifies the threshold for the records displayed on OAuth Authorizations page. Default value: -1. |
+
+## 7.7 August 2021
+
+Axway-defined Java system properties introduced in the 7.7 20210830 release
+
+| System Property                                  | Context     | Description   |
+| ------------------------------------------------ | ----------- | ------------- |
+|jdk.xml.entityExpansionLimit | API Gateway |Specifies the XML Schema validation limit for the number of entity expansions. Default value: 64000. |
+|jdk.xml.maxOccurLimit |  API Gateway | Specifies the XML Schema validation limit for the number of content model nodes. Default value: 5000. |
+|com.vordel.dwe.file.Service.includeConfDirectory | API Gateway | Specifies whether or not `conf-dir` and `envSettings.props` are included in the output of the API Gateway File API. |
+|com.axway.api.runtime.broker.parameters.skipRequiredValidation | API Manager | Allows required parameters validation to be skipped during processing of user requests. Defaults to 'false'. |
+|com.axway.api.runtime.broker.parameters.skipEnumValidation | API Manager | Allows enum parameters validation to be skipped during processing of user requests. Defaults to 'false'. |
+|com.axway.apigw.dbconnection.removeabandoned | API Gateway | Allows removal of abandoned connections if they exceed the abandoned connection timeout. Defaults to 'true'. |
+|com.axway.apigw.dbconnection.removeabandoned.timeoutms | API Gateway | Sets the abandoned connection timeout in milliseconds. Defaults to '300000'. |
+|com.axway.apigw.dbconnection.testonreturn | API Gateway | Allows validation of connections before they are returned to the pool. Defaults to 'true'. |
+| CASSANDRA_PROTOCOL_VERSION | Cassandra  | Specifies which protocol version to set on the Cassandra driver. Allowable values are 3 and 4. Default value is 4. |  

@@ -8,9 +8,9 @@
 
 This section explains the following for each data type:
 
-* If the data can be replicated across both datacenters (for example, by deploying in both datacenters or automatic replication)
-* How to configure the replication (for example, by configuring Apache Cassandra, Ehcache, or RDBMS)
-* How to install and configure API Gateway and API Manager in multiple datacenters, and how to optimize performance
+* If the data can be replicated across the datacenters (for example, by deploying in both datacenters or automatic replication).
+* How to configure the replication (for example, by configuring Apache Cassandra, Ehcache, or RDBMS).
+* How to install and configure API Gateway and API Manager in multiple datacenters, and how to optimize performance.
 
 For details on recommended architecture, see [Multi-datacenter deployment](/docs/apimgmt_multi_dc/#multi-datacenter-deployment).
 
@@ -41,16 +41,16 @@ The recommended configuration for each data type and its replication between dat
 
 ## Configure Cassandra for multiple datacenters {#cassandra_multiple}
 
-Cassandra is required to store data for API Manager data, and also recommended for API Gateway custom KPS tables. For details on the recommended Cassandra architecture, see [Multi-datacenter deployment architecture](/docs/apimgmt_multi_dc/#multi-datacenter-deployment-architecture).
+Cassandra is required to store data for API Manager and to store custom KPS tables for API Gateway. For details on the recommended Cassandra architecture, see [Multi-datacenter deployment architecture](/docs/apimgmt_multi_dc/#multi-datacenter-deployment-architecture).
 
-{{< alert title="Note" color="primary" >}}You must install and configure Cassandra on each node in both datacenters before installing and configuring API Gateway and API Manager.{{< /alert >}}
+{{< alert title="Note" color="primary" >}}You must install and configure Cassandra on each node from each datacenter installing and configuring API Gateway and API Manager.{{< /alert >}}
 
 ### Prerequisites
 
 The following prerequisites apply to Cassandra in a multi-datacenter production environment:
 
-* Ensure that Cassandra version 2.2.12 is installed. For details, see [Install an Apache Cassandra database](/docs/apim_installation/apigtw_install/cassandra_install/).
-* You must have at least three Cassandra nodes per datacenter. Cassandra must be installed on each node in the cluster, but should not be started until the Cassandra cluster is fully configured. For more details, see [Install an Apache Cassandra database](/docs/apim_installation/apigtw_install/cassandra_install/).
+* Ensure that Cassandra version 3.11.11 is [installed](/docs/apim_installation/apigtw_install/cassandra_install/).
+* You must have at least three Cassandra nodes per datacenter. Cassandra must be installed on each node in the cluster, but it should not be started until the Cassandra cluster is fully configured. For more information, see [Install an Apache Cassandra database](/docs/apim_installation/apigtw_install/cassandra_install/).
 * Configure `JAVA_HOME` to a JRE 1.8 installation.
 * Each Cassandra node must have Python 2.7.x installed.
 * Time must be synchronized on all servers.
@@ -201,7 +201,7 @@ For example, on Cassandra node 1 in DC1, perform the following steps:
     ./nodetool repair system_auth
     ```
 
-5. Change the default Cassandra user. For more details, see the [Configuring authentication](https://docs.datastax.com/en/archived/cassandra/2.2/cassandra/configuration/secureConfigNativeAuth.html?hl=authentication) documentation.
+5. Change the default Cassandra user. For more information, see [Configuring authentication](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/configuration/secureConfigNativeAuth.html) documentation.
 
 ## Configure API Management in multiple datacenters
 
@@ -366,7 +366,7 @@ You can do this by creating a new project from an API Gateway instance and addin
 7. In the **Servlet** dialog, click **Add** and enter the following in the **Properties** dialog:
     * **Name**: `CsrfProtectionFilterFactory.refererWhitelist`
     * **Value**: `https://<LB_HOSTNAME>:8075`
-8. Right-click the **API Portal v1.3 (‘v1.3’)** servlet, click **Edit**, and add the same whitelist property (see previous step).
+8. Repeat steps 6 and 7 for **API Portal v1.3 (‘v1.3’)** servlet and **API Portal v1.4 (‘v1.4’)** servlet.
 9. When complete, deploy the configuration to all API Gateways using the load balancer that you added to the whitelist.
 
 The following shows an example of configuring the **API Portal v1.2 (‘v1.2’)** servlet setting in Policy Studio:
@@ -556,4 +556,4 @@ For more details on Cassandra and Ehcache, see the following:
 
 * <http://ehcache.org/>
 * <http://cassandra.apache.org/>
-* <http://docs.datastax.com/en/cassandra/2.2/>
+* <https://docs.datastax.com/en/cassandra-oss/3.x/index.html>

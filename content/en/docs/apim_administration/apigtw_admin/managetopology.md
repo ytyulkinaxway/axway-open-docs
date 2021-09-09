@@ -206,3 +206,14 @@ To deploy existing policy and environment packages to a group of API Gateways, p
 5. Click **Next**.
 6. Select **Deploy** in the wizard, and the packages are deployed to the API Gateway group.
 7. Click **Finish**.
+
+### Deploy a YAML deployment package
+
+To deploy an existing YAML deployment package to a group of API Gateways, perform the following steps:
+
+1. In the **TOPOLOGY** view, right-click the API Gateway group to which to deploy the package, and select **Deploy Configuration**.
+2. Select **I wish to deploy YAML configuration contained in a single Deployment Archive**.
+3. Click **Browse for .tar.gz**, and select the `.tar.gz` file in the dialog.
+4. Click **Next**.
+5. Select **Deploy** in the wizard, and the deployment package is deployed to the API Gateway group.
+6. Click **Finish**.

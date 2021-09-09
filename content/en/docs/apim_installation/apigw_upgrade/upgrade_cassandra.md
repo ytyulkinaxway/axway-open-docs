@@ -3,336 +3,342 @@
     "linkTitle": "Upgrade Apache Cassandra",
     "weight": 30,
     "date": "2019-10-07",
-    "description": "Upgrade Apache Cassandra from version 2.2.8 to version 2.2.12."
+    "description": "Learn how to upgrade your Cassandra environment from version 2.2.8 or 2.2.12 to version 3.11.11 with no downtime."
 }
 
-It is recommended that you upgrade your Cassandra version *before* you upgrade your API Gateway installation to version 7.7.
+The upgrade process differs according to your environment:
 
-## Best practice
+* For single-node environments, you can upgrade directly from version 2.2.8/2.2.12 to version 3.11.11.
+* For multi-node or multi-DC environments, you must first upgrade each node and data center individually to version 2.2.19, then to the target version of 3.11.11.
 
-We recommend the following when upgrading your Apache Cassandra version:
+{{< alert title="Note">}}It is possible to upgrade multi-node or multi-DC environments directly from 2.2.8/2.2.12 to version 3.11.11. However, this results in downtime of API Gateway and Cassandra during the upgrade process.{{< /alert >}}
 
-* Upgrade your API Gateway installation after upgrading your Apache Cassandra version.
-* In multi-datacenter clusters, upgrade every node in one datacenter before upgrading another datacenter. Upgrade and restart the nodes one at a time. Other nodes in the cluster continue to operate at the earlier version until all nodes are upgraded.
+## Before you start
+
+* You must upgrade your API Gateway to the [August 2021](/docs/apim_relnotes/20210830_apimgr_relnotes/) release prior to upgrading your Cassandra environment to 3.11.11. This is because in this release we've implemented changes to the Cassandra client driver configuration to facilitate the upgrade process.
+* In multi-datacenter clusters:
+    * Upgrade every node in one datacenter before upgrading another datacenter.
+    * Upgrade and restart the nodes one at a time.
+    * Other nodes in the cluster continue to operate at the earlier version until all nodes are upgraded.
 * When upgrading a cluster on a single-datacenter or multi-datacenter setup, you must avoid any schema changes until the entire cluster has been upgraded to the same version.
-* Running `nodetool repair` on a Cassandra node will affect performance on a system running live traffic. It is recommended that you perform the Cassandra upgrade in the evening or during a maintenance window when the load is minimal.
+* Running `nodetool repair` on a Cassandra node affects performance on a system running live traffic. We recommend that you perform the Cassandra upgrade in the evening or during a maintenance window when the load is minimal.
 
-## Cassandra upgrade steps – Single-node
+## Upgrade Cassandra in a single-node
 
-The following steps give an example of how to upgrade Cassandra in a single-node setup.
+In a single-node environment, you can upgrade directly to version 3.11.11. To get started you must download [Cassandra 3.11.11](https://downloads.apache.org/cassandra/3.11.11/), unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-31111/`
 
-### Install Cassandra 2.2.12
+Now you can proceed to the next sections to complete your installation.
 
-Follow these steps to install Apache Cassandra 2.2.12 using the API Gateway installer in default GUI mode.
+{{< alert title="Caution" color="warning" >}}Upgrading single-node environments result in downtime of API Gateway and Cassandra.{{< /alert >}}
 
-1. Select the **Custom** option in the installer.
-2. When prompted to select components to install, select only the **Cassandra** component.
-3. When prompted for the Cassandra configuration, enter the following settings:
+### Step 1 - Backup your old Cassandra data
 
-    | Installation Directory   | JRE Location |
-    |--------------------------|--------------|
-    | `/opt/db/cassandra-2212` | `/opt/jre`   |
+Perform the backup of your 2.2.8/2.2.12 data.
 
-4. Do not start Cassandra 2.2.12 when the installation completes. (Your earlier version of Cassandra should still be running.)
+1. Use the `cqlsh` command to find your Cassandra keyspaces to back up.
 
-You can also install Cassandra in unattended mode, for example:
+    ```
+    SELECT * FROM system_schema.keyspaces;
+    ```
+    In the following example, `xxx_group_2` is an API Management keyspace:
+    ```
+    keyspace_name                                  | durable_writes | replication
+    -----------------------------------------------+----------------+-------------------------------------------------------------------------------------------
+    system_auth                                    |           True | {'class': 'org.apache.cassandra.locator.NetworkTopologyStrategy', 'dc1': '3', 'dc2': '3'}
+    xb9076241_7cf8_4963_a3ac_375c53f21b7d_group_2  |           True | {'class': 'org.apache.cassandra.locator.NetworkTopologyStrategy', 'dc1': '3', 'dc2': '3'}
+    system_schema                                  |           True | {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+    system_distributed                             |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
+    system                                         |           True | {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+    system_traces                                  |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '2'}
+    ```
 
-```
-./APIGateway_7.7_Install_linux-x86-64_BN<n>.run --mode unattended --setup_type advanced --enable-components cassandra --disable-components apigateway,qstart,policystudio,analytics,configurationstudio,apitester,apimgmt,packagedeploytools --cassandraInstalldir /opt/db/cassandra-2212 --cassandraJDK /opt/jre --startCassandra 0
-```
+2. Copy the `apigw-backup-tool` folder, located at `install_dir/apigateway/tools/` to your Cassandra node.
+3. Update the `/conf/apigw-backup-tool.ini` file to configure your backup. For more information, see [Apache Cassandra backup and restore](/docs/cass_admin/cassandra_bur/#update-your-configuration-file).
+4. After the configuration is set and Cassandra is running, run the following command to validate the configuration:
+    ```
+    apigw-backup-tool validateConfig
+    ```
+5. While Cassandra is running, run the following command to create a backup in the `backup_root_dir` folder. The folder is configured in the `/conf/apigw-backup-tool.ini` file:
+    ```
+    apigw-backup-tool backup -k <keyspace name> -s <snapshot name>
+    ```
+6. Backup your Cassandra configuration.
 
-### Run nodetool drain on Cassandra 2.2.8
+    In addition to backing up your data in Apache Cassandra keyspaces, you must also back up your Apache Cassandra configuration and API Gateway configuration. You must back up the `CASSANDRA_HOME/conf` directory on the Cassandra node.
 
-Run the following commands to drain the node and flush the memTables to the SSTables before copying data to the Cassandra 2.2.12 installation. Writes are not accepted while this is happening.
+### Step 2 - Update Cassandra configuration files
 
-```
-cd /opt/db/cassandra-228/cassandra/bin
-./nodetool drain
-```
+Compare the configuration in `CASSANDRA_HOME/conf` of your current Cassandra installation to the configuration in the new Cassandra 3.11.11 installation, and apply any custom changes to the relevant configuration file in your new Cassandra installation.
 
-### Stop Cassandra 2.2.8
+### Step 3 - Copy SSL certificates
 
-Run the following commands to stop Cassandra.
+If you have SSL certificates in your old Cassandra installation, you must copy them to your new Cassandra installation.
 
-```
-ps –ef | grep cassandra
-sudo kill -9 <cassandra_pid>
-```
+Copy the following files to the `CASSANDRA_HOME/conf/` folder in your new installation:
 
-### Copy data from Cassandra 2.2.8 to Cassandra 2.2.12
+* `CASSANDRA_HOME/conf/.truststore`
+* `CASSANDRA_HOME/conf/.truststore`
 
-Run the following command to copy the data folder and all subfolders from your Cassandra 2.2.8 installation to your new Cassandra 2.2.12 installation.
+### Step 4 - Stop API Gateway
 
-```
-cp –R /opt/db/cassandra-228/cassandra/data /opt/db/cassandra-2212/cassandra
-```
-
-For example, after running this command, you should have the following directories:
-
-* `/opt/db/cassandra-2212/cassandra/data/commitlog`
-* `/opt/db/cassandra-2212/cassandra/data/data`
-* `/opt/db/cassandra-2212/cassandra/data/saved_caches`
-
-{{< alert title="Tip" color="primary" >}}By default, all Cassandra data is stored in the `data` directory. However, in a production environment you should store the commit log (for example, `/opt/db/cassandra-2212/cassandra/data/commitlog`) on a separate disk partition, or a separate physical device from the data file directories. You can change the default locations in `cassandra.yaml` (`commitlog_directory`, `data_file_directories`, and `saved_caches_directory` properties). For more information, see <http://docs.datastax.com/en/archived/cassandra/2.2/cassandra/configuration/configCassandra_yaml.html>.{{< /alert >}}
-
-### Copy SSL certificates from Cassandra 2.2.8 to Cassandra 2.2.12
-
-If you have SSL certificates in your Cassandra 2.2.8 installation, copy them to Cassandra 2.2.12. To copy the SSL certificates, copy the following files to `/opt/db/cassandra-2212/cassandra/conf/`:
-
-* `/opt/db/cassandra-228/cassandra/conf/.truststore`
-* `/opt/db/cassandra-228/cassandra/conf/.keystore`
-
-### Update Cassandra 2.2.12 configuration files
-
-Update your Cassandra 2.2.12 configuration files with the relevant settings from your Cassandra 2.2.8 installation. The following files must be updated:
-
-* `/opt/db/cassandra-2212/cassandra/conf/cassandra.yaml`
-* `/opt/db/cassandra-2212/cassandra/bin/cassandra.in.sh`
-* `/opt/db/cassandra-2212/cassandra/conf/cassandra.rackdc.properties`
-* `/opt/db/cassandra-2212/cassandra/conf/cassandra-topology.properties`
-* `/opt/db/cassandra-2212/cassandra/conf/cassandra-env.sh` (This file only needs to be updated if you changed your JMX configuration after Cassandra 2.2.8 installation)
-
-You can do a diff on the files to see a complete list of the differences. The following are the values in each file that must be updated:
-
-`/opt/db/cassandra-2212/cassandra/conf/cassandra.yaml`:
+Stop each API Gateway instance, and run the following command from the `/posix/bin` directory of your gateway installation:
 
 ```
-rpc_address: <Set to the IP address of this Cassandra node>
-listen_address: <Set to the IP address of this Cassandra node>
-seed_provider:
-    # Addresses of hosts that are deemed contact points.
-    # Cassandra nodes use this list of hosts to find each other and learn
-    # the topology of the ring.  You must change this if you are running
-    # multiple nodes!
-    - class_name: org.apache.cassandra.locator.SimpleSeedProvider
-      parameters:
-          # seeds is actually a comma-delimited list of addresses.
-          # Ex: "<ip1>,<ip2>,<ip3>"
-          - seeds: "<IP seed1>,<IP seed 2>"
-server_encryption_options: <Set to same values as your 2.2.8 installation>
-client_encryption_options: <Set to same values as your 2.2.8 installation>
+./startinstance -g "my_group" -n "my_server" -k
 ```
 
-`/opt/db/cassandra-2212/cassandra/bin/cassandra.in.sh`:
+### Step 5 - Shutdown your old Cassandra installation
+
+To shutdown your old Cassandra installation, follow these steps:
+
+1. Run Cassandra's `nodetool drain` command in `CASSANDRA_HOME/bin` to flush any data in memory and write it to disk:
+
+    ```
+    $./nodetool drain
+    ```
+
+2. Kill the Cassandra process:
+
+    ```
+    $ps auwx | grep cassandra
+    $sudo kill pid #Stop Cassandra
+    ```
+
+### Step 6 - Copy data between Cassandra installations
+
+Copy the `CASSANDRA_HOME/data` directory from your old Cassandra installation to the corresponding directory in your new installation (for example, `/home/cassandra-31111/cassandra/`).
+
+The Cassandra 3.11.11 `data` directory should then have the following subdirectories:
 
 ```
-JAVA_HOME=<Set to the location of a 64-bit JRE, same value as your 2.2.8 installation>
+commitlog
+data
+saved_caches
 ```
 
-`/opt/db/cassandra-2212/cassandra/conf/cassandra.rackdc.properties`:
+### Step 7 - Start Cassandra 3.11.11
 
-Perform a diff on this file to identify the rack settings to update.
-
-`/opt/db/cassandra-2212/cassandra/conf/cassandra-topology.properties`:
-
-Perform a diff on this file to identify the rack settings to update.
-
-`/opt/db/cassandra-2212/cassandra/conf/cassandra-env.sh`
-
-If you changed your JMX configuration after Cassandra 2.2.8 installation, perform a diff on this file to identify the JMX settings to update.
-
-### Start Cassandra 2.2.12
-
-Run the following commands to start Cassandra.
+Run the following command from the `bin` directory of the Cassandra 3.11.11 installation to start the Cassandra instance:
 
 ```
-cd /opt/db/cassandra-2212/cassandra/bin
-./cassandra
-```
-
-### Run nodetool upgradesstables on Cassandra 2.2.12
-
-Run the following commands to rewrite SSTables that are not on the current version and upgrade them to Cassandra version 2.2.12.
+$cd /home/cassandra-31111/cassandra/bin
+$./cassandra
 
 ```
-cd /opt/db/cassandra-2212/cassandra/bin
-./nodetool upgradesstables
-```
 
-### Run nodetool repair on Cassandra 2.2.12
+### Step 8 - Repair and upgrade your tables
 
-Run the following commands to repair the tables.
+Run the following commands to repair and upgrade your tables:
 
-```
-cd /opt/db/cassandra-2212/cassandra/bin
-./nodetool repair
-```
+1. Repair tables on your new installation:
 
-## Cassandra upgrade steps – Multi-node single datacenter
+    ```
+    $cd /home/cassandra-31111/cassandra/bin
+    $./nodetool repair
+    ```
 
-The following steps give an example of how to upgrade Cassandra in a single datacenter HA setup. In this example the datacenter has 2 API Gateways, 3 Cassandra nodes, and 2 groups.
+2. Rewrite SSTables that are not on the current version and upgrade them to the 3.11.11 version:
 
-The following steps give an example of how to upgrade a Cassandra cluster on a three-node HA setup with the following topology:
+    ```
+    $cd /home/cassandra-31111/cassandra/bin
+    $./nodetool upgradesstables
+    ```
 
-* Node 1 – Admin Node Manager, Cassandra 2.2.8
-* Node 2 – Admin Node Manager, API Gateway, API Manager, Cassandra 2.2.8
-* Node 3 – Node Manager, API Gateway, API Manager, Cassandra 2.2.8
+### Step 9 - Restart API Gateway
 
-There are two API Gateway groups, therefore two keyspaces. The groups are as follows:
-
-* `Group1` has two API Manager-enabled API Gateway instances (one running on Node 2 and another on Node 3).
-* `Group2` has two API Manager-enabled API Gateway instances (one running on Node 2 and another on Node 3).
-
-![Multi-node HA topology](/Images/UpgradeGuide/cass_upgrade_topology2.png)
-
-Cassandra is set up as follows:
-
-* Cassandra read/write consistency is set to Local Quorum
-* Cassandra authentication is set (user name and password set to `cassUser`/`cassPasswd`)
-* SSL encryption is enabled on Cassandra
-
-### Node 1
-
-Perform the following steps on Node 1.
-
-#### Install Cassandra 2.2.12 on Node 1
-
-Follow these steps to install Apache Cassandra 2.2.12 using the API Gateway installer in default GUI mode.
-
-1. Select the **Custom** option in the installer.
-2. When prompted to select components to install, select only the **Cassandra** component.
-3. When prompted for the Cassandra configuration, enter the following settings:
-
-    | Installation Directory   | JRE Location |
-    |--------------------------|--------------|
-    | `/opt/db/cassandra-2212` | `/opt/jre`   |
-
-4. Do not start Cassandra 2.2.12 when the installation completes. (Your earlier version of Cassandra should still be running.)
-
-You can also install Cassandra in unattended mode, for example:
+Restart each API Gateway instance. Open a shell at the `/posix/bin` directory of your gateway installation and run the `startinstance` command. For example:
 
 ```
-./APIGateway_7.7_Install_linux-x86-64_BN<n>.run --mode unattended --setup_type advanced --enable-components cassandra --disable-components apigateway,qstart,policystudio,analytics,configurationstudio,apitester,apimgmt,packagedeploytools --cassandraInstalldir /opt/db/cassandra-2212 --cassandraJDK /opt/jre --startCassandra 0
+startinstance -n "my_server" -g "my_group"
 ```
 
-#### Run nodetool drain on Cassandra 2.2.8 on Node 1
+## Upgrade Cassandra in a multi-node single datacenter
 
-Run the following commands to drain the node and flush the memTables to the SSTables before copying data to the Cassandra 2.2.12 installation. Writes are not accepted while this is happening.
+This section provides an example of how to upgrade Cassandra in a multi-node environment. The upgrade is a two-stage process:
 
-```
-cd /opt/db/cassandra-228/cassandra/bin
-./nodetool drain
-```
+1. Stage 1 - Upgrade Cassandra from version 2.2.8/2.2.12 to version 2.2.19.
+2. Stage 2 - Upgrade Cassandra from version 2.2.19 to version 3.11.11.
 
-#### Stop Cassandra 2.2.8 on Node 1
+### Stage 1 - Upgrade Cassandra 2.2.8/2.2.12 to 2.2.19
 
-Run the following commands to stop Cassandra.
+You must upgrade each node in your Cassandra cluster individually before moving to the next node in the cluster. The entire cluster must be upgraded before moving to Stage 2.
 
-```
-ps –ef | grep cassandra
-sudo kill -9 <cassandra_pid>
-```
+#### Update Cassandra's driver configuration in API Gateway
 
-#### Copy data from Cassandra 2.2.8 to Cassandra 2.2.12 on Node 1
+Before upgrading the Cassandra cluster, you must set Cassandra's driver protocol to version `V3` in your gateways:
 
-Run the following command to copy the data folder and all subfolders from your Cassandra 2.2.8 installation to your new Cassandra 2.2.12 installation.
+1. Create a file called `jvm.xml` in the following location:
 
-```
-cp –R /opt/db/cassandra-228/cassandra/data /opt/db/cassandra-2212/cassandra
-```
+    ```
+    INSTALL_DIR/apigateway/groups/GROUP_ID/INSTANCE_ID/conf
+    ```
+2. Edit the `jvm.xml` as follows:
 
-For example, after running this command, you should have the following directories:
+    ```
+    <ConfigurationFragment>
+        <VMArg name="-DCASSANDRA_PROTOCOL_VERSION=3" />
+    </ConfigurationFragment>
+    ```
+3. Restart API Gateway.
 
-* `/opt/db/cassandra-2212/cassandra/data/commitlog`
-* `/opt/db/cassandra-2212/cassandra/data/data`
-* `/opt/db/cassandra-2212/cassandra/data/saved_caches`
+#### Install Cassandra 2.2.19
 
-{{< alert title="Tip" color="primary" >}}By default, all Cassandra data is stored in the `data` directory. However, in a production environment you should store the commit log (for example, `/opt/db/cassandra-2212/cassandra/data/commitlog`) on a separate disk partition, or a separate physical device from the data file directories. You can change the default locations in `cassandra.yaml` (`commitlog_directory`, `data_file_directories`, and `saved_caches_directory` properties). For more information, see <http://docs.datastax.com/en/archived/cassandra/2.2/cassandra/configuration/configCassandra_yaml.html>.{{< /alert >}}
+To start upgrading your old installation:
 
-#### Copy SSL certificates from Cassandra 2.2.8 to Cassandra 2.2.12 on Node 1
+1. Download [Cassandra 2.2.19](https://downloads.apache.org/cassandra/2.2.19/).
+2. Unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-2219/`.
 
-If you have SSL certificates in your Cassandra 2.2.8 installation, copy them to Cassandra 2.2.12. To copy the SSL certificates, copy the following files to `/opt/db/cassandra-2212/cassandra/conf/`:
+    {{< alert title="Note" color="primary" >}}To complete your installation, follow all steps on section [Upgrade in a single node](#step-1---backup-your-old-cassandra-data) for each node in the cluster. After that, proceed to Stage 2.{{< /alert >}}
 
-* `/opt/db/cassandra-228/cassandra/conf/.truststore`
-* `/opt/db/cassandra-228/cassandra/conf/.keystore`
+<!--
+#### Step 3 - Backup your old Cassandra data
 
-#### Update Cassandra 2.2.12 configuration files on Node 1
+Perform the backup of your 2.2.8 or 2.2.12 data.
 
-Update your Cassandra 2.2.12 configuration files with the relevant settings from your Cassandra 2.2.8 installation. The following files must be updated:
+1. Use the cqlsh command to find your Cassandra keyspaces to back up.
 
-* `/opt/db/cassandra-2212/cassandra/conf/cassandra.yaml`
-* `/opt/db/cassandra-2212/cassandra/bin/cassandra.in.sh`
-* `/opt/db/cassandra-2212/cassandra/conf/cassandra.rackdc.properties`
-* `/opt/db/cassandra-2212/cassandra/conf/cassandra-topology.properties`
-* `/opt/db/cassandra-2212/cassandra/conf/cassandra-env.sh` (This file only needs to be updated if you changed your JMX configuration after Cassandra 2.2.8 installation)
+    ```
+    SELECT * from system.schema_keyspaces;
+    ```
 
-You can do a diff on the files to see a complete list of the differences. The following are the values in each file that must be updated:
+    In the following example, `xxx_group_2` and `xxx_group_3` are API Management keyspaces:
+    ```
+    keyspace_name                                  | durable_writes | replication
+    -----------------------------------------------+----------------+-------------------------------------------------------------------------------------------
+    system_auth                                    |           True | {'class': 'org.apache.cassandra.locator.NetworkTopologyStrategy', 'dc1': '3', 'dc2': '3'}
+    xb9076241_7cf8_4963_a3ac_375c53f21b7d_group_2  |           True | {'class': 'org.apache.cassandra.locator.NetworkTopologyStrategy', 'dc1': '3', 'dc2': '3'}
+    system_schema                                  |           True | {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+    system_distributed                             |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
+    system                                         |           True | {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+    system_traces                                  |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '2'}
+    ```
 
-`/opt/db/cassandra-2212/cassandra/conf/cassandra.yaml`:
+2. Copy the `apigw-backup-tool` folder, located at `install_dir/apigateway/tools/` to your Cassandra node.
+3. Update the `/conf/apigw-backup-tool.ini` file to configure your backup. For more information, see [Apache Cassandra backup and restore](/docs/cass_admin/cassandra_bur/#update-your-configuration-file).
+4. After the configuration is set and Cassandra is running, run the following command to validate the configuration:
 
-```
-rpc_address: <Set to the IP address of this Cassandra node>
-listen_address: <Set to the IP address of this Cassandra node>
-seed_provider:
-    # Addresses of hosts that are deemed contact points.
-    # Cassandra nodes use this list of hosts to find each other and learn
-    # the topology of the ring.  You must change this if you are running
-    # multiple nodes!
-    - class_name: org.apache.cassandra.locator.SimpleSeedProvider
-      parameters:
-          # seeds is actually a comma-delimited list of addresses.
-          # Ex: "<ip1>,<ip2>,<ip3>"
-          - seeds: "<IP seed1>,<IP seed 2>"
-server_encryption_options: <Set to same values as your 2.2.8 installation>
-client_encryption_options: <Set to same values as your 2.2.8 installation>
-```
+    ```
+    apigw-backup-tool validateConfig 
+    ```
+5. While Cassandra is running, run the following command to create a backup in the `backup_root_dir` folder. The folder is configured in the `/conf/apigw-backup-tool.ini` file:
 
-`/opt/db/cassandra-2212/cassandra/bin/cassandra.in.sh`:
+    ```
+    apigw-backup-tool backup -k <keyspace name> -s <snapshot name>
+    ```
+6. Backup your Cassandra configuration.
 
-```
-JAVA_HOME=<Set to the location of a 64-bit JRE, same value as your 2.2.8 installation>
-```
+    In addition to backing up your data in Apache Cassandra keyspaces, you must also back up your Apache Cassandra configuration and API Gateway configuration. You must back up the `CASSANDRA_HOME/conf` directory on the Cassandra node.
 
-`/opt/db/cassandra-2212/cassandra/conf/cassandra.rackdc.properties`:
+#### Step 4 - Update Cassandra configuration files
 
-Perform a diff on this file to identify the rack settings to update.
+Compare the configuration in `CASSANDRA_HOME/conf` of your Cassandra 2.2.8/2.2.12 installation to the configuration in your Cassandra 2.2.19 installation and apply any custom changes to the relevant configuration file in Cassandra 2.2.19.
 
-`/opt/db/cassandra-2212/cassandra/conf/cassandra-topology.properties`:
+#### Step 5 - Copy SSL certificates
 
-Perform a diff on this file to identify the rack settings to update.
+If you have SSL certificates in your Cassandra 2.2.8/2.2.12 installation, copy them to Cassandra 2.2.19. To copy the SSL certificates, copy the following files to `CASSANDRA_HOME/conf/` of the Cassandra 2.2.19 installation:
 
-`/opt/db/cassandra-2212/cassandra/conf/cassandra-env.sh`
+* `CASSANDRA_HOME/conf/.truststore`
+* `CASSANDRA_HOME/conf/.truststore`
 
-If you changed your JMX configuration after Cassandra 2.2.8 installation, perform a diff on this file to identify the JMX settings to update.
+#### Step 6 - Shutdown Cassandra 2.2.8/2.2.12 node
 
-#### Start Cassandra 2.2.12 on Node 1
+1. Run Cassandra's `nodetool drain` command in `CASSANDRA_HOME/bin` to flush any data in memory and write it to disk.
 
-Run the following commands to start Cassandra.
+    ```
+    $./nodetool drain
+    ```
 
-```
-cd /opt/db/cassandra-2212/cassandra/bin
-./cassandra
-```
+2. Kill the Cassandra process
 
-#### Run nodetool upgradesstables on Cassandra 2.2.12 on Node 1
+    ```
+    $ps auwx | grep cassandra
+    $sudo kill pid #Stop Cassandra
+    ```
 
-Run the following commands to rewrite SSTables that are not on the current version and upgrade them to Cassandra version 2.2.12.
+#### Step 7 - Copy data from Cassandra 2.2.8/2.2.12 to Cassandra 2.2.19
 
-```
-cd /opt/db/cassandra-2212/cassandra/bin
-./nodetool upgradesstables
-```
-
-### Node 2
-
-Repeat the same steps on Node 2.
-
-### Node 3
-
-Repeat the same steps on Node 3.
-
-### Final step – Run nodetool repair on Cassandra 2.2.12 on each node
-
-Run the following commands, one at a time on each node, to repair the tables.
+Copy the `CASSANDRA_HOME/data` directory to the corresponding directory in your Cassandra 2.2.19 directory (e.g. /home/cassandra-2219/cassandra/). The Cassandra 2.2.19 `data` directory should then have the following sub directories:
 
 ```
-cd /opt/db/cassandra-2212/cassandra/bin
-./nodetool repair
+commitlog
+data
+saved_caches
 ```
 
-## Cassandra upgrade – Multi-datacenter
+#### Step 8 - Start Cassandra 2.2.19
 
-To upgrade Apache Cassandra in a multi-DC setup, you can follow the same steps as for the multi-node single-DC setup:
+Run the following command from the `bin` directory of the Cassandra 2.2.19 installation to start the Cassandra instance:
 
-* Repeat the steps on each node in the cluster
-* Upgrade all of the nodes in one DC before moving to the next DC
+```
+$cd /home/cassandra-2219/cassandra/bin
+$./cassandra
+
+```
+
+#### Step 9 - Repeat Steps 2-8 on all other Cassandra nodes in the cluster
+
+#### Step 10 - Run nodetool repair on each Cassandra 2.2.19 node
+
+```
+$cd /home/cassandra-2219/cassandra/bin
+$./nodetool repair
+```
+-->
+
+### Stage 2 - Upgrade Cassandra 2.2.19 to 3.11.11
+
+To start upgrading your old installation:
+
+1. Download [Cassandra 3.11.11](https://downloads.apache.org/cassandra/3.11.11/)
+2. Unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-31111/`.
+
+    {{< alert title="Note" color="primary" >}}To complete your installation, follow all steps on section [Upgrade in a single node](#step-1---backup-your-old-cassandra-data) for each node in the cluster, then return to execute the following section.{{< /alert >}}
+
+#### Revert Cassandra's driver configuration in API Gateway
+
+Update API Gateway back to use Cassandra's `V4` protocol.
+
+1. To reconfigure the protocol version on each instance of API Gateway, edit the `INSTALL_DIR/apigateway/groups/GROUP_ID/INSTANCE_ID/conf/jvm.xml` file, and remove the previously set JVM argument.
+
+    ```
+    <ConfigurationFragment>
+        <VMArg name="-DCASSANDRA_PROTOCOL_VERSION=4" />
+    </ConfigurationFragment>
+    ```
+    This reverts the gateway to use Cassandra's V4 protocol.
+2. Restart API Gateway.
+
+<!--
+#### Step 13 - Run nodetool upgradesstables on Cassandra 3.11.11
+
+```
+$cd /home/cassandra-31111/cassandra/bin
+$./nodetool upgradesstables
+```
+-->
+
+## Upgrade Cassandra in a multi-node multi-datacenter
+
+To upgrade Apache Cassandra in a multi-node multi-datacenter environment, follow the same steps as for the [Multi-node single-datacenter](#upgrade-cassandra-in-a-multi-node-single-datacenter) procedure, which follows a two-stage process: upgrade Cassandra from version 2.2.8/2.2.12 to version 2.2.19, then upgrade from version 2.2.19 to version 3.11.11.
+
+Attention to the following:
+
+* Repeat the steps on each node in the cluster.
+* Upgrade all of the nodes in one datacenter before moving to the next one.
+* Only reconfigure the API Gateway to use Cassandra protocol `V4` after all datacenter have been upgraded.
+
+## Upgrade multi-node multi-datacenter directly to 3.11.11
+
+{{< alert title="Caution" color="warning" >}}Upgrading multi-node environments directly to version 3.11.11 result in downtime of API Gateway and Cassandra.{{< /alert >}}
+
+To upgrade Apache Cassandra directly to version 3.11.11 in a multi-node or multi-datacenter environment, follow the same steps as for [Single-node](/docs/apim_installation/apigw_upgrade/upgrade_cassandra/#cassandra-upgrade-steps--single-node)) procedure.
+
+Attention to the following:
+
+* Repeat the steps on each node in the cluster.
+* Upgrade all of the nodes in one DC before moving to the next DC.
+* Only restart the API Gateway once all nodes and DCs have been upgraded.
+
+## Troubleshooting
+
+For more information on problems you might encounter when running Cassandra with API Gateway, see [Cassandra troubleshooting](/docs/cass_admin/cassandra_troubleshooting).

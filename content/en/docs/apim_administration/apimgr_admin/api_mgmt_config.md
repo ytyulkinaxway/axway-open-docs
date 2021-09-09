@@ -113,10 +113,28 @@ To configure the request rate limiter for your user's sessions in API Manager, p
 5. Click to **Add** two new properties to the **Servlet Properties** list :
 
    * **Name**: `RateLimitFilter.rateLimitSize`. **Value**: Enter the number of requests a user can make in a period of time. Defaults to `200`.
-   * **Name**: `RateLimitFilter.rateLimitOffset`. **Value**: Enter the amount of time, in milliseconds, that the request rate limiter should allow between the user’s most recent request and the configured number of requests. Defaults to `60000` milliseconds (`1` minute).
+   * **Name**: `RateLimitFilter.rateLimitOffset`. **Value**: Enter the amount of time, in milliseconds, that the request rate limiter allows between requests after the number of requests (set in `RateLimitFilter.rateLimitSize`) has been reached. Defaults to 60000 milliseconds (1 minute).
 6. Click **OK**.
 
 {{< alert title="Note" color="primary" >}}A user login to API Manager generates multiple requests. Therefore, it is recommended to set `RateLimitFilter.rateLimitSize` to higher than `50` at a minimum.
 
 Customers with a large number of entities will also generate large volumes of API Manager requests and should, therefore, consider increasing the default value for `RateLimitFilter.rateLimitSize.`
 {{< /alert >}}
+
+## Configure API Manager unauthenticated request rate limiter
+
+The rate limiter monitors the number of requests that a user can send to API Manager without an active session. If the number of requests exceeds the configured limit, a 403 Forbidden error response is returned, and the IP address of the client is locked for the configured time.
+
+To configure the unauthenticated request rate limiter in API Manager, perform the following steps in Policy Studio:
+
+1. Select **Environment Configuration > Listeners > API Gateway > API Portal > Paths** in the Policy Studio tree.
+2. Double-click the `API Portal v1.4 ('v1.4')` servlet to open its dialog box.
+3. On the servlet dialog box, click to **Edit** the `jersey.config.server.provider.classnames` property.
+4. Add `com.vordel.apiportal.api.filter.UnauthenticatedRateLimitBindingFeature` to the existing comma-separated list of class names.
+5. Click to **Add** two new properties to the **Servlet Properties** list :
+
+   * **Name**: `UnauthenticatedRateLimitFilter.rateLimitSize`. **Value**: Enter the number of requests a user can make in a period of time. Defaults to 200.
+   * **Name**: `UnauthenticatedRateLimitFilter.rateLimitOffset`. **Value**: Enter the amount of time, in milliseconds, that the request rate limiter allows between requests for a single IP address after the number of requests (set in `UnauthenticatedRateLimitFilter.rateLimitSize`) has been reached. Defaults to 60000 milliseconds (1 minute).
+6. Click **OK**.
+
+{{< alert title="Note" color="primary" >}}Currently, this feature is only applicable to the `/forgotpassword` endpoint.{{< /alert >}}

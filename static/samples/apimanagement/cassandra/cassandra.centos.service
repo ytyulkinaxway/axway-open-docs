@@ -1,0 +1,12 @@
+[Unit]
+Description=Apache Cassandra 2.2.8
+After=network.target network-online.target remote-fs.target
+[Service]
+Type=forking
+User=admincas
+ExecStart=/appli/webapi_753/cassandra/bin/cassandra -p /appli/webapi_753/cassandra/cassandra.pid
+PIDFile=/appli/webapi_753/cassandra/cassandra.pid
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

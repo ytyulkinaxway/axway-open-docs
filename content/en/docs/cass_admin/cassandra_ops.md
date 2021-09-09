@@ -53,7 +53,7 @@ See also [Clean up Cassandra repair history](/docs/cass_admin/cassandra_bestprac
 
 ## Replace dead nodes
 
-If a node is down for more than 10 days, it should be replaced. For details on replacing dead Cassandra nodes, see the [Replacing a dead node or dead seed node](https://docs.datastax.com/en/archived/cassandra/2.2/cassandra/operations/opsReplaceNode.html) documentation.
+If a node is down for more than 10 days, it should be replaced. For details on replacing dead Cassandra nodes, see the [Replacing a dead node or dead seed node](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/operations/opsReplaceNode.html) documentation.
 
 ## Reconfigure an existing Apache Cassandra installation from scratch
 
@@ -72,7 +72,7 @@ You can enable Cassandra debug logging using any of the following approaches:
   You can specify a `logger` in the `cassandra/conf/logback.xml` configuration file as follows:
   
   ```
-  <logger name "org.apache.cassandra.transport" level=DEBUG/>
+  <logger name="org.apache.cassandra.transport" level=DEBUG/>
   ```
 
 * **nodetool**
@@ -87,12 +87,12 @@ You can enable Cassandra debug logging using any of the following approaches:
 
 For more details on enabling logging, see the following, which also applies to Cassandra 2.2:
 
-* [Configuring logging](https://docs.datastax.com/en/cassandra/2.1/cassandra/configuration/configLoggingLevels\_r.html)
+* [Configuring logging](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/configuration/configLoggingLevels.html?hl=configuring%2Clogging)
 * [Locking Down Apache Cassandra Logging](http://thelastpickle.com/blog/2016/02/10/locking-down-apache-cassandra-logging.html)
 
 ## Monitor a Cassandra cluster using JMX
 
-You can use Java Management Extensions to monitor and manage performance in a Cassandra cluster. For details, see the [Monitoring a Cassandra cluster](https://docs.datastax.com/en/archived/cassandra/2.2/cassandra/operations/opsMonitoring.html) documentation.
+You can use Java Management Extensions to monitor and manage performance in a Cassandra cluster. For details, see the [Monitoring a Cassandra cluster](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/operations/opsMonitoring.html?hl=monitoring%2Ccassandra%2Ccluster) documentation.
 
 ## Upgrade your Cassandra version
 

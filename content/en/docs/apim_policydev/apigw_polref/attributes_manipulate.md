@@ -11,7 +11,7 @@
 
 The **Compare Attribute** filter enables you to compare the value of a specified message attribute on the API Gateway white board with the values specified in the filter. For example, the following filter only passes if the `${authentication.subject.id}` message attribute has a value of `penelope`:
 
-![Compare Attribute Filter](/Images/docbook/images/attr/compare_attributes.png)
+![Compare Attribute Filter](/Images/docbook/images/content/compareattributefilter.png)
 
 Configure the following fields:
 
@@ -32,6 +32,8 @@ Configure the following fields:
    * `starts with`
 3. Enter a value to compare with in the text box on the right (for example, `POST`). Alternatively, you can enter a selector that is expanded at runtime (for example, `${http.request.uri}`).
 4. Click **OK**.
+
+**Evaluate to true**: When checked, the negated rule conditions (`doesn't contain`, `doesn't match regular expression` and `is not`) evaluate to `true` if either the message attribute selector resolves to `null` or the value to compare resolves to `null` for selector values. Negated rule conditions evaluate to `false` by default.
 
 Finally, to edit or delete an existing rule condition, select it in the table and click the appropriate button.
 

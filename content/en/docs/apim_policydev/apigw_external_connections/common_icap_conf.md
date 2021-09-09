@@ -71,3 +71,15 @@ You can configure custom headers in the **Advanced** tab for the above **REQMOD*
 When the **ICAP** filter is executed, the specified custom headers are added to outgoing **REQMOD** and **RESPMOD** requests.
 
 Custom headers override default headers with the same name, so if a custom header has the same name as a header that is automatically added by the filter implementation, only the custom header value is sent.
+
+#### Message Preview
+
+Setting a message preview length notifies the ICAP server to only expect the specified number of bytes, after which point the ICAP server determines whether or not the remainder of the message body needs to be sent. Previewing a message can yield performance improvements for certain use cases, in particular where large payloads are being sent. For example, virus checkers can usually certify payloads as being 'clean' simply by looking at the first few bytes.
+
+To enable Message Preview for REQMOD/RESPMOD requests, go to the **Advanced** tab, click **Add** from the **Custom ICAP Headers** table, and select **Preview** from the dropdown list. Enter a numeric value for the preview length.
+
+After you configure the Preview header, API Gateway initially sends the configured preview of the message body, then it waits for further instruction. The ICAP server sends a `100 Continue` response if it requires more data, a `204` response if the message body does not need to be modified, or a specific REQMOD/RESPMOD response in any other case.
+
+The ICAP server can control the length of the preview message by including a Preview header in response to an ICAP OPTIONS request. This notifies API Gateway that the ICAP server can only support a message preview of this length. If the preview length configured in API Gateway is greater than that specified by the ICAP server, API Gateway downgrades its preview length to match the value specified by the ICAP server
+
+For more information, see [RFC 3507 Section 4.5](https://datatracker.ietf.org/doc/html/rfc3507#section-4.5).

@@ -66,7 +66,7 @@ If Cassandra authentication is enabled, configure the following in the **Authent
     * Single-quoted string containing any printable character (including non-alphanumeric)
 * **Password**: Enter the password to establish a connection with Cassandra. This field can be environmentalized.
 
-* Cassandra authentication is disabled by default. For details on enabling Cassandra authentication, see [Internal authentication documentation](https://docs.datastax.com/en/archived/cassandra/2.2/cassandra/configuration/secureInternalAuthenticationTOC.html).
+* Cassandra authentication is disabled by default. For details on enabling Cassandra authentication, see [Internal authentication documentation](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/configuration/secureInternalAuthenticationTOC.html?hl=internal%2Cauthentication).
 
 ## Cassandra Security settings
 
@@ -139,4 +139,4 @@ Select the consistency level for Cassandra read operations from the list. Defaul
 
 Select the consistency level for Cassandra write operations from the list. Defaults to `ONE`.
 
-For more details on Cassandra consistency levels, see the [Consistency level documentation](http://docs.datastax.com/en/archived/cassandra/2.2/cassandra/dml/dmlConfigConsistency.html).
+For more details on Cassandra consistency levels, see the [Consistency level documentation](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/dml/dmlConfigConsistency.html).

@@ -118,11 +118,15 @@ This section explains how to use the `setup-cassandra` script to secure your Cas
 
 ### Reset your default user name and password
 
-You can use the `setup-cassandra` script to reset the default user name and password (`cassandra`/`cassandra`). Run this command to see the instructions that you need to follow. For example, on the seed node the instructions are as follows:
+You can use the `setup-cassandra` script to reset the default user name and password (`cassandra`/`cassandra`). Run the following command to see the instructions that you need to follow.
 
 ```
 ./setup-cassandra --seed --own-ip=ipA --nodes=3 --cassandra config=/opt/cassandra/conf/cassandra.yaml
+```
 
+For example, on the seed node the instructions are as follows:
+
+```
 Connect to Cassandra with cqlsh and run following commands to create an alternative superuser account:
 
 CREATE USER admin WITH PASSWORD 'amujsa26al2ns' SUPERUSER;QUIT
@@ -135,31 +139,33 @@ Connect to Cassandra using newly created account to lock out the default Cassand
 ALTER KEYSPACE "system_auth" WITH REPLICATION = { 'class': 'SimpleStrategy', 'replication_factor': 3 }; QUIT
 ```
 
-If you are setting up a Cassandra HA cluster, you must replicate the `system_auth` keyspace as shown in this example. This enables API Gateway to communicate with the cluster if a node goes down. For more details, see the [Configuring authentication](https://docs.datastax.com/en/archived/cassandra/2.2/cassandra/configuration/secureConfigNativeAuth.html?hl=authentication) documentation.
+If you are setting up a Cassandra HA cluster, you must replicate the `system_auth` keyspace as shown in this example. This enables API Gateway to communicate with the cluster if a node goes down. For more information, see the [Configuring authentication](https://docs.datastax.com/en/archived/cassandra/2.2/cassandra/configuration/secureConfigNativeAuth.html?hl=authentication) documentation.
 
 ### Enable traffic encryption
 
 To configure TLS v1.2 encryption, you will need:
 
-* A private key and certificate for every Cassandra node in the cluster.
-* A certificate for the Certification Authority (CA) used to generate the node certificate.
+* A private key and certificate for every Cassandra node in the cluster. For example, a PKCS12 (.p12) file.
+* A certificate from a Certification Authority (CA), which is used to sign each node certificate. For example, a PEM (.pem) file.
 
-You can use Policy Studio to create the necessary certificates and keys or any other suitable method for generating certificates.
+If you already have a CA in Policy Studio, you can generate the certificates and keys for your TLS in Policy Studio. For more information, see [Manage X.509 certificates and keys](/docs/apim_administration/apigtw_admin/general_certificates)
 
-You must export and save the node certificate and private key as a PKCS12 file, and save the CA certificate as a PEM file as follows:
+If you need a certificate signed by a CA, which is not present in Policy Studio, you can use OpenSSL to generate a CSR and have your CA to sign it. See [Generate a CSR and import the certificate and key](/docs/apim_administration/apigtw_admin/general_certificates#create-a-private-key-andCSR)
 
-* For node-to-node: `server.p12` and `server-ca.pem`
-* For client-to-node: `client.p12` and `client-ca.pem`
+According to the type of connection, you must save your files as follows:
 
-Run the following commands to create keystore and truststore files:
+|Connection type|PKCS12 file|CA certificate|
+|--- |--- |--- |
+|node-to-node|`server.p12`|`server-ca.pem`|
+|client-to-node|`client.p12`|`client-ca.pem`|
 
-```
-/home/centos/Axway-7.7/apigateway/platform/jre/bin/keytool -keystore /tmp/client-truststore.jks -importcert -file client-ca.pem -storepass JolHiEfuGzb3s -noprompt
-/home/centos/Axway-7.7/apigateway/platform/jre/bin/keytool -importkeystore -deststorepass IMLKW9RqFa9iM -destkeypass IMLKW9RqFa9iM -destkeystore /tmp/client-keystore.jks -srckeystore client.p12 -srcstoretype PKCS12
-/home/centos/Axway-7.7/apigateway/platform/jre/bin/keytool -keystore /tmp/client-keystore.jks -importcert -file client-ca.pem -storepass IMLKW9RqFa9iM -noprompt
-```
+{{% alert title="Caution" color="warning" %}}
+Anyone with a private key or certificate signed by `server-ca.pem` can connect to the cluster. You must limit the use of this CA to sign in the node certificates only. In particular, do not use the same CA to sign client-to-node certificates.
+{{% /alert %}}
 
-To configure TLS/SSL encryption, add the `--enable-server-encryption` or `--enable-client-encryption` option to the script. For example:
+#### Configure Cassandra nodes for traffic encryption
+
+To configure TLS/SSL encryption, add the `--enable-server-encryption` or `--enable-client-encryption` option while running the setup-cassandra script. For example:
 
 To configure node-to-node TLS/SSL encryption:
 
@@ -173,21 +179,39 @@ To configure client-to-node TLS/SSL encryption:
 setup-cassandra --seed-ip=ipA --own-ip=ipB --cassandra-config=/opt/cassandra/conf/cassandra.yaml --enable-client-encryption
 ```
 
-After you run the `setup-cassandra` script, it provides instructions for converting the keys and certificates to a format required by Cassandra. After you perform these instructions, you can remove the `server.p12` and `server-ca.pem` files from the system.
+After running the script, make note of the instructions that detail the commands necessary to add your PKCS12 file and your CA certificate to their respective keystores.
 
-{{% alert title="Caution" color="warning" %}}
-Anyone with a private key or certificate signed by `server-ca.pem` can connect to the cluster. You should limit the use of this CA to signing the node certificates only. In particular, do not use the same CA to sign client-to-node certificates.
-{{% /alert %}}
+#### Add certificates to keystore
 
-### Configure the `cqlsh` command for client-to-node traffic encryption
+Accordingly to the type of connection you are configuring, you must add the following keystores:
+
+Client-to-node connection:
+
+* `client-truststore.jks` requires the `client-ca.pem` certificate.
+* `client-keystore` requires the `client.p12` and `client-ca.pem` files.
+
+Node-to-node connection:
+
+* `server-truststore.jks` requires the `server-ca.pem` certificate.
+* `server-keystore` requires the `server.p12` and `server-ca.pem` files.
+
+The following are example commands provided by the `setup-cassandra` script for a node-to-node connection:
+
+```
+<APIGW_INSTALL_DIR>/apigateway/platform/jre/bin/keytool -keystore <CASSANDRA_INSTALL_DIR>/conf/server-truststore.jks -importcert -file server-ca.pem -storepass <GENERATED_PASSWORD> -noprompt
+<APIGW_INSTALL_DIR>/apigateway/platform/jre/bin/keytool -importkeystore -deststorepass <GENERATED_PASSWORD> -destkeypass <GENERATED_PASSWORD> -destkeystore <CASSANDRA_INSTALL_DIR>/conf/server-keystore.jks -srckeystore server.p12 -srcstoretype PKCS12
+<APIGW_INSTALL_DIR>/apigateway/platform/jre/bin/keytool -keystore <CASSANDRA_INSTALL_DIR>/conf/server-keystore.jks -importcert -file server-ca.pem -storepass <GENERATED_PASSWORD> -noprompt
+```
+
+### Configure the cqlsh command for client-to-node traffic encryption
 
 When the Cassandra cluster has been configured to use client-to-node TLS/SSL encryption, you must configure all clients connecting to the cluster (including `cqlsh`) to use TLS/SSL.
 
-If client-to-node TLS/SSL encryption has been enabled, the `setup-cassandra` script creates a configuration file (`cqlshrc`) with the necessary configuration to enable TLS/SSL encryption. However, you must provide following files to configure `cqlsh` for TLS/SSL:
+If client-to-node TLS/SSL encryption has been enabled, the `setup-cassandra` script creates a configuration file (`cqlshrc`) with the necessary configuration to enable TLS/SSL encryption. However, you must provide the following files to configure `cqlsh` for TLS/SSL:
 
-* `client-ca.pem`: PEM file containing CA certificate
-* `cqlsh-cert.pem`: PEM file containing client certificate for `cqlsh`
-* `cqlsh-key.pem`: PEM file containing private key of client certificate for `cqlsh`
+* `client-ca.pem`: PEM file containing CA certificate.
+* `cqlsh-cert.pem`: PEM file containing client certificate for `cqlsh`.
+* `cqlsh-key.pem`: PEM file containing private key of client certificate for `cqlsh`.
 
 ## Updated Cassandra configuration
 

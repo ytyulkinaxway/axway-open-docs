@@ -125,7 +125,6 @@ tar -xzvf APIGateway_7.7.YYYYMMDD_PolicyStudio_linux-x86-64_BNnn.tar.gz -C 77upd
 
 * You must execute the update script using the same user who installed Policy Studio.
 * You must extract the tar.gz file into a new directory, and not into the existing API Gateway installation directory.
-* You must also remove the `libeay32.dll` and `ssleay32.dll` files if they exist in the `INSTALL_DIR/policystudio` directory.
 
 Run the `update_policy_studio.sh` script from the directory into which you extracted the update file (for example, `77update`), and specify your API Gateway installation directory as an argument:
 
@@ -169,7 +168,6 @@ tar -xzvf APIGateway_7.7.YYYYMMDD_ConfigurationStudio_linux-x86-64_BNnn.tar.gz -
 
 * You must execute the update script using the same user who installed Configuration Studio.
 * You must extract the file into a new directory and not into the existing API Gateway installation directory.
-* You must remove the `libeay32.dll` and `ssleay32.dll` files if they exist in the `INSTALL_DIR/configurationstudio` directory.
 
 Run the `update_configuration_studio.sh` script from the directory into which you extracted the Update file (for example, `77update`), and specify your API Gateway installation directory as an argument:
 

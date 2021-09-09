@@ -37,16 +37,16 @@ For more details, see [Running Cassandra in the Apache Cassandra Wiki](https://c
 
 To install Cassandra as a service, you must install and configure the appropriate startup script for your system. For example, see the following example startup scripts:
 
-* **CentOS**:
-[https://support.axway.com/kb/178063/language/en](https://support.axway.com/kb/178063/language/en "https://support.axway.com/kb/178063/language/en")
-* **Debian**:
-[https://github.com/apache/cassandra/blob/cassandra-2.2/debian/init](https://github.com/apache/cassandra/blob/cassandra-2.2/debian/init "https://github.com/apache/cassandra/blob/cassandra-2.2/debian/init")
+* **CentOS**: [cassandra.centos.service](https://axway-open-docs.netlify.app/samples/apimanagement/cassandra/cassandra.centos.service)
+* **Debian**: [cassandra.debian.service](https://axway-open-docs.netlify.app/samples/apimanagement/cassandra/cassandra.debian.service)
 
 You must have root or sudo permissions to start Cassandra as a service. For example, typically the command to start Cassandra as a service is as follows:
 
 ```
 sudo service cassandra start
 ```
+
+For more details on how to configure services, see this [Knowledge Base article](https://support.axway.com/kb/178063/language/en) in the Axway Support site.
 
 ### Stop Cassandra
 
@@ -96,4 +96,4 @@ For details on updating the Cassandra server configuration, see [Configure a hig
 For more details on Apache Cassandra, see the following:
 
 * [Apache Cassandra](http://cassandra.apache.org/) documentation.
-* [Datastax](http://docs.datastax.com/en/cassandra/2.2/) documentation.
+* [Datastax](https://docs.datastax.com/en/cassandra-oss/3.x/index.html) documentation.

@@ -6,7 +6,6 @@
 "hide_readingtime": "true",
 "description": "Reference to AMPLIFY API Management and Amplify Central terminology."
 }
-
 ## A
 
 Admin Node Manager
@@ -58,7 +57,7 @@ cacerts
 
 CMS
 
-: Content Management System
+: Content Management System.
 
 CRL
 

@@ -40,7 +40,7 @@ This section describes the `kpsadmin` operations that are available in default i
 * API Gateway group to use
 * KPS Admin API Gateway in that group that handles KPS requests.
 
-{{< alert title="Note" color="primary" >}}`kpsadmin` requires you to specify an API Gateway in a group. This is known as the *KPS Admin API Gateway*, which fields KPS requests only. Any API Gateway in the group can be used. For example, you might change this if you want to check that data is available from any API Gateway in the group.{{< /alert >}}
+{{< alert title="Note" color="primary" >}}`kpsadmin` requires you to specify an API Gateway in a group. This is known as the *KPS Admin API Gateway*, which processes KPS requests only. Any API Gateway in the group can be used. For example, you might change this if you want to check that data is available from any API Gateway in the group.{{< /alert >}}
 
 * KPS collection to use in the group
 * KPS table to use in the collection
@@ -87,9 +87,15 @@ The `kpsadmin` operations for collection administration are as follows:
 
 The `kpsadmin` operations for API Gateway group administration are as follows:
 
-* **Clear All**: Clear all data in all collections in the group.                                                          * **Backup All**: Back up all data in all collections in the group.
+* **Clear All**: Clear all data in all collections in the group.
+* **Backup All**: Back up all data in all collections in the group.
 * **Restore All**: Restore all data in all collections in the group.
-* **Re-encrypt All**: Re-encrypt all data in all collections in the group. Use this option when the encryption passphrase has been changed for the API Gateway group. The tables will be offline after a passphrase change. You must use this option to re-encrypt the data. You must enter the old API Gateway passphrase to proceed. Data is re-encrypted using the current API Gateway passphrase. You must restart the API Gateway instance(s) in the group.
+* **Re-encrypt All**: Re-encrypt all data in all collections in the group.
+    * Use this option when the encryption passphrase has been changed for the API Gateway group.
+    * The tables will be offline after a passphrase change, so you must use this option to re-encrypt the data.
+    * You must enter the old API Gateway passphrase to proceed.
+    * Data is re-encrypted using the current API Gateway passphrase.
+    * You must restart the API Gateway instance(s) in the group.
 * **Collection Details**: Display information about all collections in the group.
 
 ### Cassandra administration operations
@@ -149,7 +155,7 @@ If you have made a backup in [Backup collection data using kpsadmin](#step-1-bac
 
 ![Restore collection data using kpsadmin](/Images/APIGatewayKPSUserGuide/restorecollection.png)
 
-## Run `kpsadmin` operations in scriptable command mode
+## Run kpsadmin operations in scriptable command mode
 
 You can also control `kpsadmin` directly from the command line or from a script by specifying command operations (for example, `kpsadmin backup` or `restore`). If an operation is not specified, `kpsadmin` enters its default interactive menu mode.
 
@@ -159,18 +165,23 @@ You must also specify a user name and password, and an API Gateway group, KPS co
 ./kpsadmin --username admin --password changeme --group "myGroup" --name "myGateway" backup
 ```
 
-### `kpsadmin` command operations
+### kpsadmin command operations
 
-The available `kpsadmin` command operations in this mode are:
+Following are the available `kpsadmin` command operations in this mode:
 
 | Operation                 | Description                                                                                                                                      |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `create_row`              | Create a new row in the specified table.                                                                                                         |
+| `read_row`                | Read a row from the specified table.                                                                                                            |
+| `update_row`              | Update a row in the specified table.                                                                                                            |
+| `delete_row`              | Delete a row from the specified table.                                                                                                          |
+| `list_rows`               | List all rows in the specified table, collection, or group.                                                                                      |
 | `clear`                   | Clear all data in the specified table, collection, or group.                                                                                     |
 | `backup`                  | Back up all data in the specified table, collection, or group.                                                                                   |
 | `restore`                 | Restore all data in the specified table, collection, or group.                                                                                   |
 | `reencrypt`               | Re-encrypt all data in the specified table, collection, or group.                                                                                |
+| `recreate`                | Recreate the specified table.                                                                                                                   |
 | `details`                 | Display information about the specified table, collection, or group.                                                                             |
-| `list_rows`               | List all rows in the specified table, collection, or group.                                                                                      |
 | `cassandra_configuration` | Show the current configuration for the KPS storage service (Apache Cassandra).                                                                   |
 | `diagnostics`             | Run diagnostic checks including HA configuration checks. You must specify the `--mdc` option only when this is a multi-datacenter configuration. |
 
@@ -178,9 +189,9 @@ If this kind of `kpsadmin` command invocation succeeds, `0` is returned. If it f
 
 You can specify the user name and password on the command line or using a secure script. For details on how to script user name and password input for API Gateway scripts, see the `managedomain` command reference at [managedomain command reference](/docs/apim_reference/managedomain_ref/)
 
-### `kpsadmin` command options
+### kpsadmin command options
 
-The full `kpsadmin` command options are:
+Following are the full `kpsadmin` command options:
 
 | Option                        | Description                                                                                  |
 | ----------------------------- | -------------------------------------------------------------------------------------------- |
@@ -193,11 +204,13 @@ The full `kpsadmin` command options are:
 | `-c, --collection=COLLECTION` | Specify the KPS collection to target.                                                        |
 | `-t TABLE, --table=TABLE`     | Specify the KPS table to target.                                                             |
 | `--uuid=UUID`                 | Specify the UUID required when backing up or restoring data.                                 |
+| `--key=UUID`                  | Specify the primary key required when reading, updating, or deleting existing table data.     |
+| `--datafile=FILENAME`         | Specify the file containing table data when creating or updating a row.                      |
 | `--mdc`                       | When using the `diagnostics` command, specify that this is a multi-datacenter configuration. |
 | `--passphrase`                | KPS backup passphrase. Leave it blank if none was set.                                       |
-| `--oldpassphrase`             | Old KPS passphrase. Leave it blank if none was set.                                       |
+| `--oldpassphrase`             | Old KPS passphrase. Leave it blank if none was set.                                          |
 
-### Example `kpsadmin` scriptable commands
+### Examples of kpsadmin scriptable commands
 
 This section shows some example `kpsadmin` operations in scriptable command mode.
 
@@ -222,15 +235,59 @@ Leave the old passphrase blank if none was set.
 
 #### Show KPS table details
 
-To show table details:
+To show the details of a table:
 
 ```
 ./kpsadmin --username admin --password changeme --group "Staging" --name "Gateway1" --collection "My Collection" --table "My Table" details
 ```
 
+### Create a new row
+
+To create a new row in a table:
+
+```
+./kpsadmin --username admin --password changeme --group "Staging" --name "Gateway1" --collection "My Collection" --table "My Table" create_row --datafile data.json
+```
+
+The data file contains a JSON object representation of the row to be created. Autogenerated fields are not required.
+
+### Read an existing row
+
+To read an existing row from a table:
+
+```
+./kpsadmin --username admin --password changeme --group "Staging" --name "Gateway1" --collection "My Collection" --table "My Table" read_row --key 1c7f94db-ce81-4fd0-884a-992fda78bee8
+```
+
+### Update an existing row
+
+To update an existing row in a table:
+
+```
+./kpsadmin --username admin --password changeme --group "Staging" --name "Gateway1" --collection "My Collection" --table "My Table" update_row --datafile data.json --key 1c7f94db-ce81-4fd0-884a-992fda78bee8
+```
+
+### Delete an existing row
+
+To delete an existing row from a table:
+
+```
+./kpsadmin --username admin --password changeme --group "Staging" --name "Gateway1" --collection "My Collection" --table "My Table" delete_row --key 1c7f94db-ce81-4fd0-884a-992fda78bee8
+```
+
+### Re-create KPS table
+
+To re-create a KPS table:
+
+{{< alert title="Caution" color="warning" >}}This command drops the table and recreates an empty table. All data is lost.{{< /alert >}}
+
+```
+./kpsadmin --username admin --password changeme --group "Staging" --name "Gateway1" --collection "My Collection" --table "My Table" recreate
+```
+
 #### Show KPS collection details
 
-To show collection details:
+To show the details of a collection:
 
 ```
 ./kpsadmin --username admin --password changeme --group "Staging" --name "Gateway1" --collection "My Collection" details
@@ -260,7 +317,7 @@ To output diagnostic information for a group in a Cassandra multi-datacenter sys
 
 ## Re-encrypt KPS data
 
-You can use the `kpsadmin` re-encrypt option to re-encrypt previously encrypted KPS data. When you use this option, a backup of the data is first made in the following directory:
+You can use the `kpsadmin` re-encrypt option to re-encrypt previously encrypted KPS data. When you use this option, a backup of the data is first created in the following directory:
 
 ```
 INSTALL_DIR/apigateway/groups/<group-id>/<instance-id>/conf/kps/backup
@@ -284,6 +341,6 @@ The data is decrypted with the old encryption passphrase, which you must supply.
 
 {{< /alert >}}
 
-You should re-encrypt the data using the group-level `28) Re-encrypt All` interactive option, or the `kpsadmin --group reencrypt` scriptable command. Do not use the table or collection level re-encrypt options. These should only be used if group level encryption fails. You will then need to re-encrypt at collection and/or table level.
+We recommend you to re-encrypt the data using the group-level `28) Re-encrypt All` interactive option, or the `kpsadmin --group reencrypt` scriptable command. Do not use the table or collection level re-encrypt options. These should only be used if group level encryption fails. You will then need to re-encrypt at collection or table level.
 
 After re-encryption, you must restart all API Gateways in the group.

@@ -107,7 +107,7 @@ LimitAS=infinity
 
 ### Clean up Cassandra repair history
 
-By default Apache Cassandra 2.2.x does *not* clean `nodetool repair` trace history. This can cause the `system_distributed` keyspace to increase in size over time. The extent of the issue can be seen by running the following command to see how much space is being consumed by `system_distributed`:
+By default Apache Cassandra 3.11.x does *not* clean `nodetool repair` trace history. This can cause the `system_distributed` keyspace to increase in size over time. The extent of the issue can be seen by running the following command to see how much space is being consumed by `system_distributed`:
 
 ```
 du -md 1 <cassandra_root>/data/data/ | sort -n

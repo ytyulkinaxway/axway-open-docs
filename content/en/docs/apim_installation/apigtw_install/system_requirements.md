@@ -14,9 +14,9 @@ This section describes the operating system requirements for API Gateway.
 
 API Gateway supports the following software versions:
 
-* CentOS 6.x, 7.x, 8.x (CentOS 8.x is supported from [7.7.20200530](/docs/apim_relnotes/20200530_apimgr_relnotes/) update onward.)
+* CentOS 6.x, 7.x, 8.x (CentOS 8.x is supported from [API Gateway May 21](/docs/apim_relnotes/20200530_apimgr_relnotes/) update onward.)
 * Oracle Linux 6.x, 7.x
-* Red Hat Enterprise Linux 6.x, 7.x, 8.x (Red Hat Enterprise Linux 8.x is supported from [7.7.20200530](/docs/apim_relnotes/20200530_apimgr_relnotes/) update and later updates only.)
+* Red Hat Enterprise Linux 6.x, 7.x, 8.x (RHEL 8.x is supported from [API Gateway May 21](/docs/apim_relnotes/20200530_apimgr_relnotes/) update onward.)
 * SUSE Linux Enterprise Server 11.x, 12.x
 
 API Gateway supports the following hardware:
@@ -123,8 +123,12 @@ This section describes requirements for specific API Gateway components.
 
 * **Policy Studio** is a thick client and supports the platforms described in [Thick client platforms](#thick-client-platforms).
 * **API Gateway Manager** is a web-based client and supports the web browsers listed in [Web browsers](#web-browsers).
-* **API Gateway Analytics** is a server component that has the same operating system and hardware requirements as API Gateway. See [Operating systems and hardware](#operating-systems-and-hardware). API Gateway Analytics requires a database. For database requirements, see [Databases](#databases). The browser-based client component supports the same browsers as API Gateway Manager. See [Web browsers](#web-browsers).
-* **API Manager** is a browser-based client and supports the same browsers as API Gateway Manager. See [Web browsers](#web-browsers).
+* **API Gateway Analytics** is a server component that has the same [operating system and hardware](#operating-systems-and-hardware) requirements as API Gateway. Its browser-based client component supports the same [browsers](#web-browsers) as API Gateway Manager. API Gateway Analytics also requires a [database](#databases), and the following packages:
+    * libXext
+    * libXrender
+    * xorg-x11-fonts-Type1
+    * xorg-x11-fonts-75dpi
+* **API Manager** is a browser-based client and supports the same [browsers](#web-browsers) as API Gateway Manager.
 
 ## Default ports
 

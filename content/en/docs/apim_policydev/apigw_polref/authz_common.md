@@ -5,7 +5,6 @@
   "date": "2019-10-17",
   "description": "Commonly used authorization filters, including SAML authorization assertion, XACML PEP, and LDAP."
 }
-
 ## Insert SAML authorization assertion filter
 
 After successfully authorizing a client, the API Gateway can insert a Security Assertion Markup Language (SAML) authorization assertion into the SOAP message. Assuming all other security filters in the policy are successful, the assertion is eventually consumed by a downstream web service.
@@ -295,9 +294,9 @@ filter is configured in the API Gateway, the workflow is as follows:
 1. The client sends a request for the resource to the XACML PEP filter.
 2. The PEP filter stores the original client request, and generates the XACML request.
 3. The PEP filter delegates message-level security to the polices configured on the **XACML**
-    tab.
+   tab.
 4. The PEP filter routes the XACML request to the PDP using details configured on the **Routing**
-    tab.
+   tab.
 5. The PDP decides if access should be granted, and sends the XACML response back to the API Gateway.
 6. The PEP filter validates the response from the PDP.
 7. By default, if the response is `Permit`, the PEP filter passes, and the original client request for the resource is authorized, and the policy flow continues on the success path.
@@ -350,36 +349,36 @@ Click the **Add**
 button on the following tabs to add attributes to the XACML request:
 
 * **Subject**: Represents the entity making the access request (wants access to the resource). The `Subject`
-element can contain multiple `Attribute`
-elements used to identify the `Subject`. Each `Attribute`
-element has two attributes: `AttributeId`
-and `DataType`. You can define your own `AttributeId`
-or use those provided by the XACML specification. For more details on adding attributes, see the next subsection.
+  element can contain multiple `Attribute`
+  elements used to identify the `Subject`. Each `Attribute`
+  element has two attributes: `AttributeId`
+  and `DataType`. You can define your own `AttributeId`
+  or use those provided by the XACML specification. For more details on adding attributes, see the next subsection.
 * **Resource**: Defines the data, service, or system component that the `Subject`
-wants to access. The `Resource`
-element contains one or more attributes of the resource to which subjects request access. There can be only one `Resource`
-element per XACML request. A specific `Resource`
-is identified by the `Attribute`
-child element. In the [Example XACML request](#example-xacml-request), the `Subject`
-wants to access the following `Resource`:
+  wants to access. The `Resource`
+  element contains one or more attributes of the resource to which subjects request access. There can be only one `Resource`
+  element per XACML request. A specific `Resource`
+  is identified by the `Attribute`
+  child element. In the [Example XACML request](#example-xacml-request), the `Subject`
+  wants to access the following `Resource`:
 
 ```
 http://localhost:8280/services/echo/echoString
 ```
 
 * **Action**: Contains one or more attributes of the action that subjects wish to perform on the resource. There can be only one `Action`
-element per XACML request. A specific `Action`
-is identified by the `Attribute`
-child element. In the [Example XACML request](#example-xacml-request), the `Subject`
-wants read access the following `Resource`:
+  element per XACML request. A specific `Action`
+  is identified by the `Attribute`
+  child element. In the [Example XACML request](#example-xacml-request), the `Subject`
+  wants read access the following `Resource`:
 
 ```
 http://localhost:8280/services/echo/echoString
 ```
 
 * **Environment**: A more complex request context may contain some attributes not associated with the `Subject`, `Resource`, or `Action`. These are placed in an optional `Environment`
-element after the `Action`
-element.
+  element after the `Action`
+  element.
 
 When you click the **Add**
 button on each tab, the **XACML**
@@ -626,23 +625,26 @@ button at the bottom right to specify a rule condition. In the **Attribute filte
 dialog, perform the following steps:
 
 1. Enter a message attribute name in the **LDAP attribute named**
-    field (for example, `member`
-    or `mail`).
+   field (for example, `member`
+   or `mail`).
 2. Select one of the following rule conditions from the list:
-    * `contains`
-    * `doesn't contain`
-    * `doesn't match regular expression`
-    * `ends with`
-    * `is`
-    * `is not`
-    * `matches regular expression`
-    * `starts with`
+
+   * `contains`
+   * `doesn't contain`
+   * `doesn't match regular expression`
+   * `ends with`
+   * `is`
+   * `is not`
+   * `matches regular expression`
+   * `starts with`
 3. Enter a value to compare with in the text box on the right (for example, `POST`). Alternatively, you can enter a selector that is expanded at runtime (for example, `${http.request.uri}`).
 4. Click **OK**.
 
+**Evaluate to true**: When checked the negated rule conditions (`doesn't contain`, `doesn't match regular expression` and `is not`) evaluate to `true` if either the LDAP attribute value is `null` or the value to compare resolves to `null` for selector values. Negated rule conditions evaluate to `false` by default.
+
 The following figure shows some example search settings and attribute validation rules:
 
-![LDAP Attribute Authorization Settings](/Images/docbook/images/attr/ldap_rbac_authz.png)
+![LDAP Attribute Authorization Settings](/Images/docbook/images/content/ldapattributeauthzfilter.png)
 
 {{< alert title="Tip" color="primary" >}}
 When using this filter to determine if a user is a member of a `groupOfNames`, all the member attributes are concatenated together. The string containing the member attributes can be compared using a regular expression value provided in **Attribute validation rules**.
