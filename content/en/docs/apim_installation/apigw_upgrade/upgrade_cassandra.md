@@ -25,7 +25,7 @@ The upgrade process differs according to your environment:
 
 ## Upgrade Cassandra in a single-node
 
-In a single-node environment, you can upgrade directly to version 3.11.11. To get started you must download [Cassandra 3.11.11](https://downloads.apache.org/cassandra/3.11.11/), unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-31111/`
+In a single-node environment, you can upgrade directly to version 3.11.11. To get started you must download [Cassandra 3.11.11](https://support.axway.com/en/downloads/download-details/id/1449279), unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-31111/`
 
 Now you can proceed to the next sections to complete your installation.
 
@@ -77,7 +77,7 @@ If you have SSL certificates in your old Cassandra installation, you must copy t
 Copy the following files to the `CASSANDRA_HOME/conf/` folder in your new installation:
 
 * `CASSANDRA_HOME/conf/.truststore`
-* `CASSANDRA_HOME/conf/.truststore`
+* `CASSANDRA_HOME/conf/.keystore`
 
 ### Step 4 - Stop API Gateway
 
@@ -185,7 +185,7 @@ Before upgrading the Cassandra cluster, you must set Cassandra's driver protocol
 
 To start upgrading your old installation:
 
-1. Download [Cassandra 2.2.19](https://downloads.apache.org/cassandra/2.2.19/).
+1. Download [Cassandra 2.2.19](https://support.axway.com/en/downloads/download-details/id/1449277).
 2. Unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-2219/`.
 
     {{< alert title="Note" color="primary" >}}To complete your installation, follow all steps on section [Upgrade in a single node](#step-1---backup-your-old-cassandra-data) for each node in the cluster. After that, proceed to Stage 2.{{< /alert >}}
@@ -194,7 +194,7 @@ To start upgrading your old installation:
 
 To start upgrading your old installation:
 
-1. Download [Cassandra 3.11.11](https://downloads.apache.org/cassandra/3.11.11/)
+1. Download [Cassandra 3.11.11](https://support.axway.com/en/downloads/download-details/id/1449279)
 2. Unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-31111/`.
 
     {{< alert title="Note" color="primary" >}}To complete your installation, follow all steps on section [Upgrade in a single node](#step-1---backup-your-old-cassandra-data) for each node in the cluster, then return to execute the following section.{{< /alert >}}
