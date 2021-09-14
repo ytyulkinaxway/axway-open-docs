@@ -7,10 +7,6 @@ description: >
   Link to Samples folder - test for Zoomin
 ---
 
-This page is **not** available in the Axway docs production portal, but it needs to be available on **staging** so Zoomin can see it.
-
-There's no way to hide it on Netlify and, at the same time, make it available on Zoomin.
-
 ## Link using absolute path
 
 {{< alert title="Warning" color="warning" >}} That's the way it works today {{< /alert >}}
@@ -58,3 +54,7 @@ The code of the link is:
 ```
 ![Preview your PR](/Images/contributing/netlify_preview_PR.png)
 ```
+
+Testing HTML tags.
+<br>
+Another test: Go to the <a href="http://axway.com/" target="_blank">Axway doc site</a>
