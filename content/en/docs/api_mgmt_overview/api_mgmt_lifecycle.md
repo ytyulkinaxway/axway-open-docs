@@ -77,7 +77,7 @@ To learn more about testing your API, see [Test your APIs](/docs/api_mgmt_overvi
 Customers divide systems into zones for development, pre-production, production, and so on. The API management platform is also deployed in each zone. APIs are developed and tested in the development zone and then deployed to the next zone, and so on. This means that a deployment concept is needed, which should be automated if possible to promote the APIs and policies from one stage to the next.
 How the exact process is set up depends on the requirements of your company, for example, to use release artifacts or not, and which groups of people have which responsibilities.
 
-There are two deployment artifacts in the AMPLIFY API Management solution:
+There are two deployment artifacts in the Amplify API Management solution:
 
 * **Policies**: Generally valid policies that are referenced by different APIs. These policies map security, routing, integration, and other use cases. They are developed by policy developers using Policy Studio and have their own deployment pipeline. They are deployed relatively rarely.
 * **API**: The API is defined by the API specification and the API configuration. It is developed by service providers and deployed as a single unit.
@@ -100,7 +100,7 @@ To learn more, see [Integrate your API management solution into a CI/CD pipeline
 
 When an API is in production it is important to monitor it. Monitoring includes various aspects, such as a health check, which not only checks whether an API exists but also makes a call through to the back-end system. This is the only way to ensure that the API  works from end to end.
 
-Another aspect is the runtime monitoring of security rules, SLAs, where the consumers come from, and the performance. You can use AMPLIFY API Management dashboard tools for this, or you can integrate the platform into existing central monitoring cockpits.
+Another aspect is the runtime monitoring of security rules, SLAs, where the consumers come from, and the performance. You can use Amplify API Management dashboard tools for this, or you can integrate the platform into existing central monitoring cockpits.
 
 To learn more about how to govern and monitor, see [Introduction to API Gateway](/docs/api_mgmt_overview/api_mgmt_components/apigateway/).
 
@@ -126,7 +126,7 @@ To learn more, see [Introduction to API Portal](/docs/api_mgmt_overview/api_mgmt
 
 Long-term analyses and statistics provide information on how the platform is developing. How is the performance in the long run, which APIs are working well and which are not, are the error rates stable, and so on.
 
-The analytics components are not intended to display the operational monitoring with a detailed view of each individual API request, but are used for evaluation and planning for the platform. AMPLIFY API Management provides an out of the box analytics component with Embedded Analytics for API management. With open log formats, such as open logging, the solution can also be connected to existing systems such as Elasticsearch or Splunk.
+The analytics components are not intended to display the operational monitoring with a detailed view of each individual API request, but are used for evaluation and planning for the platform. Amplify API Management provides an out of the box analytics component with Embedded Analytics for API management. With open log formats, such as open logging, the solution can also be connected to existing systems such as Elasticsearch or Splunk.
 
 To learn more about analytics options, see [API management analytics](/docs/api_mgmt_overview/api_mgmt_components/analytics/).
 
@@ -136,4 +136,4 @@ The versioning of APIs, that is, the associated lifecycle, is important. You sho
 
 Lifecycle management should be considered from the beginning and, if possible, new requirements should be integrated into the same API version as a non-breaking change. In other words, the API is subject to a natural evolution with improvements, extensions, fixes, and so on, and the process must be designed to support this evolution.
 
-When version changes occur, AMPLIFY API Management supports processes to move consumers from one API version (`/api/v1/res`) to the next (`/api/v2/res`).
+When version changes occur, Amplify API Management supports processes to move consumers from one API version (`/api/v1/res`) to the next (`/api/v2/res`).

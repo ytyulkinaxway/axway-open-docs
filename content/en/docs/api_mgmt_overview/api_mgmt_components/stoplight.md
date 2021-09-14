@@ -3,10 +3,10 @@
 "linkTitle": "Stoplight",
 "weight":"5",
 "date": "2020-04-14",
-"description": "API-first design with AMPLIFY API Management and Stoplight."
+"description": "API-first design with Amplify API Management and Stoplight."
 }
 
-For API design, Axway and [Stoplight](https://stoplight.io) work in partnership. This page gives an overview of the possibilities Stoplight offers and how it can be integrated into your AMPLIFY API Management platform. Following the API-first approach, it is important to have a powerful API design tool that can be used by non-technical people to develop OpenAPI 2.0 / 3.0 API definitions.
+For API design, Axway and [Stoplight](https://stoplight.io) work in partnership. This page gives an overview of the possibilities Stoplight offers and how it can be integrated into your Amplify API Management platform. Following the API-first approach, it is important to have a powerful API design tool that can be used by non-technical people to develop OpenAPI 2.0 / 3.0 API definitions.
 
 ## Stoplight Studio
 
@@ -26,7 +26,7 @@ Watch this video to learn how to use Stoplight:
 
 {{< youtube 7olnV8rR1xc >}}
 
-## Integrate into the AMPLIFY API Management platform
+## Integrate into the Amplify API Management platform
 
 Stoplight creates standard OpenAPI (Swagger) files under the hood, which you can directly transfer to the API management platform. You can import the OpenAPI specification manually using the API Manager web UI, or using [`apim-cli`](/docs/api_mgmt_overview/api_mgmt_components/tools/#api-manager-cli) directly, or a CI/CD pipeline. Direct integration using `apim-cli` is preferable because it makes the process fast, easy, and repeatable. In addition, Stoplight Studio works on the basis of a checked out Git repository, which allows a fully automatic coupling with a CI/CD system.
 

@@ -89,7 +89,7 @@ This release has the following limitations:
 | IAP-911     | 00955815, 00940446 | **Issue**: Documentation stated that PHP 5.4 and later are supported on RHEL7 software installation, but API Portal installation failed with PHP 7 due to missing dependencies. **Resolution**: API Portal 7.7 RHEL7 software installation includes improved dependency checking, which resolves this issue.|
 | IAP-1421    |                    | **Issue**: When an anonymous user accesses API Portal, a new API Manager session is created. **Resolution**: All anonymous users share a single API Manager session.|
 | IAP-1480    | 00997076           | **Issue**: Enumerations are not displayed for method parameters. **Resolution**: Enumeration values are displayed.|
-| IAP-1482    | 00997076           | **Issue**: AMPLIFY Swagger UI does not display API method tags. **Resolution**: AMPLIFY Swagger UI now displays API method tags.|
+| IAP-1482    | 00997076           | **Issue**: Amplify Swagger UI does not display API method tags. **Resolution**: Amplify Swagger UI now displays API method tags.|
 | IAP-1483    | 00995497           | **Issue**: API Portal users cannot log in to Joomla! if granted Administrator or Super User privileges in JAI. **Resolution**: API Portal 7.7 includes a new user role mapping feature which resolves this issue.|
 | IAP-1611    | 01010562           | **Issue**: Unofficial best practice documentation describing how to move API Portal configuration and customizations from one environment to another, leveraging Akeeba Backup, was incorrect and outdated. **Resolution**: The documentation was updated.|
 | IAP-1652    |                    | **Issue**: When configuring connections to multiple API Managers in JAI, the value of the 'Public label for API Managers' field is not saved. **Resolution**: 'Public label for API Managers' field is saved as expected.|
@@ -142,7 +142,7 @@ To find all available documents for this product version:
 
 {{< alert title="Note" color="primary" >}}Customers with active support contracts need to log in to access restricted content.{{< /alert >}}
 
-The AMPLIFY API Management solution enables you to create, publish, promote, and manage Application Programming Interfaces (APIs) in a secure and scalable environment.
+The Amplify API Management solution enables you to create, publish, promote, and manage Application Programming Interfaces (APIs) in a secure and scalable environment.
 
 The following reference documents are also available:
 

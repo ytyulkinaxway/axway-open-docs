@@ -23,7 +23,7 @@ You can customize the following in the API Catalog view of API Portal:
 
     * **Multi-column**: A Two-column view, in which methods are listed on the left side, and the details of a selected method are listed on the right side. This is the default option in API Portal.
     * **Single-column**: The official layout shipped with the Swagger UI.
-* Show or hide code examples in endpoint details when using AMPLIFY rendering tool. Defaults to shown.
+* Show or hide code examples in endpoint details when using Amplify rendering tool. Defaults to shown.
 * Show or hide `externalDocs` along with its description.
 * Choose colors for the different methods.
 

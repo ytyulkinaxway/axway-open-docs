@@ -12,7 +12,7 @@ A policy is a network of message filters, and each filter is a modular unit that
 
 ![Sample Policy in Policy-Studio](/Images/api_mgmt_overview/sample-policy.png)
 
-AMPLIFY API Management provides a number of built-in policies that you can apply to APIs. In addition, policy developers can use Policy Studio, a graphical tool, to develop custom policies.
+Amplify API Management provides a number of built-in policies that you can apply to APIs. In addition, policy developers can use Policy Studio, a graphical tool, to develop custom policies.
 
 In Policy Studio, a policy is assembled by selecting filters from the filter palette on the right and dragging and dropping them onto the policy canvas to be configured. The configured filters are then connected to a policy using success and failure paths to trace a path through a set of filters and create sophisticated rules. Some filters require configuring additional resources or settings before the filters can be used. You can find these additional resources and settings from the node tree on the left.
 
@@ -76,7 +76,7 @@ Learn more about [how to set up API Manager policies](/docs/apim_administration/
 
 ### Integration policies
 
-In AMPLIFY API Management, API Gateway provides integration across systems and compatibility. REST-SOAP conversion enables you to make enterprise application data and operations available to mobile apps. You can convert a legacy SOAP service, and deploy it as a REST API. API Gateway then can expose the REST API that maps to the SOAP service, dynamically creating a SOAP request based on the REST API call.
+In Amplify API Management, API Gateway provides integration across systems and compatibility. REST-SOAP conversion enables you to make enterprise application data and operations available to mobile apps. You can convert a legacy SOAP service, and deploy it as a REST API. API Gateway then can expose the REST API that maps to the SOAP service, dynamically creating a SOAP request based on the REST API call.
 
 For more details, see [How to configure external systems from API Gateway](/docs/apim_policydev/apigw_external_connections/).
 

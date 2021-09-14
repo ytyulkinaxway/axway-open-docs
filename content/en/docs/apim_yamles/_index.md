@@ -4,7 +4,7 @@
   "weight": "87",
   "date": "2020-09-24",
   "hide_readingtime": "true",
-  "description": "Learn how to use YAML-based configuration with AMPLIFY API Management solution."
+  "description": "Learn how to use YAML-based configuration with Amplify API Management solution."
 }
 
 ## Introduction

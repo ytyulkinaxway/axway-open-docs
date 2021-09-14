@@ -62,7 +62,7 @@ Filebeat is included in your API Gateway installation in the following directory
 INSTALL_DIR/apigateway/tools/
 ```
 
-For more information on configuring Filebeat, see the [Embedded Analytics for AMPLIFY API Management documentation](https://docs.axway.com/bundle/EmbeddedAnalyticsAPIM_allOS_en_HTML5/).
+For more information on configuring Filebeat, see the [Embedded Analytics for Amplify API Management documentation](https://docs.axway.com/bundle/EmbeddedAnalyticsAPIM_allOS_en_HTML5/).
 
 {{< alert title="Note" color="primary" >}}In a future release, Embedded Analytics will use the open traffic event log.{{< /alert >}}
 

@@ -36,7 +36,7 @@ API Portal supports two rendering tools to customize the visualization of the AP
 
 ### SwaggerUI 3.x
 
-The UI tool used to visualize REST APIs. It supports OpenAPI specifications and it is built over the official Swagger.io. In addition to the commonly known fields of a method, the AMPLIFY SwaggerUI also provides the following:
+The UI tool used to visualize REST APIs. It supports OpenAPI specifications and it is built over the official Swagger.io. In addition to the commonly known fields of a method, the Amplify SwaggerUI also provides the following:
 
 * **Examples (or, snippets)** - This section displays a line or block of code that you can copy and paste, and run straight away using the appropriate tool (curl, Titanium, node.js, web.js).
 * **Single or 2-column layout** - Available for API details. It allows for a better and more flexible user experience.

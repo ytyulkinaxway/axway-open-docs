@@ -1,14 +1,14 @@
 {
-"title": "AMPLIFY API Management container reference architecture on AWS",
+"title": "Amplify API Management container reference architecture on AWS",
 "linkTitle": "Container reference architecture on AWS",
 "weight": 30,
 "date": "2019-12-20",
-"description": "Learn how to deploy and maintain AMPLIFY API Management using EMT mode on Amazon AWS."
+"description": "Learn how to deploy and maintain Amplify API Management using EMT mode on Amazon AWS."
 }
 
 ## Summary
 
-This document provides a reference architecture guide for deploying AMPLIFY API Management (APIM) using Externally Managed Topology ([EMT mode](/docs/apim_installation/apigw_containers/container_getstarted/)). Deploying APIM using Docker containers orchestrated by Kubernetes brings tremendous benefits in installing, developing and operating an API management solution.
+This document provides a reference architecture guide for deploying Amplify API Management (APIM) using Externally Managed Topology ([EMT mode](/docs/apim_installation/apigw_containers/container_getstarted/)). Deploying APIM using Docker containers orchestrated by Kubernetes brings tremendous benefits in installing, developing and operating an API management solution.
 
 This document describes all major areas in deploying and maintaining Axway APIM EMT on Amazon AWS cloud, including:
 
@@ -21,7 +21,7 @@ This document describes all major areas in deploying and maintaining Axway APIM 
 
 ## Overview
 
-AMPLIFY API Management is a leading API management solution on the market. It supports container-based deployment under an option called Externally Managed Topology (EMT). The purpose of this document is to share Axway reference architecture for the container-based deployment of an API management solution on Kubernetes. It will address many architectural, development and operational aspects of the proposed architecture.
+Amplify API Management is a leading API management solution on the market. It supports container-based deployment under an option called Externally Managed Topology (EMT). The purpose of this document is to share Axway reference architecture for the container-based deployment of an API management solution on Kubernetes. It will address many architectural, development and operational aspects of the proposed architecture.
 
 Since the technology choices, Docker and Kubernetes, are portable across on-premises environments and many cloud providers, most of the information in this guide should apply to those  environments. But we include specific recommendations for AWS as one of the most common deployment targets.
 
@@ -29,13 +29,13 @@ The target audience for the document is architects, developers, and operations p
 
 ## General architecture
 
-This chapter is focused on general architecture in support of an API management deployment on a dedicated Kubernetes cluster. The chapter discusses architectural principles, as well as  required and optional components. There are many ways to deploy software on a Kubernetes cluster, but this document shares Axway's experience acquired from deploying AMPLIFY API Management in an actual production environment. Most of the implementation details will be outlined in the following chapters.
+This chapter is focused on general architecture in support of an API management deployment on a dedicated Kubernetes cluster. The chapter discusses architectural principles, as well as  required and optional components. There are many ways to deploy software on a Kubernetes cluster, but this document shares Axway's experience acquired from deploying Amplify API Management in an actual production environment. Most of the implementation details will be outlined in the following chapters.
 
 Make sure the constraints listed in the chapters are respected in case of deployment on an existing Kubernetes cluster.
 
 ### Principles
 
-The name of the new deployment option _EMT_ gives a good clue that with this option, many operational aspects of the architecture are externalized to an orchestration component. Existing users of AMPLIFY API Management should be aware that with EMT deployment, the role of Admin Node Manager becomes more of a monitoring tool, and Node Manager is completely removed from the EMT architecture.
+The name of the new deployment option _EMT_ gives a good clue that with this option, many operational aspects of the architecture are externalized to an orchestration component. Existing users of Amplify API Management should be aware that with EMT deployment, the role of Admin Node Manager becomes more of a monitoring tool, and Node Manager is completely removed from the EMT architecture.
 
 Official testing is taking place in Kubernetes as the orchestration component. However, the Docker images are agnostic, so they can be deployed in other orchestration platforms, like Swarm. Kubernetes manages many important aspects of runtime, security, and operations:
 
@@ -311,7 +311,7 @@ Kubernetes permits defining a CPU and memory limits for each pod to protect the 
 | Change Xmx value and resources limitations according to the size of worker nodes | Recommended |
 | Limit memory and CPU usage to protect the cluster                                | Recommended |
 
-These are the recommended initial limits for AMPLIFY API Management components:
+These are the recommended initial limits for Amplify API Management components:
 
 * API Manager pod: 2cpu with 2GB memory and initial request of 0,5cpu with 0,5GB memory
 * Admin Node Manager: memory resource limit of 2GB memory
@@ -534,7 +534,7 @@ The following is a summary of security considerations discussed within this docu
 
 ### SQL database considerations
 
-AMPLIFY API Management supports several RDBMS:
+Amplify API Management supports several RDBMS:
 
 * MySQL or MariaDB
 * Microsoft SQL Server
@@ -556,7 +556,7 @@ The following logs should be persisted:
 
 ### Environmentalization and promotion
 
-Environmentalization and promotion go hand in hand. AMPLIFY API Management uses two different artifacts:
+Environmentalization and promotion go hand in hand. Amplify API Management uses two different artifacts:
 
 * **Polices** - used by API Gateway
 * **API data files** - used by API Manager
@@ -620,23 +620,23 @@ The Axway team ran a variety of performance tests on the reference architecture.
 
 ## Maintenance
 
-After you deploy AMPLIFY API Management in production, you will need to update product configurations (policies and settings) and install fixes and service packs. This section outlines best practices in maintaining your installation.
+After you deploy Amplify API Management in production, you will need to update product configurations (policies and settings) and install fixes and service packs. This section outlines best practices in maintaining your installation.
 
 ### New configurations
 
 With a shift to a container-based deployment, the notion of pushing API Gateway/Manager configuration updates directly to the running instances has changed. Now you need to create a new Docker image that contains the latest Gateway/Manager configuration. Using [Kubernetes rolling upgrades](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/), you deploy a new Docker image to a cluster without interrupting your request processing. To learn how to create and deploy a new Docker image, see [Development and deployment with API Gateway containers](/docs/apim_installation/apigw_containers/container_development/).
 
-In general, the process of building AMPLIFY API Management Docker images for installation can be depicted as in the picture below.
+In general, the process of building Amplify API Management Docker images for installation can be depicted as in the picture below.
 
 ![Docker images](/Images/apim-reference-architectures/container-aws/image9.tmp)
 
 Description of the images:
 
-* A base image includes a base product installation and does not change frequently. You update a base image only when you need to install an update for the underlying operating system, or when you need to install a service pack for AMPLIFY API Management or upgrade the product.
+* A base image includes a base product installation and does not change frequently. You update a base image only when you need to install an update for the underlying operating system, or when you need to install a service pack for Amplify API Management or upgrade the product.
 * An ANM image represents Admin Node Manager, but in the container-based deployment, it is not used for pushing new configurations to the gateways. It is primarily a monitoring tool.
 * Gateway or API Manager images contain configuration and settings (`.pol` and `.evn`, or `.fed`) that are updated frequently. These are the type of images that you would rebuild frequently.
 
-Axway provides sample build scripts as a working example to be modified and used by customers. The sample scripts are provided from the Axway support site. For example, a download file for AMPLIFY API Management v7.7 is `APIGateway_7.7-1_DockerScripts.tar.gz`.
+Axway provides sample build scripts as a working example to be modified and used by customers. The sample scripts are provided from the Axway support site. For example, a download file for Amplify API Management v7.7 is `APIGateway_7.7-1_DockerScripts.tar.gz`.
 
 To streamline this process for building Docker images, Axway recommends creating a CI/CD pipeline that should, at least, include these tasks:
 
@@ -649,7 +649,7 @@ Customers should use a source control management (SCM) system for maintaining/ve
 
 ### Product updates
 
-There are variations in how to install a new patch, service pack, or upgrade for a new AMPLIFY API Management version. But the overall approach is that:
+There are variations in how to install a new patch, service pack, or upgrade for a new Amplify API Management version. But the overall approach is that:
 
 * For an upgrade or SP installation, you rebuild your base, ANM and Gateway/Manager images.
 * For a patch installation, you rebuild your ANM and Gateway/Manager images.
@@ -720,7 +720,7 @@ Let's look at applying one of the patches for APIM v7.7 - `APIGateway 7.7 SP1 Pa
 
 #### Installing a service pack
 
-Installing a service pack is identical to creating your first API Gateway/Manager Docker image. The only difference is that you just need to download and use a combined installation file that includes base product plus a corresponding service pack. As an example, we look at AMPLIFY API Management v7.7 and API Management v7.7 with SP1 install files:
+Installing a service pack is identical to creating your first API Gateway/Manager Docker image. The only difference is that you just need to download and use a combined installation file that includes base product plus a corresponding service pack. As an example, we look at Amplify API Management v7.7 and API Management v7.7 with SP1 install files:
 
 * API Management v7.7 install is titled: *API Gateway and API Manager 7.7 Install (linux-x86-64)* with the following file - `APIGateway_7.7_Install_linux-x86-64_BN4.run`.
 * API Management v7.7 with SP1install is titled: *API Gateway 7.7 Install Service Pack 1 (linux-x86-64)* with the following file - `APIGateway_7.7_SP1_linux-x86-64_BN201908271.run`.
@@ -729,7 +729,7 @@ The build process will be identical to the one described in [new configurations]
 
 #### Upgrading the product
 
-Upgrading your existing deployment to a new version of AMPLIFY API Management will be similar to a process described in [new configurations](#new-configurations). But there are some additional steps to migrate your existing Gateway/Manager configuration using Policy Studio.
+Upgrading your existing deployment to a new version of Amplify API Management will be similar to a process described in [new configurations](#new-configurations). But there are some additional steps to migrate your existing Gateway/Manager configuration using Policy Studio.
 
 [Upgrade a container deployment](/docs/apim_installation/apigw_containers/container_upgrade/) describes this process for API Management v7.7. The extra steps are needed to import your existing `.fed` file in Policy Studio. This will trigger an automatic update to your `FED` file. When done, export the updated `FED` (or `.pol` and `.env`) file and use it for building a new Docker image.
 
@@ -782,7 +782,7 @@ For a disaster recovery procedure, you should have access to cloud resources in 
 
 ## Known constraints and roadmap
 
-As of AMPLIFY API Management v7.7, there are some differences or constraints compared to the classic mode deployment:
+As of Amplify API Management v7.7, there are some differences or constraints compared to the classic mode deployment:
 
 * API Portal and Embedded Analytics are not yet supported in the EMT mode.
 * Distributed Ehcache is not supported. However, you can use Apache Cassandra as a distributed data store where CRUD operations are supported to directly interact with KPS, using scripts.

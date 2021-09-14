@@ -32,4 +32,4 @@ The Embedded Analytics dashboards enable you to monitor key metrics such as the 
 * API usage — traffic, active APIs, and active applications
 * Client application health — number of methods with high response time, failure rate, exception rate
 
-For more details, see the [Embedded Analytics for AMPLIFY API Management documentation](https://docs.axway.com/bundle/EmbeddedAnalyticsAPIM_allOS_en_HTML5/).
+For more details, see the [Embedded Analytics for Amplify API Management documentation](https://docs.axway.com/bundle/EmbeddedAnalyticsAPIM_allOS_en_HTML5/).

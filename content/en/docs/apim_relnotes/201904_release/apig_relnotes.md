@@ -204,7 +204,7 @@ You can find the latest information and up-to-date user guides at the [Axway Doc
 
 ### Related documentation
 
-The AMPLIFY API Management solution enables you to create, publish, promote, and manage Application Programming Interfaces (APIs) in a secure and scalable environment.
+The Amplify API Management solution enables you to create, publish, promote, and manage Application Programming Interfaces (APIs) in a secure and scalable environment.
 
 The following reference documents are also available:
 

@@ -3,7 +3,7 @@
     "linkTitle": "Running in Docker containers",
     "weight": "20",
     "date": "2020-06-26",
-    "description": "A collection of tips and tricks for deploying and operating AMPLIFY API Management in Docker containers."
+    "description": "A collection of tips and tricks for deploying and operating Amplify API Management in Docker containers."
 }
 
 ## Reduce Docker image size

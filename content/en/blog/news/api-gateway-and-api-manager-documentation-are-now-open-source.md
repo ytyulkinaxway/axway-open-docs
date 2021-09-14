@@ -10,7 +10,7 @@ We are very excited to announce the availability of the latest version of API Ga
 
 ## What does this mean for you?
 
-Anyone can now propose changes to any topic in the AMPLIFY API Management or Amplify Central documentation using a quick and easy process. All you need is a [GitHub](https://github.com/join) account.
+Anyone can now propose changes to any topic in the Amplify API Management or Amplify Central documentation using a quick and easy process. All you need is a [GitHub](https://github.com/join) account.
 
 To get started go to [Documentation](/docs/).
 

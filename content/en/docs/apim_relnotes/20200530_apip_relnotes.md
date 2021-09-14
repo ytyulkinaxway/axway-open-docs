@@ -23,22 +23,22 @@ API Portal in Docker containers is available for production environment from [AP
 
 The following new features and enhancements are available in this update:
 
-### Integration with AMPLIFY Unified Catalog
+### Integration with Amplify Unified Catalog
 
 This integration between API Portal and the Unified Catalog is a proof of concept feature, and it is being released separately in a docker container as it is not general availability (GA) quality approved just yet. We are releasing it early to gather feedback.
 
 This is the first client implementation of the Unified Catalog API.
 
-API Portal connects to the Unified Catalog by way of a DevOps service account from AMPLIFY, and it exposes the APIs published on the catalog, alongside APIs already exposed via any connected API Manager instances.
+API Portal connects to the Unified Catalog by way of a DevOps service account from Amplify, and it exposes the APIs published on the catalog, alongside APIs already exposed via any connected API Manager instances.
 
 Target use cases include:
 
-* AMPLIFY customers that want a more customizable and extendable API developer portal.
+* Amplify customers that want a more customizable and extendable API developer portal.
 * Existing API Portal customers who also have APIs published into the Unified Catalog can now see and interact with those assets in their current API Portal.
 
-For more information on how to integrate API Portal and AMPLIFY Unified Catalog, see [Expose APIs published from the Unified Catalog](/docs/apim_administration/apiportal_admin/expose_apis_published_from_catalog/).
+For more information on how to integrate API Portal and Amplify Unified Catalog, see [Expose APIs published from the Unified Catalog](/docs/apim_administration/apiportal_admin/expose_apis_published_from_catalog/).
 
-Check out the demo video available at [How to show APIs from AMPLIFY Unified Catalog](https://www.youtube.com/watch?v=b3F-WatXxUE&list=PLSlCpG9zsECpo8-JMZ2Cx4REDyUvpwy9v).
+Check out the demo video available at [How to show APIs from Amplify Unified Catalog](https://www.youtube.com/watch?v=b3F-WatXxUE&list=PLSlCpG9zsECpo8-JMZ2Cx4REDyUvpwy9v).
 
 ### Database password encryption
 

@@ -18,7 +18,7 @@ description: Learn how to install the Axway CLI core package and Axway Central C
 
 ## Before you start
 
-* You will need an administrator account for Amplify Central ([Managing Accounts](https://docs.axway.com/bundle/AMPLIFY_Dashboard_allOS_en/page/managing_accounts.html)).
+* You will need an administrator account for Amplify Central ([Managing Accounts](https://docs.axway.com/bundle/Amplify_Dashboard_allOS_en/page/managing_accounts.html)).
 * You will need [Node.js](https://nodejs.org/en/download/) version 12.13.0 or later.
 
 ### Operating system supported configurations

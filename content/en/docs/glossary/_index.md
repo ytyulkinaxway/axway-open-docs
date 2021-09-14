@@ -4,7 +4,7 @@
 "weight":"99",
 "date": "2019-11-07",
 "hide_readingtime": "true",
-"description": "Reference to AMPLIFY API Management and Amplify Central terminology."
+"description": "Reference to Amplify API Management and Amplify Central terminology."
 }
 ## A
 

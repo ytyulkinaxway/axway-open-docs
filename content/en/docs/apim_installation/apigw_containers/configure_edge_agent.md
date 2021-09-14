@@ -9,9 +9,9 @@ description: >-
 ---
 Usage tracking is how Axway measures the subscription services you use on a monthly basis. Axway measures your usage to make sure it is within the prescribed thresholds specified in your subscription, and to determine whether overages require billing adjustments. For more information, see [About subscription usage tracking](https://docs.axway.com/bundle/subusage_en/page/about_subscription_usage_tracking.html).
 
-You can log in to the [AMPLIFY Platform](https://platform.axway.com/) and look up information about your subscriptions and service entitlements. If you are unsure whether usage tracking applies to you, contact your Axway representative or [Axway Support](https://support.axway.com/).
+You can log in to the [Amplify Platform](https://platform.axway.com/) and look up information about your subscriptions and service entitlements. If you are unsure whether usage tracking applies to you, contact your Axway representative or [Axway Support](https://support.axway.com/).
 
-The AMPLIFY Edge Agent collects data from your on-premise API management products and uploads usage reports to the AMPLIFY Platform. You must connect your API Gateway to the Edge Agent to enable automatic upload of usage reports to the AMPLIFY Platform.
+The Amplify Edge Agent collects data from your on-premise API management products and uploads usage reports to the Amplify Platform. You must connect your API Gateway to the Edge Agent to enable automatic upload of usage reports to the Amplify Platform.
 
 {{< alert title="Note" color="primary" >}}Topology logging and subscription-based billing are restricted to container-based API Gateway installations that are running in EMT mode.{{< /alert >}}
 
@@ -75,4 +75,4 @@ For information on the other options used in this example, see [Start the API Ga
 
 ## Review subscriptions and usages on the platform
 
-After you have completed the configuration and have enabled uploads of usage reports, you can log in to the [AMPLIFY Platform](https://platform.axway.com/) and access and review your subscriptions and usage data. For more information, see [Review subscriptions and usages on the platform](https://docs.axway.com/bundle/subusage_en/page/review_subscriptions_and_usages_on_the_platform.html).
+After you have completed the configuration and have enabled uploads of usage reports, you can log in to the [Amplify Platform](https://platform.axway.com/) and access and review your subscriptions and usage data. For more information, see [Review subscriptions and usages on the platform](https://docs.axway.com/bundle/subusage_en/page/review_subscriptions_and_usages_on_the_platform.html).

@@ -8,7 +8,7 @@
 
 ## Integration with IBM MQ
 
-One of the core components of AMPLIFY API Management is the API Gateway. API Gateway ships with support for several third-party systems for easier integrations. API Gateway is acting as a client requesting services from an external provider. One of those built-in features is support for the messaging system [IBM MQ](https://www.ibm.com/products/mq). IBM MQ is a widely used enterprise message communication service that often powers complex and mission critical services for large enterprises.
+One of the core components of Amplify API Management is the API Gateway. API Gateway ships with support for several third-party systems for easier integrations. API Gateway is acting as a client requesting services from an external provider. One of those built-in features is support for the messaging system [IBM MQ](https://www.ibm.com/products/mq). IBM MQ is a widely used enterprise message communication service that often powers complex and mission critical services for large enterprises.
 
 API Gateway is built on Java and uses Java message service (JMS) for messaging. Connecting to JMS servers requires some general configuration and special settings:
 
@@ -20,7 +20,7 @@ Different vendors have different strategies to maintain compatibility between me
 
 This means that client programs can use older connectivity libraries to connect to newer versions of the MQ servers. This enables you to decouple lifetime or maintenance cycles of client applications from a currently used MQ server. However, for securing the communication using TLS all clients need to support a minimum TLS version and a defined set of TLS ciphers defined by the MQ server. If a MQ client uses a cipher that is not on the supported list of ciphers for the IBM MQ server channel, the TLS handshake will fail with the error `MQRC_UNSUPPORTED_CIPHER_SUITE`.
 
-Several AMPLIFY API Management customers were facing the challenge to connect API Gateway to an upgraded IBM MQ server, and reconfigure the IBM MQ client settings within Policy Studio for this change, and the following sections describe the background and steps for how best to accomplish this.
+Several Amplify API Management customers were facing the challenge to connect API Gateway to an upgraded IBM MQ server, and reconfigure the IBM MQ client settings within Policy Studio for this change, and the following sections describe the background and steps for how best to accomplish this.
 
 ## Configure API Gateway for TLS with IBM MQ Server
 

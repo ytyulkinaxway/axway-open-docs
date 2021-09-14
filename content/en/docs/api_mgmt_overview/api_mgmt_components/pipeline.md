@@ -8,14 +8,14 @@
 
 These days, the speed at which you can bring new products to market plays an enormous role in your company's success. In the software environment, an integration pipeline is typically used to compile, test, and deploy the software. APIs are no exception and should be deployed in the same way, if necessary even parallel to the application that provides the API.
 
-In addition to the speed advantage, the integration of AMPLIFY API Management into an integration pipeline brings several benefits:
+In addition to the speed advantage, the integration of Amplify API Management into an integration pipeline brings several benefits:
 
 * Automated testing facilitates version management
 * Less effort for the developer to manage the API
 * Better feedback loop leads to a better product (better API)
 * Working collaboratively is made easier
 
-To integrate AMPLIFY API Management, two deployment artifacts must be considered and deployed in separate pipelines:
+To integrate Amplify API Management, two deployment artifacts must be considered and deployed in separate pipelines:
 
 * Policies - Policies provide security, integration, and routing functions and are developed by the policy developer. Policies are developed in a general way and are used by a variety of APIs. Policies are deployed to the corresponding API Gateways or the API Gateway group. Policy changes and the associated deployments are significantly less frequent than individual APIs.
 * APIs - The APIs deployment unit is defined by the actual API specification and the configuration of how the API is to be managed on the API management system. Both can be described as API packages and are deployed individually. These packages are managed by API developers (also called producers).
@@ -33,7 +33,7 @@ The policy configuration consists of:
 
 For deployment, the policy file and the corresponding environment file are merged to form the `fed` file, which is then deployed to the API Gateways.
 
-The AMPLIFY API Management solution provides predeployment scripts that you can use in an integration pipeline.
+The Amplify API Management solution provides predeployment scripts that you can use in an integration pipeline.
 
 Instead of deploying policy and environment files directly from the version management system, it is best to build release packages that are stored in a release repository. This allows auditing, simple rollbacks, and the maintenance of dependencies.
 
