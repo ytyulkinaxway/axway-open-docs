@@ -123,5 +123,4 @@ Watch this quick animation to delete your subscription.
 
 ## Further information
 
-* [Manage subscription workflow for V7 Manager](/docs/central/connect-api-manager/subscription-for-the-consumer/)
-* [Manage subscription workflow for AWS](/docs/central/connect-aws-gateway/subscription-for-the-consumer/)
+* [Manage subscription workflow](/docs/central/connected_agent_common_reference/manage_subscription_workflow/)
