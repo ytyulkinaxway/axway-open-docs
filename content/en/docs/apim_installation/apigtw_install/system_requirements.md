@@ -72,7 +72,7 @@ The disk space and RAM requirements for the developer tools on Windows platforms
 There are also specific requirements for the `/tmp` directory:
 
 * Minimum 500 MB available in the `/tmp` directory and writable permissions on the `/tmp`, `/var/tmp`, and `/usr/tmp` directories.
-* `noexec` must not be set on `/tmp`. If `noexec` is set, you must remount `/tmp` with `noexec` disabled or follow the additional steps detailed in [/tmp directory mounted with noexec](/docs/apim_installation/apigtw_install/system_requirements/#tmp-directory-mounted-with-noexec).
+* `noexec` must not be set on `/tmp`. If `noexec` is set, you must remount `/tmp` with `noexec` disabled or follow the additional steps detailed in [Linux tmp directory mounted with noexec](/docs/apim_installation/apigtw_install/system_requirements/#linux-tmp-directory-mounted-with-noexec).
 
 ## Databases
 
@@ -238,7 +238,7 @@ This section lists additional prerequisites for installing API Gateway.
 
 On Linux, you must ensure that the installation executable has the appropriate permissions in your environment. For example, you can use the `chmod` command to update the file permissions.
 
-### /tmp directory mounted with noexec
+### Linux tmp directory mounted with noexec
 
 If your Linux system has the `/tmp` directory mounted with `noexec`, you must complete some additional steps before installing or running API Gateway.
 
