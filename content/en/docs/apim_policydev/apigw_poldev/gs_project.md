@@ -32,19 +32,30 @@ Click **Next**.
 
 Select one of the following in the **Project starting point** window:
 
-* **From a template configuration**
+* **From a YAML template configuration**
+* **From an XML template configuration**
 * **From a .fed file**
 * **From .pol and .env files**
 * **From an API Gateway instance**
 * **From existing configuration**
 
-### New project from a template configuration
+### New project from a YAML template configuration
 
 To create a new project based on template configuration:
 
 1. Select the configuration template to use as a starting point:
-    * **Factory template**: Blank template that contains default factory configuration.
-    * **Factory template with samples**: Blank template that contains sample policies and other entities. This is for creating a project used for demo purposes.
+    * **Factory Template**: Blank template that contains default factory configuration.
+    * **Factory Template with samples**: Blank template that contains sample policies and other entities. This is for creating a project used for demo purposes.
+
+2. Click **Finish**.
+
+### New project from an XML template configuration
+
+To create a new project based on template configuration:
+
+1. Select the configuration template to use as a starting point:
+    * **Factory Template**: Blank template that contains default factory configuration.
+    * **Factory Template with samples**: Blank template that contains sample policies and other entities. This is for creating a project used for demo purposes.
     * **Team Development – Common Project (with Server Settings)**: Blank template that contains **Server Settings**. This is for creating your common project only. This should include policies common to multiple API projects (for example, authentication and authorization). Your API Gateway configuration must contain only one project with **Server Settings**. All other projects must have no **Server Settings**.
     * **Team Development – API Project (without Server Settings)**: Blank template that does not contain **Server Settings**. This is for creating all your projects (except your common project). Your API Gateway configuration must contain only one project with **Server Settings**. All other projects must have no **Server Settings**.
 
