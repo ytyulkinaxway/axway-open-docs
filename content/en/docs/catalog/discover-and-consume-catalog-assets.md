@@ -81,6 +81,22 @@ The following is a list of all possible subscription states:
 * **Unsubscribed**: The flow was successfully removed from Flow Manager.
 * **Unsubscribe Failed**: There was an error with the removal of the flow in Flow Manager.
 
+## Add CFT profile to an application
+
+This section shows how to configure an application with a CFT profile.
+
+### Create or open an application
+
+1. Select **Apps** in the left navigation bar, and select an existing app or create a new app.
+2. On **Identity Profiles** tab, add a **CFT profile**.
+3. Enter **Name** and **Product name**, which will be used by the file exchange application.
+
+Watch the animation to learn how to perform this task.
+
+![CFT profile created](/Images/central/cft_profile_Save.gif)
+
+{{< alert title="Note" color="primary" >}}A Profile used for a catalog subscription cannot be updated or deleted.{{< /alert >}}
+
 ## Edit a subscription
 
 You can change the details of a subscription (for instance, when you want to select another application) from the **Subscriptions** page. To edit a subscription:
