@@ -14,9 +14,9 @@ This section describes the operating system requirements for API Gateway.
 
 API Gateway supports the following software versions:
 
-* CentOS 6.x, 7.x, 8.x (CentOS 8.x is supported from [API Gateway May 21](/docs/apim_relnotes/20200530_apimgr_relnotes/) update onward.)
+* CentOS 6.x, 7.x, 8.x (CentOS 8.x is supported from [API Gateway May 20](/docs/apim_relnotes/20200530_apimgr_relnotes/) update onward.)
 * Oracle Linux 6.x, 7.x
-* Red Hat Enterprise Linux 6.x, 7.x, 8.x (RHEL 8.x is supported from [API Gateway May 21](/docs/apim_relnotes/20200530_apimgr_relnotes/) update onward.)
+* Red Hat Enterprise Linux 6.x, 7.x, 8.x (RHEL 8.x is supported from [API Gateway May 20](/docs/apim_relnotes/20200530_apimgr_relnotes/) update onward.)
 * SUSE Linux Enterprise Server 11.x, 12.x
 
 API Gateway supports the following hardware:
