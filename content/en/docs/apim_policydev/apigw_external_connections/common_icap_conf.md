@@ -57,11 +57,9 @@ The default value is `FIPS:!SSLv3:!aNULL`.
 Select one of the following ICAP server modes on the **Advanced**
 tab:
 
-**Request Modification Mode (REQMOD)**: Specifies that the **ICAP**
-filter in the API Gateway sends a Request Modification (REQMOD) request to the ICAP server. The ICAP server returns a modified version of the request, an HTTP response, or a 204 response code indicating that no modification is required. This mode is selected by default.
+**Request Modification Mode (REQMOD)**: Specifies that the **ICAP** filter in the API Gateway sends a Request Modification (REQMOD) request to the ICAP server. The ICAP server returns a modified version of the request, an HTTP response, or a 204 response code indicating that no modification is required. This mode protects your own API service providers from malicious clients **requests**, for example, requests from unknown sources. This mode is selected by default.
 
-**Response Modification Mode (RESPMOD)**: Specifies that the **ICAP**
-filter in the API Gateway sends a Response Modification (RESPMOD) request to the ICAP server. For example, the API Gateway sends an origin server's HTTP response to the ICAP server. The response from the ICAP server can be an adapted HTTP response, an error, or a 204 response code indicating that no adaptation is required.
+**Response Modification Mode (RESPMOD)**: Specifies that the **ICAP** filter in the API Gateway sends a Response Modification (RESPMOD) request to the ICAP server. For example, the API Gateway sends an origin server's HTTP response to the ICAP server. The response from the ICAP server can be an adapted HTTP response, an error, or a 204 response code indicating that no adaptation is required. Use this mode when you are a client yourself and you want to communicate, for example, with a cloud application. Here you want to make sure that the **response** you receive does not contain malicious code..
 
 ### Custom headers
 
