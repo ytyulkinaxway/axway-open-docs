@@ -351,7 +351,7 @@ The fields in the transaction entries include the following:
 
 **protocolSrc**: Local inbound protocol port (or path).
 
-**duration**: Execution time of the transaction element (in ms).
+**duration**: Execution time of the transaction (in ms).
 
 **status**: Transaction result status.
 
@@ -371,47 +371,27 @@ The fields in the transaction entries include the following:
 
 **legs**: Legs processed during the transaction. Each leg contains the following fields:
 
-**status**: HTTP status code returned.
-
-**statustext**: HTTP status message returned.
-
-**method**: HTTP method used.
-
-**Vhost**: Virtualized API's host.
-
-**wafStatus**: Threat protection profile status.
-
-**bytesSent**: Number of bytes sent.
-
-**bytesReceived**: Number of bytes received.
-
-**remoteName**: Name representing remote host of the transaction.
-
-**remoteAddr**: Remote host address of transaction.
-
-**localAddr**: Local host of transaction.
-
-**remotePort**: Remote port of transaction.
-
-**localPort**: Local port of transaction.
-
-**Sslsubject**: Subject name of peer certificate used to establish SSL connection.
-
-**leg**: Transaction element number.
-
-**timestamp**: Event timestamp.
-
-**duration**: Execution time of the transaction element (in ms).
-
-**serviceName**: API Gateway instance name.
-
-**subject**: Authenticated user (content of attribute `authentication.subject.id`).
-
-**operation**: SOAP request method used.
-
-**type**: Protocol used.
-
-**finalStatus**: Status text of the transaction element (global policy) execution. Only written after all policies have been executed. Initialized to "null". Possible values: "Pass", "Fail", or "Error".
+* **status**: HTTP status code returned.
+* **statustext**: HTTP status message returned.
+* **method**: HTTP method used.
+* **Vhost**: Virtualized API's host.
+* **wafStatus**: Threat protection profile status.
+* **bytesSent**: Number of bytes sent.
+* **bytesReceived**: Number of bytes received.
+* **remoteName**: Name representing remote host of the transaction.
+* **remoteAddr**: Remote host address of transaction.
+* **localAddr**: Local host of transaction.
+* **remotePort**: Remote port of transaction.
+* **localPort**: Local port of transaction.
+* **Sslsubject**: Subject name of peer certificate used to establish SSL connection.
+* **leg**: Transaction element number.
+* **timestamp**: Event timestamp.
+* **duration**: Time elapsed between request creation and response processing (in ms).
+* **serviceName**: API Gateway instance name.
+* **subject**: Authenticated user (content of attribute `authentication.subject.id`).
+* **operation**: SOAP request method used.
+* **type**: Protocol used.
+* **finalStatus**: Status text of the transaction element (global policy) execution. Only written after all policies have been executed. Initialized to "null". Possible values: "Pass", "Fail", or "Error".
 
 The following example shows the JSON format used for an HTTP `transaction` event with a service context and inbound and outbound transaction legs:
 
