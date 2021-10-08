@@ -23,13 +23,3 @@ Here are some suggestions to get started:
 * [Administer API management](/docs/apim_administration/)
 * [Develop in Policy Studio](/docs/apim_policydev/)
 * [Release notes](/docs/apim_relnotes/)
-
-## Amplify Central documentation
-
-Browse all documentation for Amplify Central and Amplify Unified Catalog under the top-level [Amplify Central](/docs/central/) item in the left navigation menu.
-
-Here are some suggestions to get started:
-
-* [Get started with Amplify Central](/docs/central/quickstart/)
-* [Get started with Axway Central CLI](/docs/central/cli_central/)
-* [Amplify Unified Catalog](/docs/catalog/)
