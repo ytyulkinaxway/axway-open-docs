@@ -79,19 +79,15 @@ To clone the Axway-Open-Docs repository directly, enter the following commands i
 
 ```
 cd ~
-git clone --recurse-submodules --depth 1 git@github.com:Axway/axway-open-docs.git
+git clone git@github.com:Axway/axway-open-docs.git
 ```
 
 If you have forked the Axway-Open-Docs repository, enter the following commands to clone your _fork_ of the repo instead:
 
 ```
 cd ~
-git clone --recurse-submodules --depth 1 git@github.com:YOUR-USERNAME/axway-open-docs.git
+git clone git@github.com:YOUR-USERNAME/axway-open-docs.git
 ```
-
-{{% alert title="Note" %}}
-In both cases, you must use `--recurse-submodules` or you will not pull down the Docsy theme code you need to generate a working site.
-{{% /alert %}}
 
 After running these commands, you will have a local copy of the repository in the following location:
 
@@ -134,9 +130,9 @@ $ hugo version
 Hugo Static Site Generator v0.66.0-78C3C78F/extended linux/amd64 BuildDate: 2020-03-03T15:28:32Z
 ```
 
-### Install NodeJS and PostCSS
+### Install NodeJS
 
-You need a recent version (10.x or later) of [NodeJS](https://nodejs.org/en/) so you can use `npm` to install PostCSS.
+You need a recent version (10.x or later) of [NodeJS](https://nodejs.org/en/). The `build.sh` script uses NodeJS to install PostCSS, which is required to run the Docsy theme submodule.
 
 Enter the following commands in WSL to install NodeJS version 10.x:
 
@@ -147,20 +143,13 @@ sudo apt-get install -y nodejs
 
 See [Node.js Binary Distributions](https://github.com/nodesource/distributions/blob/master/README.md) for instructions for installing other versions on Ubuntu.
 
-Enter the following command in WSL to install PostCSS using `npm`:
-
-```
-cd ~/axway-open-docs
-sudo npm install
-```
-
 ## Build the site locally
 
-Run the `hugo server` command in your site root:
+Run the `build.sh` script to build your site locally:
 
 ```
 cd ~/axway-open-docs/
-hugo server
+./build.sh
 ```
 
 The website is now available locally at `http://localhost:1313/`.
