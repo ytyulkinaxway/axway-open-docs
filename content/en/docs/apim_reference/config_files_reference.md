@@ -1,11 +1,10 @@
 {
-    "title": "API Gateway configuration files",
-    "linkTitle": "API Gateway configuration files",
-    "weight": 130,
-    "date": "2020-07-16",
-    "description": "List of files that you can use to change API Gateway configuration."
+"title": "API Gateway configuration files",
+  "linkTitle": "API Gateway configuration files",
+  "weight": 130,
+  "date": "2020-07-16",
+  "description": "List of files that you can use to change API Gateway configuration."
 }
-
 List of API Gateway files that you can use to change the configuration of the product, so you can test your customizations after the upgrade is complete.
 
 ## Redaction files
@@ -203,15 +202,15 @@ Used for configuring rules around passphrase requirements for node managers and 
 apigateway/conf/passphrasePolicy.json
 ```
 
-## userconfig.dtd for node manager
+## userconfig.xml for node manager
 
 User configurations for node manager.
 
 ```
-apigateway/conf/userconfig.dtd
+apigateway/conf/userconfig.xml
 ```
 
-This file is pulled in via `system/conf/config.dtd`, which is used in the `system/conf/nodemanager.xml`.
+This file is pulled in via `system/conf/config.xml`, which is used in the `system/conf/nodemanager.xml`.
 
 ## API Manager custom properties
 
