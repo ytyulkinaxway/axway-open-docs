@@ -73,7 +73,7 @@ The following features are available for API Gateway:
 * The product can validate certificates using CRL, OCSP, and XKMS.
 * It is possible to validate the thumbprint, attributes, and chain of a given certificate using the out-of-the-box filters.
 * Local private keys can be stored in the local certificate store and can be encrypted with the Entity Store passphrase using the PBE with SHA and 3DES (for example, pbeWithSHAAnd3_KeyTripleDES_CBC) algorithm.
-* The local private keys can be stored in a Hardware Security Module (HSM). For example, Thales nShield Solo or Safenet Luna SA.
+* The local private keys can be stored in a Hardware Security Module (HSM).
 
 ## API Gateway identity and access management features
 

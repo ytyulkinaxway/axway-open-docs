@@ -62,7 +62,7 @@ You can use the following buttons to import or export certificates into the cert
 
 Use the **Private Key**tab to configure details of the private key. By default, private keys are stored locally (for example, in the API Gateway certificate store). They can also be provided by an OpenSSL engine, or stored on a Hardware Security Module (HSM) if required.
 
-API Gateway supports PKCS#11-compatible HSM devices. For example, this includes Thales nShield Solo, SafeNet Luna SA, and so on.
+API Gateway supports PKCS#11-compatible HSM devices.
 
 ![Edit a Private key](/Images/APIGateway/general_certs_edit_key_new.png)
 

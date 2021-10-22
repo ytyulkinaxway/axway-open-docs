@@ -155,7 +155,7 @@ Certificates and key pairs can be imported into the API Gateway's trusted certif
 
 {{< alert title="Note" color="primary" >}}All private keys stored in the certificate store can be encrypted with the Entity Store passphrase.{{< /alert >}}
 
-For more information on the certificate store, see [Manage certificates and keys](/docs/apim_administration/apigtw_admin/general_certificates/). Certificates and keys can also be stored in a Hardware Security Module (HSM), for example, Thales nShield Solo or Safenet Luna SA.
+For more information on the certificate store, see [Manage certificates and keys](/docs/apim_administration/apigtw_admin/general_certificates/). Certificates and keys can also be stored in a Hardware Security Module (HSM).
 
 ## Configure certificates for API Gateway internal SSL channels
 
