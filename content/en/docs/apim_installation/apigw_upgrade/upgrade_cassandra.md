@@ -23,11 +23,98 @@ The upgrade process differs according to your environment:
 * When upgrading a cluster on a single-datacenter or multi-datacenter setup, you must avoid any schema changes until the entire cluster has been upgraded to the same version.
 * Running `nodetool repair` on a Cassandra node affects performance on a system running live traffic. We recommend that you perform the Cassandra upgrade in the evening or during a maintenance window when the load is minimal.
 
+## Upgrade Cassandra in a multi-node single datacenter
+
+This section provides an example of how to upgrade Cassandra in a multi-node environment. The upgrade is a two-stage process:
+
+1. Stage 1 - Upgrade Cassandra from version 2.2.8/2.2.12 to version 2.2.19.
+2. Stage 2 - Upgrade Cassandra from version 2.2.19 to version 3.11.11.
+
+### Stage 1 - Upgrade Cassandra 2.2.8/2.2.12 to 2.2.19
+
+You must upgrade each node in your Cassandra cluster individually before moving to the next node in the cluster. The entire cluster must be upgraded before moving to Stage 2.
+
+#### Update Cassandra's driver configuration in API Gateway
+
+Before upgrading the Cassandra cluster, you must set Cassandra's driver protocol to version `V3` in your gateways:
+
+1. Create a file called `jvm.xml` in the following location:
+
+    ```
+    INSTALL_DIR/apigateway/groups/GROUP_ID/INSTANCE_ID/conf
+    ```
+2. Edit the `jvm.xml` as follows:
+
+    ```
+    <ConfigurationFragment>
+        <VMArg name="-DCASSANDRA_PROTOCOL_VERSION=3" />
+    </ConfigurationFragment>
+    ```
+3. Restart API Gateway.
+
+#### Install Cassandra 2.2.19
+
+To start upgrading your old installation:
+
+1. Download [Cassandra 2.2.19](https://support.axway.com/en/downloads/download-details/id/1449277).
+2. Unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-2219/`.
+3. To complete your installation, perform all steps from section [Upgrade in a single-node](#step-1---backup-your-old-cassandra-data) for each node in the cluster, by replacing the 3.11.11 version with your target version 2.2.19. After that, proceed to Stage 2.
+
+### Stage 2 - Upgrade Cassandra 2.2.19 to 3.11.11
+
+To start upgrading your old installation:
+
+1. Download [Cassandra 3.11.11](https://support.axway.com/en/downloads/download-details/id/1449279)
+2. Unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-31111/`.
+3. To complete your installation, perform all steps from section [Upgrade in a single-node](#step-1---backup-your-old-cassandra-data) for each node in the cluster, then return to execute the following section.
+
+#### Revert Cassandra's driver configuration in API Gateway
+
+Update API Gateway back to use Cassandra's `V4` protocol.
+
+1. To reconfigure the protocol version on each instance of API Gateway, edit the `INSTALL_DIR/apigateway/groups/GROUP_ID/INSTANCE_ID/conf/jvm.xml` file, and remove the previously set JVM argument.
+
+    ```
+    <ConfigurationFragment>
+        <VMArg name="-DCASSANDRA_PROTOCOL_VERSION=4" />
+    </ConfigurationFragment>
+    ```
+    This reverts the gateway to use Cassandra's V4 protocol.
+2. Restart API Gateway.
+
+## Upgrade Cassandra in a multi-node multi-datacenter
+
+To upgrade Apache Cassandra in a multi-node multi-datacenter environment, follow the same steps as for the [Multi-node single-datacenter](#upgrade-cassandra-in-a-multi-node-single-datacenter) procedure, which follows a two-stage process: upgrade Cassandra from version 2.2.8/2.2.12 to version 2.2.19, then upgrade from version 2.2.19 to version 3.11.11.
+
+Attention to the following:
+
+* Repeat the steps on each node in the cluster.
+* Upgrade all of the nodes in one datacenter before moving to the next one.
+* Only reconfigure the API Gateway to use Cassandra protocol `V4` after all datacenter have been upgraded.
+
+## Upgrade multi-node multi-datacenter directly to 3.11.11
+
+{{< alert title="Caution" color="warning" >}}Upgrading multi-node environments directly to version 3.11.11 result in downtime of API Gateway and Cassandra.{{< /alert >}}
+
+To upgrade Apache Cassandra directly to version 3.11.11 in a multi-node or multi-datacenter environment, follow the same steps as for [Single-node](/docs/apim_installation/apigw_upgrade/upgrade_cassandra/#cassandra-upgrade-steps--single-node)) procedure.
+
+Attention to the following:
+
+* Repeat the steps on each node in the cluster.
+* Upgrade all of the nodes in one DC before moving to the next DC.
+* Only restart the API Gateway once all nodes and DCs have been upgraded.
+
 ## Upgrade Cassandra in a single-node
 
-In a single-node environment, you can upgrade directly to version 3.11.11. To get started you must download [Cassandra 3.11.11](https://support.axway.com/en/downloads/download-details/id/1449279), unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-31111/`
+In a single-node environment, you can upgrade directly to version 3.11.11.
 
-Now you can proceed to the next sections to complete your installation.
+Perform the following to get started:
+
+1. Download [Cassandra 3.11.11](https://support.axway.com/en/downloads/download-details/id/1449279)
+2. Unzip the downloaded package
+3. Copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-31111/`.
+
+Now, you can proceed to the next sections to complete your installation.
 
 {{< alert title="Caution" color="warning" >}}Upgrading single-node environments result in downtime of API Gateway and Cassandra.{{< /alert >}}
 
@@ -151,89 +238,6 @@ Restart each API Gateway instance. Open a shell at the `/posix/bin` directory of
 ```
 startinstance -n "my_server" -g "my_group"
 ```
-
-## Upgrade Cassandra in a multi-node single datacenter
-
-This section provides an example of how to upgrade Cassandra in a multi-node environment. The upgrade is a two-stage process:
-
-1. Stage 1 - Upgrade Cassandra from version 2.2.8/2.2.12 to version 2.2.19.
-2. Stage 2 - Upgrade Cassandra from version 2.2.19 to version 3.11.11.
-
-### Stage 1 - Upgrade Cassandra 2.2.8/2.2.12 to 2.2.19
-
-You must upgrade each node in your Cassandra cluster individually before moving to the next node in the cluster. The entire cluster must be upgraded before moving to Stage 2.
-
-#### Update Cassandra's driver configuration in API Gateway
-
-Before upgrading the Cassandra cluster, you must set Cassandra's driver protocol to version `V3` in your gateways:
-
-1. Create a file called `jvm.xml` in the following location:
-
-    ```
-    INSTALL_DIR/apigateway/groups/GROUP_ID/INSTANCE_ID/conf
-    ```
-2. Edit the `jvm.xml` as follows:
-
-    ```
-    <ConfigurationFragment>
-        <VMArg name="-DCASSANDRA_PROTOCOL_VERSION=3" />
-    </ConfigurationFragment>
-    ```
-3. Restart API Gateway.
-
-#### Install Cassandra 2.2.19
-
-To start upgrading your old installation:
-
-1. Download [Cassandra 2.2.19](https://support.axway.com/en/downloads/download-details/id/1449277).
-2. Unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-2219/`.
-
-    {{< alert title="Note" color="primary" >}}To complete your installation, follow all steps on section [Upgrade in a single node](#step-1---backup-your-old-cassandra-data) for each node in the cluster. After that, proceed to Stage 2.{{< /alert >}}
-
-### Stage 2 - Upgrade Cassandra 2.2.19 to 3.11.11
-
-To start upgrading your old installation:
-
-1. Download [Cassandra 3.11.11](https://support.axway.com/en/downloads/download-details/id/1449279)
-2. Unzip the downloaded package, and copy the installation directory to the target Cassandra server node in an appropriate directory, for example, `/home/cassandra-31111/`.
-
-    {{< alert title="Note" color="primary" >}}To complete your installation, follow all steps on section [Upgrade in a single node](#step-1---backup-your-old-cassandra-data) for each node in the cluster, then return to execute the following section.{{< /alert >}}
-
-#### Revert Cassandra's driver configuration in API Gateway
-
-Update API Gateway back to use Cassandra's `V4` protocol.
-
-1. To reconfigure the protocol version on each instance of API Gateway, edit the `INSTALL_DIR/apigateway/groups/GROUP_ID/INSTANCE_ID/conf/jvm.xml` file, and remove the previously set JVM argument.
-
-    ```
-    <ConfigurationFragment>
-        <VMArg name="-DCASSANDRA_PROTOCOL_VERSION=4" />
-    </ConfigurationFragment>
-    ```
-    This reverts the gateway to use Cassandra's V4 protocol.
-2. Restart API Gateway.
-
-## Upgrade Cassandra in a multi-node multi-datacenter
-
-To upgrade Apache Cassandra in a multi-node multi-datacenter environment, follow the same steps as for the [Multi-node single-datacenter](#upgrade-cassandra-in-a-multi-node-single-datacenter) procedure, which follows a two-stage process: upgrade Cassandra from version 2.2.8/2.2.12 to version 2.2.19, then upgrade from version 2.2.19 to version 3.11.11.
-
-Attention to the following:
-
-* Repeat the steps on each node in the cluster.
-* Upgrade all of the nodes in one datacenter before moving to the next one.
-* Only reconfigure the API Gateway to use Cassandra protocol `V4` after all datacenter have been upgraded.
-
-## Upgrade multi-node multi-datacenter directly to 3.11.11
-
-{{< alert title="Caution" color="warning" >}}Upgrading multi-node environments directly to version 3.11.11 result in downtime of API Gateway and Cassandra.{{< /alert >}}
-
-To upgrade Apache Cassandra directly to version 3.11.11 in a multi-node or multi-datacenter environment, follow the same steps as for [Single-node](/docs/apim_installation/apigw_upgrade/upgrade_cassandra/#cassandra-upgrade-steps--single-node)) procedure.
-
-Attention to the following:
-
-* Repeat the steps on each node in the cluster.
-* Upgrade all of the nodes in one DC before moving to the next DC.
-* Only restart the API Gateway once all nodes and DCs have been upgraded.
 
 ## Troubleshooting
 
