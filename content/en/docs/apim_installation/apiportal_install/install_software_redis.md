@@ -1,13 +1,30 @@
 {
-"title": "Install Redis cache",
-  "linkTitle": "Install Redis",
+"title": "Configure Redis cache",
+  "linkTitle": "Configure Redis",
   "weight": "50",
   "date": "2019-08-09",
-  "description": "Optionally install a Redis cache for better performance."
+  "description": "Configure a Redis cache to improve the performance of your API catalog."
 }
+
 For better performance and scalability, you can configure API Portal to cache APIs in a Redis cache. Using a Redis cache is recommended if you plan to expose hundreds of APIs, or you plan to connect API Portal to more than one API Manager.
 
-## Install Redis on Red Hat 7 (RHEL 7) using RHSCL
+{{< alert title="Note" color="primary" >}}While Redis support only caching of the API catalog page, [Elasticsearch](/docs/apim_installation/apiportal_install/install_software_elastic/) also supports Applications page caching. Therefore, we recommend using [Elasticsearch](/docs/apim_installation/apiportal_install/install_software_elastic/) instead of Redis.{{< /alert >}}
+
+## Prerequisites
+
+Before you configure API Portal to cache APIs in a Redis cache you must install at least one of the following Redis options:
+
+* Install Redis server.
+* Install Redis PHP extension on Red Hat 7 (RHEL 7) using RHSCL.
+* Install Redis PHP extension on CentOS 7 or RHEL 8 using EPEL/Remi.
+
+### Install Redis server
+
+To install Redis server, download a Redis 5 or 6 server from [Redis.io](https://redis.io/download).
+
+### Install Redis PHP extension on Red Hat 7 (RHEL 7) using RHSCL
+
+Follow these steps to install a Redis PHP extension on RHEL 7:
 
 1. Enable `rhel-server-rhscl-7-rpms` and `rhel-7-server-optional-rpms` repositories from RHSCL:
 
@@ -17,83 +34,54 @@ For better performance and scalability, you can configure API Portal to cache A
    sudo yum clean all
    ```
 
-2. Install Redis:
-
-   ```shell
-   sudo yum install rh-redis5
-   ```
-
-3. Enable Redis executables in any bash session by default:
-
-   ```shell
-   echo "source scl_source enable rh-redis5" | sudo tee -a /etc/profile.d/scl-redis5.sh
-   source /etc/profile.d/scl-redis5.sh
-   ```
-
-4. Enable and start the Redis service:
-
-   ```shell
-   sudo systemctl enable --now rh-redis5-redis
-   ```
-
-5. Verify the Redis service is active:
-
-   ```shell
-   systemctl status rh-redis5-redis
-   ```
-
-6. Install `rh-php73-php-devel` and `rh-php73-php-pear` to enable `pecl` (which manages external PHP modules) and `phpize` (which will build `redis` PHP module)`:
+2. Install `rh-php73-php-devel` and `rh-php73-php-pear` to enable `pecl` (which manages external PHP modules) and `phpize` (which will build `redis` PHP module)`:
 
    ```shell
    sudo yum install rh-php73-php-devel rh-php73-php-pear
    sudo ln -s $(which pecl) /usr/bin
    ```
 
-7. Install and enable `redis` PHP module:
+3. Install and enable `redis` PHP module:
 
    ```shell
    sudo pecl install redis
    echo "extension=redis.so" | sudo tee -a /etc/opt/rh/rh-php73/php.d/30-redis.ini
    ```
 
-8. Verify `redis` PHP module was successfully enabled:
+4. Verify `redis` PHP module was successfully enabled:
 
    ```shell
    php -m | grep redis
    ```
 
-9. Restart Apache:
+5. Restart Apache:
 
    ```shell
    sudo systemctl restart httpd24-httpd
    ```
 
-10. (Optional) Remove `rh-php73-php-devel` and `rh-php73-php-pear`:
+6. (Optional) Remove `rh-php73-php-devel` and `rh-php73-php-pear`:
 
     ```shell
     sudo yum remove rh-php73-php-devel rh-php73-php-pear
     ```
 
-## Install Redis on CentOS 7 and RHEL 8 using EPEL/Remi
+### Install Redis PHP extension on CentOS 7 or RHEL 8 using EPEL/Remi
 
-1. Install Redis and `redis` PHP module:
+Follow these steps to install a Redis PHP extension on CentOS 7 or RHEL 8:
+
+1. Install `redis5` PHP module:
 
    ```shell
-   sudo yum install redis php-pecl-redis5
+   sudo yum install php-pecl-redis5
    ```
-2. Enable and start the Redis service:
-   ```shell
-   sudo systemctl enable --now redis
-   ```
-3. Verify the Redis service is active:
-   ```shell
-   systemctl status redis
-   ```
-4. Verify `redis` PHP module is enabled:
+
+2. Verify `redis` PHP module is enabled:
    ```shell
    php -m | grep redis
    ```
-5. Restart Apache:
+
+3. Restart Apache:
    ```shell
    sudo systemctl restart httpd
    ```

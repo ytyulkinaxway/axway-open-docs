@@ -3,12 +3,14 @@
   "linkTitle": "Configure Elasticsearch",
   "weight": "50",
   "date": "2021-08-23",
-  "description": "Configure Elasticsearch in your API Portal to improve API and Applications management performance."
+  "description": "Configure Elasticsearch to improve API and Applications management performance."
 }
 
 When you connect your API Portal to an Elasticsearch server, API Portal can fetch all the API and Applications data from API Manager instances and load it into the Elasticsearch datastore.
 
 This connection also creates a pagination of 10 items per page in the API and Applications catalogs, which improves performance because only the configured number of resources per page are fetched and loaded into the server memory instead of the full list.
+
+Integration with Elasticsearch allows you to achieve the same caching capabilities as [caching with Redis](/docs/apim_installation/apiportal_install/install_software_redis/), and in addition, pagination with much better performance. While Redis support only caching of the API catalog page, Elasticsearch  also supports Applications page caching. Therefore, we recommend using Elasticsearch instead of [Redis](/docs/apim_installation/apiportal_install/install_software_redis/).
 
 ## Prerequisites
 

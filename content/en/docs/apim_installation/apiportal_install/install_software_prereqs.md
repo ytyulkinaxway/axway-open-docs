@@ -70,4 +70,4 @@ For more information on installing dependencies, see:
 
 * [Install Apache HTTP Server and PHP](/docs/apim_installation/apiportal_install/install_dependencies)
 * [Install and configure database server](/docs/apim_installation/apiportal_install/install_software_configure_database)
-* [Install Redis](/docs/apim_installation/apiportal_install/install_software_redis)
+* [Configure Redis cache](/docs/apim_installation/apiportal_install/install_software_redis)
