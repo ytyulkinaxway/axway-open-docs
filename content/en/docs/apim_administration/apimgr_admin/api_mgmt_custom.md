@@ -125,7 +125,9 @@ Some additional variables are only used in specific template files, which you ca
 
 ## Customize API Manager data
 
-API Manager organization, user, application, and API objects support user-defined fields called *custom properties*. These custom properties are stored with all other object properties in the API Manager persistence layer (defaults to Apache Cassandra). You can set and retrieve these custom properties in the same way as the default out-of-the-box **Organizations**, **Application Developers**, **Applications**, or **API** pages in API Manager. You can extend the respective user interface screens to enable viewing and editing of these custom properties. For user objects, these custom properties can also be set during user registration.
+API Manager organization, user, application, and API objects support user-defined fields called *custom properties*. These custom properties are stored with all other object properties in the API Manager persistence layer (defaults to Apache Cassandra).
+
+You can set and retrieve custom properties in the same way as the default out-of-the-box **Organizations**, **Application Developers**, **Applications**, or **API** pages in API Manager, and you can extend the respective user interface screens to enable viewing and editing of these custom properties. When configuring user objects, you can set the custom properties during user registration.
 
 You can configure custom properties using the following object in your API Manager configuration:
 
@@ -151,6 +153,8 @@ You can edit this information in the following file:
 ```
 INSTALL_DIR/apigateway/webapps/apiportal/vordel/apiportal/app/app.config
 ```
+
+For more info on how to configure custom properties, see [API Manager custom properties](/docs/apim_reference/config_files_reference/#api-manager-custom-properties).
 
 ### Add a custom property to organizations
 

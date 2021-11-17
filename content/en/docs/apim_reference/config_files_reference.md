@@ -214,7 +214,10 @@ This file is pulled in via `system/conf/config.xml`, which is used in the `syste
 
 ## API Manager custom properties
 
-These files contain customized settings for API Manager and API Gateway.
+Custom properties files contain customizable variables and functions for API Manager and API Gateway web UIs:
+
+* Javascript syntax must be used.
+* Media type `application/javascript` is implied when they are accessed via browser.
 
 The `vordel/apiportal/app/app.config` allows customers to add custom fields to the API Manager objects.
 
