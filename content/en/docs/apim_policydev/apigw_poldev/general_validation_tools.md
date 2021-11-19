@@ -33,4 +33,4 @@ menu option. When you run the tool, it generates a list of violations. Click the
 
 ## Compliant settings for filters
 
-For guidance on compliant settings for filters, see the [API Management Security Guide](/docs/apimgmt_security/compliance_appendix/).
+For guidance on compliant settings for filters, see the [API Management Security Guide](https://docs.axway.com/bundle/apim-security-guide/page/compliant_configuration_settings_for_policy_studio.html).

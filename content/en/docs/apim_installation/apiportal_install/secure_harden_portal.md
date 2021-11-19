@@ -20,7 +20,7 @@ To enable SSL on API Portal, you must configure Apache to use the correct certi
 2. Change `SSLCertificateFile` and `SSLCertificateKeyFile` to point to your CA certificate and key files.
 3. Restart Apache.
 
-For more details on API Portal certificate management, see the [API Management Security Guide](/docs/apimgmt_security/).
+For more details on API Portal certificate management, see the [API Management Security Guide](https://docs.axway.com/bundle/apim-security-guide/page/api_management_security_guide.html).
 
 ## Disable TLS 1.0 and TLS 1.1 on Apache
 
@@ -405,5 +405,5 @@ When the retention periods expire you must ensure that all of the data which is 
 
 ## Where to go next
 
-* For more information on the security features of API Management products and best practices for strengthening their security, see the [API Management Security Guide](/docs/apimgmt_security/).
+* For more information on the security features of API Management products and best practices for strengthening their security, see the [API Management Security Guide](https://docs.axway.com/bundle/apim-security-guide/page/api_management_security_guide.html).
 * For privacy and personal data security recommendations, see [Manage privacy and personal data](/docs/apim_administration/apiportal_admin/manage_privacy_personal_data).

@@ -185,7 +185,7 @@ To configure the password policy that applies to admin user passwords, perform t
 
 ## Configure a passphrase policy for node managers and API Gateway groups
 
-You can configure a [passphrase policy](/docs/apimgmt_security/c_secgd_bp_intro/#passphrase-policy) that applies to the passphrases of node managers and API Gateway groups to prevent users to create extremely weak passphrases, such as `password` or `1234`.
+You can configure a [passphrase policy](https://docs.axway.com/bundle/apim-security-guide/page/security_best_practices.html#Securitybestpractices-Passphrasepolicy) that applies to the passphrases of node managers and API Gateway groups to prevent users to create extremely weak passphrases, such as `password` or `1234`.
 
 The passphrase policy is disabled by default. To enable it, perform the following steps as an API Server Administrator:
 

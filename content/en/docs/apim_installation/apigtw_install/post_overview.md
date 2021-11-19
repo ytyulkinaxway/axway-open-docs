@@ -81,7 +81,7 @@ The default idle session timeout for the API Gateway Manager web UI is 12 hours.
 
 For additional procedures you can perform to secure your API Gateway, see the [API Gateway Administrator Guide](/docs/apim_administration/apigtw_admin/).
 
-For more information on the security features of API Gateway and best practices for strengthening the security of API Gateway, see the [API Management Security Guide](/docs/apimgmt_security/).
+For more information on the security features of API Gateway and best practices for strengthening the security of API Gateway, see the [API Management Security Guide](https://docs.axway.com/bundle/apim-security-guide/page/api_management_security_guide.html).
 
 ## Set up services
 

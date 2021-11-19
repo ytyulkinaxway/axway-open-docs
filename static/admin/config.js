@@ -139,12 +139,6 @@ const collections = [{
   description: 'All pages relating to capacity planning and performance tests.',
   format: 'frontmatter',
 }, {
-  ...docsDefaults('apimgmt_security', 'docbook/images/security'),
-  name: 'apimgmt_security',
-  label: 'Security guidance',
-  label_singular: 'page in APIM security section',
-  description: 'All pages relating to security guidance for API Gateway, API Manager, and API Portal.',
-}, {
   ...docsDefaults('apim_administration/apigtw_admin', 'APIGateway'),
   name: 'apigtw_admin',
   label: 'Administer API Gateway',

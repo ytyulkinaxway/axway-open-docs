@@ -32,7 +32,7 @@ To learn more about security topics, see the following sections:
 
 * [Integrate with Identity Management servers](/docs/apigtw_auth_auth/)
 * [Integrate with Kerberos](/docs/apigtw_kerberos/)
-* [Security guidance](/docs/apimgmt_security/)
+* [Security guidance](https://docs.axway.com/bundle/apim-security-guide/page/api_management_security_guide.html)
 * [Configure OAuth](/docs/apim_policydev/apigw_oauth/)
 
 ### API Manager policies
