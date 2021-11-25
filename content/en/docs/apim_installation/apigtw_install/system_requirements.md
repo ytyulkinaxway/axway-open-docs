@@ -265,7 +265,7 @@ After completing the installation and before starting the services:
 
    ```xml
    <ConfigurationFragment>
-       <VMArg name="-Djava.io.tmpdir=<TheNewTmpDir>
+       <VMArg name="-Djava.io.tmpdir=<TheNewTmpDir>"/>
    </ConfigurationFragment>
    ```
 
