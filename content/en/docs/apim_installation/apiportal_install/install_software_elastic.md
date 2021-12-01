@@ -15,8 +15,8 @@ Integration with Elasticsearch allows you to achieve the same caching capabiliti
 ## Prerequisites
 
 * You must have an up and running Elasticsearch server.
-* You must have `cron` and `crontab` installed, and a `crond` service running in your API Portal server. (You can usually get `cron` by default with RHEL and CentOS Linux.)
 * Connecting Elasticsearch to a single node in API Portal is enough.
+* You must have `cron` and `crontab` installed, and a `crond` service running in your API Portal server. (You can usually get `cron` by default with RHEL and CentOS Linux.) This is not required for API Portal in a Docker container.
 
 ## Elasticsearch security practices
 
@@ -56,8 +56,6 @@ Follow these steps to connect API Portal to the Elasticsearch server, and to con
 ## Configure a schedule to push data to Elasticsearch
 
 After connecting API to Elasticsearch, populate the crontab fields to create a schedule to push data to Elasticsearch.
-
-{{< alert title="Note" color="primary" >}}Cron scheduling is not yet available when using API Portal in a Docker container. You must use [manual data push](#push-data-to-elasticsearch-manually) instead.{{< /alert >}}
 
 1. In JAI, click **Components > API Portal > Elasticsearch Settings**.
 2. Populate the following fields:
