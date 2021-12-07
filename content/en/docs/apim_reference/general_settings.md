@@ -15,6 +15,10 @@ You can configure the following settings in the **General** screen:
 
 **Tracing level**: Enables you to set the trace level for API Gateway at runtime. Select the appropriate option from the drop-down list. Defaults to `INFO`.
 
+**Connection Timeout**: Set the time to connect to a remote host. If a connection to a remote host is not established within the time set in this field, the connection times out and the connection fails. Defaults to `30000` milliseconds (`30` seconds).
+
+You can configure **Connection Timeout** on a per-host basis using the **Remote Hosts** setting. For more details, see [Configure remote host settings](/docs/apim_policydev/apigw_gw_instances/general_remote_hosts/).
+
 **Active timeout**: When the API Gateway receives or sends blocks of data over a network connection, if the time between reading or writing successive blocks of data exceeds the **Active Timeout** specified in milliseconds, API Gateway closes the connection. This guards against a host closing the connection in the middle of sending data. For example, if the host's network connection is pulled out of the machine while in the middle of sending data to API Gateway. When API Gateway has read all the available data off the network, it waits the **Active Timeout** period before closing the connection. Defaults to `30000` milliseconds.
 
 This setting applies to outgoing connections. For incoming connection settings, see [HTTP and HTTPS interfaces](/docs/apim_policydev/apigw_gw_instances/general_services#http-and-https-interfaces).

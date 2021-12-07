@@ -9,7 +9,7 @@
 You can create a new Policy Studio project from the following starting points:
 
 * Template configuration (for example, factory)
-* Deployment package (`.fed` file)
+* Deployment package (`.fed` file or `.tar.gz` file)
 * Policy and environment packages (`.pol` and .`env` files)
 * API Gateway instance
 * Existing API Gateway configuration
@@ -34,6 +34,7 @@ Select one of the following in the **Project starting point** window:
 
 * **From a YAML template configuration**
 * **From an XML template configuration**
+* **From a .tar.gz file (YAML)**
 * **From a .fed file**
 * **From .pol and .env files**
 * **From an API Gateway instance**
@@ -72,6 +73,15 @@ To create a new project based on a deployment package (`.fed` file):
 1. Configure the following:
     * **File**: Enter or browse to the location of an API Gateway deployment package (`.fed` file).
     * **Passphrase**: Enter the encryption passphrase for the `.fed` file if one has been configured.
+2. Click **Finish**.
+
+### New project from a .tar.gz file (YAML)
+
+To create a new project based on a deployment archive (`.tar.gz` file):
+
+1. Configure the following:
+    * **File**: Enter or browse to the location of an API Gateway deployment archive (`.tar.gz` file).
+    * **Passphrase**: Enter the encryption passphrase for the `.tar.gz` file if one has been configured.
 2. Click **Finish**.
 
 ### New project from a policy package (.pol) file

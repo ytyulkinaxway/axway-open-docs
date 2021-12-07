@@ -64,7 +64,7 @@ For more details on configuring encryption passphrases, see the [API Gateway Adm
 When a project is loaded in Policy Studio, you call select **File** > **Export** to save the project as a configuration package. Select one of the following from the menu:
 
 * **Deployment package**:
-    Saves the project as a `.fed` file that contains all API Gateway configuration. This includes policies, listeners, external connections, users, certificates, and environment settings.
+    Saves the project as an XML `.fed` file or YAML `.tar.gz` file that contains all API Gateway configuration. This includes policies, listeners, external connections, users, certificates, and environment settings.
 * **Policy package**:
     Saves the project as a `.pol` file that contains users, certificates, and environment settings.
 * **Environment package**:
@@ -74,7 +74,7 @@ When you have saved a configuration package, you can use it to create a Policy S
 
 ## Import configuration into a project
 
-When a project is loaded in Policy Studio, you can select **File** > **Import** > **Configuration Fragment** from the main menu to import configuration into the project. This feature enables you to import XML-based configuration previously exported from Policy Studio.
+When a project is loaded in Policy Studio, you can select **File** > **Import** > **Configuration Fragment** from the main menu to import configuration into the project. This feature enables you to import XML or YAML-based configuration previously exported from Policy Studio.
 
 You can also select **File** > **Import** > **Custom filters** to import custom filters to be added to the Policy Studio filter palette.
 

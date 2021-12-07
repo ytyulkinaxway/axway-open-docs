@@ -14,7 +14,7 @@ Your system must meet the following prerequisites before you can run the scripts
 You must have the following installed on your local system:
 
 * Docker CE version 18.06 or later on CentOS 7
-* Python version 2.7.x
+* Python version 3.x or later
 * OpenSSL version 1.1 or later
 
 {{< alert title="Note" color="primary" >}}Axway supports Red Hat Enterprise Linux 7 and CentOS Linux version 7 as the base image for Docker containers. Axway supports deployment on any host operating system, cloud provider, or container orchestration system supported by your Docker version. {{< /alert >}}

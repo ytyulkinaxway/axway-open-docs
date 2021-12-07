@@ -16,7 +16,7 @@ In addition, Policy Studio enables you to compare and merge differences between 
 
 You can edit API Gateway configuration in a Policy Studio project, and deploy to specified API Gateway instances running in an API Gateway group. You can deploy projects based on existing configuration, configuration packages, factory configuration, or a running API Gateway instance.
 
-Policy Studio also enables you to create configuration packages (`.fed`, `.pol`, or `.env` files), and to deploy projects based on configuration packages to API Gateway instances.
+Policy Studio also enables you to create configuration packages (`.fed`, `.tar.gz`, `.pol`, or `.env` files), and to deploy projects based on configuration packages to API Gateway instances.
 
 You can also deploy API Gateway configuration packages in the API Gateway Manager web console. Alternatively, you can use the `managedomain` script to create and deploy deployment packages (`.fed` files) on the command line.
 
@@ -67,7 +67,7 @@ When you have deployed a configuration to one or more instances, you can click b
 
 You can deploy configuration based on API Gateway configuration packages in Policy Studio and in the API Gateway Manager web console. API Gateway includes the following types of configuration package:
 
-* A *deployment package* is a `.fed` file that contains all API Gateway configuration. This includes policies, listeners, external connections, users, certificates, and environment settings.
+* A *deployment package* can be a `.fed` (XML) or `.tar.gz` (YAML) file that contains all API Gateway configuration. This includes policies, listeners, external connections, users, certificates, and environment settings.
 * A *policy package* is a `.pol` file that contains policies, listeners, external connections, and environment settings.
 * An *environment package* is an `.env` file that contains users, certificates, and environment settings. The content of the `.fed` file is equivalent to the combined contents of the `.pol` and `.env` files.
 * A *package property* is a name-value pair that applies to a specific configuration package (`.fed`, `.pol`, or `.env`). Specifying a property associates metadata with the configuration in that package. For example, the **Name** property with a value of `Default Factory Configuration` is associated with a default installation.
@@ -77,7 +77,9 @@ You can deploy configuration based on API Gateway configuration packages in Poli
 You can create an API Gateway configuration package for a currently loaded project configuration. To create a package (`.fed`, `.pol`, or `.env`), perform the following steps:
 
 1. In the main menu, select **File > Save Package** followed by the appropriate option:
-    * **Deployment Package** (`.fed`)
+    * **Deployment Package**
+        * `.fed` (XML)
+        * `.tar.gz` (YAML)
     * **Policy Package** (`.pol`)
     * **Environment Package** (`.env`)
 2. Enter a file name, and click **Save**.

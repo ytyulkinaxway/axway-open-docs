@@ -617,6 +617,43 @@ To specify the location of the API Gateway Manager console, perform the followin
 3. After updating the file, log into API Manager.
 4. Press **Ctrl-F5** to refresh.
 
+## Customize Amplify menu header
+
+You can configure API Manager and API Gateway Manager menu headers to enable features like search, help, and link to the [Amplify platform](https://platform.axway.com/#/). The menu header displays all features by default, but you can choose to hide some or all of them.
+
+* **Search**: Allows you to search by any term in multiple Axway portals, for example, documentation, support, blog, community, and so on.
+* **Help**: Displays a list of links to Axway's portals, for example, documentation, support, blog, community, and so on.
+* **Platform**: Redirects you to the [Amplify platform](https://platform.axway.com/#/) portal.
+
+The menu is located in the `app.config` file, and it is enabled by default:
+
+```
+connectedServicesMenu: {
+    headerOffline: false,
+    showSearch: true,
+    showHelp: true,
+    showPlatform: true
+}
+```
+
+To customize the menu header, perform the following steps:
+
+1. Edit the following files, accordingly to your product:
+
+    * API Manager: `INSTALL_DIR/apigateway/webapps/apiportal/vordel/apiportal/app/app.config`
+    * API Gateway Manager: `INSTALL_DIR/apigateway/webapps/emc/vordel/manager/app/app.config`
+
+2. Change the value of the properties.
+
+### Amplify menu header properties  
+
+The `connectedServicesMenu` object groups the connected services properties. You can configure the following properties.
+
+* `headerOffline`: Specifies whether to render the connected services menu in offline mode. If set to `true`, it hides the **Search**, **Help**, and **Platform** menu options, regardless of what the `showSearch`, `showHelp` or `showPlatform` properties are set to.
+* `showSearch`: Specifies whether to show the **Search** menu option. Defaults to `true`.
+* `showHelp`: Specifies whether to show the **Help** menu option. Defaults to `true`.
+* `showPlatform`: Specifies whether to show the **Platform** menu option. Defaults to `true`.
+
 ## Custom development
 
 Web application developers can use the API Manager REST API to perform custom development. For example, you can use this REST API to view and update the configured users, organizations, applications, and to monitor events related to API Portal and API Manager. For more details, see the [API Manager REST APIs](/docs/apim_reference/api_mgmt_rest_api/).

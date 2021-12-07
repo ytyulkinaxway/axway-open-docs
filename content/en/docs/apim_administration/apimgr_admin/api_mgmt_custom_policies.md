@@ -6,15 +6,13 @@
   "description": "Overview of API Manager custom policies. How to add custom routing policies, enforce global policies, and add fault handler policies."
 }
 
-## Overview of custom policies
+API Manager custom policies are optional policies developed in Policy Studio that can be applied to APIs registered in API Manager. For example, these include custom policies for inbound security, request or response processing, or routing. These custom policies enable policy developers to implement enterprise-specific policies in Policy Studio that can be applied to multiple APIs in API Manager.
 
-API Manager custom policies are optional policies developed in Policy Studio that can be applied to APIs registered in API Manager. For example, these include custom policies for inbound security, request or response processing, or routing.
+This page describes the API Manager HTTP request flow, and explains the different custom policies that you can add at different stages in the flow. It also provides examples of why you would use custom policies and explains what happens when they are executed at runtime.
 
-This topic describes the API Manager HTTP request flow, and explains the different custom policies that you can add at different stages in the flow. It also gives examples of why you would use these custom policies and explains what happens when they are executed at runtime.
+## HTTP request flow
 
-### HTTP request flow
-
-When custom policies are configured for front-end APIs in API Manager, the request flow is in the following order:
+When custom policies are configured for front-end APIs in API Manager, the request flows in the following order:
 
 1. Client request
 2. Default inbound security or optional inbound security policy
@@ -51,7 +49,7 @@ The client request is then routed to the back-end service.
 
 When the response is returned from the back-end service to API Manager, if an optional response policy is configured, it processes the response and can customize it as needed before the response is returned to the client.
 
-### Custom policy execution
+## Custom policy execution
 
 The order of execution of the different custom policies is as follows:
 
@@ -63,11 +61,11 @@ If a filter in a custom policy is aborted, the execution flow is interrupted, an
 
 If a filter in a custom policy returns `false`, and there is no false flow defined in the policy, an `HTTP 500 Internal Server Error` is returned to the client. However, in this case, you can customize the false flow and return a custom HTTP code and error message. For example, you could use a **Set Attributes** or **Copy/Modify Attributes** filter to set the following message attributes when your request policy fails:
 
-  ```
-  request.policy.failure = true
-  request.policy.httpcode = 403
-  request.policy.error.msg = something happened
-  ```
+```
+request.policy.failure = true
+request.policy.httpcode = 403
+request.policy.error.msg = something happened
+```
 
 You can then use a custom routing policy to control processing and routing to the back-end. For example, you can test the value of the `request.policy.failure` attribute to check if the request policy succeeded, and then route to back-end. If the request policy failed, you can stop processing, and use the values from `request.policy.httpcode` and `request.policy.error.msg` to create a custom message that is reflected to the end user.
 
@@ -75,11 +73,11 @@ You can define API Manager fault handler policies at the API Manager, API, and m
 
 In the case of failure, an `HTTP 500 Internal Server Error` response code is always returned for a SOAP 1.1 response, or an `HTTP 400` and `HTTP 500` for a SOAP 1.2 response with the corresponding SOAP fault code in the SOAP response body.
 
-### Custom policy types
+## Custom policy types
 
-These API Manager custom policies are described as follows:
+API Manager custom policies are described as follows:
 
-#### Inbound Security Policy
+### Inbound Security Policy
 
 Enables you to configure optional security policies to perform custom authentication for front-end APIs. API Manager provides a number of built-in authentication policies (for example, API key, OAuth, and SSL), which you can select when creating front-end APIs. You can extend the list of built-in authentication mechanisms by using the **Inbound security > Invoke policy** setting to select a custom authentication policy that has been developed in Policy Studio.
 
@@ -89,47 +87,55 @@ The inbound security policy must set the `authentication.subject.id` message att
 
 Custom policies developed for inbound security must always end on `true` or `false`. Returning `true` means successful authentication, and returning `false` means failed authentication. In this way, these policies behave like API Gateway Policy Shortcut filters, where the result is passed back to the calling policy and handled there.
 
-#### Global Request Policy
+### Global Request Policy
 
 Enables you to configure optional global enforcement policies for front-end APIs (for example, security, compliance, or governance policies executed as part of every API call). By default, no global policies are configured.
 
 When global request policies have been configured in Policy Studio, the API administrator can select a global request policy on the API Manager settings page. The selected global request policy is executed after inbound security but before any request, routing, or response policies configured for the front-end API.
 
-#### Request Policy
-
-Enables you to configure optional request processing policies for front-end APIs. For example, you could use a configured policy to check request messages for authentication or authorization. By default, no request policies are configured.
-
-When request policies have been configured in Policy Studio, you can then apply them in API Manager on the **Frontend API > Outbound > Advanced** page. The selected request policy is executed after inbound security and any global request policy, but before any routing or response policies configured for the front-end API.
-
-#### Routing Policy
-
-Enables you to configure custom routing policies for front-end APIs. For example, you could use a configured policy to route to a specific back-end JMS service. By default, no routing policies are configured, and a default routing policy template is used.
-
-When routing policies have been configured in Policy Studio, you can then apply them in API Manager on the **Frontend API > Outbound > Advanced** page. The selected routing policy is executed after any request policy and before any response policy configured for the front-end API.
-
-#### Response Policy
-
-Enables you to configure optional response processing policies for front-end APIs. For example, you could use a configured policy to validate or transform outbound response messages. By default, no response policies are configured.
-
-When response policies have been configured in Policy Studio, you can then apply them in API Manager on the **Frontend API > Outbound > Advanced** page. The selected response policy is executed after any routing policy configured for the front-end API, but before any global response policy.
-
-#### Global Response Policy
+### Global Response Policy
 
 Enables you to configure optional global enforcement policies for front-end APIs (for example, security, compliance, or governance policies executed as part of every API call). By default, no global response policies are configured.
 
 When global response policies have been configured in Policy Studio, the API administrator can select a global response policy on the API Manager settings page. The selected global response policy is executed last after any response policy configured for the front-end API.
 
-#### Fault Handler Policy
+### Request Policy
+
+Enables you to configure optional request processing policies for front-end APIs. For example, you could use a configured policy to check request messages for authentication or authorization. By default, no request policies are configured.
+
+When request policies have been configured in Policy Studio, you can then apply them in API Manager on the **Frontend API > Outbound > Advanced** page. The selected request policy is executed after inbound security and any global request policy, but before any routing or response policies configured for the front-end API.
+
+### Routing Policy
+
+Enables you to configure custom routing policies for front-end APIs. For example, you could use a configured policy to route to a specific back-end JMS service. By default, no routing policies are configured, and a default routing policy template is used.
+
+When routing policies have been configured in Policy Studio, you can then apply them in API Manager on the **Frontend API > Outbound > Advanced** page. The selected routing policy is executed after any request policy and before any response policy configured for the front-end API.
+
+### Response Policy
+
+Enables you to configure optional response processing policies for front-end APIs. For example, you could use a configured policy to validate or transform outbound response messages. By default, no response policies are configured.
+
+When response policies have been configured in Policy Studio, you can then apply them in API Manager on the **Frontend API > Outbound > Advanced** page. The selected response policy is executed after any routing policy configured for the front-end API, but before any global response policy.
+
+### Fault Handler Policy
 
 Enables you to configure optional fault handler policies that are applied to front-end API invocations. The configured fault handler is executed when an error or exception occurs during the API Manager runtime API invocation. The API Manager Default Fault Handler policy is configured by default.
 
 When fault handler policies are configured, an API administrator can select a global fault handler policy for all front-end APIs on the API Manager settings page. API developers can also select fault handler policies for specific front-end APIs and API methods on the **Frontend API > Outbound > Advanced** page.
 
-{{< alert title="Note" color="primary" >}}These custom policies apply to APIs registered using API Manager only, and do not apply to policies registered using Policy Studio. These custom policies enable policy developers to implement enterprise-specific policies in Policy Studio that can be applied to multiple APIs in API Manager.{{< /alert >}}
+### Evaluate undefined parameters
+
+When validating the parameters received from the client, API Manager runtime ignores any parameters that are not defined by the back-end API, and it does not generate any message attributes for these parameters. As a consequence, querying undefined parameters in custom policies results in an "invalid field". To access undefined parameters in these policies, use the following selectors:
+
+* Query - `${http.querystring.paramName}`
+* Header/Cookie - `${http.headers.headerName}`
+* Form - `${http.querystring.paramName}`
+
+You can also add undefined parameters as part of a [method override](/docs/apim_administration/apimgr_admin/api_mgmt_virtualize_web/#per-method-override). In such cases, you can use API Manager `${params.query}`, `${params.form}`, and `${params.header}` selectors.
 
 ## Add custom API Manager routing policies
 
-This section explains advanced uses cases of how to configure custom API Manager routing policies. API Manager custom routing policies support all outbound API authentication profiles configured in API Manager (for example, HTTP Basic, HTTP Digest, API key, OAuth, and SSL). This topic shows detailed examples of using API key, OAuth, and SSL as the outbound authentication profile.
+This section explains advanced use-cases of how to configure custom API Manager routing policies. API Manager custom routing policies support all outbound API authentication profiles configured in API Manager (for example, HTTP Basic, HTTP Digest, API key, OAuth, and SSL). This topic shows detailed examples of using API key, OAuth, and SSL as the outbound authentication profile.
 
 ### API Manager custom routing policy templates
 

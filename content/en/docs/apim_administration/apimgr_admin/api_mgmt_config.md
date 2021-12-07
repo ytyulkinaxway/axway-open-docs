@@ -102,39 +102,39 @@ For details on configuring API Manager for a large amount of APIs and data in a 
 
 ## Configure API Manager request rate limiter
 
-Rate limit monitors the number of requests that a user can send to API Manager during an active session. If the number of requests in an individual session exceeds the configured boundaries, the session is terminated, and the user must log in again to continue using API Manager.
+The rate limiter sets the maximum rate at which a user can send requests to API Manager.
 
-To configure the request rate limiter for your user's sessions in API Manager, perform the following steps in Policy Studio:
+To configure the request rate limiter in API Manager, perform the following steps in Policy Studio:
 
 1. Select **Environment Configuration > Listeners > API Gateway > API Portal > Paths** in the Policy Studio tree.
 2. Double-click the `API Portal v1.4 ('v1.4')` servlet to open its dialog box.
 3. On the servlet dialog box, click to **Edit** the `jersey.config.server.provider.classnames` property.
-4. Add `com.vordel.apiportal.api.filter.RateLimitBindingFeature` to the existing comma-separated list of class names.
-5. Click to **Add** two new properties to the **Servlet Properties** list :
+4. Add the relevant property to the existing comma-separated list of class names accordingly with the following options:
 
-   * **Name**: `RateLimitFilter.rateLimitSize`. **Value**: Enter the number of requests a user can make in a period of time. Defaults to `200`.
-   * **Name**: `RateLimitFilter.rateLimitOffset`. **Value**: Enter the amount of time, in milliseconds, that the request rate limiter allows between requests after the number of requests (set in `RateLimitFilter.rateLimitSize`) has been reached. Defaults to 60000 milliseconds (1 minute).
-6. Click **OK**.
+### Authenticated session
 
-{{< alert title="Note" color="primary" >}}A user login to API Manager generates multiple requests. Therefore, it is recommended to set `RateLimitFilter.rateLimitSize` to higher than `50` at a minimum.
+1. Add `com.vordel.apiportal.api.filter.RateLimitBindingFeature` to the existing comma-separated list of class names.
+2. Click to Add two new properties to the Servlet Properties list:
 
-Customers with a large number of entities will also generate large volumes of API Manager requests and should, therefore, consider increasing the default value for `RateLimitFilter.rateLimitSize.`
+   * **Name**: `RateLimitFilter.rateLimitSize`. **Value**: Enter the maximum number of requests allowed in a period of time. Defaults to `5000`.
+   * **Name**: `RateLimitFilter.rateLimitOffset`. **Value**: Enter the period of time that the rate limiter allows `RateLimitFilter.rateLimitSize` requests to be made from the same client IP address. Defaults to 60000 milliseconds (1 minute).
+
+If the number of requests exceeds the configured limit during an active session, the session is terminated and the user must log in again to continue using API Manager.
+
+{{< alert title="Note" color="primary" >}}
+
+* When setting the `RateLimitFilter.rateLimitSize` take into account that a user login to API Manager generates multiple requests.
+* Customers with a large number of entities will generate large volumes of API Manager requests, so if `401 Unauthorized` is returned then the `rateLimitFilter.rateLimitSize` might have been reached. This can be confirmed by finding the following warning in the API Manager trace, "Session exceeded request rate limit. Session will be invalidated."
 {{< /alert >}}
 
-## Configure API Manager unauthenticated request rate limiter
+### Unauthenticated session
 
-The rate limiter monitors the number of requests that a user can send to API Manager without an active session. If the number of requests exceeds the configured limit, a 403 Forbidden error response is returned, and the IP address of the client is locked for the configured time.
+1. Add `com.vordel.apiportal.api.filter.UnauthenticatedRateLimitBindingFeature` to the existing comma-separated list of class names.
+2. Click to Add two new properties to the Servlet Properties list:
 
-To configure the unauthenticated request rate limiter in API Manager, perform the following steps in Policy Studio:
+* **Name**: `UnauthenticatedRateLimitFilter.rateLimitSize`. **Value**: Enter the maximum number of requests allowed in a period of time. Defaults to `200`.
+* **Name**: `UnauthenticatedRateLimitFilter.rateLimitOffset`. **Value**: Enter the period of time that the rate limiter allows `UnauthenticatedRateLimitFilter.rateLimitSize` requests to be made from the same client IP address. Defaults to 60000 milliseconds (1 minute).
 
-1. Select **Environment Configuration > Listeners > API Gateway > API Portal > Paths** in the Policy Studio tree.
-2. Double-click the `API Portal v1.4 ('v1.4')` servlet to open its dialog box.
-3. On the servlet dialog box, click to **Edit** the `jersey.config.server.provider.classnames` property.
-4. Add `com.vordel.apiportal.api.filter.UnauthenticatedRateLimitBindingFeature` to the existing comma-separated list of class names.
-5. Click to **Add** two new properties to the **Servlet Properties** list :
+If the number of requests exceeds the configured limit during an unauthenticated session, a `403 Forbidden` error response is returned, and the IP address of the client is locked for the configured time.
 
-   * **Name**: `UnauthenticatedRateLimitFilter.rateLimitSize`. **Value**: Enter the number of requests a user can make in a period of time. Defaults to 200.
-   * **Name**: `UnauthenticatedRateLimitFilter.rateLimitOffset`. **Value**: Enter the amount of time, in milliseconds, that the request rate limiter allows between requests for a single IP address after the number of requests (set in `UnauthenticatedRateLimitFilter.rateLimitSize`) has been reached. Defaults to 60000 milliseconds (1 minute).
-6. Click **OK**.
-
-{{< alert title="Note" color="primary" >}}Currently, this feature is only applicable to the `/forgotpassword` endpoint.{{< /alert >}}
+{{< alert title="Note" color="primary" >}}Request rate limiter for unauthenticated sections is only applicable to the `/forgotpassword` endpoint.{{< /alert >}}

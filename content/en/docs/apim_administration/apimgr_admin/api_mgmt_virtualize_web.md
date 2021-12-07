@@ -139,6 +139,8 @@ Configure the following to use a custom authentication policy:
 
 Configure the following to enable OAuth authorization for access tokens issued by API Manager.
 
+{{< alert title="Note" color="primary" >}}Configuring the grant types in API Manager does not affect the runtime aspect of the OAuth flow. If you wish to modify the grant types supported at runtime for the OAuth flow, you must do it at the OAuth authorization server. The purpose of grant types in API Manager is to advertise this information to clients of the API so that they can successfully retrieve an access token. The token can then be supplied for verification by the security device when invoking an API.{{< /alert >}}
+
 ##### General OAuth settings
 
 **Access token store**: Select a required OAuth access token store from the list. For details on how to add OAuth access token stores to this list, see [Configure API Manager settings in Policy Studio](/docs/apim_administration/apimgr_admin/api_mgmt_config_ps/).
@@ -155,17 +157,17 @@ Configure the following to enable OAuth authorization for access tokens issued b
 
 **Authorization header prefix**: Select the header prefix used to authorize the request (`Bearer` or `OAuth`). Defaults to `Bearer`.
 
-##### Grant type implicit
+##### Grant type - Implicit
 
-**Enabled**: Select whether to enable this simplified authorization code flow optimized for browser-based clients. Enabling advertises this grant type in the API Catalog. It is the role of the OAuth authorization server to support it. Disabling excludes this grant type from the API Catalog.
+**Publish to API Catalog**: The implicit grant is a simplified authorization code flow optimized for clients implemented in a browser using a scripting language, such as JavaScript. Select whether to advertise this grant type in the API Catalog. It is the role of the OAuth authorization server to support it. Disabling excludes this grant type from the API Catalog.
 
 **Login endpoint URL**: Enter the authorization endpoint where resource owners can interact with the OAuth service to authorize access for the client application. This is the URL where client applications will redirect end users. Defaults to `http://localhost:8089/api/oauth/authorize`.
 
 **Login token name**: Enter the response parameter name that will contain the access token. Defaults to `access_token`.
 
-##### Grant type authorization code
+##### Grant type - Authorization code
 
-**Enabled**: Select whether the authorization code is obtained using an authorization server as an intermediary between the client and resource owner. Enabling advertises this grant type in the API Catalog. It is the role of the OAuth authorization server to support it. Disabling excludes this grant type from the API Catalog.
+**Publish to API Catalog**: The authorization code is obtained by using an authorization server as an intermediary between the client and resource owner. Select whether to advertise this grant type in the API Catalog. It is the role of the OAuth authorization server to support it. Disabling excludes this grant type from the API Catalog.
 
 **Request endpoint URL**: Enter the authorization endpoint where resource owners can interact with the OAuth service to authorize access for client application. This is the URL where client application will redirect end users. Defaults to `http://localhost:8089/api/oauth/authorize`.
 
@@ -174,6 +176,14 @@ Configure the following to enable OAuth authorization for access tokens issued b
 **Request client secret name**: Enter the name of the request parameter that will contain the client application secret. Defaults to `client_secret`.
 
 **Token URL**: Enter the token endpoint URL where the client application will exchange an authorization code for an access token. Defaults to `http://localhost:8089/api/oauth/token`.
+
+**Token name**: Enter the request parameter name that will contain the access code. Defaults to `access_token`.
+
+##### Grant type - Client credentials
+
+**Publish to API Catalog**: The client credentials grant is a simplified authorization code flow optimized for clients that have arranged resource sharing from another server using a client ID and a client secret. Select whether to advertise this grant type in the API Catalog. It is the role of the OAuth authorization server to support it. Disabling excludes this grant type from the API Catalog.
+
+**Token URL**: Enter the token endpoint URL where the client application will exchange credentials for an access token. Defaults to `http://localhost:8089/api/oauth/token`.
 
 **Token name**: Enter the request parameter name that will contain the access code. Defaults to `access_token`.
 
@@ -201,7 +211,7 @@ Configure the following to enable OAuth authorization for access tokens issued b
 * `oauth.token.scopes`
 * `oauth.token.valid`
 
-For authorization, grant type implicit, and grant type authorization code settings, see the [OAuth security device settings](#oauth).
+For authorization, grant type implicit, grant type authorization code, and grant type client credentials settings, see the [OAuth security device](#oauth) settings.
 
 For a complete example, see [Configure OAuth (External) security for a front-end API](/docs/apim_administration/apimgr_admin/example_oauth_external/).
 

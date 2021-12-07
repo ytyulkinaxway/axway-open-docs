@@ -19,6 +19,8 @@ When using team development you must:
 
 The team development workflow requires you to split projects into separate pieces of configuration so that teams can work on them independently. If you do not have a requirement for multiple policy developers to work in parallel, you should not use a team development workflow. Instead you should use the previous workflows in Policy Studio where policy developers typically connect to a running API Gateway instance, download the configuration, make desired changes, and then deploy the configuration back to the API Gateway. This approach encourages use of API Gateway as a design-time repository for policies, in addition to as the runtime for executing policies. This workflow still requires you to create a project in Policy Studio, but there is no requirement to split the project into separate pieces of configuration, as in the team development workflow.
 
+{{< alert title="Note" color="primary" >}}Team Development functionality is not available when using [YAML-based projects](/docs/apim_yamles/).{{< /alert >}}
+
 ## Increase Policy Studio memory
 
 If you have a large API Gateway configuration, you might need to increase the memory allocation in Policy Studio. You can do this by increasing the value of the `Xmx` setting in the following file:

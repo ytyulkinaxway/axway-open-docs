@@ -6,11 +6,11 @@
 "description": "Import and export configuration data to share it in a development environment and to manage differences and references."
 }
 
-The ability to import and export XML-based configuration data is useful in a development environment if you wish to share and test configuration with other developers. By exporting configuration data from one API Gateway installation, and importing into another API Gateway installation, you can effectively share your API Gateway configuration in a development environment. This also enables you to manage differences and references between configuration components.
+The ability to import and export XML or YAML-based configuration data is useful in a development environment if you wish to share and test configuration with other developers. By exporting configuration data from one API Gateway installation, and importing into another API Gateway installation, you can effectively share your API Gateway configuration in a development environment. This also enables you to manage differences and references between configuration components.
 
 ## Import API Gateway configuration fragment
 
-You can import XML-based configuration data into your API Gateway configuration (for example, policies, certificates, and users).
+You can import XML or YAML-based configuration data into your API Gateway configuration (for example, policies, certificates, and users).
 
 {{< alert title="Note" color="primary" >}}The recommended way to export configuration between different environments is to use configuration packages. Select **File** > **Export** from the main menu. For more details, see [Manage projects](/docs/apim_policydev/apigw_poldev/general_project).{{< /alert >}}
 
@@ -20,8 +20,8 @@ To import previously-exported API Gateway configuration data, perform the follow
 
 1. Click the **Import Configuration Fragment**
     button in the Policy Studio toolbar.
-2. Browse to the location of the XML file that contains the previously exported configuration data that you wish to import.
-3. Select the XML file, and click **Open**.
+2. Browse to the location of the XML file or YAML configuration that contains the previously exported fragment that you wish to import.
+3. Select the XML file/YAML configuration, and click **Open**.
 4. If a passphrase was set on the configuration from which the data was previously exported, enter it in the **Enter Passphrase**
     dialog, and click **OK**.
 5. In the **Import Configuration**
@@ -60,7 +60,7 @@ Other imports are additive only. For example, importing a single certificate doe
 ### Upgrade configuration from an earlier version
 
 When you import configuration created using an earlier version of API Gateway, the configuration is automatically upgraded to the current API Gateway version configuration. This results in the migration of the configuration entities present in the `.xml`
-file that is being imported.
+file or YAML configuration that is being imported.
 
 The **Migration Report**
 trace console at the bottom of the window displays the migration report output that is generated when the configuration is upgraded. For example:
@@ -75,7 +75,7 @@ link is clicked:
 
 ## Export API Gateway configuration
 
-You can export API Gateway configuration data by right-clicking a Policy Studio tree node (for example, policy or policy container), and selecting the relevant export menu option (for example, **Export Policy**). The configuration is exported to an XML file, which you can then import into a different API Gateway configuration.
+You can export API Gateway configuration data by right-clicking a Policy Studio tree node (for example, policy or policy container), and selecting the relevant export menu option (for example, **Export Policy**). The configuration is exported to an XML file or YAML archive, which you can then import into a different API Gateway configuration.
 
 {{< alert title="Note" color="primary" >}}For details on migrating API Gateway configuration between development, testing, and production environments, see the [API Gateway DevOps Deployment Guide](/docs/apigtw_devops/).{{< /alert >}}
 

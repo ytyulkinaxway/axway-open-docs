@@ -5,7 +5,8 @@
   "date": "2019-08-09",
   "description": "Use the ready-made API Portal Docker image to run your API Portal in Docker containers."
 }
-This topic describes how to use the ready-made API Portal Docker image to run you API Portal in Docker containers. The image is ready out-of-the-box, so you do not have to build it using the `Dockerfile`.
+
+The ready-made image is ready out-of-the-box, so you do not have to build it using the `Dockerfile`.
 
 ## Prerequisites
 
@@ -19,13 +20,9 @@ Optional components:
 
 * Redis server, used for API Catalog caching.
 * ClamAV, used for scanning of uploaded files.
+* Elasticsearch server, used for API Catalog and Applications list pages performance optimization.
 
 The monitoring feature of API Portal, which enables your API consumers to monitor application and API usage, requires a connected API Manager with monitoring metrics enabled.
-
-The following are the recommended hardware disk space and memory requirements for the Docker host machine for a single node sample architecture:
-
-* 100 GB or more disk space
-* 8 GB or more RAM
 
 ## Run a Docker container using the image
 
@@ -95,12 +92,11 @@ The following is an example that you can copy and paste to an `env` file, then e
 # This configuration settings are required
 # for API Portal docker container to boot.
 #############################
-
 MYSQL_HOST=
 MYSQL_PORT=3306
-MYSQL_DATABASE=
 MYSQL_USER=
 MYSQL_PASSWORD=
+MYSQL_DATABASE=
 
 ##### OPTIONAL SETTINGS #####
 # The rest of this configuration settings are optional.
@@ -113,7 +109,7 @@ MYSQL_PASSWORD=
 # APACHE_SSL_PRIVATE_KEY=<plain-text-private-key>
 # MYSQL_SSL_CA_CERT=base64:<base64-encoded-certificate>
 #############################
-
+#
 #####
 # For reference see "Run API Portal with HTTPS"
 # under "Install API Portal" page in API Portal docs
@@ -155,7 +151,7 @@ MYSQL_SSL_VERIFY_CERT=1
 #
 # `*_ON` option determines whether the feature is enabled.
 ##############################
-
+#
 #####
 # For reference see "Connect API Portal to a single API Manager"
 # under "Connect API Portal to API Manager" page in API Portal docs
@@ -219,19 +215,6 @@ CLAMAV_HOST=
 CLAMAV_PORT=3310
 
 #####
-# For reference see reCapcha related topics
-# under "Additional customizations" page in API Portal docs
-#
-# `LOGIN_PROTECTION_LOCK_IP` is boolean
-#####
-LOGIN_PROTECTION_CONFIGURED=0
-LOGIN_PROTECTION_ON=0
-LOGIN_PROTECTION_ATTEMPTS_BEFORE_LOCK=3
-LOGIN_PROTECTION_ATTEMPTS_BEFORE_RECAPCHA=3
-LOGIN_PROTECTION_LOCK_DURATION_SEC=600
-LOGIN_PROTECTION_LOCK_IP=0
-
-#####
 # For reference see "API Portal single sign-on"
 # page in API Portal docs
 #####
@@ -240,6 +223,19 @@ SSO_ON=0
 SSO_PATH=
 SSO_ENTITY_ID=
 SSO_WHITELIST=
+
+#####
+# For reference see reCapcha related topics
+# under "Additional customizations" page in API Portal docs
+#
+# `LOGIN_PROTECTION_LOCK_IP` is boolean
+#####
+LOGIN_PROTECTION_CONFIGURED=0
+LOGIN_PROTECTION_ON=0
+LOGIN_PROTECTION_ATTEMPTS_BEFORE_RECAPCHA=3
+LOGIN_PROTECTION_ATTEMPTS_BEFORE_LOCK=3
+LOGIN_PROTECTION_LOCK_DURATION_SEC=600
+LOGIN_PROTECTION_LOCK_IP=0
 
 #####
 # For reference see "Secure API Portal"
@@ -259,12 +255,31 @@ OAUTH_WHITELIST=
 API_WHITELIST_CONFIGURED=0
 API_WHITELIST=
 
+#####
+# JAI admin management.
+# Works only at first run.
+#####
+# JAI admin account password.
+# Leave blank for container default.
+ADMIN_PASSWORD=
+# Disable reset JAI admin password
+# upon first login. Boolean value
+ADMIN_PASSWORD_RESET_DISABLED=0
+
+##### MISC SETTINGS #####
+# Settings that don't fit any other section
+###################################
+# Specify a timezone to use.
+# Leave blank for container default.
+# Example: America/New_York
+TZ=
+
 ##### NON PERSISTING SETTINGS #####
-# Settings under this section don't persist. If you configure
-# it in JAI they will be gone after container restart. So, in a common
+# Settings under this section don't persist if you configure
+# it in JAI, they will be reset after container restart. So, in a common
 # use case they should be configured via environment variables.
 ###################################
-
+#
 #####
 # For reference see "Install Redis cache"
 # page in API Portal docs
@@ -358,7 +373,9 @@ The data volumes are stored in the Docker host machine, and as such they consume
 
 The following list describes which API Portal assets you should store in a Docker volume to preserve the customizations during upgrade or HA setup of an API Portal Docker deployment:
 
+* `/etc/apiportal` - API Portal `etc` directory. Used for encryption key secret for API Manager and Elasticsearch passwords.
 * `/opt/axway/apiportal/enckey` - Encryption key directory. Used by Public API mode.
+* `/opt/axway/apiportal/tasks` - Regular tasks directory. Used by Elasticsearch scheduler.
 * `/opt/axway/apiportal/htdoc/images` - Images uploaded by API Portal users or Admins.
 * `/opt/axway/apiportal/htdoc/language` - API Portal translations.
 * `/opt/axway/apiportal/htdoc/templates` - Joomla! templates.
@@ -376,7 +393,9 @@ The following is an example of how you can create data volumes:
 
 ```
 # create volumes
+docker volume create apiportal-etc
 docker volume create apiportal-enckey
+docker volume create apiportal-tasks
 docker volume create apiportal-images
 docker volume create apiportal-language
 docker volume create apiportal-templates
@@ -385,7 +404,9 @@ docker volume create apiportal-certs
 
 # start API Portal container using the created volumes
 docker container run \
+  -v apiportal-etc:/etc/apiportal \
   -v apiportal-enckey:/opt/axway/apiportal/enckey \
+  -v apiportal-tasks:/opt/axway/apiportal/tasks \
   -v apiportal-images:/opt/axway/apiportal/htdoc/images \
   -v apiportal-language:/opt/axway/apiportal/htdoc/language \
   -v apiportal-templates:/opt/axway/apiportal/htdoc/templates \
@@ -394,4 +415,9 @@ docker container run \
   <more-options>
 ```
 
-As API Portal container runs as a non-root user, you must ensure that mounted directories are readable and writable by user with id `1048`. This user is not required to exist on the host machine though.
+As API Portal container runs as a non-root user. You must ensure that mounted directories are readable and writable by user with id `1048`. This user is not required to exist in the host machine.
+
+## RHEL API Portal software installation versus API Portal running in a docker container
+
+* [Elasticsearch scheduling](/docs/apim_installation/apiportal_install/install_software_elastic/#configure-a-schedule-to-push-data-to-elasticsearch) - API Portal software installation accepts non-standard cron expression syntax if the expression is supported by the cron version installed on the server, whereas in the Docker image only standard syntax is supported. For example, values like `@daily` or `@reboot` are not allowed.
+* [Public API Mode](/docs/apim_administration/apiportal_admin/public_api_configure) - In API Portal software installations, an encryption key directory must be generated with `apiportal_encryption.sh` script or with an option in API Portal installer to enable the Public API Mode feature, whereas the Docker image include pre-generated encryption directory (For more information, see [Create data volumes to persist data](#create-data-volumes-to-persist-data) section).
