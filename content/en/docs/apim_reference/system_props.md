@@ -436,7 +436,7 @@ Axway-defined Java system properties introduced in the 7.7 20210830 release
 |com.axway.apigw.dbconnection.removeabandoned | API Gateway | Allows removal of abandoned connections if they exceed the abandoned connection timeout. Defaults to 'true'. |
 |com.axway.apigw.dbconnection.removeabandoned.timeoutms | API Gateway | Sets the abandoned connection timeout in milliseconds. Defaults to '300000'. |
 |com.axway.apigw.dbconnection.testonreturn | API Gateway | Allows validation of connections before they are returned to the pool. Defaults to 'true'. |
-| CASSANDRA_PROTOCOL_VERSION | Cassandra  | Specifies which protocol version to set on the Cassandra driver. Allowable values are 3 and 4. Default value is 4. |
+| CASSANDRA_PROTOCOL_VERSION | Cassandra  | Specifies which protocol version to set on the Cassandra driver. Allowable values are 3 and 4. Default value is 4. |  
 
 ## 7.7 November 2021
 
@@ -445,3 +445,5 @@ Axway-defined Java system properties introduced in the 7.7 20211130 release
 | System Property                                  | Context     | Description   |
 | ------------------------------------------------ | ----------- | ------------- |
 |com.axway.api.runtime.management.allowRateLimit | API Manager | Allows customers to enable/disable the API Manager request rate limiter. Defaults to 'true'. |
+|com.axway.apigw.sso.auto.approval | API Manager SSO | Toggles whether SSO users are automatically approved or not. If set to false, a new SSO users must be approved by an API Manager Admin. Default value: 'true'
+|com.axway.apigw.sso.authorization | API Manager SSO | Toggles SSO authorizations ON or OFF. If set to false, the authorizations mapped from the SSO Users SAML assertion are ignored, and internally managed authorizations are used instead. Default value: 'true' |
