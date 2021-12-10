@@ -14,8 +14,7 @@ The authentication repository can be maintained in API Gateway's local configura
 
 For example, this *credential mapping* is useful in cases where your client-base uses user name and password combinations for authentication (*authentication attributes*), but their access rights must be looked up in an authorization server using the client's DName (*authorization attribute*). In this way, the client possesses a single *virtual identity* within API Gateway. The client can use one identity for authentication, and another for authorization, yet API Gateway sees both identities as representing the same client.
 
-You can add a new repository under the **Environment Configuration > External Connections**
-node in Policy Studio node tree. Right-click the appropriate node (for example, **Database Repositories**), and select **Add a new Repository**. Similarly, you can edit an existing repository. Right-click the repository node (for example, the default **Local User Store**), and select **Edit Repository**. You can reuse the repositories added under the **External Connections** node in multiple filters.
+You can add a new repository under the **Environment Configuration > External Connections** node in Policy Studio node tree. Right-click the appropriate node (for example, **Database Repositories**), and select **Add a new Repository**. Similarly, you can edit an existing repository. Right-click the repository node (for example, the default **Local User Store**), and select **Edit Repository**. You can reuse the repositories added under the **External Connections** node in multiple filters.
 
 ## Configure Axway PassPort repositories
 
@@ -27,62 +26,37 @@ Axway PassPort provides a central repository, identity broker, and security audi
 
 Complete the following fields to configure an Axway PassPort repository:
 
-**Repository Name**:
-Enter a descriptive name for this repository.
+* **Repository Name**: Enter a descriptive name for this repository.
+* **Hostname**: Enter the host name or IP address of the server running PassPort.
+* **Shared Secret**: Enter the PassPort shared secret. This is specified during PassPort installation.
+* **CSD Name**: Enter the name of the Axway Component Security Descriptor (CSD) file to use when registering with PassPort. Defaults to `csd.xml`.
 
-**Hostname**:
-Enter the host name or IP address of the server running PassPort.
+    {{< alert title="Note" color="primary" >}}The CSD file must be deployed in the API Gateway group's `conf` directory in your API Gateway installation (`INSTALL_DIR/apigateway/groups/GROUP_ID/conf`).{{< /alert >}}
 
-**Shared Secret**:
-Enter the PassPort shared secret. This is specified during PassPort installation.
+* **PassPort Certificates—HTTPS**: Select the certificate used for PassPort SSL communication. To export this certificate from PassPort, perform the following steps:
 
-**CSD Name**:
-Enter the name of the Axway Component Security Descriptor (CSD) file to use when registering with PassPort. Defaults to `csd.xml`.
+    1. In the PassPort user interface, click **Administration** >**Server Security Settings**.
+    2. Note the certificate used for **Default_HTTPS**.
+    3. Click **Security** >**Certificates**.
+    4. Select the certificate noted in step 2 (defaults to `CN=PassPortSecured,O=Axway,C=FR`), and click **Export Certificate**.
+    5. In the **Export Certificate** dialog, select a **File Extension** of `.cer`.
+    6. Click **OK**, and select a location to save the certificate.
 
-{{< alert title="Note" color="primary" >}}The CSD file must be deployed in the API Gateway group's `conf`
-directory in your API Gateway installation (`INSTALL_DIR/apigateway/groups/GROUP_ID/conf`).{{< /alert >}}
+    To import this certificate into the API Gateway, perform the following steps:
 
-**PassPort Certificates—HTTPS**:
-Select the certificate used for PassPort SSL communication. To export this certificate from PassPort, perform the following steps:
+    1. In the API Gateway **Authentication Repository** dialog, click **Select**.
+    2. In the **Select Certificate** dialog, click **Create/Import**.
+    3. In the **Configure Certificate and Private Key** dialog, click **Import Certificate**.
+    4. Select the certificate that was exported from PassPort.
+    5. Give the certificate an **Alias Name** manually, or click **Use Subject**.
+    6. Click **OK**.
+    7. Select the certificate from the list, and click **OK**.
 
-1. In the PassPort user interface, click **Administration** >**Server Security Settings**.
-2. Note the certificate used for **Default_HTTPS**.
-3. Click **Security** >**Certificates**.
-4. Select the certificate noted in step 2 (defaults to `CN=PassPortSecured,O=Axway,C=FR`
-    ), and click **Export Certificate**.
-5. In the **Export Certificate**
-    dialog, select a **File Extension**
-    of `.cer`.
-6. Click **OK**, and select a location to save the certificate.
-
-To import this certificate into the API Gateway, perform the following steps:
-
-1. In the API Gateway **Authentication Repository**
-    dialog, click **Select**.
-2. In the **Select Certificate**
-    dialog, click **Create/Import**.
-3. In the **Configure Certificate and Private Key**
-    dialog, click **Import Certificate**.
-4. Select the certificate that was exported from PassPort.
-5. Give the certificate an **Alias Name**
-    manually, or click **Use Subject**.
-6. Click **OK**.
-7. Select the certificate from the list, and click **OK**.
-
-**PassPort Certificates—HTTPS Client Authentication (Optional)**:
-You can configure PassPort to use a different certificate for its client authentication protocol. To do this, repeat the steps for the HTTPS certificate, except when exporting from PassPort in step 2, make a note of the **Default_HTTPS_Client_Auth**
+* **PassPort Certificates—HTTPS Client Authentication (Optional)**: You can configure PassPort to use a different certificate for its client authentication protocol. To do this, repeat the steps for the HTTPS certificate, except when exporting from PassPort in step 2, make a note of the **Default_HTTPS_Client_Auth**
 certificate.
-
-**Ports—HTTPS**:
-Enter the HTTPS port that PassPort is using. In PassPort, this is found under **Administration**
-> **Server Ports Configuration**. Defaults to `6453`.
-
-**Ports—HTTPS Client Authentication**:
-Enter the HTTPS client authentication port that PassPort is using. In PassPort, this is found under **Administration**
-> **Server Ports Configuration**. Defaults to `6666`.
-
-**Authentication—Domain**:
-Enter the PassPort domain that this repository is using for authentication and authorization. Defaults to `Synchrony`.
+* **Ports—HTTPS**: Enter the HTTPS port that PassPort is using. In PassPort, this is found under **Administration** > **Server Ports Configuration**. Defaults to `6453`.
+* **Ports—HTTPS Client Authentication**: Enter the HTTPS client authentication port that PassPort is using. In PassPort, this is found under **Administration** > **Server Ports Configuration**. Defaults to `6666`.
+* **Authentication—Domain**: Enter the PassPort domain that this repository is using for authentication and authorization. Defaults to `Synchrony`.
 
 ### Axway PassPort repository registration
 
@@ -185,40 +159,15 @@ If the user profiles are stored in an existing CA SiteMinder server, API Gateway
 
 To authenticate users against a SiteMinder repository, right-click **CA SiteMinder Repositories**, and select **Add a new Repository**. Complete the following fields on the Authentication Repository dialog:
 
-**Repository Name**:
-Enter a suitable name for this repository.
-
-**Agent Name**:
-Select a previously configured SiteMinder agent name from the list. To register a new agent, see
-[API Gateway Authentication and Authorization Integration Guide](/docs/apigtw_auth_auth/).
-
-**Resource**:
-Enter the name of the protected resource for which the user must be authenticated. Alternatively, you can enter a selector for a message attribute, which is looked up and expanded to a value at runtime. Message attribute selectors have the following format:
-
-```
-${message.attribute}
-```
-
-For example, by default API Gateway specifies the original path the end user requested as the resource:
-
-```
-${http.request.uri}
-```
-
-**Action**:
-The user must be authenticated for a specific action on the protected resource. By default, API Gateway takes this action from the HTTP verb used in the incoming request. You can use the following selector to get the HTTP verb:
-
-```
-${http.request.verb}
-```
+* **Repository Name**: Enter a suitable name for this repository.
+* **Agent Name**: Select a previously configured SiteMinder agent name from the list. To register a new agent, see [API Gateway Authentication and Authorization Integration Guide](/docs/apigtw_auth_auth/).
+* **Resource**: Enter the name of the protected resource for which the user must be authenticated. Alternatively, you can enter a selector for a message attribute, which is looked up and expanded to a value at runtime. Message attribute selectors have the following format, `${message.attribute}`. For example, by default API Gateway specifies the original path the end user requested as the resource, `${http.request.uri}`.
+* **Action**: The user must be authenticated for a specific action on the protected resource. By default, API Gateway takes this action from the HTTP verb used in the incoming request. You can use the following selector to get the HTTP verb, `${http.request.verb}`.
 
 Alternatively, you can enter any user-specified value.
 
-**Single Sign-On Token**:
-By default, when an end user has been authenticated for a given resource, SiteMinder generates a *single sign-on token* (a session cookie). API Gateway stores this cookie in a user-specified message attribute. API Gateway returns the cookie to the end user along with the response. The end user can then pass this cookie with future requests to API Gateway. When API Gateway receives such a request, it can validate the session cookie using the **CA SiteMinder Session Validation** filter. The client stays authenticated for the entire lifetime of the session cookie. As long as the session cookie is valid, API Gateway does not need to re-authenticate the end user against SiteMinder for every request. This increases throughput and performance considerably.
-
-**Put Token in Message Attribute**:
-Enter the name of the message attribute where you wish to store the session cookie. By default, the cookie is stored in the `siteminder.session` attribute.
+* **Single Sign-On Token**: By default, when an end user has been authenticated for a given resource, SiteMinder generates a *single sign-on token* (a session cookie). API Gateway stores this cookie in a user-specified message attribute. API Gateway returns the cookie to the end user along with the response. The end user can then pass this cookie with future requests to API Gateway. When API Gateway receives such a request, it can validate the session cookie using the **CA SiteMinder Session Validation** filter. The client stays authenticated for the entire lifetime of the session cookie. As long as the session cookie is valid, API Gateway does not need to re-authenticate the end user against SiteMinder for every request. This increases throughput and performance considerably.
+* **Put Token in Message Attribute**: Enter the name of the message attribute where you wish to store the session cookie. By default, the cookie is stored in the `siteminder.session` attribute.
 
 ## Database repositories
 
@@ -340,55 +289,38 @@ The following subsections demonstrate how to configure this window for typical u
 
 To configure the Authentication Repository dialog for Oracle Directory Server (formerly iPlanet and Sun Directory Server), use the following settings:
 
-* **Repository Name**:
-    Enter a suitable name for this user store.
-* **Directory Name**:
-    Click **Add/Edit** to add details of your Oracle Directory Server.
+* **Repository Name**: Enter a suitable name for this user store.
+* **Directory Name**: Click **Add/Edit** to add details of your Oracle Directory Server.
 
 The **User Search Conditions** section instructs API Gateway to search the LDAP tree according to the following conditions:
 
-* **Base Criteria**:
-    Enter where API Gateway should begin searching the LDAP directory (for example, `cn=Users, dc=qa, dc=vordel, dc=com`).
-* **User Class**:
-    Enter or select the name given by the particular LDAP directory to the *User* class. For Oracle Directory Server, select `'inetorgperson' LDAP Class`.
-* **User Search Attribute**:
-    The value entered depends on the type of LDAP directory to which you are connecting. When a user is stored in an LDAP directory, a number of user *attributes* are stored with that user. One of these attributes corresponds to the user name presented by the client for authentication. However, different LDAP directories use different names for that user attribute. For Oracle Directory Server, select `cn` from the drop-down list.
-* **Allow Blank Passwords**:
-    Select this to allow the use of blank passwords.
+* **Base Criteria**: Enter where API Gateway should begin searching the LDAP directory (for example, `cn=Users, dc=qa, dc=vordel, dc=com`).
+* **User Class**: Enter or select the name given by the particular LDAP directory to the *User* class. For Oracle Directory Server, select `'inetorgperson' LDAP Class`.
+* **User Search Attribute**: The value entered depends on the type of LDAP directory to which you are connecting. When a user is stored in an LDAP directory, a number of user *attributes* are stored with that user. One of these attributes corresponds to the user name presented by the client for authentication. However, different LDAP directories use different names for that user attribute. For Oracle Directory Server, select `cn` from the drop-down list.
+* **Allow Blank Passwords**: Select this to allow the use of blank passwords.
 
 In the next section, you must specify the following:
 
-* **Login Authentication Attribute**:
-    In an LDAP directory tree, there must be one user attribute that uniquely distinguishes any one user from all the others. In Oracle Directory Server, the Distinguished name is referred to as the *entrydn* or Entry Domain Name. Select `Entry Domain Name` to uniquely identify the client authenticating to API Gateway.
-* **Authorization Attribute**:
-    When the client has been successfully authenticated, you can use any one of that user's stored attributes in a subsequent authorization filter. In this case, you want to use the user's Entry Domain Name (DName) for an authorization filter, so enter `entrydn` in the text box. However, you can enter any user attribute as long as the subsequent authorization filter supports it. The value of the LDAP attribute specified is stored in the `authentication.subject.id` message attribute.
-* **Authorization Attribute Format**:
-    Because any user attribute can be specified in the **Authorization Attribute** above, you must inform API Gateway of the type of this attribute. API Gateway uses this information internally in subsequent authorization filters. Select `X.509 Distinguished Name` from the drop-down list.
+* **Login Authentication Attribute**: In an LDAP directory tree, there must be one user attribute that uniquely distinguishes any one user from all the others. In Oracle Directory Server, the Distinguished name is referred to as the *entrydn* or Entry Domain Name. Select `Entry Domain Name` to uniquely identify the client authenticating to API Gateway.
+* **Authorization Attribute**: When the client has been successfully authenticated, you can use any one of that user's stored attributes in a subsequent authorization filter. In this case, you want to use the user's Entry Domain Name (DName) for an authorization filter, so enter `entrydn` in the text box. However, you can enter any user attribute as long as the subsequent authorization filter supports it. The value of the LDAP attribute specified is stored in the `authentication.subject.id` message attribute.
+* **Authorization Attribute Format**: Because any user attribute can be specified in the **Authorization Attribute** above, you must inform API Gateway of the type of this attribute. API Gateway uses this information internally in subsequent authorization filters. Select `X.509 Distinguished Name` from the drop-down list.
 
 #### Microsoft Active Directory Server
 
 This subsection describes how to configure the Authentication Repository
 dialog for Microsoft Active Directory Server. The values enter here differ from those entered when interfacing to the Oracle Directory Server:
 
-* **Repository Name**:
-    Enter a suitable name for this search.
-* **LDAP Directory**:
-    Click **Add/Edit** to add details of your Active Directory Server.
+* **Repository Name**: Enter a suitable name for this search.
+* **LDAP Directory**: Click **Add/Edit** to add details of your Active Directory Server.
 
 The **User Search Conditions** instruct API Gateway to search the LDAP tree according to certain criteria. The values specified are different from those selected for Oracle Directory Server, because MS Active Directory Server uses different attributes and classes to Oracle Directory Server:
 
-* **Base Criteria**:
-    The base criteria specify the base object under which to search for the user's profile (for example, `cn=Users, dc=qa, dc=vordel, dc=com`).
-* **User Class**:
-    In Active Directory Server, the user class is called *User*, so select `'User' LDAP Class`.
-* **User Search Attribute**:
-    This specifies the name of the user attribute whose value corresponds to the user name entered by the client during a successful authentication process. With Active Directory Server, this attribute is called *givenName*, which represents the name of the user. Enter `givenName` in this field.
-* **Login Authentication Attribute**:
-    Enter the name of the user attribute that uniquely identifies the user in the LDAP directory. This attribute is the DName and is called *distinguishedName* in Active Directory Server. Select `Distinguished Name` from the drop-down list to uniquely identify the user. API Gateway authenticates the user name and password presented by the client against the values stored for the user identified in this field.
-* **Authorization Attribute**:
-    When the client has been successfully authenticated, API Gateway can use any of that user's stored attributes in subsequent authorization filters. Because most authorization filters require a DName, enter `Distinguished Name` in the text box. However, any user attribute could be entered here, as long as the subsequent authorization filter supports it.
-* **Authorization Attribute Format**:
-    API Gateway needs to know the format of the **Authorization Attribute**. Select `X.509 Distinguished Name` from the drop-down list.
+* **Base Criteria**: The base criteria specify the base object under which to search for the user's profile (for example, `cn=Users, dc=qa, dc=vordel, dc=com`).
+* **User Class**: In Active Directory Server, the user class is called *User*, so select `'User' LDAP Class`.
+* **User Search Attribute**: This specifies the name of the user attribute whose value corresponds to the user name entered by the client during a successful authentication process. With Active Directory Server, this attribute is called *givenName*, which represents the name of the user. Enter `givenName` in this field.
+* **Login Authentication Attribute**: Enter the name of the user attribute that uniquely identifies the user in the LDAP directory. This attribute is the DName and is called *distinguishedName* in Active Directory Server. Select `Distinguished Name` from the drop-down list to uniquely identify the user. API Gateway authenticates the user name and password presented by the client against the values stored for the user identified in this field.
+* **Authorization Attribute**: When the client has been successfully authenticated, API Gateway can use any of that user's stored attributes in subsequent authorization filters. Because most authorization filters require a DName, enter `Distinguished Name` in the text box. However, any user attribute could be entered here, as long as the subsequent authorization filter supports it.
+* **Authorization Attribute Format**: API Gateway needs to know the format of the **Authorization Attribute**. Select `X.509 Distinguished Name` from the drop-down list.
 
 #### IBM Directory Server
 
@@ -404,43 +336,25 @@ You can authorize an authenticated user for a particular resource against an Ora
 
 To authenticate users against an OAM repository, right-click **Oracle Access Manager Repositories**, and select **Add a new Repository**. Configure the following fields on the Authentication Repository dialog:
 
-**Repository Name**:
-Enter an appropriate name for this repository.
+* **Repository Name**: Enter an appropriate name for this repository.
+* **Resource Request**: Configure the following settings for the resource request:
+    * **Resource Type**: Enter the type of the resource for which you are requesting access. For example, for access to a Web-based URL, enter `http`.
+    * **Resource Name**: Enter the name of the resource for which the user is requesting access. By default, this field is set to `//hostname${http.request.uri}`, which contains the     original path requested by the client.
+    * **Operation**: In most access management products, users are authorized for a limited set of actions on the requested resource. For example, users with management roles may be     permitted to write (`HTTP POST`) to a certain web service, but users with junior roles might only have read access (`HTTP GET`) to the same service. Use this field to specify the     operation to which you want to grant the user access on the specified resource. By default, this is set to the `http.request.verb` message attribute, which contains the HTTP verb used     by the client to send the message to API Gateway (for example, `HTTP POST`).
+    * **Include query string**: Select whether the query string parameters are used by the OAM server to determine the policy that protects this resource. This setting is optional if the     policies configured do not rely on the query string parameters.
+    * **Client location**: If the client location must be passed to OAM for it to make its decision, you can enter a valid DNS name or IP address to specify this location.
+    * **Optional Parameters**: You can add optional additional parameters to be used in the authentication decision. The available optional parameters include the following:
+        * `ip`:IP address, in dotted decimal notation, of the client accessing the resource.
+        * `operation`: Operation attempted on the resource (for HTTP resources, one of `GET`, `POST`, `PUT`, `HEAD`, `DELETE`, `TRACE`, `OPTIONS`, `CONNECT`, or `OTHER`).
+        * `resource`: The requested resource identifier (for HTTP resources, the full URL).
+        * `targethost`: The host (`host:port`) to which resource request is sent.
 
-**Resource Request**:
-Configure the following settings for the resource request:
-
-* **Resource Type**:
-    Enter the type of the resource for which you are requesting access. For example, for access to a Web-based URL, enter `http`.
-* **Resource Name**:
-    Enter the name of the resource for which the user is requesting access. By default, this field is set to `//hostname${http.request.uri}`, which contains the original path requested by the client.
-* **Operation**:
-    In most access management products, users are authorized for a limited set of actions on the requested resource. For example, users with management roles may be permitted to write (`HTTP POST`) to a certain web service, but users with junior roles might only have read access (`HTTP GET`) to the same service. Use this field to specify the operation to which you want to grant the user access on the specified resource. By default, this is set to the `http.request.verb` message attribute, which contains the HTTP verb used by the client to send the message to API Gateway (for example, `HTTP POST`).
-* **Include query string**:
-    Select whether the query string parameters are used by the OAM server to determine the policy that protects this resource. This setting is optional if the policies configured do not rely on the query string parameters.
-* **Client location**:
-    If the client location must be passed to OAM for it to make its decision, you can enter a valid DNS name or IP address to specify this location.
-* **Optional Parameters**:
-    You can add optional additional parameters to be used in the authentication decision. The available optional parameters include the following:
-    * `ip`:IP address, in dotted decimal notation, of the client accessing the resource.
-    * `operation`: Operation attempted on the resource (for HTTP resources, one of `GET`, `POST`, `PUT`, `HEAD`, `DELETE`, `TRACE`, `OPTIONS`, `CONNECT`, or `OTHER`).
-    * `resource`: The requested resource identifier (for HTTP resources, the full URL).
-    * `targethost`: The host (`host:port`) to which resource request is sent.
-
-    One or more of these optional parameters may be required by certain authentication schemes, modules, or plugins configured in the OAM server. To determine which parameters to add, see your OAM server configuration and documentation.
-
-**Single Sign On**:
-Configure the following settings for single sign on:
-
-* **Create SSO Token**:
-    Select whether to create an SSO token. This is selected by default.
-* **Store SSO Token in User Attribute**:
-    Enter the name of the message attribute that contains the user's SSO token. This attribute is populated when authenticating to OAM using the HTTP Basic or HTTP Digest filter. By default, the SSO token is stored in the `oracle.sso.token` message attribute.
-* **Add SSO Token to User Attributes**:
-    Select whether to add the SSO Token to user message attributes. This is selected by default.
-
-**OAM Access Server SDK Directory**:
-Enter the path to your OAM Access Server SDK directory. For more details on the OAM Access Server SDK, see your OAM documentation.
+        One or more of these optional parameters may be required by certain authentication schemes, modules, or plugins configured in the OAM server. To determine which parameters to add,     see your OAM server configuration and documentation.
+    * **Single Sign On**: Configure the following settings for single sign on:
+    * **Create SSO Token**: Select whether to create an SSO token. This is selected by default.
+    * **Store SSO Token in User Attribute**: Enter the name of the message attribute that contains the user's SSO token. This attribute is populated when authenticating to OAM using the HTTP Basic or HTTP Digest filter. By default, the SSO token is stored in the `oracle.sso.token` message attribute.
+    * **Add SSO Token to User Attributes**: Select whether to add the SSO Token to user message attributes. This is selected by default.
+* **OAM Access Server SDK Directory**: Enter the path to your OAM Access Server SDK directory. For more details on the OAM Access Server SDK, see your OAM documentation.
 
 ## Oracle Entitlements Server 10g repositories
 
@@ -450,12 +364,8 @@ For example, API Gateway can extract credentials from the message sent by the cl
 
 To authenticate and authorize users against an OES 10g repository, right-click **Oracle Entitlements Server 10g Repositories**, and select **Add a new Repository**. Configure the following fields on the Authentication Repository dialog:
 
-**Repository Name**:
-Enter an appropriate name for this repository.
-
-**Oracle SSM Settings**:
-Click **Configure**
-to launch the **Oracle Security Service Module Settings** dialog. For details on configuring these settings, see [Configure Oracle Security Service Module settings (10g)](/docs/apim_policydev/apigw_poldev/security_server_settings/#configure-oracle-security-service-module-settings-10g).
+* **Repository Name**: Enter an appropriate name for this repository.
+* **Oracle SSM Settings**: Click **Configure** to launch the **Oracle Security Service Module Settings** dialog. For details on configuring these settings, see [Configure Oracle Security Service Module settings (10g)](/docs/apim_policydev/apigw_poldev/security_server_settings/#configure-oracle-security-service-module-settings-10g).
 
 ## RADIUS repositories
 
@@ -479,26 +389,17 @@ RSA Access Manager (formerly known as RSA ClearTrust) provides Identity Manageme
 
 To authenticate users against an RSA Access Manager repository, right-click **RSA Access Manager Repositories**, and select **Add a new Repository**. Configure the following fields on the Authentication Repository dialog:
 
-**Repository Name**:
-Enter an appropriate name for this repository.
+* **Repository Name**: Enter an appropriate name for this repository.
+* **Connection Details**: API Gateway can connect to a group of Access Manager *authorization servers* or *dispatcher servers*. When multiple Access Manager authorization servers are deployed for load-balancing purposes, API Gateway first connects to a dispatcher server, which returns a list of active authorization servers. An attempt is made to connect to one of these authorization servers using round-robin DNS. If the first dispatcher server in the connection group is not available, API Gateway attempts to connect to the dispatcher server with the next highest priority in the group, and so on.
 
-**Connection Details**:
-API Gateway can connect to a group of Access Manager *authorization servers* or *dispatcher servers*. When multiple Access Manager authorization servers are deployed for load-balancing purposes, API Gateway first connects to a dispatcher server, which returns a list of active authorization servers. An attempt is made to connect to one of these authorization servers using round-robin DNS. If the first dispatcher server in the connection group is not available, API Gateway attempts to connect to the dispatcher server with the next highest priority in the group, and so on.
-
-If a dispatcher server has not been deployed, API Gateway can connect directly to an authorization server. If the authorization server with the highest priority in the connection group is not available, API Gateway attempts to connect to the authorization server with the next highest priority, and so on. You can select the type of the connection group using the **Authorization Server** or **Dispatcher Server**
-radio button. All servers in the group must be of the same type.
-
-**Connection Group**:
-Select the **Connection Group** to use for authenticating clients. You can add connection groups under the **Environment Configuration > External Connections** node in Policy Studio. Expand the **Connection Sets** node, right-click **RSA Access Manager Connection Sets**, and select **Add a Connection Set**. For more details on adding and editing connection groups, see Configure connection groups.
-
-**Authentication Type**:
-Select one of the following authentication types for the connection:
-
-* HTTP Basic
-* Windows NT
-* RSA SecureID
-* LDAP
-* Certificate Distinguished Name
+    If a dispatcher server has not been deployed, API Gateway can connect directly to an authorization server. If the authorization server with the highest priority in the connection group is not available, API Gateway attempts to connect to the authorization server with the next highest priority, and so on. You can select the type of the connection group using the **Authorization Server** or **Dispatcher Server** radio button. All servers in the group must be of the same type.
+* **Connection Group**: Select the **Connection Group** to use for authenticating clients. You can add connection groups under the **Environment Configuration > External Connections** node in Policy Studio. Expand the **Connection Sets** node, right-click **RSA Access Manager Connection Sets**, and select **Add a Connection Set**. For more details on adding and editing connection groups, see Configure connection groups.
+* **Authentication Type**: Select one of the following authentication types for the connection:
+    * HTTP Basic
+    * Windows NT
+    * RSA SecureID
+    * LDAP
+    * Certificate Distinguished Name
 
 ## Sun Access Manager repositories
 
