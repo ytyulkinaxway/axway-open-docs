@@ -374,7 +374,11 @@ No new Axway-defined Java system properties were introduced in this release.
 
 ## 7.7 July 2020
 
-No new Axway-defined Java system properties were introduced in this release.
+Axway-defined Java system properties introduced in the 7.7 20200730 release
+
+| System Property                          | Context     | Description                                                                         |
+| ---------------------------------------- | ----------- | ----------------------------------------------------------------------------------- |
+| com.axway.apigw.request.headers.reflect | API Gateway; API Manager; | If set to false, incoming headers are not reflected (except for headers that are set or modified by policies). Default value: true. |
 
 ## 7.7 September 2020
 
