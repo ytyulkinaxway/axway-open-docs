@@ -7,7 +7,7 @@
 }
 ## Install dependencies from RedHat Software Collections on RHEL 7
 
-On a Red Hat Enterprise Linux (RHEL7) installation, the default PHP version available in the official repository is 5.4. However, API Portal only supports PHP 7.1+. You can use RedHat Software Collections (RHSCL) to install PHP 7.1+.
+On a Red Hat Enterprise Linux (RHEL7) installation, the default PHP version available in the official repository is 5.4. However, API Portal only supports PHP 7.1.X-7.4.X. You can use RedHat Software Collections (RHSCL) to install PHP 7.1.X-7.4.X.
 
 ### Enable RedHat Software Collections
 
