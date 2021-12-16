@@ -50,9 +50,6 @@ To install API Portal:
    sudo setsebool -P httpd_can_network_connect 1
    sudo setsebool -P httpd_can_network_connect_db 1
    sudo setsebool -P httpd_unified 1
-   sudo chcon -R -t httpd_sys_content_t <APIPORTAL_INSTALL_DIR>
-   sudo semanage fcontext -a -t httpd_sys_rw_content_t '<APIPORTAL_INSTALL_DIR>(/.*)?'
-   sudo restorecon -R -v '<APIPORTAL_INSTALL_DIR>'
    ```
 
 Watch this video to learn more about installing API Portal using a non-root user:
