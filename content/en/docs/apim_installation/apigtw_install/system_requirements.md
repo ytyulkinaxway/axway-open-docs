@@ -72,7 +72,7 @@ The disk space and RAM requirements for the developer tools on Windows platforms
 There are also specific requirements for the `/tmp` directory:
 
 * Minimum 500 MB available in the `/tmp` directory and writable permissions on the `/tmp`, `/var/tmp`, and `/usr/tmp` directories.
-* `noexec` must not be set on `/tmp`. If `noexec` is set, you must remount `/tmp` with `noexec` disabled or follow the additional steps detailed in [Linux tmp directory mounted with noexec](/docs/apim_installation/apigtw_install/system_requirements/#linux-tmp-directory-mounted-with-noexec).
+* `noexec` must not be set on `/tmp`. If `noexec` is set, you must remount `/tmp` with `noexec` disabled or follow the additional steps detailed in [Linux tmp directory mounted with noexec](/docs/apim_installation/apigtw_install/system_requirements#linux-tmp-directory-mounted-with-noexec).
 
 ## Databases
 
