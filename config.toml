@@ -94,6 +94,9 @@ github_repo = "https://github.com/Axway/axway-open-docs"
 # Enable Algolia search
 algolia_docsearch = true
 
+# Enable syntax highlighting and copy buttons on code blocks with Prism
+prism_syntax_highlighting = true
+
 # User interface configuration
 [params.ui]
 # Enable to show the side bar menu in its compact state.
@@ -122,9 +125,6 @@ no = 'Sorry to hear that. Please <a href="https://github.com/Axway/axway-open-do
 # add "hide_readingtime": "true" to the page's front matter.
 [params.ui.readingtime]
 enable = true
-
-# Enable syntax highlighting and copy buttons on code blocks with Prism
-prism_syntax_highlighting = true
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
