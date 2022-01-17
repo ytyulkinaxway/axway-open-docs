@@ -501,7 +501,7 @@ To configure global distributed cache settings for peer discovery, perform the f
     * **Peer provider class**: **Properties**: Enter the following setting using an environment variable for the cache URLs:
 
         ```
-        peerDiscovery=manual,timeToLive=1,rmiURLs=${env.CACHE.RMI.URL}
+        peerDiscovery=manual,timeToLive=1,rmiUrls=${env.CACHE.RMI.URL}
         ```
 
     * **Peer listener class**: **Properties**: Enter the following setting using environment variables for the hosts and ports:
