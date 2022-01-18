@@ -197,7 +197,7 @@ For example, you can:
 * Download the currently deployed YAML `.tar.gz` (`–download_archive` option).
 * Use API Gateway Manager UI to check if a group is consistent, and restart API Gateway instances.
 
-Refer to [Manage domain topology in API Gateway Manager](/docs/apim_administration/apigtw_admin/managetopology/) and [managedomain command reference](https://axway-open-docs.netlify.app/docs/apim_reference/managedomain_ref/) for more information on these tools.
+Refer to [Manage domain topology in API Gateway Manager](/docs/apim_administration/apigtw_admin/managetopology/) and [managedomain command reference](/docs/apim_reference/managedomain_ref/) for more information on these tools.
 
 ### Update deployment archive properties
 
