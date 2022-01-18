@@ -35,7 +35,7 @@ For more information, see:
 ### Backup passphrase parameter to restore operation in kpsadmin
 
 We have added a new `--passphrase` parameter to the restore operation in `kpsadmin`.
-If the parameter is not specified the script will prompt for a passphrase. The passphrase parameter is provided to allow data that may be encrypted at rest, be decrypted when being restored into the target API Gateway environment. For more info, see [Manage KPS using kpsadmin](https://developjan21--axway-open-docs.netlify.app/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/).
+If the parameter is not specified the script will prompt for a passphrase. The passphrase parameter is provided to allow data that may be encrypted at rest, be decrypted when being restored into the target API Gateway environment. For more info, see [Manage KPS using kpsadmin](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/).
 
 ### Content Security Policy header to improve security
 

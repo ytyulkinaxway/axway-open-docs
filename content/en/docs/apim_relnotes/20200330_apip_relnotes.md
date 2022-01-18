@@ -31,7 +31,7 @@ The following new features and enhancements are available in this update.
 * You can set a flag to include or exclude the value for the `externalDocs` attribute. The flag defaults to **On**. When the flag is enabled, the value for the externalDocs attribute is appended to the **Description** field and rendered as part of that field.
 * You can configure whether to show **Try it** for groups of HTTP methods per connected API Manager instance. This allows for finer grained control of the **Try it** functionality.
 
-For more information, see [Customize API Catalog](https://axway-open-docs.netlify.com/docs/apim_administration/apiportal_admin/customize_apicatalog_overview/)
+For more information, see [Customize API Catalog](/docs/apim_administration/apiportal_admin/customize_apicatalog_overview/)
 
 ## Limitations of this update
 
