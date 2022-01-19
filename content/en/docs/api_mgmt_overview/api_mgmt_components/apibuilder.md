@@ -6,7 +6,7 @@
     "description": "Integration, orchestration, and mocking of APIs as a lightweight microservice."
 }
 
-[Axway API Builder](https://docs.axway.com/bundle/API_Builder_4x_allOS_en/page/api_builder_getting_started_guide.html) is based on Node.js, and acts as an integration orchestration layer between existing service providers and the API management system, or governance layer.
+[Axway API Builder](https://docs.axway.com/bundle/api-builder/page/docs/index.html) is based on Node.js, and acts as an integration orchestration layer between existing service providers and the API management system, or governance layer.
 
 API Builder can connect to different service providers:
 
@@ -29,7 +29,7 @@ API Builder offers:
 * Based on standards (OpenAPI/Swagger, Node.js, Javascript, JSON)
 * Powerful flow engine
 * Optimized for use in containers
-* Easily expandable using an available [API Builder SDK](https://docs.axway.com/bundle/API_Builder_4x_allOS_en/page/api_builder_sdk.html)
+* Easily expandable using an available [API Builder SDK](https://docs.axway.com/bundle/api-builder/page/docs/developer_guide/sdk/index.html)
 
 To expose and implement APIs, the API builder offers two different approaches.
 
@@ -43,7 +43,7 @@ Watch this video to learn how to connect to a database and create a CRUD API bas
 
 {{< youtube h9YXLwEYrVw >}}
 
-Learn more about [API Builder Models](https://docs.axway.com/bundle/API_Builder_4x_allOS_en/page/api_builder_models.html).
+Learn more about [API Builder Models](https://docs.axway.com/bundle/api-builder/page/docs/developer_guide/models/index.html).
 
 ### API-first approach
 
@@ -55,7 +55,7 @@ Watch this vide to learn how to implement an API design using flows.
 
 {{< youtube Rnb9OAtyjNE >}}
 
-Learn more about [API Builder Flows](https://docs.axway.com/bundle/API_Builder_4x_allOS_en/page/api_builder_flows.html).
+Learn more about [API Builder Flows](https://docs.axway.com/bundle/api-builder/page/docs/developer_guide/flows/index.html).
 
 Both approaches can also be mixed, for example, to combine the data from a model with the data from a REST service.
 
