@@ -1,11 +1,10 @@
 {
 "title": "Performance tuning",
-"linkTitle": "Performance tuning",
-"weight":"118",
-"date": "2019-10-14",
-"description": "Optimize API Gateway performance using various configuration options."
+  "linkTitle": "Performance tuning",
+  "weight": "118",
+  "date": "2019-10-14",
+  "description": "Optimize API Gateway performance using various configuration options."
 }
-
 General performance tuning options include tracing, monitoring, and logging. More advanced performance tuning options include database pooling, HTTP keep alive, chunked encoding, and client threads.
 
 ## General performance tuning
@@ -31,8 +30,7 @@ For more details, see [Configure API Gateway diagnostic trace](/docs/apim_admini
 Real-time monitoring is displayed in the **Monitoring**
 view in the API Gateway Manager web console. This caches recent message transactions in the memory of API Gateway. You can remove this overhead by disabling real-time monitoring.
 
-To disable in Policy Studio, select **Environment Configuration > Server Settings
-> Monitoring > Real Time Monitoring**, and deselect **Enable Real Time Monitoring**:
+To disable in Policy Studio, select **Environment Configuration > Server Settings > Monitoring > Real Time Monitoring**, and deselect **Enable Real Time Monitoring**:
 
 ![Disable real-time monitoring](/Images/APIGateway/admin_perf_realtime_monitor.png)
 
@@ -72,7 +70,7 @@ You can also use the advanced configuration settings described in this section t
 
 ### Configure spilling of data to disk
 
-When stress testing with large messages (greater than 4 MB), the API Gateway spills data to disk instead of holding it in memory. By default, the `spilltodisk` option is triggered with payload sizes of 4 MB or more. For example, you can configure this in the `service.xml` file in the following directory by adding the `spilltodisk` option configured in bytes:
+When stress testing with large messages (greater than 4 MB), API Gateway spills data to disk instead of holding it in memory. By default, the `spilltodisk` option is triggered with payload sizes of 4 MB or more. You can update this value in the `service.xml` file by adding the `spilltodisk` option configured in bytes:
 
 ```
 <install-dir>/apigateway/groups/<group-id>/<instance-id>/conf/service.xml
@@ -82,22 +80,28 @@ For example:
 
 ```
 <NetService provider="NetService">
-    <SystemSettings
-            tracelevel="&server.tracelevel;"
-            tracecomponent="&server.title;"
-            title="&server.title;"
-            homedir="$VINSTDIR"
-            secret="&server.entitystore.secret;"
-            servicename="&server.servicename;
+    <SystemSettings
+         tracelevel="&server.tracelevel;"
+         tracecomponent="&server.title;"
+         title="&server.title;"
+         homedir="$VINSTDIR"
+         secret="&server.entitystore.secret;"
+         servicename="&server.servicename;
             "spilltodisk="10485760"
              ...
 ```
 
-This setting specifies the limit of what is considered a reasonably-sized incoming request message to hold in memory. After this limit is exceeded, to preserve memory, the system writes the content of the incoming request to disk when it arrives.
+The spilling setting specifies the limit of what is considered a reasonably sized incoming request message to hold in memory. After this limit is exceeded, to preserve memory, the system writes the content of the incoming request to disk when it arrives.  This data is written to the `/var/tmp/-bigmsg/` directory and deleted as soon as the transaction is finished. To configure the gateway to use another directory, set the Linux environment variable `TMPDIR` to the desired location and restart the gateway instances.
 
-For example, if API Gateway receives a 200 MB message from an HTTP/1.1 server to forward to an HTTP/1.0 client, it may need to calculate the content length of that message before transmitting the first byte to the client. API Gateway can do this by holding it in memory, or storing it to disk. After a certain point, the benefits of holding it in memory are outweighed by the cost of the memory footprint, and API Gateway stores it on disk.
+Gateway environment variables can be set in the `/apigateway/posix/lib/venv` script by adding a line like the following:
 
-When the message is entirely received, API Gateway knows the content length, and can generate it before reading the data from the disk block-by-block, and forwarding to the client. The entire 200 MB does not need to reside in API Gateway at the same time.
+```
+TMPDIR=/some/new/temp/directory
+```
+
+For an example of how this works, consider that if API Gateway receives a 200 MB message from an HTTP/1.1 server to forward to an HTTP/1.0 client, it might need to calculate the content length of that message before transmitting the first byte to the client. API Gateway can do this by holding the message in memory, or storing it to disk. After a certain point, the benefits of holding it in memory are outweighed by the cost of the memory footprint, then API Gateway stores the data in the disk.
+
+When the message is entirely received, API Gateway knows the content length and can generate either the `Content-Length` header or the chunked transfer encoding boundaries before reading the data from the disk block by block, and forwarding it to the client. The entire 200 MB of data does not need to reside in API Gateway memory at the same time.
 
 {{< alert title="Note" color="primary" >}}The `spilltodisk` option is purely used to reduce pressure on virtual address space, and does not impact on monitoring or metrics. This option applies to HTTP and SMTP only.{{< /alert >}}
 
