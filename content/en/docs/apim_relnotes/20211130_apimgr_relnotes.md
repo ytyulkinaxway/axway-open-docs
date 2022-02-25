@@ -57,11 +57,11 @@ The Externally Managed Topology (EMT) scripts were upgraded from Python 2.7 to P
 
 <!--As part of our software development life cycle we constantly review our API Management offering. As part of this update, the following capabilities have been deprecated-->
 
-No capabilities have been deprecated in this update.
+No features have been deprecated in this update.
 
 ## End of support notices
 
-This section describes the features that have been removed in this update.
+The following items are end of support:
 
 ### Developer tools on Windows 8.1
 
@@ -71,7 +71,7 @@ This is a reminder that in February 2022 we will remove support for the installa
 
 <!-- To stay current and align our offerings with customer demand and best practices, Axway might discontinue support for some capabilities. As part of this update, the following features have been removed: -->
 
-No capabilities have been removed in this update.
+No features have been removed in this update.
 
 ## Fixed issues
 

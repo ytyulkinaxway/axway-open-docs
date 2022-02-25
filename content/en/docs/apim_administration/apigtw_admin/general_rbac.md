@@ -408,3 +408,7 @@ You can use the following  for reference purposes when making changes to the `ac
     * `mgmt`
     * `deploy`
     * `config`
+
+## Concurrent sessions
+
+Concurrent sessions are allowed in API Gateway Manager by default. The approach to handling concurrent sessions is subject to context and depends on the end users particular needs. There are valid reasons for supporting multiple logins for a single entity, such as in DevOps environments or for different account types, and the approaches to handling concurrent sessions are varied. The gateway's policy engine supports session management, and handling of concurrent sessions is left to the end users discretion, which provides greater flexibility for the end user.

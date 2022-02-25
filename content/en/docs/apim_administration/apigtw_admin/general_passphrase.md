@@ -14,7 +14,7 @@ This section describes how to specify an encryption passphrase for a local Polic
 
 {{< alert title="Caution" color="warning" >}}It is crucial that you remember the passphrase when you change it. Failure to remember the passphrase results in the loss of encrypted data, and may prevent the API Gateway from functioning correctly.{{< /alert >}}
 
-## Configure the project passphrase using `projchangepass`
+## Configure the project passphrase
 
 You can use the `projchangepass` command to change the encryption passphrase for a Policy Studio project. This example shows how to change the project passphrase on proj1 from `changeme` to `newpassPhrase`:
 
@@ -22,21 +22,21 @@ You can use the `projchangepass` command to change the encryption passphrase for
 projchangepass --proj=/home/user1/apiprojects/proj1 --oldpass=changeme --newpass=newpassPhrase --confirmpass=newpassPhrase
 ```
 
-## Configure the group passphrase using `managedomain`
+## Configure the group passphrase
 
-You can use the managedomain command to change the encryption passphrase for an API Gateway group. The following example shows this using managedomain in command interpreter mode:
+You can use the `managedomain` command to change the encryption passphrase for an API Gateway group. The following example shows this using managedomain in command interpreter mode:
 
 ```
-> change_passphrase group Group1 old_passphrase "" new_passphrase "12345"
+change_passphrase group Group1 old_passphrase "" new_passphrase "12345"
 ```
 
 For more details on using `managedomain`, see [Managedomain command reference](/docs/apim_reference/managedomain_ref/).
 
-You must also re-encrypt Key Property Store tables after changing an encryption passphrase for an API Gateway group. You can do this using the [`kpsadmin` tool](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/).
+You must also re-encrypt Key Property Store tables after changing an encryption passphrase for an API Gateway group. For more information, see [`kpsadmin` tool](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/).
 
-## Configure the Node Manager passphrase using `managedomain`
+## Configure the Node Manager passphrase
 
-You can use the managedomain command to change the encryption passphrase for a Node Manager. The following example shows this using managedomain in command interpreter mode:
+You can use the `managedomain` command to change the encryption passphrase for a Node Manager. The following example shows this using `managedomain` in command interpreter mode:
 
 ```
 > edit_host old_passphrase "" new_passphrase "12345"
@@ -50,9 +50,8 @@ If you have set an encryption passphrase for API Gateway configuration data, you
 
 When you first open a connection to an API Gateway in Policy Studio, you specify a **Password**. The different roles of the **Passphrase** and the **Password** fields are as follows:
 
-**Passphrase**: Used to decrypt sensitive data that has already been encrypted (for example, private keys and passwords) . Not required by default, and only needed if you have already set the encryption passphrase in Policy Studio.
-
-**Password**: Used to authenticate to the API Gateway's management interface using HTTP basic authentication when opening a connection to a server. Required by default.
+* **Passphrase**: Used to decrypt sensitive data that has already been encrypted (for example, private keys and passwords) . Not required by default, and only needed if you have already set the encryption passphrase in Policy Studio.
+* **Password**: Used to authenticate to the API Gateway's management interface using HTTP basic authentication when opening a connection to a server. Required by default.
 
 ## Prompt for passphrase at server startup or via a startup script
 
@@ -121,8 +120,8 @@ Alternatively, you can use a script to automatically provide the passphrase when
 
 {{< alert title="Caution" color="warning" >}}
 
-1. If the group passphrase is not correctly set in the `group.xml` file, then newly created API Gateway servers will fail to start.
-2. If newly created API Gateway servers expect to use a script to provide the passphrase and the group passphrase cannot be correctly set in the `group.xml` file, then you must set the `pvalue` attribute to `"(prompt)"`, as described in [Prompt for the passphrase at server startup](/docs/apim_administration/apigtw_admin/general_passphrase/#prompt-for-the-passphrase-at-server-startup). In this scenario, you must provide the correct passphrase for the group when new API Gateway servers are created. Failing to provide the correct passphrase causes the newly created API Gateway servers fail to start.
+* If the group passphrase is not correctly set in the `group.xml` file, then newly created API Gateway servers will fail to start.
+* If newly created API Gateway servers expect to use a script to provide the passphrase and the group passphrase cannot be correctly set in the `group.xml` file, then you must set the `pvalue` attribute to `"(prompt)"`, as described in [Prompt for the passphrase at server startup](/docs/apim_administration/apigtw_admin/general_passphrase/#prompt-for-the-passphrase-at-server-startup). In this scenario, you must provide the correct passphrase for the group when new API Gateway servers are created. Failing to provide the correct passphrase causes the newly created API Gateway servers fail to start.
 {{< /alert >}}
 
 ## Promotion between environments

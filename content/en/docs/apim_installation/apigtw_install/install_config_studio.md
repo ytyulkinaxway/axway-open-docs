@@ -6,13 +6,15 @@
 "description": "Configuration Studio is a graphical tool that allows you to configure environment-specific properties to deploy APIs and policies in non-development environments."
 }
 
-You can install Configuration Studio on both Linux and Windows.
+You can install Configuration Studio on both Linux and Windows. However, Windows is supported only for a limited set of developer tools. For more information, see [Install developer tools on Windows](/docs/apim_installation/apigtw_install/install_dev_tools).
 
-{{< alert title="Note" color="primary" >}}Windows is supported only for a limited set of developer tools, see [Install developer tools on Windows](/docs/apim_installation/apigtw_install/install_dev_tools). API Gateway and API Manager do not support Windows.{{< /alert >}}
+API Gateway and API Manager do not support Windows.
+
+{{< alert title="Note" color="primary" >}}Configuration Studio is not applicable for YAML based projects. For YAML-specific details, see [YAML configuration](/docs/apim_yamles/){{< /alert >}}
 
 ## Prerequisites
 
-Ensure that all of the [prerequisites](/docs/apim_installation/apigtw_install/system_requirements) are met.
+Ensure that all of the [prerequisites](/docs/apim_installation/apigtw_install/system_requirements) for API Gateway installation are met.
 
 ## Install Configuration Studio
 
@@ -30,7 +32,8 @@ The following example shows how to install the Configuration Studio component in
 --enable-components configurationstudio --disable-components nodemanager,apigateway,qstart,apitester,analytics,policystudio,apimgmt,cassandra,packagedeploytools
 ```
 
-{{< alert title="Note" color="primary" >}}
+### Install on Windows
+
 To install Configuration Studio on Windows without administrator privileges set the following environment variable in a command-line window:
 
 ```
@@ -38,7 +41,6 @@ set __COMPAT_LAYER=RunAsInvoker
 ```
 
 You must start the installer from the same window.
-{{< /alert >}}
 
 ## Start Configuration Studio
 

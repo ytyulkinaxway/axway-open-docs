@@ -19,11 +19,11 @@ INSTALL_DIR/apigateway/posix/bin
 
 For an overview of the `managedomain` command, see [Configure an API Gateway domain](/docs/apim_administration/apigtw_admin/makegateway).
 
-## `managedomain` command interpreter mode
+## Command interpreter mode
 
 To run in default command interpreter mode, enter `managedomain`, and press Tab to view and select options. For example:
 
-```
+```bash
 Axway-7.7/apigateway/posix/bin>managedomain
 Running in command interpreter mode. Enter 'quit' to exit.
 Enter 'help' to view help topics. Enter 'help topic' to view help for a topic.
@@ -49,7 +49,7 @@ You must first run `initialize` to register the first host in the domain in orde
 
 You can view detailed help for each command and its parameters by entering `help` followed by the command name. The following example shows the help for the `initialize` command:
 
-```
+```bash
 help initialize
 
 Register the first Node Manager and host in a new domain. This Node Manager will
@@ -135,7 +135,7 @@ You can run a command using tab completion to specify parameters. The following 
 create_instance <press TAB>
 ```
 
-```
+```bash
 name                       group                      host
 instance_management_port   instance_services_port     passphrase
 yaml                       sign_with_generated        sign_with_user_provided    
@@ -152,7 +152,7 @@ The following example creates a new gateway instance with a specific name and gr
 create_instance name APIServer1 group Group1
 ```
 
-```
+```bash
 Requesting CSR from Admin Node Manager...
 CSR received from Admin Node Manager.
 Requesting signed certificate from Admin Node Manager...
@@ -178,7 +178,7 @@ You can test the connection by visiting the URL: http://roadrunner:8080/healthch
 
 Tab completion is also available for some parameter values (instance names, group names and host names). The following example shows available instances for the `delete_instance` command:
 
-```
+```bash
 delete_instance name <press TAB>
 
 APIServer1   APIServer2
@@ -186,7 +186,7 @@ APIServer1   APIServer2
 delete_instance name APIServer
 ```
 
-## `managedomain` interactive mode
+## Interactive mode
 
 To run in interactive mode, enter `managedomain --menu`, and follow the instructions at the command prompt. The following options are available:
 
@@ -244,7 +244,7 @@ Create a new API Gateway instance. You can also do this in Policy Studio and API
 
 Option `6`: `Edit API Gateway (rename, change management port)`
 
- Rename the API Gateway instance, or change the management port. This functionality is not available in Policy Studio and API Gateway Manager.
+Rename the API Gateway instance, or change the management port. This functionality is not available in Policy Studio and API Gateway Manager.
 
 Option `7`: `Delete API Gateway instance`
 
@@ -359,7 +359,7 @@ GATEWAY_OID = "1.3.6.1.4.1.17998.10.1.1.2.3"
 
 An Admin Node Manager's topology certificate will have both the `ADMIN_NODE_MANAGER_OID` and the `NODE_MANAGER_OID`, while a local Node Manager's topology certificate will have only the `NODE_MANAGER_OID` and a gateway instance's topology certificate will have only the `GATEWAY_OID` in its certificate.
 
-## `managedomain` command mode
+## Command mode
 
 You can also enter `managedomain` commands and parameters directly on the command line. For example, the following command creates an Admin Node Manager on the first host in the domain and signs with a user-provided domain key:
 
@@ -376,7 +376,7 @@ For detailed examples of using `managedomain` in command mode, see the following
 * [Configure Admin Node Manager high availability](/docs/apim_administration/apigtw_admin/admin_node_mngr)
 * [Find your installed version and list patches using managedomain](/docs/apim_administration/apigtw_admin/trblshoot_get_help#find-install-version)
 
-## Provide credentials to `managedomain`
+## Provide credentials to the Admin Node Manager
 
 You can use the following properties file to automatically provide admin user name and password credentials to authenticate to the Admin Node Manager:
 

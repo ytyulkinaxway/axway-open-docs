@@ -27,18 +27,19 @@ You must have Red Hat Enterprise Linux (RHEL) 7/8 or CentOS 7/8 installed.
 
 ### Database
 
-You must have one of the following installed:
+You must have one of the following databases installed:
 
-* MySQL 5.7
+* MySQL 5.7 or MySQL 8
 
-    API Portal does not officially support MySQL 8 as Joomla! does not support it. However, API Portal has been tested to work with MySQL 8 using a workaround. You must apply the workaround described at [Joomla! and MySQL 8](https://docs.joomla.org/Joomla_and_MySQL_8) before you install API Portal.
+  MySQL 8 is only proved to be working in combination with PHP 8.0. API Portal has not yet been tested with MySQL 8 and PHP lower than version 8.0.
+
 * MariaDB 10.4 or later
 
 ### PHP
 
-API Portal requires PHP 7.1 thru 7.4. We strongly recommend you to use only [officially supported PHP versions](https://www.php.net/supported-versions.php).
+API Portal requires PHP 7.3 through 8.0. We strongly recommend you to use only [officially supported PHP versions](https://www.php.net/supported-versions.php).
 
-In addition you must have the following PHP packages installed:
+In addition, you must have the following PHP packages installed:
 
 * `php-cli`
 * `php-common`

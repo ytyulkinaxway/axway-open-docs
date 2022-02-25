@@ -14,6 +14,8 @@ INSTALL_DIR/samples/scripts
 
 For details on packaging and deployment tools, see [Packaging and deployment tools](/docs/apigtw_devops/deploy_package_tools).
 
+{{< alert title="Note" color="primary" >}}All scripts and tools mentioned in this page pertain only to `.fed` or XML based projects, and are not applicable to YAML. For YAML-specific details, see [Package and deploy a YAML configuration](/docs/apim_yamles/yamles_packaging_deployment/).{{< /alert >}}
+
 ## Run the sample scripts
 
 To run a sample script, call the `run` shell in the `/samples/scripts` directory, and specify the script to run. For example:

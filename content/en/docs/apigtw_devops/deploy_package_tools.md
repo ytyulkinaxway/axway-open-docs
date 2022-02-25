@@ -21,6 +21,8 @@ projpack --help
 
 For a full listing of command options for the tools, see [Continuous integration tools reference](/docs/apim_reference/devopstools_ref).
 
+{{< alert title="Note" color="primary" >}}All scripts and tools mentioned in this page pertain only to `.fed` or XML based projects, and are not applicable to YAML. For YAML-specific details, see [Package and deploy a YAML configuration](/docs/apim_yamles/yamles_packaging_deployment/).{{< /alert >}}
+
 ## Generate configuration packages from API Gateway projects
 
 The `projpack` tool enables you to use automatic processes to generate API Gateway configuration packages from multiple API Gateway projects. For example, you can automatically generate deployment packages (`.fed`), policy packages (`.pol`), and environment packages (`.env`), which you can then use to promote APIs and policy configuration to upstream environments.

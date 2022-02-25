@@ -10,9 +10,7 @@
 
 The **Preferences** dialog enables you to configure a range of settings for Policy Studio. For example, you can configure the level at which Policy Studio traces diagnostic output. To change the Policy Studio settings, select **Window > Preferences** from the main menu. Each of the available settings is discussed in the following sections.
 
-{{< alert title="Note" color="primary" >}}When finished your updates, remember to click **Apply**
-at the bottom of the window, and to click **Deploy**
-in the toolbar. {{< /alert >}}
+{{< alert title="Note" color="primary" >}}After you finish your updates, remember to click **Apply** at the bottom of the window, and to click **Deploy** in the toolbar.{{< /alert >}}
 
 ### Auto-mapping
 
@@ -24,8 +22,11 @@ These settings relate to the auto-mapping feature in Visual Mapper. For more inf
 Environmentalization refers to configuring environment-specific settings for a particular target environment (for example, users, certificates, and external connections for a development environment). You can enable Policy Studio to display settings that have been environmentalized by selecting the **Allow environmentalization of fields**
 option.
 
-When this option is selected, you can environmentalize a selected field (for example, database URL) by clicking the globe icon to the right of the field. Alternatively, press **Ctrl-E**. When you have selected settings to be environmentalized, the field is disabled, and the globe icon is displayed on the right. You can manage settings that have been environmentalized under the **Environment Settings**
-node in the Policy Studio tree.
+When this option is selected, you can environmentalize a selected field (for example, database URL) by clicking the **Environmentalize** icon (![Environmentalize icon](/Images/docbook/images/deploy/env_off.png), a globe icon at the right of the fields). Alternatively, press **Ctrl-E**.
+
+{{< alert title="Tip" color="primary" >}}You must select the field for focus before the Environmentalize icon (![Environmentalize icon](/Images/docbook/images/deploy/env_off.png)) is displayed.{{< /alert >}}
+
+You can manage settings that have been environmentalized under the **Environment Settings** or **Yaml Values Settings** nodes in the Policy Studio tree.
 
 ### FIPS mode
 
@@ -113,18 +114,13 @@ setting enables you to specify whether the applications status bar is displayed 
 
 The **Enable Team Development** setting enables team development project templates and project dependencies in Policy Studio. This setting is disabled by default.
 
+Team Development is disabled for YAML-based projects.
+
 ### Trace level
 
-You can set the level at which Policy Studio logs diagnostic output by selecting the appropriate level from the **Tracing Level**
-drop-down list. Diagnostic output is written to a file in the `/logs`
-directory of your Policy Studio installation. You can select **Window**
-> **Show View**
-> **Console**
-in the main menu to view the trace output in the **Console**
-window at the bottom of the screen. The default trace level is `INFO`.
+You can set the level at which Policy Studio logs diagnostic output by selecting the appropriate level from the **Tracing Level** drop-down list. Diagnostic output is written to a file in the `/logs` directory of your Policy Studio installation. You can select **Window** > **Show View** > **Console** in the main menu to view the trace output in the **Console** window at the bottom of the screen. The default trace level is `INFO`.
 
-You can also configure the **Maximum number of files** output to the `/logs`
-directory. Defaults to 10 files.
+You can also configure the **Maximum number of files** output to the `/logs` directory. Defaults to 10 files.
 
 ### WS-I settings
 

@@ -95,8 +95,12 @@ To set up API Manager metrics you must first create an Admin Node Manager Docker
 
 When starting the containers, you must also specify the connection details for the metrics database using environment variables. For an example, see [Create a metrics-enabled ANM image](/docs/apim_installation/apigw_containers/docker_script_anmimage/#create-a-metrics-enabled-admin-node-manager-image).
 
-### How do you run API Gateway in Kubernetes?
+### How do you run API Gateway in Kubernetes
 
 To run API Gateway in Kubernetes, you can use the [API Gateway Helm charts on GitHub](https://github.com/Axway/apigw-helm-charts).
 
 These Helm charts are not intended as a recommended setup, but something that you can use as a starting point and customize for your own environment.
+
+### How do you run API Gateway with a persisted volume
+
+[Deploy API Gateway in containers](/docs/apim_installation/apigw_containers/) outlines how to create API Gateway images with fully baked configuration. Users may wish to make configuration updates in a more targeted manner, this is facilitated through the use of persisted volumes. The [Docker volumes with API Gateway](/docs/apim_howto_guides/configuring_apigw_container) section outlines the basics for how this approach can be implemented.

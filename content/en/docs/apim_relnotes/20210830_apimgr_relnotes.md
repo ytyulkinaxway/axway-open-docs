@@ -65,19 +65,23 @@ The cadence of the updates for API Gateway, API Manager, and API Portal has chan
 
 <!--As part of our software development life cycle we constantly review our API Management offering. In this update, the following capabilities have been deprecated-->
 
-No capabilities have been deprecated in this update.
+No features have been deprecated in this update.
 
 ## End of support notices
 
-### Apache Cassandra 2.2.x
-
 <!-- There are no end of support notices in this update.-->
+
+The following items are end of support:
+
+### Apache Cassandra 2.2.x
 
 Apache Cassandra version 2.2 onwards will no longer be supported by Apache Cassandra after their end of service date of April 2022. Axway will continue to support these versions on a best efforts basis, however, no critical updates will be available from Apache Cassandra from that time.
 
 ## Removed features
 
-<!-- To stay current and align our offerings with customer demand and best practices, Axway might discontinue support for some capabilities. As part of this review, the following features have been removed: -->
+<!-- To stay current and align our offerings with customer demand and best practices, Axway might discontinue support for some capabilities. As part of this review, the following features have been removed:-->
+
+The following features have been removed:
 
 ### Antivirus filters
 
