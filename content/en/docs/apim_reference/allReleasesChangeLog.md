@@ -15,9 +15,11 @@ You can find the release notes for all service packs on [Axway Support](https://
 |Update       |New features and enhancements        |Important Changes    |Deprecated features  |Release Date|
 |---------    |---               |---                  |---                  |---         |
 |[7.7.202228](/docs/apim_relnotes/20220228_apimgr_relnotes/)|API Gateway Container use of Persisted Store |Distributed cache socket connect timeout |- |28/02/2022|
-||- |WSDL Schema Validation|- | |
+||Initial YAML Environmentalization Support in Policy Studio |WSDL Schema Validation|- | |
 ||- |Axway Terms and Conditions Update|- | |
 ||- |API Gateway password policy and passphrase validation|- | |
+||- |API Manager Proxy deprecation with a retirement date|- | |
+||- |Increased validation on API Manager Quota operations|- | |
 
 ## Version 7.7 2021
 
