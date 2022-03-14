@@ -257,7 +257,7 @@ The following lists the options that you can use with the install and uninstall 
 * `--php-ini`            : The directory where `php.ini` file is located. Example: `/etc`.
 * `--apache-config`      : The directory where the Apache configuration files are located. Example: `/etc/httpd/conf.d`.
 * `--use-encryption-key` : Accepts yY/nN. Indicates whether to use an encryption key. This option is required for public API mode.
-* `--encryption-key`     : Directory where the encryption key is stored. Example: `/home/encryption/key`. The last segment is the file name (in this example it is called `key`). sed when `--use-encryption-key` is set to yY.
+* `--encryption-key`     : Directory where the encryption key is stored. Example: `/home/encryption/key`. The last segment is the file name (in this example it is called `key`). Used when `--use-encryption-key` is set to yY.
 * `--use-ssl`            : Accepts yY/nN. Indicates whether API Portal will be served by SSL.
 * `--ssl-type`           : Indicates what SSL type to use. Accepts `1` (use custom certificate and private key) or `2` (use self-signed certificate).
 * `--ssl-certificate`    : Path to the SSL certificate. Used when SSL type `1` is selected.
@@ -265,9 +265,14 @@ The following lists the options that you can use with the install and uninstall 
 * `--private-key-passphrase`: The passphrase of the private key. Used when SSL type `1` is selected and the private key has passphrase.
 * `--passphrase-path`: Directory where the passphrase will be stored. The last segment will be the filename where the passphrase will be stored. The file is required to setup pache to start silently (without asking for passphrase). Used when SSL type `1` is selected and the private key has passphrase.
 * `--hostname`: The hostname of API Portal. Used when SSL type `1` is selected.
-* `--restart-apache`: Accepts yY/nN. Indicates whether Apache restart is wanted after installation (when the apache service could be correctly detected; otherwise manual restart f Apache is required).
+* `--restart-apache`: Accepts yY/nN. Indicates whether Apache restart is wanted after installation (when the apache service could be correctly detected; otherwise manual restart of Apache is required).
 * `--optionfile`         : Reads installation options from a file. Example: `--optionfile=basic.conf`. Inline options take precedence over the options from the configuration file.
 * `--gen-optionfile`     : Prints out the file to stdout. By redirecting the output to a file instead, you can quickly generate a dummy configuration file. This option is not equired by the installation process.
+* `--admin-change-password`: Accepts yY/nN. Flag indicating whether to change JAI admin user password.
+
+* `--admin-password`: JAI admin password. Used when `--admin-change-password` is set to yY.
+
+* `--admin-password-reset`: Accepts yY/nN. Flag indicating whether to force JAI admin user password reset on the first login.
 
 To see the complete list of options, run one of the following command:
 

@@ -35,6 +35,10 @@ Pagination and Elasticsearch are now enabled in API Docker containers. The pagin
 
 Configuration for [OAuth client credentials flow](/docs/apim_administration/apimgr_admin/api_mgmt_virtualize_web/#oauth) was added in API Manager, so API Portal now supports client credentials flow in line with API Manager adding support.
 
+### New installation parameters
+
+Admin account credential control parameters were added in API Portal installer to allow users to change the JAI admin password and password reset on first login. For more information, see [Unattended installation](/docs/apim_installation/apiportal_install/install_unattended/).
+
 ## Limitations of this update
 
 This update has the following limitations:
