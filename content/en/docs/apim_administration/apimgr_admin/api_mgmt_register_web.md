@@ -47,7 +47,8 @@ To automatically register an existing back-end REST API:
 2. Click **New API** and select one of the following:
 
    * **Import Swagger API**: Import an API in Swagger/OAS format.
-   * **Import WADL API**: Import an API in [Web Application Description Language](https://wadl.java.net/) (WADL) format.
+   * **Import WADL API**: Import an API in [Web Application Description Language](https://www.w3.org/Submission/2009/SUBM-wadl-20090831) (WADL) format. Note that API Manager only supports
+    the `http://wadl.dev.java.net/2009/02` XML namespace for WADL elements.
 
 3. On the **Import API** dialog, complete the following:
 
