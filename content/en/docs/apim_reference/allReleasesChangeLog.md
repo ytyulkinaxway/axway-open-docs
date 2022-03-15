@@ -12,101 +12,153 @@ You can find the release notes for all service packs on [Axway Support](https://
 
 ## Version 7.7 2022
 
-|Update       |New features and enhancements        |Important Changes    |Deprecated features  |Release Date|
-|---------    |---               |---                  |---                  |---         |
-|[7.7.202228](/docs/apim_relnotes/20220228_apimgr_relnotes/)|API Gateway Container use of Persisted Store |Distributed cache socket connect timeout |- |28/02/2022|
-||Initial YAML Environmentalization Support in Policy Studio |WSDL Schema Validation|- | |
-||- |Axway Terms and Conditions Update|- | |
-||- |API Gateway password policy and passphrase validation|- | |
-||- |API Manager Proxy deprecation with a retirement date|- | |
-||- |Increased validation on API Manager Quota operations|- | |
+|Update |New features and enhancements        |Important Changes    |Deprecated/Removed/EOS  |
+|---  |---               |---                  |---                  |---         |
+|[API Gateway and Manager 7.7.20220130](/docs/apim_relnotes/20220130_apimgr_relnotes/)  |API Gateway Container use of Persisted Store |Distributed cache socket connect timeout |- |
+| |Initial YAML Environmentalization Support in Policy Studio |WSDL Schema Validation|- |
+| |- |Axway Terms and Conditions Update|- |
+| |- |API Gateway password policy and passphrase validation|- |
+| |- |API Manager Proxy deprecation with a retirement date|- |
+| |- |Increased validation on API Manager Quota operations|- |
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Portal 7.7.20220130](/docs/apim_relnotes/20220130_apip_relnotes/)  |Support for PHP 8.0 |-|PHP 7.1 and PHP 7.2 |
+| |Support for MySql 8.0 |- |- |
 
 ## Version 7.7 2021
 
-|Update       |New features and enhancements        |Important Changes    |Deprecated features  |Release Date|
-|---------    |---               |---                  |---                  |---         |
-|[7.7.20211130](/docs/apim_relnotes/20211130_apimgr_relnotes/)|Set Client Credentials as a Grant type|YAML support in Policy Studio|Developer tools on Windows 8.1|30/11/2021|
-||New Amplify menu header|Docker scripts now use Python 3|-||
-|**Update**       |**New features and enhancements**        |**Important Changes**    |**Deprecated features**  |**Release Date**|
-|[7.7.20210830](/docs/apim_relnotes/20210830_apimgr_relnotes/)|Elastic-Stack Logging is available for API Gateway|McAfee Anti-Virus filter has been retired|Apache Cassandra 2.2.x|30/08/2021|
-||YAML configuration store|Support for Apache Cassandra 3.11.11|-||
-||ICAP message preview|-|-||
-||Unauthenticated request rate limiter is available|-|-||
-|**Update**       |**New features and enhancements**        |**Important Changes**    |**Deprecated features**  |**Release Date**|
-|[7.7.20210530](/docs/apim_relnotes/20210530_apimgr_relnotes/)|Dependency view and revoke access to front-end APIs|From the May update onwards, the update schedule will change from every two months to every three months.                  |PS Antivirus filters                 |30/05/2021|
-||Import APIs over HTTPS through a HTTPS proxy server|Embedded ActiveMQ host name verification|The packet sniffing capability is deprecated from this update                 ||
-||YAML configuration store (GA)|INSTALL_DIR/apigateway folder permissions changed|MariaDB 5.5||
-||Support for MariaDB 10.5|Replacement of MD5 hashed API Gateway configuration files with SHA256|- ||
-||New SHA-256 hash algorithm option on SFTP server fingerprint check|Changes to JWT Verify filter|- ||
-||SFTP server fingerprint check (MD5 hash algorithm)|Analytics CSP Header change|- ||
-||-         |Authorization records threshold added to API Manager OAuth Screen|-||
-|**Update**       |**New features and enhancements**        | **Important Changes**    |**Deprecated features**  |**Release Date**|
-|[7.7.20210330](/docs/apim_relnotes/20210330_apimgr_relnotes/)|Updated cipher scheme |Apache Cassandra security advisory|Antivirus filters |30/03/2021 |
-||Passphrase policy enforcement|Changes in JWT filters|End of Support for API Management version [7.7 January 2020](/docs/apim_relnotes/20200130_apimgr_relnotes/) |
-||Security enhancements to JWT Sign and Verify filters|New Cipher schemes for configuration and KPS|End of Support for the browser Internet Explorer 11|
-||Automatic upgrade of projects in Policy Studio|Driver for metrics database|End of Support for MySQL 5.6|
-||API Manager request rate limiter|- | -|
-||HTTP strict transport security profile|- | -|
-||Certification with MySQL 8|- | -|
-||YAML configuration store (Technical preview capability)|- |- |
-|**Update**       |**New features and enhancements**        | **Important Changes**    |**Deprecated features**  |**Release Date**|
-|[7.7.20210130](/docs/apim_relnotes/20210130_apimgr_relnotes/)| Option to disable SSL renegotiation is added for HTTPS listeners and Connection filters |- |-  |30/01/2021 |
-| |Backup passphrase parameter to restore operation in kpsadmin|-  | -| |
-| |Content Security Policy header to improve security|-  | -| |
-| |Apache Cassandra security advisory|-  | -| |
-| |Changes in JWT filters|-  | -| |
-| |New Cipher schemes for configuration and KPS|-  | -| |
-| |Driver for metrics database|-  | -| |
-| |YAML configuration store (Technical preview capability)|-  | -| |
+|Update |New features and enhancements        |Important Changes    |Deprecated/Removed/EOS  |
+|--- |---                                  |---                  |---                  |
+|[API Gateway and Manager 7.7.20211130](/docs/apim_relnotes/20211130_apimgr_relnotes/) |Set Client Credentials as a Grant type|YAML support in Policy Studio|Developer tools on Windows 8.1|
+| |New Amplify menu header|Docker scripts now use Python 3|-|
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Portal 7.7.20211130](/docs/apim_relnotes/20211130_apip_relnotes/) |Centos 8 is replaced by Alpine BaseOS| -|-|
+| |Docker image includes pagination and elasticsearch| -|-|
+| |OAuth client credentials flow improvements| -|-|
+| |New installation parameters| -|-|
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Gateway and Manager 7.7.20210830](/docs/apim_relnotes/20210830_apimgr_relnotes/)|Elastic-Stack Logging is available for API Gateway|McAfee Anti-Virus filter has been retired|Apache Cassandra 2.2.x|
+||YAML configuration store|Support for Apache Cassandra 3.11.11| - |
+||ICAP message preview|-|-|
+||Unauthenticated request rate limiter is available|-|-|
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Portal 7.7.20210830](/docs/apim_relnotes/20210830_apip_relnotes/) |Pagination support for API and Applications catalogs|- |-|
+| |Database password encryption improvements|- |-|
+|**Update** |**New features and enhancements**        |**Important Changes**    |**Deprecated/Removed/EOS**  |
+|[API Gateway and Manager 7.7.20210530](/docs/apim_relnotes/20210530_apimgr_relnotes/) |Dependency view and revoke access to front-end APIs|From the May update onwards, the update schedule will change from every two months to every three months.                  |PS Antivirus | filters                 |
+| |Import APIs over HTTPS through a HTTPS proxy server|Embedded ActiveMQ host name verification|The packet sniffing capability is deprecated from this update                 |
+| |YAML configuration store (GA)|INSTALL_DIR/apigateway folder permissions changed|MariaDB 5.5|
+| |Support for MariaDB 10.5|Replacement of MD5 hashed API Gateway configuration files with SHA256|- |
+| |New SHA-256 hash algorithm option on SFTP server fingerprint check|Changes to JWT Verify filter|- |
+| |SFTP server fingerprint check (MD5 hash algorithm)|Analytics CSP Header change|- |
+| |-         |Authorization records threshold added to API Manager OAuth Screen|-|
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Portal 7.7.20210530](/docs/apim_relnotes/20205130_apip_relnotes/) |There are no new feature or enhancements in this update| -|-|
+|**Update** |**New features and enhancements**        |**Important Changes**    |**Deprecated/Removed/EOS**  |
+|[API Gateway and Manager 7.7.20210330](/docs/apim_relnotes/20210330_apimgr_relnotes/) |Updated cipher scheme |Apache Cassandra security advisory|Antivirus filters |
+| |Passphrase policy enforcement|Changes in JWT filters|End of Support for API Management version [7.7 January 2020](/docs/apim_relnotes/20200130_apimgr_relnotes/) |
+| |Security enhancements to JWT Sign and Verify filters|New Cipher schemes for configuration and KPS|End of Support for the browser Internet Explorer 11|
+| |Automatic upgrade of projects in Policy Studio|Driver for metrics database|End of Support for MySQL 5.6|
+| |API Manager request rate limiter|- |- |
+| |HTTP strict transport security profile|- |- |
+| |Certification with MySQL 8|- |- |
+| |YAML configuration store (Technical preview capability)|- |- |
+|**Update** |**New features and enhancements**        |**Important Changes**    |**Deprecated/Removed/EOS** |
+|[API Portal 7.7.20210330](/docs/apim_relnotes/20203130_apip_relnotes/) |Unattended mode enhancement| -|Internet Explorer 11 and earlier versions|
+| |Further enhancements for general features| -|-|
+|**Update**|**New features and enhancements**        | **Important Changes**    |**Deprecated/Removed/EOS**  |
+|[API Gateway and Manager 7.7.20210130](/docs/apim_relnotes/20210130_apimgr_relnotes/)|Option to disable SSL renegotiation is added for HTTPS listeners and Connection filters |- |-  |
+||Backup passphrase parameter to restore operation in kpsadmin|-  | -|
+||Content Security Policy header to improve security|-  | -|
+||Apache Cassandra security advisory|-  | -|
+||Changes in JWT filters|-  | -|
+||New Cipher schemes for configuration and KPS|-  | -|
+||Driver for metrics database|-  | -|
+||YAML configuration store (Technical preview capability)|-  | -|
+|**Update** |**New features and enhancements**        |**Important Changes**    |**Deprecated/Removed/EOS**  |
+|[API Portal 7.7.20210130](/docs/apim_relnotes/20201130_apip_relnotes/) |Docker container improvements| -|-|
+| |Simplified language file upload| -|-|
+| |Security improvements| -|-|
+| |UI modernization improvements| -|-|
 
 ## Version 7.7 2020
 
-|Update       |New features and enhancements        | Important Changes   |Deprecated features  |Release Date|
+|Update       |New features and enhancements        | Important Changes   |Deprecated features  |
 |---------    |---               |---                  |---                  |---         |
-|[7.7.20201130](/docs/apim_relnotes/20201130_apimgr_relnotes/)|JVM Flag added to allow orgAdmins to manage API Lifecycles|-|-|30/11/2020
-||OAS3 runtime bugs resolved|-|-| |
-||Simplified Cassandra backup and restore scripts|-|-| |
-|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated features**  |**Release Date**|
-|[7.7.20200930](/docs/apim_relnotes/20200930_apimgr_relnotes/)|API Manager Remote Hosts aligned with PolicyStudio functionality |OpenJDK JRE update to v8u265| API Management REST APIs versions 1.1 and 1.2 are deprecated. |30/09/2020|
-|                                                                                                |YAML-based configuration store (Technical preview) |Removed broken and risky algorithms from sFTP server |Swagger version 1.1 is deprecated ||
-|                                                                                                |Database integration updates |Groovy v2.5.13 |The requirement to run `update-apimanager.py` has been removed from the upgrade steps. | |
-|                                                                                                |User membership in multiple organizations. |Filebeat v6.2.2 |- | |
-|                                                                                                |New API Management REST API version 1.4. |OpenSSL and FIPS support |- | |
-|                                                                                                |OpenJDK JRE update to v8u265. |Increased validation of WSDLs |- | |
-|                                                                                                |Changes to the way API Gateway verifies wildcarded certificates. |API Gateway/Manager behavior changes|- | |
-|                                                                                                |The Groovy version used by the Scripting Filter is updated to 2.5.13. | Security updates|- | |
-|**Update**       |**New features and enhancements**        | **Important Changes**  |**Deprecated features**  |**Release Date**|
-|[7.7.20200730](/docs/apim_relnotes/20200730_apimgr_relnotes/)|ICAP filter improvements. |Filebeat v6.2.2 |- |30/07/2020 |
-|                                                                                                |Improved upgrade instructions. |OpenJDK JRE |- | |
-|                                                                                                |MSSQL Database Support. |OpenSSL and FIPS support |- | |
-||-|Increased validation of WSDLs |-||
-||-|API Gateway/Manager behavior changes |-||
-||-|Security updates |-||
-|**Update**       |**New features and enhancements**        | **Important Changes**  |**Deprecated features**  |**Release Date**|
-|[7.7.20200530](/docs/apim_relnotes/20200530_apimgr_relnotes/)|Updated OS Support. |TLS v1.3 support| -|30/05/2020 |
-|                                                                                                |Improved upgrade experience. |Filebeat v6.2.2 |- | |
-|                                                                                                |Log4j file format changed to YAML. |OpenJDK JRE |- | |
-|                                                                                                |Swagger parser libs updated. |OpenSSL and FIPS support |- | |
-||-|Log4j 2 changes |-||
-||-|Swagger parser |-||
-|**Update**       |**New features and enhancements**        | **Important Changes**  |**Deprecated features**  |**Release Date**|
-|[7.7.20200330](/docs/apim_relnotes/20200330_apimgr_relnotes/)|Added TLS 1.3 support. |Filebeat v6.2.2 |FIPS support was removed. |30/03/2020 |
-|                                                                                                |OpenSSL updated to v1.1.1. |OpenJDK JRE |McAfee Sophos Clam AV embedded antivirus scanners were removed.||
-||-|OpenSSL and FIPS support |-||
-|**Update**       |**New features and enhancements**        | **Important Changes**  |**Deprecated features**  |**Release Date**|
-|[7.7.20200130](/docs/apim_relnotes/20200130_apimgr_relnotes/)|Swagger 2.0 enhancements. |Increased validation of WSDL |API Tester was removed from installation.|30/01/2020 |
-|                                                                                                |Open API Specification (OAS) 3.0 enhancements. |Filebeat v6.2.2 |RAML support was removed.| |
-|                                                                                                |Try it improvements. |Increased validation of /users endpoint |Export of back-end APIs is not supported for OAS3 or WSDL APIs.| |
-|                                                                                                |Usage tracking improvements. |OpenJDK JRE |Documentation is no longer provided in PDF format.| |
-|                                                                                                |Back-end API improvements. |API Gateway/Manager behavior changes|- | |
-|                                                                                                |API documentation enhancements. |Security updates |- | |
-|                                                                                                |Multi organization (beta). |- |- | |
-|                                                                                                |Increased validation of WSDLs. |- |- | |
-|                                                                                                |Filebeat updated to v6.2.2. |- |- | |
-|                                                                                                |Increased validation of users endpoint. |- |- | |
-|                                                                                                |Undesirable cipher suites disabled by default when using SSL/TLS. |- |- | |
-|                                                                                                |Endpoint identification algorithms for LDAPS enabled by default. |- |- | |
-|                                                                                                |Fields that contain confidential information are no longer returned in some API calls.|- |- | |
+|[API Gateway and Manager 7.7.20201130](/docs/apim_relnotes/20201130_apimgr_relnotes/)|JVM Flag added to allow orgAdmins to manage API Lifecycles|-|-|
+||OAS3 runtime bugs resolved|-|-|
+||Simplified Cassandra backup and restore scripts|-|-|
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Portal 7.7.20201130](/docs/apim_relnotes/20201130_apip_relnotes/)|Production-ready Docker container|-|API Portal versions 7.5.x and 7.6.x are end of support (EOS)|
+||Red Hat Enterprise 8 support|-|Enable user listing configuration|
+||Security improvements|-|-|
+||Cumulative upgrade script|-|-|
+||User experience improvements|-|-|
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Gateway and Manager 7.7.20200930](/docs/apim_relnotes/20200930_apimgr_relnotes/)|API Manager Remote Hosts aligned with PolicyStudio functionality |OpenJDK JRE update to v8u265| API Management REST APIs versions 1.1 and 1.2 are deprecated. |
+|                                                                                                |YAML-based configuration store (Technical preview) |Removed broken and risky algorithms from sFTP server |Swagger version 1.1 is deprecated |
+|                                                                                                |Database integration updates |Groovy v2.5.13 |The requirement to run `update-apimanager.py` has been removed from the upgrade steps. |
+|                                                                                                |User membership in multiple organizations. |Filebeat v6.2.2 |- |
+|                                                                                                |New API Management REST API version 1.4. |OpenSSL and FIPS support |- |
+|                                                                                                |OpenJDK JRE update to v8u265. |Increased validation of WSDLs |- |
+|                                                                                                |Changes to the way API Gateway verifies wildcarded certificates. |API Gateway/Manager behavior changes|- |
+|                                                                                                |The Groovy version used by the Scripting Filter is updated to 2.5.13. | Security updates|- |
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Portal 7.7.20200930](/docs/apim_relnotes/20200930_apip_relnotes/)|Multiple organizations membership|-|API version update|
+||GDPR compliance|-|-|
+||Security improvements|-|-|
+||UI/UX improvements|-|-|
+|**Update**       |**New features and enhancements**        | **Important Changes**  |**Deprecated/Removed/EOS**  |
+|[API Gateway and Manager 7.7.20200730](/docs/apim_relnotes/20200730_apimgr_relnotes/)|ICAP filter improvements. |Filebeat v6.2.2 |- |
+|                                                                                                |Improved upgrade instructions. |OpenJDK JRE |- |
+|                                                                                                |MSSQL Database Support. |OpenSSL and FIPS support |- |
+||-|Increased validation of WSDLs |-|
+||-|API Gateway/Manager behavior changes |-|
+||-|Security updates |-|
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Portal 7.7.20200730](/docs/apim_relnotes/20200730_apip_relnotes/)|Non-root installer​|-|-|
+||CentOS 8​ support|-|-|
+||UI/UX improvements|-|-|
+|| Cumulative upgrade script|-|-|
+|**Update**       |**New features and enhancements**        | **Important Changes**  |**Deprecated/Removed/EOS**  |
+|[API Gateway and Manager 7.7.20200530](/docs/apim_relnotes/20200530_apimgr_relnotes/)|Updated OS Support. |TLS v1.3 support| -|
+|                                                                                                |Improved upgrade experience. |Filebeat v6.2.2 |- |
+|                                                                                                |Log4j file format changed to YAML. |OpenJDK JRE |- |
+|                                                                                                |Swagger parser libs updated. |OpenSSL and FIPS support |- |
+||-|Log4j 2 changes |-|
+||-|Swagger parser |-|
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Portal 7.7.20200530](/docs/apim_relnotes/20200530_apip_relnotes/)|Integration with Amplify Unified Catalog|-|-|
+||Database password encryption|-|-|
+||Other enhancements|-|-|
+|**Update**       |**New features and enhancements**        | **Important Changes**  |**Deprecated/Removed/EOS**  |
+|[API Gateway and Manager 7.7.20200330](/docs/apim_relnotes/20200330_apimgr_relnotes/)|Added TLS 1.3 support. |Filebeat v6.2.2 |FIPS support was removed. |
+|                                                                                                |OpenSSL updated to v1.1.1. |OpenJDK JRE |McAfee Sophos Clam AV embedded antivirus scanners were removed.|
+||-|OpenSSL and FIPS support |-|
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Portal 7.7.20200330](/docs/apim_relnotes/20200330_apip_relnotes/)|API Details page improvements|-|-|
+|**Update**       |**New features and enhancements**        | **Important Changes**  |**Deprecated/Removed/EOS**  |
+|[API Gateway and Manager 7.7.20200130](/docs/apim_relnotes/20200130_apimgr_relnotes/)|Swagger 2.0 enhancements. |Increased validation of WSDL |API Tester was removed from installation.|
+|                                                                                                |Open API Specification (OAS) 3.0 enhancements. |Filebeat v6.2.2 |RAML support was removed.|
+|                                                                                                |Try it improvements. |Increased validation of /users endpoint |Export of back-end APIs is not supported for OAS3 or WSDL APIs.|
+|                                                                                                |Usage tracking improvements. |OpenJDK JRE |Documentation is no longer provided in PDF format.|
+|                                                                                                |Back-end API improvements. |API Gateway/Manager behavior changes|- |
+|                                                                                                |API documentation enhancements. |Security updates |- |
+|                                                                                                |Multi organization (beta). |- |- |
+|                                                                                                |Increased validation of WSDLs. |- |- |
+|                                                                                                |Filebeat updated to v6.2.2. |- |- |
+|                                                                                                |Increased validation of users endpoint. |- |- |
+|                                                                                                |Undesirable cipher suites disabled by default when using SSL/TLS. |- |- |
+|                                                                                                |Endpoint identification algorithms for LDAPS enabled by default. |- |- |
+|                                                                                                |Fields that contain confidential information are no longer returned in some API calls.|- |- |
+|**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
+|[API Portal 7.7.20200130](/docs/apim_relnotes/20200130_apip_relnotes/)|Custom install directory|-|-|
+||Unattended mode installation|-|-|
+||Home page customization|-|-|
+||Application tab improvements|-|-|
+||Change of behavior for the API Information source setting|-|-|
+||Change of behavior to customize standard footer|-|-|
+||Control the visibility of APIs in the catalog|-|-|
+||Open API Specification (OAS) 3.0 Support|-|-|
 
 ## Version 7.7 2019
 
