@@ -13,7 +13,7 @@ You can find the release notes for all service packs on [Axway Support](https://
 ## Version 7.7 2022
 
 |Update |New features and enhancements        |Important Changes    |Deprecated/Removed/EOS  |
-|---  |---               |---                  |---                  |---         |
+|---  |---               |---                  |---                  |
 |[API Gateway and Manager 7.7.20220130](/docs/apim_relnotes/20220130_apimgr_relnotes/)  |API Gateway Container use of Persisted Store |Distributed cache socket connect timeout |- |
 | |Initial YAML Environmentalization Support in Policy Studio |WSDL Schema Validation|- |
 | |- |Axway Terms and Conditions Update|- |
@@ -83,7 +83,7 @@ You can find the release notes for all service packs on [Axway Support](https://
 ## Version 7.7 2020
 
 |Update       |New features and enhancements        | Important Changes   |Deprecated features  |
-|---------    |---               |---                  |---                  |---         |
+|---------    |---               |---                  |---                  |
 |[API Gateway and Manager 7.7.20201130](/docs/apim_relnotes/20201130_apimgr_relnotes/)|JVM Flag added to allow orgAdmins to manage API Lifecycles|-|-|
 ||OAS3 runtime bugs resolved|-|-|
 ||Simplified Cassandra backup and restore scripts|-|-|
