@@ -5,13 +5,18 @@
   "date": "2020-01-06",
   "description": "Learn how to use the kpsadmin tool in interactive and scriptable command modes."
 }
-The `kpsadmin` command-line tool provides KPS management functions, independent of data source. For example, this includes KPS data backup, restore, encryption, and diagnostics.
+The `kpsadmin` command-line tool provides KPS management functions regardless of the data sources. For example, this includes KPS data backup, restore, encryption, and diagnostics. This tool is particularly useful in a development environment. For production environments, you must also use data source-specific tools and administration procedures for data backup, restore, security, optimization, monitoring and so on.
 
-The `kpsadmin` tool is especially useful in a development environment. In a production environment, you should also use data source-specific tools and administration procedures for data backup, restore, security, optimization, monitoring and so on.
+{{< alert title="Caution" color="warning" >}}
+You must use `kpsadmin` operations with caution:
 
-{{< alert title="Caution" color="warning" >}}You must use `kpsadmin` operations with caution. Ensure that you have a verified backup before you run destructive operations such as clear, restore, and re-encrypt. You should always try out these options in a development environment first. Depending on data volumes, the key property store re-encryption or restore operations can take some time. These actions should be undertaken during a maintenance window. {{< /alert >}}
+* Ensure that you have a verified backup before you run destructive operations such as clear, restore, and re-encrypt.
+* Always try out these options in a development environment first.
+* Depending on data volumes, the key property store re-encryption or restore operations can take some time.
+* These operations should be undertaken during a maintenance window.
+{{< /alert >}}
 
-## Start `kpsadmin`
+## Start the kpsadmin tool
 
 From a command prompt, enter `kpsadmin`. For example:
 
@@ -33,7 +38,7 @@ kpsadmin -v
 
 For details on available options, enter `kpsadmin -h`, or see [kpsadmin command options](#kpsadmin-command-options).
 
-## Select `kpsadmin` operations in interactive mode
+## Select operations in interactive mode
 
 This section describes the `kpsadmin` operations that are available in default interactive mode. When you first select an operation in interactive mode, you must enter the following:
 
@@ -59,6 +64,8 @@ The `kpsadmin` table operations are as follows:
 
 ### KPS table administration operations
 
+{{< alert title="Caution" color="warning" >}}Avoid using `kpsadmin` to backup and restore data for internal API Manager tables or tables with high volumes of data. Internal API Manager tables store Cassandra specific properties, such as time-to-live or counter data, which will not be backed up. Additionally, tables with high volumes of data may cause performance degradation during a `kpsadmin` backup or restore. Instead, please use the [Apache Cassandra backup and restore process](/docs/cass_admin/cassandra_bur/){{< /alert >}}
+
 The `kpsadmin` operations for table administration are as follows:
 
 * **Clear**: Clear all rows in the table.
@@ -75,7 +82,7 @@ The `kpsadmin` operations for table administration are as follows:
 
 ### KPS collection administration operations
 
-The `kpsadmin` operations for collection administration are as follows:
+The following are `kpsadmin` operations for collection administration:
 
 * **Clear All** : Clear all data in all tables in the collection.
 * **Backup All**: Back up all data in all tables in the collection.
@@ -85,7 +92,7 @@ The `kpsadmin` operations for collection administration are as follows:
 
 ### API Gateway group administration operations
 
-The `kpsadmin` operations for API Gateway group administration are as follows:
+The following are `kpsadmin` operations for API Gateway group administration:
 
 * **Clear All**: Clear all data in all collections in the group.
 * **Backup All**: Back up all data in all collections in the group.
@@ -100,14 +107,14 @@ The `kpsadmin` operations for API Gateway group administration are as follows:
 
 ### Cassandra administration operations
 
-The `kpsadmin` operations for Cassandra administration are as follows:
+The following are `kpsadmin` operations for Cassandra administration:
 
 * **Show Configuration**: Show the current configuration for the KPS storage service (Apache Cassandra).
 * **Run Diagnostic Checks**: Run diagnostic checks including HA configuration checks. You must specify if this is a single or multi-datacenter configuration.
 
 ### General administration operations
 
-The `kpsadmin` operations for general administration are as follows:
+The following are `kpsadmin` operations for general administration:
 
 * **Change Table**: Change the currently selected table.
 * **Change Collection**: Change the currently selected collection.
@@ -116,9 +123,9 @@ The `kpsadmin` operations for general administration are as follows:
 
 ### Example of switching a data source in interactive mode
 
-This example shows how to switch from Cassandra storage to file storage.
+This example shows how to switch from Cassandra storage to file storage using the kpsadmin tool.
 
-#### Step 1: Backup collection data using `kpsadmin`
+#### Step 1: Backup collection data
 
 To copy the current data in the collection to the new data source, back up the collection data using `kpsadmin` option `21) Backup All`.
 
@@ -145,7 +152,7 @@ To create the new data source, perform the following steps:
    ![Default data source](/Images/APIGatewayKPSUserGuide/0300001C.png)
 8. Click the **Deploy** button in the Policy Studio toolbar to deploy the configuration
 
-#### Step 3: Restore collection data using `kpsadmin`
+#### Step 3: Restore collection data
 
 If you have made a backup in [Backup collection data using kpsadmin](#step-1-backup-collection-data-using-kpsadmin), to restore the collection data, perform the following steps:
 
@@ -216,12 +223,13 @@ This section shows some example `kpsadmin` operations in scriptable command mode
 
 #### Back up and restore
 
-To back up and restore an API Gateway group from a staging environment to a production environment, perform the following steps:
+{{< alert title="Caution" color="warning" >}}For internal API Manager tables or tables with high volumes of data, using `kpsadmin` to backup and restore data should be avoided. Internal API Manager tables store Cassandra specific properties, such as time-to-live or counter data, which will not be backed up. Additionally, tables with high volumes of data may cause performance degradation during a `kpsadmin` backup or restore. Instead, please use the [Apache Cassandra backup and restore process](/docs/cass_admin/cassandra_bur/){{< /alert >}}
 
-1. Specify the `kpsadmin backup` command:
-2. You must copy the files from the staging `backup` directory to the production `backup` directory and note the UUID. This is output by `kpsadmin` and is also a prefix on the exported filenames.
-3. Specify the `kpsadmin clear` command:
-4. Specify the `kpsadmin restore` command with the UUID noted earlier and the KPS backup passphrase. Leave the passphrase blank if none was set.
+To back up and restore an API Gateway group from a development environment to a staging environment, perform the following steps:
+
+1. Specify the `kpsadmin backup` command. Copy the files from the dev `backup` directory to the staging `backup` directory and take note of the UUID. This is outputted by `kpsadmin` and is also a prefix on the exported filenames.
+2. Specify the `kpsadmin clear` command.
+3. Specify the `kpsadmin restore` command with the UUID noted earlier and the KPS backup passphrase. Leave the passphrase blank if none was set.
 
 #### Re-encrypt the KPS data
 

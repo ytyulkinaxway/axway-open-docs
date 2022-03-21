@@ -272,8 +272,8 @@ To make use of a more secure cipher scheme, you must re-encrypt your KPS data us
 
 Encrypted KPS data cannot be transferred directly between environments even when the passphrase in use is the same in both environments. Instead, you must use one of the following options:
 
-* Use the [KPS Admin Backup and Restore](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#back-up-and-restore) process. The restore command decrypts the data from the source environment and re-encrypts the data for the target environment.
-* Use the [Cassandra Backup and Restore](/docs/cass_admin/cassandra_bur/) process and run [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
+* For internal API Manager tables, use the [Cassandra Backup and Restore](/docs/cass_admin/cassandra_bur/) process and run [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
+* For non-Cassandra KPS table, use the [KPS Admin Backup and Restore](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#back-up-and-restore) process. The restore command decrypts the data from the source environment and re-encrypts the data for the target environment.
 
 ### Use the cipher scheme with custom code
 
