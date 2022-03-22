@@ -459,3 +459,11 @@ Axway-defined Java system properties introduced in the 7.7 20220228 release
 | System Property                                  | Context     | Description   |
 | ------------------------------------------------ | ----------- | ------------- |
 |axway.rmi.socket.connect.timeout | API Gateway |  A timeout to control how long a distributed Ehcache waits for a response for a synchronous update. A timeout value of 0 means no timeout.  Defaults to 500 milliseconds. |
+
+## 7.7 May 2022
+
+Axway-defined Java system properties introduced in the 7.7 20220530 release
+
+| System Property                                  | Context     | Description   |
+| ------------------------------------------------ | ----------- | ------------- |
+|com.vordel.dwe.outputObsFoldedValuesAllowed | API Gateway | Allow output HTTP headers to contain obs-folded values. Default value: 'false' |
