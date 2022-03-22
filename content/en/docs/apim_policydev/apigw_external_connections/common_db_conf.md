@@ -44,11 +44,9 @@ To add third-party binaries to Policy Studio, perform the following steps:
 
 Configure the following fields on the **Configure Database Connection** window:
 
-**Name**:
-Enter a name for the database connection in the **Name** field.
+**Name**: Enter a name for the database connection in the **Name** field.
 
-**URL**:
-Enter the fully qualified URL of the location of the database. The following table shows examples of database connection URLs, where `reports` is the name of the database and `DB_HOST` is the IP address or host name of the machine on which the database is running:
+**URL**: Enter the fully qualified URL of the location of the database. The following table shows examples of database connection URLs, where `reports` is the name of the database and `DB_HOST` is the IP address or host name of the machine on which the database is running:
 
 | Database                 | Example Connection URL                                                         |
 |--------------------------|--------------------------------------------------------------------------------|
@@ -58,35 +56,25 @@ Enter the fully qualified URL of the location of the database. The following tab
 | **MariaDB**              | `jdbc:mariadb://DB_HOST:3306/reports`                                          |
 | **IBM DB2**              | `jdbc:db2://DB_HOST:50000/reports`                                             |
 
-**User Name**:
-The user name to use to access the database.
+**User Name**: The user name to use to access the database.
 
-**Password**:
-The password for the user specified in the **User Name** field.
+**Password**: The password for the user specified in the **User Name** field.
 
-**Initial pool size**:
-The initial size of the DBCP pool when it is first created.
+**Initial pool size**: The initial size of the DBCP pool when it is first created.
 
-**Maximum number of active connections**:
-The maximum number of active connections that can be allocated from the JDBC pool at the same time. The default maximum is 8 active connections.
+**Maximum number of active connections**: The maximum number of active connections that can be allocated from the JDBC pool at the same time. The default maximum is 8 active connections.
 
-**Maximum number of idle connections**:
-The maximum number of active connections that can remain idle in the pool without extra connections being released. The default maximum is 8 connections.
+**Maximum number of idle connections**: The maximum number of active connections that can remain idle in the pool without extra connections being released. The default maximum is 8 connections.
 
-**Minimum number of idle connections**:
-The minimum number of active connections that can remain idle in the pool without extra connections being created. The default minimum is 8 connections.
+**Minimum number of idle connections**: The minimum number of active connections that can remain idle in the pool without extra connections being created. The default minimum is 8 connections.
 
-**Maximum wait time**:
-The maximum number of milliseconds that the pool waits (when there are no available connections) for a connection to be returned before throwing an exception, or -1 to wait indefinitely. The default time is 10000ms, and a value of -1 indicates an indefinite time to wait.
+**Maximum wait time**: The maximum number of milliseconds that the pool waits (when there are no available connections) for a connection to be returned before throwing an exception, or -1 to wait indefinitely. The default time is 10000ms, and a value of -1 indicates an indefinite time to wait.
 
-**Time between eviction**:
-The number of milliseconds to sleep between runs of the thread that evicts unused connections from the JDBC pool.
+**Time between eviction**: The number of milliseconds to sleep between runs of the thread that evicts unused connections from the JDBC pool.
 
-**Number of tests**:
-The number of connection objects to examine from the pool during each run of the evictor thread. The default number of objects is 3.
+**Number of tests**: The number of connection objects to examine from the pool during each run of the evictor thread. The default number of objects is 3.
 
-**Minimum idle time**:
-The minimum amount of time, in milliseconds, an object may sit idle in the pool before it is eligible for eviction by the idle object evictor (if any).
+**Minimum idle time**: The minimum amount of time, in milliseconds, an object may sit idle in the pool before it is eligible for eviction by the idle object evictor (if any).
 
 ### Database connection pool settings
 
@@ -124,11 +112,9 @@ The **Database Statement** dialog enables you to enter an SQL query, stored proc
 
 The following fields should be completed on this window:
 
-**Name**:
-Enter a name for this database query here.
+**Name**: Enter a name for this database query here.
 
-**Database Query**:
-Enter the actual SQL query, stored procedure, or function call in the text area provided. When executed, the query should return a single user's profile. The following are examples of SQL statements and stored procedures:
+**Database Query**: Enter the actual SQL query, stored procedure, or function call in the text area provided. When executed, the query should return a single user's profile. The following are examples of SQL statements and stored procedures:
 
 ```
 select * from users where username=${authentication.subject.id}
@@ -138,13 +124,14 @@ select * from users where username=${authentication.subject.id}
 
 These examples show that you can use selectors in the query. The selector that is most commonly used in this context is `${authentication.subject.id}`, which specifies the message attribute that holds the identity of the authenticated user.
 
-**Statement Type**:
-The database can take the form of an SQL query, stored procedure, or function call, as shown in the above examples. Select the appropriate radio button depending on whether the database query is an SQL **Query** or a **Stored procedure/function call**.
+**Statement Type**: The database can take the form of an SQL query, stored procedure, or function call, as shown in the above examples. Select the appropriate radio button depending on whether the database query is an SQL **Query** or a **Stored procedure/function call**.
 
 When using a stored procedure or function call:
 
-* The [**Retrieve from or write to database** filter](/docs/apim_policydev/apigw_polref/attributes_retrieve/#retrieve-attribute-from-database-filter) does not support complex stored procedures or function calls. A complex stored procedure or function call performs multiple tasks such as updates, inserts, and deletes. These types of statements might also return multiple result sets and output parameters. The filter only handles the first result set, and if a stored procedure or function call returns multiple result sets the filter ignores it.
+* The [**Retrieve from or write to database**](/docs/apim_policydev/apigw_polref/attributes_retrieve/#retrieve-attribute-from-database-filter) filter does not support complex stored procedures or function calls. A complex stored procedure or function call performs multiple tasks such as updates, inserts, and deletes. These types of statements might also return multiple result sets and output parameters. The filter only handles the first result set, and if a stored procedure or function call returns multiple result sets the filter ignores it.
 * You must handle any exception and throw it to the JDBC layer to ensure that the **Retrieve from or write to database** filter will fail. Otherwise the filter ignores the exception.
+
+**Expect to retrieve**: If this value is greater than 0 and the SQL statement returns a result set, the result set is cached for a period of time controlled by the server setting [general parameter](/docs/apim_reference/general_settings) `Cache refresh interval`. If the value is 0, the result set is not cached. The value is not currently used as a constraint on the number of rows returned in the result set.
 
 **Table Structure**:
 To process the result set that is returned by the database query, the API Gateway needs to know whether the user's attributes are structured as rows or columns in the database table.
@@ -171,6 +158,4 @@ In the following table, the user's attributes have been structured as name-value
 | Dev      | Dept           | Engineering     |
 | Dev      | Email          | dev@org.com     |
 
-If the user's attributes are structured as column names in the database table, select the **attributes as column names**
-radio button. If the attributes are structured as name-value pair in table rows, select the **attribute name-value pairs in rows**
-option.
+If the user's attributes are structured as column names in the database table, select the **attributes as column names** radio button. If the attributes are structured as name-value pair in table rows,  select the **attribute name-value pairs in rows** option.
