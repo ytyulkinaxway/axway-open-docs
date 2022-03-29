@@ -14,14 +14,14 @@ You can find the release notes for all service packs on [Axway Support](https://
 
 |Update |New features and enhancements        |Important Changes    |Deprecated/Removed/EOS  |
 |---  |---               |---                  |---                  |
-|[API Gateway and Manager 7.7.20220130](/docs/apim_relnotes/20220130_apimgr_relnotes/)  |API Gateway Container use of Persisted Store |Distributed cache socket connect timeout |- |
+|[API Gateway and Manager 7.7.20220228](/docs/apim_relnotes/20220228_apimgr_relnotes/)  |API Gateway Container use of Persisted Store |Distributed cache socket connect timeout |- |
 | |Initial YAML Environmentalization Support in Policy Studio |WSDL Schema Validation|- |
 | |- |Axway Terms and Conditions Update|- |
 | |- |API Gateway password policy and passphrase validation|- |
 | |- |API Manager Proxy deprecation with a retirement date|- |
 | |- |Increased validation on API Manager Quota operations|- |
 |**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
-|[API Portal 7.7.20220130](/docs/apim_relnotes/20220130_apip_relnotes/)  |Support for PHP 8.0 |-|PHP 7.1 and PHP 7.2 |
+|[API Portal 7.7.20220228](/docs/apim_relnotes/20220228_apip_relnotes/)  |Support for PHP 8.0 |-|PHP 7.1 and PHP 7.2 |
 | |Support for MySql 8.0 |- |- |
 
 ## Version 7.7 2021
@@ -63,7 +63,7 @@ You can find the release notes for all service packs on [Axway Support](https://
 | |Certification with MySQL 8|- |- |
 | |YAML configuration store (Technical preview capability)|- |- |
 |**Update** |**New features and enhancements**        |**Important Changes**    |**Deprecated/Removed/EOS** |
-|[API Portal 7.7.20210330](/docs/apim_relnotes/20203130_apip_relnotes/) |Unattended mode enhancement| -|Internet Explorer 11 and earlier versions|
+|[API Portal 7.7.20210330](/docs/apim_relnotes/20210330_apip_relnotes/) |Unattended mode enhancement| -|Internet Explorer 11 and earlier versions|
 | |Further enhancements for general features| -|-|
 |**Update**|**New features and enhancements**        | **Important Changes**    |**Deprecated/Removed/EOS**  |
 |[API Gateway and Manager 7.7.20210130](/docs/apim_relnotes/20210130_apimgr_relnotes/)|Option to disable SSL renegotiation is added for HTTPS listeners and Connection filters |- |-  |
@@ -75,7 +75,7 @@ You can find the release notes for all service packs on [Axway Support](https://
 ||Driver for metrics database|-  | -|
 ||YAML configuration store (Technical preview capability)|-  | -|
 |**Update** |**New features and enhancements**        |**Important Changes**    |**Deprecated/Removed/EOS**  |
-|[API Portal 7.7.20210130](/docs/apim_relnotes/20201130_apip_relnotes/) |Docker container improvements| -|-|
+|[API Portal 7.7.20210130](/docs/apim_relnotes/20210130_apip_relnotes/) |Docker container improvements| -|-|
 | |Simplified language file upload| -|-|
 | |Security improvements| -|-|
 | |UI modernization improvements| -|-|
@@ -151,7 +151,7 @@ You can find the release notes for all service packs on [Axway Support](https://
 |                                                                                                |Endpoint identification algorithms for LDAPS enabled by default. |- |- |
 |                                                                                                |Fields that contain confidential information are no longer returned in some API calls.|- |- |
 |**Update**       |**New features and enhancements**        | **Important Changes**   |**Deprecated/Removed/EOS**  |
-|[API Portal 7.7.20200130](/docs/apim_relnotes/20200130_apip_relnotes/)|Custom install directory|-|-|
+|[API Portal 7.7.20200130](/docs/apim_relnotes/20200130_apip_relnotes/)|Custom install directory|-|Documentation is no longer provided in PDF format|
 ||Unattended mode installation|-|-|
 ||Home page customization|-|-|
 ||Application tab improvements|-|-|
@@ -159,6 +159,7 @@ You can find the release notes for all service packs on [Axway Support](https://
 ||Change of behavior to customize standard footer|-|-|
 ||Control the visibility of APIs in the catalog|-|-|
 ||Open API Specification (OAS) 3.0 Support|-|-|
+||Support for PHP 7.4 was introduced|-|-|
 
 ## Version 7.7 2019
 
