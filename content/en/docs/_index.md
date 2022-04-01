@@ -24,7 +24,3 @@ Here are some suggestions to get started:
 * [Develop in Policy Studio](/docs/apim_policydev/)
 * [Administer Apache Cassandra](/docs/cass_admin/)
 * [Release notes](/docs/apim_relnotes/)
-
-## Contribute to Amplify API Management documentation
-
-API Management documentation is written in Markdown format and is available in a [public GitHub repository](https://github.com/Axway/axway-open-docs) to enable collaboration using an open source model. For more information, see [How to contribute to Axway Open Docs](/docs/contribution_guidelines/).
