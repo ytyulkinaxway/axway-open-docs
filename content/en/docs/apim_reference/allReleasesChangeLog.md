@@ -163,14 +163,40 @@ You can find the release notes for all service packs on [Axway Support](https://
 
 ## Version 7.7 2019
 
-|Update       |New features and enhancements | Important Changes |Deprecated features  |Release Date|
-|---------    |---                           |---                |---                  |---
-|7.7 SP2      |OpenSSL updated to 1.0.2t-fips to fix security vulnerabilities. |- |- |21/12/2019 |
-|7.7 SP1|- |- |- |29/08/2019 |
-|[7.7](/docs/apim_relnotes/201904_release/)|Traffic monitor enhancements.|- |Support for MySQL Server 2005 has been removed.|12/04/2019 |
-|                                          |Filter JMS transactions by custom property in Traffic Monitor.|- |- | |
-|                                          |Entity Explorer added to API Gateway client tools installer.|- |- | |
-|                                          |Elastic topology container deployment enhancements.|- |- | |
+The following lists changes for API Gateway, API Manager, and API Portal
+
+|Update       |New features and enhancements | Deprecated features  |Release Date|
+|---------    |---                           |---                  |---
+|**API Portal 7.7 SP4**      |Download payload size |- |18/12/2019 |
+|**API Portal 7.7 SP3**      |GDPR compliance and privacy management |- |11/10/2019 |
+|      |API Catalog and Application views |- |- |
+|      |Customization options |- |- |
+|**API Gateway/Manager 7.7 SP2**  |OpenSSL updated to 1.0.2t-fips to fix security vulnerabilities. |- |21/12/2019 |
+|**API Gateway/Manager 7.7 SP1**|- |- | 29/08/2019 |
+|[API Gateway 7.7](/docs/apim_relnotes/201904_release/apig_relnotes/)|Traffic monitor enhancements.|Support for MySQL Server 2005 has been removed.|12/04/2019 |
+|                                          |Configure nested paths in API Gateway Manager.|- |- |
+|                                          |Filter JMS transactions by custom property in Traffic Monitor.|- |- |
+|                                          |Redaction support for API Gateway trace log.|- |- |
+|                                          |Entity Explorer added to API Gateway client tools installer.|- |- |
+|                                          |Policy Studio filter enhancements.|- | -|
+|                                          |Subscription licensing for API Management.|- | -|
+|                                          |Elastic topology container deployment enhancements.|- | -|
+|                                          |OpenJDK support.|- | -|
+|                                          |Third-party library updates.|- | -|
+|[API Manager 7.7](/docs/apim_relnotes/201904_release/apim_relnotes/)|API Manager custom properties.|.|12/04/2019 |
+||Compliance enhancements.|-|- |
+||Auditing enhancements.|-|- |
+||Additional search field support for front-end and back-end APIs.|-|- |
+||Try It improvements.|-|- |
+||Support for Swagger in YAML format.|-|- |
+||Swagger 2.0 enhancements.|-|- |
+||Subscription licensing for API Management.|-|- |
+||Elastic topology container deployment.|-|- |
+|                                          |OpenJDK support.|- | -|
+|                                          |Third-party library updates.|- | -|
+|[API Portal 7.7](/docs/apim_relnotes/201904_release/apip_relnotes/)  |GDPR compliance and privacy management |- | 12/04/2019|
+|  |API Catalog and Application views |- |- |
+|  |Customization options |- | -|
 
 ## Version 7.6.2
 
