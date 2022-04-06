@@ -122,6 +122,43 @@ docker run -d --name=apimgr --network=api-gateway-domain \
            api-gateway-defaultgroup
 ```
 
+### How do you customize logs in a multi-node environment
+
+You can customize the logs produced by API Gateway in Policy Studio by way of the following environment variables:
+
+* HOSTNAME - `${environment.HOSTNAME}`
+* GROUPNAME- `${environment.GROUPNAME}`
+* INSTANCENAME- `${environment.INSTANCENAME}`
+
+These variables allow you to make the configuration generic, so that you can create unique log directories and filenames across a multi-node EMT environment
+
+To customize logging for a multi-node environment, perform the following steps:
+
+1. In Policy Studio, create a project [from a .fed file](/docs/apim_policydev/apigw_poldev/gs_project/#new-project-from-a-fed-file), pointing it to an existing API Gateway FED. Or, alternatively, create a project [from an existing configuration](/docs/apim_policydev/apigw_poldev/gs_project/#new-project-from-existing-configuration) pointing to an existing directory that contains an XML or YAML configuration.
+2. Click **Server Settings > Logging**.
+3. Click **Transaction Audit Log** and configure where you wish API Gateway to log transaction audit information:
+
+   To log to a text file, select the **Text File** tab and configure the following:
+   * Check **Enable logging to file**.
+   * Set **File Name** to `transactionLog-${environment.HOSTNAME}`.
+   * Set **Directory** to `logs/transaction-${environment.HOSTNAME}`.
+
+   To log to an XML file, select the **XML File** tab  and configure the following:
+   * Check **Enable logging to XML file**.
+   * Set **File Name** to `transactionLog-${environment.HOSTNAME}`.
+   * Set **Directory** to `logs/transaction-${environment.HOSTNAME}`.
+4. Click **Transaction Access Log** and configure where you wish the API Gateway to log transaction access log information:
+    * Check **Writing to Transaction Access Log**.
+    * Set **File Name** to `access-${environment.HOSTNAME}`.
+    * Set **Directory** to `logs/access-${environment.HOSTNAME}`.
+5. Click **Transaction Event Log** and configure where you wish API Gateway to log transaction event log information:
+    * Check **Writing to Transaction Event Log**.
+    * Set **Write transaction event logs to directory** to `logs/events-${environment.HOSTNAME}`.
+6. click **Traffic Monitor** and configure where you wish API Gateway to log traffic information:
+    * Set **Transaction Directory** to `conf/opsdb.d/opsdb-${environment.HOSTNAME}`.
+
+You can rebake the updated API Gateway .fed file into an API Gateway Docker image, or you can use Docker volumes to update the configuration without having to rebake an image. For more information, see [Create an API Gateway with Docker volumes](/docs/apim_howto_guides/configuring_apigw_container/index.html).
+
 ### What license do you need to run
 
 You must have an appropriate license to run API Gateway or API Manager in a Docker container. For more information, see [Set up Docker environment](/docs/apim_installation/apigw_containers/docker_scripts_prereqs).
