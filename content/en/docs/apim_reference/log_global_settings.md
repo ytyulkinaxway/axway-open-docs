@@ -391,7 +391,7 @@ The fields in the transaction entries include the following:
 * **subject**: Authenticated user (content of attribute `authentication.subject.id`).
 * **operation**: SOAP request method used.
 * **type**: Protocol used.
-* **finalStatus**: Status text of the transaction element (global policy) execution. Only written after all policies have been executed. Initialized to "null". Possible values: "Pass", "Fail", or "Error".
+* **finalStatus**: Status text of the transaction element (global policy) execution. The value is only written to the record with leg number `0` after all policies have been executed. Initialized to "null" for all records. Possible values: "Pass", "Fail", or "Error".
 
 The following example shows the JSON format used for an HTTP `transaction` event with a service context and inbound and outbound transaction legs:
 
