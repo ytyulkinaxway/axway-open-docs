@@ -30,9 +30,13 @@ placeholder
 
 It is important, especially when upgrading from an earlier version, to be aware of the following changes in the behavior or operation of the product in this update, which may impact on your current installation.
 
-### placeholder 2
+### OpenJDK JRE
 
-placeholder
+API Gateway and API Manager 7.7 and later now support Zulu OpenJDK 1.8.0_322. This version of OpenJDK disables TLS versions 1.0 and 1.1 by default. If you wish to enable these algorithms in your API Gateway, add the `jdk.tls.disabledAlgorithms` Java security property to the jvm.xml file as follows, where `value` contains the list of disabled algorithms.
+
+```xml
+<SecurityProperty name="jdk.tls.disabledAlgorithms" value="" />
+```
 
 ## Deprecated features
 
@@ -67,7 +71,9 @@ This version of API Gateway and API Manager includes:
 
 ### Fixed security vulnerabilities
 
-placeholder
+| Internal ID | Case ID                                | Cve Identifier | Description       |
+| ----------- | -------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------ |
+|RDAPI-24024|01330775  01334869  01343778  01323363  01332552  01255316  01331493  01344660  01282085  01343977  01345491|CVE-2021-2161  CVE-2021-2163  CVE-2021-35560|**Issue:** Openjdk version 1.8.0_322 is vulnerable to CVEs. **Resolution:** Openjdk is updated to 1.8.0_322 which is not vulnerable to these CVEs. Note that this Openjdk version disables TLS versions 1.0 and 1.1 by default.|
 
 ### Other fixed issues
 
