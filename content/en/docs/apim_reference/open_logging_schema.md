@@ -253,7 +253,7 @@ Contains detailed information for an individual element (leg) of a transaction:
 | Property       | Type               | Description                                                                       |
 | -------------- | ------------------ | --------------------------------------------------------------------------------- |
 | `duration`     | `integer`          | Total execution time (in milliseconds) of this transaction element                |
-| `finalStatus`  | `string` or `null` | Status text of the transaction element execution                                  |
+| `finalStatus`  | `string` or `null` | Status text of the transaction element (global policy) execution. The value is only written to the record with leg number `0` after all policies have been executed. |
 | `leg`          | `integer`          | Transaction element number                                                        |
 | `operation`    | `string` or `null` | SOAP request method used                                                          |
 | `protocolInfo` | `object`           | [Protocol specific information of the transaction element](#protocol-information) |
