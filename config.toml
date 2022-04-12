@@ -1,5 +1,5 @@
 baseURL = "https://axway-open-docs.netlify.app/"
-title = "Axway-Open-Docs"
+title = "Amplify API Management"
 
 enableRobotsTXT = true
 
@@ -64,8 +64,8 @@ id = "UA-56643615-3"
 
 [languages]
 [languages.en]
-title = "Axway Documentation"
-description = "Axway Documentation"
+title = ""
+description = ""
 languageName ="English"
 # Weight used for sorting.
 weight = 1
