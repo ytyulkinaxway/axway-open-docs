@@ -15,7 +15,7 @@ jobs:
       uses: actions/checkout@v1
     
     - name: work around permission issue
-        run: git config --global --add safe.directory /github/workspace
+      run: git config --global --add safe.directory /github/workspace
 
     - name: Merge master into develop
       uses: robotology/gh-action-nightly-merge@v1.2.0
