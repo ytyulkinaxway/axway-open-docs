@@ -38,7 +38,7 @@ Kerberos authentication relies on a secure user database storing user IDs and pa
 
 ## Kerberos SPNEGO authentication
 
-Kerberos authentication based on Simple and Protected Negotiation Protocol (SPNEGO) over HTTP refers to the use of the HTTP negotiate protocol to perform Kerberos authentication at the transport layer between a client and a service. The tokens required for the authentication are transmitted in HTTP headers. The SPNEGO specification suggests using SSL/TLS to provide confidentiality with the authentication mechanism. For more details on SPNEGO, see [SPNEGO-based Kerberos and NTLM HTTP Authentication](http://tools.ietf.org/html/rfc4559).
+Kerberos authentication based on Simple and Protected Negotiation Protocol (SPNEGO) over HTTP refers to the use of the HTTP negotiate protocol to perform Kerberos authentication at the transport layer between a client and a service. The tokens required for the authentication are transmitted in HTTP headers. The SPNEGO specification suggests using SSL/TLS to provide confidentiality with the authentication mechanism. For more information on SPNEGO, see [SPNEGO-based Kerberos and NTLM HTTP Authentication](http://tools.ietf.org/html/rfc4559).
 
 ## Kerberos use cases
 
