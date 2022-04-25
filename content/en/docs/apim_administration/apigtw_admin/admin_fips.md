@@ -51,7 +51,7 @@ Run the following commands:
 
 You can also enable FIPS mode for a Policy Studio client application only. To enable or disable FIPS mode in Policy Studio, perform the following steps:
 
-1. Select **Preferences > IPS Mode**.
+1. Select **Preferences > FIPS Mode**.
 2. Select **Enable FIPS Mode in Axway Policy Studio**.
 3. Restart Policy Studio with the `clean` option as follows:
 
