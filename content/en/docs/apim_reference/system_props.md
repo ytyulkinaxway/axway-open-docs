@@ -467,3 +467,4 @@ Axway-defined Java system properties introduced in the 7.7 20220530 release
 | System Property                                  | Context     | Description   |
 | ------------------------------------------------ | ----------- | ------------- |
 |com.vordel.dwe.outputObsFoldedValuesAllowed | API Gateway | Allow output HTTP headers to contain obs-folded values. Default value: 'false' |
+|com.vordel.allowApiSecretModification | API Manager | When set to 'true' the secret of an OAuth Credential or an API Key can be modified via the REST API. Default value: 'false' |
