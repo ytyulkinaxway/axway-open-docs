@@ -30,6 +30,23 @@ placeholder
 
 It is important, especially when upgrading from an earlier version, to be aware of the following changes in the behavior or operation of the product in this update, which may impact on your current installation.
 
+### New redaction rules for API Gateway
+
+New redaction rules have been defined for both [Admin Node Manager](/docs/apim_administration/apigtw_admin/admin_node_mngr/) and and the gateway instances. New API Gateway installations now have these rules enabled by default.
+
+When upgrading existing installations, the default redaction files will be automatically installed.
+
+The new default rules are not included in existing configurations, so you must modify your product's configuration files manually to include the new redaction files.
+
+{{< alert title="Note" >}}
+In order to have a redaction output compatible with API Gateway versions older than **May 2022 update**, observe the following:
+
+* If the tag `action` is not present in new rules, the default action will be `replace`.
+* If the tag `replaceBy` is not present, redaction will replace `multipart/form-data` values by an empty string, and `application/x-www-form-urlencoded` values by the string `null`.
+{{< /alert >}}
+
+For more information on how to configure redaction and the format of new redaction rules, see [Redaction Rules](/docs/apim_administration/apigtw_admin/admin_redactors/).
+
 ### OpenJDK JRE
 
 API Gateway and API Manager 7.7 and later now support Zulu OpenJDK 1.8.0_322. This version of OpenJDK disables TLS versions 1.0 and 1.1 by default. If you wish to enable these algorithms in your API Gateway, add the `jdk.tls.disabledAlgorithms` Java security property to the jvm.xml file as follows, where `value` contains the list of disabled algorithms.
