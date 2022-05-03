@@ -133,7 +133,7 @@ Enter the maximum number of days after which transaction files are purged. Files
 
 ## Real-time monitoring metrics
 
-You can configure real-time monitoring metrics for a gateway instance. For example, this enables you to specify monitoring of messages at the level of API services, methods,clients, and remote hosts. This is important when managing APIs because of requirements to bill clients for their API usage.
+You can configure real-time monitoring metrics for a gateway instance. For example, this enables you to specify monitoring of messages at the level of API services, methods,clients, and remote hosts.
 
 When real-time monitoring is enabled, monitoring data is stored in API Gateway memory and displayed in the API Gateway Manager web console. API Gateway Manager uses the configured real-time monitoring metrics to display graphical reports in its **Dashboard** and **Monitoring** views. For more details on viewing real-time metrics, see [Monitor services in API Gateway Manager](/docs/apim_administration/apigtw_admin/monitor_service).
 
