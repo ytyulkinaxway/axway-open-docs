@@ -100,6 +100,8 @@ This simple API Gateway domain topology is described as follows:
 * Container 3 runs an API Gateway that writes transaction event logs, and includes API Manager is an optional component. For more details, see [Deploy API Manager or OAuth in Docker containers](/docs/apim_installation/apigw_containers/container_apimgr_oauth).
 * Container 4 runs an Admin Node Manager that generates metrics from transaction event logs, which are then read from the metrics database by API Manager and API Gateway Analytics.
 * Container 5 runs API Gateway Analytics, which is an optional standalone client of the metrics database. For more details, see [Deploy API Gateway Analytics in Docker containers](/docs/apim_installation/apigw_containers/container_apigateway_analytics).
+* Container 6 runs the Discovery Agent. The Discovery Agent is used to discover new published APIs or any updated APIs. Once they are discovered, the related APIs are published to Amplify Central. For more details, see [Discovery Agent](/docs/connect_manage_environ/connect_api_manager/gateway-administation/index.html#discovery-agent)
+* Container 7 runs the Traceability Agent. The Traceability Agent is used to prepare the transaction events that are sent to Amplify platform. Fore more details, see [Traceability Agent](/docs/connect_manage_environ/connect_api_manager/gateway-administation/index.html#traceability-agent)
 
 {{< alert title="Note" color="primary" >}}The example Quick Start domain topology is suitable for a development environment only. For more details, see the readme file provided with the API Gateway Docker scripts.{{< /alert >}}
 
