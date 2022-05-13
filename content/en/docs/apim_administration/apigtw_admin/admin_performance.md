@@ -48,7 +48,7 @@ For more details, see [Traffic monitoring settings](/docs/apim_reference/monitor
 
 ### Disable transaction logging
 
-The **Transaction Log** is displayed in the **Logs** view in the API Gateway Manager web console. You should ensure that API Gateway is not sending transaction log messages or events to transaction log destinations. This is because the performance of API Gateway will be determined by the log destination.
+The **Transaction Log** is displayed in the **Logs** view in the API Gateway Manager web console. You should ensure that API Gateway is not sending transaction log messages or events to transaction log destinations. This is because the performance of API Gateway will be determined by the log destination. Please do not disable transaction logging if you are using Discovery and Traceability agents.
 
 To disable transaction logging in the API Gateway, you must disable all log destinations in Policy Studio. For example, select **Environment Configuration > Server Settings > Logging > Transaction Log**, and deselect **Enable logging to a file**. The following example shows disabling logging to file, you must perform this step in all tabs on this screen:
 
@@ -58,7 +58,7 @@ For more details, see [Transaction audit log settings](/docs/apim_reference/log_
 
 ### Disable access logging
 
-You should also ensure that the API Gateway is not sending log messages to the access log. To disable access logging in the API Gateway, select **Environment Configuration > Server Settings > Logging > Transaction Access Log**, and deselect **Transaction Access Log Enabled**:
+You should also ensure that the API Gateway is not sending log messages to the access log. Please do not disable access logging if you are using Discovery and Traceability agents. To disable access logging in the API Gateway, select **Environment Configuration > Server Settings > Logging > Transaction Access Log**, and deselect **Transaction Access Log Enabled**:
 
 ![Disable access logging](/Images/APIGateway/admin_perf_access_log.png)
 

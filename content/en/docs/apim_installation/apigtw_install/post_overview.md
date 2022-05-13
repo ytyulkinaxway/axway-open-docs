@@ -23,6 +23,8 @@ You can examine the installation log in the root directory of the installation (
 * To log in to the API Manager web-based tool, see [Start API Manager](/docs/apim_installation/apigtw_install/install_api_mgmt/#start-api-manager).
 * To start the Configuration Studio desktop tool, see [Start Configuration Studio](/docs/apim_installation/apigtw_install/install_config_studio/#start-configuration-studio).
 * To set up and start the API Gateway Analytics server, and to log in to the API Gateway Analytics web-based tool, see the [API Gateway Analytics User Guide](/docs/apimanager_analytics/).
+* To start the Discovery agent see [Running the Discovery Agent](https://docs.axway.com/bundle/amplify-central/page/docs/connect_manage_environ/connect_api_manager/gateway-administation/index.html#running-the-discovery-agent)
+* To start the Traceability agent, see [Run the Traceability Agent](https://docs.axway.com/bundle/amplify-central/page/docs/connect_manage_environ/connect_api_manager/gateway-administation/index.html#running-the-binary-traceability-agent)
 
 ## Initial configuration
 

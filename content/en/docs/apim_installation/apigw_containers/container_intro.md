@@ -54,3 +54,7 @@ A cluster manager such as Docker Swarm or Kubernetes manages the topology and ad
 
 If the deployment includes API Manager, Apache Cassandra is configured for high availability (HA) to store API Manager data and Key Property Store (KPS) tables. For more details, see
 [Configure a Cassandra HA cluster](/docs/cass_admin/cassandra_config/).
+
+#### Discovery and Traceability agents
+
+See [Set up Discovery agent](/docs/connect_manage_environ/connect_api_manager/gateway-administation/index.html#discovery-agent) and [Set up Traceability agent](/docs/connect_manage_environ/connect_api_manager/gateway-administation/index.html#traceability-agent) to include Discovery and Traceability agents in your deployment.

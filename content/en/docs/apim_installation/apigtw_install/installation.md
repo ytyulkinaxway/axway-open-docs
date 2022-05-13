@@ -56,11 +56,12 @@ You can install API Gateway using the following setup types.
 
 #### Standard
 
-Select this option to install all API Gateway components without API Manager. This includes API Gateway Analytics, the QuickStart tutorial, Apache Cassandra database, package and deployment tools, Policy Studio, and Configuration Studio.
+Select this option to install all API Gateway components without API Manager. This includes API Gateway Analytics, the QuickStart tutorial, Apache Cassandra database,
+Discovery and Traceability agents, package and deployment tools, Policy Studio, and Configuration Studio.
 
 #### Complete
 
-Select this option to install all API Gateway components with API Manager. This includes API Manager, API Gateway Analytics, the QuickStart tutorial, Apache Cassandra database, package and deployment tools, Policy Studio, and Configuration Studio.
+Select this option to install all API Gateway components with API Manager. This includes API Manager, API Gateway Analytics, the QuickStart tutorial, Apache Cassandra database, Discovery and Traceability agents, package and deployment tools, Policy Studio, and Configuration Studio.
 
 #### Custom
 
@@ -75,6 +76,7 @@ Select this option to customize which components are installed. You can install 
 * Install API Tester
 * [Install Configuration Studio](/docs/apim_installation/apigtw_install/install_config_studio)
 * [Install API Manager](/docs/apim_installation/apigtw_install/install_api_mgmt)
+* [Install Discovery and Traceability agents](/docs/apim_installation/apigtw_install/install_agents)
 * [Install the Package and Deploy tools](/docs/apim_installation/apigtw_install/install_deploy_tools)
 * [Install API Gateway Analytics](/docs/apim_installation/apigtw_install/install_analytics)
 
@@ -94,6 +96,7 @@ Select the components to be installed, and deselect those that are not to be ins
 
 * API Gateway Server
 * Admin Node Manager
+* Discovery and Tracebility agents
 * Policy Studio desktop tool
 
 Click **Next** to continue.
@@ -156,6 +159,31 @@ Configure the following settings:
     Enter the local port that the Node Manager uses to manage the gateway instance. Defaults to `8085`.
 * **External Traffic Port**:
     Enter the port that the gateway uses for message traffic from external clients. Defaults to `8080`.
+
+Click **Next** to continue.
+
+### Specify Discovery and Traceability agents configuration
+
+Configure the following settings:
+
+* **Discovery agent name**:
+    Enter the name of this agent on Amplify Central.
+* **Traceability agent name**:
+    Enter the name of this agent on Amplify Central.
+* **Amplify Central Organization ID**:
+    Enter the Organization ID from Amplify Central. Locate this at Platform > User > Organization.
+* **Private key**:
+    Enter the private key associated with the Service Account.
+* **Public key**:
+    Enter the public key associated with the Service Account.
+* **Amplify Central URL**:
+    Enter the URL to the Amplify Central instance being used for Agents.
+* **Service Account Client ID**:
+    Enter the client identifier associated to the Service Account created in Amplify Central. Locate this at Amplify Central > Access > Service Accounts > client Id.
+* **Amplify Central Environment Name**:
+    Enter the name of the Amplify Central environment where API will be hosted.
+* **Amplify Central Authentication URL**:
+    Enter the Amplify login URL
 
 Click **Next** to continue.
 

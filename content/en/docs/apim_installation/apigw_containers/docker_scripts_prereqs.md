@@ -75,6 +75,9 @@ For the Quickstart help, run:
 
 The `quickstart.sh` script is intended to simplify deployment of API Gateway in containers, especially for development environments and evaluation use. However, you can also use it as a starting point for customization and modify it to suit your own environment.
 
+To run the Discovery and Traceability agents as part of the Quickstart demo, you need to have valid `da_env_vars.env` and `ta_env_vars.env` configuration files as well as valid private and public keys to connect with Amplify Central. Please set `APIMANAGER_HOST=apimgr` and `APIGATEWAY_HOST=apimgr` in the agents
+configuration files. Also please be aware that the default certificate used by API Manager does not match the container host name. For this reason, you will need to add `APIMANAGER_SSL_INSECURESKIPVERIFY=true` to the agents configuration files. In a production environment, you will need to change the API Manager certificate to match the container hostname used by the agents.
+
 ## Create a Docker network
 
 You must run the `docker network` command to create a Docker network for the API Gateway domain. This enables all of the containers in the domain to communicate with each another easily (for example, the API Gateway container and Admin Node Manager container). A containerized API Gateway domain must include one Admin Node Manager container and one or more API Gateway containers.
@@ -100,6 +103,8 @@ This simple API Gateway domain topology is described as follows:
 * Container 3 runs an API Gateway that writes transaction event logs, and includes API Manager is an optional component. For more details, see [Deploy API Manager or OAuth in Docker containers](/docs/apim_installation/apigw_containers/container_apimgr_oauth).
 * Container 4 runs an Admin Node Manager that generates metrics from transaction event logs, which are then read from the metrics database by API Manager and API Gateway Analytics.
 * Container 5 runs API Gateway Analytics, which is an optional standalone client of the metrics database. For more details, see [Deploy API Gateway Analytics in Docker containers](/docs/apim_installation/apigw_containers/container_apigateway_analytics).
+* Container 6 runs the Discovery Agent. The Discovery Agent is used to discover new published APIs or any updated APIs. Once they are discovered, the related APIs are published to Amplify Central. For more details, see [Discovery Agent](/docs/connect_manage_environ/connect_api_manager/gateway-administation/index.html#discovery-agent)
+* Container 7 runs the Traceability Agent. The Traceability Agent is used to prepare the transaction events that are sent to Amplify platform. Fore more details, see [Traceability Agent](/docs/connect_manage_environ/connect_api_manager/gateway-administation/index.html#traceability-agent)
 
 {{< alert title="Note" color="primary" >}}The example Quick Start domain topology is suitable for a development environment only. For more details, see the readme file provided with the API Gateway Docker scripts.{{< /alert >}}
 
