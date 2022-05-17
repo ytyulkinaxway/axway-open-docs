@@ -8,7 +8,6 @@
 
 Discovery and Traceability agents are used to connect your API Management system to Amplify Central.
 
-
 ## Prerequisites
 
 Ensure that all of the prerequisites detailed in [prerequisites](/docs/apim_installation/apigtw_install/system_requirements) are met.
