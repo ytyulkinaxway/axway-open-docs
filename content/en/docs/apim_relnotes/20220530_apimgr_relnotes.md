@@ -22,9 +22,9 @@ Any custom `.fed` files deployed to a container must be upgraded using [upgradec
 
 The following new features and enhancements are available in this update.
 
-### Manage timeouts on Connection/ConnectToUrl filters
+### Manage timeouts on Connection and ConnectToUrl filters
 
-Timeout settings can now be set on the Connection or ConnectToUrl filters. This change will allow for specific calls to timeout at different times based on your use-case. For more information, please see [Connect to URL filter](/docs/apim_policydev/apigw_polref/routing_common/#connect-to-url-filter)
+Timeout settings can now be set on the Connection and ConnectToUrl filters. This change will allow for specific calls to timeout at different times based on your use-case. For more information, please see [Connect to URL filter](/docs/apim_policydev/apigw_polref/routing_common/#connect-to-url-filter)
 
 ### Querystring passthrough
 
