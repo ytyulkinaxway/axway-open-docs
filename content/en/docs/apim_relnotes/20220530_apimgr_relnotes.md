@@ -32,28 +32,38 @@ It is important, especially when upgrading from an earlier version, to be aware 
 
 ### New redaction rules for API Gateway
 
-New redaction rules have been defined for both [Admin Node Manager](/docs/apim_administration/apigtw_admin/admin_node_mngr/) and and the gateway instances. New API Gateway installations now have these rules enabled by default.
+New redaction rules have been defined for both [Admin Node Manager](/docs/apim_administration/apigtw_admin/admin_node_mngr/) and API Gateway instances. New API Gateway installations now have these rules enabled by default.
 
 When upgrading existing installations, the default redaction files will be automatically installed.
 
-The new default rules are not included in existing configurations, so you must modify your product's configuration files manually to include the new redaction files.
+The new default rules are *not* included in existing configurations, so you must modify your product's configuration files manually to include the new redaction files.
 
 {{< alert title="Note" >}}
-In order to have a redaction output compatible with API Gateway versions older than **May 2022 update**, observe the following:
+To ensure that a redaction output is compatible with API Gateway versions older than **May 2022 update**, observe the following:
 
 * If the tag `action` is not present in new rules, the default action will be `replace`.
-* If the tag `replaceBy` is not present, redaction will replace `multipart/form-data` values by an empty string, and `application/x-www-form-urlencoded` values by the string `null`.
+* If the tag `replaceBy` is not present, redaction will replace `multipart/form-data` values by an empty string and `application/x-www-form-urlencoded` values by the string `null`.
 {{< /alert >}}
 
 For more information on how to configure redaction and the format of new redaction rules, see [Redaction Rules](/docs/apim_administration/apigtw_admin/admin_redactors/).
 
-### OpenJDK JRE
+### Support for Zulu OpenJDK and how to manually enable TLS algorithms
 
-API Gateway and API Manager 7.7 and later now support Zulu OpenJDK 1.8.0_322. This version of OpenJDK disables TLS versions 1.0 and 1.1 by default. If you wish to enable these algorithms in your API Gateway, add the `jdk.tls.disabledAlgorithms` Java security property to the jvm.xml file as follows, where `value` contains the list of disabled algorithms.
+API Gateway and API Manager now support Zulu OpenJDK 1.8.0_322. This version of OpenJDK disables TLS algorithms version 1.0 and 1.1 by default, and this might impact database connections, LDAP connections, and other connection types if these connections require the use of these algorithms.
+
+The following sections describe how to manually enable TLS algorithms.
+
+#### API Gateway and API Manager
+
+If you wish to enable these algorithms in your API Gateway or API Manager, add the `jdk.tls.disabledAlgorithms` Java security property to the jvm.xml file as follows, where `value` contains the desired list of disabled algorithms.
 
 ```xml
-<SecurityProperty name="jdk.tls.disabledAlgorithms" value="" />
+<SecurityProperty name="jdk.tls.disabledAlgorithms" value="MD2, MD5, SHA1 jdkCA & usage TLSServer,RSA keySize < 1024, DSA keySize < 1024, EC keySize < 224" />
 ```
+
+#### Policy Studio
+
+To enable these algorithms for Policy Studio, remove "TLSv1" and "TLSv1.1" from the `jdk.tls.disabledAlgorithms` property in the INSTALL_DIR/policystudio/jre/lib/security/java.security file.
 
 ## Deprecated features
 
