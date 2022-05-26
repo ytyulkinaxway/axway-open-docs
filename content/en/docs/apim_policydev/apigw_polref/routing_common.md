@@ -222,6 +222,8 @@ Configure custom timeouts for a filter. The custom timeouts will override the eq
 
 **Idle Timeout**: If a value less than or equal to zero is specified, the connection is purged (almost) immediately. Defaults to 15000 milliseconds (15 seconds).
 
+{{< alert title="Note" color="primary" >}}All custom timeouts are optional. When a timeout value is not specified, a fallback mechanism applies the value of an equivalent timeout configured either at the global level or at the remote host level, if a **Remote Host** has been previously configured.{{< /alert >}}
+
 ## Connection filter
 
 The **Connection** filter makes the connection to the remote web service. It relies on connection details that are set by the other filters in the **Routing** category. Because the **Connection** filter connects out to other services, it negotiates the SSL handshake involved in setting up a mutually authenticated secure channel.
