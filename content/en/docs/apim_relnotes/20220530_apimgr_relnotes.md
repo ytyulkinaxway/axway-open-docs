@@ -65,6 +65,12 @@ If you wish to enable these algorithms in your API Gateway or API Manager, add t
 
 To enable these algorithms for Policy Studio, remove "TLSv1" and "TLSv1.1" from the `jdk.tls.disabledAlgorithms` property in the INSTALL_DIR/policystudio/jre/lib/security/java.security file.
 
+### New system property to propagate API Manager security Invoke Policy generated headers
+
+The ticket RDAPI-23601, from the [November 2021](/docs/apim_relnotes/20211130_apimgr_relnotes/#other-fixed-issues) release, added a functionality to propagate the headers (http.headers) generated as part of an Inbound security Invoke Policy execution for further processing by API Manager, resulting in the original request headers being overwritten.
+
+Now, a new Java system property, `com.axway.apimanager.securitydevice.httpheaders.propagate`, has been added to propagate the generated headers when required, and the previous functionality of propagating the request headers for further processing is reinstated as default. For more information, see [System property changes](/docs/apim_reference/system_props/#77-may-2022).
+
 ## Deprecated features
 
 <!--As part of our software development life cycle we constantly review our API Management offering. As part of this update, the following capabilities have been deprecated-->
