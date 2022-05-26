@@ -73,9 +73,11 @@ Now, a new Java system property, `com.axway.apimanager.securitydevice.httpheader
 
 ## Deprecated features
 
-<!--As part of our software development life cycle we constantly review our API Management offering. As part of this update, the following capabilities have been deprecated-->
+As part of our software development life cycle we constantly review our API Management offering. As part of this update, the following capabilities have been deprecated
 
-No features have been deprecated in this update.
+### Edge agent for API Gateway
+
+The [Edge agent](https://docs.axway.com/bundle/subusage_en/page/deploy_the_agent.html) is removed from API Gateway, and it was replaced by the [Traceability and Discovery](https://docs.axway.com/bundle/amplify-central/page/docs/connect_manage_environ/connected_agent_common_reference/index.html) agents.
 
 ## End of support notices
 
