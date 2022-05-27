@@ -65,6 +65,32 @@ If you wish to enable these algorithms in your API Gateway or API Manager, add t
 
 To enable these algorithms for Policy Studio, remove "TLSv1" and "TLSv1.1" from the `jdk.tls.disabledAlgorithms` property in the INSTALL_DIR/policystudio/jre/lib/security/java.security file.
 
+### OpenSSL upgrade to version 3.0.3
+
+OpenSSL has been upgraded to OpenSSL 3.0.3. The following are the major changes in API Gateway related to this upgrade:
+
+#### Support of legacy algorithms
+
+Cryptographic algorithms, such as DES, MD2, and RC2 are considered legacy and their use is strongly discouraged. The legacy algorithms are still available in OpenSSL 3.0.3. For more information see, [OpenSSL, Legacy algorithms](https://www.openssl.org/docs/man3.0/man7/migration_guide.html#Legacy-Algorithms).
+
+Legacy algorithms support is provided by legacy library, which is delivered with API Gateway and referenced by the environmental variable `OPENSSL_MODULES`.
+
+The legacy cryptographic algorithms DES and RC2, used for PKCS12 creation in API Gateway, are replaced by AES256. DES and RC2 algorithms are still supported when reading PKCS12 files encrypted with legacy algorithms.
+
+#### Support of legacy engines
+
+OpenSSL 3.0 introduced the Provider concept, which conflicts with the APIs used to support engines. These APIs are deprecated, but still supported by legacy engines libraries delivered with API Gateway. The environmental variable `OPENSSL_ENGINES` is added to reference the legacy engines. For more details on legacy engines, see [OpenSSL, Support of legacy engines](https://www.openssl.org/docs/man3.0/man7/migration_guide.html#Support-of-legacy-engines).
+
+#### OpenSSL configuration
+
+OpenSSL configuration shipped with API Gateway (openssl.cnf) enables support of legacy algorithms and engines by default. Customized OpenSSL configurations should reflect this change.
+
+{{< alert title="Note" color="primary" >}}
+Running API Gateway in FIPS mode is not yet supported.
+{{< /alert >}}
+
+For more details on changes in OpenSSL 3.0.3, see [OpenSSL, Changelog](https://www.openssl.org/news/changelog.html#openssl-30).
+
 ### New system property to propagate API Manager security Invoke Policy generated headers
 
 The ticket RDAPI-23601, from the [November 2021](/docs/apim_relnotes/20211130_apimgr_relnotes/#other-fixed-issues) release, added a functionality to propagate the headers (http.headers) generated as part of an Inbound security Invoke Policy execution for further processing by API Manager, resulting in the original request headers being overwritten.
@@ -81,21 +107,13 @@ The [Edge agent](https://docs.axway.com/bundle/subusage_en/page/deploy_the_agent
 
 ## End of support notices
 
-The following items are end of support:
-
-### placeholder 3
-
-placeholder
+There are no end of support notices in this update.
 
 ## Removed features
 
-To stay current and align our offerings with customer demand and best practices, Axway might discontinue support for some capabilities. As part of this update, the following features have been removed:
+<!--To stay current and align our offerings with customer demand and best practices, Axway might discontinue support for some capabilities. As part of this update, the following features have been removed:-->
 
-<!--No features have been removed in this update.-->
-
-### placeholder 4
-
-placeholder.
+No features have been removed in this update.
 
 ## Fixed issues
 
