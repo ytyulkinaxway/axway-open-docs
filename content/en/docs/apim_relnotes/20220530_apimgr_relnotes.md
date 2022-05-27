@@ -34,9 +34,9 @@ It is important, especially when upgrading from an earlier version, to be aware 
 
 New redaction rules have been defined for both [Admin Node Manager](/docs/apim_administration/apigtw_admin/admin_node_mngr/) and API Gateway instances. New API Gateway installations now have these rules enabled by default.
 
-When upgrading existing installations, the default redaction files will be automatically installed.
+When upgrading existing installations, the default redaction files are automatically installed but not enabled.
 
-The new default rules are *not* included in existing configurations, so you must modify your product's configuration files manually to include the new redaction files.
+To enable new default rules, the redaction files must be included in existing configurations, Therefore, you must modify the configuration files of your product manually to include the new redaction files.
 
 {{< alert title="Note" >}}
 To ensure that a redaction output is compatible with API Gateway versions older than **May 2022 update**, observe the following:
@@ -96,6 +96,24 @@ For more details on changes in OpenSSL 3.0.3, see [OpenSSL, Changelog](https://w
 The ticket RDAPI-23601, from the [November 2021](/docs/apim_relnotes/20211130_apimgr_relnotes/#other-fixed-issues) release, added a functionality to propagate the headers (http.headers) generated as part of an Inbound security Invoke Policy execution for further processing by API Manager, resulting in the original request headers being overwritten.
 
 Now, a new Java system property, `com.axway.apimanager.securitydevice.httpheaders.propagate`, has been added to propagate the generated headers when required, and the previous functionality of propagating the request headers for further processing is reinstated as default. For more information, see [System property changes](/docs/apim_reference/system_props/#77-may-2022).
+
+### SAML SSO Metadata URL host verification is now required
+
+When configuring SAML SSO in API Manager, the URL provided in the attribute `metadataUrl` of the `service-provider.xml` file must return a valid certificate with a matching host name. If the hostname does not match, the certificate is rejected.
+
+If the IdP cannot provide a matching certificate, the metadata file can be downloaded out of band and added to the `groups/group-2/instance-1/conf` folder alongside the `service-provider.xml` file. The `metadataUrl` attribute can then reference the relative file.
+
+For example, in service-provider.xml:
+
+```
+metadataUrl="https://idpWithBadCert.com/idp_ADFS.xml"
+```
+
+The attribute will change to:
+
+```
+metadataUrl="./idp_ADFS.xml"
+```
 
 ## Deprecated features
 
