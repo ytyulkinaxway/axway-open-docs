@@ -115,6 +115,10 @@ The attribute will change to:
 metadataUrl="./idp_ADFS.xml"
 ```
 
+### A fault handling policy is required to enable the global fault handler
+
+When configuring the global fault handler in API Manager, it is now required to define and select a [fault handler policy](/docs/apim_administration/apimgr_admin/api_mgmt_custom_policies/#add-api-manager-fault-handler-policies).
+
 ## Deprecated features
 
 As part of our software development life cycle we constantly review our API Management offering. As part of this update, the following capabilities have been deprecated
