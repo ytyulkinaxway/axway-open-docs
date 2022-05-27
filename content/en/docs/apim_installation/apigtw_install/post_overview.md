@@ -87,9 +87,17 @@ For additional procedures you can perform to secure your API Gateway, see the [A
 
 For more information on the security features of API Gateway and best practices for strengthening the security of API Gateway, see the [API Management Security Guide](https://docs.axway.com/bundle/apim-security-guide/page/api_management_security_guide.html).
 
-## Secure Discovery and Traceability agents
+## Discovery and Traceability agents
+
+Secure and configure the Discovery and Traceability agents.
+
+### Secure agents
 
 See [Administer agent security](https://docs.axway.com/bundle/amplify-central/page/docs/connect_manage_environ/connected_agent_common_reference/agent_security/index.html) to secure your Discovery and Traceability agents.
+
+### Configure agents in a clustered environment
+
+A clustered environment requires one Traceability agent per gateway, so you must install the agents on each node. For more information, see [Configure your agents](https://docs.axway.com/bundle/amplify-central/page/docs/connect_manage_environ/connect_api_manager/deploy-your-agents-with-amplify-cli/index.html#step-4-run-the-agents-configure-procedure).
 
 ## Set up services
 
