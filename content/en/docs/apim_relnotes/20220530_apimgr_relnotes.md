@@ -28,7 +28,7 @@ The following new features and enhancements are available in this update.
 
 ### Querystring passthrough
 
-Placeholder for Padraic/Cian... Jira down at the moment
+Select whether to enable this setting for a REST API in API Manager. When enabled, query parameters are sent unmodified to the back-end service. This is a per API implementation of the [global system property](/docs/apim_administration/apimgr_admin/api_mgmt_virtualize_web).
 
 ### Policy Studio YAML performance improvements on Windows
 
