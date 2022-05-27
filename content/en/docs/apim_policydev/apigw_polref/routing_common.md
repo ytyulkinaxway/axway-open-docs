@@ -191,11 +191,10 @@ To specify the redirect settings for this filter, complete the following fields:
 To specify the header settings for this filter, complete the following fields:
 
 * **Forward spurious received Content headers**: Specifies whether the API Gateway sends any content-related message headers when sending an HTTP request with no message body to the HTTP server. For example, select this setting if content-related headers are required by an out-of-band agreement. If there is no body in the outbound request, any content-related headers from the original inbound HTTP request are forwarded. These are extracted from the `http.content.headers` message attribute, generally populated by the API Gateway for the incoming call. This attribute can be manipulated in a policy using the appropriate filters, if required. This field is not selected by default.
-* **HTTP Host Header**: An HTTP 1.1 client must send a `Host` header in all HTTP 1.1 requests. The `Host` header identifies the host name and port number of the requested resource as specified in the original URL given by the client.
 
-    When routing messages on to target web services, the API Gateway can forward on the `Host` as received from the client, or it can specify the address and port number of the destination web service in the `Host` header that it routes onwards.
+* **HTTP Host Header**: An HTTP 1.1 client must send a `Host` header in all HTTP 1.1 requests. The `Host` header identifies the host name and port number of the resource as specified in the original request URL given by the client.
 
-    Select **Use Host header specified by client** to force the API Gateway to always forward on the original `Host` header that it received from the client. Alternatively, to configure the API Gateway to include the address and port number of the destination web service in the `Host` header, select the **Generate new Host header** radio button.
+    Select **Use Host header specified by client** to make the API Gateway use the `Host` header found in the `http.headers` attribute.  This attribute is automatically populated with the incoming `Host` header value. If you have used an **[Add HTTP Header](/docs/apim_policydev/apigw_polref/conversion_common/#add-http-header-filter)** filter, scripting, or other methods to rewrite the `Host` header value in the `http.headers` attribute, your changes will show in the outgoing `Host` header value. Alternatively, to configure API Gateway to create a new `Host` header, select **Generate new Host header**. This setting uses the host and port of the URL configured in the filter and ignores the `http.headers` attribute.
 
 #### Response body settings
 
@@ -222,6 +221,8 @@ Configure custom timeouts for a filter. The custom timeouts will override the eq
 **Transaction Timeout (ms)**: Specifying a value less than or equal to zero means an infinite timeout. Defaults to 240000 milliseconds (4 minutes).
 
 **Idle Timeout**: If a value less than or equal to zero is specified, the connection is purged (almost) immediately. Defaults to 15000 milliseconds (15 seconds).
+
+{{< alert title="Note" color="primary" >}}All custom timeouts are optional. When a timeout value is not specified, a fallback mechanism applies the value of an equivalent timeout configured either at the global level or at the remote host level, if a **Remote Host** has been previously configured.{{< /alert >}}
 
 ## Connection filter
 

@@ -30,33 +30,97 @@ Timeout settings can now be set on the Connection and ConnectToUrl filters. This
 
 Placeholder for Padraic/Cian... Jira down at the moment
 
+### Policy Studio YAML performance improvements on Windows
+
+Policy Studio performance has been improved with focus on the YAML entity store on a Windows operating system. Waiting times have been reduced for many UI interactions.
+
 ## Important changes
 
 It is important, especially when upgrading from an earlier version, to be aware of the following changes in the behavior or operation of the product in this update, which may impact on your current installation.
 
 ### New redaction rules for API Gateway
 
-New redaction rules have been defined for both [Admin Node Manager](/docs/apim_administration/apigtw_admin/admin_node_mngr/) and and the gateway instances. New API Gateway installations now have these rules enabled by default.
+New redaction rules have been defined for both [Admin Node Manager](/docs/apim_administration/apigtw_admin/admin_node_mngr/) and API Gateway instances. New API Gateway installations now have these rules enabled by default.
 
-When upgrading existing installations, the default redaction files will be automatically installed.
+When upgrading existing installations, the default redaction files are automatically installed but not enabled.
 
-The new default rules are not included in existing configurations, so you must modify your product's configuration files manually to include the new redaction files.
+To enable new default rules, the redaction files must be included in existing configurations, Therefore, you must modify the configuration files of your product manually to include the new redaction files.
 
 {{< alert title="Note" >}}
-In order to have a redaction output compatible with API Gateway versions older than **May 2022 update**, observe the following:
+To ensure that a redaction output is compatible with API Gateway versions older than **May 2022 update**, observe the following:
 
 * If the tag `action` is not present in new rules, the default action will be `replace`.
-* If the tag `replaceBy` is not present, redaction will replace `multipart/form-data` values by an empty string, and `application/x-www-form-urlencoded` values by the string `null`.
+* If the tag `replaceBy` is not present, redaction will replace `multipart/form-data` values by an empty string and `application/x-www-form-urlencoded` values by the string `null`.
 {{< /alert >}}
 
 For more information on how to configure redaction and the format of new redaction rules, see [Redaction Rules](/docs/apim_administration/apigtw_admin/admin_redactors/).
 
-### OpenJDK JRE
+### Support for Zulu OpenJDK and how to manually enable TLS algorithms
 
-API Gateway and API Manager 7.7 and later now support Zulu OpenJDK 1.8.0_322. This version of OpenJDK disables TLS versions 1.0 and 1.1 by default. If you wish to enable these algorithms in your API Gateway, add the `jdk.tls.disabledAlgorithms` Java security property to the jvm.xml file as follows, where `value` contains the list of disabled algorithms.
+API Gateway and API Manager now support Zulu OpenJDK 1.8.0_322. This version of OpenJDK disables TLS algorithms version 1.0 and 1.1 by default, and this might impact database connections, LDAP connections, and other connection types if these connections require the use of these algorithms.
+
+The following sections describe how to manually enable TLS algorithms.
+
+#### API Gateway and API Manager
+
+If you wish to enable these algorithms in your API Gateway or API Manager, add the `jdk.tls.disabledAlgorithms` Java security property to the jvm.xml file as follows, where `value` contains the desired list of disabled algorithms.
 
 ```xml
-<SecurityProperty name="jdk.tls.disabledAlgorithms" value="" />
+<SecurityProperty name="jdk.tls.disabledAlgorithms" value="MD2, MD5, SHA1 jdkCA & usage TLSServer,RSA keySize < 1024, DSA keySize < 1024, EC keySize < 224" />
+```
+
+#### Policy Studio
+
+To enable these algorithms for Policy Studio, remove "TLSv1" and "TLSv1.1" from the `jdk.tls.disabledAlgorithms` property in the INSTALL_DIR/policystudio/jre/lib/security/java.security file.
+
+### OpenSSL upgrade to version 3.0.3
+
+OpenSSL has been upgraded to OpenSSL 3.0.3. The following are the major changes in API Gateway related to this upgrade:
+
+#### Support of legacy algorithms
+
+Cryptographic algorithms, such as DES, MD2, and RC2 are considered legacy and their use is strongly discouraged. The legacy algorithms are still available in OpenSSL 3.0.3. For more information see, [OpenSSL, Legacy algorithms](https://www.openssl.org/docs/man3.0/man7/migration_guide.html#Legacy-Algorithms).
+
+Legacy algorithms support is provided by legacy library, which is delivered with API Gateway and referenced by the environmental variable `OPENSSL_MODULES`.
+
+The legacy cryptographic algorithms DES and RC2, used for PKCS12 creation in API Gateway, are replaced by AES256. DES and RC2 algorithms are still supported when reading PKCS12 files encrypted with legacy algorithms.
+
+#### Support of legacy engines
+
+OpenSSL 3.0 introduced the Provider concept, which conflicts with the APIs used to support engines. These APIs are deprecated, but still supported by legacy engines libraries delivered with API Gateway. The environmental variable `OPENSSL_ENGINES` is added to reference the legacy engines. For more details on legacy engines, see [OpenSSL, Support of legacy engines](https://www.openssl.org/docs/man3.0/man7/migration_guide.html#Support-of-legacy-engines).
+
+#### OpenSSL configuration
+
+OpenSSL configuration shipped with API Gateway (openssl.cnf) enables support of legacy algorithms and engines by default. Customized OpenSSL configurations should reflect this change.
+
+{{< alert title="Note" color="primary" >}}
+Running API Gateway in FIPS mode is not yet supported.
+{{< /alert >}}
+
+For more details on changes in OpenSSL 3.0.3, see [OpenSSL, Changelog](https://www.openssl.org/news/changelog.html#openssl-30).
+
+### New system property to propagate API Manager security Invoke Policy generated headers
+
+The ticket RDAPI-23601, from the [November 2021](/docs/apim_relnotes/20211130_apimgr_relnotes/#other-fixed-issues) release, added a functionality to propagate the headers (http.headers) generated as part of an Inbound security Invoke Policy execution for further processing by API Manager, resulting in the original request headers being overwritten.
+
+Now, a new Java system property, `com.axway.apimanager.securitydevice.httpheaders.propagate`, has been added to propagate the generated headers when required, and the previous functionality of propagating the request headers for further processing is reinstated as default. For more information, see [System property changes](/docs/apim_reference/system_props/#77-may-2022).
+
+### SAML SSO Metadata URL host verification is now required
+
+When configuring SAML SSO in API Manager, the URL provided in the attribute `metadataUrl` of the `service-provider.xml` file must return a valid certificate with a matching host name. If the hostname does not match, the certificate is rejected.
+
+If the IdP cannot provide a matching certificate, the metadata file can be downloaded out of band and added to the `groups/group-2/instance-1/conf` folder alongside the `service-provider.xml` file. The `metadataUrl` attribute can then reference the relative file.
+
+For example, in service-provider.xml:
+
+```
+metadataUrl="https://idpWithBadCert.com/idp_ADFS.xml"
+```
+
+The attribute will change to:
+
+```
+metadataUrl="./idp_ADFS.xml"
 ```
 
 ### Axway Terms and Conditions must be accepted to install API Gateway
@@ -71,27 +135,21 @@ During development and testing of API Gateway with Cassandra 3.11.12, a critical
 
 ## Deprecated features
 
-<!--As part of our software development life cycle we constantly review our API Management offering. As part of this update, the following capabilities have been deprecated-->
+As part of our software development life cycle we constantly review our API Management offering. As part of this update, the following capabilities have been deprecated
 
-No features have been deprecated in this update.
+### Edge agent for API Gateway
+
+The [Edge agent](https://docs.axway.com/bundle/subusage_en/page/deploy_the_agent.html) is removed from API Gateway, and it was replaced by the [Traceability and Discovery](https://docs.axway.com/bundle/amplify-central/page/docs/connect_manage_environ/connected_agent_common_reference/index.html) agents.
 
 ## End of support notices
 
-The following items are end of support:
-
-### placeholder 3
-
-placeholder
+There are no end of support notices in this update.
 
 ## Removed features
 
-To stay current and align our offerings with customer demand and best practices, Axway might discontinue support for some capabilities. As part of this update, the following features have been removed:
+<!--To stay current and align our offerings with customer demand and best practices, Axway might discontinue support for some capabilities. As part of this update, the following features have been removed:-->
 
-<!--No features have been removed in this update.-->
-
-### placeholder 4
-
-placeholder.
+No features have been removed in this update.
 
 ## Fixed issues
 
@@ -153,12 +211,6 @@ Related Issue: RDAPI-26621
 An intermittent issue exists whereby after an installation update of Policy Studio, an error dialog is shown - "An error has occurred, see the log file", and the product will fail to start. To resolve this issue, copy the `org.apache.jasper.glassfish_2.2.2.v201205150955.jar` from the Policy Studio installation backup plugins directory to the main Policy Studio plugins directory.
 
 Related Issue: RDAPI-26743
-
-### YAML performance issue in Policy Studio
-
-A Policy Studio performance issue has been observed when utilizing the YAML entity store and running on the Windows operating system. This can result in increased waiting times for certain UI user actions.
-
-Related Issue: RDAPI-26745
 
 ### API Catalog Swagger 2.0 export issue when multiple API Manager traffic ports configured
 

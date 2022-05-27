@@ -1,4 +1,5 @@
 ---
+draft: true
 title: API Portal 7.7 May 2022 Release Notes
 linkTitle: API Portal May 2022
 weight: 95
