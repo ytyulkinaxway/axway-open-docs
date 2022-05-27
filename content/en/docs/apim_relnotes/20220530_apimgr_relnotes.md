@@ -22,9 +22,9 @@ Any custom `.fed` files deployed to a container must be upgraded using [upgradec
 
 The following new features and enhancements are available in this update.
 
-### placeholder 1
+### Policy Studio YAML performance improvements on Windows
 
-placeholder
+Policy Studio performance has been improved with focus on the YAML entity store on a Windows operating system. Waiting times have been reduced for many UI interactions.
 
 ## Important changes
 
@@ -175,12 +175,6 @@ Related Issue: RDAPI-26621
 An intermittent issue exists whereby after an installation update of Policy Studio, an error dialog is shown - "An error has occurred, see the log file", and the product will fail to start. To resolve this issue, copy the `org.apache.jasper.glassfish_2.2.2.v201205150955.jar` from the Policy Studio installation backup plugins directory to the main Policy Studio plugins directory.
 
 Related Issue: RDAPI-26743
-
-### YAML performance issue in Policy Studio
-
-A Policy Studio performance issue has been observed when utilizing the YAML entity store and running on the Windows operating system. This can result in increased waiting times for certain UI user actions.
-
-Related Issue: RDAPI-26745
 
 ### API Catalog Swagger 2.0 export issue when multiple API Manager traffic ports configured
 
