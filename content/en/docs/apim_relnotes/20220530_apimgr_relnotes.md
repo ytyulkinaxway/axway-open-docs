@@ -59,15 +59,15 @@ API Gateway and API Manager 7.7 and later now support Zulu OpenJDK 1.8.0_322. Th
 <SecurityProperty name="jdk.tls.disabledAlgorithms" value="" />
 ```
 
-### Axway Terms and Conditions must be accepted to install
+### Axway Terms and Conditions must be accepted to install API Gateway
 
-Updated General Terms and Conditions (T&C) have been added to API Gateway. During installation in interactive mode a pop-up window is shown for you to accept the T&C. In unattended mode, a new parameter (`ACCEPT_GENERAL_CONDITIONS`) has been introduced, which must be set to yes in order to run the installation.
+Updated General Terms and Conditions (T&C) have been added to API Gateway. During installation in interactive mode a pop-up window is shown, and you must accept the T&C to proceed with the installation. In unattended mode, a new parameter (`ACCEPT_GENERAL_CONDITIONS`) has been introduced, which must be set to yes in order to run the installation.
 
 For more information, see [Acceptance of General Conditions for license and subscription services](/docs/apim_installation/apigw_containers/docker_scripts_prereqs/#acceptance-of-general-conditions-for-license-and-subscription-services).
 
-### Cassandra upgrade postponed
+### Cassandra 3.11.12 upgrade postponed
 
-During development and testing of API Gateway with Cassandra 3.11.12, a critical issue was found in Cassandra, see [CASSANDRA-17581](https://issues.apache.org/jira/browse/CASSANDRA-17581). API Gateway will be upgraded to use Cassandra 3.11.13 instead, in a future version.
+During development and testing of API Gateway with Cassandra 3.11.12, a critical issue was found in Cassandra, see [CASSANDRA-17581](https://issues.apache.org/jira/browse/CASSANDRA-17581). Keep an eye on the API Gateway roadmap to follow up with Axway latest announcements and learn when we are releasing API Gateway with Cassandra 3.11.13 instead.
 
 ## Deprecated features
 
@@ -202,9 +202,9 @@ Related Issue: RDAPI-23379
 
 ### API Analytics PDF reports does not display chart contents
 
-In API Analytics, PDF reports will not contain the contents of the charts.
+In API Analytics, PDF reports does not display the contents of the charts.
 
-This issue has arised due to an upgrade of the `Highcharts.js` library.
+This issue has arisen because of an upgrade of the `Highcharts.js` library.
 
 Related Issue: RDAPI-27301
 
