@@ -24,7 +24,7 @@ The following new features and enhancements are available in this update.
 
 ### Manage timeouts on Connection and ConnectToUrl filters
 
-Timeout settings can now be set on the Connection and ConnectToUrl filters. This change will allow for specific calls to timeout at different times based on your use-case. For more information, please see [Connect to URL filter](/docs/apim_policydev/apigw_polref/routing_common/#connect-to-url-filter)
+**Timeout** settings can now be set on the **Connection** and **ConnectToUrl** filters. This change allows for specific calls to timeout at different times based on your use case. For more information, see [Connect to URL filter](/docs/apim_policydev/apigw_polref/routing_common/#connect-to-url-filter).
 
 ### Querystring passthrough
 
@@ -125,13 +125,13 @@ metadataUrl="./idp_ADFS.xml"
 
 ### Axway Terms and Conditions must be accepted to install API Gateway
 
-Updated General Terms and Conditions (T&C) have been added to API Gateway. During installation in interactive mode a pop-up window is shown, and you must accept the T&C to proceed with the installation. In unattended mode, a new parameter (`ACCEPT_GENERAL_CONDITIONS`) has been introduced, which must be set to yes in order to run the installation.
+Updated General Terms and Conditions (T&C) have been added to API Gateway. During installation in interactive mode a pop-up window is shown, and you must accept the T&C to proceed with the installation. In unattended mode, a new parameter (`ACCEPT_GENERAL_CONDITIONS`) has been introduced, which must be set to `yes` in order to run the installation.
 
 For more information, see [Acceptance of General Conditions for license and subscription services](/docs/apim_installation/apigw_containers/docker_scripts_prereqs/#acceptance-of-general-conditions-for-license-and-subscription-services).
 
 ### Cassandra 3.11.12 upgrade postponed
 
-During development and testing of API Gateway with Cassandra 3.11.12, a critical issue was found in Cassandra, see [CASSANDRA-17581](https://issues.apache.org/jira/browse/CASSANDRA-17581). Keep an eye on the API Gateway roadmap to follow up with Axway latest announcements and learn when we are releasing API Gateway with Cassandra 3.11.13 instead.
+During development and testing of API Gateway with Cassandra 3.11.12, a critical issue was found in Cassandra, see [CASSANDRA-17581](https://issues.apache.org/jira/browse/CASSANDRA-17581). Stay tuned with Axway latest announcements to know when we are releasing API Gateway with Cassandra 3.11.13 instead.
 
 ## Deprecated features
 
@@ -252,11 +252,9 @@ An issue only arises when a port is specified as part of the virtual host. API M
 
 Related Issue: RDAPI-23379
 
-### API Analytics PDF reports does not display chart contents
+### API Analytics PDF reports do not display chart contents
 
-In API Analytics, PDF reports does not display the contents of the charts.
-
-This issue has arisen because of an upgrade of the `Highcharts.js` library.
+In API Analytics, PDF reports do not display the contents of the charts. This issue has arisen because of an upgrade of the `Highcharts.js` library.
 
 Related Issue: RDAPI-27301
 
