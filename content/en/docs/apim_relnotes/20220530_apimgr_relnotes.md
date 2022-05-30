@@ -137,6 +137,16 @@ During development and testing of API Gateway with Cassandra 3.11.12, a critical
 
 When configuring the global fault handler in API Manager, it is now required to define and select a [fault handler policy](/docs/apim_administration/apimgr_admin/api_mgmt_custom_policies/#add-api-manager-fault-handler-policies).
 
+### Obs-folded values are forbidden in HTTP headers
+
+To prevent CRLF injection attacks, the names and values in HTTP headers are now checked for invalid formatting. The old HTTP format `obs-folded` is forbidden by default, but it can be enabled using the following system property:
+
+```
+-Dcom.vordel.dwe.outputObsFoldedValuesAllowed=true
+```
+
+For more information, see [System property changes](/docs/apim_reference/system_props/).
+
 ## Deprecated features
 
 As part of our software development life cycle we constantly review our API Management offering. As part of this update, the following capabilities have been deprecated
