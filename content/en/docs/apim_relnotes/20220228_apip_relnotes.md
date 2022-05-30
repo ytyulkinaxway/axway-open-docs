@@ -35,7 +35,7 @@ We are adding support for MySQL 8.0, but note that you must have PHP 8.0 install
 
 This update has the following limitations:
 
-* API Portal 7.7.20220228 is compatible with API Gateway and API Manager 7.7.20220228 only.
+* API Portal 7.7.20220228 is compatible with API Gateway and API Manager 7.7.20220228 and 7.7.20220530.
 * To upgrade from earlier versions (for example, 7.5.5, 7.6.2) you must first upgrade to [API Portal 7.7](/docs/apim_relnotes/201904_release/apip_relnotes/) only.
 * This update is not available as a virtual appliance or as a managed service on Axway Cloud.
 

@@ -22,6 +22,14 @@ Any custom `.fed` files deployed to a container must be upgraded using [upgradec
 
 The following new features and enhancements are available in this update.
 
+### Manage timeouts on Connection and ConnectToUrl filters
+
+**Timeout** settings can now be set on the **Connection** and **ConnectToUrl** filters. This change allows for specific calls to timeout at different times based on your use case. For more information, see [Connect to URL filter](/docs/apim_policydev/apigw_polref/routing_common/#connect-to-url-filter).
+
+### Querystring passthrough
+
+Select whether to enable this setting for a REST API in API Manager. When enabled, query parameters are sent unmodified to the back-end service. This is a per API implementation of the [global system property](/docs/apim_administration/apimgr_admin/api_mgmt_virtualize_web).
+
 ### Policy Studio YAML performance improvements on Windows
 
 Policy Studio performance has been improved with focus on the YAML entity store on a Windows operating system. Waiting times have been reduced for many UI interactions.
@@ -49,7 +57,7 @@ For more information on how to configure redaction and the format of new redacti
 
 ### Support for Zulu OpenJDK and how to manually enable TLS algorithms
 
-API Gateway and API Manager now support Zulu OpenJDK 1.8.0_322. This version of OpenJDK disables TLS algorithms version 1.0 and 1.1 by default, and this might impact database connections, LDAP connections, and other connection types if these connections require the use of these algorithms.
+API Gateway and API Manager now support Zulu OpenJDK 1.8.0_322. This version of OpenJDK disables TLS algorithms version 1.0 and 1.1 by default, which might impact database connections, LDAP connections, and other connection types if such connections require the use of these algorithms.
 
 The following sections describe how to manually enable TLS algorithms.
 
@@ -101,7 +109,7 @@ Now, a new Java system property, `com.axway.apimanager.securitydevice.httpheader
 
 When configuring SAML SSO in API Manager, the URL provided in the attribute `metadataUrl` of the `service-provider.xml` file must return a valid certificate with a matching host name. If the hostname does not match, the certificate is rejected.
 
-If the IdP cannot provide a matching certificate, the metadata file can be downloaded out of band and added to the `groups/group-2/instance-1/conf` folder alongside the `service-provider.xml` file. The `metadataUrl` attribute can then reference the relative file.
+If the IdP cannot provide a matching certificate, the metadata file can be manually downloaded and added to the `groups/group-2/instance-1/conf` folder alongside the `service-provider.xml` file. The `metadataUrl` attribute can then reference the relative file.
 
 For example, in service-provider.xml:
 
@@ -114,6 +122,16 @@ The attribute will change to:
 ```
 metadataUrl="./idp_ADFS.xml"
 ```
+
+### Axway Terms and Conditions must be accepted to install API Gateway
+
+Updated General Terms and Conditions (T&C) have been added to API Gateway. During installation in interactive mode, a dialog appears, and you must accept the T&C to proceed with the installation. In unattended mode, a new parameter (`ACCEPT_GENERAL_CONDITIONS`) has been introduced, which must be set to `yes` in order to run the installation.
+
+For more information, see [Acceptance of General Conditions for license and subscription services](/docs/apim_installation/apigw_containers/docker_scripts_prereqs/#acceptance-of-general-conditions-for-license-and-subscription-services).
+
+### Cassandra 3.11.12 upgrade postponed
+
+During development and testing of API Gateway with Cassandra 3.11.12, a critical issue was found in Cassandra, see [CASSANDRA-17581](https://issues.apache.org/jira/browse/CASSANDRA-17581). Stay tuned with Axway latest announcements to know when we are releasing API Gateway with Cassandra 3.11.13 instead.
 
 ### A fault handling policy is required to enable the global fault handler
 
@@ -242,6 +260,12 @@ In API Manager, if a virtual host (global default, organization level, or for a 
 An issue only arises when a port is specified as part of the virtual host. API Manager blindly takes the specified virtual host and appends it to the supported schemes for the configured traffic ports. So if a virtual host of `myhost:9999` is set, then conflicting base paths of `https://myhost:9999` and `http://myhost:9999` are displayed in the API Catalog.
 
 Related Issue: RDAPI-23379
+
+### API Analytics PDF reports do not display chart contents
+
+In API Analytics, PDF reports do not display the contents of the charts. This issue has arisen because of an upgrade of the `Highcharts.js` library.
+
+Related Issue: RDAPI-27301
 
 ## Documentation
 
