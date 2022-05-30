@@ -139,8 +139,8 @@ When configuring the global fault handler in API Manager, it is now required to 
 
 ### List of allowed HTTP methods for API Gateway CORS request
 
-Previsously, API Gateway CORS request returned a list of allowed HTTP methods that included methods of Relative Paths configured to be resolved using Longest Path match where a CORS request path is a sub-path of the Relative Paths.
-Now, a list of allowed HTTP methods includes methods of the longest Relative Paths which are sub-paths of a CORS request path.
+Previously, API Gateway CORS request returned a list of allowed HTTP methods that included methods of Relative Paths configured to be resolved using Longest Path match where a CORS request path is a sub-path of the Relative Paths.
+Now, the list of allowed HTTP methods includes methods of the longest Relative Paths which are sub-paths of a CORS request path.
 
 ## Deprecated features
 
