@@ -153,7 +153,7 @@ During development and testing of API Gateway with Cassandra 3.11.12, a critical
 
 When configuring the global fault handler in API Manager, it is now required to define and select a [fault handler policy](/docs/apim_administration/apimgr_admin/api_mgmt_custom_policies/#add-api-manager-fault-handler-policies).
 
-### New methods added to the list of allowed HTTP methods CORS request
+### Improvements to the list of allowed HTTP methods for CORS request
 
 [API Gateway CORS](/docs/apim_policydev/apigw_gw_instances/general_cors/) request returned a list of allowed HTTP methods that included methods of relative paths configured to be resolved using Longest Path match, where a CORS request path is a sub-path of the relative paths. Now, the list of allowed HTTP methods includes methods of the longest relative paths, which are sub-paths of a CORS request path.
 
