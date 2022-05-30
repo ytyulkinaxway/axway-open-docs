@@ -34,6 +34,18 @@ Select whether to enable this setting for a REST API in API Manager. When enable
 
 Policy Studio performance has been improved with focus on the YAML entity store on a Windows operating system. Waiting times have been reduced for many UI interactions.
 
+### API Manager lightweight APIs
+
+There are 3 new API Manager endpoints for retrieving a lightweight version of back-end APIs, front-end APIs, and Swagger feeds. The endpoints are available on the following paths:
+
+* /api/portal/v1.4/apirepo/light
+* /api/portal/v1.4/proxies/light
+* /api/portal/v1.4/discovery/apis/light
+
+The API Manager UI now uses these endpoints to improve performance. The models for each endpoint can be found in the [API Manager API v1.4 Swagger definition](https://apidocs.axway.com/swagger-ui-NEW/index.html?productname=apimanager&productversion=7.7.0&filename=api-manager-V_1_4-oas3.json).
+
+In-memory caches have also been introduced for the lightweight front-end and back-end API endpoints. Caches can be enabled by setting the `com.axway.apimanager.api.data.cache` JMV parameter to `true`. When caches are enabled, these endpoints will respond significantly faster, along with the API Manager Gateway consuming more memory.
+
 ## Important changes
 
 It is important, especially when upgrading from an earlier version, to be aware of the following changes in the behavior or operation of the product in this update, which may impact on your current installation.
