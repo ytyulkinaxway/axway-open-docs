@@ -220,12 +220,6 @@ If a web service is defined using multiple WSDLs, an error of 'Cannot find the d
 
 Related Issue: RDAPI-26621
 
-### Policy Studio installation update issue
-
-An intermittent issue exists whereby after an installation update of Policy Studio, an error dialog is shown - "An error has occurred, see the log file", and the product will fail to start. To resolve this issue, copy the `org.apache.jasper.glassfish_2.2.2.v201205150955.jar` from the Policy Studio installation backup plugins directory to the main Policy Studio plugins directory.
-
-Related Issue: RDAPI-26743
-
 ### API Catalog Swagger 2.0 export issue when multiple API Manager traffic ports configured
 
 When exporting Swagger 2.0 from API Manager Catalog with multiple traffic ports defined, if you try to subsequently reimport the generated document into another API Manager, the back-end URLs (HTTP and HTTPS) are correctly generated but the port will be incorrect for one of the URLs.
