@@ -34,6 +34,10 @@ Select whether to enable this setting for a REST API in API Manager. When enable
 
 Policy Studio performance has been improved with focus on the YAML entity store on a Windows operating system. Waiting times have been reduced for many UI interactions.
 
+### Discovery and Traceability agents
+
+Discovery and Traceability agents can be installed using API Gateway installer. For more information see [Install agents](/docs/apim_installation/apigtw_install/install_agents/).
+
 ### API Manager lightweight APIs
 
 There are 3 new API Manager endpoints for retrieving a lightweight version of back-end APIs, front-end APIs, and Swagger feeds. The endpoints are available on the following paths:
